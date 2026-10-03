@@ -72,11 +72,14 @@ Free Music is an independent, community-driven third-party audio player and clie
 
 ## Attribution
 
-Free Music is a rebranded fork. It stands on the work of the original
-FreeMusic author and of every upstream project FreeMusic itself builds on -
-Orchard, NewPipeExtractor, InnerTubeX, Media3 and ONNX Runtime among others.
-Their copyright notices and license terms remain in the source tree exactly
-as they were and are not affected by this rebrand. See [LICENSE](LICENSE).
+Free Music is a rebranded fork of **BitChord**, an open-source YouTube Music
+client by Kushagra Singh. It stands on the work of that original project and of
+every upstream project BitChord itself builds on - Orchard, NewPipeExtractor,
+InnerTubeX, Media3 and ONNX Runtime among others.
+
+Their copyright notices and license terms remain in the source tree exactly as
+they were and are not affected by this rebrand. Per GPLv3, redistributions of
+Free Music must keep those notices intact. See [LICENSE](LICENSE).
 
 ---
 
