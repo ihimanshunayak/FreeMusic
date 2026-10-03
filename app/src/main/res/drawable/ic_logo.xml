@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Free Music in-app / wordmark logo, mirroring assets/Logo.svg.
+     The 730x484 viewBox is the source 1024x1024 box scaled by 0.7129 about
+     its centre, which lands the mark on the 730x484 canvas. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="18dp"
+    android:viewportWidth="730"
+    android:viewportHeight="484">
+    <group
+        android:scaleX="0.7129"
+        android:scaleY="0.7129"
+        android:translateX="0"
+        android:translateY="-123.2">
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M404,296 L742,246 L742,342 L404,392 Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M426,296 a22,22 0 0 1 22,22 v408 a22,22 0 0 1 -22,22 a22,22 0 0 1 -22,-22 v-408 a22,22 0 0 1 22,-22 Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M720,246 a22,22 0 0 1 22,22 v408 a22,22 0 0 1 -22,22 a22,22 0 0 1 -22,-22 v-408 a22,22 0 0 1 22,-22 Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M449.4,715.5 A118,86 -16 1 1 222.6,780.5 A118,86 -16 1 1 449.4,715.5 Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M743.4,665.5 A118,86 -16 1 1 516.6,730.5 A118,86 -16 1 1 743.4,665.5 Z" />
+    </group>
+</vector>

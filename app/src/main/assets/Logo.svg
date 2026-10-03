@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1024" height="1024" rx="232" fill="url(#fm_bg)"/>
+<g fill="#FFFFFF">
+<path d="M404 296 L742 246 L742 342 L404 392 Z"/>
+<rect x="404" y="296" width="44" height="452" rx="22"/>
+<rect x="698" y="246" width="44" height="452" rx="22"/>
+<ellipse cx="336" cy="748" rx="118" ry="86" transform="rotate(-16 336 748)"/>
+<ellipse cx="630" cy="698" rx="118" ry="86" transform="rotate(-16 630 698)"/>
+</g>
+<defs>
+<linearGradient id="fm_bg" x1="512" y1="0" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7C4DFF"/>
+<stop offset="1" stop-color="#2962FF"/>
+</linearGradient>
+</defs>
+</svg>
