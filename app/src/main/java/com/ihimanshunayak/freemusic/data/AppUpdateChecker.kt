@@ -94,22 +94,49 @@ object AppUpdateChecker {
     }
 
     /**
-     * The release usually carries exactly one `.apk`; take its direct download
-     * URL. A release without one (source-only draft, renamed asset) leaves
-     * [UpdateInfo.apkUrl] null and the UI falls back to opening the releases
-     * page as before.
+     * Picks this device's best-fitting APK out of the release.
+     *
+     * A release carries a universal build plus one split per ABI, and GitHub
+     * hands assets back in name order rather than by relevance — so taking the
+     * first `.apk` would feed an `arm64-v8a` split to a 32-bit phone. Walk the
+     * device's own ABI preference instead, then fall back to the universal
+     * build, then to any uploaded `.apk`. A release with no usable asset
+     * (source-only draft, renamed file) leaves [UpdateInfo.apkUrl] null and the
+     * UI opens the releases page as before.
      */
     private fun apkAssetUrl(release: JsonObject): String? = runCatching {
-        release["assets"]?.jsonArray
+        val apks = release["assets"]?.jsonArray
             ?.mapNotNull { it as? JsonObject }
-            ?.firstOrNull { asset ->
-                asset["name"]?.jsonPrimitive?.contentOrNull?.endsWith(".apk", ignoreCase = true) == true &&
-                    asset["state"]?.jsonPrimitive?.contentOrNull == "uploaded"
-            }
+            .orEmpty()
+
+        pickApkForAbis(apks, Build.SUPPORTED_ABIS)
             ?.get("browser_download_url")
             ?.jsonPrimitive
             ?.contentOrNull
     }.getOrNull()
+
+    /**
+     * Chooses from [assets] by walking [supportedAbis] in the device's own
+     * preference order, then falls back to a universal build, then to whatever
+     * usable APK is left. Non-APK and not-yet-uploaded assets are filtered out
+     * first so no fallback can ever point at a source archive. Kept free of
+     * framework calls so it can be unit-tested off-device.
+     */
+    internal fun pickApkForAbis(assets: List<JsonObject>, supportedAbis: Array<String>): JsonObject? {
+        val apks = assets.filter(::isUploadedApk)
+        return supportedAbis.firstNotNullOfOrNull { abi ->
+            apks.firstOrNull { assetName(it).contains(abi, ignoreCase = true) }
+        }
+            ?: apks.firstOrNull { assetName(it).contains("universal", ignoreCase = true) }
+            ?: apks.firstOrNull()
+    }
+
+    private fun assetName(asset: JsonObject): String =
+        asset["name"]?.jsonPrimitive?.contentOrNull.orEmpty()
+
+    private fun isUploadedApk(asset: JsonObject): Boolean =
+        assetName(asset).endsWith(".apk", ignoreCase = true) &&
+            asset["state"]?.jsonPrimitive?.contentOrNull == "uploaded"
 
     /**
      * Streams the current update's APK into the app cache, reporting progress
