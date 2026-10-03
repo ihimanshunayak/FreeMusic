@@ -18,6 +18,29 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    # sdkmanager only publishes this platform as `platforms;android-37.0`, which
+    # installs to platforms/android-37.0 and reports AndroidVersion.ApiLevel=37.0.
+    # AGP 8.10.1 resolves compileSdk = 37 to platforms/android-37 and aborts with
+    # "Failed to find target with hash string 'android-37'", so the install is
+    # followed by a directory + metadata shim. See CONTRIBUTING.md.
+    - name: Set up Android SDK
+      run: |
+        SDK="$ANDROID_HOME"
+        echo "y" | "$SDK/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+        "$SDK/cmdline-tools/latest/bin/sdkmanager" \
+          "platforms;android-37.0" "build-tools;36.1.0" "platform-tools" \
+          "cmake;3.22.1" > /dev/null
+
+        cp -r "$SDK/platforms/android-37.0" "$SDK/platforms/android-37"
+        # Strip any BOM first: the SDK's XML parser rejects a leading one.
+        sed -i '1s/^\xEF\xBB\xBF//' "$SDK/platforms/android-37/source.properties" \
+                                     "$SDK/platforms/android-37/package.xml"
+        sed -i 's/^AndroidVersion\.ApiLevel=37\.0$/AndroidVersion.ApiLevel=37/' \
+          "$SDK/platforms/android-37/source.properties"
+        sed -i -e 's#path="platforms;android-37\.0"#path="platforms;android-37"#' \
+               -e 's#<api-level>37\.0</api-level>#<api-level>37</api-level>#' \
+          "$SDK/platforms/android-37/package.xml"
+
     - name: Setup local.properties
       run: |
         echo "LASTFM_API_KEY=${{ secrets.LASTFM_API_KEY }}" > local.properties
@@ -49,6 +72,24 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
+
+    # See the build-dev-debug job above for why android-37 is shimmed by hand.
+    - name: Set up Android SDK
+      run: |
+        SDK="$ANDROID_HOME"
+        echo "y" | "$SDK/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+        "$SDK/cmdline-tools/latest/bin/sdkmanager" \
+          "platforms;android-37.0" "build-tools;36.1.0" "platform-tools" \
+          "cmake;3.22.1" > /dev/null
+
+        cp -r "$SDK/platforms/android-37.0" "$SDK/platforms/android-37"
+        sed -i '1s/^\xEF\xBB\xBF//' "$SDK/platforms/android-37/source.properties" \
+                                     "$SDK/platforms/android-37/package.xml"
+        sed -i 's/^AndroidVersion\.ApiLevel=37\.0$/AndroidVersion.ApiLevel=37/' \
+          "$SDK/platforms/android-37/source.properties"
+        sed -i -e 's#path="platforms;android-37\.0"#path="platforms;android-37"#' \
+               -e 's#<api-level>37\.0</api-level>#<api-level>37</api-level>#' \
+          "$SDK/platforms/android-37/package.xml"
 
     - name: Setup Secrets (Keystore & local.properties)
       run: |
