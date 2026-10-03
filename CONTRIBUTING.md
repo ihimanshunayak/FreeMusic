@@ -22,9 +22,30 @@ When contributing:
 ## Development Setup
 The project requires the following tools:
 - **JDK**: Java Development Kit 17 (Eclipse Temurin 17 recommended).
-- **Android SDK**: `compileSdk = 36`, `targetSdk = 36`, `minSdk = 26`.
+- **Android SDK**: `compileSdk = 37`, `targetSdk = 36`, `minSdk = 26`. The
+  `compileSdk` bump is forced by InnerTubeX's AAR; runtime behaviour stays at 36.
 - **C/C++ NDK & CMake**: CMake 3.22.1+ and Android NDK (for native audio DSP components configured under `app/src/main/cpp`).
-- **Listen Together Backend (Optional)**: Go 1.22+ if developing or testing the party server (`backend/`).
+- **Listen Together Backend (Optional)**: Go 1.27+ if developing or testing the party server (`backend/`).
+
+> [!IMPORTANT]
+> **SDK Platform 37 install gotcha.** `sdkmanager` publishes this platform only as
+> `platforms;android-37.0`, which lands in `platforms/android-37.0/` and reports
+> `AndroidVersion.ApiLevel=37.0`. AGP 8.10.1 resolves `compileSdk = 37` to the
+> legacy directory name `platforms/android-37/` and fails with
+> `Failed to find target with hash string 'android-37'`. After installing, point
+> the build at the platform it expects:
+>
+> ```bash
+> # Windows: %LOCALAPPDATA%\Android\Sdk   macOS/Linux: ~/Android/Sdk
+> cd "$ANDROID_HOME/platforms"
+> cp -r android-37.0 android-37
+> # then in android-37/source.properties set:
+> #   AndroidVersion.ApiLevel=37      (instead of 37.0)
+> # and in android-37/package.xml set:
+> #   path="platforms;android-37"     and   <api-level>37</api-level>
+> ```
+>
+> Write both files without a UTF-8 BOM — the SDK's XML parser rejects a leading BOM.
 
 ## Build and Test Commands
 Run Gradle commands from the repository root.
