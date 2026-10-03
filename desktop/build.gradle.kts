@@ -136,3 +136,24 @@ tasks.register<JavaExec>("smokeCheck") {
         javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) }
     )
 }
+
+/**
+ * Drives libVLC through a real stream: resolve, play, seek, pause, resume, volume.
+ *
+ * Separate from `smokeCheck` because it adds a second prerequisite - a VLC
+ * installation - on top of the network, and a failure here means "VLC is missing
+ * or broke" rather than "the service changed". Run it with the VLC directory on
+ * PATH, or with `VLC_PLUGIN_PATH` set for an unpacked build.
+ */
+tasks.register<JavaExec>("playbackCheck") {
+    group = "verification"
+    description = "Resolves a real track, plays it through libVLC and exercises the transport."
+    mainClass.set("com.ihimanshunayak.freemusic.desktop.PlaybackSmokeCheckKt")
+    classpath = sourceSets["main"].runtimeClasspath
+    javaLauncher.set(
+        javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) }
+    )
+    // vlcj searches PATH and the standard install location; an unpacked VLC is
+    // found through jna.library.path, which is only useful if it is set here.
+    environment("VLC_PLUGIN_PATH", System.getenv("VLC_PLUGIN_PATH") ?: "")
+}

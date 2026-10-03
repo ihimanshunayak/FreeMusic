@@ -34,8 +34,7 @@ layer unchanged and replaces only the parts that are Android-specific.
 | Stream resolution | Working | Progressive and adaptive audio, picked by quality preference |
 | Local file library | Working | Recursive folder scan, multiple folders, live track counts |
 | Queue management | Working | Add, reorder-by-play, remove, clear, repeat, shuffle |
-| Playback | Requires VLC | libVLC is loaded at runtime - see [Requirements](#requirements) |
-| Downloads | Working | Any resolved stream can be saved to disk |
+| Playback | Requires VLC | libVLC is loaded at runtime - see [Requirements](#requirements) || Downloads | Working | Any resolved stream can be saved to disk |
 | Themes | Working | Light, dark, follow-system |
 | Audio quality preference | Working | Low / medium / high / highest |
 | Log file + diagnostics screen | Working | Live tail of the rotating log |
@@ -318,17 +317,43 @@ downloader apply it. A 403 on a single track while others play is usually that
 track being unavailable rather than a header problem; the next track will play.
 
 **Verify the upstream integration still works.**
-A live end-to-end check is available when the unit tests are not enough, for
-instance after a long gap or when search starts returning nothing:
+Two live checks are available when the unit tests are not enough, for instance
+after a long gap or when search starts returning nothing:
 
 ```powershell
+# session, search, parser, stream resolver, download - needs the network
 .\gradlew.bat :desktop:smokeCheck
+
+# the same, plus real playback through libVLC - needs the network and VLC
+.\gradlew.bat :desktop:playbackCheck
 ```
 
-It mints a real visitor id, runs a real search, follows a real stream URL, reads
-bytes from it and repeats the read as a range request. It is kept out of the
-`test` task on purpose: a failure there means the upstream contract moved, not
-that the build is broken, so it must never gate a commit.
+`smokeCheck` mints a real visitor id, runs a real search, follows a real stream
+URL, reads bytes from it and repeats the read as a range request. `playbackCheck`
+goes further and hands that URL to libVLC, then watches the transport to confirm
+the position advances, the duration is learned, a seek lands, pause and resume
+take effect and the volume applies.
+
+Both are kept out of the `test` task on purpose: a failure there means the
+upstream contract moved or VLC is missing, not that the build is broken, so
+neither must ever gate a commit.
+
+`playbackCheck` is what caught a second real bug. libVLC raises a `buffering`
+event for network streams and does **not** guarantee a second `playing` event
+once the buffer refills, so regressing the state on every `buffering` callback -
+which looks like the obviously correct thing to do - left the transport reading
+`BUFFERING` for the rest of the track while audio played on. The UI showed a
+spinner over a song that was audibly playing. The state is now reconciled from
+`status().isPlaying()` both in the `buffering` handler and on every position poll,
+so a late or out-of-order callback cannot strand it.
+
+For an unpacked VLC rather than an installed one, point the plugin path at it:
+
+```powershell
+$env:VLC_PLUGIN_PATH = "C:\path\to\vlc-3.0.21\plugins"
+$env:PATH = "C:\path\to\vlc-3.0.21;$env:PATH"
+.\gradlew.bat :desktop:playbackCheck
+```
 
 ---
 

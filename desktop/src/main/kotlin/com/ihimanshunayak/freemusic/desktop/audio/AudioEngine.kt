@@ -130,9 +130,15 @@ class AudioEngine(
     private fun attachListeners(mediaPlayer: MediaPlayer) {
         mediaPlayer.events().addMediaPlayerEventListener(object : MediaPlayerEventAdapter() {
             override fun buffering(mediaPlayer: MediaPlayer, percent: Float) {
-                if (percent < 100f) {
-                    _snapshot.update { it.copy(state = PlaybackState.BUFFERING) }
-                }
+                if (percent >= 100f) return
+                // libVLC reports buffer fill for network streams and does not
+                // guarantee a second `playing` event once the buffer refills, so
+                // regressing the state here would leave the transport reading
+                // BUFFERING for the rest of the track while audio plays on. The
+                // player's own status settles it when the two disagree.
+                val actuallyPlaying = runCatching { mediaPlayer.status().isPlaying() }.getOrDefault(false)
+                if (actuallyPlaying) return
+                _snapshot.update { it.copy(state = PlaybackState.BUFFERING) }
             }
 
             override fun playing(mediaPlayer: MediaPlayer) {
@@ -322,12 +328,28 @@ class AudioEngine(
                 val mediaPlayer = player
                 if (mediaPlayer == null || !isAvailable) break
                 runCatching {
-                    val time = mediaPlayer.status().time()
-                    val length = mediaPlayer.status().length()
+                    val status = mediaPlayer.status()
+                    val time = status.time()
+                    val length = status.length()
                     _snapshot.update {
+                        // The state is reconciled from the player on every tick as
+                        // well as from events, because the event stream is not
+                        // ordered with respect to the transport: a `buffering`
+                        // callback can land after the audio has already resumed.
+                        // Only a state that is genuinely in flux is corrected;
+                        // STOPPED, ENDED and ERROR are decisions rather than
+                        // observations and are left alone.
+                        val reconciled = if (
+                            it.state == PlaybackState.BUFFERING && status.isPlaying()
+                        ) {
+                            PlaybackState.PLAYING
+                        } else {
+                            it.state
+                        }
                         it.copy(
                             positionMillis = time.coerceAtLeast(0),
                             durationMillis = if (length > 0) length else it.durationMillis,
+                            state = reconciled,
                         )
                     }
                 }
