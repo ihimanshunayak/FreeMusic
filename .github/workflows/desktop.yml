@@ -1,0 +1,55 @@
+name: Desktop CI
+
+on:
+  push:
+    paths:
+      - 'desktop/**'
+      - 'gradle/libs.versions.toml'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+      - '.github/workflows/desktop.yml'
+  pull_request:
+    paths:
+      - 'desktop/**'
+      - 'settings.gradle.kts'
+      - '.github/workflows/desktop.yml'
+  workflow_dispatch:
+
+# The desktop module is a self-contained JVM build: it does not touch the Android
+# SDK, the Android keystore, or any secret. It needs JDK 21 because the
+# innertubex-desktop artifact it depends on is published as Java 21 bytecode.
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Run unit tests
+        run: ./gradlew.bat :desktop:test --no-daemon --console=plain
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-test-report
+          path: desktop/build/reports/tests/test
+          if-no-files-found: ignore
+
+      - name: Build distribution image
+        run: ./gradlew.bat :desktop:createDistributable --no-daemon --console=plain
+
+      - name: Upload distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: freemusic-windows
+          path: desktop/build/compose/binaries/main/app
+          if-no-files-found: error

@@ -13,6 +13,22 @@
 
 ---
 
+## Platforms
+
+| Platform | Status | Where |
+| --- | --- | --- |
+| **Android** | Stable | Install the signed APK from [Releases](https://github.com/ihimanshunayak/FreeMusic/releases) |
+| **Windows** | New | See [desktop/README.md](desktop/README.md) — `.\gradlew.bat :desktop:run` |
+
+Both platforms share the same data layer: the YouTube Music client
+(InnerTubeX), the stream extractor (NewPipeExtractor) and the script engine
+(Rhino) are plain JVM libraries, so search, stream resolution and metadata behave
+identically on either. Only the UI toolkit and the audio backend differ —
+Jetpack Compose and ExoPlayer on Android, Compose Multiplatform and libVLC on
+Windows.
+
+---
+
 ## Features
 
 ### Playback
