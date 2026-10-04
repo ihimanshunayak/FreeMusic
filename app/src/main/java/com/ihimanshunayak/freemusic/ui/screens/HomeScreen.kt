@@ -286,10 +286,10 @@ fun HomeScreen(
 /**
  * The filter row above the feed.
  *
- * Its own scrolling row rather than part of the list: it stays where it is
- * while the feed moves under it, so the control that filtered the page is
- * still reachable once the page has been scrolled. Tapping the active chip
- * clears the filter — the same gesture that turned it on turns it off.
+ * A row of pills rather than a segmented control: the labels are YouTube's own
+ * vocabulary and can be renamed under us, so the row has to read as a list of
+ * suggestions rather than a fixed set of modes. Tapping the active chip clears
+ * the filter — the same gesture that turned it on turns it off.
  */
 @Composable
 private fun HomeChipRow(
