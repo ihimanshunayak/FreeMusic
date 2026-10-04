@@ -10,6 +10,7 @@
 
 package com.ihimanshunayak.freemusic.desktop.audio
 
+import com.ihimanshunayak.freemusic.desktop.data.OutputBackend
 import com.ihimanshunayak.freemusic.desktop.data.stream.ResolvedStream
 import com.ihimanshunayak.freemusic.desktop.data.stream.StreamResolver
 import com.ihimanshunayak.freemusic.desktop.model.PlaybackState
@@ -159,6 +160,25 @@ class PlayerController(
     fun setRepeatMode(mode: RepeatMode) = engine.setRepeatMode(mode)
     fun setShuffle(enabled: Boolean) = engine.setShuffle(enabled)
     fun stop() = engine.stop()
+
+    /**
+     * Chooses the audio output module.
+     *
+     * Takes effect on the next media load, because libVLC resolves its output
+     * when a media starts. That is also why this is not a hard requirement: an
+     * unsupported module name makes libVLC fall back to its own default, so a
+     * wrong choice costs the user nothing but the setting not applying.
+     */
+    fun setOutputBackend(backend: OutputBackend) = engine.setOutputBackend(backend)
+
+    /**
+     * Stops playback but keeps the queue and the current position.
+     *
+     * Distinct from [stop], which clears what is loaded. The sleep timer pauses
+     * rather than stops: the user fell asleep mid-album, and they expect the
+     * album to still be there - at the point it stopped - when they wake up.
+     */
+    fun pause() = engine.pause()
 
     // ---- the interesting part ----------------------------------------------
 

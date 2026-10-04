@@ -53,8 +53,20 @@ data class SearchState(
     val loadingMore: Boolean = false,
 )
 
+/** Everything the Explore screen draws for one browsable page. */
+data class BrowseState(
+    val title: String = "",
+    val subtitle: String? = null,
+    val loading: Boolean = false,
+    val shelves: List<HomeShelf> = emptyList(),
+    val error: String? = null,
+) {
+    /** Every row on the page, flattened, so a "play all" has something to queue. */
+    val allItems: List<SearchResult> get() = shelves.flatMap { it.items }
+}
+
 /**
- * Drives Home and Search.
+ * Drives Home, Search and Explore.
  *
  * Debouncing lives here rather than in the search field because it is a property
  * of the *request*, not of the widget: the field stays responsive while the
@@ -71,8 +83,12 @@ class BrowseViewModel(
     private val _search = MutableStateFlow(SearchState())
     val search: StateFlow<SearchState> = _search.asStateFlow()
 
+    private val _browse = MutableStateFlow(BrowseState())
+    val browse: StateFlow<BrowseState> = _browse.asStateFlow()
+
     private var suggestionJob: Job? = null
     private var searchJob: Job? = null
+    private var browseJob: Job? = null
     private var continuation: String? = null
 
     /** Loads the anonymous home feed. Safe to call repeatedly; it replaces state. */
@@ -176,6 +192,55 @@ class BrowseViewModel(
         searchJob?.cancel()
         continuation = null
         _search.value = SearchState()
+    }
+
+    /**
+     * Opens an album, artist or playlist page.
+     *
+     * The title is passed in rather than read from the response, because YouTube
+     * Music repeats the page header inside several differently-shaped renderers
+     * and the row the user clicked already knows what it was called. Passing it
+     * also lets the header render immediately, while the rows are still loading.
+     */
+    fun openPage(browseId: String, title: String, subtitle: String? = null, params: String? = null) {
+        browseJob?.cancel()
+        browseJob = scope.launch {
+            _browse.value = BrowseState(
+                title = title,
+                subtitle = subtitle,
+                loading = true,
+            )
+            runCatching { music.browse(browseId, params) }
+                .onSuccess { json ->
+                    val shelves = InnertubeParser.parseShelves(json).map { shape ->
+                        HomeShelf(title = shape.title, items = shape.items)
+                    }
+                    _browse.value = BrowseState(
+                        title = title,
+                        subtitle = subtitle,
+                        loading = false,
+                        shelves = shelves,
+                    )
+                    Log.i(
+                        "browse $browseId returned ${shelves.size} sections",
+                        tag = "browse",
+                    )
+                }
+                .onFailure { e ->
+                    Log.w("browse $browseId failed: ${e.message}", tag = "browse")
+                    _browse.value = BrowseState(
+                        title = title,
+                        subtitle = subtitle,
+                        loading = false,
+                        error = describe(e),
+                    )
+                }
+        }
+    }
+
+    fun closePage() {
+        browseJob?.cancel()
+        _browse.value = BrowseState()
     }
 
     /**

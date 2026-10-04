@@ -24,8 +24,8 @@ Both platforms share the same data layer: the YouTube Music client
 (InnerTubeX), the stream extractor (NewPipeExtractor) and the script engine
 (Rhino) are plain JVM libraries, so search, stream resolution and metadata behave
 identically on either. Only the UI toolkit and the audio backend differ —
-Jetpack Compose and ExoPlayer on Android, Compose Multiplatform and libVLC on
-Windows.
+Jetpack Compose and ExoPlayer on Android, Compose Fluent UI (the Kotlin port of
+WinUI 3's design system) and libVLC on Windows.
 
 ---
 

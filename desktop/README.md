@@ -33,10 +33,22 @@ layer unchanged and replaces only the parts that are Android-specific.
 | Infinite scroll | Working | Continuation tokens are followed |
 | Stream resolution | Working | Progressive and adaptive audio, picked by quality preference |
 | Local file library | Working | Recursive folder scan, multiple folders, live track counts |
+| Remote libraries | Working | WebDAV and SMB shares browsed alongside local folders |
 | Queue management | Working | Add, reorder-by-play, remove, clear, repeat, shuffle |
-| Playback | Requires VLC | libVLC is loaded at runtime - see [Requirements](#requirements) || Downloads | Working | Any resolved stream can be saved to disk |
-| Themes | Working | Light, dark, follow-system |
+| Playback | Requires VLC | libVLC is loaded at runtime - see [Requirements](#requirements) |
+| Equalizer | Working | 18 presets over libVLC's ten bands, tone pad, clipping-safe preamp |
+| Lyrics | Working | 16 providers, synced display, `.lrc` embedded in downloads |
+| Downloads | Working | Tagged m4a/webm with artwork, album art and lyrics written in |
+| Listening stats | Working | Play history, skip rules, weekly/monthly/quarterly/yearly replays |
+| Scrobbling | Working | Last.fm and ListenBrainz |
+| Discord Rich Presence | Working | Track, artist and audio quality in the profile |
+| Listen Together | Working | Party rooms over a WebSocket server you supply |
+| Source modules | Working | Pluggable resolvers, addon scripts validated before they load |
+| Themes | Working | Light, dark, follow-system, with artwork-driven accent |
+| Animated canvas | Working | Mesh gradient behind the artwork, auto-hiding on a timer |
 | Audio quality preference | Working | Low / medium / high / highest |
+| Output backend | Working | Automatic, DirectSound, WASAPI or WaveOut |
+| Windows integration | Working | Mica backdrop, dark title bar, rounded corners, tray icon, global media keys, taskbar progress |
 | Log file + diagnostics screen | Working | Live tail of the rotating log |
 | Album art | Working | Memory + disk cache, no flicker while scrolling |
 
@@ -103,7 +115,7 @@ ships with the JDK:
 
 Both land in `desktop/build/compose/binaries/main/`. The installer bundles the
 application and the JRE it needs; the user does not have to install Java. The
-package is called **Free Music**, versioned `1.0.0`, and carries a fixed upgrade
+package is called **Free Music**, versioned `1.1.0`, and carries a fixed upgrade
 UUID (`8f3c1d64-2b7e-4a19-9c05-6d1b8a7f2e30`) so that a newer build upgrades an
 existing installation in place rather than installing side by side.
 
@@ -160,13 +172,46 @@ long-lived collaborators. `Main.kt` builds it before the window exists, brings i
 up off the UI thread, and tears it down from a shutdown hook so libVLC is released
 even when the process is closed from the taskbar.
 
+### The Windows design stack
+
+The UI is not a Material theme wearing Windows colours. It is
+[Compose Fluent UI](https://github.com/compose-fluent/compose-fluent-ui), a Kotlin
+port of WinUI 3's Fluent Design System, so the controls are the same shape and
+metrics as Explorer's, and it is paired with direct Win32 calls for the parts the
+compositor owns.
+
+| Layer | What it gives | Where |
+| --- | --- | --- |
+| `io.github.compose-fluent:fluent-desktop` | WinUI controls, Fluent type ramp, light/dark palettes, Mica/Acrylic surfaces | every screen under `ui/` |
+| JNA + `dwmapi.dll` | Mica backdrop, immersive dark title bar, rounded corners, custom frame colour | `platform/Win32.kt` |
+| JNA + `user32.dll` | global media keys (Play/Pause, Next, Previous, Stop) | `platform/MediaKeys.kt` |
+| AWT `SystemTray` / `Taskbar` | tray icon with transport menu, taskbar progress and state | `platform/ShellIntegration.kt` |
+| Artwork palette | accent and wash colours derived from the current cover | `ui/theme/Fluent.kt` |
+
+Two details are worth calling out because they are what make it feel native
+rather than themed:
+
+- The accent colour is derived from the playing artwork, and the Fluent shade
+  ramp (`Shades.base/light1..3/dark1..3`) is built from it by hand. Fluent's own
+  `lightColors`/`darkColors` only know the default Windows blue, so a hand-built
+  ramp is what lets the whole control set - focus rings, hover fills, the accent
+  button - follow the cover.
+- The Mica backdrop is applied through DWM rather than painted, so the desktop
+  wallpaper shows through the window the way it does in Explorer. That means the
+  window has to be non-opaque, and `ShellHost.syncBackdrop` re-applies the
+  attribute when the `micaBackdrop` setting changes.
+
+`ui/theme/Fluent.kt` is the only file that still imports Material - it maps
+Material's colour roles onto Fluent's so the two palettes cannot drift - and every
+screen, including the shared widgets in `ui/component/`, is Fluent.
+
 ### Module layout
 
 ```
 desktop/
   build.gradle.kts
   src/main/kotlin/com/ihimanshunayak/freemusic/desktop/
-    Main.kt                 entry point, window, folder picker
+    Main.kt                 entry point, window, shell integration, folder picker
     AppContainer.kt         object graph and lifecycle
     model/Models.kt         Track, SearchResult, Playlist, PlaybackState, ...
     data/
@@ -180,15 +225,42 @@ desktop/
         StreamResolver.kt   URL resolution + download
       library/
         LocalLibraryRepository.kt
+      local/
+        AudioMetadata.kt    tag reading for local files
+      palette/
+        ArtworkPalette.kt   colour extraction from cover art
+      remote/
+        RemoteLibrary.kt    WebDAV and SMB readers
+      source/
+        Sources.kt          pluggable resolver modules + addon scripts
+      download/
+        Downloads.kt        tagged downloads, album art, lyrics
+      scrobble/
+        Scrobbling.kt       Last.fm and ListenBrainz
+      discord/
+        DiscordRpc.kt       Rich Presence over the local IPC socket
+      party/
+        Party.kt            Listen Together client
+      stats/
+        ListeningStats.kt   play history, replay periods, recorder rules
     audio/
       AudioEngine.kt        vlcj player component
       PlayerController.kt   queue and transport logic
+      dsp/
+        Equalizer.kt        band layout, presets, tone pad, preamp
+    lyrics/
+      Lyrics.kt             sync engine and LRC parsing
+      LyricsProviders.kt    the 17 providers
+    platform/
+      Win32.kt              DWM window frame and Mica
+      MediaKeys.kt          global hotkeys, taskbar state
+      ShellIntegration.kt   tray icon and its transport menu
     ui/
       App.kt, Navigation.kt, ImageLoading.kt
-      theme/Theme.kt
+      theme/Fluent.kt       palettes, artwork accent, Fluent theme wrapper
       state/BrowseViewModel.kt
-      component/            Sidebar, NowPlayingBar, shared widgets
-      screen/               six screens
+      component/            Sidebar, NowPlayingBar, FluentIcons, SettingsWidgets
+      screen/               14 destinations plus the player sub-views
     util/Log.kt             rotating file logger + AppPaths
   src/test/kotlin/...       unit tests
 ```
@@ -211,9 +283,10 @@ Only these had to be replaced:
 | Android | Desktop | Reason |
 | --- | --- | --- |
 | ExoPlayer / Media3 | libVLC via vlcj | ExoPlayer is Android-only; libVLC is the established JVM equivalent and decodes the same Opus and AAC streams |
-| Jetpack Compose | Compose Multiplatform Desktop | same declarative model, different renderer |
+| Jetpack Compose + Material 3 | Compose Multiplatform + Compose Fluent UI | same declarative model; Fluent is the WinUI design system, so the controls match the OS instead of being Material shapes in Windows colours |
 | `Context`-based storage | `AppPaths` under `%LOCALAPPDATA%\FreeMusic` | desktop has no app sandbox |
 | Room / SQLite | JSON settings + in-memory library | the desktop app has no database requirement |
+| Android `MediaSession` / notification | Win32 media keys, tray icon, taskbar progress | the Windows equivalents of the same surfaces |
 
 Because the API client is the same code, behaviour matches the Android app: the
 same visitor-id minting, the same request shapes, the same fallback from adaptive
@@ -271,6 +344,13 @@ The suite covers the parts where a mistake is silent rather than loud:
   symlink handling, and folder removal.
 - **`TrackTest`** - derived properties such as `isStreamable` and
   `durationLabel`.
+- **`LogicTest`** - the pure transformations the UI depends on: equalizer preset
+  matching, the tone-pad curve and its inverse, the clipping-safe preamp, the
+  listening-room clock derivation, and endpoint normalisation.
+- **`DownloadAndSourceTest`** - download filename sanitising, part-file naming,
+  byte formatting, and addon-script validation.
+- **`ListeningRecorderTest`** - what counts as a listen, seek handling, the
+  once-only rule, and the replay periods.
 
 Tests run on the JVM and need no network access and no VLC installation.
 
@@ -305,7 +385,7 @@ Everything is under `%LOCALAPPDATA%\FreeMusic\`:
   logs\freemusic.log current log (rotates at 2 MB, one previous file kept)
 ```
 
-**The app reports a version that is not `1.0.0`.**
+**The app reports a version that is not `1.1.0`.**
 `APP_VERSION` in `ui/screen/SettingsScreen.kt` is displayed as-is; update it
 alongside `packageVersion` in `desktop/build.gradle.kts` when cutting a release.
 

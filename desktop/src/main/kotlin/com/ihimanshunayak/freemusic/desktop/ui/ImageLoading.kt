@@ -112,6 +112,21 @@ private object ArtworkCache {
     fun diskSizeBytes(): Long = diskDir.listFiles()?.sumOf { it.length() } ?: 0L
 }
 
+/** The artwork loader, exposed for callers that need the decoded bitmap itself. */
+object ImageLoading {
+
+    /**
+     * Suspends until [url] is decoded, sharing the same caches as [RemoteImage].
+     *
+     * This exists for the colour quantiser, which needs the actual pixels rather
+     * than something to draw. Going through the same cache means reading an
+     * album's palette costs nothing extra when its cover is already on screen -
+     * the common case, since a palette is almost always read for artwork the
+     * user is looking at.
+     */
+    suspend fun loadBlocking(url: String): ImageBitmap? = ArtworkCache.get(url)
+}
+
 /**
  * Draws [url], or nothing at all while it loads or if it fails.
  *

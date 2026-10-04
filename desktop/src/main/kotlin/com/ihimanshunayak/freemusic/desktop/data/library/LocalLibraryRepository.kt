@@ -10,6 +10,7 @@
 
 package com.ihimanshunayak.freemusic.desktop.data.library
 
+import com.ihimanshunayak.freemusic.desktop.data.local.AudioMetadataReader
 import com.ihimanshunayak.freemusic.desktop.model.SourceKind
 import com.ihimanshunayak.freemusic.desktop.model.Track
 import com.ihimanshunayak.freemusic.desktop.util.Log
@@ -132,23 +133,66 @@ class LocalLibraryRepository {
     private fun isSymlink(file: File): Boolean =
         runCatching { Files.isSymbolicLink(file.toPath()) }.getOrDefault(false)
 
+    /**
+     * Reads the file's own tags, falling back to what the filename says.
+     *
+     * Reading tags is what makes the library correct rather than merely
+     * populated: a downloaded file is all too often called `01 track.mp3`, and
+     * only the tags inside it know the artist. The filename remains the fallback
+     * because a tagless rip is common too, and "Artist - Title" from the name is
+     * a better guess than the raw stem.
+     */
     private fun toTrack(file: File): Track? {
         val extension = file.extension.lowercase(Locale.ROOT)
         if (extension !in SUPPORTED_EXTENSIONS) return null
         // Hidden files and macOS resource forks are never music the user meant.
         val name = file.name
         if (name.startsWith(".") || name.startsWith("._")) return null
+
+        val stem = name.substringBeforeLast('.').replace('_', ' ').trim()
+        val tags = AudioMetadataReader.read(file, wantCover = false)
+
+        val fromName = splitArtistTitle(stem)
+        val title = tags?.title?.takeIf { it.isNotBlank() } ?: fromName.second
+        val artist = tags?.artist?.takeIf { it.isNotBlank() }
+            ?: fromName.first
+            ?: file.parentFile?.name
+            ?: "Unknown artist"
+        val album = tags?.album?.takeIf { it.isNotBlank() } ?: file.parentFile?.parentFile?.name
+
         return Track(
             id = "local:" + file.absolutePath,
-            title = name.substringBeforeLast('.').replace('_', ' ').trim(),
-            artist = file.parentFile?.name ?: "Unknown artist",
-            album = file.parentFile?.parentFile?.name,
-            durationSeconds = 0,
+            title = title,
+            artist = artist,
+            album = album,
+            durationSeconds = tags?.durationSeconds ?: 0,
             thumbnailUrl = null,
             source = SourceKind.LOCAL_FILE,
             videoId = null,
             localPath = file.absolutePath,
         )
+    }
+
+    /**
+     * Splits a filename into artist and title.
+     *
+     * "Artist - Title" is the near-universal convention for a downloaded track,
+     * so it is worth honouring; anything else is treated as a bare title, since
+     * guessing an artist out of a name with no separator would invent data.
+     * A leading track number is stripped first, because "01 Artist - Title" is
+     * just as common.
+     */
+    private fun splitArtistTitle(stem: String): Pair<String?, String> {
+        val withoutNumber = stem.replace(Regex("""^\s*\d{1,3}[\s._-]+"""), "").trim()
+        val separator = withoutNumber.indexOf(" - ")
+        if (separator <= 0) return null to withoutNumber.ifBlank { stem }
+        val artist = withoutNumber.substring(0, separator).trim()
+        val title = withoutNumber.substring(separator + 3).trim()
+        return if (artist.isBlank() || title.isBlank()) {
+            null to withoutNumber.ifBlank { stem }
+        } else {
+            artist to title
+        }
     }
 
     fun clear() {

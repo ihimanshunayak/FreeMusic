@@ -67,6 +67,40 @@ class StreamResolver(
     private val lock = Mutex()
 
     /**
+     * A quality that overrides the supplier for exactly one resolution.
+     *
+     * The cache is keyed by video id alone, so a second `resolve` for the same
+     * id at a different quality would return the first result. A download that
+     * asks for a higher quality than the player is currently using is the
+     * ordinary case for this, and overriding here - inside the same mutex that
+     * guards the cache - is what makes it correct rather than merely likely to
+     * work. `withQuality` sets it and always clears it.
+     */
+    private var qualityOverride: AudioQuality? = null
+
+    /**
+     * Runs [block] with [target] as the resolution quality.
+     *
+     * The lambda gets the resolver as its receiver, so a call site reads as
+     * `resolver.withQuality(quality) { resolve(videoId) }` rather than repeating
+     * the resolver's name inside its own body.
+     *
+     * Restored in `finally`, so a download that throws cannot leave the player
+     * asking for a bitrate the user never chose.
+     */
+    suspend fun <T> withQuality(target: AudioQuality, block: suspend StreamResolver.() -> T): T {
+        qualityOverride = target
+        return try {
+            block()
+        } finally {
+            qualityOverride = null
+        }
+    }
+
+    /** The quality the next resolution should use. */
+    private fun effectiveQuality(): AudioQuality = qualityOverride ?: quality()
+
+    /**
      * Resolves [videoId], preferring a cached URL.
      *
      * [forceRefresh] is used when the player reports a failure mid-playback: the
@@ -102,7 +136,7 @@ class StreamResolver(
                     throw ResolutionException("no audio streams offered for ${info.name}")
                 }
 
-                val chosen = chooseStream(info.audioStreams, quality())
+                val chosen = chooseStream(info.audioStreams, effectiveQuality())
                 val bitrate = effectiveBitrate(chosen)
                 val elapsed = System.currentTimeMillis() - started
                 Log.i(

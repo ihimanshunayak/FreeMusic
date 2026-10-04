@@ -18,8 +18,27 @@ enum class SourceKind {
     /** YouTube Music, resolved through InnerTubeX. */
     YOUTUBE_MUSIC,
 
-    /** A file already on this machine. */
+    /** SoundCloud, resolved through NewPipeExtractor. */
+    SOUNDCLOUD,
+
+    /** An artist's own upload on Bandcamp. */
+    BANDCAMP,
+
+    /** A federated PeerTube instance. */
+    PEERTUBE,
+
+    /** media.ccc.de conference recordings. */
+    MEDIA_CCC,
+
+    /** A user-installed JavaScript source. */
+    ADDON,
+
+    /** A file already on this machine, or on a mounted share. */
     LOCAL_FILE,
+    ;
+
+    /** True when the kind needs a stream URL before it can play. */
+    val isRemote: Boolean get() = this != LOCAL_FILE
 }
 
 /**

@@ -28,6 +28,21 @@ dependencies {
     implementation(compose.components.resources)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.11.0")
 
+    // ---- UI: Fluent Design - Windows 11's own design language, for Compose ----
+    // `fluent` gives the Windows-native control set (title bar, navigation view,
+    // acrylic/mica surfaces, Fluent typography and motion), which is what makes
+    // this build look like a first-class Windows app rather than a phone app in
+    // a window. Apache-2.0, so it is compatible with this project's GPL-3.0.
+    implementation("io.github.compose-fluent:fluent:v0.1.0")
+    implementation("io.github.compose-fluent:fluent-icons-extended:v0.1.0")
+
+    // ---- UI: Win32 integration ----
+    // JNA reaches the shell APIs Compose has no binding for: DWM backdrop
+    // (Mica/Acrylic), the taskbar, the media transport controls and the
+    // notification centre. Windows-only at runtime; the code guards for that.
+    implementation("net.java.dev.jna:jna:5.18.1")
+    implementation("net.java.dev.jna:jna-platform:5.18.1")
+
     // ---- YouTube Music client: the pure-JVM KMP artifact of the same library
     //      the Android app uses (com.github.MetrolistGroup.innertubex:innertubex-android). ----
     implementation("com.github.MetrolistGroup.innertubex:innertubex-desktop:v0.7.4") {
@@ -55,6 +70,7 @@ dependencies {
     // ---- Serialization / coroutines ----
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
+    implementation("org.json:json:20250517")
 
     // ---- Logging ----
     implementation("org.slf4j:slf4j-api:2.0.16")
@@ -84,7 +100,7 @@ compose.desktop {
                 org.jetbrains.compose.desktop.application.dsl.TargetFormat.Exe,
             )
             packageName = "Free Music"
-            packageVersion = "1.0.0"
+            packageVersion = "1.1.0"
             description = "Free Music - open-source desktop music player"
             vendor = "Himanshu Nayak"
             copyright = "Copyright (C) 2026 Himanshu Nayak. GPL-3.0-or-later."

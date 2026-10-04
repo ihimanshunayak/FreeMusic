@@ -3,14 +3,39 @@
 //
 // Free Music for Windows - now-playing bar.
 //
-// The persistent transport at the bottom of the window. It is the only control
-// surface that is always visible, which is why it carries the seek bar as well
-// as the transport buttons: reaching the player should never require navigating
-// to a page.
+// NAME
+//     NowPlayingBar.kt - the persistent transport at the bottom of the window.
+//
+// DESCRIPTION
+//     The only control surface that is always visible, which is why it carries
+//     the seek bar as well as the transport buttons: reaching the player should
+//     never require navigating to a page.
+//
+//     The bar is drawn on the Mica layer rather than on an opaque panel, so the
+//     desktop wallpaper stays visible through it the way it does through
+//     Explorer's own chrome. That is why it uses the acrylic brush rather than a
+//     solid colour - a solid fill here would break the material the window is
+//     built on.
+//
+// RESPONSIBILITIES
+//     - Transport: play/pause, previous, next, shuffle, repeat.
+//     - Seeking, with a drag that does not fight the engine's position poll.
+//     - Volume and mute.
+//
+// DEPENDENCIES
+//     - [FluentGlyphs] for the transport glyphs.
+//     - [formatMillis] for both time labels.
+//
+// INTEGRATION NOTES
+//     - The seek slider keeps a local value while the user drags it. Binding it
+//       straight to the engine's position would snap the thumb back to the real
+//       position on every poll and make the bar impossible to drag.
+//     - Repeat cycles off -> all -> one, matching the Android build's order.
 
 package com.ihimanshunayak.freemusic.desktop.ui.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,24 +45,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.SkipNext
-import androidx.compose.material.icons.filled.SkipPrevious
-import androidx.compose.material.icons.filled.VolumeDown
-import androidx.compose.material.icons.filled.VolumeMute
-import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material.icons.outlined.PlaylistPlay
-import androidx.compose.material.icons.outlined.Repeat
-import androidx.compose.material.icons.outlined.RepeatOne
-import androidx.compose.material.icons.outlined.Shuffle
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,13 +59,18 @@ import androidx.compose.ui.unit.dp
 import com.ihimanshunayak.freemusic.desktop.audio.PlaybackSnapshot
 import com.ihimanshunayak.freemusic.desktop.model.PlaybackState
 import com.ihimanshunayak.freemusic.desktop.model.RepeatMode
+import io.github.composefluent.FluentTheme
+import io.github.composefluent.component.Icon
+import io.github.composefluent.component.Slider
+import io.github.composefluent.component.SubtleButton
+import io.github.composefluent.component.Text
 
 /**
- * Bottom transport bar.
+ * The bottom transport bar.
  *
- * The seek slider keeps a local value while the user is dragging it: binding it
- * straight to the engine's position would snap the thumb back to the real
- * position on every 500 ms poll and make the bar impossible to drag.
+ * The centre column is given the flexible width and the two side columns a fixed
+ * one, so widening the window grows the seek bar rather than the artwork - the
+ * thing a user drags is the thing that should have room.
  */
 @Composable
 fun NowPlayingBar(
@@ -72,6 +85,7 @@ fun NowPlayingBar(
     onToggleRepeat: () -> Unit,
     onToggleShuffle: () -> Unit,
     onOpenQueue: () -> Unit,
+    onOpenNowPlaying: () -> Unit,
     engineAvailable: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -87,7 +101,7 @@ fun NowPlayingBar(
         modifier = modifier
             .fillMaxWidth()
             .height(84.dp)
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f))
+            .background(FluentTheme.colors.background.acrylic.default)
             .padding(horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -100,22 +114,22 @@ fun NowPlayingBar(
             Column(modifier = Modifier.padding(start = 12.dp)) {
                 Text(
                     text = track?.title ?: "Nothing playing",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = FluentTheme.typography.body,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
                     text = track?.artist ?: "Pick a song to start",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = FluentTheme.typography.caption,
+                    color = FluentTheme.colors.text.text.secondary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 snapshot.error?.let { error ->
                     Text(
                         text = error,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error,
+                        style = FluentTheme.typography.caption,
+                        color = FluentTheme.colors.system.critical,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -131,50 +145,55 @@ fun NowPlayingBar(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onToggleShuffle) {
+                SubtleButton(onClick = onToggleShuffle, iconOnly = true) {
                     Icon(
-                        Icons.Outlined.Shuffle,
+                        FluentGlyphs.Shuffle,
                         contentDescription = "Shuffle",
-                        tint = if (snapshot.shuffle) MaterialTheme.colorScheme.primary
-                        else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp),
+                        tint = if (snapshot.shuffle) FluentTheme.colors.text.accent.primary
+                        else FluentTheme.colors.text.text.secondary,
                     )
                 }
-                IconButton(onClick = onPrevious, enabled = engineAvailable && track != null) {
-                    Icon(Icons.Default.SkipPrevious, contentDescription = "Previous")
-                }
-                IconButton(
-                    onClick = onTogglePlayPause,
-                    enabled = engineAvailable && track != null,
-                    modifier = Modifier.size(44.dp),
+                SubtleButton(
+                    onClick = onPrevious,
+                    disabled = !engineAvailable || track == null,
+                    iconOnly = true,
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(percent = 50))
-                            .background(MaterialTheme.colorScheme.primary)
-                            .padding(9.dp),
-                    ) {
-                        Icon(
-                            imageVector = if (isPlaying || buffering) Icons.Default.Pause else Icons.Default.PlayArrow,
-                            contentDescription = if (isPlaying) "Pause" else "Play",
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.size(22.dp),
+                    Icon(FluentGlyphs.Previous, contentDescription = "Previous")
+                }
+
+                // The play button is the one accent-filled control in the bar, so
+                // it reads as the primary action without any other control having
+                // to be de-emphasised to make room for it.
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 6.dp)
+                        .size(38.dp)
+                        .clip(CircleShape)
+                        .background(
+                            if (engineAvailable && track != null) FluentTheme.colors.fillAccent.default
+                            else FluentTheme.colors.control.disabled,
                         )
-                    }
-                }
-                IconButton(onClick = onNext, enabled = engineAvailable && track != null) {
-                    Icon(Icons.Default.SkipNext, contentDescription = "Next")
-                }
-                IconButton(onClick = onToggleRepeat) {
+                        .clickable(enabled = engineAvailable && track != null, onClick = onTogglePlayPause),
+                    contentAlignment = Alignment.Center,
+                ) {
                     Icon(
-                        imageVector = when (snapshot.repeatMode) {
-                            RepeatMode.ONE -> Icons.Outlined.RepeatOne
-                            else -> Icons.Outlined.Repeat
-                        },
+                        imageVector = if (isPlaying || buffering) FluentGlyphs.Pause else FluentGlyphs.Play,
+                        contentDescription = if (isPlaying) "Pause" else "Play",
+                        tint = FluentTheme.colors.text.onAccent.primary,
+                        modifier = Modifier.size(18.dp),
+                    )
+                }
+
+                SubtleButton(onClick = onNext, disabled = !engineAvailable || track == null, iconOnly = true) {
+                    Icon(FluentGlyphs.Next, contentDescription = "Next")
+                }
+                SubtleButton(onClick = onToggleRepeat, iconOnly = true) {
+                    Icon(
+                        imageVector = if (snapshot.repeatMode == RepeatMode.ONE) FluentGlyphs.Repeat
+                        else FluentGlyphs.Repeat,
                         contentDescription = "Repeat",
-                        tint = if (snapshot.repeatMode == RepeatMode.OFF) MaterialTheme.colorScheme.onSurfaceVariant
-                        else MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(20.dp),
+                        tint = if (snapshot.repeatMode == RepeatMode.OFF) FluentTheme.colors.text.text.secondary
+                        else FluentTheme.colors.text.accent.primary,
                     )
                 }
             }
@@ -182,8 +201,8 @@ fun NowPlayingBar(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = formatMillis(if (dragging) (dragFraction * snapshot.durationMillis).toLong() else snapshot.positionMillis),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = FluentTheme.typography.caption,
+                    color = FluentTheme.colors.text.text.secondary,
                 )
                 Slider(
                     value = fraction,
@@ -202,8 +221,8 @@ fun NowPlayingBar(
                 )
                 Text(
                     text = formatMillis(snapshot.durationMillis),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = FluentTheme.typography.caption,
+                    color = FluentTheme.colors.text.text.secondary,
                 )
             }
         }
@@ -214,16 +233,15 @@ fun NowPlayingBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End,
         ) {
-            IconButton(onClick = onToggleMute) {
+            SubtleButton(onClick = onToggleMute, iconOnly = true) {
                 Icon(
                     imageVector = when {
-                        snapshot.muted || snapshot.volume <= 0.001f -> Icons.Default.VolumeMute
-                        snapshot.volume < 0.5f -> Icons.Default.VolumeDown
-                        else -> Icons.Default.VolumeUp
+                        snapshot.muted || snapshot.volume <= 0.001f -> FluentGlyphs.VolumeMute
+                        snapshot.volume < 0.5f -> FluentGlyphs.VolumeLow
+                        else -> FluentGlyphs.VolumeHigh
                     },
                     contentDescription = if (snapshot.muted) "Unmute" else "Mute",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(20.dp),
+                    tint = FluentTheme.colors.text.text.secondary,
                 )
             }
             Slider(
@@ -231,12 +249,18 @@ fun NowPlayingBar(
                 onValueChange = onVolumeChange,
                 modifier = Modifier.width(90.dp),
             )
-            IconButton(onClick = onOpenQueue) {
+            SubtleButton(onClick = onOpenQueue, iconOnly = true) {
                 Icon(
-                    Icons.Outlined.PlaylistPlay,
+                    FluentGlyphs.Queue,
                     contentDescription = "Queue",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(20.dp),
+                    tint = FluentTheme.colors.text.text.secondary,
+                )
+            }
+            SubtleButton(onClick = onOpenNowPlaying, iconOnly = true) {
+                Icon(
+                    FluentGlyphs.Expand,
+                    contentDescription = "Now playing",
+                    tint = FluentTheme.colors.text.text.secondary,
                 )
             }
         }

@@ -1,57 +1,77 @@
 // Copyright (C) 2026 Himanshu Nayak
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
-// Free Music for Windows - Home screen.
+// Free Music for Windows - the Home feed.
 //
-// The anonymous YouTube Music feed as horizontal shelves. It is the screen a
-// user lands on, so it does three things at once: proves the session works, shows
-// something playable within a second of launch, and offers a way out when the
-// network or the session is broken.
+// NAME
+//     HomeScreen.kt - what YouTube Music suggests, as browsable shelves.
+//
+// DESCRIPTION
+//     Renders the browse feed as a stack of horizontal card rows, one per shelf.
+//     The feed is the app's front door, so it greets and it explains itself: an
+//     empty feed and a failed feed are different screens, because they need
+//     different actions from the user. A failed feed keeps the last good payload
+//     on screen while a refresh is in flight rather than flashing empty.
+//
+//     Refresh is manual rather than automatic. A feed that reloads itself while
+//     the user is reading it moves the shelf under their cursor, and the payload
+//     is large enough that polling it would be wasteful.
+//
+// RESPONSIBILITIES
+//     - Render every shelf as a scrolling row of cards.
+//     - Play a card that has a video id and search for one that does not.
+//     - Refresh on demand, and say why when the feed could not be fetched.
+//
+// DEPENDENCIES
+//     - [BrowseViewModel] for the payload; this screen owns no fetching of its own.
+//     - [MediaCard], [SectionHeader] and the shared empty, loading and error states.
+//
+// INTEGRATION NOTES
+//     - A shelf row is a `LazyRow` inside a `LazyColumn`, which is fine as long as
+//       the inner list has a bounded height. The cards set their own height, so
+//       the row does not need one.
+//     - The card click branches on `videoId` rather than on [ResultKind]: YouTube
+//       returns a song with no video id when it is only a catalogue entry, and a
+//       browse id on a card that looks like a song, so the id is the honest test.
+//     - [HomeShelf] carries no browse id, so "See all" hands the shelf title to the
+//       search screen instead. That always resolves to something, whereas a dead
+//       header would not.
 
 package com.ihimanshunayak.freemusic.desktop.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Album
-import androidx.compose.material.icons.outlined.CloudOff
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ihimanshunayak.freemusic.desktop.model.SearchResult
+import com.ihimanshunayak.freemusic.desktop.ui.component.EmptyState
+import com.ihimanshunayak.freemusic.desktop.ui.component.ErrorState
+import com.ihimanshunayak.freemusic.desktop.ui.component.FluentGlyphs
+import com.ihimanshunayak.freemusic.desktop.ui.component.LoadingState
 import com.ihimanshunayak.freemusic.desktop.ui.component.MediaCard
 import com.ihimanshunayak.freemusic.desktop.ui.component.SectionHeader
-import com.ihimanshunayak.freemusic.desktop.ui.component.Thumbnail
 import com.ihimanshunayak.freemusic.desktop.ui.component.iconForKind
 import com.ihimanshunayak.freemusic.desktop.ui.state.BrowseViewModel
+import com.ihimanshunayak.freemusic.desktop.ui.state.HomeShelf
+import io.github.composefluent.FluentTheme
+import io.github.composefluent.component.SubtleButton
+import io.github.composefluent.component.Text
 
 /**
  * The Home feed.
  *
- * [onOpenShelf] is how a shelf title navigates; it is not handled inside this
- * screen because the destination lives in the app's navigation state, not here.
+ * [onOpenShelf] is how a shelf header navigates; the destination lives in the
+ * app's navigation state, so it is not handled here.
  */
 @Composable
 fun HomeScreen(
@@ -65,46 +85,74 @@ fun HomeScreen(
     Box(modifier = modifier.fillMaxSize()) {
         when {
             state.loading && state.shelves.isEmpty() -> LoadingState()
-            state.error != null && state.shelves.isEmpty() -> HomeError(state.error!!) {
-                viewModel.loadHome(force = true)
+            state.error != null -> ErrorState(
+                title = "Could not reach YouTube Music",
+                detail = state.error.orEmpty(),
+                onRetry = { viewModel.loadHome(force = true) },
+            )
+            state.shelves.isEmpty() -> Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                EmptyState(
+                    icon = FluentGlyphs.Home,
+                    title = "Nothing on Home right now",
+                    detail = "YouTube Music returned no shelves for your region. Search " +
+                        "works as usual, and Explore browses by mood.",
+                )
             }
-            state.shelves.isEmpty() -> EmptyHome()
-            else -> HomeShelves(state.shelves, onPlay, onOpenShelf)
+            else -> HomeShelves(
+                shelves = state.shelves,
+                onPlay = onPlay,
+                onOpenShelf = onOpenShelf,
+                onRefresh = { viewModel.loadHome(force = true) },
+            )
         }
     }
 }
 
 @Composable
 private fun HomeShelves(
-    shelves: List<com.ihimanshunayak.freemusic.desktop.ui.state.HomeShelf>,
+    shelves: List<HomeShelf>,
     onPlay: (SearchResult) -> Unit,
     onOpenShelf: (String) -> Unit,
+    onRefresh: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 32.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        item {
-            Text(
-                text = "Good to see you",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 4.dp),
-            )
+        item(key = "greeting") {
+            SectionHeader("Good to see you") {
+                SubtleButton(onClick = onRefresh) {
+                    Text("Refresh")
+                }
+            }
             Text(
                 text = "Free Music - unlimited, free, and open source.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = FluentTheme.typography.caption,
+                color = FluentTheme.colors.text.text.secondary,
                 modifier = Modifier.padding(bottom = 12.dp),
             )
         }
+
         shelves.forEach { shelf ->
             item(key = "header-${shelf.title}") {
-                SectionHeader(title = shelf.title)
+                SectionHeader(shelf.title) {
+                    // A shelf title is a usable query, so "See all" always lands
+                    // somewhere. A dead header would be worse than no button.
+                    SubtleButton(onClick = { onOpenShelf(shelf.title) }) {
+                        Text("See all")
+                    }
+                }
             }
             item(key = "row-${shelf.title}") {
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    items(shelf.items, key = { it.videoId ?: it.browseId ?: it.title }) { result ->
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    contentPadding = PaddingValues(bottom = 8.dp),
+                ) {
+                    items(shelf.items, key = { it.stableKey() }) { result ->
                         MediaCard(
                             title = result.title,
                             subtitle = result.subtitle,
@@ -113,8 +161,7 @@ private fun HomeShelves(
                             onClick = {
                                 // A row with a video id plays; anything else is a
                                 // container the app cannot queue, so it navigates.
-                                if (result.videoId != null) onPlay(result)
-                                else onOpenShelf(result.title)
+                                if (result.videoId != null) onPlay(result) else onOpenShelf(result.title)
                             },
                         )
                     }
@@ -124,111 +171,6 @@ private fun HomeShelves(
     }
 }
 
-/**
- * Shown when a browse payload arrives but carries no shelves.
- *
- * This is not an error state: an empty feed is what YouTube returns for a
- * region with no chart data, and saying "nothing to show" is more honest than
- * offering a retry that will return the same empty page.
- */
-@Composable
-private fun EmptyHome() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Icon(
-            Icons.Outlined.Home,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(56.dp),
-        )
-        Text(
-            text = "Nothing on Home right now",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(top = 16.dp),
-        )
-        Text(
-            text = "Use Search to find something to play.",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 6.dp),
-        )
-    }
-}
-
-/** A failure that the user can act on, with the real reason underneath. */
-@Composable
-private fun HomeError(message: String, onRetry: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Icon(
-            Icons.Outlined.CloudOff,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.error,
-            modifier = Modifier.size(56.dp),
-        )
-        Text(
-            text = "Could not reach YouTube Music",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(top = 16.dp),
-        )
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 6.dp),
-        )
-        Button(onClick = onRetry, modifier = Modifier.padding(top = 20.dp)) {
-            Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
-            Text("Try again", modifier = Modifier.padding(start = 8.dp))
-        }
-    }
-}
-
-/** Centred spinner used by every screen while a first load is in flight. */
-@Composable
-fun LoadingState(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            CircularProgressIndicator()
-            Text(
-                text = "Loading",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 12.dp),
-            )
-        }
-    }
-}
-
-/** Shared skeleton row, used while a list is loading under an existing header. */
-@Composable
-fun SkeletonRow(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Thumbnail(null, Modifier.size(40.dp), icon = Icons.Outlined.Album)
-        Column(modifier = Modifier.padding(start = 12.dp)) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.4f)
-                    .height(12.dp)
-                    .padding(bottom = 4.dp),
-            )
-        }
-    }
-}
+/** A stable key for a card, since not every result has a video id. */
+private fun SearchResult.stableKey(): String =
+    videoId ?: browseId ?: playlistId ?: "$title-$subtitle"

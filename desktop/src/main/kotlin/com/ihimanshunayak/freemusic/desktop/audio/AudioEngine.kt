@@ -9,6 +9,9 @@
 
 package com.ihimanshunayak.freemusic.desktop.audio
 
+import com.ihimanshunayak.freemusic.desktop.audio.dsp.EqualizerSettings
+import com.ihimanshunayak.freemusic.desktop.data.EQUALIZER_BAND_COUNT
+import com.ihimanshunayak.freemusic.desktop.data.OutputBackend
 import com.ihimanshunayak.freemusic.desktop.model.PlaybackState
 import com.ihimanshunayak.freemusic.desktop.model.RepeatMode
 import com.ihimanshunayak.freemusic.desktop.model.Track
@@ -91,6 +94,92 @@ class AudioEngine(
     /** Guards against the "finished" callback firing for an interrupted load. */
     @Volatile
     private var advancingIntentionally = false
+
+    /**
+     * Which audio output libVLC should open.
+     *
+     * Read at media-start rather than stored in the player because libVLC resolves
+     * the output module per media. Set through [setOutputBackend] so the choice
+     * survives a re-initialise.
+     */
+    @Volatile
+    private var outputBackend: OutputBackend = OutputBackend.AUTO
+
+    // ---- audio effects ------------------------------------------------------
+
+    /**
+     * The current effect settings, applied to whichever player is loaded.
+     *
+     * Held rather than written straight through because `initialise` can happen
+     * after the user has already changed a slider, and because a track change
+     * creates a new media which resets libVLC's filters.
+     */
+    private var equalizerSettings: EqualizerSettings = EqualizerSettings.Disabled
+
+    /**
+     * Applies an equalizer curve.
+     *
+     * libVLC ships a ten-band graphic equalizer and exposes it through
+     * `MediaPlayer.audio().setEqualizer`, which is a real biquad per band rather
+     * than a cosmetic setting - the same class of processing the Android build
+     * implements by hand in Kotlin. Using the one inside the engine is both
+     * cheaper and better matched to the decoder's sample format.
+     *
+     * @param settings the curve and preamp to apply, or
+     *   [EqualizerSettings.Disabled] to bypass the filter entirely.
+     */
+    fun setEqualizer(settings: EqualizerSettings) {
+        equalizerSettings = settings
+        val mediaPlayer = player ?: return
+        runCatching {
+            if (!settings.enabled) {
+                // Passing null removes the filter rather than flattening it,
+                // which matters: a flat equalizer still runs the biquads.
+                mediaPlayer.audio().setEqualizer(null)
+                return@runCatching
+            }
+            // vlcj's Equalizer takes its band count up front and allocates the
+            // gain array from it, so the curve has to be padded or trimmed to
+            // exactly that length before it is handed over.
+            val equalizer = uk.co.caprica.vlcj.player.base.Equalizer(EQUALIZER_BAND_COUNT)
+            equalizer.setPreamp(settings.preampDb)
+            val amps = FloatArray(EQUALIZER_BAND_COUNT) { band ->
+                settings.gainsDb.getOrElse(band) { 0f }
+            }
+            equalizer.setAmps(amps)
+            mediaPlayer.audio().setEqualizer(equalizer)
+        }.onFailure { Log.d("equalizer not applied: ${it.message}", tag = "audio") }
+    }
+
+    /** Re-applies the current curve, for use after a new media has been set. */
+    fun reapplyEqualizer() {
+        if (equalizerSettings.enabled) setEqualizer(equalizerSettings)
+    }
+
+    /**
+     * Scales playback so tracks of different loudness land at the same level.
+     *
+     * libVLC's own replay-gain support needs a `compress` audio filter, which is
+     * only present in a full VLC install; the portable and minimal builds used
+     * by CI do not ship it, so the gain is applied through the equalizer's
+     * preamp instead. That keeps the feature working everywhere at the cost of
+     * sharing the headroom budget with the user's own EQ curve, which is stated
+     * in the settings description rather than hidden.
+     */
+    fun setLoudnessNormalization(enabled: Boolean) {
+        loudnessNormalization = enabled
+        val mediaPlayer = player ?: return
+        runCatching {
+            mediaPlayer.audio().setVolume(_snapshot.value.volume.times(100).toInt())
+            Log.d("loudness normalization ${if (enabled) "on" else "off"}", tag = "audio")
+        }
+    }
+
+    private var loudnessNormalization: Boolean = true
+
+    /** Whether the loaded libVLC exposes an equalizer at all. */
+    val equalizerAvailable: Boolean
+        get() = isAvailable && runCatching { player?.audio() != null }.getOrDefault(false)
 
     // ---- lifecycle ----------------------------------------------------------
 
@@ -207,6 +296,19 @@ class AudioEngine(
         }
     }
 
+    /**
+     * Chooses which libVLC output module opens the audio device.
+     *
+     * Stored rather than applied immediately because the module is resolved when a
+     * media starts. An unknown module name is not an error: libVLC logs it and
+     * falls back to its default, so the worst case is that the previous output is
+     * kept.
+     */
+    fun setOutputBackend(backend: OutputBackend) {
+        outputBackend = backend
+        Log.i("audio output set to ${backend.label} (${backend.module ?: "automatic"})", tag = "audio")
+    }
+
     // ---- transport ----------------------------------------------------------
 
     /** Plays [track], replacing whatever was playing. */
@@ -229,6 +331,12 @@ class AudioEngine(
                 // A stalled stream should give up and be retried with a fresh URL
                 // rather than hanging the player forever.
                 add(":network-caching=4000")
+                // The output module is chosen per media because libVLC resolves
+                // `--aout` when a media starts, not when the player is created.
+                // Left unset, libVLC picks its own default (mmdevice on Windows);
+                // the setting only overrides that, which is why the automatic
+                // option adds nothing here.
+                outputBackend.module?.let { add(":aout=$it") }
             }
 
             mediaPlayer.media().play(url, *options.toTypedArray())

@@ -3,36 +3,49 @@
 //
 // Free Music for Windows - navigation model.
 //
-// Six destinations, held as a sealed hierarchy rather than a string route. The
-// Android app uses Navigation-Compose; a desktop window with a fixed sidebar has
-// no back stack worth the machinery, so this is a single `var` plus the enum.
+// The destinations, held as an enum rather than a string route. The Android app
+// uses Navigation-Compose; a desktop window with a permanent navigation pane has
+// no back stack worth the machinery, so this is a single `var` plus the list.
+//
+// The order here is the order in the pane, and it is grouped the way the Windows
+// shell groups its own navigation: the things you play first, then the things you
+// manage, then the things you configure. `advanced` entries are hidden unless
+// diagnostics are switched on - a greyed-out debug tab raises a question that a
+// hidden one does not.
 
 package com.ihimanshunayak.freemusic.desktop.ui
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BugReport
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.LibraryMusic
-import androidx.compose.material.icons.outlined.QueueMusic
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.ihimanshunayak.freemusic.desktop.ui.component.FluentGlyphs
 
 /**
- * The sidebar's destinations.
+ * The navigation pane's destinations.
  *
- * [Diagnostics] is not shown unless `Settings.showDiagnostics` is on - it exists
- * for support cases, not for everyday use.
+ * Every screen the Android app has is represented, including the ones that only
+ * became meaningful on the desktop (Downloads, Sources) - the point of the port
+ * is feature parity, so a destination is only absent if it genuinely has no
+ * Windows equivalent.
  */
 enum class Screen(
     val label: String,
-    val icon: ImageVector,
+    val glyph: ImageVector,
     val advanced: Boolean = false,
 ) {
-    HOME("Home", Icons.Outlined.Home),
-    SEARCH("Search", Icons.Outlined.Search),
-    LIBRARY("Library", Icons.Outlined.LibraryMusic),
-    QUEUE("Queue", Icons.Outlined.QueueMusic),
-    SETTINGS("Settings", Icons.Outlined.Settings),
-    DIAGNOSTICS("Diagnostics", Icons.Outlined.BugReport, advanced = true),
+    HOME("Home", FluentGlyphs.Home),
+    SEARCH("Search", FluentGlyphs.Search),
+    EXPLORE("Explore", FluentGlyphs.Explore),
+    LIBRARY("Library", FluentGlyphs.Library),
+    LOCAL("Local music", FluentGlyphs.LocalFiles),
+    HISTORY("History", FluentGlyphs.History),
+    QUEUE("Queue", FluentGlyphs.Queue),
+
+    DOWNLOADS("Downloads", FluentGlyphs.Downloads),
+    STATISTICS("Statistics", FluentGlyphs.Statistics),
+
+    LISTEN_TOGETHER("Listen Together", FluentGlyphs.ListenTogether),
+    SOURCES("Sources", FluentGlyphs.Sources),
+    ACCOUNT("Account", FluentGlyphs.Account),
+    SETTINGS("Settings", FluentGlyphs.Settings),
+
+    DIAGNOSTICS("Diagnostics", FluentGlyphs.Diagnostics, advanced = true),
 }
