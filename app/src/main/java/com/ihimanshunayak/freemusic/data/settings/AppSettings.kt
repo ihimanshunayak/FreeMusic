@@ -647,6 +647,21 @@ object AppSettings {
     /** How many playlists [pinnedPlaylists] can hold at once. */
     const val MAX_PINNED_PLAYLISTS = 5
 
+    // ── Notifications ───────────────────────────────────────────────────
+
+    /**
+     * The version the notification list was last read at, or empty for never.
+     *
+     * The list is composed from things the app already knows — an available
+     * update, transfers in flight, the newest releases — and all of them are
+     * *states*, not events, so there is no unread flag to set on any of them.
+     * Storing the version instead makes "unread" mean "there is an update newer
+     * than the one you last looked at", which is the only piece of the list
+     * that is genuinely new information rather than something the user just
+     * did or is watching happen.
+     */
+    val notificationsSeenVersion = MutableStateFlow("")
+
     // ── Scrobbling ──────────────────────────────────────────────────────
 
     /** One release gate shared by the settings UI and the playback service. */
@@ -917,6 +932,7 @@ object AppSettings {
         localMusicViewType.value = readLibraryViewType(KEY_LOCAL_MUSIC_VIEW_TYPE)
         downloadedMusicViewType.value = readLibraryViewType(KEY_DOWNLOADED_MUSIC_VIEW_TYPE)
         homeRecentsViewType.value = readLibraryViewType(KEY_HOME_RECENTS_VIEW_TYPE)
+        notificationsSeenVersion.value = prefs.getString(KEY_NOTIFICATIONS_SEEN_VERSION, "").orEmpty()
         librarySort.value = prefs.getString(KEY_LIBRARY_SORT, null)
             ?.let { saved -> LibrarySort.entries.firstOrNull { it.name == saved } }
             ?: LibrarySort.DEFAULT
@@ -1804,6 +1820,13 @@ object AppSettings {
         return browseId in updated
     }
 
+    /** Records that the notification list has been seen at [version]. */
+    fun markNotificationsSeen(version: String) {
+        if (notificationsSeenVersion.value == version) return
+        notificationsSeenVersion.value = version
+        prefs.edit().putString(KEY_NOTIFICATIONS_SEEN_VERSION, version).apply()
+    }
+
     private fun readDetailSongSorts(): Map<String, SongSort> =
         prefs.getString(KEY_DETAIL_SONG_SORTS, null)
             ?.split(",")
@@ -1995,6 +2018,7 @@ object AppSettings {
     private const val KEY_LOCAL_MUSIC_VIEW_TYPE = "local_music_view_type"
     private const val KEY_DOWNLOADED_MUSIC_VIEW_TYPE = "downloaded_music_view_type"
     private const val KEY_HOME_RECENTS_VIEW_TYPE = "home_recents_view_type"
+    private const val KEY_NOTIFICATIONS_SEEN_VERSION = "notifications_seen_version"
     private const val KEY_LOCAL_MUSIC_FOLDER_URI = "local_music_folder_uri"
     private const val KEY_WEBDAV_URL = "webdav_url"
     private const val KEY_WEBDAV_USERNAME = "webdav_username"

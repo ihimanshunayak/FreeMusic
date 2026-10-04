@@ -6,6 +6,7 @@ import com.ihimanshunayak.freemusic.data.model.AccountChannel
 import com.ihimanshunayak.freemusic.data.model.ArtistPage
 import com.ihimanshunayak.freemusic.data.model.BrowseItem
 import com.ihimanshunayak.freemusic.data.model.BrowseType
+import com.ihimanshunayak.freemusic.data.model.HomeChip
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.LibraryState
 import com.ihimanshunayak.freemusic.data.model.LikeStatus
@@ -198,6 +199,33 @@ object InnertubeParser {
         return sections.mapNotNull { section ->
             section.o("musicCarouselShelfRenderer")?.let(::carouselShelf)
                 ?: section.o("musicShelfRenderer")?.let(::plainShelf)
+        }
+    }
+
+    /**
+     * The filter chips riding the Home feed's own header.
+     *
+     * YouTube puts them in `sectionListRenderer.header.chipCloudRenderer`,
+     * which means they are not a separate request and never go stale against
+     * the feed they filter — they arrive with it. A chip whose endpoint is
+     * missing is dropped rather than rendered as dead: some clouds carry
+     * non-navigating entries, and a chip that does nothing when tapped is
+     * worse than one that was never shown.
+     */
+    fun parseHomeChips(response: JsonObject): List<HomeChip> {
+        val chips = response.o("contents")
+            .o("singleColumnBrowseResultsRenderer").a("tabs")?.firstOrNull()
+            .o("tabRenderer").o("content").o("sectionListRenderer")
+            .o("header").o("chipCloudRenderer").a("chips")
+            .orEmpty()
+
+        return chips.mapNotNull { element ->
+            val chip = element.o("chipCloudChipRenderer") ?: return@mapNotNull null
+            val endpoint = chip.o("navigationEndpoint").o("browseEndpoint")
+                ?: return@mapNotNull null
+            val browseId = endpoint.s("browseId") ?: return@mapNotNull null
+            val title = chip.o("text").runs().trim()
+            if (title.isBlank()) null else HomeChip(title, browseId, endpoint.s("params").orEmpty())
         }
     }
 

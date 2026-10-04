@@ -28,6 +28,7 @@ import com.ihimanshunayak.freemusic.data.model.Account
 import com.ihimanshunayak.freemusic.data.model.AccountChannel
 import com.ihimanshunayak.freemusic.data.model.BrowseType
 import com.ihimanshunayak.freemusic.data.model.DetailPage
+import com.ihimanshunayak.freemusic.data.model.HomeChip
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.LibraryPage
 import com.ihimanshunayak.freemusic.data.model.LibraryState
@@ -126,6 +127,37 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private val _homeRecentlyPlayedLoading = MutableStateFlow(false)
     val homeRecentlyPlayedLoading: StateFlow<Boolean> = _homeRecentlyPlayedLoading.asStateFlow()
     private val homeLoadGeneration = AtomicLong(0L)
+
+    /**
+     * The filter chips that rode the last Home response, in the order the
+     * server sent them.
+     *
+     * Server-owned rather than a constant: the row is YouTube's own, it varies
+     * by account and by region, and a chip is only meaningful together with the
+     * params blob behind it — all three arrive in the same response.
+     */
+    private val _homeChips = MutableStateFlow<List<HomeChip>>(emptyList())
+    val homeChips: StateFlow<List<HomeChip>> = _homeChips.asStateFlow()
+
+    /**
+     * Which chip is filtering the page, or null for the unfiltered feed.
+     *
+     * Null is a real state and not "nothing selected yet": it is what the page
+     * shows at rest, and what clearing the filter returns to.
+     */
+    private val _selectedHomeChip = MutableStateFlow<HomeChip?>(null)
+    val selectedHomeChip: StateFlow<HomeChip?> = _selectedHomeChip.asStateFlow()
+
+    /**
+     * The shelves behind [selectedHomeChip].
+     *
+     * Separate from [home] because a filter replaces the page's *contents*
+     * without replacing the page: the feed's own state is left exactly as it
+     * was, so clearing the filter restores it with no refetch and no flicker.
+     */
+    private val _homeChipShelves = MutableStateFlow<UiState<List<HomeShelf>>>(UiState.Success(emptyList()))
+    val homeChipShelves: StateFlow<UiState<List<HomeShelf>>> = _homeChipShelves.asStateFlow()
+    private val homeChipGeneration = AtomicLong(0L)
 
     private val _explore = MutableStateFlow<UiState<List<MoodGenreSection>>>(UiState.Loading)
     val explore: StateFlow<UiState<List<MoodGenreSection>>> = _explore.asStateFlow()
@@ -1401,6 +1433,114 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         return true
     }
 
+    // ---- Home filter chips --------------------------------------------------
+
+    /**
+     * The chips the user asked for, in the order they asked for them.
+     *
+     * Used to *select* from the server's row, never to build it: a chip is
+     * only actionable together with the params blob that came with it, and
+     * those are YouTube's to issue. So only labels that exist in the response
+     * can appear here — this decides which of those show, and in what order.
+     *
+     * The row is deliberately the named ten and no more. The server also sends
+     * "Commute", which is not part of what was asked for; and the row would
+     * otherwise grow or shrink with YouTube's own editorial changes, so a page
+     * whose shortcut row is part of its design would quietly stop matching it.
+     */
+    private val preferredChipOrder = listOf(
+        "Podcasts",
+        "Romance",
+        "Relax",
+        "Feel good",
+        "Party",
+        "Energize",
+        "Sad",
+        "Workout",
+        "Sleep",
+        "Focus",
+    )
+
+    private fun rankChips(chips: List<HomeChip>): List<HomeChip> {
+        if (chips.isEmpty()) return chips
+        val rank = preferredChipOrder.withIndex()
+            .associate { (index, label) -> label.lowercase(Locale.ROOT) to index }
+        val named = chips
+            .filter { it.title.trim().lowercase(Locale.ROOT) in rank }
+            .sortedBy { rank.getValue(it.title.trim().lowercase(Locale.ROOT)) }
+        // If YouTube ever renames the vocabulary wholesale, none of the ten
+        // match and the row would vanish. Falling back to whatever arrived is
+        // worse-looking than the curated order and better than no chips at all.
+        return named.ifEmpty { chips }
+    }
+
+    /**
+     * Applies [chip] to the page, or clears the filter when it is null.
+     *
+     * Tapping the active chip is the same gesture as clearing — a filter you
+     * cannot turn off from the control that turned it on reads as a trap.
+     */
+    fun selectHomeChip(chip: HomeChip?) {
+        val current = _selectedHomeChip.value
+        if (chip == null || chip == current) {
+            clearHomeChip()
+            return
+        }
+        _selectedHomeChip.value = chip
+        val generation = homeChipGeneration.incrementAndGet()
+        _homeChipShelves.value = UiState.Loading
+        viewModelScope.launch {
+            val next = YtMusicRepository.homeChipFeed(chip.browseId, chip.params).fold(
+                onSuccess = { shelves ->
+                    if (shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
+                    else UiState.Success(shelves)
+                },
+                onFailure = { UiState.Error(it.friendly()) },
+            )
+            // A stale filter must not overwrite a newer one, the same way a
+            // stale Home load must not overwrite the feed it was replaced by.
+            if (generation == homeChipGeneration.get() && _selectedHomeChip.value == chip) {
+                _homeChipShelves.value = next
+            }
+        }
+    }
+
+    /** Drops the filter and returns the page to its unfiltered feed. */
+    fun clearHomeChip() {
+        val alreadyClear = _selectedHomeChip.value == null &&
+            (_homeChipShelves.value as? UiState.Success)?.data.isNullOrEmpty()
+        if (alreadyClear) return
+        homeChipGeneration.incrementAndGet()
+        _selectedHomeChip.value = null
+        _homeChipShelves.value = UiState.Success(emptyList())
+    }
+
+    /**
+     * Refetches the feed behind the active chip.
+     *
+     * Deliberately not [selectHomeChip] with its own argument: that treats a
+     * tap on the active chip as a request to clear the filter, which is the
+     * right reading of a tap and the wrong reading of a retry — the user is
+     * asking for the shelves again, not asking to be rid of them.
+     */
+    fun retryHomeChip() {
+        val chip = _selectedHomeChip.value ?: return
+        val generation = homeChipGeneration.incrementAndGet()
+        _homeChipShelves.value = UiState.Loading
+        viewModelScope.launch {
+            val next = YtMusicRepository.homeChipFeed(chip.browseId, chip.params).fold(
+                onSuccess = { shelves ->
+                    if (shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
+                    else UiState.Success(shelves)
+                },
+                onFailure = { UiState.Error(it.friendly()) },
+            )
+            if (generation == homeChipGeneration.get() && _selectedHomeChip.value == chip) {
+                _homeChipShelves.value = next
+            }
+        }
+    }
+
     /** Tapping a tab should leave any pushed page behind. */
     fun clearDetail() {
         if (_detailStack.value.isNotEmpty()) _detailStack.value = emptyList()
@@ -1414,6 +1554,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         homeSeenTitles.clear()
         _homeLoadingMore.value = false
         _homeRecentlyPlayedLoading.value = _signedIn.value
+        // A reload is a fresh page: the old filter belonged to the feed being
+        // replaced, and carrying it over would apply a chip to a feed it was
+        // never chosen against.
+        clearHomeChip()
         // The core feed plus one browse per supplement. Recently played is left
         // out: it has its own skeleton at the head of the page rather than the
         // one at the tail.
@@ -1425,6 +1569,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                         .onSuccess { feed ->
                             if (!isCurrentHomeLoad(identity, generation)) return@onSuccess
                             homeContinuation = feed.continuation
+                            _homeChips.value = rankChips(feed.chips)
                             publishHomeShelves(feed.shelves)
                         }
                         .onFailure { failure ->
@@ -1498,6 +1643,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         YtMusicRepository.home().onSuccess { feed ->
             if (identity != listenerKey()) return@onSuccess
             homeContinuation = feed.continuation
+            _homeChips.value = rankChips(feed.chips)
             homeSeenTitles.clear()
             val shelves = feed.shelves.filter { homeSeenTitles.add(it.title.lowercase(Locale.ROOT)) }
             if (shelves.isNotEmpty()) _home.value = UiState.Success(shelves)

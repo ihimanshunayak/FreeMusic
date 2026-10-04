@@ -359,12 +359,38 @@ data class HomeShelf(
 data class HomeFeed(
     val shelves: List<HomeShelf>,
     val continuation: String?,
+    /**
+     * The filter chips that arrived in this response's own header.
+     *
+     * Carried on the feed rather than fetched separately because they *are*
+     * part of that response — `sectionListRenderer.header` — so asking for the
+     * feed and asking for its chips is one request, not two.
+     */
+    val chips: List<HomeChip> = emptyList(),
 )
 
 /** One server-defined group of the buttons shown on Explore. */
 data class MoodGenreSection(
     val title: String,
     val items: List<MoodGenre>,
+)
+
+/**
+ * One filter chip above the Home shelves — "Podcasts", "Relax", "Work out".
+ *
+ * The row is YouTube's own: a `chipCloudRenderer` in the feed's section-list
+ * header hands back every chip with the exact browse request behind it, so
+ * nothing about the set is hard-coded here. [browseId] is always FEmusic_home
+ * and only [params] varies, which is what makes a chip a *filter* of the same
+ * feed rather than a link to somewhere else — the response comes back in the
+ * ordinary home shape, so it renders through the same parser and the same
+ * shelves as the feed underneath it.
+ */
+data class HomeChip(
+    /** The chip's own label, as the server spells it. */
+    val title: String,
+    val browseId: String,
+    val params: String,
 )
 
 /** A mood or genre button and the exact browse request that it represents. */

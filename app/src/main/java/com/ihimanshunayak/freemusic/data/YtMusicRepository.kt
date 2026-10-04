@@ -6,6 +6,7 @@ import com.ihimanshunayak.freemusic.data.innertube.InnertubeParser
 import com.ihimanshunayak.freemusic.data.model.Account
 import com.ihimanshunayak.freemusic.data.model.AccountChannel
 import com.ihimanshunayak.freemusic.data.model.ArtistPage
+import com.ihimanshunayak.freemusic.data.model.HomeChip
 import com.ihimanshunayak.freemusic.data.model.HomeFeed
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.LibraryPage
@@ -36,6 +37,9 @@ object YtMusicRepository {
 
     private const val TAG = "Free Music"
     private val moodGenreShelfCache = ConcurrentHashMap<String, List<HomeShelf>>()
+    // Chip filters off Home, keyed by browseId:params. Small responses, and
+    // the whole point of a chip row is flipping between two of them.
+    private val homeChipFeedCache = ConcurrentHashMap<String, List<HomeShelf>>()
     // Includes unchanged video fallbacks as well as successful matches. The
     // queue prefetcher asks before a track becomes current; remembering its
     // answer makes the eventual player switch use the exact rendition whose
@@ -59,11 +63,35 @@ object YtMusicRepository {
      */
     suspend fun home(): Result<HomeFeed> = call("home") {
         val home = Innertube.browse("FEmusic_home")
-        HomeFeed(InnertubeParser.parseHome(home), InnertubeParser.continuationToken(home))
+        HomeFeed(
+            shelves = InnertubeParser.parseHome(home),
+            continuation = InnertubeParser.continuationToken(home),
+            chips = InnertubeParser.parseHomeChips(home),
+        )
     }
 
     /** Recently played is rendered independently, at the top of the Play page. */
     suspend fun homeRecentlyPlayed(): Result<HomeShelf?> = call("home:recent") { recentlyPlayed() }
+
+    /**
+     * The feed behind one Home chip.
+     *
+     * A chip is the same browse id as the feed with a different params blob,
+     * so this is not a page — it is a filtered view of Home, and its response
+     * has the ordinary home shape. That is why it parses through [parseHome]
+     * unchanged and renders through the same shelves: there is exactly one
+     * layout for "rows of cards", and a chip does not introduce a second.
+     *
+     * Cached per params, since the row is small, the requests are identical,
+     * and flipping between two chips is the expected way to use it.
+     */
+    suspend fun homeChipFeed(browseId: String, params: String): Result<List<HomeShelf>> {
+        val key = "$browseId:$params"
+        homeChipFeedCache[key]?.let { return Result.success(it) }
+        return call("home:chip:$browseId") {
+            InnertubeParser.parseHome(Innertube.browse(browseId, params))
+        }.also { result -> result.getOrNull()?.let { homeChipFeedCache.putIfAbsent(key, it) } }
+    }
 
     /** Extra Play shelves are independently fetchable so each can appear as soon as it arrives. */
     suspend fun homeSupplement(browseId: String): Result<List<HomeShelf>> = call("home:$browseId") {

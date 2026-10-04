@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -42,9 +43,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
@@ -57,6 +60,7 @@ import com.ihimanshunayak.freemusic.R
 import coil3.compose.AsyncImage
 import com.ihimanshunayak.freemusic.data.model.CARD_ART_PX
 import com.ihimanshunayak.freemusic.data.model.HEADER_ART_PX
+import com.ihimanshunayak.freemusic.data.model.HomeChip
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.ROW_ART_PX
 import com.ihimanshunayak.freemusic.data.model.ShelfItem
@@ -110,8 +114,44 @@ fun HomeScreen(
     onLoadMore: (() -> Unit)? = null,
     loadingMore: Boolean = false,
     recentlyPlayedLoading: Boolean = false,
+    /**
+     * The filter chips that rode the feed's own response, already ranked.
+     *
+     * Empty while chips are not in play at all (Explore reuses this screen and
+     * passes none), which is also the state that hides the row — so the page
+     * has one way of saying "there is no chip row" rather than two.
+     */
+    chips: List<HomeChip> = emptyList(),
+    /** The chip currently filtering the page, or null for the unfiltered feed. */
+    selectedChip: HomeChip? = null,
+    onChipClick: ((HomeChip) -> Unit)? = null,
+    /** The shelves behind [selectedChip]; only read while one is selected. */
+    chipShelves: UiState<List<HomeShelf>> = UiState.Success(emptyList()),
+    onChipRetry: (() -> Unit)? = null,
+    /**
+     * The handful of tiles at the head of the page — recently played tracks,
+     * album covers and playlists, drawn as gradient tiles.
+     *
+     * A separate parameter from the shelves rather than another [HomeShelf]
+     * because it is laid out differently: a fixed grid of large tiles, not a
+     * scrolling row of cards. Empty hides the whole section.
+     *
+     * While this is non-empty the feed's own Recents shelf is left out, since
+     * the tiles *are* those same tracks laid out a second way — see
+     * [itemsIndexedShelves].
+     */
+    speedDial: List<ShelfItem> = emptyList(),
+    onSpeedDialClick: ((ShelfItem) -> Unit)? = null,
 ) {
     val recentsViewType by AppSettings.homeRecentsViewType.collectAsStateWithLifecycle()
+    // One definition of "the recents layout flips" shared by the feed, the
+    // chip-filtered feed and the hero slot above them — three rows that must
+    // not each decide for themselves what the other layout is.
+    val onRecentsViewTypeToggle: (LibraryViewType) -> Unit = { current ->
+        AppSettings.setHomeRecentsViewType(
+            if (current == LibraryViewType.LIST) LibraryViewType.GRID else LibraryViewType.LIST,
+        )
+    }
 
     PullToRefresh(
         refreshing = refreshing,
@@ -132,50 +172,92 @@ fun HomeScreen(
                     modifier = Modifier.padding(horizontal = PAGE_GUTTER, vertical = 8.dp),
                 )
             }
+            if (chips.isNotEmpty()) {
+                item(key = "home_chips") {
+                    HomeChipRow(
+                        chips = chips,
+                        selected = selectedChip,
+                        onClick = { chip -> onChipClick?.invoke(chip) },
+                    )
+                }
+            }
             if (!signedIn && onSignIn != null) {
                 item {
                     SignInBanner(onSignIn = onSignIn, modifier = Modifier.padding(bottom = 8.dp))
                 }
             }
-            when (state) {
-                is UiState.Loading -> {
-                    if (recentlyPlayedLoading) {
-                        recentlyPlayedSkeleton(listLayout = recentsViewType == LibraryViewType.LIST)
-                        // Recents owns the leading layout while its request is
-                        // pending, so the feed behind it starts with ordinary
-                        // shelf placeholders rather than another hero card.
-                        feedSkeleton(firstIsHero = false)
+            // A selected chip replaces the page's contents without replacing
+            // the page: the title bar and the chip row stay put, so the row
+            // that turned the filter on is the same row that turns it off.
+            if (selectedChip != null) {
+                when (chipShelves) {
+                    is UiState.Loading -> feedSkeleton()
+                    is UiState.Error -> item(key = "chip_error") {
+                        MessageState(
+                            chipShelves.message,
+                            actionLabel = stringResource(R.string.retry),
+                            onAction = { onChipRetry?.invoke() },
+                        )
+                    }
+                    is UiState.Success -> if (chipShelves.data.isEmpty()) {
+                        item(key = "chip_empty") {
+                            MessageState(stringResource(R.string.nothing_to_explore))
+                        }
                     } else {
-                        feedSkeleton()
+                        itemsIndexedShelves(
+                            shelves = chipShelves.data,
+                            onItemClick = onItemClick,
+                            onItemLongPress = onItemLongPress,
+                            firstIsHero = false,
+                            recentsViewType = recentsViewType,
+                            onRecentsViewTypeToggle = { onRecentsViewTypeToggle(recentsViewType) },
+                            hideRecents = false,
+                        )
                     }
                 }
-                is UiState.Error -> item {
-                    MessageState(state.message, actionLabel = stringResource(R.string.retry), onAction = onRetry)
-                }
-                is UiState.Success -> {
-                    if (recentlyPlayedLoading) {
-                        recentlyPlayedSkeleton(listLayout = recentsViewType == LibraryViewType.LIST)
+            } else {
+                if (speedDial.isNotEmpty() && onSpeedDialClick != null) {
+                    item(key = "speed_dial") {
+                        SpeedDialSection(items = speedDial, onClick = onSpeedDialClick)
                     }
-                    // The loading skeleton already owns the hero slot. Until
-                    // Recently Played lands, every real shelf must retain its
-                    // compact-card layout instead of briefly becoming a hero.
-                    itemsIndexedShelves(
-                        shelves = state.data,
-                        onItemClick = onItemClick,
-                        onItemLongPress = onItemLongPress,
-                        firstIsHero = !recentlyPlayedLoading,
-                        recentsViewType = recentsViewType,
-                        onRecentsViewTypeToggle = {
-                            AppSettings.setHomeRecentsViewType(
-                                if (recentsViewType == LibraryViewType.LIST) {
-                                    LibraryViewType.GRID
-                                } else {
-                                    LibraryViewType.LIST
-                                },
-                            )
-                        },
-                    )
-                    if (loadingMore) feedMoreSkeleton()
+                }
+                when (state) {
+                    is UiState.Loading -> {
+                        if (recentlyPlayedLoading) {
+                            recentlyPlayedSkeleton(listLayout = recentsViewType == LibraryViewType.LIST)
+                            // Recents owns the leading layout while its request is
+                            // pending, so the feed behind it starts with ordinary
+                            // shelf placeholders rather than another hero card.
+                            feedSkeleton(firstIsHero = false)
+                        } else {
+                            feedSkeleton()
+                        }
+                    }
+                    is UiState.Error -> item {
+                        MessageState(state.message, actionLabel = stringResource(R.string.retry), onAction = onRetry)
+                    }
+                    is UiState.Success -> {
+                        if (recentlyPlayedLoading) {
+                            recentlyPlayedSkeleton(listLayout = recentsViewType == LibraryViewType.LIST)
+                        }
+                        // The loading skeleton already owns the hero slot. Until
+                        // Recently Played lands, every real shelf must retain its
+                        // compact-card layout instead of briefly becoming a hero.
+                        itemsIndexedShelves(
+                            shelves = state.data,
+                            onItemClick = onItemClick,
+                            onItemLongPress = onItemLongPress,
+                            firstIsHero = !recentlyPlayedLoading,
+                            recentsViewType = recentsViewType,
+                            onRecentsViewTypeToggle = { onRecentsViewTypeToggle(recentsViewType) },
+                            // The tiles above are these same tracks. Rendering
+                            // both would put every recent play on the page twice,
+                            // once as a tile and once as a row — so the tiles win
+                            // and the shelf they were drawn from steps aside.
+                            hideRecents = speedDial.isNotEmpty() && onSpeedDialClick != null,
+                        )
+                        if (loadingMore) feedMoreSkeleton()
+                    }
                 }
             }
         }
@@ -202,6 +284,173 @@ fun HomeScreen(
 }
 
 /**
+ * The filter row above the feed.
+ *
+ * Its own scrolling row rather than part of the list: it stays where it is
+ * while the feed moves under it, so the control that filtered the page is
+ * still reachable once the page has been scrolled. Tapping the active chip
+ * clears the filter — the same gesture that turned it on turns it off.
+ */
+@Composable
+private fun HomeChipRow(
+    chips: List<HomeChip>,
+    selected: HomeChip?,
+    onClick: (HomeChip) -> Unit,
+) {
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = PAGE_GUTTER, vertical = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.padding(bottom = 10.dp),
+    ) {
+        items(chips, key = { it.title + it.params }) { chip ->
+            val isSelected = selected == chip
+            val shape = RoundedCornerShape(50)
+            Box(
+                modifier = Modifier
+                    .clip(shape)
+                    .background(
+                        if (isSelected) {
+                            MaterialTheme.colorScheme.onBackground
+                        } else {
+                            MaterialTheme.colorScheme.surfaceVariant
+                        },
+                    )
+                    .clickable { onClick(chip) }
+                    .padding(horizontal = 14.dp, vertical = 8.dp),
+            ) {
+                Text(
+                    text = localizeShelfTitle(chip.title),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = if (isSelected) {
+                        MaterialTheme.colorScheme.background
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    },
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+        }
+    }
+}
+
+/** How many tiles the speed dial shows before the feed begins. */
+private const val SPEED_DIAL_TILES = 6
+
+/**
+ * The row of shortcut tiles at the head of the page.
+ *
+ * Each tile is a mesh gradient rather than the item's own cover: the point of
+ * the section is that it reads as six *places* at a glance, and six square
+ * album covers at this size read as a seventh shelf instead. The gradient is
+ * hashed off the item's identity, so a tile keeps its colour between launches
+ * while the covers themselves arrive asynchronously — and a tile whose artwork
+ * has not landed is still a finished thing rather than a hole.
+ *
+ * Two rows of three rather than one scrolling row: six fixed tiles fit a phone
+ * width without scrolling, and a section you can take in at one glance is what
+ * makes it a shortcut rather than another shelf to browse.
+ */
+@Composable
+private fun SpeedDialSection(
+    items: List<ShelfItem>,
+    onClick: (ShelfItem) -> Unit,
+) {
+    val tiles = remember(items) { items.take(SPEED_DIAL_TILES) }
+    Column(Modifier.padding(bottom = 26.dp)) {
+        SectionHeader(stringResource(R.string.speed_dial))
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+            val tileWidth = (maxWidth - PAGE_GUTTER * 2 - 12.dp) / 2
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(horizontal = PAGE_GUTTER),
+            ) {
+                tiles.chunked(2).forEach { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        row.forEach { item ->
+                            SpeedDialTile(
+                                item = item,
+                                onClick = { onClick(item) },
+                                modifier = Modifier.width(tileWidth),
+                            )
+                        }
+                        // Keeps a lone final tile at its own half-width instead
+                        // of letting the row stretch it across the page.
+                        if (row.size == 1) Spacer(Modifier.width(tileWidth))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SpeedDialTile(item: ShelfItem, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val color = speedDialColor(item.browseId ?: item.videoId ?: item.title)
+    Box(
+        modifier = modifier
+            .height(100.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(
+                Brush.linearGradient(
+                    listOf(color, color.copy(red = color.red * .68f, green = color.green * .68f, blue = color.blue * .68f)),
+                ),
+            )
+            .clickable(onClick = onClick)
+            .padding(12.dp),
+    ) {
+        Box(
+            Modifier
+                .align(Alignment.BottomEnd)
+                // The same cropped-sleeve corner the Explore cards use, so the
+                // two surfaces read as one design rather than two.
+                .offset(x = 10.dp, y = 12.dp)
+                .size(82.dp)
+                .graphicsLayer { rotationZ = 16f }
+                .clip(RoundedCornerShape(7.dp))
+                .background(Color.White.copy(alpha = .22f)),
+        ) {
+            item.thumbnailUrl?.let { artwork ->
+                AsyncImage(
+                    model = artwork.artworkAt(ROW_ART_PX),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
+        Text(
+            text = item.title,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.align(Alignment.TopStart).padding(end = 48.dp),
+        )
+    }
+}
+
+/**
+ * A tile's colour, hashed off its identity.
+ *
+ * Identity rather than position, so the same album keeps the same colour as the
+ * section reorders around it — a palette indexed by slot would repaint every
+ * tile the moment one of them changed.
+ */
+private fun speedDialColor(key: String): Color =
+    when ((key.hashCode() and Int.MAX_VALUE) % 8) {
+        0 -> Color(0xFFE64A19)
+        1 -> Color(0xFFEC0B65)
+        2 -> Color(0xFF8664AC)
+        3 -> Color(0xFF6B4EFF)
+        4 -> Color(0xFFBE6100)
+        5 -> Color(0xFF233C78)
+        6 -> Color(0xFF4D97E5)
+        else -> Color(0xFFAA267E)
+    }
+
+/**
  * Recents mirrors the artist page's top-tracks pager. Any other lead shelf keeps
  * Apple's full-bleed treatment, while the remaining shelves use square cards.
  */
@@ -212,8 +461,22 @@ private fun androidx.compose.foundation.lazy.LazyListScope.itemsIndexedShelves(
     firstIsHero: Boolean = true,
     recentsViewType: LibraryViewType,
     onRecentsViewTypeToggle: () -> Unit,
+    /**
+     * Leaves the lead Recents shelf out. Set by the unfiltered feed while the
+     * speed dial above is drawing the same tracks, so the page doesn't carry
+     * them twice; the chip feed keeps its own, since a filter that happens to
+     * return a Recents shelf is describing a different set.
+     */
+    hideRecents: Boolean = false,
 ) {
-    shelves.forEachIndexed { index, shelf ->
+    // After the filter, so "index == 0" still means the shelf the page leads
+    // with rather than the first one that survived.
+    val visible = if (hideRecents) {
+        shelves.filterNot { it.title.equals(RECENTS_TITLE, ignoreCase = true) }
+    } else {
+        shelves
+    }
+    visible.forEachIndexed { index, shelf ->
         item(key = shelf.title + index) {
             val openItem: (ShelfItem) -> Unit = { item -> onItemClick(item, shelf.title) }
             if (index == 0 && shelf.title.equals(RECENTS_TITLE, ignoreCase = true)) {

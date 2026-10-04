@@ -111,6 +111,15 @@ object Downloads {
 
     private val _savedMetadata = MutableStateFlow<Map<String, SavedSongMetadata>>(emptyMap())
 
+    /**
+     * The tags each saved track was written with, by videoId.
+     *
+     * Read by the notification list so a transfer in flight can name the track
+     * it is saving — the queue holds ids, and an id is not something to put in
+     * front of a listener. Internal for the same reason the record is: it is
+     * this app's own detail, not part of a contract.
+     */
+    internal val savedMetadata: StateFlow<Map<String, SavedSongMetadata>> = _savedMetadata.asStateFlow()
     private val _collections = MutableStateFlow<Map<String, SavedCollection>>(emptyMap())
 
     /**

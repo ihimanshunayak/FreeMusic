@@ -518,9 +518,48 @@ object FreeMusicIcons {
         }.build()
     }
 
-    /** Speed gauge used by high-performance display settings. */
-    val Performance: ImageVector by lazy {
+    /**
+     * A bell for the notification button: a domed body over a wide rim, with a
+     * clapper dot below it.
+     *
+     * Drawn rather than taken from the Material extended set because the rest
+     * of this file is one stroke weight and one cap style, and a filled Material
+     * bell sitting among these would be the only icon in the bar that is not
+     * part of the family. The dome is a single arc so it reads at 24dp without
+     * the shoulder lines a "proper" bell drawing would need.
+     */
+    val Bell: ImageVector by lazy {
         ImageVector.Builder(
+            name = "bc_bell",
+            defaultWidth = 24.dp, defaultHeight = 24.dp,
+            viewportWidth = 24f, viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = stroke,
+                strokeLineWidth = STROKE,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                // Domed body, shoulders tucked in at the rim.
+                moveTo(5.8f, 17.2f)
+                lineTo(6.9f, 15.6f)
+                lineTo(6.9f, 10.6f)
+                arcToRelative(5.1f, 5.1f, 0f, isMoreThanHalf = true, isPositiveArc = true, 10.2f, 0f)
+                lineTo(17.1f, 15.6f)
+                lineTo(18.2f, 17.2f)
+                close()
+                // Rim.
+                moveTo(4.4f, 17.2f)
+                lineTo(19.6f, 17.2f)
+                // Clapper.
+                moveTo(10.2f, 19.4f)
+                arcToRelative(2f, 2f, 0f, isMoreThanHalf = false, isPositiveArc = false, 3.6f, 0f)
+            }
+        }.build()
+    }
+
+    /** Speed gauge used by high-performance display settings. */
+    val Performance: ImageVector by lazy {        ImageVector.Builder(
             name = "bc_performance",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f,

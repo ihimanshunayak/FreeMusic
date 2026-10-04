@@ -39,5 +39,14 @@ keystore.properties
 .tmp_verify/
 .debug/
 
+# Build/agent scratch files (never part of the app)
+build-out*.txt
+fm-*.cmd
+fm-*.js
+fm-*.py
+fm-*.txt
+fm-chips-probe.json
+run-build*.cmd
+verify-out*.txt
 # AI agent configuration
 AGENTS.md

@@ -145,6 +145,8 @@ import com.ihimanshunayak.freemusic.ui.screens.DiscordDialogHost
 import com.ihimanshunayak.freemusic.ui.screens.DiscordScreen
 import com.ihimanshunayak.freemusic.ui.screens.EqualizerScreen
 import com.ihimanshunayak.freemusic.ui.screens.HistoryScreen
+import com.ihimanshunayak.freemusic.ui.screens.NotificationFeed
+import com.ihimanshunayak.freemusic.ui.screens.NotificationsScreen
 import com.ihimanshunayak.freemusic.ui.screens.ListenTogetherScreen
 import com.ihimanshunayak.freemusic.ui.screens.PartyServerEditor
 import com.ihimanshunayak.freemusic.ui.screens.SettingsScreen
@@ -469,6 +471,15 @@ private fun FreeMusicApp(
     var confirmJioSaavn by remember { mutableStateOf(false) }
     var editingPartyServer by remember { mutableStateOf(false) }
     var showHistory by remember { mutableStateOf(false) }
+    /**
+     * Whether the notification page is open.
+     *
+     * Its list is composed from state the app already holds — an available
+     * update, transfers in flight, the newest releases — rather than fetched,
+     * so unlike the other pushed pages there is nothing to load on open and no
+     * failure state to recover from.
+     */
+    var showNotifications by remember { mutableStateOf(false) }
     // A Library shelf's "Show all" — the shelf it was opened from, so its own
     // cards can be laid out again as a full-screen grid. See [LibraryGridPage].
     var libraryShowAll by remember { mutableStateOf<HomeShelf?>(null) }
@@ -629,6 +640,45 @@ private fun FreeMusicApp(
     val activeAccountId by viewModel.activeAccountId.collectAsStateWithLifecycle()
     val activeProfileId by viewModel.activeProfileId.collectAsStateWithLifecycle()
     val historyState by viewModel.history.collectAsStateWithLifecycle()
+    val homeChips by viewModel.homeChips.collectAsStateWithLifecycle()
+    val selectedHomeChip by viewModel.selectedHomeChip.collectAsStateWithLifecycle()
+    val homeChipShelves by viewModel.homeChipShelves.collectAsStateWithLifecycle()
+    val activeDownloads by Downloads.active.collectAsStateWithLifecycle()
+    val activeUploads by com.ihimanshunayak.freemusic.data.webdav.WebDavUploads.active.collectAsStateWithLifecycle()
+    val savedDownloadMetadata by Downloads.savedMetadata.collectAsStateWithLifecycle()
+    val notificationsSeenVersion by AppSettings.notificationsSeenVersion.collectAsStateWithLifecycle()
+    // The newest-releases shelf the feed carried, if it carried one — reused as
+    // a notification source rather than re-fetched, since the page already has it.
+    val newReleasesShelf = remember(homeState) {
+        (homeState as? UiState.Success)?.data?.firstOrNull {
+            it.title.contains("new release", ignoreCase = true)
+        }
+    }
+    // Recomposed from live state rather than cached: every input is a
+    // StateFlow, so the list is never stale and never needs a refresh.
+    val notifications = remember(updateNotice, activeDownloads, activeUploads, savedDownloadMetadata, newReleasesShelf) {
+        NotificationFeed.build(
+            context = context,
+            update = updateNotice,
+            downloads = activeDownloads,
+            titles = savedDownloadMetadata.mapValues { it.value.title },
+            uploads = activeUploads,
+            newReleases = newReleasesShelf,
+        )
+    }
+    // Unread is a property of the list, not of a row: the only genuinely new
+    // thing the app can report is an update it has not been told about before.
+    val notificationsUnread = updateNotice != null && updateNotice.version != notificationsSeenVersion
+    // The speed dial is drawn from the Recents shelf, so it is that shelf's
+    // own list rather than a second query — the tracks are already fetched, and
+    // asking for them again would be a second answer to the same question.
+    val speedDialItems = remember(homeState) {
+        (homeState as? UiState.Success)?.data
+            ?.firstOrNull { it.title.equals("Recents", ignoreCase = true) }
+            ?.items
+            ?.filter { it.videoId != null || it.browseId != null }
+            .orEmpty()
+    }
     val lyrics by viewModel.lyrics.collectAsStateWithLifecycle()
     val lyricsSource by viewModel.lyricsSource.collectAsStateWithLifecycle()
     val lyricsChecked by viewModel.lyricsChecked.collectAsStateWithLifecycle()
@@ -853,6 +903,7 @@ private fun FreeMusicApp(
     val moodGenreListState = rememberLazyListState()
     val libraryListState = rememberLazyListState()
     val historyListState = rememberLazyListState()
+    val notificationsListState = rememberLazyListState()
     val libraryShowAllGridState = rememberLazyGridState()
     val searchListState = rememberLazyListState()
     val currentListState = when (selectedTab) {
@@ -936,6 +987,12 @@ private fun FreeMusicApp(
     val libraryLabel = stringResource(R.string.library)
     val searchLabel = stringResource(R.string.search)
     val historyLabel = stringResource(R.string.history)
+    // Hoisted for the same reason as [historyLabel]: the notifications page
+    // reads it inside a non-composable click lambda.
+    val notificationsLabel = stringResource(R.string.notifications)
+    // Hoisted for the same reason as [notificationsLabel]: the speed-dial tiles
+    // read it inside a non-composable click lambda.
+    val speedDialLabel = stringResource(R.string.speed_dial)
     val replayLabel = stringResource(R.string.replay)
     val queueLabel = stringResource(R.string.queue)
     val sharedLinkLabel = stringResource(R.string.shared_link)
@@ -2276,6 +2333,7 @@ private fun FreeMusicApp(
         BackHandler(enabled = editingSource != null) { editingSource = null }
         BackHandler(enabled = editingPartyServer) { editingPartyServer = false }
         BackHandler(enabled = showHistory) { showHistory = false }
+        BackHandler(enabled = showNotifications) { showNotifications = false }
         // Disabled while a detail page is open over the grid: that one's own
         // BackHandler below has to close first, or back would skip past it
         // straight to Library. See [onLibraryItemClick].
@@ -2293,6 +2351,7 @@ private fun FreeMusicApp(
                     targetState = when {
                         showDiscord -> "discord"
                         showHistory -> "history"
+                        showNotifications -> "notifications"
                         // `&& detail == null`: a card opened from the grid
                         // stacks a detail page over it exactly as one opened
                         // from the Library tab does — see
@@ -2388,7 +2447,35 @@ private fun FreeMusicApp(
                     val held = remember(key) { mutableStateOf(live) }
                     if (live != null) held.value = live
                     val page = held.value
-                    if (key == "history") {
+                    if (key == "notifications") {
+                        NotificationsScreen(
+                            entries = notifications,
+                            listState = notificationsListState,
+                            onOpen = { entry ->
+                                when {
+                                    entry.browseId != null -> viewModel.openDetail(
+                                        browseId = entry.browseId,
+                                        title = entry.title,
+                                        subtitle = entry.subtitle,
+                                        thumbnailUrl = entry.thumbnailUrl,
+                                    )
+                                    entry.videoId != null -> playRadio(
+                                        Song(
+                                            videoId = entry.videoId,
+                                            title = entry.title,
+                                            artist = entry.subtitle,
+                                            thumbnailUrl = entry.thumbnailUrl,
+                                        ),
+                                        QueueSource(
+                                            notificationsLabel,
+                                            PlaybackSourceType.HOME,
+                                        ),
+                                    )
+                                }
+                            },
+                            contentPadding = listPadding,
+                        )
+                    } else if (key == "history") {
                         HistoryScreen(
                             state = historyState,
                             listState = historyListState,
@@ -2738,6 +2825,27 @@ private fun FreeMusicApp(
                             onLoadMore = viewModel::loadMoreHome,
                             loadingMore = homeLoadingMore,
                             recentlyPlayedLoading = homeRecentlyPlayedLoading,
+                            chips = homeChips,
+                            selectedChip = selectedHomeChip,
+                            onChipClick = viewModel::selectHomeChip,
+                            chipShelves = homeChipShelves,
+                            onChipRetry = viewModel::retryHomeChip,
+                            speedDial = speedDialItems,
+                            onSpeedDialClick = { item ->
+                                val song = shelfSong(item)
+                                when {
+                                    song != null -> playRadio(
+                                        song,
+                                        QueueSource(speedDialLabel, PlaybackSourceType.HOME),
+                                    )
+                                    item.browseId != null -> viewModel.openDetail(
+                                        browseId = item.browseId,
+                                        title = item.title,
+                                        subtitle = item.subtitle,
+                                        thumbnailUrl = item.thumbnailUrl,
+                                    )
+                                }
+                            },
                         )
                         TAB_EXPLORE -> selectedMoodGenre?.let { category ->
                             MoodGenrePlaylistsScreen(
@@ -2976,6 +3084,7 @@ private fun FreeMusicApp(
                     title = when {
                         showDiscord -> "Discord"
                         showHistory -> stringResource(R.string.history)
+                        showNotifications -> stringResource(R.string.notifications)
                         libraryShowAll != null && detail == null -> libraryShowAll?.title.orEmpty()
                         showAccountScrobbling -> stringResource(R.string.account_scrobbling)
                         showSources -> stringResource(R.string.sources)
@@ -2999,7 +3108,7 @@ private fun FreeMusicApp(
                     scrolled = when {
                         showSettings || showAccountScrobbling || showSources || showListenTogether ||
                             showEqualizer ||
-                            showDiscord || showHistory ||
+                            showDiscord || showHistory || showNotifications ||
                             (libraryShowAll != null && detail == null) ||
                             (detail != null && detailActiveShelf != null) ||
                             selectedMoodGenre != null -> true
@@ -3014,6 +3123,7 @@ private fun FreeMusicApp(
                     onBack = when {
                         showDiscord -> ({ showDiscord = false })
                         showHistory -> ({ showHistory = false })
+                        showNotifications -> ({ showNotifications = false })
                         libraryShowAll != null && detail == null -> ({ libraryShowAll = null })
                         showAccountScrobbling -> ({ showAccountScrobbling = false })
                         showSources -> ({ showSources = false })
@@ -3084,6 +3194,51 @@ private fun FreeMusicApp(
                                             maxLines = 1,
                                         )
                                     }
+                                }
+                            }
+                        }
+                        // The notification bell, left of the account photo and on
+                        // every root tab: notifications are the app's own, not a
+                        // page's, so they do not belong to whichever tab happens
+                        // to be open. Hidden on pushed pages for the same reason
+                        // the update nudge is — those have their own chrome.
+                        if (!showSettings && !showAccountScrobbling && !showSources && !showListenTogether &&
+                            !showEqualizer && !showDiscord && !showHistory && !showNotifications &&
+                            !showReplay && libraryShowAll == null && detail == null
+                        ) {
+                            Box {
+                                IconButton(onClick = {
+                                    showNotifications = true
+                                    // Reading the list is what makes it read:
+                                    // there is no separate mark-read gesture, so
+                                    // opening it is the acknowledgement.
+                                    updateNotice?.let { AppSettings.markNotificationsSeen(it.version) }
+                                }) {
+                                    Icon(
+                                        FreeMusicIcons.Bell,
+                                        // An unread dot is invisible to a screen
+                                        // reader, so the state is spoken instead.
+                                        contentDescription = if (notificationsUnread) {
+                                            stringResource(R.string.notifications_unread, notifications.size)
+                                        } else {
+                                            stringResource(R.string.notifications)
+                                        },
+                                        tint = MaterialTheme.colorScheme.onSurface,
+                                    )
+                                }
+                                // A dot rather than a count: the list carries one
+                                // kind of genuinely-new thing (an update), and a
+                                // number beside a bell reads as a queue to work
+                                // through rather than a nudge.
+                                if (notificationsUnread) {
+                                    Box(
+                                        modifier = Modifier
+                                            .align(Alignment.TopEnd)
+                                            .padding(top = 10.dp, end = 10.dp)
+                                            .size(8.dp)
+                                            .clip(CircleShape)
+                                            .background(MaterialTheme.colorScheme.primary),
+                                    )
                                 }
                             }
                         }
