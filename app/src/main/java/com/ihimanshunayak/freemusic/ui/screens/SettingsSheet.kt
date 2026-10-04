@@ -1373,10 +1373,6 @@ fun SettingsScreen(
                     append("Developer")
                 }
                 append("  ")
-                withLink(LinkAnnotation.Url("https://discord.gg/pDdKfrdHY6", linkStyles)) {
-                    append("Discord")
-                }
-                append("  ")
                 withLink(LinkAnnotation.Url("https://freemusic.example.com/", linkStyles)) {
                     append("Website")
                 }
