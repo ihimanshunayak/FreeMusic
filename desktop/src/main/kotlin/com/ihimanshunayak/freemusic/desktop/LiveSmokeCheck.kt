@@ -177,15 +177,21 @@ fun main() = runBlocking {
                 .apply { stream.headers.forEach { (k, v) -> runCatching { header(k, v) } } }
                 .build()
             val bytes = Http.client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) {
-                    val body = response.body?.string()?.take(400).orEmpty()
+                if (response.isSuccessful) {
+                    check("audio request succeeded", true, "HTTP ${response.code}")
+                    response.body.byteStream().readNBytes(65_536).size
+                } else {
+                    // googlevideo names the reason in the body, and a body reads
+                    // only once - draining it here would leave byteStream() on a
+                    // closed source and throw instead of reporting the refusal.
+                    val detail = response.body.string().take(300).replace('\n', ' ')
                     println()
                     println("  itag=${stream.bitrateKbps}kbps  mime=${stream.mimeType}")
-                    println("  $body")
+                    println("  $detail")
                     println()
+                    check("audio request succeeded", false, "HTTP ${response.code}")
+                    0
                 }
-                check("audio request succeeded", response.isSuccessful, "HTTP ${response.code}")
-                response.body.byteStream().readNBytes(65_536).size
             }
             check("audio bytes downloaded", bytes > 0, "$bytes bytes")
 
