@@ -39,6 +39,7 @@ var (
 )
 
 func main() {
+	initPlaylists()
 	go startHeartbeatTicker()
 
 	mux := http.NewServeMux()
@@ -52,6 +53,9 @@ func main() {
 	mux.HandleFunc("GET /api/parties/{code}", handleGetParty)
 	mux.HandleFunc("GET /api/parties/{code}/preview", handlePreviewParty)
 	mux.HandleFunc("POST /api/parties/{code}/leave", handleLeaveParty)
+
+	// Collaborative playlists and Blends.
+	registerPlaylistRoutes(mux)
 
 	// Web invite endpoint
 	mux.HandleFunc("GET /invite/{code}", handleInviteLanding)

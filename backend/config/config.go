@@ -50,6 +50,16 @@ func getBool(key string, fallback bool) bool {
 	return parsed
 }
 
+// getStr reads a plain string, trimmed. A blank value is treated as unset so
+// that an empty env var cannot masquerade as a deliberate configuration.
+func getStr(key string, fallback string) string {
+	val := strings.TrimSpace(os.Getenv(key))
+	if val == "" {
+		return fallback
+	}
+	return val
+}
+
 func getOrigin(key string) string {
 	val := strings.TrimRight(strings.TrimSpace(os.Getenv(key)), "/")
 	if val == "" {
@@ -97,4 +107,19 @@ var (
 	TrustProxy           = getBool("JAM_TRUST_PROXY", false)
 	PublicOrigin         = getOrigin("JAM_PUBLIC_ORIGIN")
 	Port                 = getInt("PORT", 8000)
+
+	// Playlist service. Separate from the JAM_* party bounds because the two
+	// have different cost profiles: a party is a live socket with a heartbeat,
+	// a playlist is a row that is read far more often than it is written.
+	PlaylistMaxPlaylists = getInt("PLAYLIST_MAX_PLAYLISTS", 2000)
+	PlaylistMaxMembers   = getInt("PLAYLIST_MAX_MEMBERS", 100)
+	PlaylistMaxTracks    = getInt("PLAYLIST_MAX_TRACKS", 2000)
+	PlaylistMaxInvites   = getInt("PLAYLIST_MAX_INVITES", 20)
+	PlaylistHistoryLimit = getInt("PLAYLIST_HISTORY_LIMIT", 500)
+	// Two per minute per IP, matching the party limiter: playlist creation is a
+	// human action, and an unbounded endpoint is free storage for a stranger.
+	PlaylistCreateRatePerMinute = getInt("PLAYLIST_CREATE_RATE_PER_MINUTE", 2)
+	// Empty selects the memory store, which is correct on a host with no disk
+	// and is what the free tier gets. Set it to a path to survive a restart.
+	PlaylistStorePath = strings.TrimSpace(getStr("PLAYLIST_STORE_PATH", ""))
 )

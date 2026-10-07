@@ -43,3 +43,22 @@ services:
       # invite deep links then use it verbatim.
       - key: JAM_PUBLIC_ORIGIN
         sync: false
+      # Collaborative playlists and Blends.
+      #
+      # PLAYLIST_STORE_PATH is deliberately absent: it is unset, so playlists
+      # live in memory. That is the honest configuration on this plan, because a
+      # Free instance has no persistent disk — a path here would appear to work
+      # and then lose every playlist on the next deploy or idle spin-down. Set it
+      # (to a path on a mounted disk) only on a plan that has one.
+      - key: PLAYLIST_MAX_PLAYLISTS
+        value: "2000"
+      - key: PLAYLIST_MAX_MEMBERS
+        value: "100"
+      - key: PLAYLIST_MAX_TRACKS
+        value: "2000"
+      - key: PLAYLIST_MAX_INVITES
+        value: "20"
+      - key: PLAYLIST_HISTORY_LIMIT
+        value: "500"
+      - key: PLAYLIST_CREATE_RATE_PER_MINUTE
+        value: "2"

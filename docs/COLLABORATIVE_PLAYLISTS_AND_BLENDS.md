@@ -265,9 +265,14 @@ document is where a device's playlist membership list belongs.
 | `backend/playlist/model.go` | domain types and wire forms |
 | `backend/playlist/store.go` | `Store` interface, `MemoryStore` |
 | `backend/playlist/filestore.go` | durable JSON store |
-| `backend/playlist/service.go` | mutations, revisions, invites, authorisation |
-| `backend/playlist/blend.go` | taste profiles, scoring, generation |
-| `backend/playlist/*_test.go` | tests |
+| `backend/playlist/service.go` | service, options, credential resolution |
+| `backend/playlist/operations.go` | create, read, metadata, track mutations |
+| `backend/playlist/membership.go` | invites, join/leave, deltas |
+| `backend/playlist/crypto.go` | tokens, ids, constant-time comparison |
+| `backend/playlist/clock.go` | server-time indirection |
+| `backend/playlist_routes.go` | every `/api/playlists` HTTP route |
+| `backend/playlist/*_test.go`, `backend/playlist_routes_test.go` | tests |
+| `backend/playlist/blend.go` | taste profiles, scoring, generation *(phase 8)* |
 | `app/…/data/collab/CollabModels.kt` | wire models |
 | `app/…/data/collab/CollabPlaylists.kt` | client, mirroring `ListenTogether`'s shape |
 | `app/…/data/collab/TasteProfile.kt` | on-device profile from `ListeningStats` + `TrackFeatures` |
@@ -305,9 +310,10 @@ The brief's twelve phases, with the ones that are constrained by §0 marked:
 
 | Phase | Status |
 |---|---|
-| 1 — data model + persistence | deliverable now (§0.3 shapes it) |
-| 2 — API + auth + authz | deliverable now (§0.2 shapes it) |
-| 3 — invitation system | deliverable now |
+| 1 — data model + persistence | **done** — `backend/playlist/` |
+| 2 — API + auth + authz | **done** — `backend/playlist_routes.go` |
+| 3 — invitation system | **done** (server) — deep link in phase 3b |
+| 3b — invite deep link on Android | next |
 | 4 — UI | after the server contract is fixed |
 | 5 — real-time sync | extends the existing `hub` |
 | 6 — offline / reconnection | revision handshake as the brief describes |
@@ -317,3 +323,62 @@ The brief's twelve phases, with the ones that are constrained by §0 marked:
 | 10 — Listen Together bridge | playlist → party queue via the existing `setQueue` |
 | 11 — Automix | reuse `playback/smart/`, no second engine |
 | 12 — testing + hardening | throughout, not last |
+
+### 16.1 What phases 1-3 changed against this document
+
+Recorded because the plan and the code disagree in three places, and the code
+is right:
+
+1. **`List` takes variadic credentials, not one.** §15 establishes that a
+   credential is per-playlist, so a user with three playlists holds three
+   unrelated tokens and there is no single credential that answers "my
+   playlists". The endpoint accepts the bearer token plus a repeatable `token`
+   query parameter and returns the union. The alternative — one request per
+   token, merged on the device — would have put the merge, and its failure
+   modes, in every client.
+2. **There is no public playlist read.** §14 of the brief has the invitation
+   screen show the playlist before anyone joins, which reads as an
+   unauthenticated `GET`. It is not: the preview lives on the invitation
+   (`GET /api/playlist-invites/{token}`) and returns only what the sharer chose
+   to share. A public `GET /api/playlists/{id}` would return every member and
+   every track to anyone who guessed an id, which would make the capability
+   model decorative.
+3. **Invitation redemption is not under `/api/playlists/`.** It is
+   `/api/playlist-invites/{token}`, because the recipient does not know the
+   playlist id and must not need to. Go's `ServeMux` also refuses to route
+   `/api/playlists/invites/{token}` against `/api/playlists/{id}/deltas` — the
+   two patterns are genuinely ambiguous — so the separate prefix is not only
+   clearer but load-bearing.
+
+### 16.2 Two defects found by the phase 1 tests
+
+Both were silent — neither would have surfaced until the UI was wired, and both
+would have looked like a client bug.
+
+1. **Reorder was a no-op.** `MoveTrack` spliced the track slice into the wanted
+   order and then called `SortTracks()`, which sorts by the `Position` field
+   that still held the *old* order, undoing the move. Fixed by splitting the two
+   concerns: `SortTracks()` (sort by `Position`, then renumber) is for load,
+   where the file is the authority on `Position`, and `Renumber()` (rewrite
+   `Position` from the current slice order) is for in-memory mutations, where the
+   slice is already correct.
+2. **`UpdatedAtMs` could tie.** Wall-clock milliseconds are too coarse to order
+   two updates in the same millisecond, and "most recently updated" is the order
+   the playlist list is drawn in, so ties shuffled the list between reads. The
+   service now issues strictly increasing stamps (`Service.stamp`), advanced past
+   the wall clock only while mutations outpace one per millisecond.
+
+### 16.3 Deploying phases 1-3
+
+The service is wired and reachable, but two operational facts decide whether it
+is useful:
+
+- **`PLAYLIST_STORE_PATH` is unset by default**, so playlists live in memory and
+  do not survive a restart. That is the honest default on Render Free, which has
+  no persistent disk; set it only on a plan that has one. `render.yaml` carries
+  the other eight bounds and deliberately omits this one, with a comment saying
+  why.
+- **The service is still single-instance-only**, for the same reason parties are:
+  state is in the process, so a second instance would serve a different set of
+  playlists. `render.yaml` already pins `numInstances: 1`.
+
