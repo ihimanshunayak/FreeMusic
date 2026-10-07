@@ -1248,4 +1248,22 @@
 
 
 
+    <string name="speed_dial">Composizione rapida</string>
+
+    <string name="notifications">Notifiche</string>
+
+    <string name="notifications_empty">Niente di nuovo per ora</string>
+
+    <string name="notifications_unread">%1$d notifiche non lette</string>
+
+    <string name="notifications_update_available">Free Music %1$s è disponibile</string>
+
+    <string name="notifications_saving">Salvataggio · %1$d%%</string>
+
+    <string name="notifications_queued">In coda</string>
+
+    <string name="notifications_uploading">Caricamento · %1$d%%</string>
+
+    <string name="notifications_queued_upload">In coda per il caricamento</string>
+
 </resources>

@@ -1314,4 +1314,22 @@
 
 
 
+    <string name="speed_dial">Discagem rápida</string>
+
+    <string name="notifications">Notificações</string>
+
+    <string name="notifications_empty">Nada de novo por enquanto</string>
+
+    <string name="notifications_unread">%1$d notificações não lidas</string>
+
+    <string name="notifications_update_available">Free Music %1$s está disponível</string>
+
+    <string name="notifications_saving">Salvando · %1$d%%</string>
+
+    <string name="notifications_queued">Na fila</string>
+
+    <string name="notifications_uploading">Enviando · %1$d%%</string>
+
+    <string name="notifications_queued_upload">Na fila para envio</string>
+
 </resources>

@@ -1347,4 +1347,22 @@
 
 
 
+    <string name="speed_dial">Szybkie wybieranie</string>
+
+    <string name="notifications">Powiadomienia</string>
+
+    <string name="notifications_empty">Na razie nic nowego</string>
+
+    <string name="notifications_unread">%1$d nieprzeczytanych powiadomień</string>
+
+    <string name="notifications_update_available">Free Music %1$s jest dostępna</string>
+
+    <string name="notifications_saving">Zapisywanie · %1$d%%</string>
+
+    <string name="notifications_queued">W kolejce</string>
+
+    <string name="notifications_uploading">Wysyłanie · %1$d%%</string>
+
+    <string name="notifications_queued_upload">W kolejce do wysłania</string>
+
 </resources>

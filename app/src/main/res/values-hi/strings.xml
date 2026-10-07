@@ -1309,4 +1309,22 @@
 
 
 
+    <string name="speed_dial">स्पीड डायल</string>
+
+    <string name="notifications">सूचनाएँ</string>
+
+    <string name="notifications_empty">अभी कुछ नया नहीं</string>
+
+    <string name="notifications_unread">%1$d बिना पढ़ी सूचनाएँ</string>
+
+    <string name="notifications_update_available">Free Music %1$s उपलब्ध है</string>
+
+    <string name="notifications_saving">सेव हो रहा है · %1$d%%</string>
+
+    <string name="notifications_queued">कतार में</string>
+
+    <string name="notifications_uploading">अपलोड हो रहा है · %1$d%%</string>
+
+    <string name="notifications_queued_upload">अपलोड के लिए कतार में</string>
+
 </resources>

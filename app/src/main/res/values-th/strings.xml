@@ -1295,4 +1295,22 @@
     <string name="card_songs_format">%1$s songs</string>
 
 
+    <string name="speed_dial">โทรด่วน</string>
+
+    <string name="notifications">การแจ้งเตือน</string>
+
+    <string name="notifications_empty">ยังไม่มีอะไรใหม่</string>
+
+    <string name="notifications_unread">การแจ้งเตือนที่ยังไม่ได้อ่าน %1$d รายการ</string>
+
+    <string name="notifications_update_available">มี Free Music %1$s ให้ใช้แล้ว</string>
+
+    <string name="notifications_saving">กำลังบันทึก · %1$d%%</string>
+
+    <string name="notifications_queued">อยู่ในคิว</string>
+
+    <string name="notifications_uploading">กำลังอัปโหลด · %1$d%%</string>
+
+    <string name="notifications_queued_upload">อยู่ในคิวเพื่ออัปโหลด</string>
+
 </resources>

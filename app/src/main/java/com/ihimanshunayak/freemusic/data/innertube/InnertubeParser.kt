@@ -230,6 +230,31 @@ object InnertubeParser {
     }
 
     /**
+     * The page-wide background a browse response carries, or null when it
+     * carries none.
+     *
+     * Read from the response's own root rather than from [parseHome]'s walk:
+     * the picture belongs to the *page*, and YouTube keeps it as a sibling of
+     * the section list rather than as one of its shelves. That is also why it
+     * is worth having at all — the server picks a different one for each Home
+     * filter, so a chip's own response repaints the header without anything
+     * here having to know which chip was asked for.
+     *
+     * Only `musicThumbnailRenderer` is read. YouTube Music's client renders the
+     * same slot as `musicFullbleedThumbnailRenderer`, but that name is the
+     * page's own markup, not the API's — asking the API for it returns nothing.
+     *
+     * Most responses have no background at all, which is not an error: the
+     * caller reads null as "leave the page its own colour".
+     */
+    fun parseBackground(response: JsonObject): String? = response
+        .o("background")
+        .o("musicThumbnailRenderer")
+        .o("thumbnail")
+        .a("thumbnails")
+        .best()
+
+    /**
      * The Moods & genres browse page is a set of navigation-button grids, not
      * a normal carousel. Keep the browse params on every button: they select
      * the playlist shelves that belong to that exact mood or genre.

@@ -41,14 +41,17 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Folder
@@ -65,10 +68,16 @@ import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.ROW_ART_PX
 import com.ihimanshunayak.freemusic.data.model.ShelfItem
 import com.ihimanshunayak.freemusic.data.model.UiState
+import kotlin.math.roundToInt
 import java.util.Locale
 import com.ihimanshunayak.freemusic.data.model.artworkAt
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibraryViewType
+import com.ihimanshunayak.freemusic.ui.theme.ArtworkPalette
+import com.ihimanshunayak.freemusic.ui.theme.rememberArtworkPalette
+import com.ihimanshunayak.freemusic.ui.theme.rememberArtworkTopBandLuminance
+import com.ihimanshunayak.freemusic.ui.theme.topBandScrimAlpha
+import com.ihimanshunayak.freemusic.ui.components.ArtworkWash
 import com.ihimanshunayak.freemusic.ui.components.HERO_CARD_RATIO
 import com.ihimanshunayak.freemusic.ui.components.MessageState
 import com.ihimanshunayak.freemusic.ui.components.PAGE_GUTTER
@@ -77,8 +86,10 @@ import com.ihimanshunayak.freemusic.ui.components.SHELF_CARD_WIDTH
 import com.ihimanshunayak.freemusic.ui.components.SignInBanner
 import com.ihimanshunayak.freemusic.ui.components.feedMoreSkeleton
 import com.ihimanshunayak.freemusic.ui.components.feedSkeleton
-import com.ihimanshunayak.freemusic.ui.components.recentlyPlayedSkeleton
+import com.ihimanshunayak.freemusic.ui.components.glassContentColor
 import com.ihimanshunayak.freemusic.ui.components.heroCardWidth
+import com.ihimanshunayak.freemusic.ui.components.lightweightLiquidGlass
+import com.ihimanshunayak.freemusic.ui.components.recentlyPlayedSkeleton
 import com.ihimanshunayak.freemusic.ui.components.thumbnailBorder
 import com.ihimanshunayak.freemusic.ui.components.trackColumnWidth
 import com.ihimanshunayak.freemusic.ui.player.MeshGradientBackground
@@ -142,6 +153,17 @@ fun HomeScreen(
      */
     speedDial: List<ShelfItem> = emptyList(),
     onSpeedDialClick: ((ShelfItem) -> Unit)? = null,
+    /**
+     * The picture YouTube paints behind the whole page for the current filter.
+     *
+     * Belongs to the page rather than to any shelf, and changes when the filter
+     * does — which is what makes picking a chip read as having moved somewhere
+     * rather than as having only re-listed what was already there.
+     *
+     * Null is the ordinary case for pages the server has no picture for, and
+     * leaves the page exactly as it was before this existed.
+     */
+    backgroundUrl: String? = null,
 ) {
     val recentsViewType by AppSettings.homeRecentsViewType.collectAsStateWithLifecycle()
     // One definition of "the recents layout flips" shared by the feed, the
@@ -153,22 +175,49 @@ fun HomeScreen(
         )
     }
 
-    PullToRefresh(
-        refreshing = refreshing,
-        onRefresh = onRefresh,
-        state = pullState,
-        modifier = modifier,
-    ) {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = contentPadding,
+    // Read off the header picture rather than the theme, so the title, the
+    // chips and the page's own wash are all one family of colours while a
+    // picture is up — and so a burst of white artwork doesn't leave the page's
+    // text sitting on white. A page with no picture falls back to the theme's
+    // own palette, which is exactly what it drew before.
+    val palette = rememberArtworkPalette(backgroundUrl, artPx = HEADER_ART_PX)
+
+    Box(modifier.fillMaxSize()) {
+        // Only while there is a picture. A wash with nothing over it would tint
+        // every ordinary page with a colour that has no source on screen.
+        if (backgroundUrl != null) {
+            HomeBackdrop(
+                palette = palette,
+                imageUrl = backgroundUrl,
+                listState = listState,
+                contentPadding = contentPadding,
+                modifier = Modifier.matchParentSize(),
+            )
+        }
+
+        PullToRefresh(
+            refreshing = refreshing,
+            onRefresh = onRefresh,
+            state = pullState,
+            modifier = Modifier.matchParentSize(),
         ) {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = contentPadding,
+            ) {
             item {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.displayLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    // Off the header picture's own palette while one is up, so
+                    // the heading is legible against the image rather than
+                    // against a page colour the image is covering.
+                    color = if (backgroundUrl != null) {
+                        palette.onBackground
+                    } else {
+                        MaterialTheme.colorScheme.onBackground
+                    },
                     modifier = Modifier.padding(horizontal = PAGE_GUTTER, vertical = 8.dp),
                 )
             }
@@ -178,6 +227,7 @@ fun HomeScreen(
                         chips = chips,
                         selected = selectedChip,
                         onClick = { chip -> onChipClick?.invoke(chip) },
+                        palette = palette,
                     )
                 }
             }
@@ -260,6 +310,7 @@ fun HomeScreen(
                     }
                 }
             }
+            }
         }
     }
 
@@ -290,12 +341,24 @@ fun HomeScreen(
  * vocabulary and can be renamed under us, so the row has to read as a list of
  * suggestions rather than a fixed set of modes. Tapping the active chip clears
  * the filter — the same gesture that turned it on turns it off.
+ *
+ * Pills rather than filled buttons on purpose, and glass rather than a flat
+ * fill because that is what they are: a membrane over the picture the page is
+ * wearing, not a control cut out of the page. The unfiltered page keeps a
+ * picture of its own in most cases, so a solid chip would read as a hole in it.
+ *
+ * No backdrop sampling here — [lightweightLiquidGlass] rather than
+ * [liquidGlass]. This row lives inside the app's shared Haze source, where a
+ * backdrop read would come back empty and the chip would draw as a hole rather
+ * than as glass over what is behind it. The tint, the rim and the highlight are
+ * the parts of the glass that read at this size anyway.
  */
 @Composable
 private fun HomeChipRow(
     chips: List<HomeChip>,
     selected: HomeChip?,
     onClick: (HomeChip) -> Unit,
+    palette: ArtworkPalette,
 ) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = PAGE_GUTTER, vertical = 4.dp),
@@ -307,12 +370,16 @@ private fun HomeChipRow(
             val shape = RoundedCornerShape(50)
             Box(
                 modifier = Modifier
-                    .clip(shape)
-                    .background(
-                        if (isSelected) {
-                            MaterialTheme.colorScheme.onBackground
+                    .lightweightLiquidGlass(
+                        shape = shape,
+                        // Off the picture's own palette rather than the theme's
+                        // surfaceVariant: the chip is drawn over an image, and a
+                        // fill cut from the theme's greys reads as a sticker on
+                        // top of it rather than as something laid over it.
+                        fallbackColor = if (isSelected) {
+                            palette.onBackground.copy(alpha = 0.86f)
                         } else {
-                            MaterialTheme.colorScheme.surfaceVariant
+                            palette.elevated.copy(alpha = 0.72f)
                         },
                     )
                     .clickable { onClick(chip) }
@@ -321,10 +388,14 @@ private fun HomeChipRow(
                 Text(
                     text = localizeShelfTitle(chip.title),
                     style = MaterialTheme.typography.titleSmall,
+                    // The selected pill is filled with the picture's own
+                    // foreground colour, so its label has to be the colour that
+                    // reads *on that* — which is the inverse, and which is what
+                    // the page has already been tinted against.
                     color = if (isSelected) {
-                        MaterialTheme.colorScheme.background
+                        palette.background
                     } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
+                        glassContentColor()
                     },
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -333,6 +404,144 @@ private fun HomeChipRow(
         }
     }
 }
+
+/**
+ * The picture YouTube paints behind the Home page, and the wash under it.
+ *
+ * Three layers, and the order between them is the whole effect:
+ *
+ * - [ArtworkWash] beneath, holding the picture's own colours and easing out
+ *   into the page tint on the way down. It has no image in it at all, so it
+ *   costs the same on every API level and stays up under "reduce dynamic
+ *   blur" — which is what keeps the page from going flat the moment the picture
+ *   scrolls away.
+ * - The picture itself above it, sized to the header and moved with the list.
+ * - A scrim across the picture's own top band, so the heading, the chips and
+ *   the status-bar glyphs have something to sit against. Its alpha comes from
+ *   how bright that band is, so a pale picture gets a heavier one and a dark
+ *   picture is left almost alone rather than being flattened for no reason.
+ *
+ * The picture is *not* re-blurred. A blurred copy of an image that is also on
+ * screen still reads as that image — the faces in it come back through — and a
+ * full-screen `RenderEffect` behind a scrolling feed would be paid for on every
+ * frame of that scroll. So it is drawn sharp and simply moved, which is what
+ * makes it a header rather than a backdrop.
+ *
+ * Movement mirrors the detail page's: the header is scrolled off the top by the
+ * list's own offset while it is still on screen, and parks far out of the way
+ * once it isn't, so a long feed does not carry its picture along with it.
+ *
+ * Placed with `offset {}` rather than translated in a `graphicsLayer`: Haze
+ * records where an area is when it is *placed*, and a layer moves content at
+ * draw time. Nothing here is a Haze source, but the app's own chrome is, and
+ * the same rule is what keeps the two agreeing about where the header is.
+ */
+@Composable
+private fun HomeBackdrop(
+    palette: ArtworkPalette,
+    imageUrl: String,
+    listState: LazyListState,
+    contentPadding: PaddingValues,
+    modifier: Modifier = Modifier,
+) {
+    val density = LocalDensity.current
+    // The picture is as tall as the space the list gives its header — the top
+    // inset plus the large title and the chip row — because anything taller is
+    // hidden behind content that has already been laid over it, and anything
+    // shorter leaves the page's own tint showing as a band under the picture.
+    val headerHeight = with(density) {
+        contentPadding.calculateTopPadding() + HEADER_CONTENT_HEIGHT
+    }
+    // Read from the picture's upper band rather than the whole of it: that is
+    // what the heading and the status bar actually lie over, and a picture that
+    // is bright at the top and dark below is exactly the case a whole-image
+    // average gets wrong.
+    val topBandLuminance = rememberArtworkTopBandLuminance(imageUrl, artPx = HEADER_ART_PX)
+
+    Box(modifier.clipToBounds()) {
+        ArtworkWash(palette = palette, modifier = Modifier.matchParentSize())
+
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(headerHeight)
+                .offset {
+                    IntOffset(
+                        x = 0,
+                        y = listState.headerOffsetPx(headerHeight.toPx()).roundToInt(),
+                    )
+                },
+        ) {
+            AsyncImage(
+                model = imageUrl.artworkAt(HEADER_ART_PX),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .matchParentSize()
+                    .background(palette.elevated),
+            )
+
+            // Settles the foot of the picture onto the colour the page is made
+            // of, so the join between the picture and the wash below it is
+            // already close before anything else is drawn over it — the same
+            // join, and the same fix, as the detail page's header.
+            Box(
+                Modifier
+                    .matchParentSize()
+                    .background(
+                        Brush.verticalGradient(
+                            0.62f to Color.Transparent,
+                            1.00f to palette.wash.copy(alpha = 0.92f),
+                        ),
+                    ),
+            )
+
+            // The scrim is the page's own tint rather than a fixed black: the
+            // page's palette already follows the theme, so this darkens the
+            // picture in dark mode and lifts it in light mode — the same
+            // direction the bar's own glyphs are already heading, which is what
+            // keeps one of the two from having to be wrong.
+            Box(
+                Modifier
+                    .matchParentSize()
+                    .background(
+                        Brush.verticalGradient(
+                            0.00f to palette.background.copy(
+                                alpha = topBandScrimAlpha(topBandLuminance),
+                            ),
+                            0.42f to palette.background.copy(
+                                alpha = topBandScrimAlpha(topBandLuminance) * 0.35f,
+                            ),
+                            1.00f to Color.Transparent,
+                        ),
+                    ),
+            )
+        }
+    }
+}
+
+/**
+ * How far down the page the header picture runs: a slice of the page rather
+ * than the whole of the first screen.
+ *
+ * Deliberately less than the title, the chips and the first shelf together.
+ * The picture's job is to say which filter the page is showing, and that has
+ * been said by the time the chips have gone by; running it further would leave
+ * the first shelf sitting on an image it has nothing to do with.
+ */
+private val HEADER_CONTENT_HEIGHT = 340.dp
+
+/**
+ * Where the header picture currently is, relative to the list's own scroll.
+ *
+ * Mirrors `DetailScreen.headerTop`, and for the same reason: while the header
+ * is still on screen the amount it has been scrolled off the top is exactly the
+ * offset the picture needs to stay pinned to it, and once the list has moved
+ * past the header entirely there is nothing to agree with any more — so it
+ * parks two header-heights up, far enough that no part of it comes back down.
+ */
+private fun LazyListState.headerOffsetPx(heightPx: Float): Float =
+    if (firstVisibleItemIndex == 0) -firstVisibleItemScrollOffset.toFloat() else -heightPx * 2f
 
 /** How many tiles the speed dial shows before the feed begins. */
 private const val SPEED_DIAL_TILES = 6

@@ -1264,4 +1264,22 @@
 
 
 
+    <string name="speed_dial">Hızlı arama</string>
+
+    <string name="notifications">Bildirimler</string>
+
+    <string name="notifications_empty">Şu an yeni bir şey yok</string>
+
+    <string name="notifications_unread">%1$d okunmamış bildirim</string>
+
+    <string name="notifications_update_available">Free Music %1$s kullanılabilir</string>
+
+    <string name="notifications_saving">Kaydediliyor · %1$d%%</string>
+
+    <string name="notifications_queued">Sırada</string>
+
+    <string name="notifications_uploading">Yükleniyor · %1$d%%</string>
+
+    <string name="notifications_queued_upload">Yüklemek için sırada</string>
+
 </resources>

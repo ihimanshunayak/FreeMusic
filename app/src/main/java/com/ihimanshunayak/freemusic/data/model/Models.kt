@@ -367,6 +367,30 @@ data class HomeFeed(
      * feed and asking for its chips is one request, not two.
      */
     val chips: List<HomeChip> = emptyList(),
+    /**
+     * The picture YouTube puts behind the whole page, or null when it sent one.
+     *
+     * Rides the feed for the same reason the chips do, and belongs to the page
+     * rather than to any one shelf: the server hands back a different one for
+     * each filter, which is what makes choosing a chip read as having changed
+     * where you are rather than only what is listed.
+     */
+    val backgroundUrl: String? = null,
+)
+
+/**
+ * One filter's worth of Home: the shelves behind a chip, and the picture the
+ * page takes on while that chip is the one filtering it.
+ *
+ * A type of its own rather than a re-used [HomeFeed] because the two are not
+ * the same page. A chip's response *is* a Home page, but nothing on this side
+ * of it reads its continuation or its chip cloud — the row that asked for it
+ * is already on screen — so those would be fields no caller reads, and a
+ * caller that did read them would be reading the wrong page's.
+ */
+data class HomeChipFeed(
+    val shelves: List<HomeShelf>,
+    val backgroundUrl: String? = null,
 )
 
 /** One server-defined group of the buttons shown on Explore. */

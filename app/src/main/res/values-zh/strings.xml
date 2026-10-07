@@ -1289,4 +1289,22 @@
 
 
 
+    <string name="speed_dial">快速拨号</string>
+
+    <string name="notifications">通知</string>
+
+    <string name="notifications_empty">目前没有新内容</string>
+
+    <string name="notifications_unread">%1$d 条未读通知</string>
+
+    <string name="notifications_update_available">Free Music %1$s 已可用</string>
+
+    <string name="notifications_saving">正在保存 · %1$d%%</string>
+
+    <string name="notifications_queued">已排队</string>
+
+    <string name="notifications_uploading">正在上传 · %1$d%%</string>
+
+    <string name="notifications_queued_upload">已排队等待上传</string>
+
 </resources>

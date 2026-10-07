@@ -1289,4 +1289,22 @@
 
 
 
+    <string name="speed_dial">Panggilan cepat</string>
+
+    <string name="notifications">Notifikasi</string>
+
+    <string name="notifications_empty">Belum ada yang baru</string>
+
+    <string name="notifications_unread">%1$d notifikasi belum dibaca</string>
+
+    <string name="notifications_update_available">Free Music %1$s tersedia</string>
+
+    <string name="notifications_saving">Menyimpan · %1$d%%</string>
+
+    <string name="notifications_queued">Dalam antrean</string>
+
+    <string name="notifications_uploading">Mengunggah · %1$d%%</string>
+
+    <string name="notifications_queued_upload">Dalam antrean untuk diunggah</string>
+
 </resources>

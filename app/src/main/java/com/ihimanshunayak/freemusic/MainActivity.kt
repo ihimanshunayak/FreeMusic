@@ -566,6 +566,13 @@ private fun FreeMusicApp(
     // The modal player owns light status glyphs and its own contrast scrim.
     // Every other surface follows the theme; Replay's page and stories remain
     // dark artwork either way.
+    //
+    // Home's header picture is not an exception even though it is the one page
+    // whose top band is a photograph: the header draws its own scrim in the
+    // theme's background colour, so a bright picture is lifted and a dark one
+    // is left alone — the same direction these glyphs are already heading. The
+    // theme is therefore still the right thing to read here, and reading the
+    // artwork's luminance instead would only disagree with the scrim above it.
     SystemBarIcons(dark = !darkTheme && !showNowPlaying && !showReplay && replayStory == null)
 
     val homeState by viewModel.home.collectAsStateWithLifecycle()
@@ -643,6 +650,12 @@ private fun FreeMusicApp(
     val homeChips by viewModel.homeChips.collectAsStateWithLifecycle()
     val selectedHomeChip by viewModel.selectedHomeChip.collectAsStateWithLifecycle()
     val homeChipShelves by viewModel.homeChipShelves.collectAsStateWithLifecycle()
+    // The picture behind Home, already resolved against the selected filter: a
+    // chip that has its own picture wins, and the unfiltered feed's stands in
+    // while the new one is still in flight. Read here rather than inside the
+    // screen because the app's chrome has to agree with it about what the top
+    // of the page is made of.
+    val homeBackgroundUrl by viewModel.homeBackgroundUrl.collectAsStateWithLifecycle()
     val activeDownloads by Downloads.active.collectAsStateWithLifecycle()
     val activeUploads by com.ihimanshunayak.freemusic.data.webdav.WebDavUploads.active.collectAsStateWithLifecycle()
     val savedDownloadMetadata by Downloads.savedMetadata.collectAsStateWithLifecycle()
@@ -2846,6 +2859,7 @@ private fun FreeMusicApp(
                                     )
                                 }
                             },
+                            backgroundUrl = homeBackgroundUrl,
                         )
                         TAB_EXPLORE -> selectedMoodGenre?.let { category ->
                             MoodGenrePlaylistsScreen(
@@ -3055,25 +3069,45 @@ private fun FreeMusicApp(
                     !(libraryShowAll != null && detail == null) &&
                     !showAccountScrobbling && !showSources && !showListenTogether &&
                     !showEqualizer && !showSettings
-                val chromePageColor = if (isDetailVisible) {
-                    detailPalette.background
-                } else {
-                    MaterialTheme.colorScheme.background
+                // Home becomes artwork-led the moment the server gives it a
+                // picture, and stops being so the moment the filter it belongs
+                // to changes to one that has none. Every rule below that already
+                // treats a detail page differently applies here for the same
+                // reason: the page is painting its own full-bleed header, so the
+                // chrome has to get out of its way rather than lay its own
+                // colour over the top of it.
+                val isHomeArtworkPage = selectedTab == TAB_HOME && homeBackgroundUrl != null &&
+                    detail == null && libraryShowAll == null && selectedMoodGenre == null &&
+                    !showDiscord && !showHistory && !showNotifications && !showSettings &&
+                    !showAccountScrobbling && !showSources && !showListenTogether &&
+                    !showEqualizer && !showReplay
+                val chromePageColor = when {
+                    isDetailVisible -> detailPalette.background
+                    else -> MaterialTheme.colorScheme.background
                 }
                 // This is the bottom floor itself turned upside down, not a
                 // separately maintained approximation. Both edges therefore
                 // share the same curve, height and page-aware colour — including
                 // the white theme background in light mode.
-                BottomFadeScrim(
-                    pageColor = chromePageColor,
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .rotate(180f),
-                )
+                //
+                // Left off while Home is artwork-led. Upside down it is a solid
+                // band across the top of the screen, and Home's picture is at the
+                // very top of the page by design — so keeping it would paint the
+                // one thing the page just fetched straight back out. The contrast
+                // it would have provided is provided instead by the scrim the
+                // header draws over its own top band.
+                if (!isHomeArtworkPage) {
+                    BottomFadeScrim(
+                        pageColor = chromePageColor,
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .rotate(180f),
+                    )
+                }
 
                 // With Liquid Glass enabled, every page uses separated floating
                 // controls and therefore has no full-width pane underneath.
-                if (!glassActive && !isReplayVisible && !isDetailVisible) {
+                if (!glassActive && !isReplayVisible && !isDetailVisible && !isHomeArtworkPage) {
                     TopBarBlur(
                         hazeState = hazeState,
                         modifier = Modifier.align(Alignment.TopCenter),
@@ -3099,7 +3133,7 @@ private fun FreeMusicApp(
                             if (it.label == "Play") stringResource(R.string.listen_now) else it.label
                         }
                     },
-                    transparentBackdrop = glassActive || isReplayVisible || isDetailVisible,
+                    transparentBackdrop = glassActive || isReplayVisible || isDetailVisible || isHomeArtworkPage,
                     artworkPageChrome = isReplayVisible || isDetailVisible,
                     backButtonHazeState = hazeState,
                     trailingTitle = if (detail != null && detailActiveShelf != null) detail.title else null,

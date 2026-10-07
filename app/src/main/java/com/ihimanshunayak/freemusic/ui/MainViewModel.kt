@@ -159,6 +159,41 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     val homeChipShelves: StateFlow<UiState<List<HomeShelf>>> = _homeChipShelves.asStateFlow()
     private val homeChipGeneration = AtomicLong(0L)
 
+    /**
+     * The picture behind the unfiltered feed, or null when YouTube sent none.
+     *
+     * Kept apart from the shelves' state rather than folded into it: the
+     * picture paints the top of the page while the shelves arrive underneath,
+     * and a load that has not yet answered for the feed should leave the
+     * previous picture up rather than blink the header back to plain.
+     */
+    private val _homeBackgroundUrl = MutableStateFlow<String?>(null)
+
+    /** The picture behind the active filter, or null before its response lands. */
+    private val _homeChipBackgroundUrl = MutableStateFlow<String?>(null)
+
+    /**
+     * What the Home header is painted with right now.
+     *
+     * Derived rather than assigned by each caller so the header cannot fall out
+     * of step with the filter that chose it: selecting a chip and its fetch
+     * resolving are separate moments, and both funnel through here. While a
+     * chip's response is still on the wire the unfiltered picture stays up —
+     * it is the one the page is coming from, and holding it reads as the page
+     * changing rather than as the header emptying and refilling.
+     *
+     * A chip whose response carries no picture of its own resolves to null and
+     * so falls back to the feed's, which is the same rule the server applies to
+     * pages it has no picture for.
+     */
+    val homeBackgroundUrl: StateFlow<String?> = combine(
+        _selectedHomeChip,
+        _homeBackgroundUrl,
+        _homeChipBackgroundUrl,
+    ) { chip, feedBackground, chipBackground ->
+        if (chip == null) feedBackground else chipBackground ?: feedBackground
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     private val _explore = MutableStateFlow<UiState<List<MoodGenreSection>>>(UiState.Loading)
     val explore: StateFlow<UiState<List<MoodGenreSection>>> = _explore.asStateFlow()
 
@@ -1489,11 +1524,16 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _selectedHomeChip.value = chip
         val generation = homeChipGeneration.incrementAndGet()
         _homeChipShelves.value = UiState.Loading
+        // The previous filter's picture is dropped with its shelves. Keeping it
+        // would leave the header showing one filter while the page lists
+        // another, which is exactly the mismatch this feature exists to avoid.
+        _homeChipBackgroundUrl.value = null
         viewModelScope.launch {
-            val next = YtMusicRepository.homeChipFeed(chip.browseId, chip.params).fold(
-                onSuccess = { shelves ->
-                    if (shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
-                    else UiState.Success(shelves)
+            val response = YtMusicRepository.homeChipFeed(chip.browseId, chip.params)
+            val next = response.fold(
+                onSuccess = { page ->
+                    if (page.shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
+                    else UiState.Success(page.shelves)
                 },
                 onFailure = { UiState.Error(it.friendly()) },
             )
@@ -1501,6 +1541,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             // stale Home load must not overwrite the feed it was replaced by.
             if (generation == homeChipGeneration.get() && _selectedHomeChip.value == chip) {
                 _homeChipShelves.value = next
+                _homeChipBackgroundUrl.value = response.getOrNull()?.backgroundUrl
             }
         }
     }
@@ -1513,6 +1554,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         homeChipGeneration.incrementAndGet()
         _selectedHomeChip.value = null
         _homeChipShelves.value = UiState.Success(emptyList())
+        _homeChipBackgroundUrl.value = null
     }
 
     /**
@@ -1528,15 +1570,17 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val generation = homeChipGeneration.incrementAndGet()
         _homeChipShelves.value = UiState.Loading
         viewModelScope.launch {
-            val next = YtMusicRepository.homeChipFeed(chip.browseId, chip.params).fold(
-                onSuccess = { shelves ->
-                    if (shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
-                    else UiState.Success(shelves)
+            val response = YtMusicRepository.homeChipFeed(chip.browseId, chip.params)
+            val next = response.fold(
+                onSuccess = { page ->
+                    if (page.shelves.isEmpty()) UiState.Error(text(R.string.nothing_to_explore))
+                    else UiState.Success(page.shelves)
                 },
                 onFailure = { UiState.Error(it.friendly()) },
             )
             if (generation == homeChipGeneration.get() && _selectedHomeChip.value == chip) {
                 _homeChipShelves.value = next
+                _homeChipBackgroundUrl.value = response.getOrNull()?.backgroundUrl
             }
         }
     }
@@ -1558,6 +1602,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         // replaced, and carrying it over would apply a chip to a feed it was
         // never chosen against.
         clearHomeChip()
+        // Same reasoning for the picture: the page is about to be a skeleton,
+        // and the outgoing feed's picture belonged to that feed's account.
+        _homeBackgroundUrl.value = null
         // The core feed plus one browse per supplement. Recently played is left
         // out: it has its own skeleton at the head of the page rather than the
         // one at the tail.
@@ -1570,6 +1617,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                             if (!isCurrentHomeLoad(identity, generation)) return@onSuccess
                             homeContinuation = feed.continuation
                             _homeChips.value = rankChips(feed.chips)
+                            _homeBackgroundUrl.value = feed.backgroundUrl
                             publishHomeShelves(feed.shelves)
                         }
                         .onFailure { failure ->
@@ -1644,6 +1692,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             if (identity != listenerKey()) return@onSuccess
             homeContinuation = feed.continuation
             _homeChips.value = rankChips(feed.chips)
+            _homeBackgroundUrl.value = feed.backgroundUrl
             homeSeenTitles.clear()
             val shelves = feed.shelves.filter { homeSeenTitles.add(it.title.lowercase(Locale.ROOT)) }
             if (shelves.isNotEmpty()) _home.value = UiState.Success(shelves)

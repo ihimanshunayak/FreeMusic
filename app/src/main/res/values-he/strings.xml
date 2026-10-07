@@ -1314,4 +1314,22 @@
 
 
 
+    <string name="speed_dial">חיוג מהיר</string>
+
+    <string name="notifications">התראות</string>
+
+    <string name="notifications_empty">אין חדש כרגע</string>
+
+    <string name="notifications_unread">%1$d התראות שלא נקראו</string>
+
+    <string name="notifications_update_available">Free Music %1$s זמין</string>
+
+    <string name="notifications_saving">שומר · %1$d%%</string>
+
+    <string name="notifications_queued">בתור</string>
+
+    <string name="notifications_uploading">מעלה · %1$d%%</string>
+
+    <string name="notifications_queued_upload">בתור להעלאה</string>
+
 </resources>

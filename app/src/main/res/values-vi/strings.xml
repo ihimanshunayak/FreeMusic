@@ -1229,4 +1229,22 @@
     <string name="prioritize_spotify_canvas">Ưu tiên Spotify Canvas</string>
     <string name="prioritize_spotify_canvas_subtitle">Thử Spotify trước Apple Music và các nhà cung cấp ảnh bìa động khác</string>
 
+    <string name="speed_dial">Quay số nhanh</string>
+
+    <string name="notifications">Thông báo</string>
+
+    <string name="notifications_empty">Hiện chưa có gì mới</string>
+
+    <string name="notifications_unread">%1$d thông báo chưa đọc</string>
+
+    <string name="notifications_update_available">Free Music %1$s đã có sẵn</string>
+
+    <string name="notifications_saving">Đang lưu · %1$d%%</string>
+
+    <string name="notifications_queued">Trong hàng đợi</string>
+
+    <string name="notifications_uploading">Đang tải lên · %1$d%%</string>
+
+    <string name="notifications_queued_upload">Đang chờ tải lên</string>
+
 </resources>

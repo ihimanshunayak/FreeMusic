@@ -7,6 +7,7 @@ import com.ihimanshunayak.freemusic.data.model.Account
 import com.ihimanshunayak.freemusic.data.model.AccountChannel
 import com.ihimanshunayak.freemusic.data.model.ArtistPage
 import com.ihimanshunayak.freemusic.data.model.HomeChip
+import com.ihimanshunayak.freemusic.data.model.HomeChipFeed
 import com.ihimanshunayak.freemusic.data.model.HomeFeed
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.LibraryPage
@@ -39,7 +40,7 @@ object YtMusicRepository {
     private val moodGenreShelfCache = ConcurrentHashMap<String, List<HomeShelf>>()
     // Chip filters off Home, keyed by browseId:params. Small responses, and
     // the whole point of a chip row is flipping between two of them.
-    private val homeChipFeedCache = ConcurrentHashMap<String, List<HomeShelf>>()
+    private val homeChipFeedCache = ConcurrentHashMap<String, HomeChipFeed>()
     // Includes unchanged video fallbacks as well as successful matches. The
     // queue prefetcher asks before a track becomes current; remembering its
     // answer makes the eventual player switch use the exact rendition whose
@@ -67,6 +68,7 @@ object YtMusicRepository {
             shelves = InnertubeParser.parseHome(home),
             continuation = InnertubeParser.continuationToken(home),
             chips = InnertubeParser.parseHomeChips(home),
+            backgroundUrl = InnertubeParser.parseBackground(home),
         )
     }
 
@@ -82,14 +84,23 @@ object YtMusicRepository {
      * unchanged and renders through the same shelves: there is exactly one
      * layout for "rows of cards", and a chip does not introduce a second.
      *
+     * The background comes back with it because the server answers each filter
+     * with its own, and the two arrive in the same response — reading it here
+     * means choosing a chip repaints the header from the request the tap had
+     * to make anyway, rather than from a second one made to find out.
+     *
      * Cached per params, since the row is small, the requests are identical,
      * and flipping between two chips is the expected way to use it.
      */
-    suspend fun homeChipFeed(browseId: String, params: String): Result<List<HomeShelf>> {
+    suspend fun homeChipFeed(browseId: String, params: String): Result<HomeChipFeed> {
         val key = "$browseId:$params"
         homeChipFeedCache[key]?.let { return Result.success(it) }
         return call("home:chip:$browseId") {
-            InnertubeParser.parseHome(Innertube.browse(browseId, params))
+            val response = Innertube.browse(browseId, params)
+            HomeChipFeed(
+                shelves = InnertubeParser.parseHome(response),
+                backgroundUrl = InnertubeParser.parseBackground(response),
+            )
         }.also { result -> result.getOrNull()?.let { homeChipFeedCache.putIfAbsent(key, it) } }
     }
 

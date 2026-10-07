@@ -1281,4 +1281,22 @@
 
 
 
+    <string name="speed_dial">Marcado rápido</string>
+
+    <string name="notifications">Notificaciones</string>
+
+    <string name="notifications_empty">Nada nuevo por ahora</string>
+
+    <string name="notifications_unread">%1$d notificaciones sin leer</string>
+
+    <string name="notifications_update_available">Free Music %1$s ya está disponible</string>
+
+    <string name="notifications_saving">Guardando · %1$d%%</string>
+
+    <string name="notifications_queued">En cola</string>
+
+    <string name="notifications_uploading">Subiendo · %1$d%%</string>
+
+    <string name="notifications_queued_upload">En cola para subir</string>
+
 </resources>

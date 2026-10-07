@@ -1335,4 +1335,22 @@
 
 
 
+    <string name="speed_dial">Быстрый набор</string>
+
+    <string name="notifications">Уведомления</string>
+
+    <string name="notifications_empty">Пока ничего нового</string>
+
+    <string name="notifications_unread">Непрочитанных уведомлений: %1$d</string>
+
+    <string name="notifications_update_available">Доступна Free Music %1$s</string>
+
+    <string name="notifications_saving">Сохранение · %1$d%%</string>
+
+    <string name="notifications_queued">В очереди</string>
+
+    <string name="notifications_uploading">Отправка · %1$d%%</string>
+
+    <string name="notifications_queued_upload">В очереди на отправку</string>
+
 </resources>

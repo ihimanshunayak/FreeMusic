@@ -1309,4 +1309,22 @@
 
 
 
+    <string name="speed_dial">Schnellwahl</string>
+
+    <string name="notifications">Benachrichtigungen</string>
+
+    <string name="notifications_empty">Im Moment nichts Neues</string>
+
+    <string name="notifications_unread">%1$d ungelesene Benachrichtigungen</string>
+
+    <string name="notifications_update_available">Free Music %1$s ist verfügbar</string>
+
+    <string name="notifications_saving">Wird gespeichert · %1$d%%</string>
+
+    <string name="notifications_queued">In Warteschlange</string>
+
+    <string name="notifications_uploading">Wird hochgeladen · %1$d%%</string>
+
+    <string name="notifications_queued_upload">Für Upload vorgemerkt</string>
+
 </resources>
