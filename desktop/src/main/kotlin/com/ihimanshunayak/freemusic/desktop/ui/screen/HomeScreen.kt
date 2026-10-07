@@ -48,6 +48,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -81,6 +82,17 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     val state by viewModel.home.collectAsState()
+
+    /*
+     * The feed loads itself when Home is first shown.
+     *
+     * `loadHome` is idempotent - it returns early while a load is in flight and
+     * short-circuits when shelves are already present - so re-entering the
+     * destination does not refetch. Without this the screen had nothing to draw
+     * until the user pressed Refresh, because the only other callers are the two
+     * buttons below.
+     */
+    LaunchedEffect(Unit) { viewModel.loadHome() }
 
     Box(modifier = modifier.fillMaxSize()) {
         when {

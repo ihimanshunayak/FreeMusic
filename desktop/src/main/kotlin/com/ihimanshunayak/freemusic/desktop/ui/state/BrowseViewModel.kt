@@ -66,6 +66,32 @@ data class BrowseState(
 }
 
 /**
+ * The mood and genre grid that Explore shows when no page is open.
+ *
+ * Kept apart from [BrowseState] because the two have different lifetimes: a page
+ * is opened and closed constantly, while the grid is fetched once and then
+ * reused, so a page swap must not clear it.
+ */
+data class MoodState(
+    val loading: Boolean = false,
+    val sections: List<MoodGenreSection> = emptyList(),
+    val error: String? = null,
+)
+
+/** One titled group of mood/genre tiles. */
+data class MoodGenreSection(
+    val title: String,
+    val items: List<MoodGenre>,
+)
+
+/** One mood/genre tile and the browse request it stands for. */
+data class MoodGenre(
+    val title: String,
+    val browseId: String,
+    val params: String?,
+)
+
+/**
  * Drives Home, Search and Explore.
  *
  * Debouncing lives here rather than in the search field because it is a property
@@ -85,6 +111,9 @@ class BrowseViewModel(
 
     private val _browse = MutableStateFlow(BrowseState())
     val browse: StateFlow<BrowseState> = _browse.asStateFlow()
+
+    private val _moods = MutableStateFlow(MoodState())
+    val moods: StateFlow<MoodState> = _moods.asStateFlow()
 
     private var suggestionJob: Job? = null
     private var searchJob: Job? = null
@@ -108,6 +137,41 @@ class BrowseViewModel(
                 .onFailure { e ->
                     Log.w("home failed: ${e.message}", tag = "home")
                     _home.value = HomeState(loading = false, error = describe(e))
+                }
+        }
+    }
+
+    /**
+     * Loads the mood and genre grid.
+     *
+     * Idempotent: returns early while a load is in flight, and again once
+     * sections are present, so entering Explore repeatedly costs one request.
+     * The ids this fetches are the only ids that work, which is why the grid is
+     * not a hardcoded table in the UI.
+     */
+    fun loadMoods(force: Boolean = false) {
+        if (_moods.value.loading) return
+        if (!force && _moods.value.sections.isNotEmpty()) return
+        scope.launch {
+            _moods.value = _moods.value.copy(loading = true, error = null)
+            runCatching { music.moodsAndGenres() }
+                .onSuccess { sections ->
+                    _moods.value = MoodState(
+                        loading = false,
+                        sections = sections.map { section ->
+                            MoodGenreSection(
+                                title = section.title,
+                                items = section.items.map { item ->
+                                    MoodGenre(item.title, item.browseId, item.params)
+                                },
+                            )
+                        },
+                    )
+                    Log.i("moods loaded with ${sections.size} sections", tag = "moods")
+                }
+                .onFailure { e ->
+                    Log.w("moods failed: ${e.message}", tag = "moods")
+                    _moods.value = MoodState(loading = false, error = describe(e))
                 }
         }
     }

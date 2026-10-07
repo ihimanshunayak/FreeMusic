@@ -12,6 +12,7 @@
 package com.ihimanshunayak.freemusic.desktop
 
 import com.ihimanshunayak.freemusic.desktop.data.Http
+import com.ihimanshunayak.freemusic.desktop.data.innertube.InnertubeParser
 import com.ihimanshunayak.freemusic.desktop.data.innertube.MusicRepository
 import com.ihimanshunayak.freemusic.desktop.data.innertube.YouTubeSession
 import com.ihimanshunayak.freemusic.desktop.data.stream.StreamResolver
@@ -81,8 +82,74 @@ fun main() = runBlocking {
     check("suggestions return", suggestions.isNotEmpty(), suggestions.take(3).toString())
 
     // ---- 4. home shelves --------------------------------------------------
-    val shelves = music.home()
-    check("home payload arrives", shelves.toString().length > 200, "${shelves.toString().length} chars of JSON")
+    // Parsed, not just fetched. The raw payload is 200 KB of JSON whatever it
+    // contains, so a length test passed even while the Home screen rendered
+    // nothing: what matters is how many shelves come out of it.
+    val homeJson = music.home()
+    val shelves = InnertubeParser.parseShelves(homeJson)
+    val homeRows = shelves.sumOf { it.items.size }
+    check("home payload arrives", homeJson.toString().length > 200, "${homeJson.toString().length} chars of JSON")
+    check("home payload yields shelves", shelves.isNotEmpty(), "${shelves.size} shelves, $homeRows rows")
+
+    // What YouTube actually put in the section list. A low shelf count is either
+    // the parser skipping sections or the service sending few, and only this
+    // tells the two apart.
+    val sectionKeys = Regex(""""(\w+Renderer)"\s*:""").findAll(homeJson.toString())
+        .map { it.groupValues[1] }
+        .groupingBy { it }
+        .eachCount()
+        .entries
+        .sortedByDescending { it.value }
+        .take(14)
+        .joinToString(", ") { "${it.key}=${it.value}" }
+    println("[INFO] home renderer census -> $sectionKeys")
+
+    // How many shelf containers the payload actually holds, so a low shelf count
+    // can be told apart from a payload that genuinely carries two.
+    val rawCarousels = Regex("musicCarouselShelfRenderer").findAll(homeJson.toString()).count()
+    val rawShelves = Regex("musicShelfRenderer\\b").findAll(homeJson.toString()).count()
+    check(
+        "shelf containers were found",
+        shelves.size >= minOf(rawCarousels + rawShelves, 1),
+        "parsed ${shelves.size} of ${rawCarousels + rawShelves} containers ($rawCarousels carousels, $rawShelves shelves)",
+    )
+    check(
+        "home shelves carry titles",
+        shelves.all { it.title.isNotBlank() },
+        shelves.take(3).joinToString(" | ") { it.title },
+    )
+    check(
+        "home shelves carry playable rows",
+        homeRows > 0,
+        shelves.firstOrNull()?.let { "${it.items.size} rows in '${it.title}'" }.orEmpty(),
+    )
+
+    // ---- 4b. moods and genres ---------------------------------------------
+    // Explore is drawn entirely from this response, so an empty grid is a blank
+    // screen. The ids are only valid if they came from here.
+    val moods = music.moodsAndGenres()
+    val moodTiles = moods.sumOf { it.items.size }
+    check("mood grid arrives", moods.isNotEmpty(), "${moods.size} sections")
+    check("mood grid has tiles", moodTiles > 0, "$moodTiles tiles across ${moods.size} sections")
+    check(
+        "mood tiles carry a params filter",
+        moods.flatMap { it.items }.all { it.browseId.isNotBlank() },
+        moods.flatMap { it.items }.firstOrNull()?.let { "${it.title}: ${it.browseId} / ${it.params}" }.orEmpty(),
+    )
+
+    // A mood's browse request must actually answer. This is the check that
+    // catches an id invented in the UI rather than read from the grid.
+    val firstMood = moods.flatMap { it.items }.firstOrNull()
+    if (firstMood != null) {
+        val opened = runCatching {
+            InnertubeParser.parseShelves(music.browse(firstMood.browseId, firstMood.params))
+        }.getOrNull()
+        check(
+            "a mood tile opens a populated page",
+            opened != null && opened.isNotEmpty(),
+            "opened '${firstMood.title}' -> ${opened?.size ?: 0} shelves",
+        )
+    }
 
     // ---- 5. stream resolution --------------------------------------------
     val target = withVideo.firstOrNull()

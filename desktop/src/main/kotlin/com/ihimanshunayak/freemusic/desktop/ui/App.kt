@@ -111,6 +111,7 @@ import com.ihimanshunayak.freemusic.desktop.ui.screen.StatisticsScreen
 import com.ihimanshunayak.freemusic.desktop.ui.state.BrowseState
 import com.ihimanshunayak.freemusic.desktop.ui.state.BrowseViewModel
 import com.ihimanshunayak.freemusic.desktop.ui.state.HomeState
+import com.ihimanshunayak.freemusic.desktop.ui.state.MoodState
 import com.ihimanshunayak.freemusic.desktop.ui.state.SearchState
 import io.github.composefluent.ExperimentalFluentApi
 import io.github.composefluent.FluentTheme
@@ -157,6 +158,7 @@ fun App(
     val search by viewModel.search.collectAsState()
     val browse by viewModel.browse.collectAsState()
     val downloads by container.downloads.items.collectAsState()
+    val moods by viewModel.moods.collectAsState()
     val plays by container.stats.plays.collectAsState()
     val party by container.party.state.collectAsState()
     val engineAvailable = container.engine.isAvailable
@@ -411,6 +413,7 @@ fun App(
                                 home = home,
                                 search = search,
                                 browse = browse,
+                                moods = moods,
                                 downloads = downloads,
                                 plays = plays,
                                 partyQueue = partyQueue,
@@ -490,6 +493,7 @@ private fun ActiveScreen(
     home: HomeState,
     search: SearchState,
     browse: BrowseState,
+    moods: MoodState,
     downloads: List<DownloadItem>,
     plays: List<PlayRecord>,
     partyQueue: List<PartyQueueItem>,
@@ -531,10 +535,12 @@ private fun ActiveScreen(
 
         Screen.EXPLORE -> ExploreScreen(
             state = browse,
+            moods = moods,
             currentTrackId = currentId,
             isPlaying = isPlaying,
             onOpenPage = viewModel::openPage,
             onClosePage = viewModel::closePage,
+            onLoadMoods = { viewModel.loadMoods() },
             onPlayRows = { rows, index -> playAllResults(container, viewModel, rows, index) },
             onEnqueueRow = { row -> enqueueResult(container, viewModel, row) },
         )

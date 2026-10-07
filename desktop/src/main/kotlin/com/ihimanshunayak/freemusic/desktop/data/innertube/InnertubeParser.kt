@@ -33,6 +33,27 @@ data class HomeShelfShape(
 )
 
 /**
+ * One mood or genre button, and the exact browse request it stands for.
+ *
+ * [browseId] and [params] are read from YouTube's own response rather than
+ * written down here: the category ids are not derivable from a label, and the
+ * service rejects an invented one with a 400. [params] travels with the id
+ * because a mood grid entry and a plain category page are the same browse id
+ * plus a filter.
+ */
+data class MoodGenreShape(
+    val title: String,
+    val browseId: String,
+    val params: String?,
+)
+
+/** A titled group of mood/genre buttons, as the grid lays them out. */
+data class MoodGenreSectionShape(
+    val title: String,
+    val items: List<MoodGenreShape>,
+)
+
+/**
  * Reads YouTube Music's deeply nested renderer trees.
  *
  * The service nests results inconsistently - the same song appears under
@@ -183,16 +204,51 @@ object InnertubeParser {
     }
 
     /**
+     * The mood and genre grid.
+     *
+     * `FEmusic_moods_and_genres` answers with a `gridRenderer` per section, each
+     * holding `musicNavigationButtonRenderer` buttons. Every button carries the
+     * browse id and params it means, and those are the only values the service
+     * accepts - an id assembled from a label is rejected with a 400, so the grid
+     * has to be read out of this response rather than written down.
+     *
+     * The endpoint lives under `clickCommand` on current builds and under
+     * `navigationEndpoint` on older ones, so both are tried.
+     */
+    fun parseMoodAndGenres(root: JsonElement): List<MoodGenreSectionShape> {
+        val sections = collectRenderers(root, "gridRenderer")
+        return sections.mapNotNull { grid ->
+            val title = grid.obj("header")?.obj("gridHeaderRenderer")?.obj("title")?.textValue()
+                ?: grid.obj("header")?.obj("gridHeaderRenderer")?.obj("subtitle")?.textValue()
+            val items = collectRenderers(grid, "musicNavigationButtonRenderer").mapNotNull { button ->
+                val endpoint = button.obj("clickCommand")?.obj("browseEndpoint")
+                    ?: button.obj("navigationEndpoint")?.obj("browseEndpoint")
+                    ?: return@mapNotNull null
+                val browseId = endpoint.str("browseId") ?: return@mapNotNull null
+                val label = button.obj("buttonText")?.textValue()
+                    ?: button.obj("text")?.textValue()
+                    ?: return@mapNotNull null
+                MoodGenreShape(label, browseId, endpoint.str("params"))
+            }
+            if (title.isNullOrBlank() || items.isEmpty()) null
+            else MoodGenreSectionShape(title, items)
+        }
+    }
+
+    /**
      * A shelf's heading.
      *
-     * It lives under `title` on a carousel and under `header` on a numbered
-     * shelf, and YouTube has shipped both spellings of the header renderer, so
-     * all three are tried in order rather than picking one.
+     * A carousel keeps it under `header`/`musicCarouselShelfBasicHeaderRenderer`
+     * and a numbered shelf under `header`/`musicShelfRendererHeaderRenderer`;
+     * YouTube has also shipped a bare `title` on both. All three spellings are
+     * tried rather than picking one, because a shelf whose title cannot be read
+     * is dropped, and dropping them is what left Home with two shelves.
      */
     private fun shelfTitle(container: JsonObject): String? =
         container.obj("title")?.textValue()
-            ?: container.obj("header")?.obj("musicShelfRendererHeader")?.obj("title")?.textValue()
             ?: container.obj("header")?.obj("musicCarouselShelfBasicHeaderRenderer")?.obj("title")?.textValue()
+            ?: container.obj("header")?.obj("musicShelfRendererHeaderRenderer")?.obj("title")?.textValue()
+            ?: container.obj("header")?.obj("musicShelfRendererHeader")?.obj("title")?.textValue()
 
     private fun parseResponsiveItem(renderer: JsonObject): SearchResult? {
         val columns = renderer.arr("flexColumns") ?: return null

@@ -448,4 +448,182 @@ class InnertubeParserTest {
         assertTrue(!InnertubeParser.isDurationLike("2024"))
         assertTrue(!InnertubeParser.isYearLike("3:07"))
     }
+
+    // ---- moods and genres --------------------------------------------------
+
+    /**
+     * The shape `FEmusic_moods_and_genres` actually answers with.
+     *
+     * Two nested tabs wrap a `sectionListRenderer` whose sections each hold a
+     * `gridRenderer` of `musicNavigationButtonRenderer` buttons. Only the
+     * endpoint's own `browseId` and `params` are usable downstream; a category id
+     * assembled from the label is rejected by the service.
+     */
+    private val moodsPayload = """
+    {
+      "contents": {
+        "singleColumnBrowseResultsRenderer": {
+          "tabs": [{
+            "tabRenderer": {
+              "content": {
+                "sectionListRenderer": {
+                  "contents": [
+                    {
+                      "gridRenderer": {
+                        "header": {
+                          "gridHeaderRenderer": {
+                            "title": { "runs": [{ "text": "Moods" }] }
+                          }
+                        },
+                        "items": [
+                          {
+                            "musicNavigationButtonRenderer": {
+                              "buttonText": { "runs": [{ "text": "Chill" }] },
+                              "clickCommand": {
+                                "browseEndpoint": {
+                                  "browseId": "FEmusic_moods_and_genres_category",
+                                  "params": "ggMPOg1DQUFFU0Fod0xjU3dQ"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "musicNavigationButtonRenderer": {
+                              "buttonText": { "runs": [{ "text": "Energy" }] },
+                              "clickCommand": {
+                                "browseEndpoint": {
+                                  "browseId": "FEmusic_moods_and_genres_category",
+                                  "params": "ggMPOg1DQUFFU0Fod0xjU3dQAA"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "gridRenderer": {
+                        "header": {
+                          "gridHeaderRenderer": {
+                            "title": { "runs": [{ "text": "Genres" }] }
+                          }
+                        },
+                        "items": [
+                          {
+                            "musicNavigationButtonRenderer": {
+                              "buttonText": { "runs": [{ "text": "Rock" }] },
+                              "clickCommand": {
+                                "browseEndpoint": {
+                                  "browseId": "FEmusic_moods_and_genres_category",
+                                  "params": "ggMPOg1DQUFFUm9jaw"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }]
+        }
+      }
+    }
+    """
+
+    @Test
+    fun `moods and genres are read out of the browse response`() {
+        val sections = InnertubeParser.parseMoodAndGenres(json(moodsPayload))
+
+        assertEquals(2, sections.size)
+        assertEquals("Moods", sections[0].title)
+        assertEquals("Genres", sections[1].title)
+        assertEquals(listOf("Chill", "Energy"), sections[0].items.map { it.title })
+        assertEquals(listOf("Rock"), sections[1].items.map { it.title })
+    }
+
+    @Test
+    fun `a mood keeps the browse id and params the service sent`() {
+        val sections = InnertubeParser.parseMoodAndGenres(json(moodsPayload))
+        val chill = sections[0].items.first()
+
+        // The id is the same for every tile; the params are what select the mood,
+        // so dropping them would open the generic category page for all of them.
+        assertEquals("FEmusic_moods_and_genres_category", chill.browseId)
+        assertEquals("ggMPOg1DQUFFU0Fod0xjU3dQ", chill.params)
+    }
+
+    @Test
+    fun `the older navigationEndpoint spelling is read too`() {
+        val older = """
+        {
+          "contents": { "sectionListRenderer": { "contents": [
+            { "gridRenderer": {
+              "header": { "gridHeaderRenderer": { "title": { "simpleText": "Moods" } } },
+              "items": [{ "musicNavigationButtonRenderer": {
+                "buttonText": { "simpleText": "Focus" },
+                "navigationEndpoint": { "browseEndpoint": {
+                  "browseId": "FEmusic_moods_and_genres_category",
+                  "params": "abc"
+                } }
+              } }]
+            } }
+          ] } }
+        }
+        """
+
+        val sections = InnertubeParser.parseMoodAndGenres(json(older))
+        assertEquals(1, sections.size)
+        assertEquals("Focus", sections[0].items.single().title)
+        assertEquals("abc", sections[0].items.single().params)
+    }
+
+    @Test
+    fun `a button with no endpoint is dropped rather than guessed at`() {
+        val noEndpoint = """
+        {
+          "contents": { "sectionListRenderer": { "contents": [
+            { "gridRenderer": {
+              "header": { "gridHeaderRenderer": { "title": { "simpleText": "Moods" } } },
+              "items": [
+                { "musicNavigationButtonRenderer": {
+                  "buttonText": { "simpleText": "Orphan" }
+                } },
+                { "musicNavigationButtonRenderer": {
+                  "buttonText": { "simpleText": "Chill" },
+                  "clickCommand": { "browseEndpoint": { "browseId": "FEmusic_x" } }
+                } }
+              ]
+            } }
+          ] } }
+        }
+        """
+
+        val sections = InnertubeParser.parseMoodAndGenres(json(noEndpoint))
+        // A tile that cannot be opened is worse than a missing tile: clicking it
+        // would send a request the service answers with a 400.
+        assertEquals(listOf("Chill"), sections.single().items.map { it.title })
+    }
+
+    @Test
+    fun `a grid with no usable buttons is dropped entirely`() {
+        val empty = """
+        { "contents": { "sectionListRenderer": { "contents": [
+          { "gridRenderer": {
+            "header": { "gridHeaderRenderer": { "title": { "simpleText": "Moods" } } },
+            "items": []
+          } }
+        ] } } }
+        """
+
+        assertTrue(InnertubeParser.parseMoodAndGenres(json(empty)).isEmpty())
+    }
+
+    @Test
+    fun `a payload with no grid at all yields an empty grid rather than throwing`() {
+        // The Home payload has no gridRenderer. Parsing it as moods must not crash.
+        assertTrue(InnertubeParser.parseMoodAndGenres(json(searchPayload)).isEmpty())
+    }
 }

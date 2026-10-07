@@ -54,6 +54,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -71,6 +72,8 @@ import com.ihimanshunayak.freemusic.desktop.ui.component.VerticalGap
 import com.ihimanshunayak.freemusic.desktop.ui.component.iconForKind
 import com.ihimanshunayak.freemusic.desktop.ui.state.BrowseState
 import com.ihimanshunayak.freemusic.desktop.ui.state.HomeShelf
+import com.ihimanshunayak.freemusic.desktop.ui.state.MoodGenre
+import com.ihimanshunayak.freemusic.desktop.ui.state.MoodState
 import io.github.composefluent.FluentTheme
 import io.github.composefluent.component.Icon
 import io.github.composefluent.component.InfoBar
@@ -80,34 +83,13 @@ import io.github.composefluent.component.SubtleButton
 import io.github.composefluent.component.Text
 
 /**
- * The mood and genre tiles.
+ * The mood and genre grid.
  *
- * These ids are YouTube Music's browse category ids. They are stable across
- * sessions and independent of the interface language, which is why they are
- * written down rather than derived from the labels.
+ * The tiles are whatever `FEmusic_moods_and_genres` returned, in the order it
+ * returned them. They are not a table of ids written down here: the service
+ * rejects a browse id that did not come out of its own response with a 400, so
+ * the grid has to be fetched before it can be drawn at all.
  */
-private val moodPages: List<Pair<String, String>> = listOf(
-    "Chill" to "FEmusic_moods_and_genres_category_chill",
-    "Energy" to "FEmusic_moods_and_genres_category_energy",
-    "Feel good" to "FEmusic_moods_and_genres_category_feel_good",
-    "Workout" to "FEmusic_moods_and_genres_category_workout",
-    "Commute" to "FEmusic_moods_and_genres_category_commute",
-    "Focus" to "FEmusic_moods_and_genres_category_focus",
-    "Relax" to "FEmusic_moods_and_genres_category_relax",
-    "Sleep" to "FEmusic_moods_and_genres_category_sleep",
-    "Party" to "FEmusic_moods_and_genres_category_party",
-    "Romance" to "FEmusic_moods_and_genres_category_romance",
-    "Sad" to "FEmusic_moods_and_genres_category_sad",
-    "Pop" to "FEmusic_moods_and_genres_category_pop",
-    "Hip hop" to "FEmusic_moods_and_genres_category_hip_hop",
-    "Rock" to "FEmusic_moods_and_genres_category_rock",
-    "Electronic" to "FEmusic_moods_and_genres_category_electronic",
-    "Jazz" to "FEmusic_moods_and_genres_category_jazz",
-    "Classical" to "FEmusic_moods_and_genres_category_classical",
-    "Metal" to "FEmusic_moods_and_genres_category_metal",
-)
-
-/** How many tiles go on a grid row. Four fits the narrowest supported window. */
 private const val MOOD_COLUMNS = 4
 
 /**
@@ -119,14 +101,25 @@ private const val MOOD_COLUMNS = 4
 @Composable
 fun ExploreScreen(
     state: BrowseState,
+    moods: MoodState,
     currentTrackId: String?,
     isPlaying: Boolean,
     onOpenPage: (browseId: String, title: String, subtitle: String?, params: String?) -> Unit,
     onClosePage: () -> Unit,
+    onLoadMoods: () -> Unit,
     onPlayRows: (List<SearchResult>, Int) -> Unit,
     onEnqueueRow: (SearchResult) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    /*
+     * The grid fetches itself the first time Explore is shown.
+     *
+     * It is deliberately not fetched at startup: the ids only matter once the
+     * grid is on screen, and the request is a full browse call. `loadMoods` is
+     * idempotent, so switching away and back does not refetch.
+     */
+    LaunchedEffect(Unit) { onLoadMoods() }
+
     Column(modifier = modifier.fillMaxSize()) {
         val hasPage = state.title.isNotBlank() || state.loading || state.error != null
 
@@ -176,8 +169,9 @@ fun ExploreScreen(
             }
 
             !hasPage -> MoodGrid(
+                state = moods,
+                onOpen = { mood -> onOpenPage(mood.browseId, mood.title, null, mood.params) },
                 modifier = Modifier.fillMaxSize(),
-                onOpen = { id, title -> onOpenPage(id, title, null, null) },
             )
 
             state.shelves.isEmpty() -> Box(
@@ -213,34 +207,74 @@ fun ExploreScreen(
 }
 
 /**
- * The mood tiles.
+ * The mood and genre grid.
  *
- * Built as rows inside one `LazyColumn` rather than as a lazy grid, because the
- * list is a fixed eighteen items and a grid would have to be told a column count
- * that already changes with the window width anyway.
+ * Drawn as rows inside one `LazyColumn` rather than as a lazy grid, because the
+ * tiles have a label-driven width and the section count is small. Each section
+ * YouTube returns keeps its own heading and its own row width, so a section with
+ * three tiles does not stretch them across a row meant for four.
  */
 @Composable
-private fun MoodGrid(onOpen: (String, String) -> Unit, modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 24.dp),
-    ) {
-        items(moodPages.chunked(MOOD_COLUMNS)) { row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                row.forEach { (label, id) ->
-                    MoodTile(
-                        label = label,
-                        onClick = { onOpen(id, label) },
-                        modifier = Modifier.weight(1f),
-                    )
+private fun MoodGrid(
+    state: MoodState,
+    onOpen: (MoodGenre) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    when {
+        state.loading && state.sections.isEmpty() -> Box(
+            modifier = modifier,
+            contentAlignment = Alignment.Center,
+        ) {
+            ProgressRing()
+        }
+
+        state.error != null -> Column(modifier = Modifier.padding(24.dp)) {
+            InfoBar(
+                title = { Text("Could not load moods and genres") },
+                message = { Text(state.error) },
+                severity = InfoBarSeverity.Warning,
+            )
+        }
+
+        state.sections.isEmpty() -> Box(
+            modifier = modifier,
+            contentAlignment = Alignment.Center,
+        ) {
+            EmptyState(
+                icon = FluentGlyphs.Explore,
+                title = "Nothing to explore right now",
+                detail = "YouTube Music returned no moods or genres for your region. " +
+                    "Search still works as usual.",
+            )
+        }
+
+        else -> LazyColumn(
+            modifier = modifier,
+            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 24.dp),
+        ) {
+            state.sections.forEach { section ->
+                item(key = "mood-header-${section.title}") {
+                    SectionHeader(section.title)
                 }
-                // Blank filler keeps the final row's tiles the same width as every
-                // other row's, instead of stretching three tiles across four slots.
-                repeat(MOOD_COLUMNS - row.size) {
-                    Box(modifier = Modifier.weight(1f))
+                items(section.items.chunked(MOOD_COLUMNS)) { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        row.forEach { mood ->
+                            MoodTile(
+                                label = mood.title,
+                                onClick = { onOpen(mood) },
+                                modifier = Modifier.weight(1f),
+                            )
+                        }
+                        // Blank filler keeps the final row's tiles the same width as
+                        // every other row's, instead of stretching three tiles across
+                        // four slots.
+                        repeat(MOOD_COLUMNS - row.size) {
+                            Box(modifier = Modifier.weight(1f))
+                        }
+                    }
+                    VerticalGap(12.dp)
                 }
             }
-            VerticalGap(12.dp)
         }
     }
 }

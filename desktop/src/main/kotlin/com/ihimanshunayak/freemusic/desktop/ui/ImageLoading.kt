@@ -55,6 +55,12 @@ private object ArtworkCache {
      * the app should not re-download the home shelf's artwork.
      */
     suspend fun get(url: String): ImageBitmap? = withContext(Dispatchers.IO) {
+        // A row can carry an empty thumbnail field, and an empty URL is not a
+        // fetch that failed - it is one that should never be attempted. OkHttp
+        // rejects it with "no scheme was found", which reads as a network error
+        // in the log and hides the real ones.
+        if (url.isBlank()) return@withContext null
+
         synchronized(memory) { memory[url] }?.let { return@withContext it }
 
         val diskFile = File(diskDir, cacheKey(url))

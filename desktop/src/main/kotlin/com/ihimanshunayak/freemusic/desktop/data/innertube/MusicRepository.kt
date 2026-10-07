@@ -118,6 +118,16 @@ class MusicRepository(
      */
     suspend fun home(): JsonElement = browse(HOME_BROWSE_ID)
 
+    /**
+     * The mood and genre grid.
+     *
+     * This is the only source of valid mood ids: they cannot be constructed, and
+     * the service answers a made-up one with a 400. Parsed here rather than at the
+     * call site so the grid and its navigation share one round trip.
+     */
+    suspend fun moodsAndGenres(): List<MoodGenreSectionShape> =
+        InnertubeParser.parseMoodAndGenres(browse(MOODS_AND_GENRES_BROWSE_ID))
+
     /** Turns a search row into something playable. */
     fun toTrack(result: SearchResult): Track? {
         val videoId = result.videoId ?: return null
@@ -197,6 +207,14 @@ class MusicRepository(
 
         /** Anonymous "new releases" shelf. Cheaper than home when only a probe is needed. */
         const val EXPLORE_BROWSE_ID = "FEmusic_explore"
+
+        /**
+         * The mood and genre grid.
+         *
+         * One call returns every section and, with it, the browse id and params
+         * each button stands for. Those ids are not derivable from the labels.
+         */
+        const val MOODS_AND_GENRES_BROWSE_ID = "FEmusic_moods_and_genres"
     }
 }
 
