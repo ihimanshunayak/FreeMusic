@@ -134,6 +134,7 @@ import com.ihimanshunayak.freemusic.data.model.SearchHistoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.ihimanshunayak.freemusic.data.model.durationMillis
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.scrobbling.LastFM
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
@@ -143,6 +144,8 @@ import com.ihimanshunayak.freemusic.ui.screens.AccountAndScrobblingScreen
 import com.ihimanshunayak.freemusic.ui.screens.DiscordDialog
 import com.ihimanshunayak.freemusic.ui.screens.DiscordDialogHost
 import com.ihimanshunayak.freemusic.ui.screens.DiscordScreen
+import com.ihimanshunayak.freemusic.ui.screens.DevicePlaylistScreen
+import com.ihimanshunayak.freemusic.ui.screens.NewDevicePlaylistDialog
 import com.ihimanshunayak.freemusic.ui.screens.EqualizerScreen
 import com.ihimanshunayak.freemusic.ui.screens.HistoryScreen
 import com.ihimanshunayak.freemusic.ui.screens.NotificationFeed
@@ -760,6 +763,21 @@ private fun FreeMusicApp(
     val downloadedPlaylists = remember(savedCollections, savedDownloads) {
         Downloads.savedPlaylists()
     }
+    // The playlists this device holds — see [PlaylistStore]. Collected rather
+    // than remembered because the store publishes to a [StateFlow] and is the
+    // only writer: a rename or a drag lands here without anything having to ask
+    // for it, which is what lets a page read the same list the Library shelf is
+    // drawing.
+    val localPlaylists by PlaylistStore.playlists.collectAsStateWithLifecycle()
+    // Whether the store has anywhere to write. False only when a write has
+    // actually failed, which is worth saying once on the page that makes them
+    // rather than discovering one playlist at a time — see [PlaylistStore.writable].
+    val playlistsWritable by PlaylistStore.writable.collectAsStateWithLifecycle()
+    var namingPlaylist by remember { mutableStateOf(false) }
+    // Creating a playlist is the one thing on either of those surfaces that has
+    // nothing to hand it a song, so the sheet opens empty and the page it lands
+    // on is the new list's own.
+    val newLocalPlaylist: () -> Unit = { namingPlaylist = true }
     // What a browse id is recorded under in Downloads.collections, when it names
     // a release downloaded whole — see BrowseTarget.downloadId. A downloaded
     // playlist's own page and its card both carry the id under the
@@ -2712,6 +2730,55 @@ private fun FreeMusicApp(
                             },
                             contentPadding = listPadding,
                         )
+                    } else if (page != null && page.browseId.isDevicePlaylist()) {
+                        // One of the listener's own playlists. Only ever reached
+                        // on the device it was built on: the tracks are local
+                        // list entries, and there is no server anywhere holding
+                        // a copy to fetch them back from.
+                        DevicePlaylistScreen(
+                            playlistId = PlaylistStore.idOf(page.browseId).orEmpty(),
+                            currentSong = player.song,
+                            isPlaying = player.isPlaying,
+                            listState = detailListState,
+                            onSongClick = { songs, index ->
+                                playFrom(
+                                    songs,
+                                    index,
+                                    QueueSource(page.title, PlaybackSourceType.BROWSE, page.browseId),
+                                )
+                            },
+                            onSongLongPress = openSongMenu,
+                            onSongSwipe = onSongSwipe,
+                            onShuffle = { songs ->
+                                QueueShuffle.enableForNextQueue()
+                                playFrom(
+                                    songs,
+                                    songs.indices.random(),
+                                    QueueSource(page.title, PlaybackSourceType.BROWSE, page.browseId),
+                                )
+                            },
+                            onRename = { name ->
+                                PlaylistStore.idOf(page.browseId)?.let { id ->
+                                    scope.launch {
+                                        viewModel.renameLocalPlaylist(id, name).onSuccess { renamed ->
+                                            if (renamed) {
+                                                viewModel.retitleDetail(page.browseId, name.trim())
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            onDelete = {
+                                PlaylistStore.idOf(page.browseId)?.let { id ->
+                                    scope.launch {
+                                        viewModel.deleteLocalPlaylist(id).onSuccess {
+                                            viewModel.closeDetail()
+                                        }
+                                    }
+                                }
+                            },
+                            contentPadding = listPadding,
+                        )
                     } else if (page != null) {
                         // An album page's rows carry no album name of their own — the
                         // release is billed once, in the header the rows hang under — so
@@ -3051,6 +3118,9 @@ private fun FreeMusicApp(
                             pullState = libraryPull,
                             contentPadding = listPadding,
                             downloadedPlaylists = downloadedPlaylists,
+                            devicePlaylists = localPlaylists,
+                            onCreatePlaylist = newLocalPlaylist,
+                            playlistsWritable = playlistsWritable,
                         )
                     }
                 }
@@ -3354,7 +3424,17 @@ private fun FreeMusicApp(
                             // list to reorder, and the device folders already
                             // carry this same control themselves (see
                             // `LocalSearchField`).
-                            if (detail != null && !isLocalDetail && detail.type != BrowseType.ARTIST) {
+                            //
+                            // A device playlist is excluded too, and for a
+                            // stronger reason than either: its running order is
+                            // the listener's own and is *stored* in the order
+                            // they dragged it into. A control that reordered
+                            // what is on screen without touching that would
+                            // fight every drag — holding a row up would move it
+                            // in the list and not on the screen.
+                            if (detail != null && !isLocalDetail && detail.type != BrowseType.ARTIST &&
+                                !detail.browseId.isDevicePlaylist()
+                            ) {
                                 // The menu itself is [FrostedSortMenu], composed
                                 // with the app's other frosted overlays further
                                 // down — in the main hierarchy, where the haze
@@ -3696,6 +3776,16 @@ private fun FreeMusicApp(
             // carries the per-entry id a removal is expressed in.
             val editable = viewModel.editablePlaylist(detail?.browseId)
                 ?.takeIf { !fromPlayer && song.setVideoId != null }
+            // The device playlist's own order, and this track's place in it.
+            // Null everywhere else: another app's playlist has no order of
+            // ours to change.
+            val deviceSongs = PlaylistStore.idOf(detail?.browseId)
+                ?.takeIf { !fromPlayer }
+                ?.let { PlaylistStore.find(it)?.asSongs() }
+                .orEmpty()
+            val moveTarget = PlaylistStore.idOf(detail?.browseId)
+                ?.takeIf { !fromPlayer }
+                ?.let { id -> deviceSongs.indexOfFirst { it.videoId == song.videoId }.takeIf { it >= 0 }?.let { it to id } }
             ModalBottomSheet(
                 onDismissRequest = { songActions = null },
                 // The sheet paints itself in the track's own colours, corners
@@ -3753,6 +3843,24 @@ private fun FreeMusicApp(
                         {
                             songActions = null
                             viewModel.removeFromPlaylist(it.browseId, song)
+                        }
+                    },
+                    // Reordering is offered only on a device playlist — the
+                    // one page whose order is the listener's own. The index is
+                    // read off the page the sheet was opened over, so it names
+                    // the row they actually pointed at, and the ends of the
+                    // list get one arrow each rather than an arrow that would
+                    // do nothing.
+                    onMoveUp = moveTarget?.takeIf { it.first > 0 }?.let { (index, id) ->
+                        {
+                            songActions = null
+                            scope.launch { viewModel.moveLocalPlaylistTrack(id, index, index - 1) }
+                        }
+                    },
+                    onMoveDown = moveTarget?.takeIf { it.first < deviceSongs.lastIndex }?.let { (index, id) ->
+                        {
+                            songActions = null
+                            scope.launch { viewModel.moveLocalPlaylistTrack(id, index, index + 1) }
                         }
                     },
                     onOpenAlbum = { id ->
@@ -3889,6 +3997,35 @@ private fun FreeMusicApp(
             }
         }
 
+        // ---- Name a new device playlist ----
+        // A plain alert rather than the picker sheet, because there is no track
+        // to offer and no account list to offer it alongside: this is one field
+        // and a Save button. It opens from the Library shelf's create tile,
+        // which is the only way to start a device playlist without a song in
+        // hand — everywhere else starts from a track's own menu, and that route
+        // creates the playlist as part of adding to it.
+        if (namingPlaylist) {
+            NewDevicePlaylistDialog(
+                onDismiss = { namingPlaylist = false },
+                onCreate = { name ->
+                    namingPlaylist = false
+                    scope.launch {
+                        viewModel.createLocalPlaylist(name)
+                            .onSuccess { id ->
+                                viewModel.openDetail(
+                                    browseId = PlaylistStore.pageIdFor(id),
+                                    title = name.trim(),
+                                    type = BrowseType.PLAYLIST,
+                                )
+                            }
+                            .onFailure {
+                                showQueueNotice(context.getString(R.string.playlist_limit_reached))
+                            }
+                    }
+                },
+            )
+        }
+
         // ---- Add to playlist / new playlist ----
         // One sheet for both, because they are one decision: the list of
         // playlists with a way to make another. `creatingPlaylist` opens it
@@ -3908,6 +4045,27 @@ private fun FreeMusicApp(
                     loading = playlistsLoading,
                     song = target,
                     startCreating = target == null,
+                    localPlaylists = localPlaylists,
+                    onPickLocal = { playlist ->
+                        target?.let { song ->
+                            scope.launch {
+                                viewModel.addToLocalPlaylist(playlist.id, song)
+                                    .onSuccess { added ->
+                                        showQueueNotice(
+                                            context.getString(
+                                                if (added > 0) R.string.song_added_to_playlist
+                                                else R.string.song_already_in_playlist,
+                                            ),
+                                        )
+                                    }
+                            }
+                        }
+                        dismiss()
+                    },
+                    onCreateLocal = {
+                        dismiss()
+                        newLocalPlaylist()
+                    },
                     onPick = { playlist ->
                         target?.let { song ->
                             viewModel.addToPlaylist(playlist, song) { alreadyInPlaylist ->
@@ -3968,6 +4126,16 @@ private fun FreeMusicApp(
             val remote = target.browseId?.startsWith("local:") == false
             val pinnedPlaylists by AppSettings.pinnedPlaylists.collectAsStateWithLifecycle()
             val pinnableId = target.browseId?.takeIf { target.type == BrowseType.PLAYLIST }
+            // One of the listener's own playlists, which is the one case where
+            // this menu has no account question to ask: the store already knows
+            // it is editable, because the listener is the only one who could
+            // have made it. Read live off the store rather than taken from the
+            // target, so a rename from this very menu is reflected the next time
+            // the sheet is raised.
+            val devicePlaylistId = PlaylistStore.idOf(target.browseId)
+            val devicePlaylist = devicePlaylistId?.let { id ->
+                localPlaylists.firstOrNull { it.id == id }
+            }
             ModalBottomSheet(
                 onDismissRequest = { browseActions = null },
                 containerColor = MaterialTheme.colorScheme.background,
@@ -4067,11 +4235,25 @@ private fun FreeMusicApp(
                             browseActions = null
                             viewModel.renamePlaylist(p, name)
                         }
+                    } ?: devicePlaylist?.let { p ->
+                        { name: String ->
+                            browseActions = null
+                            viewModel.retitleDetail(
+                                PlaylistStore.pageIdFor(p.id),
+                                name.trim(),
+                            )
+                            scope.launch { viewModel.renameLocalPlaylist(p.id, name) }
+                        }
                     },
                     onDelete = playlist?.let { p ->
                         {
                             browseActions = null
                             viewModel.deletePlaylist(p)
+                        }
+                    } ?: devicePlaylist?.let { p ->
+                        {
+                            browseActions = null
+                            scope.launch { viewModel.deleteLocalPlaylist(p.id) }
                         }
                     },
                     onDeleteDownload = target.downloadId?.let { id ->
@@ -4694,7 +4876,19 @@ private fun SongSort.localizedLabel(): String = when (this) {
  * gets. See [Downloads.PLAYLIST_PREFIX] for why they share a namespace at all.
  */
 private fun String?.isDeviceFolder(): Boolean =
-    this != null && startsWith("local:") && !startsWith(Downloads.PLAYLIST_PREFIX)
+    this != null && startsWith("local:") &&
+        !startsWith(Downloads.PLAYLIST_PREFIX) &&
+        PlaylistStore.idOf(this) == null
+
+/**
+ * Whether [this] names one of the listener's own playlists — the page
+ * [PlaylistStore.BROWSE_PREFIX] ids belong to.
+ *
+ * Given a name of its own rather than folded into [isDeviceFolder] because the
+ * two pages want opposite chrome: a folder is a list of files with no header to
+ * draw, one of these is a release page with a cover, a title and a menu.
+ */
+private fun String?.isDevicePlaylist(): Boolean = PlaylistStore.idOf(this) != null
 
 /**
  * Whether [videoId] is the track playing, and is known to be playing YouTube's

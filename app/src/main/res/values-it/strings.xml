@@ -35,6 +35,10 @@
     <string name="playlists">Playlist</string>
     <string name="new_playlist">Nuova playlist</string>
     <string name="saved_to_youtube_music">Salvato su YouTube Music</string>
+    <string name="my_playlists">Le mie playlist</string>
+    <string name="playlist_empty">Questa playlist è ancora vuota. Tieni premuto un brano ovunque nell\'app e scegli questa playlist per aggiungerlo.</string>
+    <string name="playlist_limit_reached">Limite di playlist raggiunto</string>
+    <string name="device_playlists_unwritable">Al momento questo dispositivo non consente a Free Music di salvare playlist, quindi le modifiche andranno perse alla chiusura dell\'app.</string>
     <string name="sign_in">Accedi</string>
     <string name="sign_out">Esci</string>
     <string name="signed_in">Accesso effettuato</string>
@@ -184,9 +188,9 @@
     <string name="replay_subtitle">I tuoi brani, artisti, album e generi più ascoltati</string>
     <string name="work_out_genres">Rileva i generi</string>
     <string name="export_data">Esporta dati</string>
-    <string name="export_data_subtitle">Impostazioni e cronologia di ascolto, in un unico file JSON</string>
+    <string name="export_data_subtitle">Impostazioni, cronologia di ascolto e playlist, in un unico file JSON</string>
     <string name="import_data">Importa dati</string>
-    <string name="import_data_subtitle">Sostituisce impostazioni e cronologia su questo dispositivo</string>
+    <string name="import_data_subtitle">Sostituisce impostazioni e cronologia su questo dispositivo e unisce le sue playlist</string>
     <string name="import_backup_title">Importare un backup?</string>
     <string name="choose_file">Scegli file</string>
     <string name="top_artists">Artisti più ascoltati</string>
@@ -510,6 +514,8 @@
     <string name="remove">Rimuovi</string>
     <string name="remove_from_liked">Rimuovi da Musica che mi piace</string>
     <string name="remove_from_playlist">Rimuovi da questa playlist</string>
+    <string name="move_up">Sposta su</string>
+    <string name="move_down">Sposta giù</string>
     <string name="remove_from_queue">Rimuovi dalla coda</string>
     <string name="rename_playlist">Rinomina playlist</string>
     <string name="reset_to_default">Ripristina predefiniti</string>
@@ -729,6 +735,7 @@
     <string name="export_succeeded">Impostazioni e %1$s esportati</string>
     <string name="export_failed">Esportazione non riuscita: %1$s</string>
     <string name="import_succeeded">%1$s importati da v%2$s</string>
+    <string name="import_succeeded_with_playlists">%1$s importati da v%2$s e %3$d playlist</string>
     <string name="import_failed">Importazione non riuscita: %1$s</string>
     <string name="unknown_error">errore sconosciuto</string>
     <string name="no_listening_history">nessuna cronologia di ascolto</string>

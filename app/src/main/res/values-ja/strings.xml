@@ -33,6 +33,10 @@
     <string name="playlists">プレイリスト</string>
     <string name="new_playlist">新しいプレイリスト</string>
     <string name="saved_to_youtube_music">YouTube Musicに保存済み</string>
+    <string name="my_playlists">マイプレイリスト</string>
+    <string name="playlist_empty">このプレイリストはまだ空です。アプリ内のどこでもトラックを長押しして、このプレイリストを選んで追加してください。</string>
+    <string name="playlist_limit_reached">プレイリストの上限に達しました</string>
+    <string name="device_playlists_unwritable">この端末では現在 Free Music がプレイリストを保存できません。アプリを閉じると変更内容は失われます。</string>
     <string name="sign_in">ログイン</string>
     <string name="sign_out">ログアウト</string>
     <string name="signed_in">ログイン済み</string>
@@ -148,9 +152,9 @@
     <string name="replay_subtitle">よく聴いた曲、アーティスト、アルバム、ジャンル</string>
     <string name="work_out_genres">ジャンルを推定</string>
     <string name="export_data">データをエクスポート</string>
-    <string name="export_data_subtitle">設定と再生履歴を1つのJSONファイルとして保存</string>
+    <string name="export_data_subtitle">設定、再生履歴、プレイリストを1つのJSONファイルとして保存</string>
     <string name="import_data">データをインポート</string>
-    <string name="import_data_subtitle">このデバイスの設定と履歴を置き換えます</string>
+    <string name="import_data_subtitle">このデバイスの設定と履歴を置き換え、プレイリストを統合します</string>
     <string name="import_backup_title">バックアップをインポートしますか？</string>
     <string name="choose_file">ファイルを選択</string>
     <string name="top_artists">よく聴いたアーティスト</string>
@@ -448,6 +452,8 @@
     <string name="remove">削除</string>
     <string name="remove_from_liked">高く評価した音楽から削除</string>
     <string name="remove_from_playlist">このプレイリストから削除</string>
+    <string name="move_up">上に移動</string>
+    <string name="move_down">下に移動</string>
     <string name="remove_from_queue">再生キューから削除</string>
     <string name="rename_playlist">プレイリスト名を変更</string>
     <string name="reset_to_default">デフォルトに戻す</string>
@@ -660,6 +666,7 @@
     <string name="export_succeeded">設定と%1$sをエクスポートしました</string>
     <string name="export_failed">エクスポートに失敗しました：%1$s</string>
     <string name="import_succeeded">v%2$sから%1$sをインポートしました</string>
+    <string name="import_succeeded_with_playlists">v%2$sから%1$s、および%3$d件のプレイリストをインポートしました</string>
     <string name="import_failed">インポートに失敗しました：%1$s</string>
     <string name="unknown_error">不明なエラー</string>
     <string name="no_listening_history">再生履歴なし</string>

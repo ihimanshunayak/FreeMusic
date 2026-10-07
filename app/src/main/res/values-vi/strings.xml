@@ -34,6 +34,10 @@
     <string name="playlists">Danh sách phát</string>
     <string name="new_playlist">Danh sách phát mới</string>
     <string name="saved_to_youtube_music">Đã lưu vào YouTube Music</string>
+    <string name="my_playlists">Danh sách của tôi</string>
+    <string name="playlist_empty">Danh sách này vẫn trống. Hãy nhấn giữ một bài hát ở bất kỳ đâu trong ứng dụng rồi chọn danh sách này để thêm vào.</string>
+    <string name="playlist_limit_reached">Đã đạt giới hạn danh sách phát</string>
+    <string name="device_playlists_unwritable">Thiết bị này hiện không cho Free Music lưu danh sách phát, nên các thay đổi sẽ mất khi đóng ứng dụng.</string>
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_out">Đăng xuất</string>
     <string name="signed_in">Đã đăng nhập</string>
@@ -170,9 +174,9 @@
     <string name="replay_subtitle">Bài hát, nghệ sĩ, album và thể loại hàng đầu của bạn</string>
     <string name="work_out_genres">Phân tích thể loại</string>
     <string name="export_data">Xuất dữ liệu</string>
-    <string name="export_data_subtitle">Cài đặt và lịch sử nghe, dưới dạng một tệp JSON</string>
+    <string name="export_data_subtitle">Cài đặt, lịch sử nghe và danh sách phát, dưới dạng một tệp JSON</string>
     <string name="import_data">Nhập dữ liệu</string>
-    <string name="import_data_subtitle">Thay thế cài đặt và lịch sử trên thiết bị này</string>
+    <string name="import_data_subtitle">Thay thế cài đặt và lịch sử trên thiết bị này và hợp nhất danh sách phát của nó</string>
     <string name="import_backup_title">Nhập bản sao lưu?</string>
     <string name="choose_file">Chọn tệp</string>
     <string name="top_artists">Nghệ sĩ hàng đầu</string>
@@ -482,6 +486,8 @@
     <string name="remove">Xóa</string>
     <string name="remove_from_liked">Xóa khỏi Nhạc đã thích</string>
     <string name="remove_from_playlist">Xóa khỏi danh sách phát này</string>
+    <string name="move_up">Di chuyển lên</string>
+    <string name="move_down">Di chuyển xuống</string>
     <string name="remove_from_queue">Xóa khỏi hàng đợi</string>
     <string name="rename_playlist">Đổi tên danh sách phát</string>
     <string name="reset_to_default">Đặt lại về mặc định</string>
@@ -695,6 +701,7 @@
     <string name="export_succeeded">Đã xuất cài đặt và %1$s</string>
     <string name="export_failed">Xuất dữ liệu thất bại: %1$s</string>
     <string name="import_succeeded">Đã nhập %1$s từ v%2$s</string>
+    <string name="import_succeeded_with_playlists">Đã nhập %1$s từ v%2$s và %3$d danh sách phát</string>
     <string name="import_failed">Nhập dữ liệu thất bại: %1$s</string>
     <string name="unknown_error">lỗi không xác định</string>
     <string name="no_listening_history">không có lịch sử nghe</string>

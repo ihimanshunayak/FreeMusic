@@ -327,7 +327,19 @@ fun SettingsScreen(
         backupScope.launch {
             importStatus = Backup.importFrom(context, source).fold(
                 onSuccess = {
-                    context.getString(R.string.import_succeeded, context.countOfMonths(it.months), it.from)
+                    // Reported only when something actually arrived: on a
+                    // restore with no playlists this is the same sentence it
+                    // has always been.
+                    if (it.playlistsCreated > 0) {
+                        context.getString(
+                            R.string.import_succeeded_with_playlists,
+                            context.countOfMonths(it.months),
+                            it.from,
+                            it.playlistsCreated,
+                        )
+                    } else {
+                        context.getString(R.string.import_succeeded, context.countOfMonths(it.months), it.from)
+                    }
                 },
                 onFailure = {
                     context.getString(R.string.import_failed, it.message ?: context.getString(R.string.unknown_error))

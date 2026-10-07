@@ -36,6 +36,10 @@
     <string name="playlists">פלייליסטים</string>
     <string name="new_playlist">פלייליסט חדש</string>
     <string name="saved_to_youtube_music">נשמר ל-YouTube Music</string>
+    <string name="my_playlists">הפלייליסטים שלי</string>
+    <string name="playlist_empty">הפלייליסט הזה עדיין ריק. החזק שיר לחוץ בכל מקום באפליקציה ובחר את הפלייליסט הזה כדי להוסיף אותו.</string>
+    <string name="playlist_limit_reached">הגעת למגבלת הפלייליסטים</string>
+    <string name="device_playlists_unwritable">המכשיר הזה לא מאפשר ל-Free Music לשמור פלייליסטים כרגע, כך שהשינויים יאבדו כשהאפליקציה תיסגר.</string>
     <string name="sign_in">התחברות</string>
     <string name="sign_out">התנתקות</string>
     <string name="signed_in">מחובר</string>
@@ -155,9 +159,9 @@
     <string name="replay_subtitle">השירים, האמנים, האלבומים והז\'אנרים המובילים שלך</string>
     <string name="work_out_genres">חישוב ז\'אנרים</string>
     <string name="export_data">ייצוא נתונים</string>
-    <string name="export_data_subtitle">הגדרות והיסטוריית האזנה, כקובץ JSON אחד</string>
+    <string name="export_data_subtitle">הגדרות, היסטוריית האזנה ופלייליסטים, כקובץ JSON אחד</string>
     <string name="import_data">ייבוא נתונים</string>
-    <string name="import_data_subtitle">מחליף את ההגדרות וההיסטוריה במכשיר זה</string>
+    <string name="import_data_subtitle">מחליף את ההגדרות וההיסטוריה במכשיר זה וממזג את הפלייליסטים שלו</string>
     <string name="import_backup_title">לייבא גיבוי?</string>
     <string name="choose_file">בחירת קובץ</string>
     <string name="top_artists">האמנים המובילים</string>
@@ -427,6 +431,8 @@
     <string name="remove">הסר</string>
     <string name="remove_from_liked">הסר ממוזיקה שאהבתי</string>
     <string name="remove_from_playlist">הסר מרשימת השמעה זו</string>
+    <string name="move_up">העבר למעלה</string>
+    <string name="move_down">העבר למטה</string>
     <string name="remove_from_queue">הסר מהתור</string>
     <string name="rename_playlist">שנה שם רשימת ההשמעה</string>
     <string name="reset_to_default">אפס לברירת מחדל</string>
@@ -630,6 +636,7 @@
     <string name="export_succeeded">הגדרות ו-%1$s יוצאו בהצלחה</string>
     <string name="export_failed">הייצוא נכשל: %1$s</string>
     <string name="import_succeeded">יובאו %1$s מ-v%2$s</string>
+    <string name="import_succeeded_with_playlists">יובאו %1$s מ-v%2$s ו-%3$d פלייליסטים</string>
     <string name="import_failed">הייבוא נכשל: %1$s</string>
     <string name="unknown_error">שגיאה לא ידועה</string>
     <string name="no_listening_history">אין היסטוריית האזנה</string>

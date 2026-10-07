@@ -34,6 +34,10 @@
     <string name="playlists">Çalma listeleri</string>
     <string name="new_playlist">Yeni çalma listesi</string>
     <string name="saved_to_youtube_music">YouTube Music\'e kaydedildi</string>
+    <string name="my_playlists">Listelerim</string>
+    <string name="playlist_empty">Bu liste henüz boş. Uygulamada herhangi bir yerde bir parçayı basılı tutun ve eklemek için bu listeyi seçin.</string>
+    <string name="playlist_limit_reached">Liste sınırına ulaşıldı</string>
+    <string name="device_playlists_unwritable">Bu cihaz şu anda Free Music\'in liste kaydetmesine izin vermiyor, bu yüzden uygulama kapanınca değişiklikler kaybolur.</string>
     <string name="sign_in">Giriş yap</string>
     <string name="sign_out">Çıkış yap</string>
     <string name="signed_in">Giriş yapıldı</string>
@@ -166,9 +170,9 @@
     <string name="replay_subtitle">En çok dinlediğin şarkılar, sanatçılar, albümler ve türler</string>
     <string name="work_out_genres">Türleri belirle</string>
     <string name="export_data">Verileri dışa aktar</string>
-    <string name="export_data_subtitle">Ayarlar ve dinleme geçmişi, tek bir JSON dosyası olarak</string>
+    <string name="export_data_subtitle">Ayarlar, dinleme geçmişi ve listeler, tek bir JSON dosyası olarak</string>
     <string name="import_data">Verileri içe aktar</string>
-    <string name="import_data_subtitle">Bu cihazdaki ayarları ve geçmişi değiştirir</string>
+    <string name="import_data_subtitle">Bu cihazdaki ayarları ve geçmişi değiştirir ve listelerini birleştirir</string>
     <string name="import_backup_title">Bir yedek içe aktarılsın mı?</string>
     <string name="choose_file">Dosya seç</string>
     <string name="top_artists">En çok dinlenen sanatçılar</string>
@@ -492,6 +496,8 @@
     <string name="remove">Kaldır</string>
     <string name="remove_from_liked">Beğenilen Müzikten kaldır</string>
     <string name="remove_from_playlist">Bu çalma listesinden kaldır</string>
+    <string name="move_up">Yukarı taşı</string>
+    <string name="move_down">Aşağı taşı</string>
     <string name="remove_from_queue">Sıradan kaldır</string>
     <string name="rename_playlist">Çalma listesini yeniden adlandır</string>
     <string name="reset_to_default">Varsayılana sıfırla</string>
@@ -711,6 +717,7 @@
     <string name="export_succeeded">Ayarlar ve %1$s dışa aktarıldı</string>
     <string name="export_failed">Dışa aktarma başarısız: %1$s</string>
     <string name="import_succeeded">v%2$s\'den %1$s içe aktarıldı</string>
+    <string name="import_succeeded_with_playlists">v%2$s\'den %1$s ve %3$d çalma listesi içe aktarıldı</string>
     <string name="import_failed">İçe aktarma başarısız: %1$s</string>
     <string name="unknown_error">bilinmeyen hata</string>
     <string name="no_listening_history">dinleme geçmişi yok</string>

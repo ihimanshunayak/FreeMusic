@@ -21,6 +21,7 @@ import com.ihimanshunayak.freemusic.playback.OriginalVersion
 import com.ihimanshunayak.freemusic.data.innertube.Innertube
 import com.ihimanshunayak.freemusic.data.innertube.InnerTubeXResolver
 import com.ihimanshunayak.freemusic.data.listentogether.ListenTogether
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.scrobbling.LastFM
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.SearchHistory
@@ -101,6 +102,11 @@ class FreeMusicApplication : Application(), SingletonImageLoader.Factory {
         ListeningStats.init(this)
         // After AppSettings, whose switch decides whether half of it runs.
         ArtistFacts.init(this)
+        // The listener's own playlists. Nothing else in the app holds a copy,
+        // and nothing else in the app needs one — these are reachable without a
+        // session, so they are loaded eagerly with the rest of the stored state
+        // rather than on first use.
+        PlaylistStore.init(this)
         // One cache directory can only be opened once per process, and
         // PlaybackService shares this one — so it's opened here, not there.
         AudioCache.init(this)

@@ -36,6 +36,7 @@ import com.ihimanshunayak.freemusic.data.model.LikeStatus
 import com.ihimanshunayak.freemusic.data.model.MoodGenre
 import com.ihimanshunayak.freemusic.data.model.MoodGenreSection
 import com.ihimanshunayak.freemusic.data.model.PlaylistPrivacy
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.model.SearchFilter
 import com.ihimanshunayak.freemusic.data.model.SearchResult
 import com.ihimanshunayak.freemusic.data.model.ShelfItem
@@ -852,6 +853,60 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _playlistsLoading = MutableStateFlow(false)
     val playlistsLoading: StateFlow<Boolean> = _playlistsLoading.asStateFlow()
+
+    // ---- The listener's own playlists -----------------------------------
+
+    /**
+     * Playlists this device holds, as opposed to [playlists], which the account
+     * holds.
+     *
+     * Kept as a separate flow rather than merged into one list because the two
+     * are not the same kind of thing and are not interchangeable: these work
+     * signed out, offline, and when the network is down, and the account's do
+     * not. A screen that shows both is showing two sources, and a caller that
+     * only wants the ones it can edit is a different caller from one that is
+     * browsing a library.
+     *
+     * Read straight off [PlaylistStore], which owns the file and is the only
+     * thing that mutates it — so there is one writer and this flow cannot drift
+     * from what is on disk.
+     */
+    val localPlaylists: StateFlow<List<PlaylistStore.Playlist>> = PlaylistStore.playlists
+
+    suspend fun createLocalPlaylist(name: String): Result<String> = runCatching {
+        PlaylistStore.create(name)
+    }
+
+    suspend fun renameLocalPlaylist(id: String, name: String): Result<Boolean> = runCatching {
+        PlaylistStore.rename(id, name)
+    }
+
+    suspend fun deleteLocalPlaylist(id: String): Result<Boolean> = runCatching {
+        PlaylistStore.delete(id)
+    }
+
+    /** Adds [song] to [id]; the result is how many rows were actually added. */
+    suspend fun addToLocalPlaylist(id: String, song: Song): Result<Int> = runCatching {
+        PlaylistStore.addAll(id, listOf(song))
+    }
+
+    suspend fun addToLocalPlaylist(id: String, songs: List<Song>): Result<Int> = runCatching {
+        PlaylistStore.addAll(id, songs)
+    }
+
+    suspend fun removeFromLocalPlaylist(id: String, videoId: String): Result<Boolean> = runCatching {
+        PlaylistStore.remove(id, videoId)
+    }
+
+    suspend fun moveLocalPlaylistTrack(id: String, from: Int, to: Int): Result<Boolean> = runCatching {
+        PlaylistStore.move(id, from, to)
+    }
+
+    suspend fun exportLocalPlaylists(): Result<String> = runCatching { PlaylistStore.export() }
+
+    suspend fun importLocalPlaylists(document: String): Result<Int> = runCatching {
+        PlaylistStore.import(document)
+    }
 
     /** Re-fetched rather than cached for the session: playlists are edited here. */
     fun loadPlaylists() {
@@ -2323,6 +2378,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
          */
 
         fun browseTypeOf(browseId: String, fallback: BrowseType = BrowseType.OTHER): BrowseType = when {
+            // A device playlist is a playlist — it is one of the listener's
+            // own, which is the same kind of page as far as this question goes.
+            // Asked before the `local:` catch-alls further down so a device
+            // playlist is never read as a folder.
+            PlaylistStore.idOf(browseId) != null -> BrowseType.PLAYLIST
             browseId.startsWith(Downloads.PLAYLIST_PREFIX) -> BrowseType.PLAYLIST
             browseId.startsWith("UC") -> BrowseType.ARTIST
             browseId.startsWith("MPREb") || browseId.startsWith("VLOLAK") || browseId.startsWith("OLAK") -> BrowseType.ALBUM
@@ -2424,7 +2484,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             /** Whether this artist is subscribed to — see [DetailPage.subscription]. */
             var subscription: SubscriptionState? = null
             val remote = remoteLibrary(browseId)
+            val localId = PlaylistStore.idOf(browseId)
             val state = when {
+                // Read, never fetched: the tracks are on this device and the
+                // store is already in memory. The page itself reads the store
+                // live, so this list is only what the page has in hand the
+                // instant it opens — but a `local:mine:` id must not fall
+                // through to the network, which would answer 404 for an id
+                // YouTube has never heard of.
+                localId != null -> {
+                    val songs = PlaylistStore.find(localId)?.asSongs().orEmpty()
+                    if (songs.isEmpty()) UiState.Error(text(R.string.playlist_empty))
+                    else UiState.Success(songs)
+                }
                 remote != null -> remoteSongsState(remote)
                 Downloads.recordIdOf(browseId) != null -> {
                     val songs = downloadedPlaylist(browseId)
@@ -2534,7 +2606,13 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val context = getApplication<Application>()
             val remote = remoteLibrary(browseId)
+            val localId = PlaylistStore.idOf(browseId)
             val state: UiState<List<Song>> = when {
+                localId != null -> {
+                    val songs = PlaylistStore.find(localId)?.asSongs().orEmpty()
+                    if (songs.isEmpty()) UiState.Error(text(R.string.playlist_empty))
+                    else UiState.Success(songs)
+                }
                 remote != null -> remoteSongsState(remote)
                 Downloads.recordIdOf(browseId) != null -> {
                     val songs = downloadedPlaylist(browseId)
@@ -2682,7 +2760,12 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val context = getApplication<Application>()
             val remote = remoteLibrary(browseId)
+            val localId = PlaylistStore.idOf(browseId)
             val result = when {
+                localId != null -> runCatching {
+                    PlaylistStore.find(localId)?.asSongs().orEmpty()
+                        .ifEmpty { error(text(R.string.playlist_empty)) }
+                }
                 remote != null -> runCatching {
                     remote.songs().ifEmpty { error(text(remote.emptyRes)) }
                 }
@@ -2714,6 +2797,26 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         if (stack.isEmpty()) return false
         _detailStack.value = stack.dropLast(1)
         return true
+    }
+
+    /**
+     * Changes an open page's title in place, without reloading it.
+     *
+     * A device playlist that has just been renamed is the case this exists for:
+     * the store has the new name and the page is already drawing the right
+     * tracks, so re-opening it would refetch nothing and flash the page for no
+     * reason. The detail stack is what the top bar reads its title from, so a
+     * rename that only reached the store left the bar naming the playlist it
+     * used to be.
+     *
+     * Keyed on the page rather than the stack, so a stale id — a playlist
+     * renamed from a menu on a page that is no longer on top — is ignored rather
+     * than renaming whatever happens to be current.
+     */
+    fun retitleDetail(browseId: String, title: String) {
+        _detailStack.value = _detailStack.value.map {
+            if (it.browseId == browseId) it.copy(title = title) else it
+        }
     }
 
     /**

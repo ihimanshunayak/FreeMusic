@@ -33,6 +33,10 @@
     <string name="playlists">เพลย์ลิสต์</string>
     <string name="new_playlist">เพลย์ลิสต์ใหม่</string>
     <string name="saved_to_youtube_music">บันทึกลง YouTube Music แล้ว</string>
+    <string name="my_playlists">เพลย์ลิสต์ของฉัน</string>
+    <string name="playlist_empty">เพลย์ลิสต์นี้ยังว่างอยู่ กดค้างที่เพลงในส่วนใดก็ได้ของแอป แล้วเลือกเพลย์ลิสต์นี้เพื่อเพิ่มเพลง</string>
+    <string name="playlist_limit_reached">ถึงขีดจำกัดเพลย์ลิสต์แล้ว</string>
+    <string name="device_playlists_unwritable">อุปกรณ์นี้ไม่ให้ Free Music บันทึกเพลย์ลิสต์ในตอนนี้ การเปลี่ยนแปลงจะหายไปเมื่อปิดแอป</string>
     <string name="sign_in">ลงชื่อเข้าใช้</string>
     <string name="sign_out">ออกจากระบบ</string>
     <string name="signed_in">ลงชื่อเข้าใช้แล้ว</string>
@@ -160,9 +164,9 @@
     <string name="replay_subtitle">เพลง ศิลปิน อัลบั้ม และแนวเพลงยอดนิยมของคุณ</string>
     <string name="work_out_genres">คำนวณแนวเพลง</string>
     <string name="export_data">ส่งออกข้อมูล</string>
-    <string name="export_data_subtitle">การตั้งค่าและประวัติการฟัง เป็นไฟล์ JSON เดียว</string>
+    <string name="export_data_subtitle">การตั้งค่า ประวัติการฟัง และเพลย์ลิสต์ เป็นไฟล์ JSON เดียว</string>
     <string name="import_data">นำเข้าข้อมูล</string>
-    <string name="import_data_subtitle">แทนที่การตั้งค่าและประวัติในอุปกรณ์นี้</string>
+    <string name="import_data_subtitle">แทนที่การตั้งค่าและประวัติในอุปกรณ์นี้ และรวมเพลย์ลิสต์ของอุปกรณ์</string>
     <string name="import_backup_title">นำเข้าข้อมูลสำรองหรือไม่</string>
     <string name="choose_file">เลือกไฟล์</string>
     <string name="top_artists">ศิลปินยอดนิยม</string>
@@ -477,6 +481,8 @@
     <string name="remove">นำออก</string>
     <string name="remove_from_liked">นำออกจากเพลงที่ถูกใจ</string>
     <string name="remove_from_playlist">นำออกจากเพลย์ลิสต์นี้</string>
+    <string name="move_up">เลื่อนขึ้น</string>
+    <string name="move_down">เลื่อนลง</string>
     <string name="remove_from_queue">นำออกจากคิว</string>
     <string name="rename_playlist">เปลี่ยนชื่อเพลย์ลิสต์</string>
     <string name="reset_to_default">รีเซ็ตเป็นค่าเริ่มต้น</string>
@@ -692,6 +698,7 @@
     <string name="export_succeeded">ส่งออกการตั้งค่าและ %1$s แล้ว</string>
     <string name="export_failed">ส่งออกไม่สำเร็จ: %1$s</string>
     <string name="import_succeeded">นำเข้า %1$s จาก v%2$s แล้ว</string>
+    <string name="import_succeeded_with_playlists">นำเข้า %1$s จาก v%2$s และเพลย์ลิสต์ %3$d รายการแล้ว</string>
     <string name="import_failed">นำเข้าไม่สำเร็จ: %1$s</string>
     <string name="unknown_error">ข้อผิดพลาดที่ไม่ทราบสาเหตุ</string>
     <string name="no_listening_history">ไม่มีประวัติการฟัง</string>

@@ -71,6 +71,7 @@ import com.ihimanshunayak.freemusic.data.model.UiState
 import kotlin.math.roundToInt
 import java.util.Locale
 import com.ihimanshunayak.freemusic.data.model.artworkAt
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibraryViewType
 import com.ihimanshunayak.freemusic.ui.theme.ArtworkPalette
@@ -1297,6 +1298,24 @@ private fun ServiceCard(colors: List<Color>, trackKey: String, icon: ImageVector
     }
 }
 
+/**
+ * The mesh colours a device-playlist card cycles through, picked by playlist
+ * id so each list keeps the same colour between launches.
+ *
+ * Four rather than a generated hue, so that neighbouring cards in a row read
+ * as related tiles rather than as a rainbow — the same restraint the four
+ * folder cards above show.
+ */
+private val PLAYLIST_CARD_COLORS = listOf(
+    listOf(Color(0xFF6A3093), Color(0xFFA044FF)),
+    listOf(Color(0xFF3F5EFB), Color(0xFFFC466B)),
+    listOf(Color(0xFF11998E), Color(0xFF38EF7D)),
+    listOf(Color(0xFFB24592), Color(0xFFF15F79)),
+)
+
+/** The playlist id behind a card's browse id, or null if it isn't one. */
+private fun playlistCardId(browseId: String?): String? = PlaylistStore.idOf(browseId)
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ShelfCard(
@@ -1310,8 +1329,8 @@ internal fun ShelfCard(
     Column(
         modifier = modifier.combinedClickable(onClick = onClick, onLongClick = onLongPress),
     ) {
-        when (item.browseId) {
-            "local:downloads" -> {
+        when {
+            item.browseId == "local:downloads" -> {
                 val palette = remember { MeshPalette(listOf(Color(0xFF1E3C72), Color(0xFF2A5298))) }
                 Box(
                     modifier = Modifier
@@ -1334,20 +1353,34 @@ internal fun ShelfCard(
                     )
                 }
             }
-            "local:all" -> ServiceCard(
+            item.browseId == "local:all" -> ServiceCard(
                 colors = listOf(Color(0xFF134E5E), Color(0xFF71B280)),
                 trackKey = "local:all",
                 icon = Icons.Rounded.LibraryMusic,
             )
-            "local:webdav" -> ServiceCard(
+            item.browseId == "local:webdav" -> ServiceCard(
                 colors = listOf(Color(0xFF3A1C71), Color(0xFFD76D77)),
                 trackKey = "local:webdav",
                 icon = Icons.Rounded.Folder,
             )
-            "local:smb" -> ServiceCard(
+            item.browseId == "local:smb" -> ServiceCard(
                 colors = listOf(Color(0xFF0F2027), Color(0xFF2C5364)),
                 trackKey = "local:smb",
                 icon = Icons.Rounded.Storage,
+            )
+            // One of the listener's own playlists. Set apart from the four
+            // above by colour rather than by shape, because it is the only
+            // card here whose art the listener can choose: the folders are
+            // fixed places and always look the same, while two playlists side
+            // by side under identical tiles would be a row you have to read
+            // rather than scan. Keyed on the playlist id, so the mesh is stable
+            // across restarts instead of reshuffling on every launch.
+            playlistCardId(item.browseId) != null -> ServiceCard(
+                colors = PLAYLIST_CARD_COLORS[
+                    playlistCardId(item.browseId)!!.hashCode().mod(PLAYLIST_CARD_COLORS.size)
+                ],
+                trackKey = item.browseId.orEmpty(),
+                icon = FreeMusicIcons.MusicNote,
             )
             else -> {
                 AsyncImage(

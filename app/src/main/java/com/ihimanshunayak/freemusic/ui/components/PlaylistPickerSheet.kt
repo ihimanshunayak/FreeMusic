@@ -43,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -59,6 +60,7 @@ import com.ihimanshunayak.freemusic.data.model.ROW_ART_PX
 import com.ihimanshunayak.freemusic.data.model.Song
 import com.ihimanshunayak.freemusic.data.model.UserPlaylist
 import com.ihimanshunayak.freemusic.data.model.artworkAt
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.ui.components.thumbnailBorder
 import com.ihimanshunayak.freemusic.ui.icons.FreeMusicIcons
 import java.util.Locale
@@ -85,6 +87,24 @@ fun PlaylistPickerSheet(
     modifier: Modifier = Modifier,
     song: Song? = null,
     startCreating: Boolean = false,
+    /**
+     * The playlists this device holds, above the account's and never merged
+     * with them.
+     *
+     * Two lists under one heading would be a list where the fifth row is
+     * editable and the sixth is not, with nothing on screen saying which is
+     * which — and the failure is silent in the worst direction: a tap on an
+     * account playlist while offline looks identical to a tap on a device one
+     * and only fails after the sheet has closed. So they are separate groups,
+     * each with its own heading, and this one leads because it is the one that
+     * works without a network, without an account, and without waiting.
+     *
+     * Empty is the normal state for a new install and draws no heading at all
+     * rather than an empty section.
+     */
+    localPlaylists: List<PlaylistStore.Playlist> = emptyList(),
+    onPickLocal: (PlaylistStore.Playlist) -> Unit = {},
+    onCreateLocal: () -> Unit = {},
 ) {
     var creating by remember { mutableStateOf(startCreating) }
 
@@ -104,6 +124,24 @@ fun PlaylistPickerSheet(
             SheetTrackHeader(song)
             HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outline)
         }
+
+        if (localPlaylists.isNotEmpty()) {
+            SheetHeading(
+                stringResource(R.string.my_playlists).uppercase(Locale.getDefault()),
+            )
+            ActionRow(
+                icon = FreeMusicIcons.Plus,
+                label = stringResource(R.string.new_playlist),
+                onClick = onCreateLocal,
+            )
+            LocalPlaylistRows(playlists = localPlaylists, onPick = onPickLocal)
+            HorizontalDivider(
+                modifier = Modifier.padding(top = 6.dp),
+                thickness = 0.5.dp,
+                color = MaterialTheme.colorScheme.outline,
+            )
+        }
+
         SheetHeading(
             stringResource(if (song != null) R.string.add_to_playlist else R.string.your_playlists)
                 .uppercase(Locale.getDefault()),
@@ -157,8 +195,7 @@ fun PlaylistPickerSheet(
 }
 
 @Composable
-private fun PlaylistRow(playlist: UserPlaylist, onClick: () -> Unit) {
-    Row(
+private fun PlaylistRow(playlist: UserPlaylist, onClick: () -> Unit) {    Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
@@ -191,6 +228,70 @@ private fun PlaylistRow(playlist: UserPlaylist, onClick: () -> Unit) {
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
+            }
+        }
+    }
+}
+
+/**
+ * The device-playlist rows in the picker.
+ *
+ * Capped like the account's list below it, and for the same reason — a hundred
+ * playlists must not push the sheet past the screen.
+ *
+ * Each row draws the same fixed glyph rather than a cover: these playlists have
+ * no artwork, and borrowing their first track's would make two playlists
+ * starting with the same song look like the same playlist.
+ */
+@Composable
+private fun LocalPlaylistRows(
+    playlists: List<PlaylistStore.Playlist>,
+    onPick: (PlaylistStore.Playlist) -> Unit,
+) {
+    LazyColumn(Modifier.heightIn(max = 240.dp)) {
+        items(playlists, key = { it.id }) { playlist ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onPick(playlist) }
+                    .padding(horizontal = 22.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(7.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = FreeMusicIcons.MusicNote,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
+                Spacer(Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = playlist.name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    Text(
+                        text = pluralStringResource(
+                            R.plurals.track_count_plural,
+                            playlist.size,
+                            playlist.size,
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
         }
     }

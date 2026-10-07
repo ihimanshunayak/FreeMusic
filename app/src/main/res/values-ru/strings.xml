@@ -36,6 +36,10 @@
     <string name="playlists">Плейлисты</string>
     <string name="new_playlist">Новый плейлист</string>
     <string name="saved_to_youtube_music">Сохранено в YouTube Music</string>
+    <string name="my_playlists">Мои плейлисты</string>
+    <string name="playlist_empty">Этот плейлист пока пуст. Удерживайте трек в любом месте приложения и выберите этот плейлист, чтобы добавить его.</string>
+    <string name="playlist_limit_reached">Достигнут предел плейлистов</string>
+    <string name="device_playlists_unwritable">Это устройство сейчас не разрешает Free Music сохранять плейлисты, поэтому изменения исчезнут при закрытии приложения.</string>
     <string name="sign_in">Войти</string>
     <string name="sign_out">Выйти</string>
     <string name="signed_in">Вход выполнен</string>
@@ -163,9 +167,9 @@
     <string name="replay_subtitle">Ваши любимые песни, исполнители, альбомы и жанры</string>
     <string name="work_out_genres">Определять жанры</string>
     <string name="export_data">Экспорт данных</string>
-    <string name="export_data_subtitle">Настройки и история прослушивания в одном файле JSON</string>
+    <string name="export_data_subtitle">Настройки, история прослушивания и плейлисты в одном файле JSON</string>
     <string name="import_data">Импорт данных</string>
-    <string name="import_data_subtitle">Заменяет настройки и историю на этом устройстве</string>
+    <string name="import_data_subtitle">Заменяет настройки и историю на этом устройстве и объединяет его плейлисты</string>
     <string name="import_backup_title">Импортировать резервную копию?</string>
     <string name="choose_file">Выбрать файл</string>
     <string name="top_artists">Топ исполнителей</string>
@@ -481,6 +485,8 @@
     <string name="remove">Удалить</string>
     <string name="remove_from_liked">Удалить из понравившейся музыки</string>
     <string name="remove_from_playlist">Удалить из этого плейлиста</string>
+    <string name="move_up">Переместить вверх</string>
+    <string name="move_down">Переместить вниз</string>
     <string name="remove_from_queue">Удалить из очереди</string>
     <string name="rename_playlist">Переименовать плейлист</string>
     <string name="reset_to_default">Сбросить по умолчанию</string>
@@ -701,6 +707,7 @@
     <string name="export_succeeded">Экспортированы настройки и %1$s</string>
     <string name="export_failed">Ошибка экспорта: %1$s</string>
     <string name="import_succeeded">Импортировано %1$s из v%2$s</string>
+    <string name="import_succeeded_with_playlists">Импортировано %1$s из v%2$s и %3$d плейлистов</string>
     <string name="import_failed">Ошибка импорта: %1$s</string>
     <string name="unknown_error">неизвестная ошибка</string>
     <string name="no_listening_history">нет истории прослушивания</string>

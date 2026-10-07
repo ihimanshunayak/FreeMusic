@@ -33,6 +33,10 @@
     <string name="playlists">Playlist</string>
     <string name="new_playlist">Playlist baru</string>
     <string name="saved_to_youtube_music">Disimpan ke YouTube Music</string>
+    <string name="my_playlists">Playlist saya</string>
+    <string name="playlist_empty">Playlist ini masih kosong. Tahan sebuah trek di mana saja di aplikasi ini lalu pilih playlist ini untuk menambahkannya.</string>
+    <string name="playlist_limit_reached">Batas playlist tercapai</string>
+    <string name="device_playlists_unwritable">Perangkat ini tidak mengizinkan Free Music menyimpan playlist saat ini, jadi perubahan akan hilang saat aplikasi ditutup.</string>
     <string name="sign_in">Masuk</string>
     <string name="sign_out">Keluar</string>
     <string name="signed_in">Sudah masuk</string>
@@ -148,9 +152,9 @@
     <string name="replay_subtitle">Lagu, artis, album, dan genre teratas Anda</string>
     <string name="work_out_genres">Hitung genre</string>
     <string name="export_data">Ekspor data</string>
-    <string name="export_data_subtitle">Pengaturan dan riwayat mendengarkan, sebagai satu file JSON</string>
+    <string name="export_data_subtitle">Pengaturan, riwayat mendengarkan, dan playlist sebagai satu file JSON</string>
     <string name="import_data">Impor data</string>
-    <string name="import_data_subtitle">Mengganti pengaturan dan riwayat di perangkat ini</string>
+    <string name="import_data_subtitle">Mengganti pengaturan dan riwayat di perangkat ini serta menggabungkan playlist-nya</string>
     <string name="import_backup_title">Impor cadangan?</string>
     <string name="choose_file">Pilih file</string>
     <string name="top_artists">Artis teratas</string>
@@ -448,6 +452,8 @@
     <string name="remove">Hapus</string>
     <string name="remove_from_liked">Hapus dari Musik yang Disukai</string>
     <string name="remove_from_playlist">Hapus dari playlist ini</string>
+    <string name="move_up">Naikkan</string>
+    <string name="move_down">Turunkan</string>
     <string name="remove_from_queue">Hapus dari antrean</string>
     <string name="rename_playlist">Ganti nama playlist</string>
     <string name="reset_to_default">Setel ulang ke default</string>
@@ -660,6 +666,7 @@
     <string name="export_succeeded">Berhasil mengekspor pengaturan dan %1$s</string>
     <string name="export_failed">Ekspor gagal: %1$s</string>
     <string name="import_succeeded">Berhasil mengimpor %1$s dari v%2$s</string>
+    <string name="import_succeeded_with_playlists">Berhasil mengimpor %1$s dari v%2$s, dan %3$d playlist</string>
     <string name="import_failed">Impor gagal: %1$s</string>
     <string name="unknown_error">kesalahan tidak diketahui</string>
     <string name="no_listening_history">tidak ada riwayat mendengarkan</string>

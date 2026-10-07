@@ -27,6 +27,8 @@ import androidx.compose.material.icons.automirrored.rounded.PlaylistPlay
 import androidx.compose.material.icons.automirrored.rounded.QueueMusic
 import androidx.compose.material.icons.automirrored.rounded.Undo
 import androidx.compose.material.icons.rounded.Album
+import androidx.compose.material.icons.rounded.ArrowDownward
+import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material.icons.rounded.Bedtime
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Check
@@ -141,6 +143,14 @@ fun SongActionsSheet(
     onOpenArtist: (String) -> Unit,
     modifier: Modifier = Modifier,
     onRemoveFromPlaylist: (() -> Unit)? = null,
+    /**
+     * Reordering within a device playlist. Both are null everywhere else —
+     * there is no order of your own to keep in someone else's playlist — and
+     * individually null at the ends of the list, so the first row offers no
+     * "Move up" and the last none of "Move down".
+     */
+    onMoveUp: (() -> Unit)? = null,
+    onMoveDown: (() -> Unit)? = null,
     showSleepTimer: Boolean = false,
     /**
      * Sends the playing track back to YouTube's own upload, and keeps it there.
@@ -280,6 +290,24 @@ fun SongActionsSheet(
                 ActionRow(
                     icon = Icons.Rounded.PlaylistRemove,
                     label = stringResource(R.string.remove_from_playlist),
+                    accent = palette.accent,
+                    onClick = it,
+                )
+            }
+            // Only in a device playlist, and only where there is a neighbour to
+            // trade places with — see [onMoveUp].
+            onMoveUp?.let {
+                ActionRow(
+                    icon = Icons.Rounded.ArrowUpward,
+                    label = stringResource(R.string.move_up),
+                    accent = palette.accent,
+                    onClick = it,
+                )
+            }
+            onMoveDown?.let {
+                ActionRow(
+                    icon = Icons.Rounded.ArrowDownward,
+                    label = stringResource(R.string.move_down),
                     accent = palette.accent,
                     onClick = it,
                 )

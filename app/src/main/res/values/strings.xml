@@ -43,6 +43,16 @@
     <string name="playlists">Playlists</string>
     <string name="new_playlist">New playlist</string>
     <string name="saved_to_youtube_music">Saved to YouTube Music</string>
+    <!--
+      Playlists this device holds, as opposed to the account's. "My playlists"
+      rather than "Local playlists" because the shelf is the listener's own
+      list, not a folder of files — and "local" in this app already means
+      something else (see the Local Music folder on the same page).
+    -->
+    <string name="my_playlists">My playlists</string>
+    <string name="playlist_empty">Nothing in this playlist yet. Hold a track anywhere in the app and choose this playlist to add it.</string>
+    <string name="playlist_limit_reached">Playlist limit reached</string>
+    <string name="device_playlists_unwritable">This device won\'t let Free Music save playlists right now, so changes will be lost when the app closes.</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_out">Sign out</string>
     <string name="signed_in">Signed in</string>
@@ -208,9 +218,9 @@
     <string name="replay_subtitle">Your top songs, artists, albums and genres</string>
     <string name="work_out_genres">Work out genres</string>
     <string name="export_data">Export data</string>
-    <string name="export_data_subtitle">Settings and listening history, as one JSON file</string>
+    <string name="export_data_subtitle">Settings, listening history and playlists, as one JSON file</string>
     <string name="import_data">Import data</string>
-    <string name="import_data_subtitle">Replaces the settings and history on this device</string>
+    <string name="import_data_subtitle">Replaces the settings and history on this device, and merges in its playlists</string>
     <string name="import_backup_title">Import a backup?</string>
     <string name="choose_file">Choose file</string>
     <string name="top_artists">Top artists</string>
@@ -627,6 +637,8 @@
     <string name="remove">Remove</string>
     <string name="remove_from_liked">Remove from Liked Music</string>
     <string name="remove_from_playlist">Remove from this playlist</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
     <string name="remove_from_queue">Remove from queue</string>
     <string name="rename_playlist">Rename playlist</string>
     <string name="reset_to_default">Reset to default</string>
@@ -851,6 +863,7 @@
     <string name="export_succeeded">Exported settings and %1$s</string>
     <string name="export_failed">Export failed: %1$s</string>
     <string name="import_succeeded">Imported %1$s from v%2$s</string>
+    <string name="import_succeeded_with_playlists">Imported %1$s from v%2$s, and %3$d playlists</string>
     <string name="import_failed">Import failed: %1$s</string>
     <string name="unknown_error">unknown error</string>
     <string name="no_listening_history">no listening history</string>

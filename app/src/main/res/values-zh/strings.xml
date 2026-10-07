@@ -33,6 +33,10 @@
     <string name="playlists">播放列表</string>
     <string name="new_playlist">新建播放列表</string>
     <string name="saved_to_youtube_music">已保存到 YouTube Music</string>
+    <string name="my_playlists">我的播放列表</string>
+    <string name="playlist_empty">此播放列表还是空的。在应用中任意位置长按一首曲目，然后选择此播放列表即可添加。</string>
+    <string name="playlist_limit_reached">已达播放列表上限</string>
+    <string name="device_playlists_unwritable">此设备目前不允许 Free Music 保存播放列表，关闭应用后更改将会丢失。</string>
     <string name="sign_in">登录</string>
     <string name="sign_out">退出登录</string>
     <string name="signed_in">已登录</string>
@@ -148,9 +152,9 @@
     <string name="replay_subtitle">你的热门歌曲、艺人、专辑和流派</string>
     <string name="work_out_genres">推算流派</string>
     <string name="export_data">导出数据</string>
-    <string name="export_data_subtitle">将设置和收听记录导出为一个 JSON 文件</string>
+    <string name="export_data_subtitle">将设置、收听记录和播放列表导出为一个 JSON 文件</string>
     <string name="import_data">导入数据</string>
-    <string name="import_data_subtitle">替换此设备上的设置和记录</string>
+    <string name="import_data_subtitle">替换此设备上的设置和记录，并合并其播放列表</string>
     <string name="import_backup_title">要导入备份吗？</string>
     <string name="choose_file">选择文件</string>
     <string name="top_artists">热门艺人</string>
@@ -448,6 +452,8 @@
     <string name="remove">移除</string>
     <string name="remove_from_liked">从喜欢的音乐中移除</string>
     <string name="remove_from_playlist">从此播放列表中移除</string>
+    <string name="move_up">上移</string>
+    <string name="move_down">下移</string>
     <string name="remove_from_queue">从播放队列中移除</string>
     <string name="rename_playlist">重命名播放列表</string>
     <string name="reset_to_default">恢复默认设置</string>
@@ -660,6 +666,7 @@
     <string name="export_succeeded">已导出设置和%1$s</string>
     <string name="export_failed">导出失败：%1$s</string>
     <string name="import_succeeded">已从 v%2$s 导入%1$s</string>
+    <string name="import_succeeded_with_playlists">已从 v%2$s 导入%1$s和 %3$d 个播放列表</string>
     <string name="import_failed">导入失败：%1$s</string>
     <string name="unknown_error">未知错误</string>
     <string name="no_listening_history">无收听记录</string>

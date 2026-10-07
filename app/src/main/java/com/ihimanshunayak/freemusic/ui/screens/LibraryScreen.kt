@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -45,6 +46,7 @@ import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.model.LibraryPage
 import com.ihimanshunayak.freemusic.data.model.ShelfItem
 import com.ihimanshunayak.freemusic.data.model.UiState
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
 import com.ihimanshunayak.freemusic.download.Downloads
@@ -121,6 +123,33 @@ fun LibraryScreen(
      * without going through that folder.
      */
     downloadedPlaylists: List<SavedCollection> = emptyList(),
+    /**
+     * The playlists this device holds, kept by
+     * [com.ihimanshunayak.freemusic.data.playlist.PlaylistStore].
+     *
+     * A shelf of their own above the folders rather than cards mixed into the
+     * On Device row, because that row means "here, now, without a network" and
+     * a device playlist is a different promise: it is a list that is yours to
+     * edit, and its tracks may well stream. Mixing them would put an editable
+     * card among read-only ones and make the row's long-press menu offer
+     * Rename on a folder.
+     *
+     * Drawn before the sign-in gate below, so a guest — who cannot reach any of
+     * the network shelves — still gets the one part of the library that works
+     * without an account.
+     */
+    devicePlaylists: List<PlaylistStore.Playlist> = emptyList(),
+    onCreatePlaylist: () -> Unit = {},
+    /**
+     * False once a write to the playlist store has actually failed — a
+     * read-only volume, a full disk.
+     *
+     * Said on screen rather than only logged, because every edit that lands in
+     * that state works exactly as it looks like it should and is gone after the
+     * next launch. There is no way for a listener to tell that apart from
+     * having imagined making the playlist, so the shelf says so once instead.
+     */
+    playlistsWritable: Boolean = true,
 ) {
     val pinnedPlaylists by AppSettings.pinnedPlaylists.collectAsStateWithLifecycle()
     val onDevice = stringResource(R.string.on_device)
@@ -159,6 +188,50 @@ fun LibraryScreen(
                         onCardClick = onOpenReplay,
                         modifier = Modifier.padding(vertical = 6.dp),
                         contentPadding = PaddingValues(horizontal = PAGE_GUTTER),
+                    )
+                }
+            }
+            item(key = "shelf:mine") {
+                val mineShelf = HomeShelf(
+                    title = stringResource(R.string.my_playlists),
+                    items = devicePlaylists.map { playlist ->
+                        ShelfItem(
+                            title = playlist.name,
+                            subtitle = pluralStringResource(
+                                R.plurals.track_count_plural,
+                                playlist.size,
+                                playlist.size,
+                            ),
+                            thumbnailUrl = null,
+                            videoId = null,
+                            browseId = PlaylistStore.pageIdFor(playlist.id),
+                        )
+                    },
+                )
+                LibraryGridShelf(
+                    shelf = mineShelf,
+                    onItemClick = onShelfItemClick,
+                    onItemLongPress = onShelfItemLongPress,
+                    onShowAll = { onShowAll(mineShelf) },
+                    leadingCard = {
+                        NewShelfCard(
+                            icon = FreeMusicIcons.Plus,
+                            label = stringResource(R.string.new_playlist),
+                            subtitle = stringResource(R.string.on_device),
+                            onClick = onCreatePlaylist,
+                        )
+                    },
+                )
+                if (!playlistsWritable) {
+                    Text(
+                        text = stringResource(R.string.device_playlists_unwritable),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(
+                            start = PAGE_GUTTER,
+                            end = PAGE_GUTTER,
+                            bottom = 12.dp,
+                        ),
                     )
                 }
             }

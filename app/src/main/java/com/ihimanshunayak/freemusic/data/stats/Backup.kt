@@ -3,6 +3,7 @@ package com.ihimanshunayak.freemusic.data.stats
 import android.content.Context
 import android.net.Uri
 import com.ihimanshunayak.freemusic.BuildConfig
+import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.SearchHistory
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +71,13 @@ object Backup {
                     PrefValue.of(value)?.let { key to it }
                 }.toMap(),
                 listening = buckets,
+                // The device playlists, typed rather than as a nested JSON
+                // string. They belong in here for the same reason the listening
+                // stats do: they exist only on this phone, and a factory reset
+                // takes them with no way back. A backup that restored the stats
+                // but silently dropped the playlists would be worse than one
+                // that had never offered either.
+                playlists = PlaylistStore.archive(),
             )
             val text = json.encodeToString(BackupFile.serializer(), file)
             context.contentResolver.openOutputStream(target, "wt")
@@ -104,11 +112,18 @@ object Backup {
             // Shares AppSettings' preference file, so it has already been
             // overwritten by the line above — it just doesn't know yet.
             SearchHistory.reload()
+            // Merged rather than replaced, and the count is reported so a
+            // listener who expected more playlists than arrived can see that
+            // the file was read rather than blame the restore. See
+            // [PlaylistStore.merge] for why this is not a wholesale swap.
+            val playlistsCreated = PlaylistStore.merge(file.playlists)
             Summary(
                 months = file.listening.size,
                 settings = file.settings.size,
                 from = file.versionName,
                 at = file.exportedAt,
+                playlists = file.playlists.playlists.size,
+                playlistsCreated = playlistsCreated,
             )
         }
     }
@@ -119,6 +134,15 @@ object Backup {
         val settings: Int,
         val from: String,
         val at: String,
+        /** How many device playlists the file held. */
+        val playlists: Int = 0,
+        /**
+         * How many of those were new here. The rest were merged into playlists
+         * already on the device — see [PlaylistStore.merge] — which is worth
+         * reporting separately, since "20 playlists" arriving as "0 created" is
+         * otherwise indistinguishable from an import that silently failed.
+         */
+        val playlistsCreated: Int = 0,
     )
 
     private const val APP_TAG = "freemusic"
@@ -139,6 +163,16 @@ object Backup {
         val exportedAt: String = "",
         val settings: Map<String, PrefValue> = emptyMap(),
         val listening: List<StoredBucket> = emptyList(),
+        /**
+         * The device playlists, when the build that wrote this had any.
+         *
+         * Defaulted so a backup taken before this field existed still imports —
+         * it simply arrives with none, which is the truth about it.
+         */
+        val playlists: PlaylistStore.Archive = PlaylistStore.Archive(
+            exportedAt = 0,
+            playlists = emptyList(),
+        ),
     )
 
     /** One preference, with the type it has to be restored as. */
