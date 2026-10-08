@@ -67,6 +67,7 @@ import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Sort
 import androidx.compose.material.icons.rounded.Upgrade
 import com.ihimanshunayak.freemusic.data.listentogether.ServerConnectionState
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -134,6 +135,10 @@ import com.ihimanshunayak.freemusic.data.model.SearchHistoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.ihimanshunayak.freemusic.data.model.durationMillis
+import com.ihimanshunayak.freemusic.data.collab.CollabApi
+import com.ihimanshunayak.freemusic.data.collab.CollabInvitePreview
+import com.ihimanshunayak.freemusic.data.collab.CollabPlaylistType
+import com.ihimanshunayak.freemusic.data.collab.CollabPlaylists
 import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.scrobbling.LastFM
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
@@ -145,12 +150,15 @@ import com.ihimanshunayak.freemusic.ui.screens.DiscordDialog
 import com.ihimanshunayak.freemusic.ui.screens.DiscordDialogHost
 import com.ihimanshunayak.freemusic.ui.screens.DiscordScreen
 import com.ihimanshunayak.freemusic.ui.screens.DevicePlaylistScreen
-import com.ihimanshunayak.freemusic.ui.screens.NewDevicePlaylistDialog
+import com.ihimanshunayak.freemusic.ui.screens.CollabPlaylistScreen
 import com.ihimanshunayak.freemusic.ui.screens.EqualizerScreen
 import com.ihimanshunayak.freemusic.ui.screens.HistoryScreen
+import com.ihimanshunayak.freemusic.ui.screens.JoinCollabPlaylistDialog
+import com.ihimanshunayak.freemusic.ui.screens.ListenTogetherScreen
+import com.ihimanshunayak.freemusic.ui.screens.NewCollabPlaylistDialog
+import com.ihimanshunayak.freemusic.ui.screens.NewDevicePlaylistDialog
 import com.ihimanshunayak.freemusic.ui.screens.NotificationFeed
 import com.ihimanshunayak.freemusic.ui.screens.NotificationsScreen
-import com.ihimanshunayak.freemusic.ui.screens.ListenTogetherScreen
 import com.ihimanshunayak.freemusic.ui.screens.PartyServerEditor
 import com.ihimanshunayak.freemusic.ui.screens.SettingsScreen
 import com.ihimanshunayak.freemusic.ui.screens.SourceEditorAlert
@@ -540,6 +548,13 @@ private fun FreeMusicApp(
     // The picker opened from the Library tab, where there is no track and
     // creating the playlist is the whole errand.
     var creatingPlaylist by remember { mutableStateOf(false) }
+    // The shared-playlist counterpart, kept apart from the device one because
+    // the two dialogs differ: this one can fail (no server, limit reached), so
+    // it owns a busy state and an error line, and closing the device dialog must
+    // not close this one.
+    var creatingCollabPlaylist by remember { mutableStateOf(false) }
+    var collabCreating by remember { mutableStateOf(false) }
+    var collabCreateError by remember { mutableStateOf<String?>(null) }
     // Which album or playlist the collection menu is open on, or null when it
     // is shut. One slot for every surface that can open it — the shelves on
     // three tabs, the search rows, the artist page's carousels, the release
@@ -612,8 +627,16 @@ private fun FreeMusicApp(
     val filter by viewModel.filter.collectAsStateWithLifecycle()
     val signedIn by viewModel.signedIn.collectAsStateWithLifecycle()
     val incomingJamInvite by JamInviteLink.pending.collectAsStateWithLifecycle()
+    val incomingPlaylistInvite by JamInviteLink.pendingPlaylist.collectAsStateWithLifecycle()
     var activeJamInviteCode by rememberSaveable { mutableStateOf<String?>(null) }
     var activeJamInviteServer by rememberSaveable { mutableStateOf<String?>(null) }
+    // Held while the preview is fetched and shown, so a sign-in round trip
+    // returns to the invitation it started from rather than losing it.
+    var pendingCollabInvite by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingCollabInviteServer by rememberSaveable { mutableStateOf<String?>(null) }
+    var collabInvitePreview by remember { mutableStateOf<CollabInvitePreview?>(null) }
+    var collabInviteBusy by remember { mutableStateOf(false) }
+    var collabInviteError by remember { mutableStateOf<String?>(null) }
 
     // An invite is navigation and an action: reveal the Jam settings page now,
     // then let that page join once an account is available. Keeping the code
@@ -642,6 +665,36 @@ private fun FreeMusicApp(
         if (signedIn && activeJamInviteCode != null) {
             showSettings = true
             showListenTogether = true
+        }
+    }
+
+    // A shared-playlist invitation is navigation *and* a question: the preview
+    // says who invited you and to what, and joining is a decision only the
+    // recipient can make. Held rather than joined outright because a link that
+    // silently adds somebody to somebody else's list is a link that can be sent
+    // as a prank.
+    LaunchedEffect(incomingPlaylistInvite) {
+        val invite = incomingPlaylistInvite ?: return@LaunchedEffect
+        pendingCollabInvite = invite.token
+        pendingCollabInviteServer = invite.serverUrl
+        collabInviteError = null
+        collabInvitePreview = null
+        JamInviteLink.handledPlaylist()
+    }
+    // Fetched here rather than in the dialog so a sign-in round trip — which
+    // tears the dialog down — does not lose the invitation. The dialog is a
+    // question about a playlist; this is the answer.
+    LaunchedEffect(pendingCollabInvite, signedIn) {
+        val token = pendingCollabInvite ?: return@LaunchedEffect
+        if (!signedIn) return@LaunchedEffect
+        collabInviteBusy = true
+        collabInviteError = null
+        val preview = CollabPlaylists.previewInvite(token)
+        collabInviteBusy = false
+        if (preview == null) {
+            collabInviteError = CollabPlaylists.state.value.error
+        } else {
+            collabInvitePreview = preview
         }
     }
     val account by viewModel.account.collectAsStateWithLifecycle()
@@ -773,6 +826,13 @@ private fun FreeMusicApp(
     // actually failed, which is worth saying once on the page that makes them
     // rather than discovering one playlist at a time — see [PlaylistStore.writable].
     val playlistsWritable by PlaylistStore.writable.collectAsStateWithLifecycle()
+    // The shared playlists this device holds a credential for. Collected rather
+    // than asked for once, and refreshed on the library's pull-to-refresh, so a
+    // playlist somebody else created and shared arrives without a relaunch.
+    val collabState by CollabPlaylists.state.collectAsStateWithLifecycle()
+    LaunchedEffect(signedIn) {
+        if (signedIn) CollabPlaylists.refresh()
+    }
     var namingPlaylist by remember { mutableStateOf(false) }
     // Creating a playlist is the one thing on either of those surfaces that has
     // nothing to hand it a song, so the sheet opens empty and the page it lands
@@ -2730,6 +2790,37 @@ private fun FreeMusicApp(
                             },
                             contentPadding = listPadding,
                         )
+                    } else if (page != null && page.browseId.isCollabPlaylist()) {
+                        // A playlist on the server, which several people may be
+                        // editing right now. Dispatched before the device
+                        // branch because the two prefixes are checked by
+                        // different helpers and a shared page must never be
+                        // handed a device id.
+                        CollabPlaylistScreen(
+                            playlistId = CollabPlaylists.idOf(page.browseId).orEmpty(),
+                            currentSong = player.song,
+                            isPlaying = player.isPlaying,
+                            listState = detailListState,
+                            onSongClick = { songs, index ->
+                                playFrom(
+                                    songs,
+                                    index,
+                                    QueueSource(page.title, PlaybackSourceType.BROWSE, page.browseId),
+                                )
+                            },
+                            onSongLongPress = openSongMenu,
+                            onSongSwipe = onSongSwipe,
+                            onShuffle = { songs ->
+                                QueueShuffle.enableForNextQueue()
+                                playFrom(
+                                    songs,
+                                    songs.indices.random(),
+                                    QueueSource(page.title, PlaybackSourceType.BROWSE, page.browseId),
+                                )
+                            },
+                            onBack = { viewModel.closeDetail() },
+                            contentPadding = listPadding,
+                        )
                     } else if (page != null && page.browseId.isDevicePlaylist()) {
                         // One of the listener's own playlists. Only ever reached
                         // on the device it was built on: the tracks are local
@@ -3121,6 +3212,10 @@ private fun FreeMusicApp(
                             devicePlaylists = localPlaylists,
                             onCreatePlaylist = newLocalPlaylist,
                             playlistsWritable = playlistsWritable,
+                            collabSummaries = collabState.summaries,
+                            onCreateCollabPlaylist = { creatingCollabPlaylist = true },
+                            collabOffline = collabState.offline,
+                            collabDurable = collabState.durable,
                         )
                     }
                 }
@@ -4026,6 +4121,118 @@ private fun FreeMusicApp(
             )
         }
 
+        // ---- Join a shared playlist from a link ----
+        // Rendered from the held token rather than the intent, so a sign-in
+        // round trip — which destroys and rebuilds this composition — returns to
+        // the same invitation instead of losing it. The dialog only appears once
+        // the preview has been fetched, because the question it asks ("join
+        // *this*?") cannot be asked before knowing what *this* is.
+        val invitePreview = collabInvitePreview
+        if (invitePreview != null) {
+            JoinCollabPlaylistDialog(
+                preview = invitePreview,
+                busy = collabInviteBusy,
+                error = collabInviteError,
+                onDismiss = {
+                    collabInvitePreview = null
+                    collabInviteError = null
+                    pendingCollabInvite = null
+                    pendingCollabInviteServer = null
+                },
+                onJoin = {
+                    val token = pendingCollabInvite ?: return@JoinCollabPlaylistDialog
+                    scope.launch {
+                        collabInviteBusy = true
+                        collabInviteError = null
+                        val joined = CollabPlaylists.join(token)
+                        collabInviteBusy = false
+                        if (joined != null) {
+                            val name = invitePreview.name
+                            collabInvitePreview = null
+                            pendingCollabInvite = null
+                            pendingCollabInviteServer = null
+                            showQueueNotice(
+                                context.getString(R.string.shared_playlist_joined, name),
+                            )
+                            viewModel.openDetail(
+                                browseId = CollabPlaylists.pageIdFor(joined.id),
+                                title = name,
+                                type = BrowseType.PLAYLIST,
+                            )
+                        } else {
+                            collabInviteError = CollabPlaylists.state.value.error
+                                ?: context.getString(R.string.shared_playlist_invite_invalid)
+                        }
+                    }
+                },
+            )
+        } else if (pendingCollabInvite != null && collabInviteError != null) {
+            // The preview itself failed — an expired or revoked link — so there
+            // is nothing to describe and only the reason to say.
+            AlertDialog(
+                onDismissRequest = {
+                    pendingCollabInvite = null
+                    pendingCollabInviteServer = null
+                    collabInviteError = null
+                },
+                title = { Text(stringResource(R.string.shared_playlist_join_title)) },
+                text = { Text(collabInviteError.orEmpty()) },
+                confirmButton = {
+                    TextButton(onClick = {
+                        pendingCollabInvite = null
+                        pendingCollabInviteServer = null
+                        collabInviteError = null
+                    }) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                },
+            )
+        }
+
+        // ---- New shared playlist ----
+        // Its own dialog rather than a mode of the one above: this create can
+        // fail for reasons the user can act on — no server configured, the limit
+        // reached, no network — so it stays open on failure with the reason and
+        // stays open while the request is in flight, where the device dialog
+        // closes immediately because there is nothing that could go wrong.
+        if (creatingCollabPlaylist) {
+            if (!signedIn) {
+                // Not a dialog that signs you in: the account flow is a whole
+                // page with a web session behind it, and opening it from here
+                // would leave this sheet stacked underneath it.
+                showQueueNotice(context.getString(R.string.shared_playlist_sign_in_required))
+                creatingCollabPlaylist = false
+            } else {
+                NewCollabPlaylistDialog(
+                    onDismiss = { creatingCollabPlaylist = false },
+                    busy = collabCreating,
+                    error = collabCreateError,
+                    onCreate = { name ->
+                        scope.launch {
+                            collabCreating = true
+                            collabCreateError = null
+                            val created = CollabPlaylists.create(name)
+                            collabCreating = false
+                            if (created != null) {
+                                creatingCollabPlaylist = false
+                                showQueueNotice(
+                                    context.getString(R.string.shared_playlist_created, name.trim()),
+                                )
+                                viewModel.openDetail(
+                                    browseId = CollabPlaylists.pageIdFor(created.id),
+                                    title = name.trim(),
+                                    type = BrowseType.PLAYLIST,
+                                )
+                            } else {
+                                collabCreateError = CollabPlaylists.state.value.error
+                                    ?: context.getString(R.string.shared_playlist_invite_invalid)
+                            }
+                        }
+                    },
+                )
+            }
+        }
+
         // ---- Add to playlist / new playlist ----
         // One sheet for both, because they are one decision: the list of
         // playlists with a way to make another. `creatingPlaylist` opens it
@@ -4065,6 +4272,52 @@ private fun FreeMusicApp(
                     onCreateLocal = {
                         dismiss()
                         newLocalPlaylist()
+                    },
+                    collabPlaylists = collabState.summaries.filter {
+                        it.playlistType != CollabPlaylistType.BLEND
+                    },
+                    onPickCollab = { playlist ->
+                        target?.let { song ->
+                            scope.launch {
+                                val added = CollabPlaylists.addTracks(
+                                    playlist.id,
+                                    listOf(
+                                        CollabApi.NewTrack(
+                                            videoId = song.videoId,
+                                            title = song.title,
+                                            artist = song.artist,
+                                            album = song.albumName,
+                                            thumbnailUrl = song.thumbnailUrl,
+                                            durationMs = song.durationMillis()
+                                                .takeIf { it > 0L },
+                                        ),
+                                    ),
+                                )
+                                // A null means the write was refused, and the
+                                // repository has already recorded why — a spent
+                                // credential, a stale revision, a track the
+                                // playlist won't take. Preferring that over a
+                                // generic line is the difference between the
+                                // user knowing to reload and retrying blind.
+                                showQueueNotice(
+                                    when {
+                                        added == null -> CollabPlaylists.state.value.error
+                                            ?: context.getString(
+                                                R.string.shared_playlist_add_failed,
+                                                playlist.name,
+                                            )
+                                        added > 0 -> context.getString(
+                                            R.string.shared_playlist_added,
+                                            playlist.name,
+                                        )
+                                        else -> context.getString(
+                                            R.string.song_already_in_playlist,
+                                        )
+                                    },
+                                )
+                            }
+                        }
+                        dismiss()
                     },
                     onPick = { playlist ->
                         target?.let { song ->
@@ -4889,6 +5142,19 @@ private fun String?.isDeviceFolder(): Boolean =
  * draw, one of these is a release page with a cover, a title and a menu.
  */
 private fun String?.isDevicePlaylist(): Boolean = PlaylistStore.idOf(this) != null
+
+/**
+ * Whether [this] names a playlist on the playlist server.
+ *
+ * Separate from [isDevicePlaylist] rather than a widening of it because the two
+ * pages behave differently in the ways that matter: a shared playlist can be
+ * edited by somebody else between two reads, its edits can be refused, and it
+ * has members. The distinction also decides which page a `BrowseType.PLAYLIST`
+ * id is dispatched to, so the two helpers must never both answer true for one id
+ * — which is why [CollabPlaylists.BROWSE_PREFIX] shares no prefix with
+ * [PlaylistStore.BROWSE_PREFIX].
+ */
+private fun String?.isCollabPlaylist(): Boolean = CollabPlaylists.idOf(this) != null
 
 /**
  * Whether [videoId] is the track playing, and is known to be playing YouTube's

@@ -36,6 +36,7 @@ import com.ihimanshunayak.freemusic.data.model.LikeStatus
 import com.ihimanshunayak.freemusic.data.model.MoodGenre
 import com.ihimanshunayak.freemusic.data.model.MoodGenreSection
 import com.ihimanshunayak.freemusic.data.model.PlaylistPrivacy
+import com.ihimanshunayak.freemusic.data.collab.CollabPlaylists
 import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.model.SearchFilter
 import com.ihimanshunayak.freemusic.data.model.SearchResult
@@ -2378,6 +2379,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
          */
 
         fun browseTypeOf(browseId: String, fallback: BrowseType = BrowseType.OTHER): BrowseType = when {
+            // A shared playlist is a playlist in this sense: a long-lived list
+            // of tracks with an id, reached by a card, and handed to the queue
+            // whole. Which of the two screens draws it is a separate question,
+            // asked where the page is dispatched.
+            CollabPlaylists.idOf(browseId) != null -> BrowseType.PLAYLIST
             // A device playlist is a playlist — it is one of the listener's
             // own, which is the same kind of page as far as this question goes.
             // Asked before the `local:` catch-alls further down so a device
@@ -2485,7 +2491,20 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             var subscription: SubscriptionState? = null
             val remote = remoteLibrary(browseId)
             val localId = PlaylistStore.idOf(browseId)
+            val sharedId = CollabPlaylists.idOf(browseId)
             val state = when {
+                // Served from whatever the repository already holds. The list is
+                // fetched by the screen's own load, so an empty answer here is
+                // "not read yet", not "empty" — reported as an error only when
+                // the repository has nothing at all to show.
+                sharedId != null -> {
+                    val songs = CollabPlaylists.snapshot(sharedId)
+                        ?.tracks
+                        ?.map { it.toSong() }
+                        .orEmpty()
+                    if (songs.isEmpty()) UiState.Error(text(R.string.shared_playlist_loading))
+                    else UiState.Success(songs)
+                }
                 // Read, never fetched: the tracks are on this device and the
                 // store is already in memory. The page itself reads the store
                 // live, so this list is only what the page has in hand the
@@ -2607,7 +2626,21 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val context = getApplication<Application>()
             val remote = remoteLibrary(browseId)
             val localId = PlaylistStore.idOf(browseId)
+            val sharedId = CollabPlaylists.idOf(browseId)
             val state: UiState<List<Song>> = when {
+                // The tray this feeds is the one behind the page's own reload
+                // gesture, so a shared playlist's answer comes from the
+                // repository — which the screen keeps current — rather than
+                // from a fetch of its own. That fetch is the screen's, and it
+                // is the only one that knows when the user actually asked.
+                sharedId != null -> {
+                    val songs = CollabPlaylists.snapshot(sharedId)
+                        ?.tracks
+                        ?.map { it.toSong() }
+                        .orEmpty()
+                    if (songs.isEmpty()) UiState.Error(text(R.string.shared_playlist_loading))
+                    else UiState.Success(songs)
+                }
                 localId != null -> {
                     val songs = PlaylistStore.find(localId)?.asSongs().orEmpty()
                     if (songs.isEmpty()) UiState.Error(text(R.string.playlist_empty))
@@ -2761,7 +2794,20 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             val context = getApplication<Application>()
             val remote = remoteLibrary(browseId)
             val localId = PlaylistStore.idOf(browseId)
+            val sharedId = CollabPlaylists.idOf(browseId)
             val result = when {
+                // A shared playlist collects from the repository's held copy,
+                // not the network. A fetch here would be a second read of a
+                // list the screen is already keeping current, and the two
+                // could disagree — the long-press menu would queue a version
+                // the visible page had already moved past.
+                sharedId != null -> runCatching {
+                    CollabPlaylists.snapshot(sharedId)
+                        ?.tracks
+                        ?.map { it.toSong() }
+                        .orEmpty()
+                        .ifEmpty { error(text(R.string.shared_playlist_loading)) }
+                }
                 localId != null -> runCatching {
                     PlaylistStore.find(localId)?.asSongs().orEmpty()
                         .ifEmpty { error(text(R.string.playlist_empty)) }

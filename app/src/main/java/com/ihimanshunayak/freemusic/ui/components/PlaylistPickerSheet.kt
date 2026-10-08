@@ -57,6 +57,8 @@ import coil3.compose.AsyncImage
 import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.model.PlaylistPrivacy
 import com.ihimanshunayak.freemusic.data.model.ROW_ART_PX
+import com.ihimanshunayak.freemusic.data.collab.CollabPlaylistType
+import com.ihimanshunayak.freemusic.data.collab.CollabSummary
 import com.ihimanshunayak.freemusic.data.model.Song
 import com.ihimanshunayak.freemusic.data.model.UserPlaylist
 import com.ihimanshunayak.freemusic.data.model.artworkAt
@@ -105,6 +107,24 @@ fun PlaylistPickerSheet(
     localPlaylists: List<PlaylistStore.Playlist> = emptyList(),
     onPickLocal: (PlaylistStore.Playlist) -> Unit = {},
     onCreateLocal: () -> Unit = {},
+    /**
+     * Shared playlists this device can add to, between the device ones and the
+     * account's.
+     *
+     * A third group rather than folded into either, because all three make a
+     * different promise about where the track ends up: a device playlist is on
+     * this phone, a shared one is on a server that other people are editing right
+     * now, and an account playlist is on YouTube. The shared one is the only one
+     * where somebody else sees the addition, which is worth being its own row —
+     * and the only one that can be refused, since the server checks the
+     * credential on every write.
+     *
+     * Read-only Blends are already filtered out by the caller: a generated
+     * playlist cannot take a track, and offering it here would be a row that
+     * always fails.
+     */
+    collabPlaylists: List<CollabSummary> = emptyList(),
+    onPickCollab: (CollabSummary) -> Unit = {},
 ) {
     var creating by remember { mutableStateOf(startCreating) }
 
@@ -135,6 +155,18 @@ fun PlaylistPickerSheet(
                 onClick = onCreateLocal,
             )
             LocalPlaylistRows(playlists = localPlaylists, onPick = onPickLocal)
+            HorizontalDivider(
+                modifier = Modifier.padding(top = 6.dp),
+                thickness = 0.5.dp,
+                color = MaterialTheme.colorScheme.outline,
+            )
+        }
+
+        if (collabPlaylists.isNotEmpty()) {
+            SheetHeading(
+                stringResource(R.string.shared_playlists).uppercase(Locale.getDefault()),
+            )
+            CollabPlaylistRows(playlists = collabPlaylists, onPick = onPickCollab)
             HorizontalDivider(
                 modifier = Modifier.padding(top = 6.dp),
                 thickness = 0.5.dp,
@@ -285,6 +317,79 @@ private fun LocalPlaylistRows(
                             R.plurals.track_count_plural,
                             playlist.size,
                             playlist.size,
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * The shared-playlist rows in the picker.
+ *
+ * Rendered from [CollabSummary] rather than a snapshot, because the sheet has
+ * cards in hand, not track lists — the summary already carries the name, the
+ * count and the member count, which is everything a picker row draws.
+ *
+ * The member count is the second line where a device playlist shows only a track
+ * count, and that is the point of the group: these are lists other people are
+ * in, and the row should say so before the tap rather than after it.
+ */
+@Composable
+private fun CollabPlaylistRows(
+    playlists: List<CollabSummary>,
+    onPick: (CollabSummary) -> Unit,
+) {
+    LazyColumn(Modifier.heightIn(max = 240.dp)) {
+        items(playlists, key = { it.id }) { playlist ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onPick(playlist) }
+                    .padding(horizontal = 22.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(7.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        // The same glyph the playlist's own page leads with, so a
+                        // Blend is recognisable here without a second legend.
+                        imageVector = if (playlist.playlistType == CollabPlaylistType.BLEND) {
+                            FreeMusicIcons.Infinity
+                        } else {
+                            FreeMusicIcons.Queue
+                        },
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
+                Spacer(Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = playlist.name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    Text(
+                        text = stringResource(
+                            R.string.shared_playlist_songs,
+                            playlist.trackCount,
+                        ) + " · " + stringResource(
+                            R.string.shared_playlist_members,
+                            playlist.memberCount,
                         ),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,

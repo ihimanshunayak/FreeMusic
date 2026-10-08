@@ -46,6 +46,8 @@ import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.model.LibraryPage
 import com.ihimanshunayak.freemusic.data.model.ShelfItem
 import com.ihimanshunayak.freemusic.data.model.UiState
+import com.ihimanshunayak.freemusic.data.collab.CollabPlaylists
+import com.ihimanshunayak.freemusic.data.collab.CollabSummary
 import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
@@ -150,6 +152,25 @@ fun LibraryScreen(
      * having imagined making the playlist, so the shelf says so once instead.
      */
     playlistsWritable: Boolean = true,
+    /**
+     * The playlists this device holds a credential for on the playlist server.
+     *
+     * A separate shelf from [devicePlaylists], because the two make different
+     * promises: a device playlist is private to this install, and a shared one is
+     * a list other people are editing right now. Putting them in one row would
+     * make a card that somebody else can rename between two reads look
+     * indistinguishable from a card only this device can change.
+     *
+     * Reached only when signed in, unlike [devicePlaylists]: a credential exists
+     * because somebody created or joined a playlist through an account-backed
+     * flow, so an empty shelf for a guest would be an empty promise.
+     */
+    collabSummaries: List<CollabSummary> = emptyList(),
+    onCreateCollabPlaylist: () -> Unit = {},
+    /** True while the server is unreachable, so the shelf can say so. */
+    collabOffline: Boolean = false,
+    /** False when the server cannot persist across a restart. */
+    collabDurable: Boolean = true,
 ) {
     val pinnedPlaylists by AppSettings.pinnedPlaylists.collectAsStateWithLifecycle()
     val onDevice = stringResource(R.string.on_device)
@@ -227,6 +248,65 @@ fun LibraryScreen(
                         text = stringResource(R.string.device_playlists_unwritable),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(
+                            start = PAGE_GUTTER,
+                            end = PAGE_GUTTER,
+                            bottom = 12.dp,
+                        ),
+                    )
+                }
+            }
+            item(key = "shelf:shared") {
+                val sharedShelf = HomeShelf(
+                    title = stringResource(R.string.shared_playlists),
+                    items = collabSummaries.map { summary ->
+                        ShelfItem(
+                            title = summary.name,
+                            subtitle = pluralStringResource(
+                                R.plurals.track_count_plural,
+                                summary.trackCount,
+                                summary.trackCount,
+                            ),
+                            thumbnailUrl = summary.coverThumbs.firstOrNull() ?: summary.coverUrl,
+                            videoId = null,
+                            browseId = CollabPlaylists.pageIdFor(summary.id),
+                        )
+                    },
+                )
+                LibraryGridShelf(
+                    shelf = sharedShelf,
+                    onItemClick = onShelfItemClick,
+                    onItemLongPress = onShelfItemLongPress,
+                    onShowAll = { onShowAll(sharedShelf) },
+                    leadingCard = {
+                        NewShelfCard(
+                            icon = FreeMusicIcons.Plus,
+                            label = stringResource(R.string.shared_playlist_new),
+                            subtitle = stringResource(R.string.my_playlists),
+                            onClick = onCreateCollabPlaylist,
+                        )
+                    },
+                )
+                if (collabOffline) {
+                    Text(
+                        text = stringResource(R.string.shared_playlist_offline),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(
+                            start = PAGE_GUTTER,
+                            end = PAGE_GUTTER,
+                            bottom = 12.dp,
+                        ),
+                    )
+                } else if (!collabDurable) {
+                    // Worth one line: the server is running without a disk, so
+                    // everything on this shelf disappears when it restarts. A
+                    // listener who is not told would read that as data loss they
+                    // caused.
+                    Text(
+                        text = stringResource(R.string.shared_playlist_not_durable),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(
                             start = PAGE_GUTTER,
                             end = PAGE_GUTTER,

@@ -1429,6 +1429,37 @@ object ListenTogether {
         )
     }
 
+    /**
+     * This device's identity for the playlist service.
+     *
+     * Exposed from here rather than derived again in
+     * [com.ihimanshunayak.freemusic.data.collab.CollabPlaylists], because the
+     * derivation has to be identical: a playlist and a party that disagreed about
+     * who somebody is would show the same person twice in a member list, and the
+     * two would drift the moment either changed.
+     *
+     * Unlike [identity], this does not require a signed-in account. A playlist
+     * needs a stable pseudonym to attribute an edit to, not a real identity, and
+     * the server treats it as exactly that — a self-asserted label that is never
+     * an authorisation principal. Returning a device-scoped fallback means a
+     * listener who has not signed in can still use playlists, which they can:
+     * access is by token, and the token does not care.
+     */
+    fun selfUserIdForPlaylists(): String {
+        identity()?.let { return it.userId }
+        // No account: derive from the device id, so the pseudonym is stable for
+        // this installation and still reveals nothing. Hashed rather than used
+        // raw, to match the shape the signed-in path produces.
+        return sha256("device:${deviceId()}").take(32)
+    }
+
+    /** This device's display name for a playlist member row. */
+    fun selfDisplayNameForPlaylists(): String =
+        identity()?.name ?: nickname().takeIf { it.isNotBlank() }.orEmpty()
+
+    /** This device's avatar for a playlist member row, when it has one. */
+    fun selfAvatarForPlaylists(): String? = identity()?.avatar
+
     // ------------------------------------------------------- recent kicks --
 
     /**

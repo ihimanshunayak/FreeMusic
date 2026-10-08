@@ -107,6 +107,68 @@ class JamInviteLinkTest {
         assertEquals("https://custom.example.com", invite?.serverUrl)
     }
 
+    // ---- Shared playlist invitations ------------------------------------
+
+    @Test
+    fun `parses a custom scheme playlist invite`() {
+        val token = "0123456789abcdef0123456789abcdef"
+        val invite = JamInviteLink.parsePlaylistInvite("freemusic://playlist/invite/$token")
+        assertEquals(token, invite?.token)
+        assertNull(invite?.serverUrl)
+    }
+
+    @Test
+    fun `parses a custom scheme playlist invite carrying its server`() {
+        val token = "0123456789abcdef0123456789abcdef"
+        val invite = JamInviteLink.parsePlaylistInvite(
+            "freemusic://playlist/invite/$token?server=https%3A%2F%2Fmy-party.onrender.com",
+        )
+        assertEquals(token, invite?.token)
+        assertEquals("https://my-party.onrender.com", invite?.serverUrl)
+    }
+
+    @Test
+    fun `parses a web playlist invite`() {
+        val token = "0123456789abcdef0123456789abcdef"
+        val invite = JamInviteLink.parsePlaylistInvite("https://freemusic.example.com/playlist/invite/$token")
+        assertEquals(token, invite?.token)
+    }
+
+    @Test
+    fun `a playlist token is never normalized the way a party code is`() {
+        // The two spellings differ only in case, and both must survive: the
+        // server compares the token byte-for-byte against a hash, so uppercasing
+        // it here would produce a link that is refused with "invalid invitation"
+        // and no way to tell why.
+        val lower = JamInviteLink.parsePlaylistInvite("freemusic://playlist/invite/abcdefabcdefabcdef")
+        val upper = JamInviteLink.parsePlaylistInvite("freemusic://playlist/invite/ABCDEFABCDEFABCDEF")
+        assertEquals("abcdefabcdefabcdef", lower?.token)
+        assertEquals("ABCDEFABCDEFABCDEF", upper?.token)
+    }
+
+    @Test
+    fun `rejects playlist links that are not invitations`() {
+        // `freemusic://playlist/<id>` with no /invite/ segment is not a link
+        // this app mints, and treating it as one would send a playlist id to the
+        // redemption endpoint as if it were a capability.
+        assertNull(JamInviteLink.parsePlaylistInvite("freemusic://playlist/0123456789abcdef"))
+        assertNull(JamInviteLink.parsePlaylistInvite("https://freemusic.example.com/playlist/0123456789abcdef"))
+        assertNull(JamInviteLink.parsePlaylistInvite("freemusic://playlist/invite/short"))
+        assertNull(JamInviteLink.parsePlaylistInvite("freemusic://party/A1B2C3"))
+        assertNull(JamInviteLink.parsePlaylistInvite(null))
+    }
+
+    @Test
+    fun `a party link is not accepted as a playlist invite and the reverse`() {
+        // Each parser must refuse the other's shape. `consume` tries them in
+        // order, so a party code that happened to sit at a playlist path would
+        // be redeemed as a token and vice versa — both are opaque to the user,
+        // and the failure would surface as "invalid invitation" on a link that
+        // looked perfectly normal.
+        assertNull(JamInviteLink.parsePlaylistInvite("freemusic://party/A1B2C3"))
+        assertNull(JamInviteLink.parseInvite("freemusic://playlist/invite/0123456789abcdef"))
+    }
+
     @Test
     fun `switch party result sealed hierarchy holds expected properties`() {
         val success: com.ihimanshunayak.freemusic.data.listentogether.ListenTogether.SwitchPartyResult =

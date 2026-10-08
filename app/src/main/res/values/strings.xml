@@ -53,6 +53,57 @@
     <string name="playlist_empty">Nothing in this playlist yet. Hold a track anywhere in the app and choose this playlist to add it.</string>
     <string name="playlist_limit_reached">Playlist limit reached</string>
     <string name="device_playlists_unwritable">This device won\'t let Free Music save playlists right now, so changes will be lost when the app closes.</string>
+
+    <!--
+      Collaborative playlists and Blends. "Shared" rather than "collaborative"
+      throughout the UI: the feature is a playlist several people edit together,
+      and the word the brief uses is the one nobody says out loud.
+    -->
+    <string name="shared_playlists">Shared playlists</string>
+    <string name="shared_playlist_new">New shared playlist</string>
+    <string name="shared_playlist_name_hint">Playlist name</string>
+    <string name="shared_playlist_create">Create</string>
+    <string name="shared_playlist_empty">No shared playlists yet. Create one, then share the invite link with anyone you want to build it with.</string>
+    <string name="shared_playlist_members">%1$d members</string>
+    <string name="shared_playlist_songs">%1$d songs</string>
+    <string name="shared_playlist_invite">Invite people</string>
+    <string name="shared_playlist_invite_title">Invite link</string>
+    <string name="shared_playlist_invite_body">Anyone with this link can join and edit the playlist. It expires in seven days.</string>
+    <string name="shared_playlist_invite_copy">Copy link</string>
+    <string name="shared_playlist_invite_share">Share</string>
+    <string name="shared_playlist_invite_copied">Link copied</string>
+    <string name="shared_playlist_leave">Leave playlist</string>
+    <string name="shared_playlist_leave_confirmation">Leave "%1$s"? You can rejoin with a new invite link.</string>
+    <string name="shared_playlist_members_title">Members</string>
+    <string name="shared_playlist_remove_member">Remove</string>
+    <string name="shared_playlist_remove_member_confirmation">Remove %1$s from "%2$s"? Their edits stay; they just can\'t make more.</string>
+    <string name="shared_playlist_offline">You\'re offline. Shared playlists will load when you\'re back.</string>
+    <string name="shared_playlist_not_durable">The playlist server is not saving to disk right now, so shared playlists may be lost when it restarts.</string>
+    <string name="shared_playlist_added_by">Added by %1$s</string>
+    <string name="shared_playlist_owner">Owner</string>
+    <string name="shared_playlist_owned_by_you">You own this playlist</string>
+    <string name="shared_playlist_sign_in_required">Sign in to create a shared playlist.</string>
+    <string name="shared_playlist_add_to">Add to shared playlist</string>
+    <string name="shared_playlist_added">Added to "%1$s"</string>
+    <string name="shared_playlist_add_failed">Could not add to "%1$s"</string>
+    <string name="shared_playlist_created">Created "%1$s"</string>
+    <string name="shared_playlist_blend">Blend</string>
+    <string name="shared_playlist_blend_empty">A Blend builds itself from what everyone listens to. It refreshes daily and can\'t be edited by hand.</string>
+    <string name="shared_playlist_compatibility">Music compatibility</string>
+    <string name="shared_playlist_compatibility_value">%1$d%% match</string>
+    <string name="shared_playlist_code_join">Join with a link or code</string>
+    <string name="shared_playlist_code_hint">Paste an invite link</string>
+    <string name="shared_playlist_join">Join</string>
+    <string name="shared_playlist_invite_invalid">That invitation is no longer valid.</string>
+    <string name="shared_playlist_invite_expired">That invitation has expired. Ask for a new one.</string>
+    <string name="shared_playlist_invite_used">That invitation has already been used.</string>
+    <string name="shared_playlist_invite_full">That playlist is full.</string>
+    <string name="shared_playlist_join_title">Join playlist</string>
+    <string name="shared_playlist_join_body">%1$s invited you to "%2$s".</string>
+    <string name="shared_playlist_join_confirm">Join</string>
+    <string name="shared_playlist_joined">Joined "%1$s"</string>
+    <string name="shared_playlist_loading">Loading this playlist…</string>
+    <string name="loading">Loading…</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_out">Sign out</string>
     <string name="signed_in">Signed in</string>

@@ -12,6 +12,7 @@ import coil3.memory.MemoryCache
 import coil3.request.crossfade
 import com.ihimanshunayak.freemusic.auth.AuthStore
 import com.ihimanshunayak.freemusic.data.canvas.CanvasCache
+import com.ihimanshunayak.freemusic.data.collab.CollabCredentials
 import com.ihimanshunayak.freemusic.data.smb.SmbCoverFetcher
 import com.ihimanshunayak.freemusic.data.webdav.WebDavCoilAuth
 import com.ihimanshunayak.freemusic.data.canvas.SpotifyToken
@@ -107,6 +108,11 @@ class FreeMusicApplication : Application(), SingletonImageLoader.Factory {
         // session, so they are loaded eagerly with the rest of the stored state
         // rather than on first use.
         PlaylistStore.init(this)
+        // The credentials for shared playlists. Eager because every request to
+        // the playlist server needs one, and because these tokens are the only
+        // proof of access that will ever exist — the server keeps hashes and
+        // cannot reissue one, so they must be readable before anything asks.
+        CollabCredentials.init(this)
         // One cache directory can only be opened once per process, and
         // PlaybackService shares this one — so it's opened here, not there.
         AudioCache.init(this)

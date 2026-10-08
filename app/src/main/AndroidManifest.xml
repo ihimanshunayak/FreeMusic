@@ -219,6 +219,38 @@
             </intent-filter>
 
             <!--
+              Shared-playlist invitations, in both shapes the server mints.
+
+              A separate host and a separate path from the party links above and
+              below, because the payload is a different kind of thing: a party
+              code is short and public, and this token is a long secret. Sharing
+              a filter would mean one parser had to guess which it had, and the
+              guess would be wrong for every link whose token happened to be the
+              length of a code.
+
+              The path filter is what keeps `freemusic://playlist/<anything>`
+              from arriving on a screen that will try to redeem it.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="freemusic"
+                    android:host="playlist"
+                    android:pathPrefix="/invite/" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="freemusic.example.com"
+                    android:pathPrefix="/playlist/invite/" />
+            </intent-filter>
+
+            <!--
               Share → Free Music, from YT Music's own share sheet or from
               anywhere a link can be sent. The text is whatever the sending app
               wrote around the URL, so the URL is picked out of it rather than

@@ -313,8 +313,8 @@ The brief's twelve phases, with the ones that are constrained by §0 marked:
 | 1 — data model + persistence | **done** — `backend/playlist/` |
 | 2 — API + auth + authz | **done** — `backend/playlist_routes.go` |
 | 3 — invitation system | **done** (server) — deep link in phase 3b |
-| 3b — invite deep link on Android | next |
-| 4 — UI | after the server contract is fixed |
+| 3b — invite deep link on Android | **done** — `JamInviteLink`, two intent filters |
+| 4 — UI | **done** (client) — Library shelf, detail screen, picker group |
 | 5 — real-time sync | extends the existing `hub` |
 | 6 — offline / reconnection | revision handshake as the brief describes |
 | 7 — taste profiles | **on-device**, leveraging §10 |
@@ -381,4 +381,41 @@ is useful:
 - **The service is still single-instance-only**, for the same reason parties are:
   state is in the process, so a second instance would serve a different set of
   playlists. `render.yaml` already pins `numInstances: 1`.
+
+### 16.4 The Android client (phases 3b-4)
+
+`data/collab/` holds the wire models, the HTTP client, the credential store and
+the repository the UI talks to; `ui/screens/CollabPlaylistScreen.kt` is the
+detail screen, the members dialog, the invite sheet and the two creation
+dialogs. Four decisions worth recording:
+
+1. **A separate `HttpClient`, not `ListenTogether`'s.** The party client sets
+   `readTimeout(0)` because its socket must stay open across ten quiet minutes.
+   Sharing it would either hang every playlist request or drop the party socket,
+   so `CollabApi` owns its own, with `expectSuccess = false` — a 403 or a 409
+   has a body worth reading, and an exception would throw the reason away.
+2. **`explicitNulls = false` is load-bearing.** An absent field in a patch means
+   "leave it alone" and an empty string means "clear it"; encoding nulls would
+   collapse the two, so a rename would blank the description.
+3. **Credentials are a separate preferences file and are deliberately not in the
+   backup.** `Backup` exports `AppSettings` and `ListeningStats`, and
+   `CollabCredentials` writes to its own `freemusic_collab` store that
+   `AppSettings.exportPrefs` never sees. That is the right answer rather than an
+   oversight: a capability token is authority over a playlist, and a backup is a
+   file people mail to themselves and drop in Drive. Restoring one onto someone
+   else's phone would hand them the playlist. The cost is real and is why the
+   store writes with `commit()` — a device that loses its tokens loses its
+   playlists, and there is no recovery flow because the server stores only
+   hashes.
+4. **Browse ids are namespaced `shared:`.** `PlaylistStore` uses `local:mine:`
+   and `Downloads` uses its own prefix, so `CollabPlaylists.idOf` can never
+   answer true for two kinds of playlist at once and the navigation dispatcher
+   stays a single check.
+
+Two client-side spellings of the invitation had to be kept apart: the custom
+scheme carries the type in the authority
+(`freemusic://playlist/invite/<token>`) while the web form carries it in the path
+(`https://<host>/playlist/invite/<token>`). They need two expressions — one
+regex accepting both would also accept `freemusic://party/playlist/invite/...`
+as a playlist invitation.
 
