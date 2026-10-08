@@ -70,6 +70,7 @@ import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material.icons.rounded.VolumeOff
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Waves
+import androidx.compose.material.icons.rounded.Vibration
 import androidx.compose.material.icons.rounded.Wifi
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -140,6 +141,7 @@ import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.OutputPcmMode
 import com.ihimanshunayak.freemusic.playback.AudioOutputStatus
 import com.ihimanshunayak.freemusic.data.settings.AutomixPerformanceMode
+import com.ihimanshunayak.freemusic.data.settings.MusicHapticsMode
 import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.sources.DeviceCodecs
 import com.ihimanshunayak.freemusic.data.settings.AudioQuality
@@ -189,6 +191,7 @@ fun SettingsScreen(
     val smartFade by AppSettings.smartFadeEnabled.collectAsStateWithLifecycle()
     val automixPerformance by AppSettings.automixPerformanceMode.collectAsStateWithLifecycle()
     val skipSilence by AppSettings.skipSilence.collectAsStateWithLifecycle()
+    val musicHapticsMode by AppSettings.musicHapticsMode.collectAsStateWithLifecycle()
     val dolbyAtmos by AppSettings.dolbyAtmos.collectAsStateWithLifecycle()
     // A property of the hardware, so it is read once rather than remembered
     // against a key that can never change — see [DeviceCodecs.playsDolbyAtmos],
@@ -269,6 +272,7 @@ fun SettingsScreen(
     var picking by remember { mutableStateOf<QualityTarget?>(null) }
     var pickingDownloadQuality by remember { mutableStateOf(false) }
     var pickingAutomixPerformance by remember { mutableStateOf(false) }
+    var pickingMusicHaptics by remember { mutableStateOf(false) }
     // What the last export or import did, shown on the row that did it rather
     // than as a toast: a backup is the one action here whose outcome nobody can
     // check by looking at the app afterwards. Held per direction, or an import's
@@ -692,6 +696,16 @@ fun SettingsScreen(
                         )
                     },
                     onClick = { AppSettings.setSkipSilence(!skipSilence) },
+                )
+            }
+            val musicHapticsTitle = stringResource(R.string.music_haptics)
+            row(musicHapticsTitle, "haptics", "vibration", "bass") {
+                SettingsRow(
+                    icon = Icons.Rounded.Vibration,
+                    title = musicHapticsTitle,
+                    subtitle = stringResource(R.string.music_haptics_subtitle),
+                    value = musicHapticsMode.localizedLabel(),
+                    onClick = { pickingMusicHaptics = true },
                 )
             }
             val spatialAudioTitle = stringResource(R.string.spatial_audio)
@@ -1445,6 +1459,21 @@ fun SettingsScreen(
         }
     }
 
+    if (pickingMusicHaptics) {
+        ModalBottomSheet(
+            onDismissRequest = { pickingMusicHaptics = false },
+            containerColor = MaterialTheme.colorScheme.background,
+        ) {
+            MusicHapticsSheet(
+                selected = musicHapticsMode,
+                onSelect = { mode ->
+                    AppSettings.setMusicHapticsMode(mode)
+                    pickingMusicHaptics = false
+                },
+            )
+        }
+    }
+
     if (pickingAutomixPerformance) {
         ModalBottomSheet(
             onDismissRequest = { pickingAutomixPerformance = false },
@@ -1956,6 +1985,106 @@ private fun AutomixPerformanceSheet(
             }
         }
     }
+}
+
+/**
+ * Strength picker for the music vibration, plus the switch that turns it off.
+ *
+ * Modelled on [AutomixPerformanceSheet] — same rows, same checkmark — because
+ * this is the same kind of choice: a trade-off the listener makes once between
+ * how strong the effect is and what it costs them. Off is offered first and is
+ * the default, since the cost here is a motor running for the whole of every
+ * track.
+ */
+@Composable
+private fun MusicHapticsSheet(
+    selected: MusicHapticsMode,
+    onSelect: (MusicHapticsMode) -> Unit,
+) {
+    val haptics = LocalHapticFeedback.current
+    Column(Modifier.fillMaxWidth().padding(bottom = 24.dp)) {
+        Row(
+            modifier = Modifier.padding(start = 22.dp, end = 22.dp, bottom = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Vibration,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(22.dp),
+            )
+            Spacer(Modifier.width(14.dp))
+            Column {
+                Text(
+                    text = stringResource(R.string.music_haptics),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                    text = stringResource(R.string.music_haptics_warning),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outline)
+        MusicHapticsMode.entries.forEach { mode ->
+            val chosen = mode == selected
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        onSelect(mode)
+                    }
+                    .padding(horizontal = 22.dp, vertical = 14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = mode.localizedLabel(),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    mode.localizedSubtitle()?.let { subtitle ->
+                        Text(
+                            text = subtitle,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                if (chosen) {
+                    Spacer(Modifier.width(12.dp))
+                    Icon(
+                        Icons.Rounded.Check,
+                        contentDescription = stringResource(R.string.selected),
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MusicHapticsMode.localizedLabel(): String = stringResource(
+    when (this) {
+        MusicHapticsMode.OFF -> R.string.off
+        MusicHapticsMode.LOW -> R.string.low
+        MusicHapticsMode.MEDIUM -> R.string.medium
+        MusicHapticsMode.HIGH -> R.string.high
+    },
+)
+
+/** Null for [MusicHapticsMode.OFF], whose name is answer enough on its own. */
+@Composable
+private fun MusicHapticsMode.localizedSubtitle(): String? = when (this) {
+    MusicHapticsMode.OFF -> null
+    MusicHapticsMode.LOW -> stringResource(R.string.music_haptics_low_subtitle)
+    MusicHapticsMode.MEDIUM -> stringResource(R.string.music_haptics_medium_subtitle)
+    MusicHapticsMode.HIGH -> stringResource(R.string.music_haptics_high_subtitle)
 }
 
 /**

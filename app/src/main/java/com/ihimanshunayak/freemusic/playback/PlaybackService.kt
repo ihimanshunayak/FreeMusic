@@ -112,7 +112,9 @@ import com.ihimanshunayak.freemusic.data.scrobbling.ListenBrainzManager
 import com.ihimanshunayak.freemusic.data.scrobbling.ScrobbleManager
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.EqualizerMode
+import com.ihimanshunayak.freemusic.data.settings.MusicHapticsMode
 import com.ihimanshunayak.freemusic.data.settings.OutputPcmMode
+import com.ihimanshunayak.freemusic.playback.haptics.MusicHaptics
 import com.ihimanshunayak.freemusic.data.sources.SourceResolver
 import com.ihimanshunayak.freemusic.data.sources.SourceStream
 import com.ihimanshunayak.freemusic.data.sources.StreamFormat
@@ -593,6 +595,16 @@ class PlaybackService : MediaLibraryService() {
     /** Automix's DSP analyzer — see [com.ihimanshunayak.freemusic.playback.smart.TrackAnalyzer]. */
     private val trackAnalyzer = com.ihimanshunayak.freemusic.playback.smart.TrackAnalyzer(this, AudioCache)
 
+    /**
+     * Plays the current track's vibration — see
+     * [com.ihimanshunayak.freemusic.playback.haptics.MusicHaptics].
+     *
+     * Built lazily behind [musicHaptics] rather than here, because a service is
+     * constructed on every cold start and the motor probe is only worth doing
+     * for someone who has turned the feature on.
+     */
+    private var musicHapticsEngine: MusicHaptics? = null
+
     /** Shared with the crossfade's tail player, so both read the same disk cache. */
     private var mediaSourceFactory: DefaultMediaSourceFactory? = null
 
@@ -783,6 +795,11 @@ class PlaybackService : MediaLibraryService() {
                 consecutiveErrorSkips = 0
             }
             if (isPlaying) registerCurrentPlay()
+            // Haptics follow play/pause as well as track changes: a resume
+            // mid-track needs the pattern restarted at the right beat, and a
+            // pause must stop the motor rather than leave it running against a
+            // frozen playhead.
+            syncMusicHaptics()
             // Nothing to read ahead for while paused, and a pause is often
             // the last thing that happens before the process goes idle.
             if (isPlaying) prefetchAround(exoPlayer) else cancelPrefetch()
@@ -866,6 +883,10 @@ class PlaybackService : MediaLibraryService() {
                 if (exoPlayer.isPlaying) pushDiscordPresence(exoPlayer)
                 updateLyricSubtitle()
             }
+            // A seek moves the music out from under a pattern that was built
+            // for where the playhead used to be, so the schedule-ahead window
+            // has to be discarded and rebuilt rather than allowed to finish.
+            musicHapticsEngine?.onPositionDiscontinuity()
         }
 
         override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
@@ -1587,6 +1608,15 @@ class PlaybackService : MediaLibraryService() {
 
         reportProgress()
 
+        // Turning the feature on mid-session has to take effect on the track
+        // already playing, not on the next one — otherwise the switch reads as
+        // broken until the song happens to change.
+        scope.launch {
+            AppSettings.musicHapticsMode.collect { mode ->
+                if (mode != MusicHapticsMode.OFF) syncMusicHaptics()
+            }
+        }
+
         val controller = createCrossfadeController()
         crossfade = controller
         controller.start()
@@ -1634,6 +1664,66 @@ class PlaybackService : MediaLibraryService() {
             analysisRunningFor = { item -> trackAnalyzer.isAnalysing(item.mediaId) },
             versionSwapActive = { versionSwapJob?.isActive == true },
         )
+
+    // ── Music haptics ─────────────────────────────────────────────────────────
+
+    /**
+     * The vibration engine, built the first time something actually needs it.
+     *
+     * Nothing is allocated and no motor is probed while the feature is off,
+     * which matters because this service is constructed on every cold start and
+     * the vast majority of them are never going to vibrate.
+     */
+    private val musicHaptics: MusicHaptics?
+        get() {
+            musicHapticsEngine?.let { return it }
+            val engine = MusicHaptics(
+                context = this,
+                scope = scope,
+                // Read live rather than captured: the session player swaps at
+                // every crossfade handoff — see [adoptPlayer] — so a lambda
+                // closing over the instance present at construction would go on
+                // following a player that has been silent since the first blend.
+                positionMs = { player?.currentPosition },
+                isPlaying = { player?.isPlaying == true },
+                analysisFor = {
+                    player?.currentMediaItem?.mediaId?.let(trackAnalyzer::analysisFor)
+                },
+            )
+            musicHapticsEngine = engine
+            return engine
+        }
+
+    /**
+     * Points the vibration at whatever is playing now, and makes sure its
+     * analysis is on its way.
+     *
+     * Called on every track change and on every play, because both can be the
+     * moment a new track's vibration has to start — and because the analysis
+     * this depends on is *not* requested by anything else unless smart fade
+     * happens to be on. Automix only asks around its own imminent transitions;
+     * a listener who never crossfades would otherwise get no analysis for the
+     * track under their thumb at all, and therefore no vibration.
+     */
+    private fun syncMusicHaptics() {
+        if (AppSettings.musicHapticsMode.value == MusicHapticsMode.OFF) {
+            musicHapticsEngine?.clear()
+            return
+        }
+        val exoPlayer = player ?: return
+        val item = exoPlayer.currentMediaItem ?: return
+
+        // Independent of [AppSettings.smartFadeEnabled] on purpose: the two
+        // features want the same analysis for entirely different reasons, and
+        // gating one on the other would make haptics silently depend on a
+        // setting that has nothing to do with it.
+        item.localConfiguration?.uri?.let { uri ->
+            val durationMs = exoPlayer.duration.takeIf { it != C.TIME_UNSET } ?: 0L
+            trackAnalyzer.request(item.mediaId, uri, durationMs / 1000.0)
+        }
+
+        musicHaptics?.followCurrentTrack(item.mediaId)
+    }
 
     /** Favorite and Shuffle: the only actions shown on the phone notification. */
     private fun notificationButtons(): List<CommandButton> {
@@ -2696,6 +2786,10 @@ class PlaybackService : MediaLibraryService() {
         // corrects it — see [formatListener]'s onAudioInputFormatChanged.
         activeTrackIsDolbyAtmos = NerdStats.declaredFormat(mediaItem?.mediaId)?.isDolbyAtmos == true
         applySpatialAudioEnabled()
+
+        // Whatever just became current needs its own vibration, and its own
+        // analysis request to have one. See [syncMusicHaptics].
+        syncMusicHaptics()
 
         // A genuinely different track, so the gain is re-read for it. A
         // quality upgrade never reaches here — it returns early in
@@ -6137,6 +6231,8 @@ class PlaybackService : MediaLibraryService() {
         serviceLyrics = null
         cancelPrefetch()
         trackAnalyzer.release()
+        musicHapticsEngine?.release()
+        musicHapticsEngine = null
         loudnessRetryJob?.cancel()
         loudnessEnhancer?.release()
         loudnessEnhancer = null

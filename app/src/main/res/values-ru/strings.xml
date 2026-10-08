@@ -262,6 +262,12 @@
     <string name="skip_silence">Пропускать тишину</string>
     <string name="skip_silence_subtitle">Обрезает паузы длиннее секунды</string>
     <string name="skip_silence_float_subtitle">Недоступно при 32-битном выводе с плавающей точкой</string>
+    <string name="music_haptics">Музыкальная тактильность</string>
+    <string name="music_haptics_subtitle">Чувствуйте ритм вместе с музыкой</string>
+    <string name="music_haptics_warning">Вибрационный мотор работает всю песню, поэтому батарея расходуется заметно быстрее.</string>
+    <string name="music_haptics_low_subtitle">Самое лёгкое ощущение</string>
+    <string name="music_haptics_medium_subtitle">Сбалансированно</string>
+    <string name="music_haptics_high_subtitle">Самое сильное — лучше всего в кармане</string>
     <string name="equalizer">Эквалайзер</string>
     <string name="equalizer_subtitle">Системная панель вашего устройства</string>
     <string name="show_nerd_stats">Показывать техническую статистику</string>

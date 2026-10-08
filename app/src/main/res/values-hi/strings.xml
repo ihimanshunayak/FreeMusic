@@ -252,6 +252,12 @@
     <string name="skip_silence">खामोशी छोड़ें</string>
     <string name="skip_silence_subtitle">एक सेकंड से लंबे गैप को काटता है</string>
     <string name="skip_silence_float_subtitle">32-बिट फ़्लोट आउटपुट पर उपलब्ध नहीं</string>
+    <string name="music_haptics">संगीत हैप्टिक्स</string>
+    <string name="music_haptics_subtitle">संगीत बजते समय बीट महसूस करें</string>
+    <string name="music_haptics_warning">पूरे गाने के दौरान वाइब्रेशन मोटर चलती रहती है, इसलिए बैटरी काफ़ी ज़्यादा खर्च होती है।</string>
+    <string name="music_haptics_low_subtitle">सबसे हल्का स्पर्श</string>
+    <string name="music_haptics_medium_subtitle">संतुलित</string>
+    <string name="music_haptics_high_subtitle">सबसे तेज़ — जेब के लिए बेहतर</string>
     <string name="equalizer">इक्वलाइज़र</string>
     <string name="equalizer_subtitle">आपके डिवाइस का सिस्टम पैनल</string>
     <string name="show_nerd_stats">टेक्निकल आंकड़े दिखाएं</string>

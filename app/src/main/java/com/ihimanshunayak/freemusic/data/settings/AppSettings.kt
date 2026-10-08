@@ -145,6 +145,23 @@ enum class AutomixPerformanceMode(val inferenceThreads: Int) {
     PERFORMANCE(4),
 }
 
+/**
+ * How hard Music Haptics drives the motor, and whether it runs at all.
+ *
+ * [scale] multiplies every strike, so this is a usability control first: the
+ * motor runs for the whole of every track, which is a real and continuous
+ * battery cost, and [OFF] is the only switch that stops it. Below that the
+ * levels exist because the right strength is a property of the phone and of
+ * how the phone is being held, not of the music — a phone in a pocket wants
+ * more than one resting on a desk.
+ */
+enum class MusicHapticsMode(val scale: Double) {
+    OFF(0.0),
+    LOW(0.55),
+    MEDIUM(0.8),
+    HIGH(1.0),
+}
+
 /** Stable persisted ordering for each on-device music library. */
 enum class LocalMusicSort {
     TITLE_ASC,
@@ -292,6 +309,15 @@ object AppSettings {
     /** The CPU budget used by Beat This! and vocal analysis for Automix. */
     val automixPerformanceMode = MutableStateFlow(AutomixPerformanceMode.BALANCED)
     val skipSilence = MutableStateFlow(false)
+
+    /**
+     * Vibrate the phone in time with the music. Off by default, like
+     * [smartFadeEnabled], and for the same reason: both spend a background
+     * decode per track to do their job.
+     *
+     * See [com.ihimanshunayak.freemusic.playback.haptics.MusicHaptics].
+     */
+    val musicHapticsMode = MutableStateFlow(MusicHapticsMode.OFF)
 
     /** Requested PCM representation at the Android AudioTrack boundary. */
     val outputPcmMode = MutableStateFlow(OutputPcmMode.PCM_16)
@@ -840,6 +866,11 @@ object AppSettings {
             )
         }.getOrDefault(AutomixPerformanceMode.BALANCED)
         skipSilence.value = prefs.getBoolean(KEY_SKIP_SILENCE, false)
+        musicHapticsMode.value = runCatching {
+            MusicHapticsMode.valueOf(
+                prefs.getString(KEY_MUSIC_HAPTICS_MODE, null) ?: MusicHapticsMode.OFF.name,
+            )
+        }.getOrDefault(MusicHapticsMode.OFF)
         outputPcmMode.value = runCatching {
             OutputPcmMode.valueOf(
                 prefs.getString(KEY_OUTPUT_PCM_MODE, OutputPcmMode.PCM_16.name)
@@ -1135,6 +1166,11 @@ object AppSettings {
     fun setSkipSilence(value: Boolean) {
         skipSilence.value = value
         prefs.edit().putBoolean(KEY_SKIP_SILENCE, value).apply()
+    }
+
+    fun setMusicHapticsMode(value: MusicHapticsMode) {
+        musicHapticsMode.value = value
+        prefs.edit().putString(KEY_MUSIC_HAPTICS_MODE, value.name).apply()
     }
 
     fun setDolbyAtmos(value: Boolean) {
@@ -1962,6 +1998,7 @@ object AppSettings {
     private const val KEY_SMART_FADE = "smart_fade_enabled"
     private const val KEY_AUTOMIX_PERFORMANCE_MODE = "automix_performance_mode"
     private const val KEY_SKIP_SILENCE = "skip_silence"
+    private const val KEY_MUSIC_HAPTICS_MODE = "music_haptics_mode"
     private const val KEY_OUTPUT_PCM_MODE = "output_pcm_mode"
     private const val KEY_PREFER_USB_DAC = "prefer_usb_dac"
     private const val KEY_LOUDNESS_NORMALIZATION = "loudness_normalization"

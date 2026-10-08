@@ -253,6 +253,12 @@
     <string name="skip_silence">Ignorer les silences</string>
     <string name="skip_silence_subtitle">Coupe les silences de plus d\'une seconde</string>
     <string name="skip_silence_float_subtitle">Indisponible avec la sortie flottante 32 bits</string>
+    <string name="music_haptics">Haptique musicale</string>
+    <string name="music_haptics_subtitle">Ressentez le rythme pendant la musique</string>
+    <string name="music_haptics_warning">Fait tourner le moteur de vibration pendant tout le morceau, ce qui consomme nettement plus de batterie.</string>
+    <string name="music_haptics_low_subtitle">Retour le plus léger</string>
+    <string name="music_haptics_medium_subtitle">Équilibré</string>
+    <string name="music_haptics_high_subtitle">Le plus fort — idéal en poche</string>
     <string name="equalizer">Égaliseur</string>
     <string name="equalizer_subtitle">Le panneau système de votre appareil</string>
     <string name="show_nerd_stats">Afficher les statistiques techniques</string>

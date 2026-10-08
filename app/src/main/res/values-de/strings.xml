@@ -252,6 +252,12 @@
     <string name="skip_silence">Stille überspringen</string>
     <string name="skip_silence_subtitle">Kürzt Pausen länger als eine Sekunde</string>
     <string name="skip_silence_float_subtitle">Bei 32-Bit-Float-Ausgabe nicht verfügbar</string>
+    <string name="music_haptics">Musik-Haptik</string>
+    <string name="music_haptics_subtitle">Den Beat beim Musikhören spüren</string>
+    <string name="music_haptics_warning">Lässt den Vibrationsmotor über den ganzen Titel laufen und verbraucht dadurch deutlich mehr Akku.</string>
+    <string name="music_haptics_low_subtitle">Sanfteste Rückmeldung</string>
+    <string name="music_haptics_medium_subtitle">Ausgewogen</string>
+    <string name="music_haptics_high_subtitle">Am stärksten – ideal in der Tasche</string>
     <string name="equalizer">Equalizer</string>
     <string name="equalizer_subtitle">Das Systempanel deines Geräts</string>
     <string name="show_nerd_stats">Technische Details anzeigen</string>

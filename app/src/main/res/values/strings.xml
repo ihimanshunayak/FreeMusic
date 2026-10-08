@@ -327,6 +327,12 @@
     <string name="skip_silence">Skip silence</string>
     <string name="skip_silence_subtitle">Trim gaps longer than a second</string>
     <string name="skip_silence_float_subtitle">Unavailable on 32-bit float output</string>
+    <string name="music_haptics">Music haptics</string>
+    <string name="music_haptics_subtitle">Feel the beat as the music plays</string>
+    <string name="music_haptics_warning">Runs the vibration motor for the whole track, so it uses noticeably more battery.</string>
+    <string name="music_haptics_low_subtitle">Lightest touch</string>
+    <string name="music_haptics_medium_subtitle">Balanced</string>
+    <string name="music_haptics_high_subtitle">Strongest — best in a pocket</string>
     <string name="prefer_music_only">Prefer music-only version</string>
     <string name="prefer_music_only_subtitle">For music videos, show the video details while finding and loading the catalogue audio version</string>
     <string name="smart_version_alignment">Smart audio alignment</string>

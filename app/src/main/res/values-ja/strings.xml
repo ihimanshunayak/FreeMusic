@@ -247,6 +247,12 @@
     <string name="skip_silence">無音をスキップ</string>
     <string name="skip_silence_subtitle">1秒より長い無音部分をカットします</string>
     <string name="skip_silence_float_subtitle">32ビット浮動小数点出力では使用できません</string>
+    <string name="music_haptics">音楽ハプティクス</string>
+    <string name="music_haptics_subtitle">音楽に合わせてビートを感じる</string>
+    <string name="music_haptics_warning">曲の間ずっと振動モーターが動くため、バッテリーの消費が明らかに増えます。</string>
+    <string name="music_haptics_low_subtitle">最も軽い触感</string>
+    <string name="music_haptics_medium_subtitle">バランス</string>
+    <string name="music_haptics_high_subtitle">最も強い — ポケットに最適</string>
     <string name="equalizer">イコライザー</string>
     <string name="equalizer_subtitle">デバイスのシステムパネル</string>
     <string name="show_nerd_stats">技術情報を表示</string>

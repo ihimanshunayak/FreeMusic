@@ -253,6 +253,12 @@
     <string name="skip_silence">דילוג על שקט</string>
     <string name="skip_silence_subtitle">קיצוץ הפסקות ארוכות משנייה</string>
     <string name="skip_silence_float_subtitle">לא זמין בפלט float של 32 סיביות</string>
+    <string name="music_haptics">משוב מגע מוזיקלי</string>
+    <string name="music_haptics_subtitle">להרגיש את הקצב עם המוזיקה</string>
+    <string name="music_haptics_warning">מפעיל את מנוע הרטט לאורך כל השיר, ולכן צורך הרבה יותר סוללה.</string>
+    <string name="music_haptics_low_subtitle">המגע הקל ביותר</string>
+    <string name="music_haptics_medium_subtitle">מאוזן</string>
+    <string name="music_haptics_high_subtitle">החזק ביותר — מתאים לכיס</string>
     <string name="equalizer">אקולייזר</string>
     <string name="equalizer_subtitle">פאנל המערכת של המכשיר שלך</string>
     <string name="show_nerd_stats">הצגת נתונים לחנונים</string>

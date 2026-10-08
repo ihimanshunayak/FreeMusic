@@ -250,6 +250,12 @@
     <string name="skip_silence">Pomiń ciszę</string>
     <string name="skip_silence_subtitle">Przycinanie przerw dłuższych niż sekunda</string>
     <string name="skip_silence_float_subtitle">Niedostępne przy 32-bitowym wyjściu float</string>
+    <string name="music_haptics">Haptyka muzyczna</string>
+    <string name="music_haptics_subtitle">Poczuj rytm razem z muzyką</string>
+    <string name="music_haptics_warning">Uruchamia silnik wibracji przez cały utwór, więc zużywa znacznie więcej baterii.</string>
+    <string name="music_haptics_low_subtitle">Najlżejsze odczucie</string>
+    <string name="music_haptics_medium_subtitle">Zrównoważone</string>
+    <string name="music_haptics_high_subtitle">Najmocniejsze — najlepsze w kieszeni</string>
     <string name="equalizer">Equalizer</string>
     <string name="equalizer_subtitle">Panel systemowy Twojego urządzenia</string>
     <string name="show_nerd_stats">Pokaż statystyki dla nerdów</string>

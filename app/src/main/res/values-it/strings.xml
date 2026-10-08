@@ -292,6 +292,12 @@
     <string name="skip_silence">Salta i silenzi</string>
     <string name="skip_silence_subtitle">Taglia le pause più lunghe di un secondo</string>
     <string name="skip_silence_float_subtitle">Non disponibile con uscita float a 32 bit</string>
+    <string name="music_haptics">Aptica musicale</string>
+    <string name="music_haptics_subtitle">Senti il ritmo mentre la musica suona</string>
+    <string name="music_haptics_warning">Fa funzionare il motore di vibrazione per tutto il brano, quindi consuma molta più batteria.</string>
+    <string name="music_haptics_low_subtitle">Tocco più leggero</string>
+    <string name="music_haptics_medium_subtitle">Bilanciato</string>
+    <string name="music_haptics_high_subtitle">Più intenso: ideale in tasca</string>
     <string name="equalizer">Equalizzatore</string>
     <string name="equalizer_subtitle">Il pannello di sistema del tuo dispositivo</string>
     <string name="show_nerd_stats">Mostra statistiche per nerd</string>

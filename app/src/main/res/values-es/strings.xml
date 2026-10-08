@@ -262,6 +262,12 @@
     <string name="skip_silence">Omitir silencios</string>
     <string name="skip_silence_subtitle">Recorta pausas de más de un segundo</string>
     <string name="skip_silence_float_subtitle">No disponible con salida float de 32 bits</string>
+    <string name="music_haptics">Háptica musical</string>
+    <string name="music_haptics_subtitle">Siente el ritmo mientras suena la música</string>
+    <string name="music_haptics_warning">Mantiene activo el motor de vibración durante toda la canción, por lo que consume bastante más batería.</string>
+    <string name="music_haptics_low_subtitle">Toque más suave</string>
+    <string name="music_haptics_medium_subtitle">Equilibrado</string>
+    <string name="music_haptics_high_subtitle">Más intenso: ideal en el bolsillo</string>
     <string name="equalizer">Ecualizador</string>
     <string name="equalizer_subtitle">El panel de audio del sistema</string>
     <string name="show_nerd_stats">Mostrar datos técnicos</string>

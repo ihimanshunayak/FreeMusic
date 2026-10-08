@@ -247,6 +247,12 @@
     <string name="skip_silence">Lewati keheningan</string>
     <string name="skip_silence_subtitle">Memotong jeda lebih dari satu detik</string>
     <string name="skip_silence_float_subtitle">Tidak tersedia pada output float 32-bit</string>
+    <string name="music_haptics">Haptik musik</string>
+    <string name="music_haptics_subtitle">Rasakan ketukan saat musik diputar</string>
+    <string name="music_haptics_warning">Menjalankan motor getar sepanjang lagu, jadi baterai jauh lebih cepat terkuras.</string>
+    <string name="music_haptics_low_subtitle">Sentuhan paling ringan</string>
+    <string name="music_haptics_medium_subtitle">Seimbang</string>
+    <string name="music_haptics_high_subtitle">Paling kuat — cocok di kantong</string>
     <string name="equalizer">Equalizer</string>
     <string name="equalizer_subtitle">Panel sistem perangkat Anda</string>
     <string name="show_nerd_stats">Tampilkan statistik teknis</string>

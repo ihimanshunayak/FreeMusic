@@ -278,6 +278,12 @@
     <string name="skip_silence">Bỏ qua đoạn im lặng</string>
     <string name="skip_silence_subtitle">Cắt bớt các khoảng lặng dài hơn 1 giây</string>
     <string name="skip_silence_float_subtitle">Không khả dụng với đầu ra float 32-bit</string>
+    <string name="music_haptics">Rung theo nhạc</string>
+    <string name="music_haptics_subtitle">Cảm nhận nhịp điệu cùng với nhạc</string>
+    <string name="music_haptics_warning">Chạy động cơ rung suốt bài hát nên tốn pin nhiều hơn rõ rệt.</string>
+    <string name="music_haptics_low_subtitle">Cảm giác nhẹ nhất</string>
+    <string name="music_haptics_medium_subtitle">Cân bằng</string>
+    <string name="music_haptics_high_subtitle">Mạnh nhất — hợp khi để trong túi</string>
     <string name="equalizer">Bộ chỉnh âm</string>
     <string name="equalizer_subtitle">Bảng điều khiển hệ thống của thiết bị</string>
     <string name="show_nerd_stats">Thống kê chi tiết</string>

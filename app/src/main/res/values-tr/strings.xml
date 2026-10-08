@@ -274,6 +274,12 @@
     <string name="skip_silence">Sessizliği atla</string>
     <string name="skip_silence_subtitle">Bir saniyeden uzun boşlukları kırp</string>
     <string name="skip_silence_float_subtitle">32 bit float çıkışta kullanılamaz</string>
+    <string name="music_haptics">Müzik dokunsallığı</string>
+    <string name="music_haptics_subtitle">Müzik çalarken ritmi hissedin</string>
+    <string name="music_haptics_warning">Şarkı boyunca titreşim motorunu çalıştırır, bu yüzden pil belirgin şekilde daha hızlı tükenir.</string>
+    <string name="music_haptics_low_subtitle">En hafif dokunuş</string>
+    <string name="music_haptics_medium_subtitle">Dengeli</string>
+    <string name="music_haptics_high_subtitle">En güçlü — cepte en iyisi</string>
     <string name="equalizer">Ekolayzır</string>
     <string name="equalizer_subtitle">Cihazınızın sistem paneli</string>
     <string name="show_nerd_stats">Meraklılar için istatistikleri göster</string>
