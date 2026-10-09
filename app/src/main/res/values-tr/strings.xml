@@ -293,6 +293,8 @@
     <string name="liquid_glass_subtitle">Yüzen gezinme çubuğunda gerçek kırılan cam. Yalnızca Android 12+; daha fazla GPU kullanır.</string>
     <string name="liquid_glass_unavailable">Android 12 veya daha yenisini gerektirir</string>
     <string name="full_screen_cover_art">Tam ekran kapak resmi</string>
+    <string name="player_carousel">Kapağı kaydır</string>
+    <string name="player_carousel_subtitle">Bir plak destesi gibi sonraki ve önceki parçayı getirmek için kapağı yana sürükleyin. Kapalı bırakmak kapağı bugünkü hâliyle korur.</string>
     <string name="animated_cover_art">Hareketli kapak resmi</string>
     <string name="synced_lyrics">Senkronize sözler</string>
     <string name="synced_lyrics_subtitle">Söylenirken oynatıcıdaki kelimeleri aydınlatır</string>

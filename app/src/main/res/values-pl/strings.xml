@@ -266,6 +266,8 @@
     <string name="reduce_dynamic_blur">Zmniejsz rozmycie dynamiczne</string>
     <string name="reduce_dynamic_blur_subtitle">Zastępuje matowe szkło jednolitymi wypełnieniami w całej aplikacji</string>
     <string name="full_screen_cover_art">Pełnoekranowa okładka</string>
+    <string name="player_carousel">Przesuwanie okładki</string>
+    <string name="player_carousel_subtitle">Przeciągnij okładkę w bok, aby przywołać następny i poprzedni utwór, jak w stosie płyt. Wyłączone pozostawia okładkę taką, jaka jest dziś.</string>
     <string name="animated_cover_art">Animowana okładka</string>
     <string name="synced_lyrics">Zsynchronizowany tekst</string>
     <string name="synced_lyrics_subtitle">Podświetla słowa na odtwarzaczu w miarę ich śpiewania</string>

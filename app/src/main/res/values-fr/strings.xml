@@ -269,6 +269,8 @@
     <string name="reduce_dynamic_blur">Réduire le flou dynamique</string>
     <string name="reduce_dynamic_blur_subtitle">Remplace le verre dépoli par des couleurs unies dans toute l\'application</string>
     <string name="full_screen_cover_art">Pochette plein écran</string>
+    <string name="player_carousel">Balayer la pochette</string>
+    <string name="player_carousel_subtitle">Faites glisser la pochette sur les côtés pour amener la piste suivante et la précédente, comme un paquet de disques. Désactivé, la pochette reste telle quelle.</string>
     <string name="animated_cover_art">Pochette animée</string>
     <string name="synced_lyrics">Paroles synchronisées</string>
     <string name="synced_lyrics_subtitle">Met en surbrillance les mots au fil de la chanson</string>

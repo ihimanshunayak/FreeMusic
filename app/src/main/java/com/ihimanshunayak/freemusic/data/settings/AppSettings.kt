@@ -523,6 +523,23 @@ object AppSettings {
     val prioritizeSpotifyCanvas = MutableStateFlow(false)
 
     /**
+     * Unlocks the redesigned player: the sleeve becomes a carousel the next and
+     * previous tracks can be swiped in from, rather than a single card that only
+     * leans at a sideways drag.
+     *
+     * Off by default, and deliberately so. Everything behind this switch is a
+     * different way of drawing and driving the player — new artwork cards, new
+     * gesture arbitration, new timing — and a player is where someone is most
+     * likely to be annoyed by a change they did not ask for. Leaving it off
+     * means the app as shipped is exactly the app that was reviewed, and the
+     * new surface is opted into rather than inflicted.
+     *
+     * The gate is one switch rather than a scattering of flags so the two
+     * players can be reasoned about as two, not as a matrix.
+     */
+    val playerCarouselEnabled = MutableStateFlow(false)
+
+    /**
      * Blows the player's cover art out to a full-bleed banner running off the
      * top of the screen, rather than sitting it in a square card.
      *
@@ -925,6 +942,7 @@ object AppSettings {
         canvasOverCellular.value = prefs.getBoolean(KEY_CANVAS_OVER_CELLULAR, false)
         spotifyCanvasAutoHide.value = prefs.getBoolean(KEY_SPOTIFY_CANVAS_AUTO_HIDE, true)
         prioritizeSpotifyCanvas.value = prefs.getBoolean(KEY_PRIORITIZE_SPOTIFY_CANVAS, false)
+        playerCarouselEnabled.value = prefs.getBoolean(KEY_PLAYER_CAROUSEL, false)
         fullBleedArtwork.value = prefs.getBoolean(KEY_FULL_BLEED_ARTWORK, true)
         legacyMeshGradient.value = prefs.getBoolean(KEY_LEGACY_MESH_GRADIENT, false)
         lastPlayerScreen.value = runCatching {
@@ -1476,6 +1494,11 @@ object AppSettings {
     fun setPrioritizeSpotifyCanvas(value: Boolean) {
         prioritizeSpotifyCanvas.value = value
         prefs.edit().putBoolean(KEY_PRIORITIZE_SPOTIFY_CANVAS, value).apply()
+    }
+
+    fun setPlayerCarouselEnabled(value: Boolean) {
+        playerCarouselEnabled.value = value
+        prefs.edit().putBoolean(KEY_PLAYER_CAROUSEL, value).apply()
     }
 
     fun setFullBleedArtwork(value: Boolean) {
@@ -2037,6 +2060,7 @@ object AppSettings {
     private const val KEY_CANVAS_OVER_CELLULAR = "canvas_over_cellular"
     private const val KEY_SPOTIFY_CANVAS_AUTO_HIDE = "spotify_canvas_auto_hide"
     private const val KEY_PRIORITIZE_SPOTIFY_CANVAS = "prioritize_spotify_canvas"
+    private const val KEY_PLAYER_CAROUSEL = "player_carousel"
     private const val KEY_FULL_BLEED_ARTWORK = "full_bleed_artwork"
     private const val KEY_LEGACY_MESH_GRADIENT = "legacy_mesh_gradient"
     private const val KEY_LAST_PLAYER_SCREEN = "last_player_screen"

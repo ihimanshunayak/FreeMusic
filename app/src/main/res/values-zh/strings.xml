@@ -263,6 +263,8 @@
     <string name="reduce_dynamic_blur">减少动态模糊</string>
     <string name="reduce_dynamic_blur_subtitle">在整个应用中用纯色填充替代磨砂玻璃效果</string>
     <string name="full_screen_cover_art">全屏封面</string>
+    <string name="player_carousel">滑动封面</string>
+    <string name="player_carousel_subtitle">横向拖动封面即可调出下一首和上一首，就像一叠唱片。关闭后封面保持现状。</string>
     <string name="animated_cover_art">动态封面</string>
     <string name="synced_lyrics">同步歌词</string>
     <string name="synced_lyrics_subtitle">随着演唱在播放器上高亮显示歌词</string>

@@ -263,6 +263,8 @@
     <string name="reduce_dynamic_blur">Kurangi blur dinamis</string>
     <string name="reduce_dynamic_blur_subtitle">Mengganti kaca buram dengan warna solid di seluruh aplikasi</string>
     <string name="full_screen_cover_art">Sampul layar penuh</string>
+    <string name="player_carousel">Geser sampulnya</string>
+    <string name="player_carousel_subtitle">Tarik sampul ke samping untuk memunculkan trek berikutnya dan sebelumnya, seperti tumpukan piringan hitam. Nonaktif membuat sampul tetap seperti sekarang.</string>
     <string name="animated_cover_art">Sampul animasi</string>
     <string name="synced_lyrics">Lirik tersinkron</string>
     <string name="synced_lyrics_subtitle">Menyorot kata-kata di pemutar saat dinyanyikan</string>

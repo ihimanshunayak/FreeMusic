@@ -71,6 +71,7 @@ import androidx.compose.material.icons.rounded.VolumeOff
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Waves
 import androidx.compose.material.icons.rounded.Vibration
+import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material.icons.rounded.Wifi
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -207,6 +208,7 @@ fun SettingsScreen(
     val animatedCanvas by AppSettings.animatedCanvas.collectAsStateWithLifecycle()
     val canvasOverCellular by AppSettings.canvasOverCellular.collectAsStateWithLifecycle()
     val fullBleedArtwork by AppSettings.fullBleedArtwork.collectAsStateWithLifecycle()
+    val playerCarouselEnabled by AppSettings.playerCarouselEnabled.collectAsStateWithLifecycle()
     val legacyMeshGradient by AppSettings.legacyMeshGradient.collectAsStateWithLifecycle()
     val syncedLyrics by AppSettings.syncedLyrics.collectAsStateWithLifecycle()
     val lyricsSources by AppSettings.lyricsSources.collectAsStateWithLifecycle()
@@ -854,6 +856,25 @@ fun SettingsScreen(
                         onClick = { AppSettings.setFullBleedArtwork(!fullBleedArtwork) },
                     )
                 }
+            }
+            val playerCarouselTitle = stringResource(R.string.player_carousel)
+            row(playerCarouselTitle, "artwork", "player", "swipe") {
+                SettingsRow(
+                    icon = Icons.Rounded.ViewCarousel,
+                    title = playerCarouselTitle,
+                    subtitle = stringResource(R.string.player_carousel_subtitle),
+                    trailing = {
+                        Switch(
+                            checked = playerCarouselEnabled,
+                            onCheckedChange = AppSettings::setPlayerCarouselEnabled,
+                            colors = SwitchDefaults.colors(
+                                checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                checkedBorderColor = MaterialTheme.colorScheme.primary,
+                            ),
+                        )
+                    },
+                    onClick = { AppSettings.setPlayerCarouselEnabled(!playerCarouselEnabled) },
+                )
             }
             val legacyMeshGradientTitle = stringResource(R.string.legacy_mesh_gradient)
             row(legacyMeshGradientTitle, "background", "player") {

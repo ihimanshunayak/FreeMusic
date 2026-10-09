@@ -10,6 +10,7 @@ import com.ihimanshunayak.freemusic.R
 
 import android.graphics.Bitmap
 import android.os.Build
+import android.os.SystemClock
 import android.view.View
 import android.window.OnBackInvokedCallback
 import android.window.OnBackInvokedDispatcher
@@ -46,6 +47,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clipToBounds
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import androidx.compose.foundation.layout.Spacer
@@ -86,6 +88,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -910,6 +913,38 @@ fun NowPlayingScreen(
         ) { value, _ -> queueSlide.floatValue = value }
     }
 
+    // ---- The deck ----
+    // Swiping the sleeve to bring the covers either side of it in. Off by
+    // default behind its own switch in Settings, so with it off the player is
+    // the player it has always been — see [PlayerSwipeCarousel].
+    val carouselEnabled by AppSettings.playerCarouselEnabled.collectAsStateWithLifecycle()
+    // A phone idiom, exactly as the full-bleed banner is: the deck wants the
+    // sleeve to be the widest thing on the player so that the covers parked
+    // either side of it have an edge to show past. Landscape spends that edge
+    // on a column of sliders and a lyric list, and a tablet's player is a
+    // column with a backdrop of its own around it.
+    val carouselActive = carouselEnabled &&
+        playerFillsWindow(windowWidth) &&
+        !landscapePlayerAvailable(windowWidth, windowHeight)
+    // How far the deck is under a finger, in pixels. Kept apart from
+    // [swipeSettle] because the two move differently: this one tracks the
+    // finger exactly, and the spring behind [swipeSettle] takes over on
+    // release, so the deck travels at full reach while a finger is on it and
+    // only then behaves like something thrown.
+    val carouselDrag = remember { mutableFloatStateOf(0f) }
+    // The sleeve's drawn side in pixels, and read when a finger lifts rather
+    // than composed from down here: a release is measured as a fraction of the
+    // card, and the only place the card's real size is known is the layout
+    // below, which is inside the [BoxWithConstraints] this function's gesture
+    // cannot see into.
+    //
+    // Filled from that layout through the same guarded [SideEffect] the control
+    // spread uses — this is a measurement feeding the gesture it was measured
+    // for, and the gesture has a whole finger's travel to catch up in.
+    val carouselCardPx = remember { mutableFloatStateOf(0f) }
+    val carouselFlick = remember { CarouselFlick() }
+    val swipeScope = rememberCoroutineScope()
+
     // Horizontal fling anywhere on the player skips tracks; the artwork
     // follows the finger so the gesture has something to hold on to.
     val swipeThreshold = with(density) { 72.dp.toPx() }
@@ -938,6 +973,34 @@ fun NowPlayingScreen(
         derivedStateOf { abs(swipeSettle.value) / swipeThreshold > 0.01f }
     }
     val swipeHintNext by remember { derivedStateOf { swipeSettle.value > 0f } }
+    // Handing the deck back to the spring.
+    //
+    // The live drag is handed over *inside* the coroutine, immediately after the
+    // spring has been snapped to the same place: the sleeve reads the two added
+    // together, so dropping the drag first and snapping second would show the
+    // deck at rest for the frame between — and snapping first and dropping second
+    // cannot be done from here, since the snap suspends.
+    //
+    // [Animatable.snapTo] on an uncontended mutex does not actually suspend, so
+    // the handover lands inside one frame and the sum is never counted twice.
+    //
+    // Declared after the spring it hands over to, and after [setSwipeOffset]
+    // for the case with no deck to hand it over from.
+    val releaseSwipe: () -> Unit = {
+        val from = carouselDrag.floatValue
+        if (carouselActive) {
+            if (from != 0f) {
+                swipeScope.launch {
+                    swipeSettle.snapTo(from)
+                    carouselDrag.floatValue = 0f
+                    swipeSettle.animateTo(0f, spring(stiffness = Spring.StiffnessMediumLow))
+                }
+            }
+        } else {
+            carouselDrag.floatValue = 0f
+            setSwipeOffset(0f)
+        }
+    }
 
     // Signature Apple Music touch: the sleeve shrinks back while paused.
     val artScale by animateFloatAsState(
@@ -1053,9 +1116,15 @@ fun NowPlayingScreen(
     // Spotify Canvas is the player background on a phone, independent of the
     // still-art full-bleed preference. Other providers and static artwork keep
     // answering to that preference exactly as before.
-    val heroMode = spotifyCanvasOnPhone ||
-        (fullBleedArt && playerFillsWindow(windowWidth))
-
+    //
+    // Unless the deck is up, and then none of it: a carousel is a card with
+    // covers parked either side of it, and the banner, the full-screen clip and
+    // the contained portrait clip are all *full-screen artwork* — presentations
+    // that have no card edge and no room beside one. The deck replaces the
+    // presentation rather than layering over it, so the three of them stand down
+    // while it is on and come back the moment it is switched off.
+    val heroMode = !carouselActive &&
+        (spotifyCanvasOnPhone || (fullBleedArt && playerFillsWindow(windowWidth)))
     // Whether there's a still image to blow out — a placeholder tile is a card
     // or it is nothing, and going full-bleed with one would just tint the top
     // third of the screen.
@@ -1252,12 +1321,23 @@ fun NowPlayingScreen(
     // screen, the landscape one on the sleeve alone — the right column there is
     // full of horizontal sliders and a lyric list that should not be one stray
     // sideways drag away from changing the song.
-    val skipSwipeGesture = Modifier.pointerInput(showAudioPipeline, panelScrolling, controlsLocked) {
+    val skipSwipeGesture = Modifier.pointerInput(
+        showAudioPipeline,
+        panelScrolling,
+        controlsLocked,
+        carouselActive,
+    ) {
         if (showAudioPipeline || panelScrolling) return@pointerInput
         var total = 0f
         detectHorizontalDragGestures(
-            onDragStart = { total = 0f },
-            onDragCancel = { setSwipeOffset(0f) },
+            onDragStart = {
+                total = 0f
+                carouselFlick.reset()
+            },
+            onDragCancel = {
+                carouselFlick.reset()
+                releaseSwipe()
+            },
             onDragEnd = {
                 // The same two buzzes the transport glyphs give, so swiping the
                 // sleeve and tapping skip feel like one gesture with two
@@ -1268,6 +1348,28 @@ fun NowPlayingScreen(
                     // sleeve does not feel dead — it just says why it did not
                     // move on.
                     controlsLocked -> if (crossed) onBlockedControl()
+                    carouselActive -> when (
+                        carouselCommit(
+                            drag = total,
+                            velocity = carouselFlick.velocity,
+                            cardSize = carouselCardPx.floatValue,
+                            allowNext = hasNext,
+                            allowPrevious = hasPrevious,
+                        )
+                    ) {
+                        CarouselRelease.Next -> {
+                            haptics.play(Haptic.SkipNext)
+                            onNext()
+                        }
+                        CarouselRelease.Previous -> {
+                            haptics.play(Haptic.SkipPrevious)
+                            onPrevious()
+                        }
+                        // Falls back rather than staying where it was let go:
+                        // the deck reads as something put back down, and the
+                        // next release starts from a settled card.
+                        CarouselRelease.Return -> Unit
+                    }
                     total <= -swipeThreshold -> {
                         haptics.play(Haptic.SkipNext)
                         onNext()
@@ -1277,12 +1379,26 @@ fun NowPlayingScreen(
                         onPrevious()
                     }
                 }
-                setSwipeOffset(0f)
+                carouselFlick.reset()
+                releaseSwipe()
             },
             onHorizontalDrag = { _, delta ->
                 total += delta
-                // Damped: it's a hint, not a drag-to-position.
-                setSwipeOffset(total * 0.35f)
+                if (carouselActive) {
+                    // Straight to the sleeve: a card under a finger follows it
+                    // exactly, and this is the one place in the player where the
+                    // drag is the positioning rather than a hint at it.
+                    carouselFlick.add(total, SystemClock.uptimeMillis())
+                    carouselDrag.floatValue = carouselDragOffset(
+                        drag = total,
+                        cardSize = carouselCardPx.floatValue,
+                        allowNext = hasNext,
+                        allowPrevious = hasPrevious,
+                    )
+                } else {
+                    // Damped: it's a hint, not a drag-to-position.
+                    setSwipeOffset(total * 0.35f)
+                }
             },
         )
     }
@@ -1679,8 +1795,7 @@ fun NowPlayingScreen(
         } else if (!tabletArtworkBackdrop && !spotifyCanvasPresentation) {
             ArtworkMeshBackdrop(
                 mesh = artMesh,
-                seam = if (canvasFirstPortrait) renderedCanvasBottom else if (heroMode) heroHeight else 0.dp,
-                modifier = Modifier.graphicsLayer { alpha = 1f - fullArtworkBackdropAlpha },
+                seam = if (canvasFirstPortrait) renderedCanvasBottom else if (heroMode) heroHeight else 0.dp,                modifier = Modifier.graphicsLayer { alpha = 1f - fullArtworkBackdropAlpha },
             )
         }
         fullArtworkBlurContent(
@@ -2347,6 +2462,12 @@ fun NowPlayingScreen(
                         // a band that breathed with the shrink would hand it
                         // back and forth on every play and pause.
                         .onGloballyPositioned { dismissBandTop = it.boundsInRoot().top }
+                        // The sleeve's drawn side, in pixels, straight from its
+                        // own measure pass — the one true answer, whether it came
+                        // off the player's width or the box's height. Read by the
+                        // gesture when a finger lifts, to size the commit as a
+                        // fraction of the card rather than of the screen.
+                        .onSizeChanged { carouselCardPx.floatValue = it.width.toFloat() }
                         .graphicsLayer {
                             // The paused shrink and the swipe nudge only make
                             // sense on the full sleeve.
@@ -2354,7 +2475,13 @@ fun NowPlayingScreen(
                             val idle = artScale + (1f - artScale) * collapse
                             scaleX = idle
                             scaleY = idle
-                            translationX = swipeSettle.value * (1f - collapse)
+                            // Dragged, the sleeve follows the finger exactly and
+                            // the spring is at zero; released, the arm resets and
+                            // the spring carries it home. The two are added rather
+                            // than chosen between, so the handover is invisible
+                            // whichever side of it this frame lands on.
+                            translationX = (carouselDrag.floatValue + swipeSettle.value) *
+                                (1f - collapse)
                         }
                         // Collapsed, the sleeve is the way back: tapping the
                         // thumbnail puts the queue or the lyrics away again.
@@ -2370,6 +2497,60 @@ fun NowPlayingScreen(
                         ),
                     contentAlignment = Alignment.Center,
                 ) {
+                    // ---- The deck ----
+                    // The covers either side of the sleeve, parked one gap out
+                    // and travelling with it.
+                    //
+                    // Children first, so they draw *under* the sleeve: the card
+                    // being played is the one on top of the pile, and a
+                    // neighbour that crossed over it while being brought in
+                    // would be the one thing in the deck that does not read as a
+                    // card at all.
+                    //
+                    // Offset from the same `carouselDrag` the sleeve moves by,
+                    // read at placement — a finger's worth of movement should
+                    // cost a placement pass, not a recomposition of the whole
+                    // player. Composed at all only while the deck is out and the
+                    // sleeve is not collapsed to a thumbnail, since a
+                    // neighbour's whole reason to exist is the sleeve's edge,
+                    // and a thumbnail on a left edge has none to show.
+                    if (carouselActive && !collapsePastSettling) {
+                        // A neighbour is the sleeve's own square, parked one pitch
+                        // — its side plus the gap — beyond it, and both numbers
+                        // are read off [artSize] at measure and placement time
+                        // rather than at composition: the sleeve changes size
+                        // through the collapse, and reading it here would
+                        // recompose the whole player once a frame to resize two
+                        // cards that are mostly off screen.
+                        //
+                        // No drag term in the offset. The sleeve's own layer
+                        // carries the movement and the neighbours sit inside it,
+                        // so the deck travels as one piece with a single write per
+                        // frame rather than three that have to agree.
+                        fun neighbourModifier(step: Int): Modifier = Modifier
+                            .layout { measurable, constraints ->
+                                val side = artSize().roundToPx()
+                                val placeable = measurable.measure(
+                                    constraints.constrain(Constraints.fixed(side, side)),
+                                )
+                                layout(placeable.width, placeable.height) {
+                                    placeable.placeRelative(0, 0)
+                                }
+                            }
+                            .offset {
+                                val pitch = artSize().toPx() + CAROUSEL_NEIGHBOUR_GAP.toPx()
+                                IntOffset((step * pitch).roundToInt(), 0)
+                            }
+                        CarouselNeighbourCard(
+                            url = neighbourArtwork(queue, queueIndex, -1),
+                            modifier = neighbourModifier(-1),
+                        )
+                        CarouselNeighbourCard(
+                            url = neighbourArtwork(queue, queueIndex, +1),
+                            modifier = neighbourModifier(+1),
+                        )
+                    }
+
                     // The sleeve proper. Separated from the box around it so
                     // the banner can dissolve the card — shadow, corners, tile
                     // and all — without taking the stats line with it.

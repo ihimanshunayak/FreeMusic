@@ -270,6 +270,8 @@
     <string name="reduce_dynamic_blur">Reduzir desfoque dinâmico</string>
     <string name="reduce_dynamic_blur_subtitle">Troca o vidro fosco por preenchimentos sólidos em todo o app</string>
     <string name="full_screen_cover_art">Capa em tela cheia</string>
+    <string name="player_carousel">Deslizar a capa</string>
+    <string name="player_carousel_subtitle">Arraste a capa para os lados para trazer a faixa seguinte e a anterior, como um maço de discos. Desativado mantém a capa como está hoje.</string>
     <string name="animated_cover_art">Capa animada</string>
     <string name="synced_lyrics">Letras sincronizadas</string>
     <string name="synced_lyrics_subtitle">Destaca as palavras no player conforme são cantadas</string>

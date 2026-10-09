@@ -281,6 +281,8 @@
     <string name="liquid_glass_subtitle">Cristal refractante real en la barra de navegación flotante. Solo Android 12+; usa más GPU.</string>
     <string name="liquid_glass_unavailable">Requiere Android 12 o posterior</string>
     <string name="full_screen_cover_art">Portada a pantalla completa</string>
+    <string name="player_carousel">Deslizar la portada</string>
+    <string name="player_carousel_subtitle">Arrastra la portada hacia los lados para ver la pista siguiente y la anterior, como un mazo de discos. Desactivado deja la funda tal como está ahora.</string>
     <string name="animated_cover_art">Portada animada</string>
     <string name="synced_lyrics">Letras sincronizadas</string>
     <string name="synced_lyrics_subtitle">Ilumina las palabras mientras se cantan</string>
