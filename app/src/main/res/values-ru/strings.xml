@@ -753,6 +753,9 @@
     <string name="song_cache_limit_subtitle">Хранит загруженное аудио на диске для мгновенной перемотки и повторного прослушивания</string>
     <string name="replay_genres_enabled_subtitle">Запрашивает у Last.fm жанры исполнителя. Отправляется только имя исполнителя.</string>
     <string name="replay_genres_disabled_subtitle">Пока это отключено, график жанров в Replay остаётся скрытым</string>
+    <string name="show_play_counts">Показывать число прослушиваний</string>
+    <string name="show_play_counts_enabled_subtitle">Каждый трек показывает, сколько раз он воспроизводился на этом устройстве</string>
+    <string name="show_play_counts_disabled_subtitle">Строки показывают только длительность, пока это отключено</string>
     <string name="swipe_plays_next">Свайп песни ставит её следующей</string>
     <string name="swipe_adds_to_queue">Если отключено, свайп добавляет песню в конец очереди</string>
     <string name="import_backup_warning">Это заменит настройки и историю прослушивания на этом устройстве содержимым файла. Сначала экспортируйте текущие данные, если хотите их сохранить.</string>

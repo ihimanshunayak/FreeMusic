@@ -6,6 +6,9 @@ import com.ihimanshunayak.freemusic.data.model.Song
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -95,6 +98,21 @@ object ListeningStats {
     @Volatile
     private var version = 0L
 
+    /**
+     * Bumped whenever the *number of plays* could have moved, so [plays] is not
+     * rebuilt on writes that cannot change it.
+     *
+     * A separate counter from [version] because the two answer different
+     * questions. [version] moves every thirty seconds of playback, when the open
+     * month is flushed, and a flush is mostly minutes. Keying the count map on
+     * [version] would therefore re-read and re-parse every stored month twice a
+     * minute, for as long as music is playing, to arrive at a map that has not
+     * changed. A play is counted roughly once a track, and that is the cadence
+     * this map is worth rebuilding at.
+     */
+    @Volatile
+    private var playsVersion = 0L
+
     /** The last summary handed out, and what it was computed from. */
     private var cached: Cached? = null
 
@@ -106,6 +124,11 @@ object ListeningStats {
         val summary: ReplaySummary,
     )
 
+    /** The last per-track count lookup, and the write it was computed from. */
+    private var cachedPlays: CachedPlays? = null
+
+    private class CachedPlays(val version: Long, val plays: Map<String, Int>)
+
     fun init(context: Context) {
         directory = File(context.filesDir, DIRECTORY)
         // Opening a month means reading and parsing it, and the first thing to
@@ -113,6 +136,11 @@ object ListeningStats {
         // seconds into the first track. Done here instead, it has happened long
         // before anything is playing.
         writer.launch { synchronized(lock) { bucketFor(YearMonth.now()) } }
+        // Primed as well as the bucket, for the same reason: the first thing
+        // that asks how often a track has been played is a list on screen, and
+        // waiting for the first write would leave every row bare until half a
+        // minute of the first track had gone by.
+        publishPlays()
     }
 
     private val ready: Boolean get() = this::directory.isInitialized
@@ -199,7 +227,16 @@ object ListeningStats {
             val day = at.dayOfMonth
             bucket.days[day] = (bucket.days[day] ?: 0L) + playedMs
             dirty = true
+            // Bumped inside the lock, so a rebuild cannot capture the counter
+            // before this play and then read the month after it — which would
+            // cache the new numbers under the old version and keep serving them
+            // until the next play moved it again.
+            if (countsAsPlay) playsVersion++
         }
+        // Launched, not awaited: this is the playback sampler's thread and the
+        // read behind it is a disk pass. Only for a counted play, because that
+        // is the one event that can move a number on a visible row.
+        if (countsAsPlay) publishPlays()
     }
 
     /**
@@ -275,6 +312,83 @@ object ListeningStats {
 
     // ── Reading ─────────────────────────────────────────────────────────────
 
+    private val _plays = MutableStateFlow<Map<String, Int>>(emptyMap())
+
+    /**
+     * Plays per track id, for a row that wants one number rather than a page.
+     *
+     * A flow rather than a suspend read for the reason [com.ihimanshunayak.freemusic.download.Downloads.saved]
+     * is one: every song row in the app asks this question, the answer changes
+     * while a list is on screen, and a row that recomputed it would be a disk
+     * pass per row per recomposition. Here the whole map is built once on a
+     * write and every row reads the same value.
+     *
+     * A track that has never been played is absent rather than zero, and that
+     * is the deliberate part: a list is mostly unplayed tracks, and a map with
+     * an entry per track in the account would be a megabyte of zeroes carried
+     * around so that a badge could say "0 plays" on nine rows out of ten.
+     */
+    val plays: StateFlow<Map<String, Int>> = _plays.asStateFlow()
+
+    /**
+     * Plays per track id, across every month [summary] would merge.
+     *
+     * A cheap counterpart to [summary] for this question: a playlist's track
+     * list can be five hundred rows, and asking [summary] once per row would
+     * re-read and re-merge the whole history five hundred times to answer
+     * something the merge was already holding.
+     *
+     * The full set of months, because "how many times have I played this" is a
+     * question about all of history rather than about what is open, and an
+     * answer that quietly meant "this month" would be wrong on every row that
+     * predates it. What is saved is the ranking — sorting, the artist and album
+     * rollups, the genre join — not the read.
+     *
+     * The open month is flushed first, so a play counted a moment ago is
+     * already on disk when this looks. That costs a write per *counted play*
+     * rather than per row, and a counted play is rarer than the thirty-second
+     * flush that would have written the same month anyway.
+     *
+     * Disk-bound and never on the main thread: [publishPlays] is the only
+     * caller, and it runs on [writer].
+     */
+    private suspend fun computePlays(): Map<String, Int> {
+        cachedPlays?.takeIf { it.version == playsVersion }?.let { return it.plays }
+        // Captured before the flush rather than after the read, and that is the
+        // point: a play counted while this is running would otherwise be
+        // written by the flush below, read back, and then filed under the very
+        // version that play had already moved — so the number would be right
+        // once and the cache entry would claim the stale one was too. Taken
+        // here it can only ever be behind, which costs a rebuild and never a
+        // wrong count.
+        val seen = playsVersion
+        flushAndAwait()
+        val counts = HashMap<String, Int>()
+        months().forEach { month ->
+            read(month.toString())?.tracks?.forEach { entry ->
+                // Added rather than assigned: a track can appear in more than
+                // one month, and the sum is what the question asked for.
+                if (entry.plays > 0) counts[entry.id] = (counts[entry.id] ?: 0) + entry.plays
+            }
+        }
+        return counts.also { cachedPlays = CachedPlays(seen, it) }
+    }
+
+    /**
+     * Rebuilds [plays] on [writer], off the main thread.
+     *
+     * Launched rather than run inline, and deliberately so: one of its callers
+     * is [record], which holds [lock] for the whole of a sample, and the read
+     * below takes that same lock on its way through the open bucket.
+     *
+     * Called on a counted play rather than on a cadence, because that is the
+     * only event that can move a number on a visible row.
+     */
+    private fun publishPlays() {
+        if (!ready) return
+        writer.launch { runCatching { computePlays() }.onSuccess { _plays.value = it } }
+    }
+
     /**
      * The Replay for [period], merged off disk.
      *
@@ -333,16 +447,35 @@ object ListeningStats {
      * appear on any page this data exists to draw.
      */
     private fun prune() {
+        var evicted = false
         val existing = months()
         if (existing.size > KEEP_MONTHS) {
             existing.take(existing.size - KEEP_MONTHS).forEach {
                 File(directory, "$it.json").delete()
             }
+            evicted = true
         }
-        val bucket = open ?: return
-        bucket.tracks.trimTo(MAX_TRACKS) { it.ms }
-        bucket.artists.trimTo(MAX_NAMES) { it.ms }
-        bucket.albums.trimTo(MAX_NAMES) { it.ms }
+        val bucket = open
+        if (bucket != null) {
+            val tracks = bucket.tracks.size
+            bucket.tracks.trimTo(MAX_TRACKS) { it.ms }
+            bucket.artists.trimTo(MAX_NAMES) { it.ms }
+            bucket.albums.trimTo(MAX_NAMES) { it.ms }
+            // Eviction is by time played, so what leaves is a track with little
+            // of it — and a track with little played time is one whose count is
+            // small enough to be worth drawing. Only the counts are watched for
+            // this, so a pass that trims artists or albums alone costs nothing.
+            if (bucket.tracks.size != tracks) evicted = true
+        }
+        // A dropped month or a dropped track is a dropped set of counts, and the
+        // map that was built while it still existed is now describing files that
+        // are gone. The counter goes up so the next rebuild is not served the
+        // old answer, and the rebuild is queued so the numbers on screen catch
+        // up without waiting for somebody to finish another track.
+        if (evicted) {
+            playsVersion++
+            publishPlays()
+        }
     }
 
     /**
@@ -403,6 +536,11 @@ object ListeningStats {
             directory.mkdirs()
             version++
             cached = null
+            // The whole history was just replaced, so the counts held for the
+            // old one are not merely stale, they describe listening that is no
+            // longer on disk.
+            playsVersion++
+            cachedPlays = null
             buckets.forEach { bucket ->
                 val key = runCatching { YearMonth.parse(bucket.month).toString() }.getOrNull()
                     ?: return@forEach
@@ -412,6 +550,7 @@ object ListeningStats {
                 }.onFailure { Log.w(TAG, "Could not import bucket $key", it) }
             }
         }
+        publishPlays()
     }
 
     // ── Shapes ──────────────────────────────────────────────────────────────

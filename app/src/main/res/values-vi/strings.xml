@@ -747,6 +747,9 @@
     <string name="song_cache_limit_subtitle">Lưu trữ âm thanh đã tải trên đĩa để tua nhanh và phát lại tức thì</string>
     <string name="replay_genres_enabled_subtitle">Hỏi Last.fm về thể loại của nghệ sĩ. Chỉ tên nghệ sĩ được gửi đi.</string>
     <string name="replay_genres_disabled_subtitle">Biểu đồ thể loại Replay sẽ ẩn khi tắt tùy chọn này</string>
+    <string name="show_play_counts">Hiện số lần phát</string>
+    <string name="show_play_counts_enabled_subtitle">Mỗi bài hát hiển thị số lần đã phát trên thiết bị này</string>
+    <string name="show_play_counts_disabled_subtitle">Hàng chỉ hiển thị thời lượng khi tùy chọn này tắt</string>
     <string name="swipe_plays_next">Vuốt bài hát để phát tiếp theo</string>
     <string name="swipe_adds_to_queue">Khi tắt, vuốt sẽ thêm bài hát vào cuối hàng đợi</string>
     <string name="import_backup_warning">Thao tác này sẽ thay thế cài đặt và lịch sử nghe trên thiết bị bằng nội dung của tệp sao lưu. Hãy xuất dữ liệu hiện tại trước nếu bạn muốn giữ lại.</string>

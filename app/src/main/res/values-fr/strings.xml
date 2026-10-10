@@ -731,6 +731,9 @@
     <string name="song_cache_limit_subtitle">Conserve l\'audio téléchargé sur le disque pour une recherche instantanée et de nouvelles écoutes</string>
     <string name="replay_genres_enabled_subtitle">Demande à Last.fm les genres d\'un artiste. Seul le nom de l\'artiste est envoyé.</string>
     <string name="replay_genres_disabled_subtitle">Le graphique des genres de Replay reste masqué tant que cette option est désactivée</string>
+    <string name="show_play_counts">Afficher le nombre d\'écoutes</string>
+    <string name="show_play_counts_enabled_subtitle">Chaque titre indique combien de fois il a été écouté sur cet appareil</string>
+    <string name="show_play_counts_disabled_subtitle">Les lignes n\'affichent que leur durée tant que cette option est désactivée</string>
     <string name="swipe_plays_next">Glisser une chanson la fait jouer ensuite</string>
     <string name="swipe_adds_to_queue">Lorsque c\'est désactivé, glisser ajoute la chanson à la fin de la file d\'attente</string>
     <string name="import_backup_warning">Cela remplace les paramètres et l\'historique d\'écoute de cet appareil par le contenu du fichier. Exportez d\'abord les données actuelles si vous voulez les conserver.</string>

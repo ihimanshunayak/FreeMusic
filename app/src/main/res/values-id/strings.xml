@@ -712,6 +712,9 @@
     <string name="song_cache_limit_subtitle">Menyimpan audio yang diunduh di disk untuk pencarian posisi dan pemutaran ulang instan</string>
     <string name="replay_genres_enabled_subtitle">Meminta genre artis dari Last.fm. Hanya nama artis yang dikirim.</string>
     <string name="replay_genres_disabled_subtitle">Grafik genre Replay tetap tersembunyi selama ini nonaktif</string>
+    <string name="show_play_counts">Tampilkan jumlah pemutaran</string>
+    <string name="show_play_counts_enabled_subtitle">Setiap lagu menampilkan berapa kali diputar di perangkat ini</string>
+    <string name="show_play_counts_disabled_subtitle">Baris hanya menampilkan durasinya selama ini nonaktif</string>
     <string name="swipe_plays_next">Menggeser lagu memutarnya berikutnya</string>
     <string name="swipe_adds_to_queue">Saat dinonaktifkan, menggeser menambahkan lagu ke akhir antrean</string>
     <string name="import_backup_warning">Ini akan mengganti pengaturan dan riwayat mendengarkan perangkat ini dengan isi file tersebut. Ekspor data saat ini terlebih dahulu jika ingin menyimpannya.</string>

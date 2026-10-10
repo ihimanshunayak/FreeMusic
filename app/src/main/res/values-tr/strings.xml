@@ -763,6 +763,9 @@
     <string name="song_cache_limit_subtitle">Anında atlama ve tekrar dinleme için indirilen sesi diskte tutar</string>
     <string name="replay_genres_enabled_subtitle">Last.fm\'den bir sanatçının türlerini ister. Yalnızca sanatçı adı gönderilir.</string>
     <string name="replay_genres_disabled_subtitle">Bu kapalıyken Replay tür grafiği gizli kalır</string>
+    <string name="show_play_counts">Çalma sayılarını göster</string>
+    <string name="show_play_counts_enabled_subtitle">Her şarkı bu cihazda kaç kez çalındığını gösterir</string>
+    <string name="show_play_counts_disabled_subtitle">Bu kapalıyken satırlar yalnızca süresini gösterir</string>
     <string name="swipe_plays_next">Bir şarkıyı kaydırmak onu sonraki olarak çalar</string>
     <string name="swipe_adds_to_queue">Kapalıyken kaydırmak şarkıyı sıranın sonuna ekler</string>
     <string name="import_backup_warning">Bu, dosyanın içeriğiyle bu cihazın ayarlarını ve dinleme geçmişini değiştirir. Korumak istiyorsan önce mevcut verileri dışa aktar.</string>

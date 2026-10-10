@@ -679,6 +679,9 @@
     <string name="song_cache_limit_subtitle">Trzyma pobrany dźwięk na dysku do natychmiastowego przeglądania i odtwarzania</string>
     <string name="replay_genres_enabled_subtitle">Pobiera z Last.fm gatunki artysty. Wysłane zostaje tylko imię/nazwa artysty.</string>
     <string name="replay_genres_disabled_subtitle">Wykres gatunków Replay pozostaje ukryty z powodu wyłączonej funkcji</string>
+    <string name="show_play_counts">Pokaż liczbę odtworzeń</string>
+    <string name="show_play_counts_enabled_subtitle">Każdy utwór pokazuje, ile razy został odtworzony na tym urządzeniu</string>
+    <string name="show_play_counts_disabled_subtitle">Wiersze pokazują tylko czas trwania, dopóki to jest wyłączone</string>
     <string name="swipe_plays_next">Przeciągnięcie utworu doda do odtworzenia na następnym miejscu</string>
     <string name="swipe_adds_to_queue">Jeżeli jest wyłączone, przeciągnięcie powoduje dodanie go na sam koniec kolejki</string>
     <string name="import_backup_warning">To zamieni te dane z danymi na tym urządzeniu. Wyeksportuj istniejące, jeżeli nie chcesz ich stracić.</string>

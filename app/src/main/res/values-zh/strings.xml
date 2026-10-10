@@ -712,6 +712,9 @@
     <string name="song_cache_limit_subtitle">将已下载的音频保留在磁盘上，以便即时跳转和重播</string>
     <string name="replay_genres_enabled_subtitle">向 Last.fm 请求艺人的流派信息，仅会发送艺人名称。</string>
     <string name="replay_genres_disabled_subtitle">关闭此项时，Replay 的流派图表将保持隐藏</string>
+    <string name="show_play_counts">显示播放次数</string>
+    <string name="show_play_counts_enabled_subtitle">每首歌曲显示其在此设备上的播放次数</string>
+    <string name="show_play_counts_disabled_subtitle">关闭此项时行内仅显示时长</string>
     <string name="swipe_plays_next">滑动歌曲后将其设为下一首播放</string>
     <string name="swipe_adds_to_queue">关闭后，滑动会将歌曲添加到播放队列末尾</string>
     <string name="import_backup_warning">这将用文件中的内容替换此设备上的设置和收听记录。如果想保留当前数据，请先将其导出。</string>

@@ -743,6 +743,9 @@
     <string name="song_cache_limit_subtitle">Conserva el audio descargado para búsquedas instantáneas y nuevas reproducciones</string>
     <string name="replay_genres_enabled_subtitle">Consulta en Last.fm los géneros de un artista. Solo se envía el nombre del artista.</string>
     <string name="replay_genres_disabled_subtitle">El gráfico de géneros de Replay permanece oculto mientras esta opción está desactivada</string>
+    <string name="show_play_counts">Mostrar recuento de reproducciones</string>
+    <string name="show_play_counts_enabled_subtitle">Cada canción muestra cuántas veces se ha reproducido en este dispositivo</string>
+    <string name="show_play_counts_disabled_subtitle">Las filas solo muestran su duración mientras esto esté desactivado</string>
     <string name="swipe_plays_next">Al deslizar una canción, se reproduce a continuación</string>
     <string name="swipe_adds_to_queue">Cuando está desactivado, deslizar añade la canción al final de la cola</string>
     <string name="import_backup_warning">Esto reemplaza los ajustes y el historial de reproducción de este dispositivo con el contenido del archivo. Exporta primero los datos actuales si quieres conservarlos.</string>

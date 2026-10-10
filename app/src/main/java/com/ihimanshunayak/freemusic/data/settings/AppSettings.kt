@@ -630,6 +630,22 @@ object AppSettings {
      */
     val replayGenres = MutableStateFlow(true)
 
+    /**
+     * Whether each song row shows how many times it has been played.
+     *
+     * On by default: the count is this device's own history, it costs a row
+     * nothing to draw, and a number that only appears once somebody has gone
+     * looking for it is a number nobody finds. Off for anyone who reads a list
+     * as a list of titles rather than as a scoreboard — the figure sits between
+     * the duration and the ⋮, which is exactly where a row's own information
+     * already is, so removing it is removing one value and not a layout.
+     *
+     * It draws nothing at all for a track with no plays, so the default reads
+     * as "every row that has been played is marked" rather than as a column of
+     * zeroes on a new install. See [ListeningStats.plays][com.ihimanshunayak.freemusic.data.stats.ListeningStats.plays].
+     */
+    val showPlayCounts = MutableStateFlow(true)
+
     // ── Library ─────────────────────────────────────────────────────────────
 
     /** Hides short clips, recorder output and non-music formats from Local Music. */
@@ -985,6 +1001,7 @@ object AppSettings {
         listenBrainzPrimaryArtistOnly.value = prefs.getBoolean(KEY_LISTENBRAINZ_PRIMARY_ARTIST_ONLY, false)
         spotifySpdcToken.value = prefs.getString(KEY_SPOTIFY_SPDC_TOKEN, "").orEmpty()
         replayGenres.value = prefs.getBoolean(KEY_REPLAY_GENRES, true)
+        showPlayCounts.value = prefs.getBoolean(KEY_SHOW_PLAY_COUNTS, true)
         filterNonMusicAudio.value = prefs.getBoolean(KEY_FILTER_NON_MUSIC_AUDIO, true)
         localMusicSort.value = readLocalMusicSort(KEY_LOCAL_MUSIC_SORT)
         downloadedMusicSort.value = readLocalMusicSort(KEY_DOWNLOADED_MUSIC_SORT)
@@ -1721,6 +1738,11 @@ object AppSettings {
         prefs.edit().putBoolean(KEY_REPLAY_GENRES, value).apply()
     }
 
+    fun setShowPlayCounts(value: Boolean) {
+        showPlayCounts.value = value
+        prefs.edit().putBoolean(KEY_SHOW_PLAY_COUNTS, value).apply()
+    }
+
     fun setFilterNonMusicAudio(value: Boolean) {
         filterNonMusicAudio.value = value
         prefs.edit().putBoolean(KEY_FILTER_NON_MUSIC_AUDIO, value).apply()
@@ -2087,6 +2109,7 @@ object AppSettings {
     private const val KEY_PRIORITIZE_SYLLABLE_SYNC = "prioritize_syllable_sync"
     private const val KEY_PAXSENIX_API_KEY = "paxsenix_api_key"
     private const val KEY_REPLAY_GENRES = "replay_genres"
+    private const val KEY_SHOW_PLAY_COUNTS = "show_play_counts"
     private const val KEY_FILTER_NON_MUSIC_AUDIO = "filter_non_music_audio"
     private const val KEY_LOCAL_MUSIC_SORT = "local_music_sort"
     private const val KEY_DOWNLOADED_MUSIC_SORT = "downloaded_music_sort"

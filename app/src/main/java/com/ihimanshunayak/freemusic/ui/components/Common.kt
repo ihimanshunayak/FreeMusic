@@ -30,7 +30,9 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
+import com.ihimanshunayak.freemusic.data.stats.ListeningStats
 import com.ihimanshunayak.freemusic.download.Downloads
+import com.ihimanshunayak.freemusic.ui.replay.grouped
 import com.ihimanshunayak.freemusic.ui.haptics.Haptic
 import com.ihimanshunayak.freemusic.ui.haptics.rememberHaptics
 import kotlin.math.abs
@@ -63,6 +65,9 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -567,6 +572,7 @@ private fun SongRowContent(
                 modifier = Modifier.size(20.dp),
             )
         }
+        PlayCountBadge(song.videoId, subtitleColor)
         song.durationText?.let {
             Spacer(Modifier.width(8.dp))
             Text(
@@ -619,6 +625,55 @@ fun DownloadedBadge(videoId: String, tint: Color, modifier: Modifier = Modifier)
         tint = tint,
         modifier = modifier.size(16.dp),
     )
+}
+
+/**
+ * How often a row's track has been played, on the row itself.
+ *
+ * A glyph and a count rather than the phrase — "▶ 128" and not "128 plays" —
+ * because this lands in a trailing run that already carries a download mark, a
+ * now-playing glyph, the duration and a menu, and on a phone the full sentence
+ * would leave the title a few characters wide. The glyph is what keeps it
+ * unambiguous; a bare number in that position reads as a track number.
+ *
+ * Nothing at all for a track that has never been played, and that is the case
+ * worth naming: it is most of a library. A row saying "0" is noise on every
+ * list, so the count map leaves unplayed tracks out rather than carrying a zero
+ * for each of them, and this draws only what the map has.
+ *
+ * Reads [ListeningStats.plays], which is rebuilt when a play is counted, so a
+ * number here settles a moment after the track it belongs to finishes. No
+ * polling and no disk read per row.
+ */
+@Composable
+fun PlayCountBadge(videoId: String, tint: Color, modifier: Modifier = Modifier) {
+    val enabled by AppSettings.showPlayCounts.collectAsStateWithLifecycle()
+    if (!enabled) return
+    val plays by ListeningStats.plays.collectAsStateWithLifecycle()
+    val count = plays[videoId] ?: return
+    val label = pluralStringResource(R.plurals.replay_play_count, count, grouped(count.toLong()))
+    Spacer(Modifier.width(8.dp))
+    Row(
+        // The glyph and the digits are one statement, and a reader that
+        // announced them separately would say "play, one hundred and twenty
+        // eight" and leave the listener to join them up.
+        modifier = modifier.clearAndSetSemantics { contentDescription = label },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            Icons.Rounded.PlayArrow,
+            contentDescription = null,
+            tint = tint,
+            modifier = Modifier.size(12.dp),
+        )
+        Spacer(Modifier.width(2.dp))
+        Text(
+            text = grouped(count.toLong()),
+            style = MaterialTheme.typography.labelMedium,
+            color = tint,
+            maxLines = 1,
+        )
+    }
 }
 
 /**
