@@ -3428,7 +3428,11 @@ private fun FreeMusicApp(
                                     updateNotice?.let { AppSettings.markNotificationsSeen(it.version) }
                                 }) {
                                     Icon(
-                                        FreeMusicIcons.Bell,
+                                        if (newExperience) {
+                                            NewExperienceIcons.Bell
+                                        } else {
+                                            FreeMusicIcons.Bell
+                                        },
                                         // An unread dot is invisible to a screen
                                         // reader, so the state is spoken instead.
                                         contentDescription = if (notificationsUnread) {

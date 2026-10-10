@@ -29,18 +29,24 @@ first opened is the app that was reviewed.
 
 ## What the switch changes
 
-Three surfaces, and only three:
+Four surfaces, and nothing else:
 
 | Surface | Off | On |
 |---|---|---|
 | Now Playing sleeve | single card, leans at a sideways drag | carousel the neighbours swipe in from |
 | Bottom bar tabs | 25dp glyph over its label, tint carrying selection | a glass disc under the selected glyph, no label |
 | Library page's "new" tiles | flat `surfaceVariant` square with a `Plus` in it | the same square with a glass disc and a filled glyph |
+| Home header bell | 25dp stroked bell | 25dp filled bell, at the same size and tint |
 
 Everything else — colours, type, spacing, the rest of the shelves, every other
 page — is untouched. This is a control-surface redesign, not a theme, and it
 has no light/dark story of its own because it does not need one: it is drawn
 from the same theme tokens the surfaces it replaces were.
+
+The last row is the narrowest and the one worth naming: the bell is a glyph
+swap and nothing more — same 25dp box, same tint, same unread dot on top. It
+shares a shape with the tab the sheet draws for notifications, and leaving one
+of the two stroked would have made the sheet's own family point at itself.
 
 ## The button
 
@@ -85,30 +91,25 @@ paints a rectangle over whatever is behind the icon and is not an option.
 
 ## Which icons go where
 
-Not all 24 are used; the sheet is a set, and a set is not a placement plan.
-The eleven that map onto controls the app actually has:
+Not all of them are wired; the sheet is a set, and a set is not a placement
+plan. The six that map onto the surfaces this switch governs:
 
-| Sheet position | Icon | Used for |
-|---|---|---|
-| r0c0 | `Library` | bottom bar, Library tab |
-| r0c1 | `Notifications` | bottom bar *and* the Home header's bell, which shares the glyph |
-| r0c2 | `Clock` | bottom bar, History — the sheet's clock, not a second one |
-| r2c0 | `Person` | the signed-in header |
-| r2c1 | `Party` | a shared playlist's `NewShelfCard` |
-| r2c2 | `Plus` | the same card's disc |
-| r2c3 | `Heart` | saved/liked artwork |
-| r2c4 | `Check` | a completed download |
-| r2c5 | `Bookmark` | a pinned playlist |
-| r3c0 | `Grid` | the library page's grid toggle |
-| r3c1 | `Performance` | the settings row's own glyph |
+| Icon | Wired to |
+|---|---|
+| `Home` | bottom bar, Home tab |
+| `Explore` | bottom bar, Explore tab |
+| `Library` | bottom bar, Library tab |
+| `Search` | bottom bar, Search tab |
+| `Bell` | the Home header's bell |
+| `Plus` | the Library page's leading "new" tiles, inside their disc |
 
-The remaining thirteen — download, play, shuffle, search, home, lyrics,
-equaliser, explore, albums, person-plus, music note, repeat, timer — have no
-control on the surfaces this switch governs. They are drawn in the sheet, so
-they are drawn here, and the ones with an obvious owner (search, play,
-shuffle) are the first to reach for when one of those controls is redesigned
-next. Drawing all 24 and wiring eleven is cheaper than drawing eleven and
-discovering that the twelfth is what the next surface needed.
+The rest — clock, download, play, shuffle, mic, equaliser, albums, repeat,
+person, party, heart, check, bookmark, grid, performance, infinity, music
+note, timer — have no control on the four surfaces above. They are drawn in
+the sheet, so they are drawn here, and the ones with an obvious owner (clock,
+play, shuffle) are the first to reach for when the surface they belong to is
+redesigned next. Drawing the set and wiring six is cheaper than drawing six
+and discovering that the seventh is what the next surface needed.
 
 ## Why the sleeve switch moved inside it
 
@@ -126,12 +127,13 @@ idempotent and downgrading does not lose the answer either.
 
 ## What is not covered
 
-- **Labels stay.** The redesign drops a tab's label to make room for the disc,
-  which is the one way it is a downside rather than a trade: four unlabelled
-  glyphs are less discoverable than four labelled ones, and the sheet's own
-  icons are the only thing that carries the meaning. It is confined to four
-  tabs that the whole app is arranged around, and it is what the reference
-  asks for.
+- **Labels go, and that is the cost.** The redesign drops a tab's label to make
+  room for the disc, which is the one way it is a downside rather than a trade:
+  four unlabelled glyphs are less discoverable than four labelled ones, and the
+  sheet's own icons are the only thing that carries the meaning. It is confined
+  to four tabs that the whole app is arranged around, and it is what the
+  reference asks for. Every other label in the app — every shelf, every row,
+  every page title — stays.
 - **No theme change.** Light and dark are the app's, not this switch's.
 - **No layout change.** Every disc occupies the box the control it replaces
   occupied, so nothing reflows and no spacing constant moves.
