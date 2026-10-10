@@ -243,6 +243,7 @@ import com.ihimanshunayak.freemusic.ui.components.UpdateAvailableDialog
 import com.ihimanshunayak.freemusic.ui.components.WebDavConflictAlert
 import com.ihimanshunayak.freemusic.ui.components.FieldConfig
 import com.ihimanshunayak.freemusic.ui.icons.FreeMusicIcons
+import com.ihimanshunayak.freemusic.ui.icons.NewExperienceIcons
 import androidx.media3.common.Player
 import com.ihimanshunayak.freemusic.data.YtMusicRepository
 import com.ihimanshunayak.freemusic.ui.player.NowPlayingScreen
@@ -1087,13 +1088,26 @@ private fun FreeMusicApp(
     val replayLabel = stringResource(R.string.replay)
     val queueLabel = stringResource(R.string.queue)
     val sharedLinkLabel = stringResource(R.string.shared_link)
-    val tabs = remember(homeLabel, exploreLabel, libraryLabel, searchLabel) {
-        listOf(
-            BottomTab(homeLabel, FreeMusicIcons.Home),
-            BottomTab(exploreLabel, FreeMusicIcons.Explore),
-            BottomTab(libraryLabel, FreeMusicIcons.Library),
-            BottomTab(searchLabel, FreeMusicIcons.Search),
-        )
+    // Read here because the *icons* change with it and the tab list is built
+    // from them. Both bars read the same flow for the same reason — reading it
+    // in one place and handing it down would be a second source of the answer.
+    val newExperience by AppSettings.newExperience.collectAsStateWithLifecycle()
+    val tabs = remember(homeLabel, exploreLabel, libraryLabel, searchLabel, newExperience) {
+        if (newExperience) {
+            listOf(
+                BottomTab(homeLabel, NewExperienceIcons.Home),
+                BottomTab(exploreLabel, NewExperienceIcons.Explore),
+                BottomTab(libraryLabel, NewExperienceIcons.Library),
+                BottomTab(searchLabel, NewExperienceIcons.Search),
+            )
+        } else {
+            listOf(
+                BottomTab(homeLabel, FreeMusicIcons.Home),
+                BottomTab(exploreLabel, FreeMusicIcons.Explore),
+                BottomTab(libraryLabel, FreeMusicIcons.Library),
+                BottomTab(searchLabel, FreeMusicIcons.Search),
+            )
+        }
     }
 
     val scope = rememberCoroutineScope()

@@ -917,7 +917,7 @@ fun NowPlayingScreen(
     // Swiping the sleeve to bring the covers either side of it in. Off by
     // default behind its own switch in Settings, so with it off the player is
     // the player it has always been — see [PlayerSwipeCarousel].
-    val carouselEnabled by AppSettings.playerCarouselEnabled.collectAsStateWithLifecycle()
+    val carouselEnabled by AppSettings.newExperience.collectAsStateWithLifecycle()
     // A phone idiom, exactly as the full-bleed banner is: the deck wants the
     // sleeve to be the widest thing on the player so that the covers parked
     // either side of it have an edge to show past. Landscape spends that edge

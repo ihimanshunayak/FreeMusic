@@ -278,8 +278,8 @@
     <string name="reduce_dynamic_blur">Уменьшить динамическое размытие</string>
     <string name="reduce_dynamic_blur_subtitle">Заменяет матовое стекло сплошной заливкой во всём приложении</string>
     <string name="full_screen_cover_art">Обложка на весь экран</string>
-    <string name="player_carousel">Смахивание обложки</string>
-    <string name="player_carousel_subtitle">Проведите по обложке в сторону, чтобы показать следующий и предыдущий трек, как колоду пластинок. Выключено — обложка остаётся как сейчас.</string>
+    <string name="new_experience">Новый опыт</string>
+    <string name="new_experience_subtitle">Включает плеер со свайпом, стеклянные диски и набор залитых иконок. Выключено — приложение остаётся точно таким, как сейчас.</string>
     <string name="animated_cover_art">Анимированная обложка</string>
     <string name="synced_lyrics">Синхронизированный текст</string>
     <string name="synced_lyrics_subtitle">Подсвечивает слова в плеере по мере исполнения</string>

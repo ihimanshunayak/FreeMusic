@@ -287,8 +287,8 @@
     <string name="liquid_glass_subtitle">กระจกหักเหแสงจริงบนแถบนำทางแบบลอย ใช้ได้เฉพาะ Android 12 ขึ้นไป และใช้ GPU มากขึ้น</string>
     <string name="liquid_glass_unavailable">ต้องใช้ Android 12 ขึ้นไป</string>
     <string name="full_screen_cover_art">ปกอัลบั้มเต็มจอ</string>
-    <string name="player_carousel">ปัดปกอัลบั้ม</string>
-    <string name="player_carousel_subtitle">ลากปกอัลบั้มไปด้านข้างเพื่อนำเพลงถัดไปและเพลงก่อนหน้ามาแสดง เหมือนสำรับแผ่นเสียง ปิดไว้จะคงปกแบบเดิม</string>
+    <string name="new_experience">ประสบการณ์ใหม่</string>
+    <string name="new_experience_subtitle">เปิดตัวเล่นเพลงแบบปัด, แผ่นกระจก และชุดไอคอนแบบทึบ ปิดไว้แอปจะเหมือนเดิมทุกอย่าง</string>
     <string name="animated_cover_art">ปกอัลบั้มเคลื่อนไหว</string>
     <string name="synced_lyrics">เนื้อเพลงซิงค์</string>
     <string name="synced_lyrics_subtitle">ไฮไลต์คำร้องบนหน้าเครื่องเล่นตามจังหวะที่ร้อง</string>

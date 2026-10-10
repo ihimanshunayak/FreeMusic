@@ -297,8 +297,8 @@
     <string name="liquid_glass_subtitle">Hiệu ứng kính khúc xạ trên thanh điều hướng nổi. Chỉ dành cho Android 12+; sử dụng nhiều GPU hơn.</string>
     <string name="liquid_glass_unavailable">Yêu cầu Android 12 trở lên</string>
     <string name="full_screen_cover_art">Ảnh bìa toàn màn hình</string>
-    <string name="player_carousel">Vuốt bìa đĩa</string>
-    <string name="player_carousel_subtitle">Kéo bìa sang hai bên để hiện bài kế tiếp và bài trước, như một chồng đĩa. Tắt sẽ giữ nguyên bìa như hiện tại.</string>
+    <string name="new_experience">Trải nghiệm mới</string>
+    <string name="new_experience_subtitle">Bật trình phát vuốt được, các đĩa kính và bộ biểu tượng đặc. Tắt sẽ giữ ứng dụng y như hiện tại.</string>
     <string name="legacy_mesh_gradient">Dải màu lưới kiểu cũ</string>
     <string name="legacy_mesh_gradient_subtitle">Mang lại các đốm màu chuyển động phía sau trình phát từ phiên bản 1.5</string>
     <string name="animated_cover_art">Ảnh bìa động</string>

@@ -144,6 +144,11 @@ fun FloatingBottomBar(
     val reduceDynamicBlur by AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
     val useGlass = LocalLiquidGlassEnabled.current && isGlassSupported()
     val reduceAnimation by AppSettings.reduceAnimation.collectAsStateWithLifecycle()
+    // The disc *is* the indicator in the New Experience — see [BottomBarItem].
+    // Drawing both would put a travelling pill behind a shape that already
+    // marks the same tab, and two things claiming to say "you are here" a few
+    // pixels apart is one thing too many.
+    val newExperience by AppSettings.newExperience.collectAsStateWithLifecycle()
     // The glass settle is exactly the motion "reduce animation" promises to
     // drop — snapping both the indicator's travel and the glyph's pop to
     // their target leaves the tap itself instant rather than eased.
@@ -215,7 +220,7 @@ fun FloatingBottomBar(
             .border(GLASS_EDGE_WIDTH, GLASS_EDGE_COLOR, pillShape)
             .padding(horizontal = PILL_INSET, vertical = PILL_INSET),
     ) {
-        if (tabWidthPx > 0f) {
+        if (tabWidthPx > 0f && !newExperience) {
             Box(
                 modifier = Modifier
                     .width(with(density) { tabWidthPx.toDp() })
@@ -296,6 +301,7 @@ fun FloatingBottomBar(
                     tab = tab,
                     selected = index == selectedIndex,
                     glassSpec = glassSpec,
+                    newExperience = newExperience,
                     selectedTint = adaptiveTint,
                     unselectedTint = adaptiveTint?.copy(alpha = 0.65f),
                     onClick = { onTabSelected(index) },
@@ -313,6 +319,8 @@ private fun BottomBarItem(
     glassSpec: AnimationSpec<Float>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Draws the tab as a glass disc with no label — see [NewExperienceButton]. */
+    newExperience: Boolean = false,
     /** Overrides the theme's primary/onSurfaceVariant tint — see the glass branch above. */
     selectedTint: Color? = null,
     unselectedTint: Color? = null,
@@ -325,6 +333,10 @@ private fun BottomBarItem(
         label = "tabScale",
     )
     val haptics = rememberHaptics()
+    val onClickAndHaptic = {
+        if (!selected) haptics.play(Haptic.Select)
+        onClick()
+    }
     val tint by animateColorAsState(
         targetValue = if (selected) {
             selectedTint ?: MaterialTheme.colorScheme.primary
@@ -335,6 +347,40 @@ private fun BottomBarItem(
         label = "tabTint",
     )
 
+    if (newExperience) {
+        // The disc occupies exactly the box the old glyph did, and the label
+        // goes — which is the reference's own trade, and the one thing in this
+        // mode that costs something. It is confined to the four tabs the app is
+        // arranged around; every other label in the app stays.
+        //
+        // Label and glyph are replaced rather than merely hidden so the tab
+        // keeps its width: a `visibility`-style hide would leave the text
+        // occupying the cell and the disc floating off-centre in it.
+        Box(
+            modifier = modifier
+                .clip(RoundedCornerShape(percent = 50))
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickAndHaptic,
+                )
+                .padding(vertical = TAB_VERTICAL_PADDING),
+            contentAlignment = Alignment.Center,
+        ) {
+            NewExperienceButton(
+                icon = tab.icon,
+                contentDescription = tab.label,
+                // Null: the tab's own clickable above owns the gesture, so a
+                // disc with one of its own would only split the target.
+                onClick = null,
+                selected = selected,
+                selectedTint = selectedTint,
+                unselectedTint = unselectedTint,
+            )
+        }
+        return
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -342,10 +388,8 @@ private fun BottomBarItem(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
-            ) {
-                if (!selected) haptics.play(Haptic.Select)
-                onClick()
-            }
+                onClick = onClickAndHaptic,
+            )
             .padding(vertical = TAB_VERTICAL_PADDING),
     ) {
         Icon(

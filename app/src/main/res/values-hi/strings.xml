@@ -268,8 +268,8 @@
     <string name="reduce_dynamic_blur">डायनामिक ब्लर कम करें</string>
     <string name="reduce_dynamic_blur_subtitle">पूरे ऐप में फ्रॉस्टेड ग्लास की जगह ठोस रंग लगाता है</string>
     <string name="full_screen_cover_art">फ़ुल-स्क्रीन कवर आर्ट</string>
-    <string name="player_carousel">स्लीव स्वाइप करें</string>
-    <string name="player_carousel_subtitle">कवर को किनारे की ओर खींचकर अगला और पिछला ट्रैक लाएँ, जैसे रिकॉर्ड का ढेर। बंद रहने पर स्लीव आज जैसी ही रहेगी।</string>
+    <string name="new_experience">नया अनुभव</string>
+    <string name="new_experience_subtitle">स्वाइप होने वाला प्लेयर, ग्लास डिस्क और भरे हुए आइकन सेट चालू करता है। बंद रहने पर ऐप आज जैसा ही रहेगा।</string>
     <string name="animated_cover_art">एनिमेटेड कवर आर्ट</string>
     <string name="synced_lyrics">सिंक किए गए लिरिक्स</string>
     <string name="synced_lyrics_subtitle">गाए जाने के साथ प्लेयर पर शब्दों को हाइलाइट करता है</string>

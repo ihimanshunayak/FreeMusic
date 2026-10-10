@@ -51,11 +51,13 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.model.ROW_ART_PX
 import com.ihimanshunayak.freemusic.data.model.Song
 import com.ihimanshunayak.freemusic.data.model.artworkAt
+import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.ui.components.floatingtabbar.FloatingTabBar
 import com.ihimanshunayak.freemusic.ui.components.floatingtabbar.FloatingTabBarDefaults
 import com.ihimanshunayak.freemusic.ui.components.floatingtabbar.FloatingTabBarScrollConnection
@@ -119,6 +121,12 @@ fun GlassNavBar(
     // the pill rather than a quarter of it. It is the last tab in Free Music's
     // order, which is where the shape wants it anyway.
     val standaloneIndex = tabs.lastIndex
+
+    // The disc's own material is glass over the pill's glass, so the mode is
+    // only worth drawing where the device can render it at all — on the flat
+    // branch the plain bar is the better answer anyway, and MainActivity
+    // already picks between the two bars on exactly this condition.
+    val newExperience by AppSettings.newExperience.collectAsStateWithLifecycle()
 
     // A factory, not a value — see the note in FloatingTabBar's header. Each of
     // the three surfaces gets its own glass modifier and so its own shape cache.
@@ -198,8 +206,8 @@ fun GlassNavBar(
         ),
         // Held too: this is declared `Any?`, so a fresh list every pass is a
         // changed argument by identity and defeats skipping on its own.
-        contentKey = remember(selectedIndex, tabs, contentColor) {
-            listOf(selectedIndex, tabs, contentColor)
+        contentKey = remember(selectedIndex, tabs, contentColor, newExperience) {
+            listOf(selectedIndex, tabs, contentColor, newExperience)
         },
     ) {
         tabs.forEachIndexed { index, tab ->
@@ -213,12 +221,30 @@ fun GlassNavBar(
                 standaloneTab(
                     key = index,
                     icon = {
-                        Icon(
-                            imageVector = tab.icon,
-                            contentDescription = tab.label,
-                            tint = tint,
-                            modifier = Modifier.size(25.dp),
-                        )
+                        if (newExperience) {
+                            // The standalone tab is already a circle, so the
+                            // disc would be a circle on a circle. The mode's
+                            // one rule — the selected control wears the
+                            // surface, the rest are bare glyphs — reads here
+                            // as the Search height staying 25dp either way.
+                            NewExperienceButton(
+                                icon = tab.icon,
+                                contentDescription = tab.label,
+                                onClick = null,
+                                selected = isSelected,
+                                selectedTint = selectedColor,
+                                unselectedTint = unselectedColor,
+                                discSize = 40.dp,
+                                glyphSize = 24.dp,
+                            )
+                        } else {
+                            Icon(
+                                imageVector = tab.icon,
+                                contentDescription = tab.label,
+                                tint = tint,
+                                modifier = Modifier.size(25.dp),
+                            )
+                        }
                     },
                     onClick = onClick,
                 )
@@ -226,25 +252,41 @@ fun GlassNavBar(
                 tab(
                     key = index,
                     icon = {
-                        Icon(
-                            imageVector = tab.icon,
-                            contentDescription = tab.label,
-                            tint = tint,
-                            modifier = Modifier.size(25.dp),
-                        )
+                        if (newExperience) {
+                            NewExperienceButton(
+                                icon = tab.icon,
+                                contentDescription = tab.label,
+                                onClick = null,
+                                selected = isSelected,
+                                selectedTint = selectedColor,
+                                unselectedTint = unselectedColor,
+                            )
+                        } else {
+                            Icon(
+                                imageVector = tab.icon,
+                                contentDescription = tab.label,
+                                tint = tint,
+                                modifier = Modifier.size(25.dp),
+                            )
+                        }
                     },
                     title = {
-                        Text(
-                            text = tab.label,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = tint,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            // The library's Tab stacks the glyph and the label
-                            // with nothing between them; the plain bar spaces
-                            // them, and this is where that gap goes.
-                            modifier = Modifier.padding(top = TAB_ICON_LABEL_GAP),
-                        )
+                        // Empty rather than omitted: the slot is what keeps the
+                        // glyph centred in the cell, and [Tab] already agrees to
+                        // skip drawing it (`!isStandalone && !isInline`).
+                        if (!newExperience) {
+                            Text(
+                                text = tab.label,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = tint,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                // The library's Tab stacks the glyph and the label
+                                // with nothing between them; the plain bar spaces
+                                // them, and this is where that gap goes.
+                                modifier = Modifier.padding(top = TAB_ICON_LABEL_GAP),
+                            )
+                        }
                     },
                     onClick = onClick,
                 )

@@ -523,21 +523,28 @@ object AppSettings {
     val prioritizeSpotifyCanvas = MutableStateFlow(false)
 
     /**
-     * Unlocks the redesigned player: the sleeve becomes a carousel the next and
-     * previous tracks can be swiped in from, rather than a single card that only
-     * leans at a sideways drag.
+     * Unlocks the redesigned control surfaces: the player sleeve becomes a
+     * carousel the neighbours swipe in from, the bottom bar's tabs wear a glass
+     * disc under the selected glyph instead of a label, and the Library's
+     * leading tiles draw their glyph in one.
      *
      * Off by default, and deliberately so. Everything behind this switch is a
-     * different way of drawing and driving the player — new artwork cards, new
-     * gesture arbitration, new timing — and a player is where someone is most
-     * likely to be annoyed by a change they did not ask for. Leaving it off
-     * means the app as shipped is exactly the app that was reviewed, and the
-     * new surface is opted into rather than inflicted.
+     * different way of drawing and driving a control, and a control is where
+     * someone is most likely to be annoyed by a change they did not ask for.
+     * Leaving it off means the app as shipped is exactly the app that was
+     * reviewed, and the new surface is opted into rather than inflicted.
      *
-     * The gate is one switch rather than a scattering of flags so the two
-     * players can be reasoned about as two, not as a matrix.
+     * One switch rather than a row per surface: a settings page that grows one
+     * per redesign is a page nobody can answer "am I using the new app or not?"
+     * from. See `docs/NEW_EXPERIENCE.md`.
+     *
+     * Reads [LEGACY_KEY_PLAYER_CAROUSEL] when it has never been written, so the
+     * carousel that shipped in 1.14 as its own switch is still on for anyone who
+     * had turned it on. The old key is left in place, unread after the first
+     * write, so the migration is idempotent and a downgrade does not lose the
+     * answer either.
      */
-    val playerCarouselEnabled = MutableStateFlow(false)
+    val newExperience = MutableStateFlow(false)
 
     /**
      * Blows the player's cover art out to a full-bleed banner running off the
@@ -942,7 +949,10 @@ object AppSettings {
         canvasOverCellular.value = prefs.getBoolean(KEY_CANVAS_OVER_CELLULAR, false)
         spotifyCanvasAutoHide.value = prefs.getBoolean(KEY_SPOTIFY_CANVAS_AUTO_HIDE, true)
         prioritizeSpotifyCanvas.value = prefs.getBoolean(KEY_PRIORITIZE_SPOTIFY_CANVAS, false)
-        playerCarouselEnabled.value = prefs.getBoolean(KEY_PLAYER_CAROUSEL, false)
+        newExperience.value = prefs.getBoolean(
+            KEY_NEW_EXPERIENCE,
+            prefs.getBoolean(LEGACY_KEY_PLAYER_CAROUSEL, false),
+        )
         fullBleedArtwork.value = prefs.getBoolean(KEY_FULL_BLEED_ARTWORK, true)
         legacyMeshGradient.value = prefs.getBoolean(KEY_LEGACY_MESH_GRADIENT, false)
         lastPlayerScreen.value = runCatching {
@@ -1496,9 +1506,9 @@ object AppSettings {
         prefs.edit().putBoolean(KEY_PRIORITIZE_SPOTIFY_CANVAS, value).apply()
     }
 
-    fun setPlayerCarouselEnabled(value: Boolean) {
-        playerCarouselEnabled.value = value
-        prefs.edit().putBoolean(KEY_PLAYER_CAROUSEL, value).apply()
+    fun setNewExperience(value: Boolean) {
+        newExperience.value = value
+        prefs.edit().putBoolean(KEY_NEW_EXPERIENCE, value).apply()
     }
 
     fun setFullBleedArtwork(value: Boolean) {
@@ -2060,7 +2070,13 @@ object AppSettings {
     private const val KEY_CANVAS_OVER_CELLULAR = "canvas_over_cellular"
     private const val KEY_SPOTIFY_CANVAS_AUTO_HIDE = "spotify_canvas_auto_hide"
     private const val KEY_PRIORITIZE_SPOTIFY_CANVAS = "prioritize_spotify_canvas"
-    private const val KEY_PLAYER_CAROUSEL = "player_carousel"
+    private const val KEY_NEW_EXPERIENCE = "new_experience"
+
+    /**
+     * 1.14's own switch for the player carousel, which [KEY_NEW_EXPERIENCE] now
+     * covers. Read once, only as the new key's default — see [newExperience].
+     */
+    private const val LEGACY_KEY_PLAYER_CAROUSEL = "player_carousel"
     private const val KEY_FULL_BLEED_ARTWORK = "full_bleed_artwork"
     private const val KEY_LEGACY_MESH_GRADIENT = "legacy_mesh_gradient"
     private const val KEY_LAST_PLAYER_SCREEN = "last_player_screen"

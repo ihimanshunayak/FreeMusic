@@ -269,8 +269,8 @@
     <string name="reduce_dynamic_blur">הפחתת טשטוש דינמי</string>
     <string name="reduce_dynamic_blur_subtitle">מחליף אפקט זכוכית מטושטשת במילוי אחיד בכל האפליקציה</string>
     <string name="full_screen_cover_art">עטיפת אלבום במסך מלא</string>
-    <string name="player_carousel">החלקת העטיפה</string>
-    <string name="player_carousel_subtitle">גורר את העטיפה הצידה כדי להציג את הרצועה הבאה והקודמת, כמו חבילת תקליטים. כבוי משאיר את העטיפה כפי שהיא היום.</string>
+    <string name="new_experience">חוויה חדשה</string>
+    <string name="new_experience_subtitle">מפעיל את הנגן הניתן להחלקה, דיסקות הזכוכית וסט הסמלים המלאים. כבוי משאיר את האפליקציה בדיוק כפי שהיא היום.</string>
     <string name="animated_cover_art">עטיפת אלבום מונפשת</string>
     <string name="synced_lyrics">מילות שיר מסונכרנות</string>
     <string name="synced_lyrics_subtitle">מדגיש את המילים בנגן בזמן שהן מושרות</string>

@@ -81,6 +81,7 @@ import com.ihimanshunayak.freemusic.ui.theme.topBandScrimAlpha
 import com.ihimanshunayak.freemusic.ui.components.ArtworkWash
 import com.ihimanshunayak.freemusic.ui.components.HERO_CARD_RATIO
 import com.ihimanshunayak.freemusic.ui.components.MessageState
+import com.ihimanshunayak.freemusic.ui.components.NewExperienceButton
 import com.ihimanshunayak.freemusic.ui.components.PAGE_GUTTER
 import com.ihimanshunayak.freemusic.ui.components.PullToRefresh
 import com.ihimanshunayak.freemusic.ui.components.SHELF_CARD_WIDTH
@@ -1223,6 +1224,12 @@ internal fun Shelf(
  * A card that isn't a thing yet — the dashed "New playlist" tile at the head
  * of the Library's playlist row, sized to sit in line with the covers beside
  * it rather than as a button bolted above them.
+ *
+ * Under the New Experience the glyph gets a glass disc behind it. Only the
+ * glyph does: the tile's own square is already the card that sits in line with
+ * the covers, and a second surface inside it would read as a card on a card.
+ * The disc goes where a disc means *control* — the row's four other glyphs are
+ * artwork, and this one is the only thing in the row anybody can press.
  */
 @Composable
 internal fun NewShelfCard(
@@ -1231,7 +1238,14 @@ internal fun NewShelfCard(
     subtitle: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier.width(SHELF_CARD_WIDTH),
+    /**
+     * The New Experience's own drawing of [icon]. Defaults to [icon] itself, so
+     * a caller that has no counterpart to offer still gets a working tile
+     * rather than an empty one.
+     */
+    newExperienceIcon: ImageVector = icon,
 ) {
+    val newExperience by AppSettings.newExperience.collectAsStateWithLifecycle()
     Column(
         modifier = modifier.clickable(onClick = onClick),
     ) {
@@ -1243,12 +1257,28 @@ internal fun NewShelfCard(
                 .background(MaterialTheme.colorScheme.surfaceVariant),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(34.dp),
-            )
+            if (newExperience) {
+                NewExperienceButton(
+                    icon = newExperienceIcon,
+                    contentDescription = null,
+                    // Null: the tile's own clickable above owns the gesture.
+                    onClick = null,
+                    // Sized past the bars' 34dp because this disc is the whole
+                    // of the tile's middle — in a tab it sits in a pill that is
+                    // already a surface, here it is the only thing on a grey
+                    // square, and the reference sheet's leading tile is the one
+                    // place it draws the disc large.
+                    discSize = 56.dp,
+                    glyphSize = 30.dp,
+                )
+            } else {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(34.dp),
+                )
+            }
         }
         Spacer(Modifier.height(10.dp))
         Text(

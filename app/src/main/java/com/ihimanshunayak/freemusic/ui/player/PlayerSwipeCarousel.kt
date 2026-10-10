@@ -27,7 +27,8 @@ import kotlin.math.abs
  * the edges, like a deck of records.
  *
  * Off until it is asked for, which is the whole point of the switch in Settings
- * — see [com.ihimanshunayak.freemusic.data.settings.AppSettings.playerCarouselEnabled].
+ * — see [com.ihimanshunayak.freemusic.data.settings.AppSettings.newExperience],
+ * which the carousel is one surface of rather than a feature of its own.
  * With it off the player is byte for byte the player it has always been: no
  * inset, no neighbours, and the damped directional hint the old horizontal drag
  * gave. With it on the drag tracks the finger at full travel and commits on a
