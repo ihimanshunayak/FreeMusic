@@ -730,9 +730,6 @@
     <string name="song_cache_limit_subtitle">Behält heruntergeladenes Audio auf dem Speicher für sofortiges Springen und Wiederholen</string>
     <string name="replay_genres_enabled_subtitle">Fragt Last.fm nach den Genres eines Künstlers. Nur der Künstlername wird gesendet.</string>
     <string name="replay_genres_disabled_subtitle">Das Replay-Genre-Diagramm bleibt ausgeblendet, solange dies deaktiviert ist</string>
-    <string name="show_play_counts">Wiedergabezähler anzeigen</string>
-    <string name="show_play_counts_enabled_subtitle">Jeder Titel zeigt, wie oft er auf diesem Gerät abgespielt wurde</string>
-    <string name="show_play_counts_disabled_subtitle">Zeilen zeigen nur ihre Dauer, solange dies aus ist</string>
     <string name="swipe_plays_next">Ein gewischter Song wird als Nächstes gespielt</string>
     <string name="swipe_adds_to_queue">Wenn deaktiviert, fügt Wischen den Song ans Ende der Warteschlange hinzu</string>
     <string name="import_backup_warning">Dies ersetzt die Einstellungen und den Hörverlauf dieses Geräts durch den Inhalt der Datei. Exportiere zuerst die aktuellen Daten, wenn du sie behalten möchtest.</string>

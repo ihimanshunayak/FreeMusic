@@ -744,9 +744,6 @@
     <string name="song_cache_limit_subtitle">เก็บเสียงที่ดาวน์โหลดไว้บนดิสก์เพื่อการเลื่อนฟังและฟังซ้ำได้ทันที</string>
     <string name="replay_genres_enabled_subtitle">ขอข้อมูลแนวเพลงของศิลปินจาก Last.fm โดยส่งเฉพาะชื่อศิลปินเท่านั้น</string>
     <string name="replay_genres_disabled_subtitle">กราฟแนวเพลงใน Replay จะซ่อนอยู่ตราบใดที่ปิดอยู่</string>
-    <string name="show_play_counts">แสดงจำนวนครั้งที่เล่น</string>
-    <string name="show_play_counts_enabled_subtitle">แต่ละเพลงจะแสดงจำนวนครั้งที่เล่นบนอุปกรณ์นี้</string>
-    <string name="show_play_counts_disabled_subtitle">แถวจะแสดงเฉพาะความยาวตราบใดที่ปิดอยู่</string>
     <string name="swipe_plays_next">การปัดเพลงจะเล่นเพลงนั้นต่อไป</string>
     <string name="swipe_adds_to_queue">เมื่อปิด การปัดจะเพิ่มเพลงไปที่ท้ายคิวแทน</string>
     <string name="import_backup_warning">การดำเนินการนี้จะแทนที่การตั้งค่าและประวัติการฟังของอุปกรณ์นี้ด้วยเนื้อหาในไฟล์ ส่งออกข้อมูลปัจจุบันก่อนหากต้องการเก็บไว้</string>

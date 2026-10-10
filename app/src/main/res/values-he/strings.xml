@@ -682,9 +682,6 @@
     <string name="song_cache_limit_subtitle">שומר שמע שהורד בכונן לחיפוש מיידי ולהשמעות חוזרות</string>
     <string name="replay_genres_enabled_subtitle">מבקש מ-Last.fm את הז\'אנרים של האמן. רק שם האמן נשלח.</string>
     <string name="replay_genres_disabled_subtitle">תרשים הז\'אנרים של Replay נשאר מוסתר כל עוד זה כבוי</string>
-    <string name="show_play_counts">הצג ספירת השמעות</string>
-    <string name="show_play_counts_enabled_subtitle">כל שיר מציג כמה פעמים הוא הושמע במכשיר הזה</string>
-    <string name="show_play_counts_disabled_subtitle">שורות יציגו רק את משכן כל עוד זה כבוי</string>
     <string name="swipe_plays_next">החלקה של שיר מנגנת אותו בהמשך</string>
     <string name="swipe_adds_to_queue">כאשר מושבת, החלקה מוסיפה את השיר לסוף התור</string>
     <string name="import_backup_warning">זה מחליף את ההגדרות והיסטוריית ההאזנה של מכשיר זה בתוכן הקובץ. ייצא את הנתונים הנוכחיים תחילה אם תרצה לשמור אותם.</string>

@@ -712,9 +712,6 @@
     <string name="song_cache_limit_subtitle">即座にシークや再生ができるよう、ダウンロードした音声をディスクに保持します</string>
     <string name="replay_genres_enabled_subtitle">Last.fmにアーティストのジャンルを問い合わせます。送信されるのはアーティスト名のみです。</string>
     <string name="replay_genres_disabled_subtitle">オフの間はReplayのジャンルグラフが表示されません</string>
-    <string name="show_play_counts">再生回数を表示</string>
-    <string name="show_play_counts_enabled_subtitle">各曲がこの端末で再生された回数を表示します</string>
-    <string name="show_play_counts_disabled_subtitle">オフの間は行に長さだけが表示されます</string>
     <string name="swipe_plays_next">曲をスワイプすると次に再生します</string>
     <string name="swipe_adds_to_queue">オフにすると、スワイプした曲は再生キューの末尾に追加されます</string>
     <string name="import_backup_warning">これによりこのデバイスの設定と再生履歴がファイルの内容で置き換えられます。保持したい場合は先に現在のデータをエクスポートしてください。</string>

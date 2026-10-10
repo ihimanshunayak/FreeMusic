@@ -781,9 +781,6 @@
     <string name="song_cache_limit_subtitle">Mantiene l\'audio scaricato sul disco per ricerca istantanea e replay</string>
     <string name="replay_genres_enabled_subtitle">Chiede a Last.fm i generi di un artista. Viene inviato solo il nome dell\'artista.</string>
     <string name="replay_genres_disabled_subtitle">Il grafico dei generi del Replay resta nascosto finché questa opzione è disattivata</string>
-    <string name="show_play_counts">Mostra conteggio riproduzioni</string>
-    <string name="show_play_counts_enabled_subtitle">Ogni brano mostra quante volte è stato riprodotto su questo dispositivo</string>
-    <string name="show_play_counts_disabled_subtitle">Le righe mostrano solo la durata finché questa opzione è disattivata</string>
     <string name="swipe_plays_next">Scorrere un brano lo riproduce come successivo</string>
     <string name="swipe_adds_to_queue">Quando disattivato, scorrere aggiunge il brano alla fine della coda</string>
     <string name="import_backup_warning">Questo sostituisce le impostazioni e la cronologia di ascolto di questo dispositivo con il contenuto del file. Esporta prima i dati attuali se vuoi conservarli.</string>
