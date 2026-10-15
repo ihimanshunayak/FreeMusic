@@ -54,7 +54,6 @@ import com.ihimanshunayak.freemusic.data.settings.LibrarySort
 import com.ihimanshunayak.freemusic.download.Downloads
 import com.ihimanshunayak.freemusic.download.SavedCollection
 import com.ihimanshunayak.freemusic.ui.icons.FreeMusicIcons
-import com.ihimanshunayak.freemusic.ui.icons.NewExperienceIcons
 import com.ihimanshunayak.freemusic.ui.components.LIBRARY_GRID_SPACING
 import com.ihimanshunayak.freemusic.ui.components.MessageState
 import com.ihimanshunayak.freemusic.ui.components.PAGE_GUTTER
@@ -238,7 +237,6 @@ fun LibraryScreen(
                     leadingCard = {
                         NewShelfCard(
                             icon = FreeMusicIcons.Plus,
-                            newExperienceIcon = NewExperienceIcons.Plus,
                             label = stringResource(R.string.new_playlist),
                             subtitle = stringResource(R.string.on_device),
                             onClick = onCreatePlaylist,
@@ -283,7 +281,6 @@ fun LibraryScreen(
                     leadingCard = {
                         NewShelfCard(
                             icon = FreeMusicIcons.Plus,
-                            newExperienceIcon = NewExperienceIcons.Plus,
                             label = stringResource(R.string.shared_playlist_new),
                             subtitle = stringResource(R.string.my_playlists),
                             onClick = onCreateCollabPlaylist,
@@ -578,7 +575,6 @@ private fun PlaylistShelf(
         leadingCard = {
             NewShelfCard(
                 icon = FreeMusicIcons.Plus,
-                newExperienceIcon = NewExperienceIcons.Plus,
                 label = stringResource(R.string.new_playlist),
                 subtitle = stringResource(R.string.saved_to_youtube_music),
                 onClick = onNewPlaylist,
@@ -672,7 +668,6 @@ fun LibraryGridPage(
                 item(key = "leading") {
                     NewShelfCard(
                         icon = FreeMusicIcons.Plus,
-                        newExperienceIcon = NewExperienceIcons.Plus,
                         label = stringResource(R.string.new_playlist),
                         subtitle = stringResource(R.string.saved_to_youtube_music),
                         onClick = onNewPlaylist,

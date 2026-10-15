@@ -71,6 +71,7 @@ import androidx.compose.material.icons.rounded.VolumeOff
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Waves
 import androidx.compose.material.icons.rounded.Vibration
+import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material.icons.rounded.Wifi
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -207,7 +208,7 @@ fun SettingsScreen(
     val animatedCanvas by AppSettings.animatedCanvas.collectAsStateWithLifecycle()
     val canvasOverCellular by AppSettings.canvasOverCellular.collectAsStateWithLifecycle()
     val fullBleedArtwork by AppSettings.fullBleedArtwork.collectAsStateWithLifecycle()
-    val newExperience by AppSettings.newExperience.collectAsStateWithLifecycle()
+    val playerCarouselEnabled by AppSettings.playerCarouselEnabled.collectAsStateWithLifecycle()
     val legacyMeshGradient by AppSettings.legacyMeshGradient.collectAsStateWithLifecycle()
     val syncedLyrics by AppSettings.syncedLyrics.collectAsStateWithLifecycle()
     val lyricsSources by AppSettings.lyricsSources.collectAsStateWithLifecycle()
@@ -856,26 +857,23 @@ fun SettingsScreen(
                     )
                 }
             }
-            val newExperienceTitle = stringResource(R.string.new_experience)
-            // Carries the keywords of every surface it brings in, so that
-            // hunting for the swipe, the disc or the new icons turns up the one
-            // switch that turns them all on.
-            row(newExperienceTitle, "swipe", "carousel", "icons", "beta", "experimental") {
+            val playerCarouselTitle = stringResource(R.string.player_carousel)
+            row(playerCarouselTitle, "artwork", "player", "swipe") {
                 SettingsRow(
-                    icon = Icons.Rounded.AutoAwesome,
-                    title = newExperienceTitle,
-                    subtitle = stringResource(R.string.new_experience_subtitle),
+                    icon = Icons.Rounded.ViewCarousel,
+                    title = playerCarouselTitle,
+                    subtitle = stringResource(R.string.player_carousel_subtitle),
                     trailing = {
                         Switch(
-                            checked = newExperience,
-                            onCheckedChange = AppSettings::setNewExperience,
+                            checked = playerCarouselEnabled,
+                            onCheckedChange = AppSettings::setPlayerCarouselEnabled,
                             colors = SwitchDefaults.colors(
                                 checkedTrackColor = MaterialTheme.colorScheme.primary,
                                 checkedBorderColor = MaterialTheme.colorScheme.primary,
                             ),
                         )
                     },
-                    onClick = { AppSettings.setNewExperience(!newExperience) },
+                    onClick = { AppSettings.setPlayerCarouselEnabled(!playerCarouselEnabled) },
                 )
             }
             val legacyMeshGradientTitle = stringResource(R.string.legacy_mesh_gradient)
