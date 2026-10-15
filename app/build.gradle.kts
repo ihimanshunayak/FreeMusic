@@ -80,8 +80,13 @@ android {
         // Haze falls back to a translucent scrim below that.
         minSdk = 26
         targetSdk = 36
-        versionCode = 30
-        versionName = "1.15"
+        // 32, not 31: 31 was the play-count build that 1.17 rolls back, and
+        // Android refuses to install a lower code over a higher one — so a
+        // rollback that kept 1.15's 30 would be the one release nobody could
+        // actually put on a phone that had 1.16. The number tracks build order,
+        // not feature set, and this build comes after 1.16.
+        versionCode = 32
+        versionName = "1.17"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
