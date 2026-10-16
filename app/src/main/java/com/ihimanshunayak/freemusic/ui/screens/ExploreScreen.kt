@@ -32,16 +32,20 @@
 
 package com.ihimanshunayak.freemusic.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -51,6 +55,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -108,6 +113,7 @@ fun ExploreScreen(
                     sections = state.data,
                     onCardOpen = onCategoryClick,
                     onPlayClick = onCategoryClick,
+                    onShuffle = onCategoryClick,
                     contentPadding = contentPadding,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -118,30 +124,93 @@ fun ExploreScreen(
 
 @Composable
 private fun ExploreDeckSkeleton() {
-    // Three stacked shells mimicking the deck shape so the page doesn't
-    // pop when data arrives.
+    // One large center shell + two side peeks + page-indicator row +
+    // action-row shells, so the page doesn't pop when the carousel
+    // data arrives.
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val cardHeight = maxHeight * 0.62f
-        val peek = 56.dp
+        val cardHeight = 460.dp
         val pageWidth = maxWidth
+        val cardWidth = pageWidth * 0.72f
+        val sideGutter = pageWidth * 0.14f
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(Modifier.height(8.dp))
-            repeat(3) { i ->
-                Box(
-                    Modifier
-                        .padding(
-                            horizontal = pageWidth * 0.07f,
-                            vertical = peek * if (i == 0) 0f else 1f,
-                        )
+            Spacer(Modifier.height(4.dp))
+            // Carousel shell
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(cardHeight),
+                contentAlignment = Alignment.Center,
+            ) {
+                Row(
+                    modifier = Modifier
                         .fillMaxWidth()
                         .height(cardHeight)
-                        .clip(RoundedCornerShape(22.dp)),
+                        .padding(horizontal = sideGutter),
+                    horizontalArrangement = Arrangement.spacedBy(0.dp),
                 ) {
-                    ShimmerBox(Modifier.fillMaxSize(), RoundedCornerShape(22.dp))
+                    // Left peek
+                    Box(
+                        modifier = Modifier
+                            .width(cardWidth * 0.40f)
+                            .height(cardHeight)
+                            .clip(RoundedCornerShape(28.dp)),
+                    ) {
+                        ShimmerBox(Modifier.fillMaxSize(), RoundedCornerShape(28.dp))
+                    }
+                    Spacer(Modifier.width(cardWidth * 0.10f))
+                    // Center card
+                    Box(
+                        modifier = Modifier
+                            .width(cardWidth)
+                            .height(cardHeight)
+                            .clip(RoundedCornerShape(28.dp)),
+                    ) {
+                        ShimmerBox(Modifier.fillMaxSize(), RoundedCornerShape(28.dp))
+                    }
+                    Spacer(Modifier.width(cardWidth * 0.10f))
+                    // Right peek
+                    Box(
+                        modifier = Modifier
+                            .width(cardWidth * 0.40f)
+                            .height(cardHeight)
+                            .clip(RoundedCornerShape(28.dp)),
+                    ) {
+                        ShimmerBox(Modifier.fillMaxSize(), RoundedCornerShape(28.dp))
+                    }
                 }
+            }
+            Spacer(Modifier.height(12.dp))
+            // Page-indicator pill row shell
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                repeat(4) {
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.10f)),
+                    )
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+            // Action-row shell
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+                    .height(56.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                ShimmerBox(
+                    modifier = Modifier.weight(1f).fillMaxSize(),
+                    shape = RoundedCornerShape(20.dp),
+                )
+                ShimmerBox(
+                    modifier = Modifier.weight(1f).fillMaxSize(),
+                    shape = RoundedCornerShape(20.dp),
+                )
             }
         }
     }
