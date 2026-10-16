@@ -80,13 +80,15 @@ android {
         // Haze falls back to a translucent scrim below that.
         minSdk = 26
         targetSdk = 36
-        // 34: v1.19 lands the Account & Integrations profile hero redesign
-        // (avatar ring, status pill, 2x2 stat grid, liquid-glass treatment,
-        // edit-profile dialog with avatar picker) on top of the v1.18
-        // platform. This follows v1.18 (which itself rolled back the v1.15
-        // New Experience mode), so it is a strict forward step.
-        versionCode = 34
-        versionName = "1.19"
+        // 35: v1.20 replaces the Explore page's 2-column mood/genre grid
+        // with a fluid stacked-card deck (ExploreCardStack + ExploreCard)
+        // inspired by the user's reference video: large overlapping cards
+        // with depth, scale, alpha, and a snap-to-card gesture, plus a
+        // shared-element transition into the existing
+        // MoodGenrePlaylistsScreen. Follows v1.19 (profile hero) and
+        // v1.18 (revert of v1.15 New Experience mode).
+        versionCode = 35
+        versionName = "1.20"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
