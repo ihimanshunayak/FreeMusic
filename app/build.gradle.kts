@@ -8,6 +8,45 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+/*
+ * Date-based versioning. Runs the PowerShell helper once per Gradle
+ * invocation to advance the same-day counter and write the resulting
+ * `versionName` (DD.MM.YY or DD.MM.YY.N) and `versionCode`
+ * (YYYYMMDD * 100 + N) into .gradle/version-date.properties, which
+ * `defaultConfig` reads back below. See docs/VERSION_DATE_SYSTEM.md for
+ * the full contract and why the format stays backward compatible with
+ * AppUpdateChecker.
+ *
+ * The script is run only when building, not when IDEA imports the
+ * project — that keeps IDE sync cheap and avoids spurious counter
+ * bumps. -PdateVersion.skip=true (or DATE_VERSION_SKIP=1) disables the
+ * auto-bump; -PdateVersion.dryRun=true makes the script print the next
+ * version without writing anything.
+ */
+val dateVersionSkip: Boolean =
+    (project.findProperty("dateVersion.skip") as String?)?.toBoolean() == true ||
+        System.getenv("DATE_VERSION_SKIP") == "1"
+val dateVersionDryRun: Boolean =
+    (project.findProperty("dateVersion.dryRun") as String?)?.toBoolean() == true
+val dateVersionRunner: String = System.getenv("DATE_VERSION_PWSH") ?: "pwsh"
+if (!dateVersionSkip) {
+    val script = rootProject.file("scripts/compute-date-version.ps1")
+    if (script.exists()) {
+        val args = buildList {
+            add("-NoProfile")
+            add("-ExecutionPolicy"); add("Bypass")
+            add("-File"); add(script.absolutePath)
+            if (dateVersionDryRun) add("-DryRun")
+        }
+        exec {
+            commandLine(dateVersionRunner, *args.toTypedArray())
+            isIgnoreExitValue = false
+        }
+    } else {
+        logger.warn("compute-date-version.ps1 not found at ${script.absolutePath}; using whatever versionName/versionCode is in build.gradle.kts")
+    }
+}
+
 /**
  * Signing details, kept out of the repository in `keystore.properties`
  * (see keystore.properties.example). Absent on a fresh checkout, in which case
@@ -80,15 +119,20 @@ android {
         // Haze falls back to a translucent scrim below that.
         minSdk = 26
         targetSdk = 36
-        // 35: v1.20 replaces the Explore page's 2-column mood/genre grid
-        // with a fluid stacked-card deck (ExploreCardStack + ExploreCard)
-        // inspired by the user's reference video: large overlapping cards
-        // with depth, scale, alpha, and a snap-to-card gesture, plus a
-        // shared-element transition into the existing
-        // MoodGenrePlaylistsScreen. Follows v1.19 (profile hero) and
-        // v1.18 (revert of v1.15 New Experience mode).
-        versionCode = 35
-        versionName = "1.20"
+        // versionName / versionCode are now driven by the system clock.
+        // scripts/compute-date-version.ps1 (run at the top of this file)
+        // writes the result to .gradle/version-date.properties (ignored by
+        // git) and we read it back here. Format: DD.MM.YY[.N] for
+        // versionName and YYYYMMDD * 100 + N for versionCode. See
+        // docs/VERSION_DATE_SYSTEM.md.
+        val dateVersionState = rootProject.file(".gradle/version-date.properties")
+        val dateVersionProps = Properties().apply {
+            if (dateVersionState.exists()) dateVersionState.inputStream().use { load(it) }
+        }
+        val dateBase: String = dateVersionProps.getProperty("base", "0.0.0")
+        val dateCode: Int = dateVersionProps.getProperty("code", "0")?.toIntOrNull() ?: 0
+        versionCode = dateCode
+        versionName = dateBase
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
