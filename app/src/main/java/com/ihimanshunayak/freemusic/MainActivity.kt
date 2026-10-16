@@ -2695,11 +2695,22 @@ private fun FreeMusicApp(
                                 // This route sits below Discord, History, Notifications
                                 // and the Library "show all" overlay in AnimatedContent's
                                 // priority order. Clear any stale overlay state first so
-                                // the account destination can become the visible target.
+                                // the account destination can become the visible target,
+                                // and tear Settings down with it so AnimatedContent is
+                                // only ever hosting one screen at a time. Without the
+                                // `showSettings = false` line, AnimatedContent keeps the
+                                // Settings composable in the slot while targetState flips
+                                // to "account_scrobbling" and the two compete for the
+                                // same frame during the 180 ms crossfade — the visible
+                                // symptom is the Account screen never landing cleanly.
                                 showDiscord = false
                                 showHistory = false
                                 showNotifications = false
                                 libraryShowAll = null
+                                showSources = false
+                                showListenTogether = false
+                                showEqualizer = false
+                                showSettings = false
                                 showAccountScrobbling = true
                             },
                             onEqualizer = { showEqualizer = true },
