@@ -1,1121 +1,1146 @@
 <resources>
     <string name="app_name">Free Music</string>
-    <string name="playback_channel_name">再生中</string>
-    <string name="download_channel_name">ダウンロード</string>
-    <string name="download_channel_description">ミュージックフォルダに保存中の曲</string>
-    <string name="download_notification_title">ダウンロード中</string>
-    <string name="download_notification_starting">開始しています</string>
-    <string name="download_notification_queued">%1$s · あと%2$d件が待機中</string>
-    <string name="upload_channel_name">アップロード</string>
-    <string name="upload_channel_description">WebDAVサーバーへ送信中の曲</string>
-    <string name="upload_notification_title">アップロード中</string>
-    <string name="upload_notification_queued">%1$s · ほか%2$d曲が待機中</string>
+    <string name="playback_channel_name">å†ç”Ÿä¸­</string>
+    <string name="download_channel_name">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="download_channel_description">ãƒŸãƒ¥ãƒ¼ã‚¸ãƒƒã‚¯ãƒ•ã‚©ãƒ«ãƒ€ã«ä¿å­˜ä¸­ã®æ›²</string>
+    <string name="download_notification_title">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­</string>
+    <string name="download_notification_starting">é–‹å§‹ã—ã¦ã„ã¾ã™</string>
+    <string name="download_notification_queued">%1$s Â· ã‚ã¨%2$dä»¶ãŒå¾…æ©Ÿä¸­</string>
+    <string name="upload_channel_name">ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="upload_channel_description">WebDAVã‚µãƒ¼ãƒãƒ¼ã¸é€ä¿¡ä¸­ã®æ›²</string>
+    <string name="upload_notification_title">ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ä¸­</string>
+    <string name="upload_notification_queued">%1$s Â· ã»ã‹%2$dæ›²ãŒå¾…æ©Ÿä¸­</string>
     <plurals name="uploading_song_count">
-        <item quantity="other">%1$d曲をアップロード中</item>
+        <item quantity="other">%1$dæ›²ã‚’ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ä¸­</item>
     </plurals>
-    <string name="cancel">キャンセル</string>
-    <string name="save">保存</string>
-    <string name="close">閉じる</string>
-    <string name="back">戻る</string>
-    <string name="settings">設定</string>
-    <string name="search">検索</string>
-    <string name="clear_search">検索をクリア</string>
-    <string name="library">ライブラリ</string>
-    <string name="home">ホーム</string>
-    <string name="play">再生</string>
-    <string name="explore">見つける</string>
-    <string name="listen_now">今すぐ聴く</string>
-    <string name="downloads">ダウンロード</string>
-    <string name="downloaded_songs">ダウンロード済みの曲</string>
-    <string name="local_music">ローカルの音楽</string>
-    <string name="audio_files_on_device">デバイス内のオーディオファイル</string>
-    <string name="on_device">デバイス内</string>
-    <string name="playlists">プレイリスト</string>
-    <string name="new_playlist">新しいプレイリスト</string>
-    <string name="saved_to_youtube_music">YouTube Musicに保存済み</string>
-    <string name="my_playlists">マイプレイリスト</string>
-    <string name="playlist_empty">このプレイリストはまだ空です。アプリ内のどこでもトラックを長押しして、このプレイリストを選んで追加してください。</string>
-    <string name="playlist_limit_reached">プレイリストの上限に達しました</string>
-    <string name="device_playlists_unwritable">この端末では現在 Free Music がプレイリストを保存できません。アプリを閉じると変更内容は失われます。</string>
-    <!-- 共有プレイリストと Blend。 -->
-    <string name="shared_playlists">共有プレイリスト</string>
-    <string name="shared_playlist_new">共有プレイリストを作成</string>
-    <string name="shared_playlist_name_hint">プレイリスト名</string>
-    <string name="shared_playlist_create">作成</string>
-    <string name="shared_playlist_empty">共有プレイリストはまだありません。作成して、一緒に作りたい人に招待リンクを送りましょう。</string>
-    <string name="shared_playlist_members">メンバー %1$d 人</string>
-    <string name="shared_playlist_songs">%1$d 曲</string>
-    <string name="shared_playlist_invite">メンバーを招待</string>
-    <string name="shared_playlist_invite_title">招待リンク</string>
-    <string name="shared_playlist_invite_body">このリンクを知っている人は誰でも参加してプレイリストを編集できます。7 日で期限切れになります。</string>
-    <string name="shared_playlist_invite_copy">リンクをコピー</string>
-    <string name="shared_playlist_invite_share">共有</string>
-    <string name="shared_playlist_invite_copied">リンクをコピーしました</string>
-    <string name="shared_playlist_leave">プレイリストを退出</string>
-    <string name="shared_playlist_leave_confirmation">「%1$s」を退出しますか？新しい招待リンクでまた参加できます。</string>
-    <string name="shared_playlist_members_title">メンバー</string>
-    <string name="shared_playlist_remove_member">削除</string>
-    <string name="shared_playlist_remove_member_confirmation">%1$s を「%2$s」から削除しますか？追加した曲は残りますが、それ以上追加できなくなります。</string>
-    <string name="shared_playlist_offline">オフラインです。共有プレイリストはオンラインに戻ると読み込まれます。</string>
-    <string name="shared_playlist_not_durable">プレイリストサーバーが現在ディスクに保存していないため、再起動すると共有プレイリストが失われる可能性があります。</string>
-    <string name="shared_playlist_added_by">%1$s が追加</string>
-    <string name="shared_playlist_owner">オーナー</string>
-    <string name="shared_playlist_owned_by_you">このプレイリストはあなたのものです</string>
-    <string name="shared_playlist_sign_in_required">共有プレイリストを作成するにはサインインしてください。</string>
-    <string name="shared_playlist_add_to">共有プレイリストに追加</string>
-    <string name="shared_playlist_added">「%1$s」に追加しました</string>
-    <string name="shared_playlist_add_failed">「%1$s」に追加できませんでした</string>
-    <string name="shared_playlist_created">「%1$s」を作成しました</string>
+    <string name="cancel">ã‚­ãƒ£ãƒ³ã‚»ãƒ«</string>
+    <string name="save">ä¿å­˜</string>
+    <string name="close">é–‰ã˜ã‚‹</string>
+    <string name="back">æˆ»ã‚‹</string>
+    <string name="settings">è¨­å®š</string>
+    <string name="search">æ¤œç´¢</string>
+    <string name="clear_search">æ¤œç´¢ã‚’ã‚¯ãƒªã‚¢</string>
+    <string name="library">ãƒ©ã‚¤ãƒ–ãƒ©ãƒª</string>
+    <string name="home">ãƒ›ãƒ¼ãƒ </string>
+    <string name="play">å†ç”Ÿ</string>
+    <string name="explore">è¦‹ã¤ã‘ã‚‹</string>
+    <string name="listen_now">ä»Šã™ãè´ã</string>
+    <string name="downloads">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="downloaded_songs">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿ã®æ›²</string>
+    <string name="local_music">ãƒ­ãƒ¼ã‚«ãƒ«ã®éŸ³æ¥½</string>
+    <string name="audio_files_on_device">ãƒ‡ãƒã‚¤ã‚¹å†…ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒ•ã‚¡ã‚¤ãƒ«</string>
+    <string name="on_device">ãƒ‡ãƒã‚¤ã‚¹å†…</string>
+    <string name="playlists">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="new_playlist">æ–°ã—ã„ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="saved_to_youtube_music">YouTube Musicã«ä¿å­˜æ¸ˆã¿</string>
+    <string name="my_playlists">ãƒžã‚¤ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="playlist_empty">ã“ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯ã¾ã ç©ºã§ã™ã€‚ã‚¢ãƒ—ãƒªå†…ã®ã©ã“ã§ã‚‚ãƒˆãƒ©ãƒƒã‚¯ã‚’é•·æŠ¼ã—ã—ã¦ã€ã“ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’é¸ã‚“ã§è¿½åŠ ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="playlist_limit_reached">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®ä¸Šé™ã«é”ã—ã¾ã—ãŸ</string>
+    <string name="device_playlists_unwritable">ã“ã®ç«¯æœ«ã§ã¯ç¾åœ¨ Free Music ãŒãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä¿å­˜ã§ãã¾ã›ã‚“ã€‚ã‚¢ãƒ—ãƒªã‚’é–‰ã˜ã‚‹ã¨å¤‰æ›´å†…å®¹ã¯å¤±ã‚ã‚Œã¾ã™ã€‚</string>
+    <!-- å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¨ Blendã€‚ -->
+    <string name="shared_playlists">å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="shared_playlist_new">å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä½œæˆ</string>
+    <string name="shared_playlist_name_hint">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå</string>
+    <string name="shared_playlist_create">ä½œæˆ</string>
+    <string name="shared_playlist_empty">å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯ã¾ã ã‚ã‚Šã¾ã›ã‚“ã€‚ä½œæˆã—ã¦ã€ä¸€ç·’ã«ä½œã‚ŠãŸã„äººã«æ‹›å¾…ãƒªãƒ³ã‚¯ã‚’é€ã‚Šã¾ã—ã‚‡ã†ã€‚</string>
+    <string name="shared_playlist_members">ãƒ¡ãƒ³ãƒãƒ¼ %1$d äºº</string>
+    <string name="shared_playlist_songs">%1$d æ›²</string>
+    <string name="shared_playlist_invite">ãƒ¡ãƒ³ãƒãƒ¼ã‚’æ‹›å¾…</string>
+    <string name="shared_playlist_invite_title">æ‹›å¾…ãƒªãƒ³ã‚¯</string>
+    <string name="shared_playlist_invite_body">ã“ã®ãƒªãƒ³ã‚¯ã‚’çŸ¥ã£ã¦ã„ã‚‹äººã¯èª°ã§ã‚‚å‚åŠ ã—ã¦ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ç·¨é›†ã§ãã¾ã™ã€‚7 æ—¥ã§æœŸé™åˆ‡ã‚Œã«ãªã‚Šã¾ã™ã€‚</string>
+    <string name="shared_playlist_invite_copy">ãƒªãƒ³ã‚¯ã‚’ã‚³ãƒ”ãƒ¼</string>
+    <string name="shared_playlist_invite_share">å…±æœ‰</string>
+    <string name="shared_playlist_invite_copied">ãƒªãƒ³ã‚¯ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ</string>
+    <string name="shared_playlist_leave">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’é€€å‡º</string>
+    <string name="shared_playlist_leave_confirmation">ã€Œ%1$sã€ã‚’é€€å‡ºã—ã¾ã™ã‹ï¼Ÿæ–°ã—ã„æ‹›å¾…ãƒªãƒ³ã‚¯ã§ã¾ãŸå‚åŠ ã§ãã¾ã™ã€‚</string>
+    <string name="shared_playlist_members_title">ãƒ¡ãƒ³ãƒãƒ¼</string>
+    <string name="shared_playlist_remove_member">å‰Šé™¤</string>
+    <string name="shared_playlist_remove_member_confirmation">%1$s ã‚’ã€Œ%2$sã€ã‹ã‚‰å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿè¿½åŠ ã—ãŸæ›²ã¯æ®‹ã‚Šã¾ã™ãŒã€ãã‚Œä»¥ä¸Šè¿½åŠ ã§ããªããªã‚Šã¾ã™ã€‚</string>
+    <string name="shared_playlist_offline">ã‚ªãƒ•ãƒ©ã‚¤ãƒ³ã§ã™ã€‚å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯ã‚ªãƒ³ãƒ©ã‚¤ãƒ³ã«æˆ»ã‚‹ã¨èª­ã¿è¾¼ã¾ã‚Œã¾ã™ã€‚</string>
+    <string name="shared_playlist_not_durable">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚µãƒ¼ãƒãƒ¼ãŒç¾åœ¨ãƒ‡ã‚£ã‚¹ã‚¯ã«ä¿å­˜ã—ã¦ã„ãªã„ãŸã‚ã€å†èµ·å‹•ã™ã‚‹ã¨å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆãŒå¤±ã‚ã‚Œã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="shared_playlist_added_by">%1$s ãŒè¿½åŠ </string>
+    <string name="shared_playlist_owner">ã‚ªãƒ¼ãƒŠãƒ¼</string>
+    <string name="shared_playlist_owned_by_you">ã“ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯ã‚ãªãŸã®ã‚‚ã®ã§ã™</string>
+    <string name="shared_playlist_sign_in_required">å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä½œæˆã™ã‚‹ã«ã¯ã‚µã‚¤ãƒ³ã‚¤ãƒ³ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="shared_playlist_add_to">å…±æœ‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«è¿½åŠ </string>
+    <string name="shared_playlist_added">ã€Œ%1$sã€ã«è¿½åŠ ã—ã¾ã—ãŸ</string>
+    <string name="shared_playlist_add_failed">ã€Œ%1$sã€ã«è¿½åŠ ã§ãã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="shared_playlist_created">ã€Œ%1$sã€ã‚’ä½œæˆã—ã¾ã—ãŸ</string>
     <string name="shared_playlist_blend">Blend</string>
-    <string name="shared_playlist_blend_empty">Blend はみんなが聴いているものから自動で作られます。毎日更新され、手動では編集できません。</string>
-    <string name="shared_playlist_compatibility">音楽の相性</string>
-    <string name="shared_playlist_compatibility_value">一致度 %1$d%%</string>
-    <string name="shared_playlist_code_join">リンクまたはコードで参加</string>
-    <string name="shared_playlist_code_hint">招待リンクを貼り付け</string>
-    <string name="shared_playlist_join">参加</string>
-    <string name="shared_playlist_invite_invalid">その招待はもう有効ではありません。</string>
-    <string name="shared_playlist_invite_expired">その招待は期限切れです。新しいものを依頼してください。</string>
-    <string name="shared_playlist_invite_used">その招待はすでに使われています。</string>
-    <string name="shared_playlist_invite_full">そのプレイリストは満員です。</string>
-    <string name="shared_playlist_join_title">プレイリストに参加</string>
-    <string name="shared_playlist_join_body">%1$s さんが「%2$s」に招待しました。</string>
-    <string name="shared_playlist_join_confirm">参加</string>
-    <string name="shared_playlist_joined">「%1$s」に参加しました</string>
-    <string name="shared_playlist_loading">プレイリストを読み込み中…</string>
-    <string name="loading">読み込み中…</string>
-    <string name="sign_in">ログイン</string>
-    <string name="sign_out">ログアウト</string>
-    <string name="signed_in">ログイン済み</string>
-    <string name="not_signed_in">未ログイン</string>
-    <string name="retry">再試行</string>
-    <string name="shuffle">シャッフル</string>
-    <string name="more">その他</string>
-    <string name="add_to_playlist">プレイリストに追加</string>
-    <string name="add_to_library">ライブラリに追加</string>
-    <string name="remove_from_library">ライブラリから削除</string>
-    <string name="download_all">すべてダウンロード</string>
-    <string name="top_songs">よく聴いた曲</string>
-    <string name="suggested">おすすめ</string>
-    <string name="song_count">%1$d曲</string>
+    <string name="shared_playlist_blend_empty">Blend ã¯ã¿ã‚“ãªãŒè´ã„ã¦ã„ã‚‹ã‚‚ã®ã‹ã‚‰è‡ªå‹•ã§ä½œã‚‰ã‚Œã¾ã™ã€‚æ¯Žæ—¥æ›´æ–°ã•ã‚Œã€æ‰‹å‹•ã§ã¯ç·¨é›†ã§ãã¾ã›ã‚“ã€‚</string>
+    <string name="shared_playlist_compatibility">éŸ³æ¥½ã®ç›¸æ€§</string>
+    <string name="shared_playlist_compatibility_value">ä¸€è‡´åº¦ %1$d%%</string>
+    <string name="shared_playlist_code_join">ãƒªãƒ³ã‚¯ã¾ãŸã¯ã‚³ãƒ¼ãƒ‰ã§å‚åŠ </string>
+    <string name="shared_playlist_code_hint">æ‹›å¾…ãƒªãƒ³ã‚¯ã‚’è²¼ã‚Šä»˜ã‘</string>
+    <string name="shared_playlist_join">å‚åŠ </string>
+    <string name="shared_playlist_invite_invalid">ãã®æ‹›å¾…ã¯ã‚‚ã†æœ‰åŠ¹ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚</string>
+    <string name="shared_playlist_invite_expired">ãã®æ‹›å¾…ã¯æœŸé™åˆ‡ã‚Œã§ã™ã€‚æ–°ã—ã„ã‚‚ã®ã‚’ä¾é ¼ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="shared_playlist_invite_used">ãã®æ‹›å¾…ã¯ã™ã§ã«ä½¿ã‚ã‚Œã¦ã„ã¾ã™ã€‚</string>
+    <string name="shared_playlist_invite_full">ãã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯æº€å“¡ã§ã™ã€‚</string>
+    <string name="shared_playlist_join_title">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«å‚åŠ </string>
+    <string name="shared_playlist_join_body">%1$s ã•ã‚“ãŒã€Œ%2$sã€ã«æ‹›å¾…ã—ã¾ã—ãŸã€‚</string>
+    <string name="shared_playlist_join_confirm">å‚åŠ </string>
+    <string name="shared_playlist_joined">ã€Œ%1$sã€ã«å‚åŠ ã—ã¾ã—ãŸ</string>
+    <string name="shared_playlist_loading">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’èª­ã¿è¾¼ã¿ä¸­â€¦</string>
+    <string name="loading">èª­ã¿è¾¼ã¿ä¸­â€¦</string>
+    <string name="sign_in">ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="sign_out">ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ</string>
+    <string name="signed_in">ãƒ­ã‚°ã‚¤ãƒ³æ¸ˆã¿</string>
+    <string name="not_signed_in">æœªãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="retry">å†è©¦è¡Œ</string>
+    <string name="shuffle">ã‚·ãƒ£ãƒƒãƒ•ãƒ«</string>
+    <string name="more">ãã®ä»–</string>
+    <string name="add_to_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«è¿½åŠ </string>
+    <string name="add_to_library">ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«è¿½åŠ </string>
+    <string name="remove_from_library">ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‹ã‚‰å‰Šé™¤</string>
+    <string name="download_all">ã™ã¹ã¦ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="top_songs">ã‚ˆãè´ã„ãŸæ›²</string>
+    <string name="suggested">ãŠã™ã™ã‚</string>
+    <string name="song_count">%1$dæ›²</string>
     <plurals name="song_count_plural">
-        <item quantity="other">%1$d曲</item>
+        <item quantity="other">%1$dæ›²</item>
     </plurals>
     <plurals name="artist_count">
-        <item quantity="other">%1$d組のアーティスト</item>
+        <item quantity="other">%1$dçµ„ã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</item>
     </plurals>
     <plurals name="album_count">
-        <item quantity="other">%1$d枚のアルバム</item>
+        <item quantity="other">%1$dæžšã®ã‚¢ãƒ«ãƒãƒ </item>
     </plurals>
-    <string name="songs">曲</string>
-    <string name="artists">アーティスト</string>
-    <string name="albums">アルバム</string>
-    <string name="no_album_metadata">これらの曲はどのアルバムに属するか示されていません。</string>
-    <string name="search_empty">YouTube Musicで何百万もの曲を検索できます。</string>
-    <string name="recent_searches">最近の検索</string>
-    <string name="clear">消去</string>
-    <string name="search_hint">アーティスト、曲、歌詞など</string>
-    <string name="recent_search_edit">「%1$s」を編集</string>
-    <string name="recent_search_remove">最近の検索から「%1$s」を削除</string>
-    <string name="storage_required_save">曲を保存するにはストレージへのアクセスが必要です</string>
-    <string name="storage_required_read">ローカルの音声ファイルを読み込むにはストレージの権限が必要です</string>
-    <string name="sharing_coming_soon">共有機能は近日公開予定です</string>
-    <string name="already_downloaded">ダウンロード済み</string>
+    <string name="songs">æ›²</string>
+    <string name="artists">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="albums">ã‚¢ãƒ«ãƒãƒ </string>
+    <string name="no_album_metadata">ã“ã‚Œã‚‰ã®æ›²ã¯ã©ã®ã‚¢ãƒ«ãƒãƒ ã«å±žã™ã‚‹ã‹ç¤ºã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚</string>
+    <string name="search_empty">YouTube Musicã§ä½•ç™¾ä¸‡ã‚‚ã®æ›²ã‚’æ¤œç´¢ã§ãã¾ã™ã€‚</string>
+    <string name="recent_searches">æœ€è¿‘ã®æ¤œç´¢</string>
+    <string name="clear">æ¶ˆåŽ»</string>
+    <string name="search_hint">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã€æ›²ã€æ­Œè©žãªã©</string>
+    <string name="recent_search_edit">ã€Œ%1$sã€ã‚’ç·¨é›†</string>
+    <string name="recent_search_remove">æœ€è¿‘ã®æ¤œç´¢ã‹ã‚‰ã€Œ%1$sã€ã‚’å‰Šé™¤</string>
+    <string name="storage_required_save">æ›²ã‚’ä¿å­˜ã™ã‚‹ã«ã¯ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ãŒå¿…è¦ã§ã™</string>
+    <string name="storage_required_read">ãƒ­ãƒ¼ã‚«ãƒ«ã®éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€ã«ã¯ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã®æ¨©é™ãŒå¿…è¦ã§ã™</string>
+    <string name="sharing_coming_soon">å…±æœ‰æ©Ÿèƒ½ã¯è¿‘æ—¥å…¬é–‹äºˆå®šã§ã™</string>
+    <string name="already_downloaded">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿</string>
     <plurals name="downloading_song_count">
-        <item quantity="other">%1$d曲をダウンロード中</item>
+        <item quantity="other">%1$dæ›²ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­</item>
     </plurals>
-    <string name="source">ソース</string>
-    <string name="lossless_audio">ロスレスオーディオ</string>
-    <string name="prefer_lossless">ロスレスを優先</string>
-    <string name="lossless_source_subtitle">ソースから直接FLACやALACを取得</string>
-    <string name="overridden">上書き済み</string>
-    <string name="add_module_source">モジュールソースを追加</string>
-    <string name="remove_source">このソースを削除</string>
-    <string name="test">テスト</string>
-    <string name="testing">テスト中…</string>
-    <string name="connected">接続済み</string>
-    <string name="account_integrations">アカウントと連携</string>
-    <string name="account_scrobbling">アカウントとスクロブリング</string>
-    <string name="rich_presence">リッチプレゼンス</string>
-    <string name="scrobbling">スクロブリング</string>
-    <string name="now_playing">再生中</string>
-    <string name="next_in_queue">キューの次の曲</string>
-    <string name="next_from">次の再生元: %1$s</string>
-    <string name="selected">選択済み</string>
-    <string name="password">パスワード</string>
-    <string name="username">ユーザー名</string>
-    <string name="login_failed">ログインに失敗しました</string>
-    <string name="song_cache_cleared">曲のキャッシュを削除しました</string>
-    <string name="image_cache_cleared">画像のキャッシュを削除しました</string>
-    <string name="no_equalizer">このデバイスにはシステムイコライザーがありません</string>
-    <string name="no_dolby_atmos">このデバイスにはDolby Atmosパネルがありません</string>
-    <string name="dolby_atmos_open_failed">Dolby Atmosの設定を開けませんでした</string>
-    <string name="update_available">アップデートが利用可能です：v%1$s</string>
-    <string name="software_update">ソフトウェアアップデート</string>
-    <string name="update_available_body">Free Music %1$s がダウンロード可能です。</string>
-    <string name="update_downloading_body">Free Music %1$s をダウンロード中…</string>
-    <string name="update_ready_body">Free Music %1$s のインストール準備ができました。</string>
-    <string name="update_failed_body">Free Music %1$s をダウンロードできませんでした。</string>
-    <string name="download_now">今すぐダウンロード</string>
-    <string name="install_now">今すぐインストール</string>
-    <string name="later">後で</string>
-    <string name="remind_me_later">後で通知する</string>
-    <string name="try_again">再試行</string>
-    <string name="open_releases_page">リリースページを開く</string>
-    <string name="whats_new">新機能</string>
-    <string name="log_copied">ログをコピーしました · %1$d行</string>
-    <string name="sign_in_youtube_music">YouTube Musicにログイン</string>
-    <string name="sign_in_discord">Discordにログイン</string>
-    <string name="personalized_recommendations">あなたに合わせたおすすめを受け取る</string>
-    <string name="play_next">次に再生</string>
-    <string name="queue">再生キュー</string>
-    <string name="source_setup_required">タップして設定を完了</string>
-    <string name="source_unreachable">現在アクセスできません · %1$s</string>
-    <string name="checking">確認中…</string>
-    <string name="failed">失敗しました</string>
-    <string name="widget_square_label">再生中 2×2</string>
-    <string name="widget_wide_label">再生中 4×2</string>
-    <string name="widget_square_description">再生コントロール付きのアルバムアート（正方形）。</string>
-    <string name="widget_wide_description">曲名と再生コントロール付きのアルバムアート（横幅いっぱい）。</string>
-    <string name="widget_play">再生</string>
-    <string name="widget_pause">一時停止</string>
-    <string name="widget_next">次へ</string>
-    <string name="widget_previous">前へ</string>
-    <string name="widget_artwork">アルバムアート</string>
-    <string name="widget_nothing_played">まだ何も再生されていません</string>
-    <string name="widget_open_freemusic">Free Musicを開く</string>
-    <string name="widget_preview_title">曲名</string>
-    <string name="widget_preview_artist">アーティスト</string>
-    <string name="widget_pill_label">再生中 4×1</string>
-    <string name="widget_pill_description">曲名といいね、シャッフル、再生コントロールを1行に。</string>
-    <string name="widget_preview_pill">曲名 - アーティスト</string>
-    <string name="download_quality">ダウンロード品質</string>
-    <string name="download_wifi_only">Wi-Fi接続時のみダウンロード</string>
-    <string name="spatial_audio">空間オーディオ</string>
-    <string name="spatial_audio_subtitle">よりイマーシブな体験のためにステレオトラックを広げます</string>
-    <string name="spatial_audio_atmos_subtitle">この曲では一時停止中 — Dolby Atmosはすでに空間オーディオです</string>
-    <string name="animated_cover_cellular">モバイルデータでアニメーションカバーを再生</string>
+    <string name="source">ã‚½ãƒ¼ã‚¹</string>
+    <string name="lossless_audio">ãƒ­ã‚¹ãƒ¬ã‚¹ã‚ªãƒ¼ãƒ‡ã‚£ã‚ª</string>
+    <string name="prefer_lossless">ãƒ­ã‚¹ãƒ¬ã‚¹ã‚’å„ªå…ˆ</string>
+    <string name="lossless_source_subtitle">ã‚½ãƒ¼ã‚¹ã‹ã‚‰ç›´æŽ¥FLACã‚„ALACã‚’å–å¾—</string>
+    <string name="overridden">ä¸Šæ›¸ãæ¸ˆã¿</string>
+    <string name="add_module_source">ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚½ãƒ¼ã‚¹ã‚’è¿½åŠ </string>
+    <string name="remove_source">ã“ã®ã‚½ãƒ¼ã‚¹ã‚’å‰Šé™¤</string>
+    <string name="test">ãƒ†ã‚¹ãƒˆ</string>
+    <string name="testing">ãƒ†ã‚¹ãƒˆä¸­â€¦</string>
+    <string name="connected">æŽ¥ç¶šæ¸ˆã¿</string>
+    <string name="account_integrations">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã¨é€£æº</string>
+    <string name="account_scrobbling">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã¨ã‚¹ã‚¯ãƒ­ãƒ–ãƒªãƒ³ã‚°</string>
+
+    <!-- Profile hero + edit profile dialog -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_signed_in_as">Signed in as %1$s</string>
+    <string name="profile_status_default">What\'s playing lately</string>
+    <string name="profile_bio_default">No bio yet</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_cancel">Cancel</string>
+    <string name="edit_profile_field_display_name">Display name</string>
+    <string name="edit_profile_field_status">Status</string>
+    <string name="edit_profile_field_bio">Bio</string>
+    <string name="edit_profile_avatar_alt">Profile picture</string>
+    <string name="edit_profile_change_avatar">Change picture</string>
+    <string name="edit_profile_remove_avatar">Remove</string>
+    <string name="edit_profile_display_name_hint">Visible to your connections</string>
+    <string name="edit_profile_status_hint">A short line about your listening mood</string>
+    <string name="edit_profile_bio_hint">A few lines about your music taste</string>
+    <string name="edit_profile_display_name_required">Display name cannot be empty</string>
+    <string name="edit_profile_status_too_long">Status is too long</string>
+    <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="stat_hours_listened">Hours listened</string>
+    <string name="stat_tracks_played">Tracks played</string>
+    <string name="stat_playlists">Playlists</string>
+    <string name="stat_sources">Sources</string>
+    <string name="rich_presence">ãƒªãƒƒãƒãƒ—ãƒ¬ã‚¼ãƒ³ã‚¹</string>
+    <string name="scrobbling">ã‚¹ã‚¯ãƒ­ãƒ–ãƒªãƒ³ã‚°</string>
+    <string name="now_playing">å†ç”Ÿä¸­</string>
+    <string name="next_in_queue">ã‚­ãƒ¥ãƒ¼ã®æ¬¡ã®æ›²</string>
+    <string name="next_from">æ¬¡ã®å†ç”Ÿå…ƒ: %1$s</string>
+    <string name="selected">é¸æŠžæ¸ˆã¿</string>
+    <string name="password">ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</string>
+    <string name="username">ãƒ¦ãƒ¼ã‚¶ãƒ¼å</string>
+    <string name="login_failed">ãƒ­ã‚°ã‚¤ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ</string>
+    <string name="song_cache_cleared">æ›²ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã—ã¾ã—ãŸ</string>
+    <string name="image_cache_cleared">ç”»åƒã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã—ã¾ã—ãŸ</string>
+    <string name="no_equalizer">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã«ã¯ã‚·ã‚¹ãƒ†ãƒ ã‚¤ã‚³ãƒ©ã‚¤ã‚¶ãƒ¼ãŒã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="no_dolby_atmos">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã«ã¯Dolby Atmosãƒ‘ãƒãƒ«ãŒã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="dolby_atmos_open_failed">Dolby Atmosã®è¨­å®šã‚’é–‹ã‘ã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="update_available">ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆãŒåˆ©ç”¨å¯èƒ½ã§ã™ï¼šv%1$s</string>
+    <string name="software_update">ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ</string>
+    <string name="update_available_body">Free Music %1$s ãŒãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å¯èƒ½ã§ã™ã€‚</string>
+    <string name="update_downloading_body">Free Music %1$s ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­â€¦</string>
+    <string name="update_ready_body">Free Music %1$s ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æº–å‚™ãŒã§ãã¾ã—ãŸã€‚</string>
+    <string name="update_failed_body">Free Music %1$s ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚</string>
+    <string name="download_now">ä»Šã™ããƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="install_now">ä»Šã™ãã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«</string>
+    <string name="later">å¾Œã§</string>
+    <string name="remind_me_later">å¾Œã§é€šçŸ¥ã™ã‚‹</string>
+    <string name="try_again">å†è©¦è¡Œ</string>
+    <string name="open_releases_page">ãƒªãƒªãƒ¼ã‚¹ãƒšãƒ¼ã‚¸ã‚’é–‹ã</string>
+    <string name="whats_new">æ–°æ©Ÿèƒ½</string>
+    <string name="log_copied">ãƒ­ã‚°ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ Â· %1$dè¡Œ</string>
+    <string name="sign_in_youtube_music">YouTube Musicã«ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="sign_in_discord">Discordã«ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="personalized_recommendations">ã‚ãªãŸã«åˆã‚ã›ãŸãŠã™ã™ã‚ã‚’å—ã‘å–ã‚‹</string>
+    <string name="play_next">æ¬¡ã«å†ç”Ÿ</string>
+    <string name="queue">å†ç”Ÿã‚­ãƒ¥ãƒ¼</string>
+    <string name="source_setup_required">ã‚¿ãƒƒãƒ—ã—ã¦è¨­å®šã‚’å®Œäº†</string>
+    <string name="source_unreachable">ç¾åœ¨ã‚¢ã‚¯ã‚»ã‚¹ã§ãã¾ã›ã‚“ Â· %1$s</string>
+    <string name="checking">ç¢ºèªä¸­â€¦</string>
+    <string name="failed">å¤±æ•—ã—ã¾ã—ãŸ</string>
+    <string name="widget_square_label">å†ç”Ÿä¸­ 2Ã—2</string>
+    <string name="widget_wide_label">å†ç”Ÿä¸­ 4Ã—2</string>
+    <string name="widget_square_description">å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ä»˜ãã®ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒˆï¼ˆæ­£æ–¹å½¢ï¼‰ã€‚</string>
+    <string name="widget_wide_description">æ›²åã¨å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ä»˜ãã®ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒˆï¼ˆæ¨ªå¹…ã„ã£ã±ã„ï¼‰ã€‚</string>
+    <string name="widget_play">å†ç”Ÿ</string>
+    <string name="widget_pause">ä¸€æ™‚åœæ­¢</string>
+    <string name="widget_next">æ¬¡ã¸</string>
+    <string name="widget_previous">å‰ã¸</string>
+    <string name="widget_artwork">ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒˆ</string>
+    <string name="widget_nothing_played">ã¾ã ä½•ã‚‚å†ç”Ÿã•ã‚Œã¦ã„ã¾ã›ã‚“</string>
+    <string name="widget_open_freemusic">Free Musicã‚’é–‹ã</string>
+    <string name="widget_preview_title">æ›²å</string>
+    <string name="widget_preview_artist">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="widget_pill_label">å†ç”Ÿä¸­ 4Ã—1</string>
+    <string name="widget_pill_description">æ›²åã¨ã„ã„ã­ã€ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã€å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’1è¡Œã«ã€‚</string>
+    <string name="widget_preview_pill">æ›²å - ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="download_quality">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å“è³ª</string>
+    <string name="download_wifi_only">Wi-FiæŽ¥ç¶šæ™‚ã®ã¿ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="spatial_audio">ç©ºé–“ã‚ªãƒ¼ãƒ‡ã‚£ã‚ª</string>
+    <string name="spatial_audio_subtitle">ã‚ˆã‚Šã‚¤ãƒžãƒ¼ã‚·ãƒ–ãªä½“é¨“ã®ãŸã‚ã«ã‚¹ãƒ†ãƒ¬ã‚ªãƒˆãƒ©ãƒƒã‚¯ã‚’åºƒã’ã¾ã™</string>
+    <string name="spatial_audio_atmos_subtitle">ã“ã®æ›²ã§ã¯ä¸€æ™‚åœæ­¢ä¸­ â€” Dolby Atmosã¯ã™ã§ã«ç©ºé–“ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã§ã™</string>
+    <string name="animated_cover_cellular">ãƒ¢ãƒã‚¤ãƒ«ãƒ‡ãƒ¼ã‚¿ã§ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒãƒ¼ã‚’å†ç”Ÿ</string>
     <string name="replay">Replay</string>
-    <string name="replay_subtitle">よく聴いた曲、アーティスト、アルバム、ジャンル</string>
-    <string name="work_out_genres">ジャンルを推定</string>
-    <string name="export_data">データをエクスポート</string>
-    <string name="export_data_subtitle">設定、再生履歴、プレイリストを1つのJSONファイルとして保存</string>
-    <string name="import_data">データをインポート</string>
-    <string name="import_data_subtitle">このデバイスの設定と履歴を置き換え、プレイリストを統合します</string>
-    <string name="import_backup_title">バックアップをインポートしますか？</string>
-    <string name="choose_file">ファイルを選択</string>
-    <string name="top_artists">よく聴いたアーティスト</string>
-    <string name="top_albums">よく聴いたアルバム</string>
-    <string name="top_genres">よく聴いたジャンル</string>
-    <string name="cancel_all">すべてキャンセル</string>
-    <string name="language">言語</string>
-    <string name="app_language">アプリの言語</string>
-    <string name="app_language_description">Free Musicで使用する言語を選択してください。</string>
-    <string name="english">英語</string>
-    <string name="spanish">スペイン語</string>
-    <string name="french">フランス語</string>
-    <string name="german">ドイツ語</string>
-    <string name="polish">ポーランド語</string>
-    <string name="portuguese">ポルトガル語</string>
-    <string name="indonesian">インドネシア語</string>
-    <string name="hindi">ヒンディー語</string>
-    <string name="japanese">日本語</string>
-    <string name="russian">ロシア語</string>
-    <string name="chinese">中国語（簡体字）</string>
-    <string name="hebrew">ヘブライ語</string>
-    <string name="italian">イタリア語</string>
-    <string name="turkish">トルコ語</string>
-    <string name="thai">タイ語</string>
-    <string name="show_all">すべて表示</string>
-    <string name="grid_view">グリッド表示</string>
-    <string name="list_view">リスト表示</string>
-    <string name="switch_to_grid_view">グリッド表示に切り替え</string>
-    <string name="switch_to_list_view">リスト表示に切り替え</string>
-    <string name="audio_quality">音質</string>
-    <string name="playback">再生</string>
-    <string name="appearance">外観</string>
-    <string name="storage">ストレージ</string>
-    <string name="your_data">あなたのデータ</string>
-    <string name="miscellaneous">その他</string>
-    <string name="lossless_hq_audio">ロスレス / 高音質オーディオ</string>
-    <string name="on_wifi">Wi-Fi接続時</string>
-    <string name="on_mobile_data">モバイルデータ接続時</string>
-    <string name="in_use">使用中</string>
-    <string name="blocking">ブロック中</string>
-    <string name="crossfade">クロスフェード</string>
-    <string name="crossfade_subtitle">1曲を次の曲へなめらかにつなげます</string>
-    <string name="automix">オートミックス [BETA]</string>
-    <string name="skip_silence">無音をスキップ</string>
-    <string name="skip_silence_subtitle">1秒より長い無音部分をカットします</string>
-    <string name="skip_silence_float_subtitle">32ビット浮動小数点出力では使用できません</string>
-    <string name="music_haptics">音楽ハプティクス</string>
-    <string name="music_haptics_subtitle">音楽に合わせてビートを感じる</string>
-    <string name="music_haptics_warning">曲の間ずっと振動モーターが動くため、バッテリーの消費が明らかに増えます。</string>
-    <string name="music_haptics_low_subtitle">最も軽い触感</string>
-    <string name="music_haptics_medium_subtitle">バランス</string>
-    <string name="music_haptics_high_subtitle">最も強い — ポケットに最適</string>
-    <string name="equalizer">イコライザー</string>
-    <string name="equalizer_subtitle">デバイスのシステムパネル</string>
-    <string name="show_nerd_stats">技術情報を表示</string>
-    <string name="show_nerd_stats_subtitle">プレイヤーにコーデック、ビットレート、サンプルレートを表示</string>
-    <string name="theme">テーマ</string>
-    <string name="reduce_animation">アニメーションを減らす</string>
-    <string name="reduce_animation_subtitle">メインプレイヤーのグラデーションを動かさず固定します</string>
-    <string name="reduce_dynamic_blur">動的なぼかしを減らす</string>
-    <string name="reduce_dynamic_blur_subtitle">アプリ全体ですりガラス効果を単色の塗りつぶしに置き換えます</string>
-    <string name="full_screen_cover_art">全画面カバーアート</string>
-    <string name="player_carousel">ジャケットをスワイプ</string>
-    <string name="player_carousel_subtitle">ジャケットを横にドラッグすると、次の曲と前の曲がレコードのように現れます。オフのままなら今のジャケット表示は変わりません。</string>
-    <string name="animated_cover_art">アニメーションカバーアート</string>
-    <string name="synced_lyrics">同期歌詞</string>
-    <string name="synced_lyrics_subtitle">歌われている歌詞をプレイヤー上でハイライト表示します</string>
-    <string name="lyrics_sources">歌詞のソース</string>
-    <string name="song_cache_limit">曲キャッシュの上限</string>
-    <string name="clear_song_cache">曲のキャッシュを削除</string>
-    <string name="clear_song_cache_subtitle">ダウンロードした音声が使用している容量を解放します</string>
-    <string name="clear_image_cache">画像のキャッシュを削除</string>
-    <string name="clear_image_cache_subtitle">アルバムアートが使用している容量を解放します</string>
-    <string name="play_next_on_swipe">スワイプで次に再生</string>
-    <string name="dont_repeat_songs">今回のセッションでは曲を繰り返さない</string>
-    <string name="stop_music_on_close">最近のアプリから終了したら音楽を停止</string>
-    <string name="stop_music_on_close_subtitle">アプリを最近のアプリから消すと再生を停止します</string>
-    <string name="hide_volume_bar">音量バーを隠す</string>
-    <string name="hide_volume_bar_subtitle">メインプレイヤーから音量スライダーを削除します</string>
-    <string name="hide_song_status">曲のステータスを隠す</string>
-    <string name="hide_song_status_subtitle">メインプレーヤーの「再生元」や「再生者」の表示を隠します</string>
-    <string name="off">オフ</string>
-    <string name="low">低</string>
-    <string name="medium">中</string>
-    <string name="high">高</string>
-    <string name="standard">標準</string>
-    <string name="lossless">ロスレス</string>
-    <string name="system">システム</string>
-    <string name="light">ライト</string>
-    <string name="dark">ダーク</string>
-    <string name="full_screen_cover_art_subtitle">正方形のジャケットの代わりにカバーをプレイヤーの端まで広げます</string>
-    <string name="animated_cover_art_subtitle">静止画のジャケットの代わりに一部のリリースが持つループ動画を再生します</string>
-    <string name="dont_repeat_songs_subtitle">オートプレイは、このセッションで既に再生または提案された曲を再度提案しません</string>
-    <string name="download_quality_subtitle">接続にかかわらず、1トラックあたり%1$s</string>
-    <string name="filter_non_music_audio">音楽以外の音声を除外</string>
-    <string name="filter_non_music_audio_subtitle">30秒未満のクリップ、WAVファイル、ボイスメモ、録音、システム音を非表示にします</string>
-    <string name="performance">パフォーマンス</string>
-    <string name="high_performance_mode">高パフォーマンスモード</string>
-    <string name="high_performance_subtitle">フルアニメーションとぼかしを使用し、より高いディスプレイリフレッシュレートをリクエストします</string>
-    <string name="high_performance_active">%1$d Hzをリクエスト中です。必要に応じてAndroidが下げることがあります。</string>
-    <string name="beta">ベータ</string>
-    <string name="refresh_rate">リフレッシュレート</string>
-    <string name="high_performance_before_enabling">有効にする前に</string>
-    <string name="high_performance_battery_warning">まずFree Musicのバッテリー使用を「制限なし」に設定してください。リフレッシュレートを上げるとバッテリー、CPU、GPUの消費が増え、デバイスが熱くなることがあります。</string>
-    <string name="open_battery_settings">バッテリー設定を開く</string>
-    <string name="enable_high_performance_title">高パフォーマンスモードを有効にしますか？</string>
-    <string name="enable_high_performance_confirmation">Free Musicのバッテリー使用が「制限なし」に設定されている場合のみ有効にしてください。デバイスが熱くなったり電力が少なくなったりすると、Androidがリフレッシュレートを制限することがあります。</string>
-    <string name="enable">有効にする</string>
-    <string name="not_yet">今はしない</string>
-    <string name="activity">アクティビティ</string>
-    <string name="activity_competing">参加中</string>
-    <string name="activity_dialog_message">カードの上に表示される動詞です。</string>
-    <string name="activity_listening">再生中</string>
-    <string name="activity_name_message">プロフィールで動詞の後に続く文言です。空欄にすると%1$sが使われます。</string>
-    <string name="activity_playing">プレイ中</string>
-    <string name="activity_watching">視聴中</string>
-    <string name="add_to_queue">再生キューに追加</string>
-    <string name="after_this_song">この曲の後に</string>
-    <string name="always_on">常にオン</string>
-    <string name="api_token">APIトークン</string>
-    <string name="audio_quality_connection">%1$s接続時</string>
+    <string name="replay_subtitle">ã‚ˆãè´ã„ãŸæ›²ã€ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã€ã‚¢ãƒ«ãƒãƒ ã€ã‚¸ãƒ£ãƒ³ãƒ«</string>
+    <string name="work_out_genres">ã‚¸ãƒ£ãƒ³ãƒ«ã‚’æŽ¨å®š</string>
+    <string name="export_data">ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆ</string>
+    <string name="export_data_subtitle">è¨­å®šã€å†ç”Ÿå±¥æ­´ã€ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’1ã¤ã®JSONãƒ•ã‚¡ã‚¤ãƒ«ã¨ã—ã¦ä¿å­˜</string>
+    <string name="import_data">ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆ</string>
+    <string name="import_data_subtitle">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã®è¨­å®šã¨å±¥æ­´ã‚’ç½®ãæ›ãˆã€ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’çµ±åˆã—ã¾ã™</string>
+    <string name="import_backup_title">ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="choose_file">ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠž</string>
+    <string name="top_artists">ã‚ˆãè´ã„ãŸã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="top_albums">ã‚ˆãè´ã„ãŸã‚¢ãƒ«ãƒãƒ </string>
+    <string name="top_genres">ã‚ˆãè´ã„ãŸã‚¸ãƒ£ãƒ³ãƒ«</string>
+    <string name="cancel_all">ã™ã¹ã¦ã‚­ãƒ£ãƒ³ã‚»ãƒ«</string>
+    <string name="language">è¨€èªž</string>
+    <string name="app_language">ã‚¢ãƒ—ãƒªã®è¨€èªž</string>
+    <string name="app_language_description">Free Musicã§ä½¿ç”¨ã™ã‚‹è¨€èªžã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="english">è‹±èªž</string>
+    <string name="spanish">ã‚¹ãƒšã‚¤ãƒ³èªž</string>
+    <string name="french">ãƒ•ãƒ©ãƒ³ã‚¹èªž</string>
+    <string name="german">ãƒ‰ã‚¤ãƒ„èªž</string>
+    <string name="polish">ãƒãƒ¼ãƒ©ãƒ³ãƒ‰èªž</string>
+    <string name="portuguese">ãƒãƒ«ãƒˆã‚¬ãƒ«èªž</string>
+    <string name="indonesian">ã‚¤ãƒ³ãƒ‰ãƒã‚·ã‚¢èªž</string>
+    <string name="hindi">ãƒ’ãƒ³ãƒ‡ã‚£ãƒ¼èªž</string>
+    <string name="japanese">æ—¥æœ¬èªž</string>
+    <string name="russian">ãƒ­ã‚·ã‚¢èªž</string>
+    <string name="chinese">ä¸­å›½èªžï¼ˆç°¡ä½“å­—ï¼‰</string>
+    <string name="hebrew">ãƒ˜ãƒ–ãƒ©ã‚¤èªž</string>
+    <string name="italian">ã‚¤ã‚¿ãƒªã‚¢èªž</string>
+    <string name="turkish">ãƒˆãƒ«ã‚³èªž</string>
+    <string name="thai">ã‚¿ã‚¤èªž</string>
+    <string name="show_all">ã™ã¹ã¦è¡¨ç¤º</string>
+    <string name="grid_view">ã‚°ãƒªãƒƒãƒ‰è¡¨ç¤º</string>
+    <string name="list_view">ãƒªã‚¹ãƒˆè¡¨ç¤º</string>
+    <string name="switch_to_grid_view">ã‚°ãƒªãƒƒãƒ‰è¡¨ç¤ºã«åˆ‡ã‚Šæ›¿ãˆ</string>
+    <string name="switch_to_list_view">ãƒªã‚¹ãƒˆè¡¨ç¤ºã«åˆ‡ã‚Šæ›¿ãˆ</string>
+    <string name="audio_quality">éŸ³è³ª</string>
+    <string name="playback">å†ç”Ÿ</string>
+    <string name="appearance">å¤–è¦³</string>
+    <string name="storage">ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸</string>
+    <string name="your_data">ã‚ãªãŸã®ãƒ‡ãƒ¼ã‚¿</string>
+    <string name="miscellaneous">ãã®ä»–</string>
+    <string name="lossless_hq_audio">ãƒ­ã‚¹ãƒ¬ã‚¹ / é«˜éŸ³è³ªã‚ªãƒ¼ãƒ‡ã‚£ã‚ª</string>
+    <string name="on_wifi">Wi-FiæŽ¥ç¶šæ™‚</string>
+    <string name="on_mobile_data">ãƒ¢ãƒã‚¤ãƒ«ãƒ‡ãƒ¼ã‚¿æŽ¥ç¶šæ™‚</string>
+    <string name="in_use">ä½¿ç”¨ä¸­</string>
+    <string name="blocking">ãƒ–ãƒ­ãƒƒã‚¯ä¸­</string>
+    <string name="crossfade">ã‚¯ãƒ­ã‚¹ãƒ•ã‚§ãƒ¼ãƒ‰</string>
+    <string name="crossfade_subtitle">1æ›²ã‚’æ¬¡ã®æ›²ã¸ãªã‚ã‚‰ã‹ã«ã¤ãªã’ã¾ã™</string>
+    <string name="automix">ã‚ªãƒ¼ãƒˆãƒŸãƒƒã‚¯ã‚¹ [BETA]</string>
+    <string name="skip_silence">ç„¡éŸ³ã‚’ã‚¹ã‚­ãƒƒãƒ—</string>
+    <string name="skip_silence_subtitle">1ç§’ã‚ˆã‚Šé•·ã„ç„¡éŸ³éƒ¨åˆ†ã‚’ã‚«ãƒƒãƒˆã—ã¾ã™</string>
+    <string name="skip_silence_float_subtitle">32ãƒ“ãƒƒãƒˆæµ®å‹•å°æ•°ç‚¹å‡ºåŠ›ã§ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“</string>
+    <string name="music_haptics">éŸ³æ¥½ãƒãƒ—ãƒ†ã‚£ã‚¯ã‚¹</string>
+    <string name="music_haptics_subtitle">éŸ³æ¥½ã«åˆã‚ã›ã¦ãƒ“ãƒ¼ãƒˆã‚’æ„Ÿã˜ã‚‹</string>
+    <string name="music_haptics_warning">æ›²ã®é–“ãšã£ã¨æŒ¯å‹•ãƒ¢ãƒ¼ã‚¿ãƒ¼ãŒå‹•ããŸã‚ã€ãƒãƒƒãƒ†ãƒªãƒ¼ã®æ¶ˆè²»ãŒæ˜Žã‚‰ã‹ã«å¢—ãˆã¾ã™ã€‚</string>
+    <string name="music_haptics_low_subtitle">æœ€ã‚‚è»½ã„è§¦æ„Ÿ</string>
+    <string name="music_haptics_medium_subtitle">ãƒãƒ©ãƒ³ã‚¹</string>
+    <string name="music_haptics_high_subtitle">æœ€ã‚‚å¼·ã„ â€” ãƒã‚±ãƒƒãƒˆã«æœ€é©</string>
+    <string name="equalizer">ã‚¤ã‚³ãƒ©ã‚¤ã‚¶ãƒ¼</string>
+    <string name="equalizer_subtitle">ãƒ‡ãƒã‚¤ã‚¹ã®ã‚·ã‚¹ãƒ†ãƒ ãƒ‘ãƒãƒ«</string>
+    <string name="show_nerd_stats">æŠ€è¡“æƒ…å ±ã‚’è¡¨ç¤º</string>
+    <string name="show_nerd_stats_subtitle">ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚³ãƒ¼ãƒ‡ãƒƒã‚¯ã€ãƒ“ãƒƒãƒˆãƒ¬ãƒ¼ãƒˆã€ã‚µãƒ³ãƒ—ãƒ«ãƒ¬ãƒ¼ãƒˆã‚’è¡¨ç¤º</string>
+    <string name="theme">ãƒ†ãƒ¼ãƒž</string>
+    <string name="reduce_animation">ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ¸›ã‚‰ã™</string>
+    <string name="reduce_animation_subtitle">ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å‹•ã‹ã•ãšå›ºå®šã—ã¾ã™</string>
+    <string name="reduce_dynamic_blur">å‹•çš„ãªã¼ã‹ã—ã‚’æ¸›ã‚‰ã™</string>
+    <string name="reduce_dynamic_blur_subtitle">ã‚¢ãƒ—ãƒªå…¨ä½“ã§ã™ã‚Šã‚¬ãƒ©ã‚¹åŠ¹æžœã‚’å˜è‰²ã®å¡—ã‚Šã¤ã¶ã—ã«ç½®ãæ›ãˆã¾ã™</string>
+    <string name="full_screen_cover_art">å…¨ç”»é¢ã‚«ãƒãƒ¼ã‚¢ãƒ¼ãƒˆ</string>
+    <string name="player_carousel">ã‚¸ãƒ£ã‚±ãƒƒãƒˆã‚’ã‚¹ãƒ¯ã‚¤ãƒ—</string>
+    <string name="player_carousel_subtitle">ã‚¸ãƒ£ã‚±ãƒƒãƒˆã‚’æ¨ªã«ãƒ‰ãƒ©ãƒƒã‚°ã™ã‚‹ã¨ã€æ¬¡ã®æ›²ã¨å‰ã®æ›²ãŒãƒ¬ã‚³ãƒ¼ãƒ‰ã®ã‚ˆã†ã«ç¾ã‚Œã¾ã™ã€‚ã‚ªãƒ•ã®ã¾ã¾ãªã‚‰ä»Šã®ã‚¸ãƒ£ã‚±ãƒƒãƒˆè¡¨ç¤ºã¯å¤‰ã‚ã‚Šã¾ã›ã‚“ã€‚</string>
+    <string name="animated_cover_art">ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒãƒ¼ã‚¢ãƒ¼ãƒˆ</string>
+    <string name="synced_lyrics">åŒæœŸæ­Œè©ž</string>
+    <string name="synced_lyrics_subtitle">æ­Œã‚ã‚Œã¦ã„ã‚‹æ­Œè©žã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä¸Šã§ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤ºã—ã¾ã™</string>
+    <string name="lyrics_sources">æ­Œè©žã®ã‚½ãƒ¼ã‚¹</string>
+    <string name="song_cache_limit">æ›²ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®ä¸Šé™</string>
+    <string name="clear_song_cache">æ›²ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤</string>
+    <string name="clear_song_cache_subtitle">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸéŸ³å£°ãŒä½¿ç”¨ã—ã¦ã„ã‚‹å®¹é‡ã‚’è§£æ”¾ã—ã¾ã™</string>
+    <string name="clear_image_cache">ç”»åƒã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤</string>
+    <string name="clear_image_cache_subtitle">ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒˆãŒä½¿ç”¨ã—ã¦ã„ã‚‹å®¹é‡ã‚’è§£æ”¾ã—ã¾ã™</string>
+    <string name="play_next_on_swipe">ã‚¹ãƒ¯ã‚¤ãƒ—ã§æ¬¡ã«å†ç”Ÿ</string>
+    <string name="dont_repeat_songs">ä»Šå›žã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã§ã¯æ›²ã‚’ç¹°ã‚Šè¿”ã•ãªã„</string>
+    <string name="stop_music_on_close">æœ€è¿‘ã®ã‚¢ãƒ—ãƒªã‹ã‚‰çµ‚äº†ã—ãŸã‚‰éŸ³æ¥½ã‚’åœæ­¢</string>
+    <string name="stop_music_on_close_subtitle">ã‚¢ãƒ—ãƒªã‚’æœ€è¿‘ã®ã‚¢ãƒ—ãƒªã‹ã‚‰æ¶ˆã™ã¨å†ç”Ÿã‚’åœæ­¢ã—ã¾ã™</string>
+    <string name="hide_volume_bar">éŸ³é‡ãƒãƒ¼ã‚’éš ã™</string>
+    <string name="hide_volume_bar_subtitle">ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’å‰Šé™¤ã—ã¾ã™</string>
+    <string name="hide_song_status">æ›²ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’éš ã™</string>
+    <string name="hide_song_status_subtitle">ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒ¤ãƒ¼ã®ã€Œå†ç”Ÿå…ƒã€ã‚„ã€Œå†ç”Ÿè€…ã€ã®è¡¨ç¤ºã‚’éš ã—ã¾ã™</string>
+    <string name="off">ã‚ªãƒ•</string>
+    <string name="low">ä½Ž</string>
+    <string name="medium">ä¸­</string>
+    <string name="high">é«˜</string>
+    <string name="standard">æ¨™æº–</string>
+    <string name="lossless">ãƒ­ã‚¹ãƒ¬ã‚¹</string>
+    <string name="system">ã‚·ã‚¹ãƒ†ãƒ </string>
+    <string name="light">ãƒ©ã‚¤ãƒˆ</string>
+    <string name="dark">ãƒ€ãƒ¼ã‚¯</string>
+    <string name="full_screen_cover_art_subtitle">æ­£æ–¹å½¢ã®ã‚¸ãƒ£ã‚±ãƒƒãƒˆã®ä»£ã‚ã‚Šã«ã‚«ãƒãƒ¼ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç«¯ã¾ã§åºƒã’ã¾ã™</string>
+    <string name="animated_cover_art_subtitle">é™æ­¢ç”»ã®ã‚¸ãƒ£ã‚±ãƒƒãƒˆã®ä»£ã‚ã‚Šã«ä¸€éƒ¨ã®ãƒªãƒªãƒ¼ã‚¹ãŒæŒã¤ãƒ«ãƒ¼ãƒ—å‹•ç”»ã‚’å†ç”Ÿã—ã¾ã™</string>
+    <string name="dont_repeat_songs_subtitle">ã‚ªãƒ¼ãƒˆãƒ—ãƒ¬ã‚¤ã¯ã€ã“ã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã§æ—¢ã«å†ç”Ÿã¾ãŸã¯ææ¡ˆã•ã‚ŒãŸæ›²ã‚’å†åº¦ææ¡ˆã—ã¾ã›ã‚“</string>
+    <string name="download_quality_subtitle">æŽ¥ç¶šã«ã‹ã‹ã‚ã‚‰ãšã€1ãƒˆãƒ©ãƒƒã‚¯ã‚ãŸã‚Š%1$s</string>
+    <string name="filter_non_music_audio">éŸ³æ¥½ä»¥å¤–ã®éŸ³å£°ã‚’é™¤å¤–</string>
+    <string name="filter_non_music_audio_subtitle">30ç§’æœªæº€ã®ã‚¯ãƒªãƒƒãƒ—ã€WAVãƒ•ã‚¡ã‚¤ãƒ«ã€ãƒœã‚¤ã‚¹ãƒ¡ãƒ¢ã€éŒ²éŸ³ã€ã‚·ã‚¹ãƒ†ãƒ éŸ³ã‚’éžè¡¨ç¤ºã«ã—ã¾ã™</string>
+    <string name="performance">ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹</string>
+    <string name="high_performance_mode">é«˜ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ãƒ¢ãƒ¼ãƒ‰</string>
+    <string name="high_performance_subtitle">ãƒ•ãƒ«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã¨ã¼ã‹ã—ã‚’ä½¿ç”¨ã—ã€ã‚ˆã‚Šé«˜ã„ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆã—ã¾ã™</string>
+    <string name="high_performance_active">%1$d Hzã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆä¸­ã§ã™ã€‚å¿…è¦ã«å¿œã˜ã¦AndroidãŒä¸‹ã’ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="beta">ãƒ™ãƒ¼ã‚¿</string>
+    <string name="refresh_rate">ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆ</string>
+    <string name="high_performance_before_enabling">æœ‰åŠ¹ã«ã™ã‚‹å‰ã«</string>
+    <string name="high_performance_battery_warning">ã¾ãšFree Musicã®ãƒãƒƒãƒ†ãƒªãƒ¼ä½¿ç”¨ã‚’ã€Œåˆ¶é™ãªã—ã€ã«è¨­å®šã—ã¦ãã ã•ã„ã€‚ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆã‚’ä¸Šã’ã‚‹ã¨ãƒãƒƒãƒ†ãƒªãƒ¼ã€CPUã€GPUã®æ¶ˆè²»ãŒå¢—ãˆã€ãƒ‡ãƒã‚¤ã‚¹ãŒç†±ããªã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="open_battery_settings">ãƒãƒƒãƒ†ãƒªãƒ¼è¨­å®šã‚’é–‹ã</string>
+    <string name="enable_high_performance_title">é«˜ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="enable_high_performance_confirmation">Free Musicã®ãƒãƒƒãƒ†ãƒªãƒ¼ä½¿ç”¨ãŒã€Œåˆ¶é™ãªã—ã€ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã®ã¿æœ‰åŠ¹ã«ã—ã¦ãã ã•ã„ã€‚ãƒ‡ãƒã‚¤ã‚¹ãŒç†±ããªã£ãŸã‚Šé›»åŠ›ãŒå°‘ãªããªã£ãŸã‚Šã™ã‚‹ã¨ã€AndroidãŒãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆã‚’åˆ¶é™ã™ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="enable">æœ‰åŠ¹ã«ã™ã‚‹</string>
+    <string name="not_yet">ä»Šã¯ã—ãªã„</string>
+    <string name="activity">ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£</string>
+    <string name="activity_competing">å‚åŠ ä¸­</string>
+    <string name="activity_dialog_message">ã‚«ãƒ¼ãƒ‰ã®ä¸Šã«è¡¨ç¤ºã•ã‚Œã‚‹å‹•è©žã§ã™ã€‚</string>
+    <string name="activity_listening">å†ç”Ÿä¸­</string>
+    <string name="activity_name_message">ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã§å‹•è©žã®å¾Œã«ç¶šãæ–‡è¨€ã§ã™ã€‚ç©ºæ¬„ã«ã™ã‚‹ã¨%1$sãŒä½¿ã‚ã‚Œã¾ã™ã€‚</string>
+    <string name="activity_playing">ãƒ—ãƒ¬ã‚¤ä¸­</string>
+    <string name="activity_watching">è¦–è´ä¸­</string>
+    <string name="add_to_queue">å†ç”Ÿã‚­ãƒ¥ãƒ¼ã«è¿½åŠ </string>
+    <string name="after_this_song">ã“ã®æ›²ã®å¾Œã«</string>
+    <string name="always_on">å¸¸ã«ã‚ªãƒ³</string>
+    <string name="api_token">APIãƒˆãƒ¼ã‚¯ãƒ³</string>
+    <string name="audio_quality_connection">%1$sæŽ¥ç¶šæ™‚</string>
     <string name="autoplay">AutoPlay</string>
-    <string name="back_in_future_version">今後のバージョンで復活予定</string>
-    <string name="buttons">ボタン</string>
-    <string name="clear_name">名前を消去</string>
-    <string name="close_lyrics">歌詞を閉じる</string>
-    <string name="translate_lyrics">歌詞を翻訳</string>
-    <string name="romanize_lyrics">歌詞をローマ字化</string>
-    <string name="show_original_lyrics">元の歌詞を表示</string>
-    <string name="translating_lyrics_to">%1$sに翻訳中…</string>
-    <string name="lyrics_translated_to">%1$sに翻訳済み</string>
-    <string name="romanizing_lyrics">歌詞をローマ字化しています…</string>
-    <string name="lyrics_romanized">ローマ字読み</string>
-    <string name="lyrics_already_romanized">この歌詞はすでにラテン文字です</string>
-    <string name="lyrics_romanization_unavailable">この歌詞はローマ字化できません</string>
-    <string name="lyrics_already_in_language">この歌詞はすでに%1$sです</string>
-    <string name="lyrics_translation_unavailable">現在、翻訳を利用できません</string>
-    <string name="connect_account_first">先にアカウントを連携してください</string>
-    <string name="connected_presence_off">接続済み、プレゼンスはオフ</string>
-    <string name="copy_log">ログをコピー</string>
-    <string name="couldnt_find">%1$sが見つかりませんでした</string>
-    <string name="couldnt_open_link">リンクを開けませんでした</string>
-    <string name="create_playlist">プレイリストを作成</string>
-    <string name="customize_card">カードをカスタマイズ</string>
-    <string name="customize_card_subtitle">ステータス、文言、両方のボタン</string>
-    <string name="delete">削除</string>
-    <string name="disconnect">接続を解除</string>
+    <string name="back_in_future_version">ä»Šå¾Œã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§å¾©æ´»äºˆå®š</string>
+    <string name="buttons">ãƒœã‚¿ãƒ³</string>
+    <string name="clear_name">åå‰ã‚’æ¶ˆåŽ»</string>
+    <string name="close_lyrics">æ­Œè©žã‚’é–‰ã˜ã‚‹</string>
+    <string name="translate_lyrics">æ­Œè©žã‚’ç¿»è¨³</string>
+    <string name="romanize_lyrics">æ­Œè©žã‚’ãƒ­ãƒ¼ãƒžå­—åŒ–</string>
+    <string name="show_original_lyrics">å…ƒã®æ­Œè©žã‚’è¡¨ç¤º</string>
+    <string name="translating_lyrics_to">%1$sã«ç¿»è¨³ä¸­â€¦</string>
+    <string name="lyrics_translated_to">%1$sã«ç¿»è¨³æ¸ˆã¿</string>
+    <string name="romanizing_lyrics">æ­Œè©žã‚’ãƒ­ãƒ¼ãƒžå­—åŒ–ã—ã¦ã„ã¾ã™â€¦</string>
+    <string name="lyrics_romanized">ãƒ­ãƒ¼ãƒžå­—èª­ã¿</string>
+    <string name="lyrics_already_romanized">ã“ã®æ­Œè©žã¯ã™ã§ã«ãƒ©ãƒ†ãƒ³æ–‡å­—ã§ã™</string>
+    <string name="lyrics_romanization_unavailable">ã“ã®æ­Œè©žã¯ãƒ­ãƒ¼ãƒžå­—åŒ–ã§ãã¾ã›ã‚“</string>
+    <string name="lyrics_already_in_language">ã“ã®æ­Œè©žã¯ã™ã§ã«%1$sã§ã™</string>
+    <string name="lyrics_translation_unavailable">ç¾åœ¨ã€ç¿»è¨³ã‚’åˆ©ç”¨ã§ãã¾ã›ã‚“</string>
+    <string name="connect_account_first">å…ˆã«ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’é€£æºã—ã¦ãã ã•ã„</string>
+    <string name="connected_presence_off">æŽ¥ç¶šæ¸ˆã¿ã€ãƒ—ãƒ¬ã‚¼ãƒ³ã‚¹ã¯ã‚ªãƒ•</string>
+    <string name="copy_log">ãƒ­ã‚°ã‚’ã‚³ãƒ”ãƒ¼</string>
+    <string name="couldnt_find">%1$sãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="couldnt_open_link">ãƒªãƒ³ã‚¯ã‚’é–‹ã‘ã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="create_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä½œæˆ</string>
+    <string name="customize_card">ã‚«ãƒ¼ãƒ‰ã‚’ã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚º</string>
+    <string name="customize_card_subtitle">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã€æ–‡è¨€ã€ä¸¡æ–¹ã®ãƒœã‚¿ãƒ³</string>
+    <string name="delete">å‰Šé™¤</string>
+    <string name="disconnect">æŽ¥ç¶šã‚’è§£é™¤</string>
     <string name="discord">Discord</string>
-    <string name="discord_account">Discordアカウント</string>
-    <string name="discord_button_variables">{song_name}、{artist_name}、{album_name}は現在の曲に置き換えられます。</string>
-    <string name="discord_buttons_footer">{song_name}、{artist_name}、{album_name}は曲の情報に置き換えられます。1つ目のボタンはYouTube Musicで曲を開き、2つ目はこのプロジェクトを開きます。</string>
-    <string name="discord_presence_footer">曲、再生位置、再生状態が変わるとカードが更新されます。再生が止まると消去されます。</string>
-    <string name="discord_show_audio_quality">音質を表示</string>
-    <string name="discord_show_audio_quality_subtitle">ステータスカードにハイレゾ・ロスレス・Dolbyの仕様を表示</string>
-    <string name="discord_sign_in_footer">ログインするとDiscordのログインページが開きます。Free Musicに何かが入力されることはありません。</string>
-    <string name="discord_token">Discordトークン</string>
-    <string name="discord_token_description">Discordアカウントトークンを貼り付けてください。このデバイス内で暗号化され、Discordにのみ送信されます。</string>
-    <string name="discord_token_rejected">Discordがそのトークンを拒否しました。</string>
-    <string name="discord_token_warning">Discordはアプリがプレゼンスを設定できるAPIを提供していないため、この機能はあなたのアカウントとしてログインし、Discordのプロトコルを使用します。トークンはこのデバイス内で暗号化され、Discordにのみ送信されます。アカウント全体へのアクセス権を与えることになり、アカウントの自動化はDiscordの利用規約に違反します。このリスクを受け入れられる場合のみ使用してください。</string>
-    <string name="dislike">低評価</string>
-    <string name="done">完了</string>
-    <string name="download">ダウンロード</string>
-    <string name="download_quality_dialog_subtitle">このデバイスに保存するファイル向け</string>
-    <string name="downloaded">ダウンロード済み</string>
-    <string name="drag_to_reorder">ドラッグして並べ替え</string>
-    <string name="enabled">有効</string>
-    <string name="enter_token_instead">代わりにトークンを入力</string>
-    <string name="enter_token_instead_subtitle">ログインページが読み込まれない場合に使用してください</string>
-    <string name="enter_token_to_enable">有効にするにはトークンを入力してください</string>
-    <string name="first_button">1つ目のボタン</string>
-    <string name="got_it">了解</string>
-    <string name="high_quality">高音質</string>
-    <string name="instrumental">インストゥルメンタル</string>
-    <string name="pause">一時停止</string>
-    <string name="lyrics_by">歌詞提供：%1$s</string>
-    <string name="change_lyrics_provider">変更</string>
-    <string name="choose_lyrics_provider">歌詞の提供元を選択</string>
-    <string name="lyrics_provider_current">現在の提供元</string>
-    <string name="lyrics_provider_found">歌詞が見つかりました · タップして使用</string>
-    <string name="lyrics_provider_not_found">歌詞が見つかりません</string>
-    <string name="lyrics_provider_fetching">歌詞を取得中…</string>
-    <string name="lyrics_provider_not_fetched">タップして取得</string>
-    <string name="no_lyrics_found">歌詞が見つかりません</string>
-    <string name="lyrics_saved_with_download">このダウンロードに歌詞を保存済み</string>
-    <string name="shuffle_on">シャッフル: オン</string>
-    <string name="shuffle_off">シャッフル: オフ</string>
-    <string name="repeat_one">1曲をリピート</string>
-    <string name="repeat_all">すべてリピート</string>
-    <string name="repeat_off">リピート: オフ</string>
-    <string name="autoplay_on">AutoPlay: オン</string>
-    <string name="autoplay_off">AutoPlay: オフ</string>
-    <string name="autoplay_queue_description">次に再生される、似た曲</string>
-    <string name="autoplay_empty_description">似た曲が引き続き再生されます</string>
-    <string name="high_quality_upgrading">高音質、アップグレード中</string>
-    <string name="upgrading_quality">音質をアップグレード中</string>
-    <string name="hi_res_lossless">ハイレゾロスレス</string>
-    <string name="bit_depth">%1$dビット</string>
-    <string name="mono">モノラル</string>
-    <string name="stereo">ステレオ</string>
+    <string name="discord_account">Discordã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
+    <string name="discord_button_variables">{song_name}ã€{artist_name}ã€{album_name}ã¯ç¾åœ¨ã®æ›²ã«ç½®ãæ›ãˆã‚‰ã‚Œã¾ã™ã€‚</string>
+    <string name="discord_buttons_footer">{song_name}ã€{artist_name}ã€{album_name}ã¯æ›²ã®æƒ…å ±ã«ç½®ãæ›ãˆã‚‰ã‚Œã¾ã™ã€‚1ã¤ç›®ã®ãƒœã‚¿ãƒ³ã¯YouTube Musicã§æ›²ã‚’é–‹ãã€2ã¤ç›®ã¯ã“ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’é–‹ãã¾ã™ã€‚</string>
+    <string name="discord_presence_footer">æ›²ã€å†ç”Ÿä½ç½®ã€å†ç”ŸçŠ¶æ…‹ãŒå¤‰ã‚ã‚‹ã¨ã‚«ãƒ¼ãƒ‰ãŒæ›´æ–°ã•ã‚Œã¾ã™ã€‚å†ç”ŸãŒæ­¢ã¾ã‚‹ã¨æ¶ˆåŽ»ã•ã‚Œã¾ã™ã€‚</string>
+    <string name="discord_show_audio_quality">éŸ³è³ªã‚’è¡¨ç¤º</string>
+    <string name="discord_show_audio_quality_subtitle">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚«ãƒ¼ãƒ‰ã«ãƒã‚¤ãƒ¬ã‚¾ãƒ»ãƒ­ã‚¹ãƒ¬ã‚¹ãƒ»Dolbyã®ä»•æ§˜ã‚’è¡¨ç¤º</string>
+    <string name="discord_sign_in_footer">ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹ã¨Discordã®ãƒ­ã‚°ã‚¤ãƒ³ãƒšãƒ¼ã‚¸ãŒé–‹ãã¾ã™ã€‚Free Musicã«ä½•ã‹ãŒå…¥åŠ›ã•ã‚Œã‚‹ã“ã¨ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚</string>
+    <string name="discord_token">Discordãƒˆãƒ¼ã‚¯ãƒ³</string>
+    <string name="discord_token_description">Discordã‚¢ã‚«ã‚¦ãƒ³ãƒˆãƒˆãƒ¼ã‚¯ãƒ³ã‚’è²¼ã‚Šä»˜ã‘ã¦ãã ã•ã„ã€‚ã“ã®ãƒ‡ãƒã‚¤ã‚¹å†…ã§æš—å·åŒ–ã•ã‚Œã€Discordã«ã®ã¿é€ä¿¡ã•ã‚Œã¾ã™ã€‚</string>
+    <string name="discord_token_rejected">DiscordãŒãã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’æ‹’å¦ã—ã¾ã—ãŸã€‚</string>
+    <string name="discord_token_warning">Discordã¯ã‚¢ãƒ—ãƒªãŒãƒ—ãƒ¬ã‚¼ãƒ³ã‚¹ã‚’è¨­å®šã§ãã‚‹APIã‚’æä¾›ã—ã¦ã„ãªã„ãŸã‚ã€ã“ã®æ©Ÿèƒ½ã¯ã‚ãªãŸã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³ã—ã€Discordã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚ãƒˆãƒ¼ã‚¯ãƒ³ã¯ã“ã®ãƒ‡ãƒã‚¤ã‚¹å†…ã§æš—å·åŒ–ã•ã‚Œã€Discordã«ã®ã¿é€ä¿¡ã•ã‚Œã¾ã™ã€‚ã‚¢ã‚«ã‚¦ãƒ³ãƒˆå…¨ä½“ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©ã‚’ä¸Žãˆã‚‹ã“ã¨ã«ãªã‚Šã€ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã®è‡ªå‹•åŒ–ã¯Discordã®åˆ©ç”¨è¦ç´„ã«é•åã—ã¾ã™ã€‚ã“ã®ãƒªã‚¹ã‚¯ã‚’å—ã‘å…¥ã‚Œã‚‰ã‚Œã‚‹å ´åˆã®ã¿ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="dislike">ä½Žè©•ä¾¡</string>
+    <string name="done">å®Œäº†</string>
+    <string name="download">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="download_quality_dialog_subtitle">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã«ä¿å­˜ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å‘ã‘</string>
+    <string name="downloaded">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿</string>
+    <string name="drag_to_reorder">ãƒ‰ãƒ©ãƒƒã‚°ã—ã¦ä¸¦ã¹æ›¿ãˆ</string>
+    <string name="enabled">æœ‰åŠ¹</string>
+    <string name="enter_token_instead">ä»£ã‚ã‚Šã«ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å…¥åŠ›</string>
+    <string name="enter_token_instead_subtitle">ãƒ­ã‚°ã‚¤ãƒ³ãƒšãƒ¼ã‚¸ãŒèª­ã¿è¾¼ã¾ã‚Œãªã„å ´åˆã«ä½¿ç”¨ã—ã¦ãã ã•ã„</string>
+    <string name="enter_token_to_enable">æœ‰åŠ¹ã«ã™ã‚‹ã«ã¯ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„</string>
+    <string name="first_button">1ã¤ç›®ã®ãƒœã‚¿ãƒ³</string>
+    <string name="got_it">äº†è§£</string>
+    <string name="high_quality">é«˜éŸ³è³ª</string>
+    <string name="instrumental">ã‚¤ãƒ³ã‚¹ãƒˆã‚¥ãƒ«ãƒ¡ãƒ³ã‚¿ãƒ«</string>
+    <string name="pause">ä¸€æ™‚åœæ­¢</string>
+    <string name="lyrics_by">æ­Œè©žæä¾›ï¼š%1$s</string>
+    <string name="change_lyrics_provider">å¤‰æ›´</string>
+    <string name="choose_lyrics_provider">æ­Œè©žã®æä¾›å…ƒã‚’é¸æŠž</string>
+    <string name="lyrics_provider_current">ç¾åœ¨ã®æä¾›å…ƒ</string>
+    <string name="lyrics_provider_found">æ­Œè©žãŒè¦‹ã¤ã‹ã‚Šã¾ã—ãŸ Â· ã‚¿ãƒƒãƒ—ã—ã¦ä½¿ç”¨</string>
+    <string name="lyrics_provider_not_found">æ­Œè©žãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“</string>
+    <string name="lyrics_provider_fetching">æ­Œè©žã‚’å–å¾—ä¸­â€¦</string>
+    <string name="lyrics_provider_not_fetched">ã‚¿ãƒƒãƒ—ã—ã¦å–å¾—</string>
+    <string name="no_lyrics_found">æ­Œè©žãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“</string>
+    <string name="lyrics_saved_with_download">ã“ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«æ­Œè©žã‚’ä¿å­˜æ¸ˆã¿</string>
+    <string name="shuffle_on">ã‚·ãƒ£ãƒƒãƒ•ãƒ«: ã‚ªãƒ³</string>
+    <string name="shuffle_off">ã‚·ãƒ£ãƒƒãƒ•ãƒ«: ã‚ªãƒ•</string>
+    <string name="repeat_one">1æ›²ã‚’ãƒªãƒ”ãƒ¼ãƒˆ</string>
+    <string name="repeat_all">ã™ã¹ã¦ãƒªãƒ”ãƒ¼ãƒˆ</string>
+    <string name="repeat_off">ãƒªãƒ”ãƒ¼ãƒˆ: ã‚ªãƒ•</string>
+    <string name="autoplay_on">AutoPlay: ã‚ªãƒ³</string>
+    <string name="autoplay_off">AutoPlay: ã‚ªãƒ•</string>
+    <string name="autoplay_queue_description">æ¬¡ã«å†ç”Ÿã•ã‚Œã‚‹ã€ä¼¼ãŸæ›²</string>
+    <string name="autoplay_empty_description">ä¼¼ãŸæ›²ãŒå¼•ãç¶šãå†ç”Ÿã•ã‚Œã¾ã™</string>
+    <string name="high_quality_upgrading">é«˜éŸ³è³ªã€ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰ä¸­</string>
+    <string name="upgrading_quality">éŸ³è³ªã‚’ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰ä¸­</string>
+    <string name="hi_res_lossless">ãƒã‚¤ãƒ¬ã‚¾ãƒ­ã‚¹ãƒ¬ã‚¹</string>
+    <string name="bit_depth">%1$dãƒ“ãƒƒãƒˆ</string>
+    <string name="mono">ãƒ¢ãƒŽãƒ©ãƒ«</string>
+    <string name="stereo">ã‚¹ãƒ†ãƒ¬ã‚ª</string>
     <string name="channel_count">%1$dch</string>
-    <string name="downgraded_from">↓ %1$sから</string>
-    <string name="history">履歴</string>
-    <string name="sources">ソース</string>
+    <string name="downgraded_from">â†“ %1$sã‹ã‚‰</string>
+    <string name="history">å±¥æ­´</string>
+    <string name="sources">ã‚½ãƒ¼ã‚¹</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="mobile_data">モバイルデータ</string>
-    <string name="couldnt_load_tracks">これらのトラックを読み込めませんでした</string>
-    <string name="wifi_only_download_refusal">ダウンロードはWi-Fiのみに制限されています。モバイルデータを使うには設定でオフにしてください。</string>
-    <string name="pinned_playlist_limit">ピン留めできるプレイリストは%1$d件までです</string>
-    <string name="downloaded_playlist">ダウンロード済みのプレイリスト</string>
-    <string name="library_sign_in_description">Googleアカウントにログインすると、高評価した曲、プレイリスト、YouTube Musicの履歴が表示されます。</string>
-    <string name="downloads_progress">ダウンロード · %1$d%%</string>
-    <string name="downloads_finished">ダウンロード · 完了</string>
-    <string name="downloading_progress">ダウンロード中 · %1$d%%</string>
-    <string name="starting">開始しています</string>
-    <string name="saved_to_freemusic_folder">Music/Free Musicに保存済み</string>
-    <string name="nothing_downloading">ダウンロード中の項目はありません</string>
-    <string name="nothing_to_explore">現在探索できるものはありません</string>
-    <string name="no_youtube_music_results">YouTube Musicからの結果はありません</string>
-    <string name="library_empty">ライブラリにはまだ何もありません</string>
-    <string name="history_sign_in_required">これまでの再生履歴を見るにはログインしてください</string>
-    <string name="history_empty">まだ何も再生されていません</string>
-    <string name="no_results">結果がありません</string>
-    <string name="downloaded_playlist_empty">このプレイリストの曲はこのデバイスに残っていません</string>
-    <string name="no_local_audio_found">このデバイスにオーディオファイルが見つかりません</string>
-    <string name="no_internet_connection">インターネット接続がありません</string>
-    <string name="youtube_request_rejected">YouTube Musicがリクエストを拒否しました。もう一度ログインしてみてください。</string>
-    <string name="something_went_wrong">問題が発生しました</string>
-    <string name="unknown_artist">不明なアーティスト</string>
+    <string name="mobile_data">ãƒ¢ãƒã‚¤ãƒ«ãƒ‡ãƒ¼ã‚¿</string>
+    <string name="couldnt_load_tracks">ã“ã‚Œã‚‰ã®ãƒˆãƒ©ãƒƒã‚¯ã‚’èª­ã¿è¾¼ã‚ã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="wifi_only_download_refusal">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã¯Wi-Fiã®ã¿ã«åˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚ãƒ¢ãƒã‚¤ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ã†ã«ã¯è¨­å®šã§ã‚ªãƒ•ã«ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="pinned_playlist_limit">ãƒ”ãƒ³ç•™ã‚ã§ãã‚‹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯%1$dä»¶ã¾ã§ã§ã™</string>
+    <string name="downloaded_playlist">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="library_sign_in_description">Googleã‚¢ã‚«ã‚¦ãƒ³ãƒˆã«ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹ã¨ã€é«˜è©•ä¾¡ã—ãŸæ›²ã€ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã€YouTube Musicã®å±¥æ­´ãŒè¡¨ç¤ºã•ã‚Œã¾ã™ã€‚</string>
+    <string name="downloads_progress">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ Â· %1$d%%</string>
+    <string name="downloads_finished">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ Â· å®Œäº†</string>
+    <string name="downloading_progress">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ Â· %1$d%%</string>
+    <string name="starting">é–‹å§‹ã—ã¦ã„ã¾ã™</string>
+    <string name="saved_to_freemusic_folder">Music/Free Musicã«ä¿å­˜æ¸ˆã¿</string>
+    <string name="nothing_downloading">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ã®é …ç›®ã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="nothing_to_explore">ç¾åœ¨æŽ¢ç´¢ã§ãã‚‹ã‚‚ã®ã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="no_youtube_music_results">YouTube Musicã‹ã‚‰ã®çµæžœã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="library_empty">ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«ã¯ã¾ã ä½•ã‚‚ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="history_sign_in_required">ã“ã‚Œã¾ã§ã®å†ç”Ÿå±¥æ­´ã‚’è¦‹ã‚‹ã«ã¯ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ãã ã•ã„</string>
+    <string name="history_empty">ã¾ã ä½•ã‚‚å†ç”Ÿã•ã‚Œã¦ã„ã¾ã›ã‚“</string>
+    <string name="no_results">çµæžœãŒã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="downloaded_playlist_empty">ã“ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®æ›²ã¯ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã«æ®‹ã£ã¦ã„ã¾ã›ã‚“</string>
+    <string name="no_local_audio_found">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“</string>
+    <string name="no_internet_connection">ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šãŒã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="youtube_request_rejected">YouTube MusicãŒãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’æ‹’å¦ã—ã¾ã—ãŸã€‚ã‚‚ã†ä¸€åº¦ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ã¿ã¦ãã ã•ã„ã€‚</string>
+    <string name="something_went_wrong">å•é¡ŒãŒç™ºç”Ÿã—ã¾ã—ãŸ</string>
+    <string name="unknown_artist">ä¸æ˜Žãªã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
     <plurals name="downloads_failed_count">
-        <item quantity="other">ダウンロード · %1$d件失敗</item>
+        <item quantity="other">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ Â· %1$dä»¶å¤±æ•—</item>
     </plurals>
     <plurals name="download_waiting_count">
-        <item quantity="other">%1$d件待機中</item>
+        <item quantity="other">%1$dä»¶å¾…æ©Ÿä¸­</item>
     </plurals>
     <plurals name="download_done_count">
-        <item quantity="other">%1$d件完了</item>
+        <item quantity="other">%1$dä»¶å®Œäº†</item>
     </plurals>
     <plurals name="download_failed_count">
-        <item quantity="other">%1$d件失敗</item>
+        <item quantity="other">%1$dä»¶å¤±æ•—</item>
     </plurals>
     <plurals name="all_songs_downloaded">
-        <item quantity="other">%1$d曲すべてダウンロード済み</item>
+        <item quantity="other">%1$dæ›²ã™ã¹ã¦ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿</item>
     </plurals>
-    <string name="your_playlists">あなたのプレイリスト</string>
-    <string name="who_can_see_it">公開範囲</string>
-    <string name="about_artist">アーティストについて</string>
-    <string name="about_album">アルバムについて</string>
-    <string name="nothing_matches">「%1$s」に一致するものはありません</string>
-    <string name="close_search">検索を閉じる</string>
-    <string name="less">折りたたむ</string>
-    <string name="song_count_with_minutes">%1$s、%2$d分</string>
-    <string name="song_count_with_duration">%1$s、%2$s</string>
-    <string name="song_count_with_hours_minutes">%1$s、%2$s %3$d分</string>
+    <string name="your_playlists">ã‚ãªãŸã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="who_can_see_it">å…¬é–‹ç¯„å›²</string>
+    <string name="about_artist">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã«ã¤ã„ã¦</string>
+    <string name="about_album">ã‚¢ãƒ«ãƒãƒ ã«ã¤ã„ã¦</string>
+    <string name="nothing_matches">ã€Œ%1$sã€ã«ä¸€è‡´ã™ã‚‹ã‚‚ã®ã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="close_search">æ¤œç´¢ã‚’é–‰ã˜ã‚‹</string>
+    <string name="less">æŠ˜ã‚ŠãŸãŸã‚€</string>
+    <string name="song_count_with_minutes">%1$sã€%2$dåˆ†</string>
+    <string name="song_count_with_duration">%1$sã€%2$s</string>
+    <string name="song_count_with_hours_minutes">%1$sã€%2$s %3$dåˆ†</string>
     <plurals name="hour_count">
-        <item quantity="other">%1$d時間</item>
+        <item quantity="other">%1$dæ™‚é–“</item>
     </plurals>
     <plurals name="songs_will_play_next">
-        <item quantity="other">%1$d曲が次に再生されます</item>
+        <item quantity="other">%1$dæ›²ãŒæ¬¡ã«å†ç”Ÿã•ã‚Œã¾ã™</item>
     </plurals>
     <plurals name="songs_added_to_queue">
-        <item quantity="other">%1$d曲を再生キューに追加しました</item>
+        <item quantity="other">%1$dæ›²ã‚’å†ç”Ÿã‚­ãƒ¥ãƒ¼ã«è¿½åŠ ã—ã¾ã—ãŸ</item>
     </plurals>
     <plurals name="log_copied_line_count">
-        <item quantity="other">ログをコピーしました · %1$d行</item>
+        <item quantity="other">ãƒ­ã‚°ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ Â· %1$dè¡Œ</item>
     </plurals>
-    <string name="integrate_spotify_canvas">Spotify Canvasを設定</string>
-    <string name="lastfm_login">Last.fmログイン</string>
-    <string name="lastfm_login_description">Last.fmアカウントでログインするとスクロブリングが有効になります。</string>
-    <string name="lastfm_now_playing_subtitle">今聴いているものをLast.fmに反映します</string>
-    <string name="lead_with_song">曲名を先頭に</string>
-    <string name="lead_with_song_subtitle">太字の行にアーティストではなく曲名を表示します</string>
-    <string name="like">高評価</string>
-    <string name="listenbrainz_token">ListenBrainzトークン</string>
-    <string name="listenbrainz_token_description">スクロブリングを有効にするには、ListenBrainzのユーザートークンを貼り付けてください。</string>
-    <string name="listening_history">再生履歴</string>
-    <string name="lyrics_not_available">歌詞は利用できません</string>
-    <string name="lyrics_sources_order">ソースはこの順番で試されます。ドラッグして並べ替えられます。音節単位の歌詞が優先されていない限り、歌詞が見つかった最初のソースが採用されます。</string>
-    <string name="max_delay">最大遅延</string>
-    <string name="max_delay_subtitle">スクロブルまでの最大遅延（秒）</string>
-    <string name="min_song_duration">最小の曲の長さ</string>
-    <string name="min_song_duration_subtitle">これより短い曲はスクロブルされません</string>
-    <string name="monthly_listeners">月間リスナー数 %1$s人</string>
-    <string name="name">名前</string>
-    <string name="no_lyrics_for_track">この曲の歌詞はありません</string>
-    <string name="no_playlists_yet">プレイリストはまだありません。上の行から作成してください。</string>
-    <string name="no_tracks_here">ここにはトラックがありません</string>
-    <string name="not_connected">未接続</string>
-    <string name="one_hour">1時間</string>
-    <string name="open_album">アルバムを開く</string>
-    <string name="open_artist">アーティストを開く</string>
-    <string name="pause_after_a_while">しばらくしたら再生を一時停止</string>
-    <string name="pause_after_song">この曲が終わったら一時停止します</string>
-    <string name="pause_countdown">あと%1$sで再生が一時停止します</string>
-    <string name="play_to_preview">プレビューを表示するには何かを再生してください。</string>
-    <string name="playlist_name">プレイリスト名</string>
-    <string name="presence">プレゼンス</string>
-    <string name="preview">プレビュー</string>
-    <string name="prioritize_syllable_lyrics">音節単位の歌詞を優先</string>
-    <string name="prioritize_syllable_lyrics_subtitle">行単位で一致しても、単語ごとの歌詞を求めて検索を続けます</string>
-    <string name="quality_hourly">%1$s · %2$s</string>
-    <string name="quality_per_track">%1$s · 1トラックあたり%2$s</string>
-    <string name="queued">待機中</string>
-    <string name="remove">削除</string>
-    <string name="remove_from_liked">高く評価した音楽から削除</string>
-    <string name="remove_from_playlist">このプレイリストから削除</string>
-    <string name="move_up">上に移動</string>
-    <string name="move_down">下に移動</string>
-    <string name="remove_from_queue">再生キューから削除</string>
-    <string name="rename_playlist">プレイリスト名を変更</string>
-    <string name="reset_to_default">デフォルトに戻す</string>
-    <string name="rich_presence_footer">Discordのプロフィールに再生中の曲を表示します。</string>
-    <string name="save_name">名前を保存</string>
-    <string name="saved_to_downloads">ダウンロードに保存済み</string>
-    <string name="saved_to_youtube_music_account">YouTube Musicアカウントに保存済み</string>
-    <string name="scrobble_delay">スクロブル遅延</string>
-    <string name="scrobble_delay_subtitle">曲のどの時点でスクロブルするか</string>
-    <string name="scrobble_timing">スクロブルのタイミング</string>
-    <string name="scrobble_tracks">トラックをスクロブル</string>
-    <string name="scrobble_tracks_subtitle">再生をLast.fmのタイムラインに記録します</string>
-    <string name="scrobbling_footer">再生した曲をLast.fmとListenBrainzにスクロブルします。</string>
-    <string name="scrobbling_paused_footer">Last.fmとListenBrainzは今回のリリースでは一時停止しており、後日再開されます。既存の連携は保存されたままです。</string>
-    <string name="search_this_folder">このフォルダ内を検索</string>
-    <string name="search_this_list">このリスト内を検索</string>
-    <string name="second_button">2つ目のボタン</string>
-    <string name="share">共有</string>
-    <string name="sharing_as">@%1$sとして共有中</string>
-    <string name="sharing_listens">再生履歴を共有中</string>
-    <string name="show_what_playing">再生中の曲を表示する</string>
-    <string name="signed_in_as">%1$sとしてログイン済み</string>
-    <string name="signing_in">ログイン中…</string>
-    <string name="sleep_timer">スリープタイマー</string>
-    <string name="sources_no_lossless">有効なソースの中にロスレスオーディオを提供できるものがありません。トランスコードなしでロスレスファイルを再生するにはカスタムモジュールを追加してください。</string>
-    <string name="sources_order_footer">ソースにトラックがない、またはアクセスできない場合、Free Musicは次のソースを試します。YouTubeより上のソースは、より良いバージョンが見つかった場合にその録音を置き換えられます。</string>
-    <string name="sources_order_header">ソース（この順番で試行）</string>
-    <string name="sources_quality_capped">この接続は「高音質」より低く設定されているため、ストリームはその上限に合わせてトランスコードされます。ダウンロードには影響しません。</string>
-    <string name="jiosaavn_mismatch_warning">曲の別バージョンに一致してしまうことがあります。自己責任で有効にしてください。</string>
-    <string name="enable_jiosaavn">JioSaavnを有効にしますか？</string>
-    <string name="enable_anyway">有効にする</string>
-    <string name="sources_subtitle">音声の取得元と使用する順序</string>
-    <string name="source_matching">ソースの照合</string>
-    <string name="upgrade_length_slack">曲の長さの許容差</string>
-    <string name="upgrade_length_slack_subtitle">差し替えストリームで許容する長さの最大差</string>
-    <string name="upgrade_length_slack_footer">許容差を大きくするとソースの一致が増え、小さくすると厳しくなります。既定値は3秒です。</string>
-    <string name="seconds_short">%1$d秒</string>
-    <string name="spdc_token">sp_dcトークン</string>
-    <string name="spotify_canvas_setup">Spotify Canvasの設定</string>
-    <string name="spotify_canvas_setup_description">Spotify Canvasを使うには、Spotifyのsp_dc cookieを入力してください。</string>
-    <string name="spotify_canvas_setup_steps">1. ブラウザでopen.spotify.comにログインします。\n2. デベロッパーツールを開き、[Application]と[Cookies]を選択します。\n3. sp_dc cookieの値をコピーします。\n4. 下に貼り付けます。</string>
-    <string name="spotify_canvas_auto_hide">操作ボタンを自動で隠す</string>
-    <string name="spotify_canvas_auto_hide_subtitle">Spotify Canvasの再生中、5秒後にハーフプレーヤーを折りたたみます</string>
-    <string name="prioritize_spotify_canvas">Spotify Canvasを優先</string>
-    <string name="prioritize_spotify_canvas_subtitle">Apple Musicなどのアニメーションカバーより先にSpotifyを試します</string>
-    <string name="status">ステータス</string>
-    <string name="status_dialog_message">プレゼンスが有効な間、アカウントに表示される内容です。</string>
-    <string name="status_dnd">取り込み中</string>
-    <string name="status_dnd_detail">赤いダッシュ。通知も無効になります。</string>
-    <string name="status_idle">退席中</string>
-    <string name="status_idle_detail">オレンジの三日月、離席として表示されます</string>
-    <string name="status_online">オンライン</string>
-    <string name="status_online_detail">緑のドット</string>
-    <string name="subscribers">登録者数 %1$s人</string>
-    <string name="tap_to_connect">タップして接続</string>
-    <string name="tap_to_sign_in">タップしてログイン</string>
-    <string name="tap_to_sign_in_discord">タップしてDiscordでログイン</string>
-    <string name="token">トークン</string>
-    <string name="turn_off_timer">タイマーをオフにする</string>
-    <string name="undo_dislike">低評価を取り消す</string>
-    <string name="up_next">次の曲</string>
-    <string name="verb_competing">参加中</string>
-    <string name="verb_listening">再生中</string>
-    <string name="verb_playing">プレイ中</string>
-    <string name="verb_watching">視聴中</string>
+    <string name="integrate_spotify_canvas">Spotify Canvasã‚’è¨­å®š</string>
+    <string name="lastfm_login">Last.fmãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="lastfm_login_description">Last.fmã‚¢ã‚«ã‚¦ãƒ³ãƒˆã§ãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹ã¨ã‚¹ã‚¯ãƒ­ãƒ–ãƒªãƒ³ã‚°ãŒæœ‰åŠ¹ã«ãªã‚Šã¾ã™ã€‚</string>
+    <string name="lastfm_now_playing_subtitle">ä»Šè´ã„ã¦ã„ã‚‹ã‚‚ã®ã‚’Last.fmã«åæ˜ ã—ã¾ã™</string>
+    <string name="lead_with_song">æ›²åã‚’å…ˆé ­ã«</string>
+    <string name="lead_with_song_subtitle">å¤ªå­—ã®è¡Œã«ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã§ã¯ãªãæ›²åã‚’è¡¨ç¤ºã—ã¾ã™</string>
+    <string name="like">é«˜è©•ä¾¡</string>
+    <string name="listenbrainz_token">ListenBrainzãƒˆãƒ¼ã‚¯ãƒ³</string>
+    <string name="listenbrainz_token_description">ã‚¹ã‚¯ãƒ­ãƒ–ãƒªãƒ³ã‚°ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã«ã¯ã€ListenBrainzã®ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒˆãƒ¼ã‚¯ãƒ³ã‚’è²¼ã‚Šä»˜ã‘ã¦ãã ã•ã„ã€‚</string>
+    <string name="listening_history">å†ç”Ÿå±¥æ­´</string>
+    <string name="lyrics_not_available">æ­Œè©žã¯åˆ©ç”¨ã§ãã¾ã›ã‚“</string>
+    <string name="lyrics_sources_order">ã‚½ãƒ¼ã‚¹ã¯ã“ã®é †ç•ªã§è©¦ã•ã‚Œã¾ã™ã€‚ãƒ‰ãƒ©ãƒƒã‚°ã—ã¦ä¸¦ã¹æ›¿ãˆã‚‰ã‚Œã¾ã™ã€‚éŸ³ç¯€å˜ä½ã®æ­Œè©žãŒå„ªå…ˆã•ã‚Œã¦ã„ãªã„é™ã‚Šã€æ­Œè©žãŒè¦‹ã¤ã‹ã£ãŸæœ€åˆã®ã‚½ãƒ¼ã‚¹ãŒæŽ¡ç”¨ã•ã‚Œã¾ã™ã€‚</string>
+    <string name="max_delay">æœ€å¤§é…å»¶</string>
+    <string name="max_delay_subtitle">ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«ã¾ã§ã®æœ€å¤§é…å»¶ï¼ˆç§’ï¼‰</string>
+    <string name="min_song_duration">æœ€å°ã®æ›²ã®é•·ã•</string>
+    <string name="min_song_duration_subtitle">ã“ã‚Œã‚ˆã‚ŠçŸ­ã„æ›²ã¯ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«ã•ã‚Œã¾ã›ã‚“</string>
+    <string name="monthly_listeners">æœˆé–“ãƒªã‚¹ãƒŠãƒ¼æ•° %1$säºº</string>
+    <string name="name">åå‰</string>
+    <string name="no_lyrics_for_track">ã“ã®æ›²ã®æ­Œè©žã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="no_playlists_yet">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¯ã¾ã ã‚ã‚Šã¾ã›ã‚“ã€‚ä¸Šã®è¡Œã‹ã‚‰ä½œæˆã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="no_tracks_here">ã“ã“ã«ã¯ãƒˆãƒ©ãƒƒã‚¯ãŒã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="not_connected">æœªæŽ¥ç¶š</string>
+    <string name="one_hour">1æ™‚é–“</string>
+    <string name="open_album">ã‚¢ãƒ«ãƒãƒ ã‚’é–‹ã</string>
+    <string name="open_artist">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã‚’é–‹ã</string>
+    <string name="pause_after_a_while">ã—ã°ã‚‰ãã—ãŸã‚‰å†ç”Ÿã‚’ä¸€æ™‚åœæ­¢</string>
+    <string name="pause_after_song">ã“ã®æ›²ãŒçµ‚ã‚ã£ãŸã‚‰ä¸€æ™‚åœæ­¢ã—ã¾ã™</string>
+    <string name="pause_countdown">ã‚ã¨%1$sã§å†ç”ŸãŒä¸€æ™‚åœæ­¢ã—ã¾ã™</string>
+    <string name="play_to_preview">ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã‚’è¡¨ç¤ºã™ã‚‹ã«ã¯ä½•ã‹ã‚’å†ç”Ÿã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="playlist_name">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå</string>
+    <string name="presence">ãƒ—ãƒ¬ã‚¼ãƒ³ã‚¹</string>
+    <string name="preview">ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼</string>
+    <string name="prioritize_syllable_lyrics">éŸ³ç¯€å˜ä½ã®æ­Œè©žã‚’å„ªå…ˆ</string>
+    <string name="prioritize_syllable_lyrics_subtitle">è¡Œå˜ä½ã§ä¸€è‡´ã—ã¦ã‚‚ã€å˜èªžã”ã¨ã®æ­Œè©žã‚’æ±‚ã‚ã¦æ¤œç´¢ã‚’ç¶šã‘ã¾ã™</string>
+    <string name="quality_hourly">%1$s Â· %2$s</string>
+    <string name="quality_per_track">%1$s Â· 1ãƒˆãƒ©ãƒƒã‚¯ã‚ãŸã‚Š%2$s</string>
+    <string name="queued">å¾…æ©Ÿä¸­</string>
+    <string name="remove">å‰Šé™¤</string>
+    <string name="remove_from_liked">é«˜ãè©•ä¾¡ã—ãŸéŸ³æ¥½ã‹ã‚‰å‰Šé™¤</string>
+    <string name="remove_from_playlist">ã“ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤</string>
+    <string name="move_up">ä¸Šã«ç§»å‹•</string>
+    <string name="move_down">ä¸‹ã«ç§»å‹•</string>
+    <string name="remove_from_queue">å†ç”Ÿã‚­ãƒ¥ãƒ¼ã‹ã‚‰å‰Šé™¤</string>
+    <string name="rename_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆåã‚’å¤‰æ›´</string>
+    <string name="reset_to_default">ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™</string>
+    <string name="rich_presence_footer">Discordã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã«å†ç”Ÿä¸­ã®æ›²ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚</string>
+    <string name="save_name">åå‰ã‚’ä¿å­˜</string>
+    <string name="saved_to_downloads">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«ä¿å­˜æ¸ˆã¿</string>
+    <string name="saved_to_youtube_music_account">YouTube Musicã‚¢ã‚«ã‚¦ãƒ³ãƒˆã«ä¿å­˜æ¸ˆã¿</string>
+    <string name="scrobble_delay">ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«é…å»¶</string>
+    <string name="scrobble_delay_subtitle">æ›²ã®ã©ã®æ™‚ç‚¹ã§ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«ã™ã‚‹ã‹</string>
+    <string name="scrobble_timing">ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°</string>
+    <string name="scrobble_tracks">ãƒˆãƒ©ãƒƒã‚¯ã‚’ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«</string>
+    <string name="scrobble_tracks_subtitle">å†ç”Ÿã‚’Last.fmã®ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ³ã«è¨˜éŒ²ã—ã¾ã™</string>
+    <string name="scrobbling_footer">å†ç”Ÿã—ãŸæ›²ã‚’Last.fmã¨ListenBrainzã«ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«ã—ã¾ã™ã€‚</string>
+    <string name="scrobbling_paused_footer">Last.fmã¨ListenBrainzã¯ä»Šå›žã®ãƒªãƒªãƒ¼ã‚¹ã§ã¯ä¸€æ™‚åœæ­¢ã—ã¦ãŠã‚Šã€å¾Œæ—¥å†é–‹ã•ã‚Œã¾ã™ã€‚æ—¢å­˜ã®é€£æºã¯ä¿å­˜ã•ã‚ŒãŸã¾ã¾ã§ã™ã€‚</string>
+    <string name="search_this_folder">ã“ã®ãƒ•ã‚©ãƒ«ãƒ€å†…ã‚’æ¤œç´¢</string>
+    <string name="search_this_list">ã“ã®ãƒªã‚¹ãƒˆå†…ã‚’æ¤œç´¢</string>
+    <string name="second_button">2ã¤ç›®ã®ãƒœã‚¿ãƒ³</string>
+    <string name="share">å…±æœ‰</string>
+    <string name="sharing_as">@%1$sã¨ã—ã¦å…±æœ‰ä¸­</string>
+    <string name="sharing_listens">å†ç”Ÿå±¥æ­´ã‚’å…±æœ‰ä¸­</string>
+    <string name="show_what_playing">å†ç”Ÿä¸­ã®æ›²ã‚’è¡¨ç¤ºã™ã‚‹</string>
+    <string name="signed_in_as">%1$sã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³æ¸ˆã¿</string>
+    <string name="signing_in">ãƒ­ã‚°ã‚¤ãƒ³ä¸­â€¦</string>
+    <string name="sleep_timer">ã‚¹ãƒªãƒ¼ãƒ—ã‚¿ã‚¤ãƒžãƒ¼</string>
+    <string name="sources_no_lossless">æœ‰åŠ¹ãªã‚½ãƒ¼ã‚¹ã®ä¸­ã«ãƒ­ã‚¹ãƒ¬ã‚¹ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚’æä¾›ã§ãã‚‹ã‚‚ã®ãŒã‚ã‚Šã¾ã›ã‚“ã€‚ãƒˆãƒ©ãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰ãªã—ã§ãƒ­ã‚¹ãƒ¬ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å†ç”Ÿã™ã‚‹ã«ã¯ã‚«ã‚¹ã‚¿ãƒ ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="sources_order_footer">ã‚½ãƒ¼ã‚¹ã«ãƒˆãƒ©ãƒƒã‚¯ãŒãªã„ã€ã¾ãŸã¯ã‚¢ã‚¯ã‚»ã‚¹ã§ããªã„å ´åˆã€Free Musicã¯æ¬¡ã®ã‚½ãƒ¼ã‚¹ã‚’è©¦ã—ã¾ã™ã€‚YouTubeã‚ˆã‚Šä¸Šã®ã‚½ãƒ¼ã‚¹ã¯ã€ã‚ˆã‚Šè‰¯ã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒè¦‹ã¤ã‹ã£ãŸå ´åˆã«ãã®éŒ²éŸ³ã‚’ç½®ãæ›ãˆã‚‰ã‚Œã¾ã™ã€‚</string>
+    <string name="sources_order_header">ã‚½ãƒ¼ã‚¹ï¼ˆã“ã®é †ç•ªã§è©¦è¡Œï¼‰</string>
+    <string name="sources_quality_capped">ã“ã®æŽ¥ç¶šã¯ã€Œé«˜éŸ³è³ªã€ã‚ˆã‚Šä½Žãè¨­å®šã•ã‚Œã¦ã„ã‚‹ãŸã‚ã€ã‚¹ãƒˆãƒªãƒ¼ãƒ ã¯ãã®ä¸Šé™ã«åˆã‚ã›ã¦ãƒˆãƒ©ãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰ã•ã‚Œã¾ã™ã€‚ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«ã¯å½±éŸ¿ã—ã¾ã›ã‚“ã€‚</string>
+    <string name="jiosaavn_mismatch_warning">æ›²ã®åˆ¥ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã«ä¸€è‡´ã—ã¦ã—ã¾ã†ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚è‡ªå·±è²¬ä»»ã§æœ‰åŠ¹ã«ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="enable_jiosaavn">JioSaavnã‚’æœ‰åŠ¹ã«ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="enable_anyway">æœ‰åŠ¹ã«ã™ã‚‹</string>
+    <string name="sources_subtitle">éŸ³å£°ã®å–å¾—å…ƒã¨ä½¿ç”¨ã™ã‚‹é †åº</string>
+    <string name="source_matching">ã‚½ãƒ¼ã‚¹ã®ç…§åˆ</string>
+    <string name="upgrade_length_slack">æ›²ã®é•·ã•ã®è¨±å®¹å·®</string>
+    <string name="upgrade_length_slack_subtitle">å·®ã—æ›¿ãˆã‚¹ãƒˆãƒªãƒ¼ãƒ ã§è¨±å®¹ã™ã‚‹é•·ã•ã®æœ€å¤§å·®</string>
+    <string name="upgrade_length_slack_footer">è¨±å®¹å·®ã‚’å¤§ããã™ã‚‹ã¨ã‚½ãƒ¼ã‚¹ã®ä¸€è‡´ãŒå¢—ãˆã€å°ã•ãã™ã‚‹ã¨åŽ³ã—ããªã‚Šã¾ã™ã€‚æ—¢å®šå€¤ã¯3ç§’ã§ã™ã€‚</string>
+    <string name="seconds_short">%1$dç§’</string>
+    <string name="spdc_token">sp_dcãƒˆãƒ¼ã‚¯ãƒ³</string>
+    <string name="spotify_canvas_setup">Spotify Canvasã®è¨­å®š</string>
+    <string name="spotify_canvas_setup_description">Spotify Canvasã‚’ä½¿ã†ã«ã¯ã€Spotifyã®sp_dc cookieã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="spotify_canvas_setup_steps">1. ãƒ–ãƒ©ã‚¦ã‚¶ã§open.spotify.comã«ãƒ­ã‚°ã‚¤ãƒ³ã—ã¾ã™ã€‚\n2. ãƒ‡ãƒ™ãƒ­ãƒƒãƒ‘ãƒ¼ãƒ„ãƒ¼ãƒ«ã‚’é–‹ãã€[Application]ã¨[Cookies]ã‚’é¸æŠžã—ã¾ã™ã€‚\n3. sp_dc cookieã®å€¤ã‚’ã‚³ãƒ”ãƒ¼ã—ã¾ã™ã€‚\n4. ä¸‹ã«è²¼ã‚Šä»˜ã‘ã¾ã™ã€‚</string>
+    <string name="spotify_canvas_auto_hide">æ“ä½œãƒœã‚¿ãƒ³ã‚’è‡ªå‹•ã§éš ã™</string>
+    <string name="spotify_canvas_auto_hide_subtitle">Spotify Canvasã®å†ç”Ÿä¸­ã€5ç§’å¾Œã«ãƒãƒ¼ãƒ•ãƒ—ãƒ¬ãƒ¼ãƒ¤ãƒ¼ã‚’æŠ˜ã‚ŠãŸãŸã¿ã¾ã™</string>
+    <string name="prioritize_spotify_canvas">Spotify Canvasã‚’å„ªå…ˆ</string>
+    <string name="prioritize_spotify_canvas_subtitle">Apple Musicãªã©ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚«ãƒãƒ¼ã‚ˆã‚Šå…ˆã«Spotifyã‚’è©¦ã—ã¾ã™</string>
+    <string name="status">ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹</string>
+    <string name="status_dialog_message">ãƒ—ãƒ¬ã‚¼ãƒ³ã‚¹ãŒæœ‰åŠ¹ãªé–“ã€ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã«è¡¨ç¤ºã•ã‚Œã‚‹å†…å®¹ã§ã™ã€‚</string>
+    <string name="status_dnd">å–ã‚Šè¾¼ã¿ä¸­</string>
+    <string name="status_dnd_detail">èµ¤ã„ãƒ€ãƒƒã‚·ãƒ¥ã€‚é€šçŸ¥ã‚‚ç„¡åŠ¹ã«ãªã‚Šã¾ã™ã€‚</string>
+    <string name="status_idle">é€€å¸­ä¸­</string>
+    <string name="status_idle_detail">ã‚ªãƒ¬ãƒ³ã‚¸ã®ä¸‰æ—¥æœˆã€é›¢å¸­ã¨ã—ã¦è¡¨ç¤ºã•ã‚Œã¾ã™</string>
+    <string name="status_online">ã‚ªãƒ³ãƒ©ã‚¤ãƒ³</string>
+    <string name="status_online_detail">ç·‘ã®ãƒ‰ãƒƒãƒˆ</string>
+    <string name="subscribers">ç™»éŒ²è€…æ•° %1$säºº</string>
+    <string name="tap_to_connect">ã‚¿ãƒƒãƒ—ã—ã¦æŽ¥ç¶š</string>
+    <string name="tap_to_sign_in">ã‚¿ãƒƒãƒ—ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="tap_to_sign_in_discord">ã‚¿ãƒƒãƒ—ã—ã¦Discordã§ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="token">ãƒˆãƒ¼ã‚¯ãƒ³</string>
+    <string name="turn_off_timer">ã‚¿ã‚¤ãƒžãƒ¼ã‚’ã‚ªãƒ•ã«ã™ã‚‹</string>
+    <string name="undo_dislike">ä½Žè©•ä¾¡ã‚’å–ã‚Šæ¶ˆã™</string>
+    <string name="up_next">æ¬¡ã®æ›²</string>
+    <string name="verb_competing">å‚åŠ ä¸­</string>
+    <string name="verb_listening">å†ç”Ÿä¸­</string>
+    <string name="verb_playing">ãƒ—ãƒ¬ã‚¤ä¸­</string>
+    <string name="verb_watching">è¦–è´ä¸­</string>
     <plurals name="minute_count">
-        <item quantity="other">%1$d分</item>
+        <item quantity="other">%1$dåˆ†</item>
     </plurals>
-    <string name="biggest_day_note">最も聴いた日は%1$sで、%2$sの再生時間でした。</string>
-    <string name="close_replay">Replayを閉じる</string>
-    <string name="couldnt_draw_picture">画像を作成できませんでした</string>
-    <string name="default_replay_holder">Free Musicリスナー</string>
-    <string name="different_albums">さまざまなアルバム</string>
-    <string name="genres_pending">再生履歴が増えるとジャンルが表示されます</string>
-    <string name="hour_am">午前%1$d時</string>
-    <string name="hour_pm">午後%1$d時</string>
-    <string name="hours_minutes_short">%1$d時間%2$d分</string>
-    <string name="listen_most_around">最もよく聴くのは%1$s頃です。</string>
-    <string name="listening_shape">あなたの再生パターン</string>
-    <string name="member_since">登録日</string>
-    <string name="member_since_value">登録日：%1$s</string>
-    <string name="midday">正午</string>
-    <string name="midnight">真夜中</string>
-    <string name="minutes">分</string>
-    <string name="minutes_grouped_short">%1$s分</string>
-    <string name="minutes_listened">再生時間（分）</string>
-    <string name="minutes_short">%1$d分</string>
-    <string name="not_enough_listening">再生履歴がまだ十分ではありません</string>
-    <string name="not_enough_this_month">今月もう少し曲を再生するとReplayが解放されます。</string>
-    <string name="pinned">ピン留め済み</string>
-    <string name="replay_across">にわたって</string>
-    <string name="replay_album_end">があなたの心を掴みました。</string>
-    <string name="replay_album_focus">1枚のアルバム</string>
-    <string name="replay_album_start">今回は、</string>
-    <string name="replay_artist_end">に何度も戻ってきました。</string>
-    <string name="replay_artist_focus">1組のアーティスト</string>
-    <string name="replay_artist_start">今月はずっと、</string>
-    <string name="replay_empty_description">もう少し聴くと、Free Musicがあなたの履歴からReplayを作成します。</string>
-    <string name="replay_genre_end">があなたのサウンドを形作りました。</string>
-    <string name="replay_genre_focus">あなたのジャンル</string>
-    <string name="replay_genre_start">合わせて、</string>
-    <string name="replay_habits_middle">、そのきっかけは</string>
-    <string name="replay_habits_start">あなたが探求したのは</string>
-    <string name="replay_hours_across">%1$s時間</string>
-    <string name="replay_intro_end">の準備ができました。</string>
-    <string name="replay_intro_start">あなたの</string>
-    <string name="replay_minutes_end">です。</string>
-    <string name="replay_minutes_start">音楽と過ごした時間は</string>
+    <string name="biggest_day_note">æœ€ã‚‚è´ã„ãŸæ—¥ã¯%1$sã§ã€%2$sã®å†ç”Ÿæ™‚é–“ã§ã—ãŸã€‚</string>
+    <string name="close_replay">Replayã‚’é–‰ã˜ã‚‹</string>
+    <string name="couldnt_draw_picture">ç”»åƒã‚’ä½œæˆã§ãã¾ã›ã‚“ã§ã—ãŸ</string>
+    <string name="default_replay_holder">Free Musicãƒªã‚¹ãƒŠãƒ¼</string>
+    <string name="different_albums">ã•ã¾ã–ã¾ãªã‚¢ãƒ«ãƒãƒ </string>
+    <string name="genres_pending">å†ç”Ÿå±¥æ­´ãŒå¢—ãˆã‚‹ã¨ã‚¸ãƒ£ãƒ³ãƒ«ãŒè¡¨ç¤ºã•ã‚Œã¾ã™</string>
+    <string name="hour_am">åˆå‰%1$dæ™‚</string>
+    <string name="hour_pm">åˆå¾Œ%1$dæ™‚</string>
+    <string name="hours_minutes_short">%1$dæ™‚é–“%2$dåˆ†</string>
+    <string name="listen_most_around">æœ€ã‚‚ã‚ˆãè´ãã®ã¯%1$sé ƒã§ã™ã€‚</string>
+    <string name="listening_shape">ã‚ãªãŸã®å†ç”Ÿãƒ‘ã‚¿ãƒ¼ãƒ³</string>
+    <string name="member_since">ç™»éŒ²æ—¥</string>
+    <string name="member_since_value">ç™»éŒ²æ—¥ï¼š%1$s</string>
+    <string name="midday">æ­£åˆ</string>
+    <string name="midnight">çœŸå¤œä¸­</string>
+    <string name="minutes">åˆ†</string>
+    <string name="minutes_grouped_short">%1$såˆ†</string>
+    <string name="minutes_listened">å†ç”Ÿæ™‚é–“ï¼ˆåˆ†ï¼‰</string>
+    <string name="minutes_short">%1$dåˆ†</string>
+    <string name="not_enough_listening">å†ç”Ÿå±¥æ­´ãŒã¾ã ååˆ†ã§ã¯ã‚ã‚Šã¾ã›ã‚“</string>
+    <string name="not_enough_this_month">ä»Šæœˆã‚‚ã†å°‘ã—æ›²ã‚’å†ç”Ÿã™ã‚‹ã¨ReplayãŒè§£æ”¾ã•ã‚Œã¾ã™ã€‚</string>
+    <string name="pinned">ãƒ”ãƒ³ç•™ã‚æ¸ˆã¿</string>
+    <string name="replay_across">ã«ã‚ãŸã£ã¦</string>
+    <string name="replay_album_end">ãŒã‚ãªãŸã®å¿ƒã‚’æŽ´ã¿ã¾ã—ãŸã€‚</string>
+    <string name="replay_album_focus">1æžšã®ã‚¢ãƒ«ãƒãƒ </string>
+    <string name="replay_album_start">ä»Šå›žã¯ã€</string>
+    <string name="replay_artist_end">ã«ä½•åº¦ã‚‚æˆ»ã£ã¦ãã¾ã—ãŸã€‚</string>
+    <string name="replay_artist_focus">1çµ„ã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="replay_artist_start">ä»Šæœˆã¯ãšã£ã¨ã€</string>
+    <string name="replay_empty_description">ã‚‚ã†å°‘ã—è´ãã¨ã€Free MusicãŒã‚ãªãŸã®å±¥æ­´ã‹ã‚‰Replayã‚’ä½œæˆã—ã¾ã™ã€‚</string>
+    <string name="replay_genre_end">ãŒã‚ãªãŸã®ã‚µã‚¦ãƒ³ãƒ‰ã‚’å½¢ä½œã‚Šã¾ã—ãŸã€‚</string>
+    <string name="replay_genre_focus">ã‚ãªãŸã®ã‚¸ãƒ£ãƒ³ãƒ«</string>
+    <string name="replay_genre_start">åˆã‚ã›ã¦ã€</string>
+    <string name="replay_habits_middle">ã€ãã®ãã£ã‹ã‘ã¯</string>
+    <string name="replay_habits_start">ã‚ãªãŸãŒæŽ¢æ±‚ã—ãŸã®ã¯</string>
+    <string name="replay_hours_across">%1$sæ™‚é–“</string>
+    <string name="replay_intro_end">ã®æº–å‚™ãŒã§ãã¾ã—ãŸã€‚</string>
+    <string name="replay_intro_start">ã‚ãªãŸã®</string>
+    <string name="replay_minutes_end">ã§ã™ã€‚</string>
+    <string name="replay_minutes_start">éŸ³æ¥½ã¨éŽã”ã—ãŸæ™‚é–“ã¯</string>
     <string name="replay_minutes_value">%1$s</string>
-    <string name="replay_mostly_around">、主に%1$s頃でした。</string>
-    <string name="replay_private_counting">このデバイス内の再生履歴から非公開で集計されています</string>
-    <string name="replay_share_card_description">主な再生ハイライトをまとめた、洗練されたカードです。</string>
-    <string name="replay_share_summary_description">曲、アーティスト、アルバム、ジャンル、傾向をまとめた全体像です。</string>
-    <string name="replay_songs_end">があなたの1か月を彩りました。</string>
-    <string name="replay_songs_start">合計</string>
-    <string name="replay_summary_start">あなたの再生スタイルは</string>
-    <string name="saved">保存済み</string>
-    <string name="share_my_replay">自分のReplayを共有</string>
-    <string name="share_your_replay">あなたのReplayを共有</string>
-    <string name="tap_share_for_picture">共有をタップして画像を作成</string>
-    <string name="top_album">トップアルバム</string>
-    <string name="top_artist">トップアーティスト</string>
-    <string name="top_genre">トップジャンル</string>
-    <string name="top_song">トップ曲</string>
-    <string name="when_you_listen_most">最もよく聴く時間帯</string>
-    <string name="your_biggest_day">最も聴いた日：%1$s</string>
-    <string name="your_listening_experience">あなたの再生体験</string>
-    <string name="your_replay">あなたのReplay</string>
+    <string name="replay_mostly_around">ã€ä¸»ã«%1$sé ƒã§ã—ãŸã€‚</string>
+    <string name="replay_private_counting">ã“ã®ãƒ‡ãƒã‚¤ã‚¹å†…ã®å†ç”Ÿå±¥æ­´ã‹ã‚‰éžå…¬é–‹ã§é›†è¨ˆã•ã‚Œã¦ã„ã¾ã™</string>
+    <string name="replay_share_card_description">ä¸»ãªå†ç”Ÿãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’ã¾ã¨ã‚ãŸã€æ´—ç·´ã•ã‚ŒãŸã‚«ãƒ¼ãƒ‰ã§ã™ã€‚</string>
+    <string name="replay_share_summary_description">æ›²ã€ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã€ã‚¢ãƒ«ãƒãƒ ã€ã‚¸ãƒ£ãƒ³ãƒ«ã€å‚¾å‘ã‚’ã¾ã¨ã‚ãŸå…¨ä½“åƒã§ã™ã€‚</string>
+    <string name="replay_songs_end">ãŒã‚ãªãŸã®1ã‹æœˆã‚’å½©ã‚Šã¾ã—ãŸã€‚</string>
+    <string name="replay_songs_start">åˆè¨ˆ</string>
+    <string name="replay_summary_start">ã‚ãªãŸã®å†ç”Ÿã‚¹ã‚¿ã‚¤ãƒ«ã¯</string>
+    <string name="saved">ä¿å­˜æ¸ˆã¿</string>
+    <string name="share_my_replay">è‡ªåˆ†ã®Replayã‚’å…±æœ‰</string>
+    <string name="share_your_replay">ã‚ãªãŸã®Replayã‚’å…±æœ‰</string>
+    <string name="tap_share_for_picture">å…±æœ‰ã‚’ã‚¿ãƒƒãƒ—ã—ã¦ç”»åƒã‚’ä½œæˆ</string>
+    <string name="top_album">ãƒˆãƒƒãƒ—ã‚¢ãƒ«ãƒãƒ </string>
+    <string name="top_artist">ãƒˆãƒƒãƒ—ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
+    <string name="top_genre">ãƒˆãƒƒãƒ—ã‚¸ãƒ£ãƒ³ãƒ«</string>
+    <string name="top_song">ãƒˆãƒƒãƒ—æ›²</string>
+    <string name="when_you_listen_most">æœ€ã‚‚ã‚ˆãè´ãæ™‚é–“å¸¯</string>
+    <string name="your_biggest_day">æœ€ã‚‚è´ã„ãŸæ—¥ï¼š%1$s</string>
+    <string name="your_listening_experience">ã‚ãªãŸã®å†ç”Ÿä½“é¨“</string>
+    <string name="your_replay">ã‚ãªãŸã®Replay</string>
     <plurals name="replay_artist_count">
-        <item quantity="other">%1$s組のアーティスト</item>
+        <item quantity="other">%1$sçµ„ã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</item>
     </plurals>
     <plurals name="replay_play_count">
-        <item quantity="other">%1$s回再生</item>
+        <item quantity="other">%1$så›žå†ç”Ÿ</item>
     </plurals>
     <plurals name="replay_song_count">
-        <item quantity="other">%1$s曲</item>
+        <item quantity="other">%1$sæ›²</item>
     </plurals>
-    <string name="all_audio_folders">すべてのオーディオフォルダ</string>
-    <string name="local_music_folder">ローカルミュージックフォルダ</string>
-    <string name="sort_music">音楽を並べ替え</string>
-    <string name="sort_title_ascending">アルファベット順（A→Z）</string>
-    <string name="sort_title_descending">アルファベット順（Z→A）</string>
-    <string name="sort_date_added">追加日（新しい順）</string>
-    <string name="sort_date_modified">更新日（新しい順）</string>
-    <string name="use_all_audio_folders">すべてのオーディオフォルダを使用</string>
-    <string name="use_all_audio_folders_subtitle">フォルダの制限を解除し、デバイス全体の音楽をスキャンします</string>
-    <string name="album">アルバム</string>
-    <string name="artist">アーティスト</string>
+    <string name="all_audio_folders">ã™ã¹ã¦ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒ•ã‚©ãƒ«ãƒ€</string>
+    <string name="local_music_folder">ãƒ­ãƒ¼ã‚«ãƒ«ãƒŸãƒ¥ãƒ¼ã‚¸ãƒƒã‚¯ãƒ•ã‚©ãƒ«ãƒ€</string>
+    <string name="sort_music">éŸ³æ¥½ã‚’ä¸¦ã¹æ›¿ãˆ</string>
+    <string name="sort_title_ascending">ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé †ï¼ˆAâ†’Zï¼‰</string>
+    <string name="sort_title_descending">ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé †ï¼ˆZâ†’Aï¼‰</string>
+    <string name="sort_date_added">è¿½åŠ æ—¥ï¼ˆæ–°ã—ã„é †ï¼‰</string>
+    <string name="sort_date_modified">æ›´æ–°æ—¥ï¼ˆæ–°ã—ã„é †ï¼‰</string>
+    <string name="use_all_audio_folders">ã™ã¹ã¦ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½¿ç”¨</string>
+    <string name="use_all_audio_folders_subtitle">ãƒ•ã‚©ãƒ«ãƒ€ã®åˆ¶é™ã‚’è§£é™¤ã—ã€ãƒ‡ãƒã‚¤ã‚¹å…¨ä½“ã®éŸ³æ¥½ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã—ã¾ã™</string>
+    <string name="album">ã‚¢ãƒ«ãƒãƒ </string>
+    <string name="artist">ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
     <string name="webdav">WebDAV</string>
-    <string name="webdav_subtitle">サーバー上の音楽</string>
-    <string name="webdav_not_configured">「ソース」でサーバーを接続してください</string>
-    <string name="webdav_empty">WebDAVサーバーに音声ファイルが見つかりません。設定のURLを確認してください。</string>
-    <string name="webdav_description">Free MusicをWebDAVの音楽フォルダーに接続します — NextcloudのMusicフォルダーや、WebDAVに対応した任意のサーバーを使えます。</string>
-    <string name="webdav_server_url">サーバーURL</string>
+    <string name="webdav_subtitle">ã‚µãƒ¼ãƒãƒ¼ä¸Šã®éŸ³æ¥½</string>
+    <string name="webdav_not_configured">ã€Œã‚½ãƒ¼ã‚¹ã€ã§ã‚µãƒ¼ãƒãƒ¼ã‚’æŽ¥ç¶šã—ã¦ãã ã•ã„</string>
+    <string name="webdav_empty">WebDAVã‚µãƒ¼ãƒãƒ¼ã«éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚è¨­å®šã®URLã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="webdav_description">Free Musicã‚’WebDAVã®éŸ³æ¥½ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã«æŽ¥ç¶šã—ã¾ã™ â€” Nextcloudã®Musicãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚„ã€WebDAVã«å¯¾å¿œã—ãŸä»»æ„ã®ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ãˆã¾ã™ã€‚</string>
+    <string name="webdav_server_url">ã‚µãƒ¼ãƒãƒ¼URL</string>
     <string name="webdav_server_url_hint">https://cloud.example.com/remote.php/dav/files/user/Music</string>
-    <string name="webdav_disconnect">接続を解除</string>
-    <string name="webdav_test_failed">接続できません: %1$s</string>
-    <string name="upload_to_webdav">WebDAVにアップロード</string>
-    <string name="webdav_conflict_title">「%1$s」はすでにサーバーにあります</string>
-    <string name="webdav_conflict_message">上書きしますか？それとも両方残しますか？</string>
-    <string name="webdav_overwrite">上書き</string>
-    <string name="webdav_keep_both">両方残す</string>
-    <string name="webdav_skip">スキップ</string>
-    <string name="webdav_apply_to_all">すべてに適用</string>
-    <string name="webdav_upload_summary">アップロード %1$d · スキップ %2$d · 失敗 %3$d</string>
+    <string name="webdav_disconnect">æŽ¥ç¶šã‚’è§£é™¤</string>
+    <string name="webdav_test_failed">æŽ¥ç¶šã§ãã¾ã›ã‚“: %1$s</string>
+    <string name="upload_to_webdav">WebDAVã«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰</string>
+    <string name="webdav_conflict_title">ã€Œ%1$sã€ã¯ã™ã§ã«ã‚µãƒ¼ãƒãƒ¼ã«ã‚ã‚Šã¾ã™</string>
+    <string name="webdav_conflict_message">ä¸Šæ›¸ãã—ã¾ã™ã‹ï¼Ÿãã‚Œã¨ã‚‚ä¸¡æ–¹æ®‹ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="webdav_overwrite">ä¸Šæ›¸ã</string>
+    <string name="webdav_keep_both">ä¸¡æ–¹æ®‹ã™</string>
+    <string name="webdav_skip">ã‚¹ã‚­ãƒƒãƒ—</string>
+    <string name="webdav_apply_to_all">ã™ã¹ã¦ã«é©ç”¨</string>
+    <string name="webdav_upload_summary">ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ %1$d Â· ã‚¹ã‚­ãƒƒãƒ— %2$d Â· å¤±æ•— %3$d</string>
     <string name="smb">SMB</string>
-    <string name="smb_subtitle">共有フォルダーの音楽</string>
-    <string name="smb_not_configured">「ソース」で共有フォルダーを接続してください</string>
-    <string name="smb_empty">SMB共有に音声ファイルが見つかりません。「ソース」でサーバーを確認してください。</string>
-    <string name="smb_description">Free Musicを共有の音楽フォルダーに接続します — SMB対応のNASやWindows共有を使えます。</string>
+    <string name="smb_subtitle">å…±æœ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã®éŸ³æ¥½</string>
+    <string name="smb_not_configured">ã€Œã‚½ãƒ¼ã‚¹ã€ã§å…±æœ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’æŽ¥ç¶šã—ã¦ãã ã•ã„</string>
+    <string name="smb_empty">SMBå…±æœ‰ã«éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã€Œã‚½ãƒ¼ã‚¹ã€ã§ã‚µãƒ¼ãƒãƒ¼ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="smb_description">Free Musicã‚’å…±æœ‰ã®éŸ³æ¥½ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã«æŽ¥ç¶šã—ã¾ã™ â€” SMBå¯¾å¿œã®NASã‚„Windowså…±æœ‰ã‚’ä½¿ãˆã¾ã™ã€‚</string>
     <string name="smb_server_hint">nas.local or 192.168.1.10:4445</string>
-    <string name="smb_share_hint">共有名（例: Music）</string>
-    <string name="smb_folder_hint">フォルダー（任意）</string>
-    <string name="smb_disconnect">接続を解除</string>
-    <string name="smb_test_failed">接続できません: %1$s</string>
-    <string name="playlist">プレイリスト</string>
-    <string name="open">開く</string>
-    <string name="open_playlist">プレイリストを開く</string>
-    <string name="pin">ピン留め</string>
-    <string name="unpin">ピン留めを解除</string>
-    <string name="rename">名前を変更</string>
-    <string name="downloading">ダウンロード中</string>
-    <string name="delete_playlist">プレイリストを削除</string>
-    <string name="delete_download">ダウンロードを削除</string>
-    <string name="delete_playlist_confirmation">「%1$s」を削除しますか？もう一度タップして確定します。</string>
-    <string name="delete_download_confirmation">「%1$s」をこのデバイスから削除しますか？もう一度タップして確定します。</string>
-    <string name="running">実行中</string>
-    <string name="automix_analysis_status">オートミックス · この曲：%1$s · 次：%2$s</string>
-    <string name="analysis_complete">分析済み</string>
-    <string name="analysis_refining">分析済み、調整中…</string>
-    <string name="analysis_in_progress">分析中…</string>
-    <string name="waiting">待機中</string>
-    <string name="version_alignment_status">%1$s · %2$s</string>
-    <string name="version_cut_not_fetched">未取得</string>
-    <string name="version_cut_fetching">取得中</string>
-    <string name="version_cut_measuring">解析中</string>
-    <string name="version_cut_aligned">同期済み</string>
-    <string name="automix_enabled_subtitle">トラック自体からすべての切り替えのタイミングとブレンドを計算します。端末が熱くなったり再生が途切れたりする場合はオフにしてください。</string>
-    <string name="automix_disabled_subtitle">スライダーなしで切り替えのタイミングとブレンドを自動的に計算します。低スペック端末ではパフォーマンスが変わることがあります。</string>
-    <string name="no_lyrics_sources_enabled">なし。歌詞は取得されません。</string>
-    <string name="song_cache_large_subtitle">ダウンロードした音声を最大%1$sまでディスクに保持します。空き容量をかなり使用することがあります。</string>
-    <string name="song_cache_limit_subtitle">即座にシークや再生ができるよう、ダウンロードした音声をディスクに保持します</string>
-    <string name="replay_genres_enabled_subtitle">Last.fmにアーティストのジャンルを問い合わせます。送信されるのはアーティスト名のみです。</string>
-    <string name="replay_genres_disabled_subtitle">オフの間はReplayのジャンルグラフが表示されません</string>
-    <string name="swipe_plays_next">曲をスワイプすると次に再生します</string>
-    <string name="swipe_adds_to_queue">オフにすると、スワイプした曲は再生キューの末尾に追加されます</string>
-    <string name="import_backup_warning">これによりこのデバイスの設定と再生履歴がファイルの内容で置き換えられます。保持したい場合は先に現在のデータをエクスポートしてください。</string>
-    <string name="youtube_music_account">YouTube Musicアカウント</string>
-    <string name="tap_to_sign_in_google">タップしてGoogleでログイン</string>
-    <string name="export_succeeded">設定と%1$sをエクスポートしました</string>
-    <string name="export_failed">エクスポートに失敗しました：%1$s</string>
-    <string name="import_succeeded">v%2$sから%1$sをインポートしました</string>
-    <string name="import_succeeded_with_playlists">v%2$sから%1$s、および%3$d件のプレイリストをインポートしました</string>
-    <string name="import_failed">インポートに失敗しました：%1$s</string>
-    <string name="unknown_error">不明なエラー</string>
-    <string name="no_listening_history">再生履歴なし</string>
+    <string name="smb_share_hint">å…±æœ‰åï¼ˆä¾‹: Musicï¼‰</string>
+    <string name="smb_folder_hint">ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ï¼ˆä»»æ„ï¼‰</string>
+    <string name="smb_disconnect">æŽ¥ç¶šã‚’è§£é™¤</string>
+    <string name="smb_test_failed">æŽ¥ç¶šã§ãã¾ã›ã‚“: %1$s</string>
+    <string name="playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
+    <string name="open">é–‹ã</string>
+    <string name="open_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’é–‹ã</string>
+    <string name="pin">ãƒ”ãƒ³ç•™ã‚</string>
+    <string name="unpin">ãƒ”ãƒ³ç•™ã‚ã‚’è§£é™¤</string>
+    <string name="rename">åå‰ã‚’å¤‰æ›´</string>
+    <string name="downloading">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­</string>
+    <string name="delete_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’å‰Šé™¤</string>
+    <string name="delete_download">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’å‰Šé™¤</string>
+    <string name="delete_playlist_confirmation">ã€Œ%1$sã€ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿã‚‚ã†ä¸€åº¦ã‚¿ãƒƒãƒ—ã—ã¦ç¢ºå®šã—ã¾ã™ã€‚</string>
+    <string name="delete_download_confirmation">ã€Œ%1$sã€ã‚’ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿã‚‚ã†ä¸€åº¦ã‚¿ãƒƒãƒ—ã—ã¦ç¢ºå®šã—ã¾ã™ã€‚</string>
+    <string name="running">å®Ÿè¡Œä¸­</string>
+    <string name="automix_analysis_status">ã‚ªãƒ¼ãƒˆãƒŸãƒƒã‚¯ã‚¹ Â· ã“ã®æ›²ï¼š%1$s Â· æ¬¡ï¼š%2$s</string>
+    <string name="analysis_complete">åˆ†æžæ¸ˆã¿</string>
+    <string name="analysis_refining">åˆ†æžæ¸ˆã¿ã€èª¿æ•´ä¸­â€¦</string>
+    <string name="analysis_in_progress">åˆ†æžä¸­â€¦</string>
+    <string name="waiting">å¾…æ©Ÿä¸­</string>
+    <string name="version_alignment_status">%1$s Â· %2$s</string>
+    <string name="version_cut_not_fetched">æœªå–å¾—</string>
+    <string name="version_cut_fetching">å–å¾—ä¸­</string>
+    <string name="version_cut_measuring">è§£æžä¸­</string>
+    <string name="version_cut_aligned">åŒæœŸæ¸ˆã¿</string>
+    <string name="automix_enabled_subtitle">ãƒˆãƒ©ãƒƒã‚¯è‡ªä½“ã‹ã‚‰ã™ã¹ã¦ã®åˆ‡ã‚Šæ›¿ãˆã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã¨ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚’è¨ˆç®—ã—ã¾ã™ã€‚ç«¯æœ«ãŒç†±ããªã£ãŸã‚Šå†ç”ŸãŒé€”åˆ‡ã‚ŒãŸã‚Šã™ã‚‹å ´åˆã¯ã‚ªãƒ•ã«ã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="automix_disabled_subtitle">ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ãªã—ã§åˆ‡ã‚Šæ›¿ãˆã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã¨ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚’è‡ªå‹•çš„ã«è¨ˆç®—ã—ã¾ã™ã€‚ä½Žã‚¹ãƒšãƒƒã‚¯ç«¯æœ«ã§ã¯ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ãŒå¤‰ã‚ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="no_lyrics_sources_enabled">ãªã—ã€‚æ­Œè©žã¯å–å¾—ã•ã‚Œã¾ã›ã‚“ã€‚</string>
+    <string name="song_cache_large_subtitle">ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸéŸ³å£°ã‚’æœ€å¤§%1$sã¾ã§ãƒ‡ã‚£ã‚¹ã‚¯ã«ä¿æŒã—ã¾ã™ã€‚ç©ºãå®¹é‡ã‚’ã‹ãªã‚Šä½¿ç”¨ã™ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="song_cache_limit_subtitle">å³åº§ã«ã‚·ãƒ¼ã‚¯ã‚„å†ç”ŸãŒã§ãã‚‹ã‚ˆã†ã€ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸéŸ³å£°ã‚’ãƒ‡ã‚£ã‚¹ã‚¯ã«ä¿æŒã—ã¾ã™</string>
+    <string name="replay_genres_enabled_subtitle">Last.fmã«ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã®ã‚¸ãƒ£ãƒ³ãƒ«ã‚’å•ã„åˆã‚ã›ã¾ã™ã€‚é€ä¿¡ã•ã‚Œã‚‹ã®ã¯ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆåã®ã¿ã§ã™ã€‚</string>
+    <string name="replay_genres_disabled_subtitle">ã‚ªãƒ•ã®é–“ã¯Replayã®ã‚¸ãƒ£ãƒ³ãƒ«ã‚°ãƒ©ãƒ•ãŒè¡¨ç¤ºã•ã‚Œã¾ã›ã‚“</string>
+    <string name="swipe_plays_next">æ›²ã‚’ã‚¹ãƒ¯ã‚¤ãƒ—ã™ã‚‹ã¨æ¬¡ã«å†ç”Ÿã—ã¾ã™</string>
+    <string name="swipe_adds_to_queue">ã‚ªãƒ•ã«ã™ã‚‹ã¨ã€ã‚¹ãƒ¯ã‚¤ãƒ—ã—ãŸæ›²ã¯å†ç”Ÿã‚­ãƒ¥ãƒ¼ã®æœ«å°¾ã«è¿½åŠ ã•ã‚Œã¾ã™</string>
+    <string name="import_backup_warning">ã“ã‚Œã«ã‚ˆã‚Šã“ã®ãƒ‡ãƒã‚¤ã‚¹ã®è¨­å®šã¨å†ç”Ÿå±¥æ­´ãŒãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ã§ç½®ãæ›ãˆã‚‰ã‚Œã¾ã™ã€‚ä¿æŒã—ãŸã„å ´åˆã¯å…ˆã«ç¾åœ¨ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ã¦ãã ã•ã„ã€‚</string>
+    <string name="youtube_music_account">YouTube Musicã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
+    <string name="tap_to_sign_in_google">ã‚¿ãƒƒãƒ—ã—ã¦Googleã§ãƒ­ã‚°ã‚¤ãƒ³</string>
+    <string name="export_succeeded">è¨­å®šã¨%1$sã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ã¾ã—ãŸ</string>
+    <string name="export_failed">ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸï¼š%1$s</string>
+    <string name="import_succeeded">v%2$sã‹ã‚‰%1$sã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆã—ã¾ã—ãŸ</string>
+    <string name="import_succeeded_with_playlists">v%2$sã‹ã‚‰%1$sã€ãŠã‚ˆã³%3$dä»¶ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆã—ã¾ã—ãŸ</string>
+    <string name="import_failed">ã‚¤ãƒ³ãƒãƒ¼ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸï¼š%1$s</string>
+    <string name="unknown_error">ä¸æ˜Žãªã‚¨ãƒ©ãƒ¼</string>
+    <string name="no_listening_history">å†ç”Ÿå±¥æ­´ãªã—</string>
     <plurals name="listening_month_count">
-        <item quantity="other">%1$dか月の再生履歴</item>
+        <item quantity="other">%1$dã‹æœˆã®å†ç”Ÿå±¥æ­´</item>
     </plurals>
-    <string name="no_local_albums">ここにはまだアルバムやプレイリストに属するものがありません。完全なアルバムやプレイリストをダウンロードするとここに表示されます。</string>
-    <string name="play_your_replay">あなたのReplayを再生</string>
-    <string name="counted_on_device_with_freemusic">Free Musicでこのデバイス内で集計</string>
-    <string name="this_month">今月</string>
-    <string name="this_year">今年</string>
-    <string name="all_time">すべての期間</string>
+    <string name="no_local_albums">ã“ã“ã«ã¯ã¾ã ã‚¢ãƒ«ãƒãƒ ã‚„ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«å±žã™ã‚‹ã‚‚ã®ãŒã‚ã‚Šã¾ã›ã‚“ã€‚å®Œå…¨ãªã‚¢ãƒ«ãƒãƒ ã‚„ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã¨ã“ã“ã«è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚</string>
+    <string name="play_your_replay">ã‚ãªãŸã®Replayã‚’å†ç”Ÿ</string>
+    <string name="counted_on_device_with_freemusic">Free Musicã§ã“ã®ãƒ‡ãƒã‚¤ã‚¹å†…ã§é›†è¨ˆ</string>
+    <string name="this_month">ä»Šæœˆ</string>
+    <string name="this_year">ä»Šå¹´</string>
+    <string name="all_time">ã™ã¹ã¦ã®æœŸé–“</string>
     <string-array name="lyrics_intro_lines">
-        <item>ビートが着地中</item>
-        <item>曲がスタート</item>
-        <item>ウォーミングアップ中</item>
-        <item>ムードを演出中</item>
-        <item>まずベース、言葉は後で</item>
-        <item>お楽しみに</item>
-        <item>盛り上がりを感じて</item>
-        <item>今はグルーヴだけ</item>
-        <item>サビが近づいています</item>
-        <item>少し間を置いて</item>
-        <item>ボーカルの出番</item>
-        <item>最初の音が鳴った</item>
+        <item>ãƒ“ãƒ¼ãƒˆãŒç€åœ°ä¸­</item>
+        <item>æ›²ãŒã‚¹ã‚¿ãƒ¼ãƒˆ</item>
+        <item>ã‚¦ã‚©ãƒ¼ãƒŸãƒ³ã‚°ã‚¢ãƒƒãƒ—ä¸­</item>
+        <item>ãƒ ãƒ¼ãƒ‰ã‚’æ¼”å‡ºä¸­</item>
+        <item>ã¾ãšãƒ™ãƒ¼ã‚¹ã€è¨€è‘‰ã¯å¾Œã§</item>
+        <item>ãŠæ¥½ã—ã¿ã«</item>
+        <item>ç››ã‚Šä¸ŠãŒã‚Šã‚’æ„Ÿã˜ã¦</item>
+        <item>ä»Šã¯ã‚°ãƒ«ãƒ¼ãƒ´ã ã‘</item>
+        <item>ã‚µãƒ“ãŒè¿‘ã¥ã„ã¦ã„ã¾ã™</item>
+        <item>å°‘ã—é–“ã‚’ç½®ã„ã¦</item>
+        <item>ãƒœãƒ¼ã‚«ãƒ«ã®å‡ºç•ª</item>
+        <item>æœ€åˆã®éŸ³ãŒé³´ã£ãŸ</item>
     </string-array>
     <string-array name="lyrics_loading_lines">
-        <item>歌詞を取得中</item>
-        <item>言葉を探しています</item>
-        <item>歌詞を呼び出し中</item>
-        <item>歌詞を読み込み中</item>
-        <item>歌詞カードを確認中</item>
-        <item>歌詞集を検索中</item>
-        <item>歌詞を並べています</item>
-        <item>言葉がもうすぐ届きます</item>
-        <item>アーカイブを確認中</item>
-        <item>ぴったりの言葉を探しています</item>
-        <item>歌詞がまとまりつつあります</item>
-        <item>もう少しで言葉が見つかりそう</item>
+        <item>æ­Œè©žã‚’å–å¾—ä¸­</item>
+        <item>è¨€è‘‰ã‚’æŽ¢ã—ã¦ã„ã¾ã™</item>
+        <item>æ­Œè©žã‚’å‘¼ã³å‡ºã—ä¸­</item>
+        <item>æ­Œè©žã‚’èª­ã¿è¾¼ã¿ä¸­</item>
+        <item>æ­Œè©žã‚«ãƒ¼ãƒ‰ã‚’ç¢ºèªä¸­</item>
+        <item>æ­Œè©žé›†ã‚’æ¤œç´¢ä¸­</item>
+        <item>æ­Œè©žã‚’ä¸¦ã¹ã¦ã„ã¾ã™</item>
+        <item>è¨€è‘‰ãŒã‚‚ã†ã™ãå±Šãã¾ã™</item>
+        <item>ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’ç¢ºèªä¸­</item>
+        <item>ã´ã£ãŸã‚Šã®è¨€è‘‰ã‚’æŽ¢ã—ã¦ã„ã¾ã™</item>
+        <item>æ­Œè©žãŒã¾ã¨ã¾ã‚Šã¤ã¤ã‚ã‚Šã¾ã™</item>
+        <item>ã‚‚ã†å°‘ã—ã§è¨€è‘‰ãŒè¦‹ã¤ã‹ã‚Šãã†</item>
     </string-array>
 
     <!-- Listen together -->
-    <string name="listen_together">一緒に聴く</string>
-    <string name="listen_together_subtitle">コードを共有して、同じ音楽を同時に再生</string>
-    <string name="listen_together_in_party">パーティー中 · %1$s</string>
-    <string name="listen_together_sign_in_footer">一緒に聴くにはアカウントが必要です。パーティーの全員が、ほかに誰がいるかを見られるようにするためです。</string>
-    <string name="listen_together_server">パーティーサーバー</string>
-    <string name="listen_together_server_online">オンライン · %1$d ms</string>
-    <string name="listen_together_server_online_fallback">オンライン（既定のフォールバック） · %1$d ms</string>
-    <string name="listen_together_server_offline">今は接続できません</string>
-    <string name="listen_together_server_checking">確認中…</string>
-    <string name="listen_together_server_unknown">タップして確認</string>
-    <string name="listen_together_custom_server">自分のサーバーを使う</string>
-    <string name="listen_together_custom_server_footer">空のままにすると内蔵サーバーを使います。自分でコピーを動かしている場合は、パーティーの全員が同じサーバーを指している必要があります。</string>
-    <string name="listen_together_using_default">内蔵サーバーを使用中</string>
-    <string name="listen_together_remove_server">サーバーを削除</string>
-    <string name="listen_together_switched_to_default">既定のサーバーに切り替えました</string>
-    <string name="listen_together_custom_server_saved">カスタムサーバーを保存しました</string>
-    <string name="listen_together_create">パーティーを作る</string>
-    <string name="listen_together_create_subtitle">友だちに共有するコードを取得</string>
-    <string name="listen_together_create_footer">6文字のコードが発行されます。コードを知っている人は誰でも参加でき、自分を含めて%1$d台までです。</string>
-    <string name="listen_together_profile">パーティーでのプロフィール</string>
-    <string name="listen_together_nickname_hint">このパーティーでのニックネーム</string>
-    <string name="listen_together_party_size">パーティーの人数</string>
-    <string name="listen_together_party_size_subtitle">2〜10人から選択</string>
-    <string name="listen_together_host_controls">人数の変更やリスナーの削除はあなただけが行えます</string>
-    <string name="listen_together_remove">削除</string>
-    <string name="listen_together_activity">最近のアクティビティ</string>
-    <string name="listen_together_activity_footer">このセッションのみ · 新しい順 · 最大100件</string>
-    <string name="listen_together_activity_played">再生を開始</string>
-    <string name="listen_together_activity_paused">再生を一時停止</string>
-    <string name="listen_together_activity_seeked">再生位置を移動</string>
-    <string name="listen_together_activity_skipped">次へスキップ</string>
-    <string name="listen_together_activity_went_back">前に戻る</string>
-    <string name="listen_together_activity_added">キューに追加</string>
-    <string name="listen_together_activity_removed_track">キューから曲を削除</string>
-    <string name="listen_together_activity_cleared">次の曲をクリア</string>
-    <string name="listen_together_activity_reordered">キューを並べ替え</string>
-    <string name="listen_together_activity_removed_member">リスナーを削除</string>
-    <string name="listen_together_activity_changed_size">パーティーの人数を変更</string>
-    <string name="listen_together_activity_updated">パーティーを更新</string>
-    <string name="listen_together_join">パーティーに参加</string>
-    <string name="listen_together_join_action">参加</string>
-    <string name="listen_together_code_hint">英字か数字6文字</string>
-    <string name="listen_together_code">パーティーコード</string>
-    <string name="listen_together_code_footer">読み上げるか送ってください。O と I は使われないので、「オー」は必ずゼロです。</string>
-    <string name="copy_code">コードをコピー</string>
-    <string name="listen_together_share_text">Free Music で一緒に聴こう — パーティーコード %1$s</string>
-    <string name="listen_together_now_playing">再生中</string>
-    <string name="listen_together_nothing_playing">まだ何も再生していません</string>
-    <string name="listen_together_listening">参加中 · %1$d / %2$d</string>
-    <string name="listen_together_members_footer">パーティーには %1$d 台まで入れます。参加者は誰でも音楽を操作できます。</string>
-    <string name="listen_together_you">あなた</string>
-    <string name="listen_together_host">ホスト</string>
-    <string name="listen_together_away">離席中 — 枠は確保されています</string>
-    <string name="listen_together_manage">管理</string>
-    <string name="listen_together_landing_title">パーティーを始める</string>
-    <string name="listen_together_landing_subtitle">音楽はみんなで聴くともっと楽しい。友だちを招待して、どこにいてもリアルタイムで一緒に聴いたり曲を追加したりできます。</string>
-    <string name="listen_together_create_action">パーティーを作成</string>
-    <string name="listen_together_join_existing">既存のパーティーに参加</string>
-    <string name="listen_together_create_sheet_subtitle">表示のされ方と参加できる人数を選んでください。</string>
-    <string name="listen_together_creating">作成中…</string>
-    <string name="listen_together_joining">参加中…</string>
-    <string name="listen_together_full">このパーティーは満員です</string>
-    <string name="listen_together_join_question">%1$sさんのパーティーに参加しますか？</string>
-    <string name="listen_together_join_question_unnamed">このパーティーに参加しますか？</string>
-    <string name="listen_together_not_now">今はしない</string>
-    <string name="listen_together_preview_footer">パーティーの参加者にあなたの名前とプロフィール写真が表示されます。</string>
-    <string name="listen_together_invite_title">友だちをパーティーに招待</string>
-    <string name="listen_together_share_link">リンクを共有</string>
-    <string name="listen_together_scan_qr">QRコードをスキャン</string>
-    <string name="listen_together_scan_qr_subtitle">友だちにスキャンしてもらうと参加できます。</string>
-    <string name="listen_together_invite">招待</string>
-    <string name="listen_together_host_only">音楽の操作は自分だけ</string>
-    <string name="listen_together_host_only_subtitle">ほかの人は一緒に聴けて、自分のデバイスで一時停止できます</string>
-    <string name="listen_together_host_only_notice">音楽を操作できるのはホストだけです</string>
-    <string name="listen_together_leave">パーティーを出る</string>
-    <string name="listen_together_leave_subtitle">ほかの人はそのまま聴き続けます</string>
-    <string name="listen_together_reconnecting">再接続中…</string>
-    <string name="listen_together_syncing_clock">時刻を計測中…</string>
-    <string name="listen_together_in_sync">同期中 · 往復 %1$d ms</string>
-    <string name="listen_together_jam">%1$s のジャム</string>
-    <string name="listen_together_jam_unnamed">一緒に聴いています</string>
-    <string name="listen_together_open">一緒に聴く</string>
-    <string name="listen_together_open_count">一緒に聴いています · %1$d</string>
-    <string name="listen_together_custom_server_dialog_title">カスタムサーバーのパーティーに参加しますか？</string>
-    <string name="listen_together_custom_server_dialog_message">このパーティーは外部サーバーでホストされています:\n\n%1$s\n\nパーティーサーバーを切り替えて、パーティー %2$s に参加しますか？</string>
-    <string name="listen_together_custom_server_switch_and_join">切り替えて参加</string>
-    <string name="listen_together_official_server_dialog_title">公式サーバーに切り替えますか？</string>
-    <string name="listen_together_official_server_dialog_message">このパーティーはFree Music公式サーバーでホストされています。\n\n公式サーバーに戻して、パーティー %1$s に参加しますか？</string>
-    <string name="listen_together_switch_failed_stayed_in_party">パーティーに参加できませんでした: %1$s。パーティー %2$s に残ります。</string>
-    <string name="listen_together_switch_failed">パーティーに参加できませんでした: %1$s。</string>
+    <string name="listen_together">ä¸€ç·’ã«è´ã</string>
+    <string name="listen_together_subtitle">ã‚³ãƒ¼ãƒ‰ã‚’å…±æœ‰ã—ã¦ã€åŒã˜éŸ³æ¥½ã‚’åŒæ™‚ã«å†ç”Ÿ</string>
+    <string name="listen_together_in_party">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ä¸­ Â· %1$s</string>
+    <string name="listen_together_sign_in_footer">ä¸€ç·’ã«è´ãã«ã¯ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå¿…è¦ã§ã™ã€‚ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®å…¨å“¡ãŒã€ã»ã‹ã«èª°ãŒã„ã‚‹ã‹ã‚’è¦‹ã‚‰ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã§ã™ã€‚</string>
+    <string name="listen_together_server">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚µãƒ¼ãƒãƒ¼</string>
+    <string name="listen_together_server_online">ã‚ªãƒ³ãƒ©ã‚¤ãƒ³ Â· %1$d ms</string>
+    <string name="listen_together_server_online_fallback">ã‚ªãƒ³ãƒ©ã‚¤ãƒ³ï¼ˆæ—¢å®šã®ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ï¼‰ Â· %1$d ms</string>
+    <string name="listen_together_server_offline">ä»Šã¯æŽ¥ç¶šã§ãã¾ã›ã‚“</string>
+    <string name="listen_together_server_checking">ç¢ºèªä¸­â€¦</string>
+    <string name="listen_together_server_unknown">ã‚¿ãƒƒãƒ—ã—ã¦ç¢ºèª</string>
+    <string name="listen_together_custom_server">è‡ªåˆ†ã®ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ã†</string>
+    <string name="listen_together_custom_server_footer">ç©ºã®ã¾ã¾ã«ã™ã‚‹ã¨å†…è”µã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ã„ã¾ã™ã€‚è‡ªåˆ†ã§ã‚³ãƒ”ãƒ¼ã‚’å‹•ã‹ã—ã¦ã„ã‚‹å ´åˆã¯ã€ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®å…¨å“¡ãŒåŒã˜ã‚µãƒ¼ãƒãƒ¼ã‚’æŒ‡ã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚</string>
+    <string name="listen_together_using_default">å†…è”µã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ä¸­</string>
+    <string name="listen_together_remove_server">ã‚µãƒ¼ãƒãƒ¼ã‚’å‰Šé™¤</string>
+    <string name="listen_together_switched_to_default">æ—¢å®šã®ã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚Šæ›¿ãˆã¾ã—ãŸ</string>
+    <string name="listen_together_custom_server_saved">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã‚’ä¿å­˜ã—ã¾ã—ãŸ</string>
+    <string name="listen_together_create">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚’ä½œã‚‹</string>
+    <string name="listen_together_create_subtitle">å‹ã ã¡ã«å…±æœ‰ã™ã‚‹ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—</string>
+    <string name="listen_together_create_footer">6æ–‡å­—ã®ã‚³ãƒ¼ãƒ‰ãŒç™ºè¡Œã•ã‚Œã¾ã™ã€‚ã‚³ãƒ¼ãƒ‰ã‚’çŸ¥ã£ã¦ã„ã‚‹äººã¯èª°ã§ã‚‚å‚åŠ ã§ãã€è‡ªåˆ†ã‚’å«ã‚ã¦%1$då°ã¾ã§ã§ã™ã€‚</string>
+    <string name="listen_together_profile">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã§ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«</string>
+    <string name="listen_together_nickname_hint">ã“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã§ã®ãƒ‹ãƒƒã‚¯ãƒãƒ¼ãƒ </string>
+    <string name="listen_together_party_size">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®äººæ•°</string>
+    <string name="listen_together_party_size_subtitle">2ã€œ10äººã‹ã‚‰é¸æŠž</string>
+    <string name="listen_together_host_controls">äººæ•°ã®å¤‰æ›´ã‚„ãƒªã‚¹ãƒŠãƒ¼ã®å‰Šé™¤ã¯ã‚ãªãŸã ã‘ãŒè¡Œãˆã¾ã™</string>
+    <string name="listen_together_remove">å‰Šé™¤</string>
+    <string name="listen_together_activity">æœ€è¿‘ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£</string>
+    <string name="listen_together_activity_footer">ã“ã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã®ã¿ Â· æ–°ã—ã„é † Â· æœ€å¤§100ä»¶</string>
+    <string name="listen_together_activity_played">å†ç”Ÿã‚’é–‹å§‹</string>
+    <string name="listen_together_activity_paused">å†ç”Ÿã‚’ä¸€æ™‚åœæ­¢</string>
+    <string name="listen_together_activity_seeked">å†ç”Ÿä½ç½®ã‚’ç§»å‹•</string>
+    <string name="listen_together_activity_skipped">æ¬¡ã¸ã‚¹ã‚­ãƒƒãƒ—</string>
+    <string name="listen_together_activity_went_back">å‰ã«æˆ»ã‚‹</string>
+    <string name="listen_together_activity_added">ã‚­ãƒ¥ãƒ¼ã«è¿½åŠ </string>
+    <string name="listen_together_activity_removed_track">ã‚­ãƒ¥ãƒ¼ã‹ã‚‰æ›²ã‚’å‰Šé™¤</string>
+    <string name="listen_together_activity_cleared">æ¬¡ã®æ›²ã‚’ã‚¯ãƒªã‚¢</string>
+    <string name="listen_together_activity_reordered">ã‚­ãƒ¥ãƒ¼ã‚’ä¸¦ã¹æ›¿ãˆ</string>
+    <string name="listen_together_activity_removed_member">ãƒªã‚¹ãƒŠãƒ¼ã‚’å‰Šé™¤</string>
+    <string name="listen_together_activity_changed_size">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®äººæ•°ã‚’å¤‰æ›´</string>
+    <string name="listen_together_activity_updated">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚’æ›´æ–°</string>
+    <string name="listen_together_join">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ </string>
+    <string name="listen_together_join_action">å‚åŠ </string>
+    <string name="listen_together_code_hint">è‹±å­—ã‹æ•°å­—6æ–‡å­—</string>
+    <string name="listen_together_code">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚³ãƒ¼ãƒ‰</string>
+    <string name="listen_together_code_footer">èª­ã¿ä¸Šã’ã‚‹ã‹é€ã£ã¦ãã ã•ã„ã€‚O ã¨ I ã¯ä½¿ã‚ã‚Œãªã„ã®ã§ã€ã€Œã‚ªãƒ¼ã€ã¯å¿…ãšã‚¼ãƒ­ã§ã™ã€‚</string>
+    <string name="copy_code">ã‚³ãƒ¼ãƒ‰ã‚’ã‚³ãƒ”ãƒ¼</string>
+    <string name="listen_together_share_text">Free Music ã§ä¸€ç·’ã«è´ã“ã† â€” ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚³ãƒ¼ãƒ‰ %1$s</string>
+    <string name="listen_together_now_playing">å†ç”Ÿä¸­</string>
+    <string name="listen_together_nothing_playing">ã¾ã ä½•ã‚‚å†ç”Ÿã—ã¦ã„ã¾ã›ã‚“</string>
+    <string name="listen_together_listening">å‚åŠ ä¸­ Â· %1$d / %2$d</string>
+    <string name="listen_together_members_footer">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«ã¯ %1$d å°ã¾ã§å…¥ã‚Œã¾ã™ã€‚å‚åŠ è€…ã¯èª°ã§ã‚‚éŸ³æ¥½ã‚’æ“ä½œã§ãã¾ã™ã€‚</string>
+    <string name="listen_together_you">ã‚ãªãŸ</string>
+    <string name="listen_together_host">ãƒ›ã‚¹ãƒˆ</string>
+    <string name="listen_together_away">é›¢å¸­ä¸­ â€” æž ã¯ç¢ºä¿ã•ã‚Œã¦ã„ã¾ã™</string>
+    <string name="listen_together_manage">ç®¡ç†</string>
+    <string name="listen_together_landing_title">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚’å§‹ã‚ã‚‹</string>
+    <string name="listen_together_landing_subtitle">éŸ³æ¥½ã¯ã¿ã‚“ãªã§è´ãã¨ã‚‚ã£ã¨æ¥½ã—ã„ã€‚å‹ã ã¡ã‚’æ‹›å¾…ã—ã¦ã€ã©ã“ã«ã„ã¦ã‚‚ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ã§ä¸€ç·’ã«è´ã„ãŸã‚Šæ›²ã‚’è¿½åŠ ã—ãŸã‚Šã§ãã¾ã™ã€‚</string>
+    <string name="listen_together_create_action">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚’ä½œæˆ</string>
+    <string name="listen_together_join_existing">æ—¢å­˜ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ </string>
+    <string name="listen_together_create_sheet_subtitle">è¡¨ç¤ºã®ã•ã‚Œæ–¹ã¨å‚åŠ ã§ãã‚‹äººæ•°ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚</string>
+    <string name="listen_together_creating">ä½œæˆä¸­â€¦</string>
+    <string name="listen_together_joining">å‚åŠ ä¸­â€¦</string>
+    <string name="listen_together_full">ã“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã¯æº€å“¡ã§ã™</string>
+    <string name="listen_together_join_question">%1$sã•ã‚“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_join_question_unnamed">ã“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_not_now">ä»Šã¯ã—ãªã„</string>
+    <string name="listen_together_preview_footer">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®å‚åŠ è€…ã«ã‚ãªãŸã®åå‰ã¨ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«å†™çœŸãŒè¡¨ç¤ºã•ã‚Œã¾ã™ã€‚</string>
+    <string name="listen_together_invite_title">å‹ã ã¡ã‚’ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«æ‹›å¾…</string>
+    <string name="listen_together_share_link">ãƒªãƒ³ã‚¯ã‚’å…±æœ‰</string>
+    <string name="listen_together_scan_qr">QRã‚³ãƒ¼ãƒ‰ã‚’ã‚¹ã‚­ãƒ£ãƒ³</string>
+    <string name="listen_together_scan_qr_subtitle">å‹ã ã¡ã«ã‚¹ã‚­ãƒ£ãƒ³ã—ã¦ã‚‚ã‚‰ã†ã¨å‚åŠ ã§ãã¾ã™ã€‚</string>
+    <string name="listen_together_invite">æ‹›å¾…</string>
+    <string name="listen_together_host_only">éŸ³æ¥½ã®æ“ä½œã¯è‡ªåˆ†ã ã‘</string>
+    <string name="listen_together_host_only_subtitle">ã»ã‹ã®äººã¯ä¸€ç·’ã«è´ã‘ã¦ã€è‡ªåˆ†ã®ãƒ‡ãƒã‚¤ã‚¹ã§ä¸€æ™‚åœæ­¢ã§ãã¾ã™</string>
+    <string name="listen_together_host_only_notice">éŸ³æ¥½ã‚’æ“ä½œã§ãã‚‹ã®ã¯ãƒ›ã‚¹ãƒˆã ã‘ã§ã™</string>
+    <string name="listen_together_leave">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚’å‡ºã‚‹</string>
+    <string name="listen_together_leave_subtitle">ã»ã‹ã®äººã¯ãã®ã¾ã¾è´ãç¶šã‘ã¾ã™</string>
+    <string name="listen_together_reconnecting">å†æŽ¥ç¶šä¸­â€¦</string>
+    <string name="listen_together_syncing_clock">æ™‚åˆ»ã‚’è¨ˆæ¸¬ä¸­â€¦</string>
+    <string name="listen_together_in_sync">åŒæœŸä¸­ Â· å¾€å¾© %1$d ms</string>
+    <string name="listen_together_jam">%1$s ã®ã‚¸ãƒ£ãƒ </string>
+    <string name="listen_together_jam_unnamed">ä¸€ç·’ã«è´ã„ã¦ã„ã¾ã™</string>
+    <string name="listen_together_open">ä¸€ç·’ã«è´ã</string>
+    <string name="listen_together_open_count">ä¸€ç·’ã«è´ã„ã¦ã„ã¾ã™ Â· %1$d</string>
+    <string name="listen_together_custom_server_dialog_title">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_custom_server_dialog_message">ã“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã¯å¤–éƒ¨ã‚µãƒ¼ãƒãƒ¼ã§ãƒ›ã‚¹ãƒˆã•ã‚Œã¦ã„ã¾ã™:\n\n%1$s\n\nãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã‚’åˆ‡ã‚Šæ›¿ãˆã¦ã€ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ %2$s ã«å‚åŠ ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_custom_server_switch_and_join">åˆ‡ã‚Šæ›¿ãˆã¦å‚åŠ </string>
+    <string name="listen_together_official_server_dialog_title">å…¬å¼ã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚Šæ›¿ãˆã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_official_server_dialog_message">ã“ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã¯Free Musicå…¬å¼ã‚µãƒ¼ãƒãƒ¼ã§ãƒ›ã‚¹ãƒˆã•ã‚Œã¦ã„ã¾ã™ã€‚\n\nå…¬å¼ã‚µãƒ¼ãƒãƒ¼ã«æˆ»ã—ã¦ã€ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ %1$s ã«å‚åŠ ã—ã¾ã™ã‹ï¼Ÿ</string>
+    <string name="listen_together_switch_failed_stayed_in_party">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ ã§ãã¾ã›ã‚“ã§ã—ãŸ: %1$sã€‚ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ %2$s ã«æ®‹ã‚Šã¾ã™ã€‚</string>
+    <string name="listen_together_switch_failed">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã«å‚åŠ ã§ãã¾ã›ã‚“ã§ã—ãŸ: %1$sã€‚</string>
     <string name="listen_together_ping">%1$d ms</string>
-    <string name="listen_together_server_offline_dash">—</string>
-    <string name="listen_together_invalid_server_url">サーバーURLが無効です。有効なアドレスを入力してください（例: https://your-server.com）</string>
-    <string name="listen_together_err_whitespace">サーバーURLに空白は使えません</string>
-    <string name="listen_together_err_invalid_path">サーバーURLのパスが無効です</string>
-    <string name="listen_together_err_no_path">サーバーURLにパスを含めないでください</string>
-    <string name="listen_together_err_no_query">サーバーURLにクエリパラメーターを含めないでください</string>
-    <string name="listen_together_err_no_fragment">サーバーURLにフラグメントを含めないでください</string>
-    <string name="listen_together_err_invalid_port">サーバーのポートは1〜65535の範囲で指定してください</string>
-    <string name="listen_together_custom_server_connected">カスタムサーバーに接続しました</string>
-    <string name="listen_together_custom_server_unreachable_fallback">カスタムサーバーに接続できません。既定のサーバーを使用します。</string>
-    <string name="listen_together_status_custom_online">カスタムサーバーに接続中 · %1$d ms</string>
-    <string name="listen_together_status_custom_fallback">カスタムサーバーに接続できません · 既定のフォールバックを使用中（%1$d ms）</string>
-    <string name="listen_together_status_all_offline">カスタムサーバーと既定のサーバーの両方がオフラインです</string>
-    <string name="listen_together_top_bar_fallback">フォールバック · %1$s</string>
+    <string name="listen_together_server_offline_dash">â€”</string>
+    <string name="listen_together_invalid_server_url">ã‚µãƒ¼ãƒãƒ¼URLãŒç„¡åŠ¹ã§ã™ã€‚æœ‰åŠ¹ãªã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ï¼ˆä¾‹: https://your-server.comï¼‰</string>
+    <string name="listen_together_err_whitespace">ã‚µãƒ¼ãƒãƒ¼URLã«ç©ºç™½ã¯ä½¿ãˆã¾ã›ã‚“</string>
+    <string name="listen_together_err_invalid_path">ã‚µãƒ¼ãƒãƒ¼URLã®ãƒ‘ã‚¹ãŒç„¡åŠ¹ã§ã™</string>
+    <string name="listen_together_err_no_path">ã‚µãƒ¼ãƒãƒ¼URLã«ãƒ‘ã‚¹ã‚’å«ã‚ãªã„ã§ãã ã•ã„</string>
+    <string name="listen_together_err_no_query">ã‚µãƒ¼ãƒãƒ¼URLã«ã‚¯ã‚¨ãƒªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’å«ã‚ãªã„ã§ãã ã•ã„</string>
+    <string name="listen_together_err_no_fragment">ã‚µãƒ¼ãƒãƒ¼URLã«ãƒ•ãƒ©ã‚°ãƒ¡ãƒ³ãƒˆã‚’å«ã‚ãªã„ã§ãã ã•ã„</string>
+    <string name="listen_together_err_invalid_port">ã‚µãƒ¼ãƒãƒ¼ã®ãƒãƒ¼ãƒˆã¯1ã€œ65535ã®ç¯„å›²ã§æŒ‡å®šã—ã¦ãã ã•ã„</string>
+    <string name="listen_together_custom_server_connected">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šã—ã¾ã—ãŸ</string>
+    <string name="listen_together_custom_server_unreachable_fallback">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šã§ãã¾ã›ã‚“ã€‚æ—¢å®šã®ã‚µãƒ¼ãƒãƒ¼ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚</string>
+    <string name="listen_together_status_custom_online">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šä¸­ Â· %1$d ms</string>
+    <string name="listen_together_status_custom_fallback">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šã§ãã¾ã›ã‚“ Â· æ—¢å®šã®ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’ä½¿ç”¨ä¸­ï¼ˆ%1$d msï¼‰</string>
+    <string name="listen_together_status_all_offline">ã‚«ã‚¹ã‚¿ãƒ ã‚µãƒ¼ãƒãƒ¼ã¨æ—¢å®šã®ã‚µãƒ¼ãƒãƒ¼ã®ä¸¡æ–¹ãŒã‚ªãƒ•ãƒ©ã‚¤ãƒ³ã§ã™</string>
+    <string name="listen_together_top_bar_fallback">ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ Â· %1$s</string>
 
-    <string name="vietnamese">ベトナム語</string>
+    <string name="vietnamese">ãƒ™ãƒˆãƒŠãƒ èªž</string>
 
-    <string name="miscellaneous_footer">オンにすると、最近のアプリ画面からアプリを終了した際に音楽の再生も停止します。</string>
+    <string name="miscellaneous_footer">ã‚ªãƒ³ã«ã™ã‚‹ã¨ã€æœ€è¿‘ã®ã‚¢ãƒ—ãƒªç”»é¢ã‹ã‚‰ã‚¢ãƒ—ãƒªã‚’çµ‚äº†ã—ãŸéš›ã«éŸ³æ¥½ã®å†ç”Ÿã‚‚åœæ­¢ã—ã¾ã™ã€‚</string>
 
 
-    <string name="switch_account">アカウントを切り替える</string>
+    <string name="switch_account">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹</string>
 
-    <string name="accounts">アカウント</string>
+    <string name="accounts">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
 
-    <string name="profiles">プロフィール</string>
+    <string name="profiles">ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«</string>
 
-    <string name="personal">個人</string>
+    <string name="personal">å€‹äºº</string>
 
-    <string name="brand_account">ブランド アカウント</string>
+    <string name="brand_account">ãƒ–ãƒ©ãƒ³ãƒ‰ ã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
 
-    <string name="add_account">アカウントを追加</string>
+    <string name="add_account">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’è¿½åŠ </string>
 
-    <string name="manage_accounts">アカウントを管理</string>
+    <string name="manage_accounts">ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã‚’ç®¡ç†</string>
 
-    <string name="current_account">現在のアカウント</string>
+    <string name="current_account">ç¾åœ¨ã®ã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
 
-    <string name="current_profile">現在のプロフィール</string>
+    <string name="current_profile">ç¾åœ¨ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«</string>
 
-    <string name="selected_account">選択したアカウント</string>
+    <string name="selected_account">é¸æŠžã—ãŸã‚¢ã‚«ã‚¦ãƒ³ãƒˆ</string>
 
-    <string name="listen_as">次のユーザーとして聴く</string>
+    <string name="listen_as">æ¬¡ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¨ã—ã¦è´ã</string>
 
-    <string name="default_youtube_profile">YouTube Music デフォルト プロフィール</string>
+    <string name="default_youtube_profile">YouTube Music ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«</string>
 
-    <string name="account_profiles_help">Google アカウントには個人プロフィールとブランド プロフィールがあります。それぞれにライブラリ、高評価、再生履歴があります。</string>
+    <string name="account_profiles_help">Google ã‚¢ã‚«ã‚¦ãƒ³ãƒˆã«ã¯å€‹äººãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã¨ãƒ–ãƒ©ãƒ³ãƒ‰ ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ãŒã‚ã‚Šã¾ã™ã€‚ãã‚Œãžã‚Œã«ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã€é«˜è©•ä¾¡ã€å†ç”Ÿå±¥æ­´ãŒã‚ã‚Šã¾ã™ã€‚</string>
 
-    <string name="choose_profile">プロフィールを選択</string>
+    <string name="choose_profile">ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’é¸æŠž</string>
 
-    <string name="use_this_profile">このプロフィールを使用</string>
+    <string name="use_this_profile">ã“ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’ä½¿ç”¨</string>
 
-    <string name="switch_profile_hint">アバターで切り替えて、このプロフィールを使用します。</string>
+    <string name="switch_profile_hint">ã‚¢ãƒã‚¿ãƒ¼ã§åˆ‡ã‚Šæ›¿ãˆã¦ã€ã“ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚</string>
 
-    <string name="profile_unavailable">このページではログインしているプロフィールはまだありません。</string>
+    <string name="profile_unavailable">ã“ã®ãƒšãƒ¼ã‚¸ã§ã¯ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ã„ã‚‹ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã¯ã¾ã ã‚ã‚Šã¾ã›ã‚“ã€‚</string>
 
-    <string name="export_compatible_downloads">互換性のあるダウンロードをエクスポート</string>
+    <string name="export_compatible_downloads">äº’æ›æ€§ã®ã‚ã‚‹ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆ</string>
 
-    <string name="output_precision">出力精度</string>
+    <string name="output_precision">å‡ºåŠ›ç²¾åº¦</string>
 
-    <string name="prefer_usb_dac">USB DAC を優先</string>
-    <string name="loudness_normalization">音量の正規化</string>
-    <string name="loudness_normalization_subtitle">すべての曲を同じラウドネスにそろえます</string>
-    <string name="loudness_target">目標ラウドネス</string>
-    <string name="loudness_target_subtitle">小さめはヘッドホン向け、大きめは車やスマホのスピーカー向けです</string>
+    <string name="prefer_usb_dac">USB DAC ã‚’å„ªå…ˆ</string>
+    <string name="loudness_normalization">éŸ³é‡ã®æ­£è¦åŒ–</string>
+    <string name="loudness_normalization_subtitle">ã™ã¹ã¦ã®æ›²ã‚’åŒã˜ãƒ©ã‚¦ãƒ‰ãƒã‚¹ã«ãã‚ãˆã¾ã™</string>
+    <string name="loudness_target">ç›®æ¨™ãƒ©ã‚¦ãƒ‰ãƒã‚¹</string>
+    <string name="loudness_target_subtitle">å°ã•ã‚ã¯ãƒ˜ãƒƒãƒ‰ãƒ›ãƒ³å‘ã‘ã€å¤§ãã‚ã¯è»Šã‚„ã‚¹ãƒžãƒ›ã®ã‚¹ãƒ”ãƒ¼ã‚«ãƒ¼å‘ã‘ã§ã™</string>
     <string name="loudness_target_value">%1$s LUFS</string>
-    <string name="pipeline_loudness">ラウドネス</string>
-    <string name="pipeline_loudness_gain">ゲイン</string>
-    <string name="pipeline_loudness_measured">測定値</string>
-    <string name="pipeline_bit_exact">ビットパーフェクト</string>
-    <string name="loudness_measuring">測定中…</string>
+    <string name="pipeline_loudness">ãƒ©ã‚¦ãƒ‰ãƒã‚¹</string>
+    <string name="pipeline_loudness_gain">ã‚²ã‚¤ãƒ³</string>
+    <string name="pipeline_loudness_measured">æ¸¬å®šå€¤</string>
+    <string name="pipeline_bit_exact">ãƒ“ãƒƒãƒˆãƒ‘ãƒ¼ãƒ•ã‚§ã‚¯ãƒˆ</string>
+    <string name="loudness_measuring">æ¸¬å®šä¸­â€¦</string>
     <string name="loudness_gain_db">%1$s dB</string>
     <string name="loudness_lufs">%1$s LUFS</string>
 
-    <string name="blur_unfocused_lyrics">フォーカスされていない歌詞をぼかす</string>
+    <string name="blur_unfocused_lyrics">ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã•ã‚Œã¦ã„ãªã„æ­Œè©žã‚’ã¼ã‹ã™</string>
 
-    <string name="blur_unfocused_lyrics_subtitle">現在の行をハイライトします</string>
+    <string name="blur_unfocused_lyrics_subtitle">ç¾åœ¨ã®è¡Œã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆã—ã¾ã™</string>
 
-    <string name="advanced_options">詳細設定</string>
+    <string name="advanced_options">è©³ç´°è¨­å®š</string>
 
-    <string name="lyrics_debug_logs">歌詞デバッグログ</string>
+    <string name="lyrics_debug_logs">æ­Œè©žãƒ‡ãƒãƒƒã‚°ãƒ­ã‚°</string>
 
-    <string name="lyrics_debug_logs_subtitle">歌詞パネルにライブ API クエリとスクレイパーのアクティビティを表示します</string>
+    <string name="lyrics_debug_logs_subtitle">æ­Œè©žãƒ‘ãƒãƒ«ã«ãƒ©ã‚¤ãƒ– API ã‚¯ã‚¨ãƒªã¨ã‚¹ã‚¯ãƒ¬ã‚¤ãƒ‘ãƒ¼ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£ã‚’è¡¨ç¤ºã—ã¾ã™</string>
 
-    <string name="shelf_trending_community_playlists">急上昇のコミュニティ再生リスト</string>
+    <string name="shelf_trending_community_playlists">æ€¥ä¸Šæ˜‡ã®ã‚³ãƒŸãƒ¥ãƒ‹ãƒ†ã‚£å†ç”Ÿãƒªã‚¹ãƒˆ</string>
 
-    <string name="shelf_featured_playlists_for_you">おすすめの再生リスト</string>
+    <string name="shelf_featured_playlists_for_you">ãŠã™ã™ã‚ã®å†ç”Ÿãƒªã‚¹ãƒˆ</string>
 
-    <string name="shelf_quick_picks">クイック ミックス</string>
+    <string name="shelf_quick_picks">ã‚¯ã‚¤ãƒƒã‚¯ ãƒŸãƒƒã‚¯ã‚¹</string>
 
-    <string name="shelf_listen_again">もう一度聴く</string>
+    <string name="shelf_listen_again">ã‚‚ã†ä¸€åº¦è´ã</string>
 
-    <string name="shelf_mixed_for_you">ミックス</string>
+    <string name="shelf_mixed_for_you">ãƒŸãƒƒã‚¯ã‚¹</string>
 
-    <string name="shelf_similar_to">%1$s に似ている曲</string>
+    <string name="shelf_similar_to">%1$s ã«ä¼¼ã¦ã„ã‚‹æ›²</string>
 
-    <string name="shelf_forgotten_favorites">よく聴いたお気に入りの曲</string>
+    <string name="shelf_forgotten_favorites">ã‚ˆãè´ã„ãŸãŠæ°—ã«å…¥ã‚Šã®æ›²</string>
 
-    <string name="shelf_recommended_music_videos">おすすめのミュージック ビデオ</string>
+    <string name="shelf_recommended_music_videos">ãŠã™ã™ã‚ã®ãƒŸãƒ¥ãƒ¼ã‚¸ãƒƒã‚¯ ãƒ“ãƒ‡ã‚ª</string>
 
-    <string name="shelf_from_your_library">ライブラリから</string>
+    <string name="shelf_from_your_library">ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‹ã‚‰</string>
 
-    <string name="shelf_charts">チャート</string>
+    <string name="shelf_charts">ãƒãƒ£ãƒ¼ãƒˆ</string>
 
-    <string name="shelf_new_releases">最新リリース</string>
+    <string name="shelf_new_releases">æœ€æ–°ãƒªãƒªãƒ¼ã‚¹</string>
 
-    <string name="shelf_top_music_videos">人気のミュージック ビデオ</string>
+    <string name="shelf_top_music_videos">äººæ°—ã®ãƒŸãƒ¥ãƒ¼ã‚¸ãƒƒã‚¯ ãƒ“ãƒ‡ã‚ª</string>
 
-    <string name="shelf_for_you">あなたへのおすすめ</string>
+    <string name="shelf_for_you">ã‚ãªãŸã¸ã®ãŠã™ã™ã‚</string>
 
-    <string name="shelf_energy_boosters">エネルギー チャージ</string>
+    <string name="shelf_energy_boosters">ã‚¨ãƒãƒ«ã‚®ãƒ¼ ãƒãƒ£ãƒ¼ã‚¸</string>
 
-    <string name="shelf_feel_good">気分アップ</string>
+    <string name="shelf_feel_good">æ°—åˆ†ã‚¢ãƒƒãƒ—</string>
 
-    <string name="shelf_commute">通勤・通学</string>
+    <string name="shelf_commute">é€šå‹¤ãƒ»é€šå­¦</string>
 
-    <string name="shelf_workout">ワークアウト</string>
+    <string name="shelf_workout">ãƒ¯ãƒ¼ã‚¯ã‚¢ã‚¦ãƒˆ</string>
 
-    <string name="shelf_focus">集中</string>
+    <string name="shelf_focus">é›†ä¸­</string>
 
-    <string name="shelf_relax">リラックス</string>
+    <string name="shelf_relax">ãƒªãƒ©ãƒƒã‚¯ã‚¹</string>
 
-    <string name="shelf_sleep">睡眠</string>
+    <string name="shelf_sleep">ç¡çœ </string>
 
-    <string name="shelf_party">パーティー</string>
+    <string name="shelf_party">ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼</string>
 
-    <string name="shelf_romance">ロマンス</string>
+    <string name="shelf_romance">ãƒ­ãƒžãƒ³ã‚¹</string>
 
-    <string name="shelf_sad">哀愁</string>
+    <string name="shelf_sad">å“€æ„</string>
 
-    <string name="shelf_100_on_repeat">リピート再生中</string>
+    <string name="shelf_100_on_repeat">ãƒªãƒ”ãƒ¼ãƒˆå†ç”Ÿä¸­</string>
 
-    <string name="shelf_new_albums_singles">最新アルバム＆シングル</string>
+    <string name="shelf_new_albums_singles">æœ€æ–°ã‚¢ãƒ«ãƒãƒ ï¼†ã‚·ãƒ³ã‚°ãƒ«</string>
 
-    <string name="shelf_hits_today">今日のヒット曲</string>
+    <string name="shelf_hits_today">ä»Šæ—¥ã®ãƒ’ãƒƒãƒˆæ›²</string>
 
-    <string name="shelf_artists_on_the_rise">注目のアーティスト</string>
+    <string name="shelf_artists_on_the_rise">æ³¨ç›®ã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ</string>
 
-    <string name="shelf_top_tunes_right_now">注目の曲</string>
+    <string name="shelf_top_tunes_right_now">æ³¨ç›®ã®æ›²</string>
 
-    <string name="shelf_concerts">コンサート</string>
+    <string name="shelf_concerts">ã‚³ãƒ³ã‚µãƒ¼ãƒˆ</string>
 
-    <string name="shelf_shorts">ショート</string>
+    <string name="shelf_shorts">ã‚·ãƒ§ãƒ¼ãƒˆ</string>
 
-    <string name="shelf_single">シングル</string>
+    <string name="shelf_single">ã‚·ãƒ³ã‚°ãƒ«</string>
 
-    <string name="shelf_chart">チャート</string>
+    <string name="shelf_chart">ãƒãƒ£ãƒ¼ãƒˆ</string>
 
-    <string name="shelf_song_item">曲</string>
+    <string name="shelf_song_item">æ›²</string>
 
-    <string name="shelf_from_the_community">コミュニティより</string>
+    <string name="shelf_from_the_community">ã‚³ãƒŸãƒ¥ãƒ‹ãƒ†ã‚£ã‚ˆã‚Š</string>
 
-    <string name="shelf_youtube_charts">YouTube チャート</string>
+    <string name="shelf_youtube_charts">YouTube ãƒãƒ£ãƒ¼ãƒˆ</string>
 
-    <string name="shelf_trending">急上昇</string>
+    <string name="shelf_trending">æ€¥ä¸Šæ˜‡</string>
 
-    <string name="shelf_recents">最近</string>
+    <string name="shelf_recents">æœ€è¿‘</string>
 
-    <string name="subscriptions">登録チャンネル</string>
+    <string name="subscriptions">ç™»éŒ²ãƒãƒ£ãƒ³ãƒãƒ«</string>
 
-    <string name="card_views_format">%1$s 回視聴</string>
+    <string name="card_views_format">%1$s å›žè¦–è´</string>
 
-    <string name="card_plays_format">%1$s 回再生</string>
+    <string name="card_plays_format">%1$s å›žå†ç”Ÿ</string>
 
-    <string name="card_songs_format">%1$s 曲</string>
+    <string name="card_songs_format">%1$s æ›²</string>
 
 
     <plurals name="track_count_plural">
-        <item quantity="other">%1$d 曲</item>
+        <item quantity="other">%1$d æ›²</item>
     </plurals>
 
-    <string name="add_addon">アドオンを追加</string>
+    <string name="add_addon">ã‚¢ãƒ‰ã‚ªãƒ³ã‚’è¿½åŠ </string>
 
-    <string name="add_addon_detail">ホストしているかリンクを受け取ったアドオン サーバーを Free Music に指定します</string>
+    <string name="add_addon_detail">ãƒ›ã‚¹ãƒˆã—ã¦ã„ã‚‹ã‹ãƒªãƒ³ã‚¯ã‚’å—ã‘å–ã£ãŸã‚¢ãƒ‰ã‚ªãƒ³ ã‚µãƒ¼ãƒãƒ¼ã‚’ Free Music ã«æŒ‡å®šã—ã¾ã™</string>
 
-    <string name="addon_url_description">アドオンの URL（ルートまたは manifest.json）を貼り付けます。Free Music が検索および再生できる曲を読み取ります。</string>
+    <string name="addon_url_description">ã‚¢ãƒ‰ã‚ªãƒ³ã® URLï¼ˆãƒ«ãƒ¼ãƒˆã¾ãŸã¯ manifest.jsonï¼‰ã‚’è²¼ã‚Šä»˜ã‘ã¾ã™ã€‚Free Music ãŒæ¤œç´¢ãŠã‚ˆã³å†ç”Ÿã§ãã‚‹æ›²ã‚’èª­ã¿å–ã‚Šã¾ã™ã€‚</string>
 
-    <string name="automix_mode_balanced">バランス</string>
+    <string name="automix_mode_balanced">ãƒãƒ©ãƒ³ã‚¹</string>
 
-    <string name="automix_mode_balanced_subtitle">2 スレッド · 速度、発熱、バッテリーのバランスを推奨</string>
+    <string name="automix_mode_balanced_subtitle">2 ã‚¹ãƒ¬ãƒƒãƒ‰ Â· é€Ÿåº¦ã€ç™ºç†±ã€ãƒãƒƒãƒ†ãƒªãƒ¼ã®ãƒãƒ©ãƒ³ã‚¹ã‚’æŽ¨å¥¨</string>
 
-    <string name="automix_mode_efficient">省電力</string>
+    <string name="automix_mode_efficient">çœé›»åŠ›</string>
 
-    <string name="automix_mode_efficient_subtitle">1 スレッド · 最低限の発熱とバッテリー消費 · 分析に時間がかかる場合があります</string>
+    <string name="automix_mode_efficient_subtitle">1 ã‚¹ãƒ¬ãƒƒãƒ‰ Â· æœ€ä½Žé™ã®ç™ºç†±ã¨ãƒãƒƒãƒ†ãƒªãƒ¼æ¶ˆè²» Â· åˆ†æžã«æ™‚é–“ãŒã‹ã‹ã‚‹å ´åˆãŒã‚ã‚Šã¾ã™</string>
 
-    <string name="automix_mode_performance">高パフォーマンス</string>
+    <string name="automix_mode_performance">é«˜ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹</string>
 
-    <string name="automix_mode_performance_subtitle">4 スレッド · 最速分析 · 発熱とバッテリー消費が高くなります</string>
+    <string name="automix_mode_performance_subtitle">4 ã‚¹ãƒ¬ãƒƒãƒ‰ Â· æœ€é€Ÿåˆ†æž Â· ç™ºç†±ã¨ãƒãƒƒãƒ†ãƒªãƒ¼æ¶ˆè²»ãŒé«˜ããªã‚Šã¾ã™</string>
 
-    <string name="automix_not_supported_video">動画の曲では Automix はサポートされていません</string>
-    <string name="automix_stopped_in_party">Automix: 一緒に聴く中は停止</string>
+    <string name="automix_not_supported_video">å‹•ç”»ã®æ›²ã§ã¯ Automix ã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“</string>
+    <string name="automix_stopped_in_party">Automix: ä¸€ç·’ã«è´ãä¸­ã¯åœæ­¢</string>
 
-    <string name="automix_performance">Automix パフォーマンス</string>
+    <string name="automix_performance">Automix ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹</string>
 
-    <string name="automix_performance_subtitle">バックグラウンド分析で使用できる CPU 使用量を設定します</string>
+    <string name="automix_performance_subtitle">ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰åˆ†æžã§ä½¿ç”¨ã§ãã‚‹ CPU ä½¿ç”¨é‡ã‚’è¨­å®šã—ã¾ã™</string>
 
-    <string name="automix_performance_warning">高いパフォーマンスを設定すると分析が速くなりますが、バッテリーを多く消費し端末が温かくなる可能性があります。</string>
+    <string name="automix_performance_warning">é«˜ã„ãƒ‘ãƒ•ã‚©ãƒ¼ãƒžãƒ³ã‚¹ã‚’è¨­å®šã™ã‚‹ã¨åˆ†æžãŒé€Ÿããªã‚Šã¾ã™ãŒã€ãƒãƒƒãƒ†ãƒªãƒ¼ã‚’å¤šãæ¶ˆè²»ã—ç«¯æœ«ãŒæ¸©ã‹ããªã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚</string>
 
-    <string name="channel_session_unavailable">このページにはまだセッションがありません — 最初に YouTube Music を開いてください</string>
+    <string name="channel_session_unavailable">ã“ã®ãƒšãƒ¼ã‚¸ã«ã¯ã¾ã ã‚»ãƒƒã‚·ãƒ§ãƒ³ãŒã‚ã‚Šã¾ã›ã‚“ â€” æœ€åˆã« YouTube Music ã‚’é–‹ã„ã¦ãã ã•ã„</string>
 
-    <string name="channel_switch_instructions">アバターで切り替え、[このチャンネルを使用] をタップします</string>
+    <string name="channel_switch_instructions">ã‚¢ãƒã‚¿ãƒ¼ã§åˆ‡ã‚Šæ›¿ãˆã€[ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã‚’ä½¿ç”¨] ã‚’ã‚¿ãƒƒãƒ—ã—ã¾ã™</string>
 
-    <string name="choose_a_channel">チャンネルを選択</string>
+    <string name="choose_a_channel">ãƒãƒ£ãƒ³ãƒãƒ«ã‚’é¸æŠž</string>
 
-    <string name="convert_to_audio">音声に変換</string>
-    <string name="convert_to_video">動画に変換</string>
+    <string name="convert_to_audio">éŸ³å£°ã«å¤‰æ›</string>
+    <string name="convert_to_video">å‹•ç”»ã«å¤‰æ›</string>
 
-    <string name="converting_to_audio">音声に変換中…</string>
+    <string name="converting_to_audio">éŸ³å£°ã«å¤‰æ›ä¸­â€¦</string>
 
     <string name="dolby_atmos">Dolby Atmos</string>
 
-    <string name="dolby_atmos_subtitle">利用可能な場合は、より臨場感のあるサラウンド バージョンの曲を再生します。</string>
+    <string name="dolby_atmos_subtitle">åˆ©ç”¨å¯èƒ½ãªå ´åˆã¯ã€ã‚ˆã‚Šè‡¨å ´æ„Ÿã®ã‚ã‚‹ã‚µãƒ©ã‚¦ãƒ³ãƒ‰ ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®æ›²ã‚’å†ç”Ÿã—ã¾ã™ã€‚</string>
 
-    <string name="dolby_atmos_unavailable">このデバイスは Atmos を再生できないため、通常バージョンで再生されます</string>
+    <string name="dolby_atmos_unavailable">ã“ã®ãƒ‡ãƒã‚¤ã‚¹ã¯ Atmos ã‚’å†ç”Ÿã§ããªã„ãŸã‚ã€é€šå¸¸ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§å†ç”Ÿã•ã‚Œã¾ã™</string>
 
-    <string name="legacy_mesh_gradient">従来のメッシュ グラデーション</string>
+    <string name="legacy_mesh_gradient">å¾“æ¥ã®ãƒ¡ãƒƒã‚·ãƒ¥ ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³</string>
 
-    <string name="legacy_mesh_gradient_subtitle">v1.5 のプレーヤー背面の流れるカラー アニメーションを復元します</string>
+    <string name="legacy_mesh_gradient_subtitle">v1.5 ã®ãƒ—ãƒ¬ãƒ¼ãƒ¤ãƒ¼èƒŒé¢ã®æµã‚Œã‚‹ã‚«ãƒ©ãƒ¼ ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å¾©å…ƒã—ã¾ã™</string>
 
-    <string name="liquid_glass">リキッド グラス</string>
+    <string name="liquid_glass">ãƒªã‚­ãƒƒãƒ‰ ã‚°ãƒ©ã‚¹</string>
 
-    <string name="liquid_glass_subtitle">フローティング ナビゲーション バーの屈折ガラス効果。Android 12 以降のみ。</string>
+    <string name="liquid_glass_subtitle">ãƒ•ãƒ­ãƒ¼ãƒ†ã‚£ãƒ³ã‚° ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³ ãƒãƒ¼ã®å±ˆæŠ˜ã‚¬ãƒ©ã‚¹åŠ¹æžœã€‚Android 12 ä»¥é™ã®ã¿ã€‚</string>
 
-    <string name="liquid_glass_unavailable">Android 12 以降が必要です</string>
+    <string name="liquid_glass_unavailable">Android 12 ä»¥é™ãŒå¿…è¦ã§ã™</string>
 
-    <string name="playing_radio">%1$s ラジオを再生中</string>
+    <string name="playing_radio">%1$s ãƒ©ã‚¸ã‚ªã‚’å†ç”Ÿä¸­</string>
 
-    <string name="playlist_action">プレイリスト</string>
+    <string name="playlist_action">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ</string>
 
-    <string name="radio_started">%1$s ラジオを開始しました</string>
+    <string name="radio_started">%1$s ãƒ©ã‚¸ã‚ªã‚’é–‹å§‹ã—ã¾ã—ãŸ</string>
 
-    <string name="revert_to_original">オリジナルに戻す</string>
+    <string name="revert_to_original">ã‚ªãƒªã‚¸ãƒŠãƒ«ã«æˆ»ã™</string>
 
-    <string name="scrobble_primary_artist_only">メイン アーティストのみスクロブル</string>
+    <string name="scrobble_primary_artist_only">ãƒ¡ã‚¤ãƒ³ ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã®ã¿ã‚¹ã‚¯ãƒ­ãƒ–ãƒ«</string>
 
-    <string name="scrobble_primary_artist_only_subtitle">曲に複数のアーティストがクレジットされている場合は最初のアーティストを使用します</string>
+    <string name="scrobble_primary_artist_only_subtitle">æ›²ã«è¤‡æ•°ã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆãŒã‚¯ãƒ¬ã‚¸ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹å ´åˆã¯æœ€åˆã®ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã‚’ä½¿ç”¨ã—ã¾ã™</string>
 
-    <string name="select_all">すべて選択</string>
+    <string name="select_all">ã™ã¹ã¦é¸æŠž</string>
 
-    <string name="sort_date_added_oldest">追加日（古い順）</string>
+    <string name="sort_date_added_oldest">è¿½åŠ æ—¥ï¼ˆå¤ã„é †ï¼‰</string>
 
-    <string name="sort_date_added_toggle">追加日</string>
+    <string name="sort_date_added_toggle">è¿½åŠ æ—¥</string>
 
-    <string name="sort_default">デフォルトの順序</string>
+    <string name="sort_default">ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®é †åº</string>
 
-    <string name="sort_library">並べ替え</string>
+    <string name="sort_library">ä¸¦ã¹æ›¿ãˆ</string>
 
-    <string name="sort_songs">曲を並べ替え</string>
+    <string name="sort_songs">æ›²ã‚’ä¸¦ã¹æ›¿ãˆ</string>
 
-    <string name="source_already_added">%1$s として追加済み</string>
+    <string name="source_already_added">%1$s ã¨ã—ã¦è¿½åŠ æ¸ˆã¿</string>
 
-    <string name="source_skipped_by_quality">%1$s では使用されていません · 音質は %2$s に設定されています</string>
+    <string name="source_skipped_by_quality">%1$s ã§ã¯ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã›ã‚“ Â· éŸ³è³ªã¯ %2$s ã«è¨­å®šã•ã‚Œã¦ã„ã¾ã™</string>
 
-    <string name="source_unrecognised">Free Music はそのリンクを認識できませんでした</string>
+    <string name="source_unrecognised">Free Music ã¯ãã®ãƒªãƒ³ã‚¯ã‚’èªè­˜ã§ãã¾ã›ã‚“ã§ã—ãŸ</string>
 
-    <string name="start_radio">ラジオを開始</string>
+    <string name="start_radio">ãƒ©ã‚¸ã‚ªã‚’é–‹å§‹</string>
 
-    <string name="subscribe">チャンネル登録</string>
+    <string name="subscribe">ãƒãƒ£ãƒ³ãƒãƒ«ç™»éŒ²</string>
 
-    <string name="unsubscribe">チャンネル登録を解除</string>
+    <string name="unsubscribe">ãƒãƒ£ãƒ³ãƒãƒ«ç™»éŒ²ã‚’è§£é™¤</string>
 
-    <string name="upgrade_quality">音質をアップグレード</string>
+    <string name="upgrade_quality">éŸ³è³ªã‚’ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰</string>
 
-    <string name="use_this_channel">このチャンネルを使用</string>
+    <string name="use_this_channel">ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã‚’ä½¿ç”¨</string>
 
 
     <string name="lyrics_offset">Lyrics offset</string>
@@ -1164,13 +1189,13 @@
 
     <string name="settings_search_hint">Search settings</string>
 
-    <string name="settings_search_empty">No settings match “%1$s”</string>
+    <string name="settings_search_empty">No settings match â€œ%1$sâ€</string>
 
     <string name="prefer_music_only">Prefer music-only version</string>
 
     <string name="prefer_music_only_subtitle">For music videos, show the video details while finding and loading the catalogue audio version</string>
-    <string name="smart_version_alignment">スマート音声同期</string>
-    <string name="smart_version_alignment_subtitle">波形を解析して、対応する再生位置を正確に合わせます</string>
+    <string name="smart_version_alignment">ã‚¹ãƒžãƒ¼ãƒˆéŸ³å£°åŒæœŸ</string>
+    <string name="smart_version_alignment_subtitle">æ³¢å½¢ã‚’è§£æžã—ã¦ã€å¯¾å¿œã™ã‚‹å†ç”Ÿä½ç½®ã‚’æ­£ç¢ºã«åˆã‚ã›ã¾ã™</string>
 
     <string name="equalizer_footer">Shapes the sound inside Free Music, before it reaches the system.</string>
 
@@ -1207,9 +1232,9 @@
     <string name="equalizer_balance_right">R</string>
 
     <string name="equalizer_balance_footer">Shifts the sound towards one ear by quietening the other.</string>
-    <string name="equalizer_bitstream_title">現在は動作していません</string>
-    <string name="equalizer_bitstream_subtitle">この曲はデコードされずに出力へ送られます</string>
-    <string name="equalizer_bitstream_footer">イコライザーはデコード済みの音声に作用します。この曲はデバイス側でデコードするビットストリームとしてそのまま渡されるため、ここには処理できるサンプルがありません。</string>
+    <string name="equalizer_bitstream_title">ç¾åœ¨ã¯å‹•ä½œã—ã¦ã„ã¾ã›ã‚“</string>
+    <string name="equalizer_bitstream_subtitle">ã“ã®æ›²ã¯ãƒ‡ã‚³ãƒ¼ãƒ‰ã•ã‚Œãšã«å‡ºåŠ›ã¸é€ã‚‰ã‚Œã¾ã™</string>
+    <string name="equalizer_bitstream_footer">ã‚¤ã‚³ãƒ©ã‚¤ã‚¶ãƒ¼ã¯ãƒ‡ã‚³ãƒ¼ãƒ‰æ¸ˆã¿ã®éŸ³å£°ã«ä½œç”¨ã—ã¾ã™ã€‚ã“ã®æ›²ã¯ãƒ‡ãƒã‚¤ã‚¹å´ã§ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹ãƒ“ãƒƒãƒˆã‚¹ãƒˆãƒªãƒ¼ãƒ ã¨ã—ã¦ãã®ã¾ã¾æ¸¡ã•ã‚Œã‚‹ãŸã‚ã€ã“ã“ã«ã¯å‡¦ç†ã§ãã‚‹ã‚µãƒ³ãƒ—ãƒ«ãŒã‚ã‚Šã¾ã›ã‚“ã€‚</string>
 
     <string name="system_equalizer">System equalizer</string>
 
@@ -1268,7 +1293,7 @@
     <string name="medium_quality">Medium Quality</string>
 
     <string name="audio_pipeline">Audio Pipeline</string>
-    <string name="audio_pipeline_subtitle">デコーダーから出力までのリアルタイム信号経路</string>
+    <string name="audio_pipeline_subtitle">ãƒ‡ã‚³ãƒ¼ãƒ€ãƒ¼ã‹ã‚‰å‡ºåŠ›ã¾ã§ã®ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ä¿¡å·çµŒè·¯</string>
 
     <string name="pipeline_track_info">Track Info</string>
 
@@ -1323,15 +1348,15 @@
     <string name="song_will_play_next">Song will play next</string>
 
     <string name="song_added_to_queue">Song added to queue</string>
-    <string name="song_added_to_playlist">プレイリストに追加しました</string>
-    <string name="song_already_in_playlist">すでにプレイリストにあります</string>
-    <string name="party_queue_full">キューがいっぱいです（パーティーの上限は%d曲）</string>
+    <string name="song_added_to_playlist">ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ã¾ã—ãŸ</string>
+    <string name="song_already_in_playlist">ã™ã§ã«ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«ã‚ã‚Šã¾ã™</string>
+    <string name="party_queue_full">ã‚­ãƒ¥ãƒ¼ãŒã„ã£ã±ã„ã§ã™ï¼ˆãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼ã®ä¸Šé™ã¯%dæ›²ï¼‰</string>
 
     <string name="paxsenix_api_key">PaxSenix API key</string>
 
-    <string name="paxsenix_api_key_configured">PaxSenix API key — configured</string>
+    <string name="paxsenix_api_key_configured">PaxSenix API key â€” configured</string>
 
-    <string name="paxsenix_api_key_missing">PaxSenix API key — optional, not configured</string>
+    <string name="paxsenix_api_key_missing">PaxSenix API key â€” optional, not configured</string>
 
     <string name="open_lyrics">Lyrics</string>
 
@@ -1345,28 +1370,28 @@
 
     <string name="hdmi_output">HDMI</string>
 
-    <string name="personal_phone">%1$s’s Phone</string>
+    <string name="personal_phone">%1$sâ€™s Phone</string>
 
     <string name="this_phone">This phone</string>
 
 
 
-    <string name="speed_dial">スピードダイヤル</string>
+    <string name="speed_dial">ã‚¹ãƒ”ãƒ¼ãƒ‰ãƒ€ã‚¤ãƒ¤ãƒ«</string>
 
-    <string name="notifications">通知</string>
+    <string name="notifications">é€šçŸ¥</string>
 
-    <string name="notifications_empty">今は新しいものはありません</string>
+    <string name="notifications_empty">ä»Šã¯æ–°ã—ã„ã‚‚ã®ã¯ã‚ã‚Šã¾ã›ã‚“</string>
 
-    <string name="notifications_unread">未読の通知 %1$d 件</string>
+    <string name="notifications_unread">æœªèª­ã®é€šçŸ¥ %1$d ä»¶</string>
 
-    <string name="notifications_update_available">Free Music %1$s が利用可能です</string>
+    <string name="notifications_update_available">Free Music %1$s ãŒåˆ©ç”¨å¯èƒ½ã§ã™</string>
 
-    <string name="notifications_saving">保存中 · %1$d%%</string>
+    <string name="notifications_saving">ä¿å­˜ä¸­ Â· %1$d%%</string>
 
-    <string name="notifications_queued">待機中</string>
+    <string name="notifications_queued">å¾…æ©Ÿä¸­</string>
 
-    <string name="notifications_uploading">アップロード中 · %1$d%%</string>
+    <string name="notifications_uploading">ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ä¸­ Â· %1$d%%</string>
 
-    <string name="notifications_queued_upload">アップロード待ち</string>
+    <string name="notifications_queued_upload">ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰å¾…ã¡</string>
 
 </resources>

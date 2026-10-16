@@ -3,19 +3,19 @@
     <string name="app_name">Free Music</string>
     <string name="playback_channel_name">Teraz gra</string>
     <string name="download_channel_name">Pobrane</string>
-    <string name="download_channel_description">Utwory są zapisywane do folderu Muzyka</string>
+    <string name="download_channel_description">Utwory sÄ… zapisywane do folderu Muzyka</string>
     <string name="download_notification_title">Pobieranie</string>
     <string name="download_notification_starting">Rozpoczynanie</string>
-    <string name="download_notification_queued">%1$s · %2$d jeszcze w kolejce</string>
-    <string name="upload_channel_name">Przesyłanie</string>
-    <string name="upload_channel_description">Utwory wysyłane na twój serwer WebDAV</string>
-    <string name="upload_notification_title">Przesyłanie</string>
-    <string name="upload_notification_queued">%1$s · jeszcze %2$d w kolejce</string>
+    <string name="download_notification_queued">%1$s Â· %2$d jeszcze w kolejce</string>
+    <string name="upload_channel_name">PrzesyÅ‚anie</string>
+    <string name="upload_channel_description">Utwory wysyÅ‚ane na twÃ³j serwer WebDAV</string>
+    <string name="upload_notification_title">PrzesyÅ‚anie</string>
+    <string name="upload_notification_queued">%1$s Â· jeszcze %2$d w kolejce</string>
     <plurals name="uploading_song_count">
-        <item quantity="one">Przesyłanie %1$d utworu</item>
-        <item quantity="few">Przesyłanie %1$d utworów</item>
-        <item quantity="many">Przesyłanie %1$d utworów</item>
-        <item quantity="other">Przesyłanie %1$d utworu</item>
+        <item quantity="one">PrzesyÅ‚anie %1$d utworu</item>
+        <item quantity="few">PrzesyÅ‚anie %1$d utworÃ³w</item>
+        <item quantity="many">PrzesyÅ‚anie %1$d utworÃ³w</item>
+        <item quantity="other">PrzesyÅ‚anie %1$d utworu</item>
     </plurals>
     <string name="cancel">Anuluj</string>
     <string name="save">Zapisz</string>
@@ -23,80 +23,80 @@
     <string name="back">Cofnij</string>
     <string name="settings">Ustawienia</string>
     <string name="search">Szukaj</string>
-    <string name="clear_search">Wyczyść wyszukiwanie</string>
+    <string name="clear_search">WyczyÅ›Ä‡ wyszukiwanie</string>
     <string name="library">Biblioteka</string>
-    <string name="home">Główna</string>
-    <string name="play">Odtwórz</string>
+    <string name="home">GÅ‚Ã³wna</string>
+    <string name="play">OdtwÃ³rz</string>
     <string name="explore">Odkrywaj</string>
-    <string name="listen_now">Posłuchaj teraz</string>
+    <string name="listen_now">PosÅ‚uchaj teraz</string>
     <string name="downloads">Pobrane</string>
     <string name="downloaded_songs">Pobrane piosenki</string>
     <string name="local_music">Muzyka lokalna</string>
-    <string name="audio_files_on_device">Pliki audio na urządzeniu</string>
-    <string name="on_device">Na urządzeniu</string>
+    <string name="audio_files_on_device">Pliki audio na urzÄ…dzeniu</string>
+    <string name="on_device">Na urzÄ…dzeniu</string>
     <string name="playlists">Playlisty</string>
     <string name="new_playlist">Nowa playlista</string>
     <string name="saved_to_youtube_music">Zapisano do YouTube Music</string>
     <string name="my_playlists">Moje playlisty</string>
-    <string name="playlist_empty">Ta playlista jest jeszcze pusta. Przytrzymaj utwór w dowolnym miejscu aplikacji i wybierz tę playlistę, aby go dodać.</string>
-    <string name="playlist_limit_reached">Osiągnięto limit playlist</string>
-    <string name="device_playlists_unwritable">To urządzenie nie pozwala teraz Free Music zapisywać playlist, więc zmiany znikną po zamknięciu aplikacji.</string>
-    <!-- Playlisty współdzielone i Blendy. -->
-    <string name="shared_playlists">Współdzielone playlisty</string>
-    <string name="shared_playlist_new">Nowa współdzielona playlista</string>
+    <string name="playlist_empty">Ta playlista jest jeszcze pusta. Przytrzymaj utwÃ³r w dowolnym miejscu aplikacji i wybierz tÄ™ playlistÄ™, aby go dodaÄ‡.</string>
+    <string name="playlist_limit_reached">OsiÄ…gniÄ™to limit playlist</string>
+    <string name="device_playlists_unwritable">To urzÄ…dzenie nie pozwala teraz Free Music zapisywaÄ‡ playlist, wiÄ™c zmiany zniknÄ… po zamkniÄ™ciu aplikacji.</string>
+    <!-- Playlisty wspÃ³Å‚dzielone i Blendy. -->
+    <string name="shared_playlists">WspÃ³Å‚dzielone playlisty</string>
+    <string name="shared_playlist_new">Nowa wspÃ³Å‚dzielona playlista</string>
     <string name="shared_playlist_name_hint">Nazwa playlisty</string>
-    <string name="shared_playlist_create">Utwórz</string>
-    <string name="shared_playlist_empty">Nie ma jeszcze współdzielonych playlist. Utwórz jedną i wyślij link z zaproszeniem wszystkim, z którymi chcesz ją budować.</string>
-    <string name="shared_playlist_members">%1$d członków</string>
-    <string name="shared_playlist_songs">%1$d utworów</string>
-    <string name="shared_playlist_invite">Zaproś osoby</string>
+    <string name="shared_playlist_create">UtwÃ³rz</string>
+    <string name="shared_playlist_empty">Nie ma jeszcze wspÃ³Å‚dzielonych playlist. UtwÃ³rz jednÄ… i wyÅ›lij link z zaproszeniem wszystkim, z ktÃ³rymi chcesz jÄ… budowaÄ‡.</string>
+    <string name="shared_playlist_members">%1$d czÅ‚onkÃ³w</string>
+    <string name="shared_playlist_songs">%1$d utworÃ³w</string>
+    <string name="shared_playlist_invite">ZaproÅ› osoby</string>
     <string name="shared_playlist_invite_title">Link z zaproszeniem</string>
-    <string name="shared_playlist_invite_body">Każdy, kto ma ten link, może dołączyć i edytować playlistę. Wygasa po siedmiu dniach.</string>
+    <string name="shared_playlist_invite_body">KaÅ¼dy, kto ma ten link, moÅ¼e doÅ‚Ä…czyÄ‡ i edytowaÄ‡ playlistÄ™. Wygasa po siedmiu dniach.</string>
     <string name="shared_playlist_invite_copy">Kopiuj link</string>
-    <string name="shared_playlist_invite_share">Udostępnij</string>
+    <string name="shared_playlist_invite_share">UdostÄ™pnij</string>
     <string name="shared_playlist_invite_copied">Link skopiowany</string>
-    <string name="shared_playlist_leave">Opuść playlistę</string>
-    <string name="shared_playlist_leave_confirmation">Opuścić „%1$s”? Możesz wrócić z nowym linkiem zaproszenia.</string>
-    <string name="shared_playlist_members_title">Członkowie</string>
-    <string name="shared_playlist_remove_member">Usuń</string>
-    <string name="shared_playlist_remove_member_confirmation">Usunąć %1$s z „%2$s”? Dodane utwory zostaną, ale ta osoba nie doda już kolejnych.</string>
-    <string name="shared_playlist_offline">Jesteś offline. Współdzielone playlisty wczytają się, gdy wrócisz.</string>
-    <string name="shared_playlist_not_durable">Serwer playlist nie zapisuje teraz na dysku, więc współdzielone playlisty mogą zniknąć po jego restarcie.</string>
+    <string name="shared_playlist_leave">OpuÅ›Ä‡ playlistÄ™</string>
+    <string name="shared_playlist_leave_confirmation">OpuÅ›ciÄ‡ â€ž%1$sâ€? MoÅ¼esz wrÃ³ciÄ‡ z nowym linkiem zaproszenia.</string>
+    <string name="shared_playlist_members_title">CzÅ‚onkowie</string>
+    <string name="shared_playlist_remove_member">UsuÅ„</string>
+    <string name="shared_playlist_remove_member_confirmation">UsunÄ…Ä‡ %1$s z â€ž%2$sâ€? Dodane utwory zostanÄ…, ale ta osoba nie doda juÅ¼ kolejnych.</string>
+    <string name="shared_playlist_offline">JesteÅ› offline. WspÃ³Å‚dzielone playlisty wczytajÄ… siÄ™, gdy wrÃ³cisz.</string>
+    <string name="shared_playlist_not_durable">Serwer playlist nie zapisuje teraz na dysku, wiÄ™c wspÃ³Å‚dzielone playlisty mogÄ… zniknÄ…Ä‡ po jego restarcie.</string>
     <string name="shared_playlist_added_by">Dodane przez %1$s</string>
-    <string name="shared_playlist_owner">Właściciel</string>
-    <string name="shared_playlist_owned_by_you">Ta playlista należy do Ciebie</string>
-    <string name="shared_playlist_sign_in_required">Zaloguj się, aby utworzyć współdzieloną playlistę.</string>
-    <string name="shared_playlist_add_to">Dodaj do współdzielonej playlisty</string>
-    <string name="shared_playlist_added">Dodano do „%1$s”</string>
-    <string name="shared_playlist_add_failed">Nie udało się dodać do „%1$s”</string>
-    <string name="shared_playlist_created">Utworzono „%1$s”</string>
+    <string name="shared_playlist_owner">WÅ‚aÅ›ciciel</string>
+    <string name="shared_playlist_owned_by_you">Ta playlista naleÅ¼y do Ciebie</string>
+    <string name="shared_playlist_sign_in_required">Zaloguj siÄ™, aby utworzyÄ‡ wspÃ³Å‚dzielonÄ… playlistÄ™.</string>
+    <string name="shared_playlist_add_to">Dodaj do wspÃ³Å‚dzielonej playlisty</string>
+    <string name="shared_playlist_added">Dodano do â€ž%1$sâ€</string>
+    <string name="shared_playlist_add_failed">Nie udaÅ‚o siÄ™ dodaÄ‡ do â€ž%1$sâ€</string>
+    <string name="shared_playlist_created">Utworzono â€ž%1$sâ€</string>
     <string name="shared_playlist_blend">Blend</string>
-    <string name="shared_playlist_blend_empty">Blend tworzy się sam z tego, czego wszyscy słuchają. Odświeża się codziennie i nie da się go edytować ręcznie.</string>
-    <string name="shared_playlist_compatibility">Zgodność muzyczna</string>
-    <string name="shared_playlist_compatibility_value">%1$d%% zgodności</string>
-    <string name="shared_playlist_code_join">Dołącz przez link lub kod</string>
+    <string name="shared_playlist_blend_empty">Blend tworzy siÄ™ sam z tego, czego wszyscy sÅ‚uchajÄ…. OdÅ›wieÅ¼a siÄ™ codziennie i nie da siÄ™ go edytowaÄ‡ rÄ™cznie.</string>
+    <string name="shared_playlist_compatibility">ZgodnoÅ›Ä‡ muzyczna</string>
+    <string name="shared_playlist_compatibility_value">%1$d%% zgodnoÅ›ci</string>
+    <string name="shared_playlist_code_join">DoÅ‚Ä…cz przez link lub kod</string>
     <string name="shared_playlist_code_hint">Wklej link zaproszenia</string>
-    <string name="shared_playlist_join">Dołącz</string>
-    <string name="shared_playlist_invite_invalid">To zaproszenie nie jest już ważne.</string>
-    <string name="shared_playlist_invite_expired">To zaproszenie wygasło. Poproś o nowe.</string>
-    <string name="shared_playlist_invite_used">To zaproszenie zostało już użyte.</string>
-    <string name="shared_playlist_invite_full">Ta playlista jest pełna.</string>
-    <string name="shared_playlist_join_title">Dołącz do playlisty</string>
-    <string name="shared_playlist_join_body">%1$s zaprosił(a) Cię do „%2$s”.</string>
-    <string name="shared_playlist_join_confirm">Dołącz</string>
-    <string name="shared_playlist_joined">Dołączono do „%1$s”</string>
-    <string name="shared_playlist_loading">Wczytywanie playlisty…</string>
-    <string name="loading">Wczytywanie…</string>
+    <string name="shared_playlist_join">DoÅ‚Ä…cz</string>
+    <string name="shared_playlist_invite_invalid">To zaproszenie nie jest juÅ¼ waÅ¼ne.</string>
+    <string name="shared_playlist_invite_expired">To zaproszenie wygasÅ‚o. PoproÅ› o nowe.</string>
+    <string name="shared_playlist_invite_used">To zaproszenie zostaÅ‚o juÅ¼ uÅ¼yte.</string>
+    <string name="shared_playlist_invite_full">Ta playlista jest peÅ‚na.</string>
+    <string name="shared_playlist_join_title">DoÅ‚Ä…cz do playlisty</string>
+    <string name="shared_playlist_join_body">%1$s zaprosiÅ‚(a) CiÄ™ do â€ž%2$sâ€.</string>
+    <string name="shared_playlist_join_confirm">DoÅ‚Ä…cz</string>
+    <string name="shared_playlist_joined">DoÅ‚Ä…czono do â€ž%1$sâ€</string>
+    <string name="shared_playlist_loading">Wczytywanie playlistyâ€¦</string>
+    <string name="loading">Wczytywanieâ€¦</string>
     <string name="sign_in">Zaloguj</string>
     <string name="sign_out">Wyloguj</string>
     <string name="signed_in">Zalogowano</string>
     <string name="not_signed_in">Nie zalogowano</string>
-    <string name="retry">Spróbuj ponownie</string>
+    <string name="retry">SprÃ³buj ponownie</string>
     <string name="shuffle">Losowo</string>
-    <string name="more">Więcej</string>
+    <string name="more">WiÄ™cej</string>
     <string name="add_to_playlist">Dodaj do playlisty</string>
     <string name="add_to_library">Dodaj do biblioteki</string>
-    <string name="remove_from_library">Usuń z biblioteki</string>
+    <string name="remove_from_library">UsuÅ„ z biblioteki</string>
     <string name="download_all">Pobierz wszystko</string>
     <string name="top_songs">Top piosenek</string>
     <string name="suggested">Proponowane</string>
@@ -107,336 +107,361 @@
     </plurals>
     <plurals name="artist_count">
         <item quantity="one">%1$d artysta</item>
-        <item quantity="other">%1$d artystów</item>
+        <item quantity="other">%1$d artystÃ³w</item>
     </plurals>
     <plurals name="album_count">
         <item quantity="one">%1$d album</item>
-        <item quantity="other">%1$d albumów</item>
+        <item quantity="other">%1$d albumÃ³w</item>
     </plurals>
     <string name="songs">Piosenki</string>
-    <string name="artists">Artyści</string>
+    <string name="artists">ArtyÅ›ci</string>
     <string name="albums">Albumy</string>
-    <string name="no_album_metadata">Żaden z tych utworów nie informuje z jakiego albumu pochodzi.</string>
-    <string name="search_empty">Szukaj milionów utworów na YouTube Music.</string>
+    <string name="no_album_metadata">Å»aden z tych utworÃ³w nie informuje z jakiego albumu pochodzi.</string>
+    <string name="search_empty">Szukaj milionÃ³w utworÃ³w na YouTube Music.</string>
     <string name="recent_searches">Ostatnie wyszukiwania</string>
-    <string name="clear">Wyczyść</string>
-    <string name="search_hint">Artyści, Piosenki, Teksty i więcej</string>
-    <string name="recent_search_edit">Edytuj “%1$s”</string>
-    <string name="recent_search_remove">Usuń “%1$s” z ostatnich wyszukiwań</string>
-    <string name="storage_required_save">Wymagany dostęp do pamięci, aby zapisać piosenki</string>
-    <string name="storage_required_read">Wymagane uprawnienia do odczytu plików audio na urządzeniu</string>
-    <string name="sharing_coming_soon">Udostępnianie już wkrótce</string>
-    <string name="already_downloaded">Już pobrane</string>
+    <string name="clear">WyczyÅ›Ä‡</string>
+    <string name="search_hint">ArtyÅ›ci, Piosenki, Teksty i wiÄ™cej</string>
+    <string name="recent_search_edit">Edytuj â€œ%1$sâ€</string>
+    <string name="recent_search_remove">UsuÅ„ â€œ%1$sâ€ z ostatnich wyszukiwaÅ„</string>
+    <string name="storage_required_save">Wymagany dostÄ™p do pamiÄ™ci, aby zapisaÄ‡ piosenki</string>
+    <string name="storage_required_read">Wymagane uprawnienia do odczytu plikÃ³w audio na urzÄ…dzeniu</string>
+    <string name="sharing_coming_soon">UdostÄ™pnianie juÅ¼ wkrÃ³tce</string>
+    <string name="already_downloaded">JuÅ¼ pobrane</string>
     <plurals name="downloading_song_count">
         <item quantity="one">Pobieranie %1$d piosenki</item>
         <item quantity="other">Pobieranie %1$d piosenek</item>
     </plurals>
-    <string name="source">Źródła</string>
-    <string name="lossless_audio">Bezstratna jakość dźwięku</string>
-    <string name="prefer_lossless">Preferuj bezstratną jakość dźwięku</string>
-    <string name="lossless_source_subtitle">FLAC i ALAC prosto ze źródła</string>
+    <string name="source">Å¹rÃ³dÅ‚a</string>
+    <string name="lossless_audio">Bezstratna jakoÅ›Ä‡ dÅºwiÄ™ku</string>
+    <string name="prefer_lossless">Preferuj bezstratnÄ… jakoÅ›Ä‡ dÅºwiÄ™ku</string>
+    <string name="lossless_source_subtitle">FLAC i ALAC prosto ze ÅºrÃ³dÅ‚a</string>
     <string name="overridden">Nadpisano</string>
-    <string name="add_module_source">Dodaj źródło modułu</string>
-    <string name="remove_source">Usuń to źródło</string>
+    <string name="add_module_source">Dodaj ÅºrÃ³dÅ‚o moduÅ‚u</string>
+    <string name="remove_source">UsuÅ„ to ÅºrÃ³dÅ‚o</string>
     <string name="test">Test</string>
-    <string name="testing">Testowanie…</string>
-    <string name="connected">Połączono</string>
+    <string name="testing">Testowanieâ€¦</string>
+    <string name="connected">PoÅ‚Ä…czono</string>
     <string name="account_integrations">Konto i integracje</string>
     <string name="account_scrobbling">Konto i scrobbling</string>
+
+    <!-- Profile hero + edit profile dialog -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_signed_in_as">Signed in as %1$s</string>
+    <string name="profile_status_default">What\'s playing lately</string>
+    <string name="profile_bio_default">No bio yet</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_cancel">Cancel</string>
+    <string name="edit_profile_field_display_name">Display name</string>
+    <string name="edit_profile_field_status">Status</string>
+    <string name="edit_profile_field_bio">Bio</string>
+    <string name="edit_profile_avatar_alt">Profile picture</string>
+    <string name="edit_profile_change_avatar">Change picture</string>
+    <string name="edit_profile_remove_avatar">Remove</string>
+    <string name="edit_profile_display_name_hint">Visible to your connections</string>
+    <string name="edit_profile_status_hint">A short line about your listening mood</string>
+    <string name="edit_profile_bio_hint">A few lines about your music taste</string>
+    <string name="edit_profile_display_name_required">Display name cannot be empty</string>
+    <string name="edit_profile_status_too_long">Status is too long</string>
+    <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="stat_hours_listened">Hours listened</string>
+    <string name="stat_tracks_played">Tracks played</string>
+    <string name="stat_playlists">Playlists</string>
+    <string name="stat_sources">Sources</string>
     <string name="rich_presence">Status na Discordzie</string>
     <string name="scrobbling">Scrobbling</string>
     <string name="now_playing">Teraz odtwarzane</string>
-    <string name="next_in_queue">Następny w kolejce</string>
-    <string name="next_from">Następne z: %1$s</string>
+    <string name="next_in_queue">NastÄ™pny w kolejce</string>
+    <string name="next_from">NastÄ™pne z: %1$s</string>
     <string name="selected">Wybrano</string>
-    <string name="password">Hasło</string>
-    <string name="username">Nazwa użytkownika</string>
-    <string name="login_failed">Nie udało się zalogować</string>
-    <string name="song_cache_cleared">Piosenki w pamięci podręcznej zostały usunięte</string>
-    <string name="image_cache_cleared">Obrazy w pamięci podręcznej zostały usunięte</string>
-    <string name="no_equalizer">Brak systemowego equalizera na tym urządzeniu</string>
-    <string name="no_dolby_atmos">Brak panelu Dolby Atmos na tym urządzeniu</string>
-    <string name="dolby_atmos_open_failed">Nie można było otworzyć ustawień Dolby Atmos</string>
-    <string name="update_available">Dostępna aktualizacja: v%1$s</string>
+    <string name="password">HasÅ‚o</string>
+    <string name="username">Nazwa uÅ¼ytkownika</string>
+    <string name="login_failed">Nie udaÅ‚o siÄ™ zalogowaÄ‡</string>
+    <string name="song_cache_cleared">Piosenki w pamiÄ™ci podrÄ™cznej zostaÅ‚y usuniÄ™te</string>
+    <string name="image_cache_cleared">Obrazy w pamiÄ™ci podrÄ™cznej zostaÅ‚y usuniÄ™te</string>
+    <string name="no_equalizer">Brak systemowego equalizera na tym urzÄ…dzeniu</string>
+    <string name="no_dolby_atmos">Brak panelu Dolby Atmos na tym urzÄ…dzeniu</string>
+    <string name="dolby_atmos_open_failed">Nie moÅ¼na byÅ‚o otworzyÄ‡ ustawieÅ„ Dolby Atmos</string>
+    <string name="update_available">DostÄ™pna aktualizacja: v%1$s</string>
     <string name="software_update">Aktualizacja oprogramowania</string>
-    <string name="update_available_body">Free Music %1$s jest dostępny do pobrania.</string>
-    <string name="update_downloading_body">Pobieranie Free Music %1$s…</string>
+    <string name="update_available_body">Free Music %1$s jest dostÄ™pny do pobrania.</string>
+    <string name="update_downloading_body">Pobieranie Free Music %1$sâ€¦</string>
     <string name="update_ready_body">Free Music %1$s jest gotowy do zainstalowania.</string>
-    <string name="update_failed_body">Nie udało się pobrać Free Music %1$s.</string>
+    <string name="update_failed_body">Nie udaÅ‚o siÄ™ pobraÄ‡ Free Music %1$s.</string>
     <string name="download_now">Pobierz teraz</string>
     <string name="install_now">Zainstaluj teraz</string>
-    <string name="later">Później</string>
-    <string name="remind_me_later">Przypomnij mi później</string>
-    <string name="try_again">Spróbuj ponownie</string>
-    <string name="open_releases_page">Otwórz stronę wydań</string>
+    <string name="later">PÃ³Åºniej</string>
+    <string name="remind_me_later">Przypomnij mi pÃ³Åºniej</string>
+    <string name="try_again">SprÃ³buj ponownie</string>
+    <string name="open_releases_page">OtwÃ³rz stronÄ™ wydaÅ„</string>
     <string name="whats_new">Co nowego</string>
-    <string name="log_copied">Logi zostały skopiowane · %1$d lines</string>
-    <string name="sign_in_youtube_music">Zaloguj się do YouTube Music</string>
-    <string name="sign_in_discord">Zaloguj się do Discorda</string>
+    <string name="log_copied">Logi zostaÅ‚y skopiowane Â· %1$d lines</string>
+    <string name="sign_in_youtube_music">Zaloguj siÄ™ do YouTube Music</string>
+    <string name="sign_in_discord">Zaloguj siÄ™ do Discorda</string>
     <string name="personalized_recommendations">Otrzymuj spersonalizowane rekomendacje</string>
     <string name="play_next">Odtwarzaj dalej</string>
     <string name="queue">Kolejka</string>
-    <string name="source_setup_required">Dotknij, aby zakończyć konfigurację</string>
-    <string name="source_unreachable">Nie można się teraz połączyć · %1$s</string>
-    <string name="checking">Sprawdzanie…</string>
-    <string name="failed">Błąd</string>
-    <string name="widget_square_label">Now playing 2×2</string>
-    <string name="widget_wide_label">Now playing 4×2</string>
-    <string name="widget_square_description">Okładka albumu z kontrolkami odtwarzania, w kwadracie.</string>
-    <string name="widget_wide_description">Okładka albumu z utworem i kontrolkami odtwarzania, na pełną szerokość.</string>
+    <string name="source_setup_required">Dotknij, aby zakoÅ„czyÄ‡ konfiguracjÄ™</string>
+    <string name="source_unreachable">Nie moÅ¼na siÄ™ teraz poÅ‚Ä…czyÄ‡ Â· %1$s</string>
+    <string name="checking">Sprawdzanieâ€¦</string>
+    <string name="failed">BÅ‚Ä…d</string>
+    <string name="widget_square_label">Now playing 2Ã—2</string>
+    <string name="widget_wide_label">Now playing 4Ã—2</string>
+    <string name="widget_square_description">OkÅ‚adka albumu z kontrolkami odtwarzania, w kwadracie.</string>
+    <string name="widget_wide_description">OkÅ‚adka albumu z utworem i kontrolkami odtwarzania, na peÅ‚nÄ… szerokoÅ›Ä‡.</string>
     <string name="widget_play">Graj</string>
     <string name="widget_pause">Pauza</string>
     <string name="widget_next">Dalej</string>
     <string name="widget_previous">Poprzedni</string>
-    <string name="widget_artwork">Okładka albumu</string>
-    <string name="widget_nothing_played">Nic nie zostało odtworzone</string>
+    <string name="widget_artwork">OkÅ‚adka albumu</string>
+    <string name="widget_nothing_played">Nic nie zostaÅ‚o odtworzone</string>
     <string name="widget_open_freemusic">Open Free Music</string>
-    <string name="widget_preview_title">Tytuł utworu</string>
+    <string name="widget_preview_title">TytuÅ‚ utworu</string>
     <string name="widget_preview_artist">Artysta</string>
-    <string name="widget_pill_label">Now playing 4×1</string>
-    <string name="widget_pill_description">Utwór z polubieniem, losowaniem i kontrolkami odtwarzania w jednym wierszu.</string>
-    <string name="widget_preview_pill">Tytuł utworu - Artysta</string>
-    <string name="download_quality">Jakość pobierania</string>
+    <string name="widget_pill_label">Now playing 4Ã—1</string>
+    <string name="widget_pill_description">UtwÃ³r z polubieniem, losowaniem i kontrolkami odtwarzania w jednym wierszu.</string>
+    <string name="widget_preview_pill">TytuÅ‚ utworu - Artysta</string>
+    <string name="download_quality">JakoÅ›Ä‡ pobierania</string>
     <string name="download_wifi_only">Pobieraj tylko przez Wi-Fi</string>
-    <string name="spatial_audio">Dźwięk przestrzenny</string>
-    <string name="spatial_audio_subtitle">Większa immersja dzięki poszerzeniu utworów stereo</string>
-    <string name="spatial_audio_atmos_subtitle">Wstrzymane dla tego utworu – Dolby Atmos już jest przestrzenny</string>
-    <string name="animated_cover_cellular">Odtwarzaj animowaną okładkę w sieci komórkowej</string>
+    <string name="spatial_audio">DÅºwiÄ™k przestrzenny</string>
+    <string name="spatial_audio_subtitle">WiÄ™ksza immersja dziÄ™ki poszerzeniu utworÃ³w stereo</string>
+    <string name="spatial_audio_atmos_subtitle">Wstrzymane dla tego utworu â€“ Dolby Atmos juÅ¼ jest przestrzenny</string>
+    <string name="animated_cover_cellular">Odtwarzaj animowanÄ… okÅ‚adkÄ™ w sieci komÃ³rkowej</string>
     <string name="replay">Replay</string>
-    <string name="replay_subtitle">Twoje top utwory, artyści, albumy i gatunki</string>
-    <string name="work_out_genres">Gatunki do ćwiczeń</string>
+    <string name="replay_subtitle">Twoje top utwory, artyÅ›ci, albumy i gatunki</string>
+    <string name="work_out_genres">Gatunki do Ä‡wiczeÅ„</string>
     <string name="export_data">Wyeksportuj dane</string>
-    <string name="export_data_subtitle">Ustawienia, historia słuchania i playlisty jako jeden plik JSON</string>
+    <string name="export_data_subtitle">Ustawienia, historia sÅ‚uchania i playlisty jako jeden plik JSON</string>
     <string name="import_data">Importuj dane</string>
-    <string name="import_data_subtitle">Zastępuje ustawienia i historię na tym urządzeniu i scala jego playlisty</string>
+    <string name="import_data_subtitle">ZastÄ™puje ustawienia i historiÄ™ na tym urzÄ…dzeniu i scala jego playlisty</string>
     <string name="import_backup_title">Import a backup?</string>
     <string name="choose_file">Wybierz plik</string>
-    <string name="top_artists">Topowi artyści</string>
+    <string name="top_artists">Topowi artyÅ›ci</string>
     <string name="top_albums">Topowe albumy</string>
     <string name="top_genres">Topowe gatunki</string>
     <string name="cancel_all">Anuluj wszystkie</string>
-    <string name="language">Język</string>
-    <string name="app_language">Język aplikacji</string>
-    <string name="app_language_description">Wybierz język używany przez Free Music.</string>
+    <string name="language">JÄ™zyk</string>
+    <string name="app_language">JÄ™zyk aplikacji</string>
+    <string name="app_language_description">Wybierz jÄ™zyk uÅ¼ywany przez Free Music.</string>
     <string name="english">Angielski</string>
-    <string name="spanish">Hiszpański</string>
+    <string name="spanish">HiszpaÅ„ski</string>
     <string name="french">Francuski</string>
     <string name="german">Niemiecki</string>
     <string name="polish">Polski</string>
     <string name="portuguese">Portugalski</string>
     <string name="indonesian">Indonezyjski</string>
     <string name="hindi">Hindi</string>
-    <string name="japanese">Japoński</string>
+    <string name="japanese">JapoÅ„ski</string>
     <string name="russian">Rosyjski</string>
-    <string name="chinese">Chiński (uproszczony)</string>
-    <string name="italian">Włoski</string>
+    <string name="chinese">ChiÅ„ski (uproszczony)</string>
+    <string name="italian">WÅ‚oski</string>
     <string name="turkish">Turecki</string>
     <string name="thai">Tajski</string>
-    <string name="show_all">Pokaż wszystkie</string>
-    <string name="audio_quality">Jakość audio</string>
+    <string name="show_all">PokaÅ¼ wszystkie</string>
+    <string name="audio_quality">JakoÅ›Ä‡ audio</string>
     <string name="playback">Odtwarzanie</string>
-    <string name="appearance">Wygląd</string>
-    <string name="storage">Pamięć masowa</string>
+    <string name="appearance">WyglÄ…d</string>
+    <string name="storage">PamiÄ™Ä‡ masowa</string>
     <string name="your_data">Twoje dane</string>
-    <string name="miscellaneous">Różne</string>
+    <string name="miscellaneous">RÃ³Å¼ne</string>
     <string name="lossless_hq_audio">Lossless / HQ Audio</string>
     <string name="on_wifi">Na Wi-Fi</string>
-    <string name="on_mobile_data">Na danych komórkowych</string>
-    <string name="in_use">W użyciu</string>
+    <string name="on_mobile_data">Na danych komÃ³rkowych</string>
+    <string name="in_use">W uÅ¼yciu</string>
     <string name="blocking">Blokowanie</string>
     <string name="crossfade">Crossfade</string>
-    <string name="crossfade_subtitle">Płynne przejścia między utworami</string>
+    <string name="crossfade_subtitle">PÅ‚ynne przejÅ›cia miÄ™dzy utworami</string>
     <string name="automix">Automix [BETA]</string>
-    <string name="skip_silence">Pomiń ciszę</string>
-    <string name="skip_silence_subtitle">Przycinanie przerw dłuższych niż sekunda</string>
-    <string name="skip_silence_float_subtitle">Niedostępne przy 32-bitowym wyjściu float</string>
+    <string name="skip_silence">PomiÅ„ ciszÄ™</string>
+    <string name="skip_silence_subtitle">Przycinanie przerw dÅ‚uÅ¼szych niÅ¼ sekunda</string>
+    <string name="skip_silence_float_subtitle">NiedostÄ™pne przy 32-bitowym wyjÅ›ciu float</string>
     <string name="music_haptics">Haptyka muzyczna</string>
-    <string name="music_haptics_subtitle">Poczuj rytm razem z muzyką</string>
-    <string name="music_haptics_warning">Uruchamia silnik wibracji przez cały utwór, więc zużywa znacznie więcej baterii.</string>
-    <string name="music_haptics_low_subtitle">Najlżejsze odczucie</string>
-    <string name="music_haptics_medium_subtitle">Zrównoważone</string>
-    <string name="music_haptics_high_subtitle">Najmocniejsze — najlepsze w kieszeni</string>
+    <string name="music_haptics_subtitle">Poczuj rytm razem z muzykÄ…</string>
+    <string name="music_haptics_warning">Uruchamia silnik wibracji przez caÅ‚y utwÃ³r, wiÄ™c zuÅ¼ywa znacznie wiÄ™cej baterii.</string>
+    <string name="music_haptics_low_subtitle">NajlÅ¼ejsze odczucie</string>
+    <string name="music_haptics_medium_subtitle">ZrÃ³wnowaÅ¼one</string>
+    <string name="music_haptics_high_subtitle">Najmocniejsze â€” najlepsze w kieszeni</string>
     <string name="equalizer">Equalizer</string>
-    <string name="equalizer_subtitle">Panel systemowy Twojego urządzenia</string>
-    <string name="show_nerd_stats">Pokaż statystyki dla nerdów</string>
+    <string name="equalizer_subtitle">Panel systemowy Twojego urzÄ…dzenia</string>
+    <string name="show_nerd_stats">PokaÅ¼ statystyki dla nerdÃ³w</string>
     <string name="show_nerd_stats_subtitle">Kodek, bitrate i sample rate na odtwarzaczu</string>
     <string name="theme">Motyw</string>
-    <string name="reduce_animation">Zmniejsz animację</string>
-    <string name="reduce_animation_subtitle">Zatrzymuje gradient głównego odtwarzacza zamiast dryfowania</string>
+    <string name="reduce_animation">Zmniejsz animacjÄ™</string>
+    <string name="reduce_animation_subtitle">Zatrzymuje gradient gÅ‚Ã³wnego odtwarzacza zamiast dryfowania</string>
     <string name="reduce_dynamic_blur">Zmniejsz rozmycie dynamiczne</string>
-    <string name="reduce_dynamic_blur_subtitle">Zastępuje matowe szkło jednolitymi wypełnieniami w całej aplikacji</string>
-    <string name="full_screen_cover_art">Pełnoekranowa okładka</string>
-    <string name="player_carousel">Przesuwanie okładki</string>
-    <string name="player_carousel_subtitle">Przeciągnij okładkę w bok, aby przywołać następny i poprzedni utwór, jak w stosie płyt. Wyłączone pozostawia okładkę taką, jaka jest dziś.</string>
-    <string name="animated_cover_art">Animowana okładka</string>
+    <string name="reduce_dynamic_blur_subtitle">ZastÄ™puje matowe szkÅ‚o jednolitymi wypeÅ‚nieniami w caÅ‚ej aplikacji</string>
+    <string name="full_screen_cover_art">PeÅ‚noekranowa okÅ‚adka</string>
+    <string name="player_carousel">Przesuwanie okÅ‚adki</string>
+    <string name="player_carousel_subtitle">PrzeciÄ…gnij okÅ‚adkÄ™ w bok, aby przywoÅ‚aÄ‡ nastÄ™pny i poprzedni utwÃ³r, jak w stosie pÅ‚yt. WyÅ‚Ä…czone pozostawia okÅ‚adkÄ™ takÄ…, jaka jest dziÅ›.</string>
+    <string name="animated_cover_art">Animowana okÅ‚adka</string>
     <string name="synced_lyrics">Zsynchronizowany tekst</string>
-    <string name="synced_lyrics_subtitle">Podświetla słowa na odtwarzaczu w miarę ich śpiewania</string>
-    <string name="lyrics_sources">Źródła tekstów</string>
-    <string name="song_cache_limit">Limit pamięci podręcznej utworów</string>
-    <string name="clear_song_cache">Wyczyść pamięć podręczną utworów</string>
+    <string name="synced_lyrics_subtitle">PodÅ›wietla sÅ‚owa na odtwarzaczu w miarÄ™ ich Å›piewania</string>
+    <string name="lyrics_sources">Å¹rÃ³dÅ‚a tekstÃ³w</string>
+    <string name="song_cache_limit">Limit pamiÄ™ci podrÄ™cznej utworÃ³w</string>
+    <string name="clear_song_cache">WyczyÅ›Ä‡ pamiÄ™Ä‡ podrÄ™cznÄ… utworÃ³w</string>
     <string name="clear_song_cache_subtitle">Zwalnia miejsce zajmowane przez pobrane pliki audio</string>
-    <string name="clear_image_cache">Wyczyść pamięć podręczną obrazów</string>
-    <string name="clear_image_cache_subtitle">Zwalnia miejsce zajmowane przez okładki albumów</string>
-    <string name="play_next_on_swipe">Graj następny po przesunięciu</string>
-    <string name="dont_repeat_songs">Nie powtarzaj utworów w bieżącej sesji</string>
-    <string name="stop_music_on_close">Zatrzymaj muzykę po wyjściu z ostatnich</string>
-    <string name="stop_music_on_close_subtitle">Zatrzymuje odtwarzanie po usunięciu z listy ostatnich aplikacji</string>
-    <string name="hide_volume_bar">Ukryj pasek głośności</string>
-    <string name="hide_volume_bar_subtitle">Usuwa suwak głośności z głównego odtwarzacza</string>
+    <string name="clear_image_cache">WyczyÅ›Ä‡ pamiÄ™Ä‡ podrÄ™cznÄ… obrazÃ³w</string>
+    <string name="clear_image_cache_subtitle">Zwalnia miejsce zajmowane przez okÅ‚adki albumÃ³w</string>
+    <string name="play_next_on_swipe">Graj nastÄ™pny po przesuniÄ™ciu</string>
+    <string name="dont_repeat_songs">Nie powtarzaj utworÃ³w w bieÅ¼Ä…cej sesji</string>
+    <string name="stop_music_on_close">Zatrzymaj muzykÄ™ po wyjÅ›ciu z ostatnich</string>
+    <string name="stop_music_on_close_subtitle">Zatrzymuje odtwarzanie po usuniÄ™ciu z listy ostatnich aplikacji</string>
+    <string name="hide_volume_bar">Ukryj pasek gÅ‚oÅ›noÅ›ci</string>
+    <string name="hide_volume_bar_subtitle">Usuwa suwak gÅ‚oÅ›noÅ›ci z gÅ‚Ã³wnego odtwarzacza</string>
     <string name="hide_song_status">Ukryj status utworu</string>
-    <string name="hide_song_status_subtitle">Ukrywa tekst „Odtwarzane z” lub „Odtwarzane przez” w głównym odtwarzaczu</string>
-    <string name="off">Wyłączone</string>
+    <string name="hide_song_status_subtitle">Ukrywa tekst â€žOdtwarzane zâ€ lub â€žOdtwarzane przezâ€ w gÅ‚Ã³wnym odtwarzaczu</string>
+    <string name="off">WyÅ‚Ä…czone</string>
     <string name="low">Niskie</string>
-    <string name="medium">Średnie</string>
+    <string name="medium">Åšrednie</string>
     <string name="high">Wysokie</string>
     <string name="standard">Standard</string>
     <string name="lossless">Lossless</string>
     <string name="system">System</string>
     <string name="light">Jasny</string>
     <string name="dark">Ciemny</string>
-    <string name="full_screen_cover_art_subtitle">Wyświetla okładkę na całym ekranie odtwarzacza zamiast kwadratowej okładki</string>
-    <string name="animated_cover_art_subtitle">Odtwarza animowaną okładkę dostępną w niektórych wydaniach zamiast statycznej</string>
-    <string name="dont_repeat_songs_subtitle">AutoPlay nie zaproponuje utworu, który został już odtworzony lub zaproponowany w tej sesji</string>
-    <string name="download_quality_subtitle">%1$s na utwór, niezależnie od połączenia</string>
-    <string name="filter_non_music_audio">Filtruj dźwięk inny niż muzyka</string>
-    <string name="filter_non_music_audio_subtitle">Ukrywa klipy krótsze niż 30 sekund, pliki WAV, notatki głosowe, nagrania i dźwięki systemowe</string>
-    <string name="performance">Wydajność</string>
-    <string name="high_performance_mode">Tryb wysokiej wydajności</string>
-    <string name="high_performance_subtitle">Używa pełnych animacji i rozmycia oraz żąda wyższej częstotliwości odświeżania ekranu</string>
-    <string name="high_performance_active">Zażądano %1$d Hz. Android może ją obniżyć, jeśli to konieczne.</string>
+    <string name="full_screen_cover_art_subtitle">WyÅ›wietla okÅ‚adkÄ™ na caÅ‚ym ekranie odtwarzacza zamiast kwadratowej okÅ‚adki</string>
+    <string name="animated_cover_art_subtitle">Odtwarza animowanÄ… okÅ‚adkÄ™ dostÄ™pnÄ… w niektÃ³rych wydaniach zamiast statycznej</string>
+    <string name="dont_repeat_songs_subtitle">AutoPlay nie zaproponuje utworu, ktÃ³ry zostaÅ‚ juÅ¼ odtworzony lub zaproponowany w tej sesji</string>
+    <string name="download_quality_subtitle">%1$s na utwÃ³r, niezaleÅ¼nie od poÅ‚Ä…czenia</string>
+    <string name="filter_non_music_audio">Filtruj dÅºwiÄ™k inny niÅ¼ muzyka</string>
+    <string name="filter_non_music_audio_subtitle">Ukrywa klipy krÃ³tsze niÅ¼ 30 sekund, pliki WAV, notatki gÅ‚osowe, nagrania i dÅºwiÄ™ki systemowe</string>
+    <string name="performance">WydajnoÅ›Ä‡</string>
+    <string name="high_performance_mode">Tryb wysokiej wydajnoÅ›ci</string>
+    <string name="high_performance_subtitle">UÅ¼ywa peÅ‚nych animacji i rozmycia oraz Å¼Ä…da wyÅ¼szej czÄ™stotliwoÅ›ci odÅ›wieÅ¼ania ekranu</string>
+    <string name="high_performance_active">ZaÅ¼Ä…dano %1$d Hz. Android moÅ¼e jÄ… obniÅ¼yÄ‡, jeÅ›li to konieczne.</string>
     <string name="beta">Beta</string>
-    <string name="refresh_rate">Częstotliwość odświeżania</string>
-    <string name="high_performance_before_enabling">Przed włączeniem</string>
-    <string name="high_performance_battery_warning">Najpierw ustaw użycie baterii przez Free Music na Bez ograniczeń. Wyższe częstotliwości odświeżania zużywają więcej baterii, procesora i układu graficznego oraz mogą nagrzewać urządzenie.</string>
-    <string name="open_battery_settings">Otwórz ustawienia baterii</string>
-    <string name="enable_high_performance_title">Włączyć tryb wysokiej wydajności?</string>
-    <string name="enable_high_performance_confirmation">Włącz tylko wtedy, gdy użycie baterii przez Free Music jest ustawione na Bez ograniczeń. Android nadal może ograniczyć częstotliwość odświeżania, gdy urządzenie jest gorące lub ma mało energii.</string>
-    <string name="enable">Włącz</string>
+    <string name="refresh_rate">CzÄ™stotliwoÅ›Ä‡ odÅ›wieÅ¼ania</string>
+    <string name="high_performance_before_enabling">Przed wÅ‚Ä…czeniem</string>
+    <string name="high_performance_battery_warning">Najpierw ustaw uÅ¼ycie baterii przez Free Music na Bez ograniczeÅ„. WyÅ¼sze czÄ™stotliwoÅ›ci odÅ›wieÅ¼ania zuÅ¼ywajÄ… wiÄ™cej baterii, procesora i ukÅ‚adu graficznego oraz mogÄ… nagrzewaÄ‡ urzÄ…dzenie.</string>
+    <string name="open_battery_settings">OtwÃ³rz ustawienia baterii</string>
+    <string name="enable_high_performance_title">WÅ‚Ä…czyÄ‡ tryb wysokiej wydajnoÅ›ci?</string>
+    <string name="enable_high_performance_confirmation">WÅ‚Ä…cz tylko wtedy, gdy uÅ¼ycie baterii przez Free Music jest ustawione na Bez ograniczeÅ„. Android nadal moÅ¼e ograniczyÄ‡ czÄ™stotliwoÅ›Ä‡ odÅ›wieÅ¼ania, gdy urzÄ…dzenie jest gorÄ…ce lub ma maÅ‚o energii.</string>
+    <string name="enable">WÅ‚Ä…cz</string>
     <string name="not_yet">Jeszcze nie</string>
-    <string name="activity">Aktywność</string>
+    <string name="activity">AktywnoÅ›Ä‡</string>
     <string name="activity_competing">Rywalizuje</string>
-    <string name="activity_dialog_message">Czasownik wyświetlany nad kartą.</string>
-    <string name="activity_listening">Słucha</string>
-    <string name="activity_name_message">Co następuje po czasowniku na profilu. Zostaw puste, aby użyć %1$s.</string>
+    <string name="activity_dialog_message">Czasownik wyÅ›wietlany nad kartÄ….</string>
+    <string name="activity_listening">SÅ‚ucha</string>
+    <string name="activity_name_message">Co nastÄ™puje po czasowniku na profilu. Zostaw puste, aby uÅ¼yÄ‡ %1$s.</string>
     <string name="activity_playing">Gra</string>
-    <string name="activity_watching">Ogląda</string>
+    <string name="activity_watching">OglÄ…da</string>
     <string name="add_to_queue">Dodaj do kolejki</string>
     <string name="after_this_song">Po tej piosence</string>
-    <string name="always_on">Zawsze włączone</string>
+    <string name="always_on">Zawsze wÅ‚Ä…czone</string>
     <string name="api_token">Token API</string>
-    <string name="audio_quality_connection">Gdy połączono przez %1$s</string>
+    <string name="audio_quality_connection">Gdy poÅ‚Ä…czono przez %1$s</string>
     <string name="autoplay">Autoodtwarzanie</string>
-    <string name="back_in_future_version">Powróci w przyszłej wersji</string>
+    <string name="back_in_future_version">PowrÃ³ci w przyszÅ‚ej wersji</string>
     <string name="buttons">Przyciski</string>
-    <string name="clear_name">Wyczyść nazwę</string>
+    <string name="clear_name">WyczyÅ›Ä‡ nazwÄ™</string>
     <string name="close_lyrics">Zamknij teksty</string>
-    <string name="translate_lyrics">Przetłumacz tekst</string>
+    <string name="translate_lyrics">PrzetÅ‚umacz tekst</string>
     <string name="romanize_lyrics">Latynizuj tekst</string>
-    <string name="show_original_lyrics">Pokaż oryginalny tekst</string>
-    <string name="translating_lyrics_to">Tłumaczenie na %1$s…</string>
-    <string name="lyrics_translated_to">Przetłumaczono na %1$s</string>
-    <string name="romanizing_lyrics">Latynizowanie tekstu…</string>
-    <string name="lyrics_romanized">Wymowa w alfabecie łacińskim</string>
-    <string name="lyrics_already_romanized">Ten tekst jest już zapisany alfabetem łacińskim</string>
-    <string name="lyrics_romanization_unavailable">Latynizacja jest niedostępna dla tego tekstu</string>
-    <string name="lyrics_already_in_language">Ten tekst jest już w języku %1$s</string>
-    <string name="lyrics_translation_unavailable">Tłumaczenie jest teraz niedostępne</string>
-    <string name="connect_account_first">Najpierw połącz konto</string>
-    <string name="connected_presence_off">Połączono, obecność wyłączona</string>
+    <string name="show_original_lyrics">PokaÅ¼ oryginalny tekst</string>
+    <string name="translating_lyrics_to">TÅ‚umaczenie na %1$sâ€¦</string>
+    <string name="lyrics_translated_to">PrzetÅ‚umaczono na %1$s</string>
+    <string name="romanizing_lyrics">Latynizowanie tekstuâ€¦</string>
+    <string name="lyrics_romanized">Wymowa w alfabecie Å‚aciÅ„skim</string>
+    <string name="lyrics_already_romanized">Ten tekst jest juÅ¼ zapisany alfabetem Å‚aciÅ„skim</string>
+    <string name="lyrics_romanization_unavailable">Latynizacja jest niedostÄ™pna dla tego tekstu</string>
+    <string name="lyrics_already_in_language">Ten tekst jest juÅ¼ w jÄ™zyku %1$s</string>
+    <string name="lyrics_translation_unavailable">TÅ‚umaczenie jest teraz niedostÄ™pne</string>
+    <string name="connect_account_first">Najpierw poÅ‚Ä…cz konto</string>
+    <string name="connected_presence_off">PoÅ‚Ä…czono, obecnoÅ›Ä‡ wyÅ‚Ä…czona</string>
     <string name="copy_log">Kopiuj log</string>
     <string name="couldnt_find">Nie znaleziono %1$s</string>
-    <string name="couldnt_open_link">Nie udało się otworzyć tego linku</string>
-    <string name="create_playlist">Utwórz playlistę</string>
-    <string name="customize_card">Dostosuj kartę</string>
-    <string name="customize_card_subtitle">Status, treść i oba przyciski</string>
-    <string name="delete">Usuń</string>
-    <string name="disconnect">Odłącz</string>
+    <string name="couldnt_open_link">Nie udaÅ‚o siÄ™ otworzyÄ‡ tego linku</string>
+    <string name="create_playlist">UtwÃ³rz playlistÄ™</string>
+    <string name="customize_card">Dostosuj kartÄ™</string>
+    <string name="customize_card_subtitle">Status, treÅ›Ä‡ i oba przyciski</string>
+    <string name="delete">UsuÅ„</string>
+    <string name="disconnect">OdÅ‚Ä…cz</string>
     <string name="discord">Discord</string>
     <string name="discord_account">Konto Discord</string>
-    <string name="discord_button_variables">{song_name}, {artist_name} i {album_name} są zastępowane obecnym utworem.</string>
-    <string name="discord_buttons_footer">{song_name}, {artist_name} i {album_name} są zastępowane utworem. Pierwszy przycisk otwiera utwór w YouTube Music, a drugi otwiera ten projekt.</string>
-    <string name="discord_presence_footer">Karta aktualizuje się, gdy zmieni się utwór, pozycja lub stan odtwarzania. Znika, gdy odtwarzanie się zatrzyma.</string>
-    <string name="discord_show_audio_quality">Pokaż jakość dźwięku</string>
+    <string name="discord_button_variables">{song_name}, {artist_name} i {album_name} sÄ… zastÄ™powane obecnym utworem.</string>
+    <string name="discord_buttons_footer">{song_name}, {artist_name} i {album_name} sÄ… zastÄ™powane utworem. Pierwszy przycisk otwiera utwÃ³r w YouTube Music, a drugi otwiera ten projekt.</string>
+    <string name="discord_presence_footer">Karta aktualizuje siÄ™, gdy zmieni siÄ™ utwÃ³r, pozycja lub stan odtwarzania. Znika, gdy odtwarzanie siÄ™ zatrzyma.</string>
+    <string name="discord_show_audio_quality">PokaÅ¼ jakoÅ›Ä‡ dÅºwiÄ™ku</string>
     <string name="discord_show_audio_quality_subtitle">Parametry Hi-Res, bezstratne i Dolby na karcie statusu</string>
-    <string name="discord_sign_in_footer">Logowanie otwiera stronę logowania Discord. Nic nie jest wpisywane do Free Music.</string>
+    <string name="discord_sign_in_footer">Logowanie otwiera stronÄ™ logowania Discord. Nic nie jest wpisywane do Free Music.</string>
     <string name="discord_token">Token Discord</string>
-    <string name="discord_token_description">Wklej token swojego konta Discord. Pozostaje on zaszyfrowany na tym urządzeniu i jest wysyłany tylko do Discorda.</string>
-    <string name="discord_token_rejected">Discord odrzucił ten token.</string>
-    <string name="discord_token_warning">Discord nie oferuje API, które pozwala aplikacjom na ustawianie statusu aktywności, więc ta funkcja loguje się na twoje konto i używa protokołu Discorda. Twój token pozostaje zaszyfrowany na tym urządzeniu i jest wysyłany tylko do Discorda. Daje dostęp do całego konta, a automatyzacja konta narusza regulamin Discorda. Używaj tylko jeśli akceptujesz to ryzyko.</string>
-    <string name="dislike">Nie lubię</string>
+    <string name="discord_token_description">Wklej token swojego konta Discord. Pozostaje on zaszyfrowany na tym urzÄ…dzeniu i jest wysyÅ‚any tylko do Discorda.</string>
+    <string name="discord_token_rejected">Discord odrzuciÅ‚ ten token.</string>
+    <string name="discord_token_warning">Discord nie oferuje API, ktÃ³re pozwala aplikacjom na ustawianie statusu aktywnoÅ›ci, wiÄ™c ta funkcja loguje siÄ™ na twoje konto i uÅ¼ywa protokoÅ‚u Discorda. TwÃ³j token pozostaje zaszyfrowany na tym urzÄ…dzeniu i jest wysyÅ‚any tylko do Discorda. Daje dostÄ™p do caÅ‚ego konta, a automatyzacja konta narusza regulamin Discorda. UÅ¼ywaj tylko jeÅ›li akceptujesz to ryzyko.</string>
+    <string name="dislike">Nie lubiÄ™</string>
     <string name="done">Gotowe</string>
     <string name="download">Pobierz</string>
-    <string name="download_quality_dialog_subtitle">Dla plików trzymanych na tym urządzeniu</string>
+    <string name="download_quality_dialog_subtitle">Dla plikÃ³w trzymanych na tym urzÄ…dzeniu</string>
     <string name="downloaded">Pobrane</string>
-    <string name="drag_to_reorder">Przeciągnij, aby zmienić kolejność</string>
-    <string name="enabled">Włączone</string>
-    <string name="enter_token_instead">Wprowadź token</string>
-    <string name="enter_token_instead_subtitle">Użyj tego, jeśli strona logowania się nie ładuje</string>
-    <string name="enter_token_to_enable">Wprowadź token, aby włączyć</string>
+    <string name="drag_to_reorder">PrzeciÄ…gnij, aby zmieniÄ‡ kolejnoÅ›Ä‡</string>
+    <string name="enabled">WÅ‚Ä…czone</string>
+    <string name="enter_token_instead">WprowadÅº token</string>
+    <string name="enter_token_instead_subtitle">UÅ¼yj tego, jeÅ›li strona logowania siÄ™ nie Å‚aduje</string>
+    <string name="enter_token_to_enable">WprowadÅº token, aby wÅ‚Ä…czyÄ‡</string>
     <string name="first_button">Pierwszy przycisk</string>
     <string name="got_it">Rozumiem</string>
-    <string name="high_quality">Wysoka jakość</string>
+    <string name="high_quality">Wysoka jakoÅ›Ä‡</string>
     <string name="instrumental">Instrumentalny</string>
     <string name="pause">Wstrzymaj</string>
     <string name="lyrics_by">Tekst przez %1$s</string>
-    <string name="change_lyrics_provider">Zmień</string>
-    <string name="choose_lyrics_provider">Wybierz źródło tekstów</string>
-    <string name="lyrics_provider_current">Aktualne źródło</string>
-    <string name="lyrics_provider_found">Tekst znaleziony · Dotknij, aby użyć</string>
+    <string name="change_lyrics_provider">ZmieÅ„</string>
+    <string name="choose_lyrics_provider">Wybierz ÅºrÃ³dÅ‚o tekstÃ³w</string>
+    <string name="lyrics_provider_current">Aktualne ÅºrÃ³dÅ‚o</string>
+    <string name="lyrics_provider_found">Tekst znaleziony Â· Dotknij, aby uÅ¼yÄ‡</string>
     <string name="lyrics_provider_not_found">Nie znaleziono tekstu</string>
-    <string name="lyrics_provider_fetching">Pobieranie tekstu…</string>
-    <string name="lyrics_provider_not_fetched">Dotknij, aby pobrać</string>
+    <string name="lyrics_provider_fetching">Pobieranie tekstuâ€¦</string>
+    <string name="lyrics_provider_not_fetched">Dotknij, aby pobraÄ‡</string>
     <string name="no_lyrics_found">Nie znaleziono tekstu</string>
     <string name="lyrics_saved_with_download">Teksty zapisane wraz z tym pobieraniem</string>
-    <string name="shuffle_on">Losowanie włączone</string>
-    <string name="shuffle_off">Losowanie wyłączone</string>
-    <string name="repeat_one">Powtórz jeden</string>
-    <string name="repeat_all">Powtórz wszystkie</string>
-    <string name="repeat_off">Powtarzanie wyłączone</string>
-    <string name="autoplay_on">Autoodtwarzanie włączone</string>
-    <string name="autoplay_off">Autoodtwarzanie wyłączone</string>
-    <string name="autoplay_queue_description">Podobna muzyka, wybrana do odtworzenia w następnej kolejności</string>
-    <string name="autoplay_empty_description">Podobna muzyka będzie nadal odtwarzana</string>
-    <string name="high_quality_upgrading">Wysoka jakość, uaktualnianie</string>
-    <string name="upgrading_quality">Uaktualnianie jakości</string>
+    <string name="shuffle_on">Losowanie wÅ‚Ä…czone</string>
+    <string name="shuffle_off">Losowanie wyÅ‚Ä…czone</string>
+    <string name="repeat_one">PowtÃ³rz jeden</string>
+    <string name="repeat_all">PowtÃ³rz wszystkie</string>
+    <string name="repeat_off">Powtarzanie wyÅ‚Ä…czone</string>
+    <string name="autoplay_on">Autoodtwarzanie wÅ‚Ä…czone</string>
+    <string name="autoplay_off">Autoodtwarzanie wyÅ‚Ä…czone</string>
+    <string name="autoplay_queue_description">Podobna muzyka, wybrana do odtworzenia w nastÄ™pnej kolejnoÅ›ci</string>
+    <string name="autoplay_empty_description">Podobna muzyka bÄ™dzie nadal odtwarzana</string>
+    <string name="high_quality_upgrading">Wysoka jakoÅ›Ä‡, uaktualnianie</string>
+    <string name="upgrading_quality">Uaktualnianie jakoÅ›ci</string>
     <string name="hi_res_lossless">Hi-Res Lossless</string>
     <string name="bit_depth">%1$d-bit</string>
     <string name="mono">Mono</string>
     <string name="stereo">Stereo</string>
     <string name="channel_count">%1$d kan</string>
-    <string name="downgraded_from">↓ z %1$s</string>
+    <string name="downgraded_from">â†“ z %1$s</string>
     <string name="history">Historia</string>
-    <string name="sources">Źródła</string>
+    <string name="sources">Å¹rÃ³dÅ‚a</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="mobile_data">Dane komórkowe</string>
-    <string name="couldnt_load_tracks">Nie można załadować tych utworów</string>
-    <string name="wifi_only_download_refusal">Pobieranie jest ograniczone do Wi-Fi. Wyłącz to w Ustawieniach, aby korzystać z danych komórkowych.</string>
-    <string name="pinned_playlist_limit">Tylko %1$d playlist może być przypiętych</string>
+    <string name="mobile_data">Dane komÃ³rkowe</string>
+    <string name="couldnt_load_tracks">Nie moÅ¼na zaÅ‚adowaÄ‡ tych utworÃ³w</string>
+    <string name="wifi_only_download_refusal">Pobieranie jest ograniczone do Wi-Fi. WyÅ‚Ä…cz to w Ustawieniach, aby korzystaÄ‡ z danych komÃ³rkowych.</string>
+    <string name="pinned_playlist_limit">Tylko %1$d playlist moÅ¼e byÄ‡ przypiÄ™tych</string>
     <string name="downloaded_playlist">Pobrana playlista</string>
-    <string name="library_sign_in_description">Zaloguj się na swoje konto Google, aby zobaczyć polubione piosenki, playlisty i historię YouTube Music.</string>
-    <string name="downloads_progress">Pobieranie · %1$d%%</string>
-    <string name="downloads_finished">Pobieranie · zakończone</string>
-    <string name="downloading_progress">Pobieranie · %1$d%%</string>
+    <string name="library_sign_in_description">Zaloguj siÄ™ na swoje konto Google, aby zobaczyÄ‡ polubione piosenki, playlisty i historiÄ™ YouTube Music.</string>
+    <string name="downloads_progress">Pobieranie Â· %1$d%%</string>
+    <string name="downloads_finished">Pobieranie Â· zakoÅ„czone</string>
+    <string name="downloading_progress">Pobieranie Â· %1$d%%</string>
     <string name="starting">Rozpoczynanie</string>
     <string name="saved_to_freemusic_folder">Zapisano w Music/Free Music</string>
-    <string name="nothing_downloading">Nic się nie pobiera</string>
+    <string name="nothing_downloading">Nic siÄ™ nie pobiera</string>
     <string name="nothing_to_explore">Nie ma teraz nic do odkrycia</string>
-    <string name="no_youtube_music_results">Brak wyników z YouTube Music</string>
+    <string name="no_youtube_music_results">Brak wynikÃ³w z YouTube Music</string>
     <string name="library_empty">Nie masz jeszcze nic w bibliotece</string>
-    <string name="history_sign_in_required">Zaloguj się, aby zobaczyć, czego słuchałeś</string>
+    <string name="history_sign_in_required">Zaloguj siÄ™, aby zobaczyÄ‡, czego sÅ‚uchaÅ‚eÅ›</string>
     <string name="history_empty">Nie odtworzono jeszcze nic</string>
-    <string name="no_results">Brak wyników</string>
-    <string name="downloaded_playlist_empty">Nic z tej playlisty nie pozostało na tym urządzeniu</string>
-    <string name="no_local_audio_found">Nie znaleziono plików audio na tym urządzeniu</string>
-    <string name="no_internet_connection">Brak połączenia internetowego</string>
-    <string name="youtube_request_rejected">YouTube Music odrzucił żądanie. Spróbuj zalogować się ponownie.</string>
-    <string name="something_went_wrong">Coś poszło nie tak</string>
+    <string name="no_results">Brak wynikÃ³w</string>
+    <string name="downloaded_playlist_empty">Nic z tej playlisty nie pozostaÅ‚o na tym urzÄ…dzeniu</string>
+    <string name="no_local_audio_found">Nie znaleziono plikÃ³w audio na tym urzÄ…dzeniu</string>
+    <string name="no_internet_connection">Brak poÅ‚Ä…czenia internetowego</string>
+    <string name="youtube_request_rejected">YouTube Music odrzuciÅ‚ Å¼Ä…danie. SprÃ³buj zalogowaÄ‡ siÄ™ ponownie.</string>
+    <string name="something_went_wrong">CoÅ› poszÅ‚o nie tak</string>
     <string name="unknown_artist">Nieznany artysta</string>
     <string name="your_playlists">Twoje playlisty</string>
     <string name="who_can_see_it">Kto to widzi</string>
-    <string name="about_artist">O artyście</string>
+    <string name="about_artist">O artyÅ›cie</string>
     <string name="about_album">O albumie</string>
-    <string name="nothing_matches">Nic tu nie pasuje do „%1$s”</string>
+    <string name="nothing_matches">Nic tu nie pasuje do â€ž%1$sâ€</string>
     <string name="close_search">Zamknij wyszukiwanie</string>
     <string name="less">Mniej</string>
     <string name="song_count_with_minutes">%1$s, %2$d minut</string>
@@ -444,268 +469,268 @@
     <string name="song_count_with_hours_minutes">%1$s, %2$s %3$d minut</string>
     <string name="integrate_spotify_canvas">Skonfiguruj Spotify Canvas</string>
     <string name="lastfm_login">Logowanie do Last.fm</string>
-    <string name="lastfm_login_description">Zaloguj się za pomocą konta Last.fm, aby włączyć scrobbling.</string>
-    <string name="lastfm_now_playing_subtitle">Aktualizuj Last.fm tym, czego słuchasz</string>
-    <string name="lead_with_song">Podkreśl piosenkę</string>
-    <string name="lead_with_song_subtitle">Umieszcza tytuł na pogrubionej linii zamiast artysty</string>
-    <string name="like">Lubię</string>
+    <string name="lastfm_login_description">Zaloguj siÄ™ za pomocÄ… konta Last.fm, aby wÅ‚Ä…czyÄ‡ scrobbling.</string>
+    <string name="lastfm_now_playing_subtitle">Aktualizuj Last.fm tym, czego sÅ‚uchasz</string>
+    <string name="lead_with_song">PodkreÅ›l piosenkÄ™</string>
+    <string name="lead_with_song_subtitle">Umieszcza tytuÅ‚ na pogrubionej linii zamiast artysty</string>
+    <string name="like">LubiÄ™</string>
     <string name="listenbrainz_token">Token ListenBrainz</string>
-    <string name="listenbrainz_token_description">Wklej token użytkownika ListenBrainz, aby włączyć scrobbling.</string>
+    <string name="listenbrainz_token_description">Wklej token uÅ¼ytkownika ListenBrainz, aby wÅ‚Ä…czyÄ‡ scrobbling.</string>
     <string name="listening_history">Historia odtwarzania</string>
-    <string name="lyrics_not_available">Tekst niedostępny</string>
-    <string name="lyrics_sources_order">Źródła są sprawdzane w tej kolejności. Przeciągnij, aby zmienić ich kolejność. Pierwsze źródło z tekstami wygrywa, chyba że preferowane są teksty zsynchronizowane do sylab.</string>
-    <string name="max_delay">Maksymalne opóźnienie</string>
-    <string name="max_delay_subtitle">Maksymalne opóźnienie scrobble w sekundach</string>
+    <string name="lyrics_not_available">Tekst niedostÄ™pny</string>
+    <string name="lyrics_sources_order">Å¹rÃ³dÅ‚a sÄ… sprawdzane w tej kolejnoÅ›ci. PrzeciÄ…gnij, aby zmieniÄ‡ ich kolejnoÅ›Ä‡. Pierwsze ÅºrÃ³dÅ‚o z tekstami wygrywa, chyba Å¼e preferowane sÄ… teksty zsynchronizowane do sylab.</string>
+    <string name="max_delay">Maksymalne opÃ³Åºnienie</string>
+    <string name="max_delay_subtitle">Maksymalne opÃ³Åºnienie scrobble w sekundach</string>
     <string name="min_song_duration">Minimalny czas trwania piosenki</string>
-    <string name="min_song_duration_subtitle">Krótsze utwory nie będą scrobblowane</string>
-    <string name="monthly_listeners">%1$s słuchaczy miesięcznie</string>
+    <string name="min_song_duration_subtitle">KrÃ³tsze utwory nie bÄ™dÄ… scrobblowane</string>
+    <string name="monthly_listeners">%1$s sÅ‚uchaczy miesiÄ™cznie</string>
     <string name="name">Nazwa</string>
-    <string name="no_lyrics_for_track">Brak tekstów do tego utworu</string>
-    <string name="no_playlists_yet">Brak playlist. Użyj rzędu powyżej, by jedną stworzyć.</string>
-    <string name="no_tracks_here">Nie ma tu utworów</string>
-    <string name="not_connected">Nie połączono</string>
+    <string name="no_lyrics_for_track">Brak tekstÃ³w do tego utworu</string>
+    <string name="no_playlists_yet">Brak playlist. UÅ¼yj rzÄ™du powyÅ¼ej, by jednÄ… stworzyÄ‡.</string>
+    <string name="no_tracks_here">Nie ma tu utworÃ³w</string>
+    <string name="not_connected">Nie poÅ‚Ä…czono</string>
     <string name="one_hour">1 godzina</string>
-    <string name="open_album">Otwórz album</string>
-    <string name="open_artist">Otwórz artystę</string>
+    <string name="open_album">OtwÃ³rz album</string>
+    <string name="open_artist">OtwÃ³rz artystÄ™</string>
     <string name="pause_after_a_while">Zatrzymaj odtwarzanie po pewnym czasie</string>
-    <string name="pause_after_song">Wstrzymanie po zakończeniu tego utworu</string>
+    <string name="pause_after_song">Wstrzymanie po zakoÅ„czeniu tego utworu</string>
     <string name="pause_countdown">%1$s do wstrzymania odtwarzania</string>
-    <string name="play_to_preview">Odtwórz coś, aby wypełnić podgląd.</string>
+    <string name="play_to_preview">OdtwÃ³rz coÅ›, aby wypeÅ‚niÄ‡ podglÄ…d.</string>
     <string name="playlist_name">Nazwa playlisty</string>
-    <string name="presence">Aktywność</string>
-    <string name="preview">Podgląd</string>
+    <string name="presence">AktywnoÅ›Ä‡</string>
+    <string name="preview">PodglÄ…d</string>
     <string name="prioritize_syllable_lyrics">Preferuj teksty po sylabach</string>
-    <string name="prioritize_syllable_lyrics_subtitle">Kontynuuj wyszukiwanie w poszukiwaniu tekstów słowo po słowie</string>
-    <string name="quality_hourly">%1$s · %2$s</string>
-    <string name="quality_per_track">%1$s · %2$s na utwór</string>
+    <string name="prioritize_syllable_lyrics_subtitle">Kontynuuj wyszukiwanie w poszukiwaniu tekstÃ³w sÅ‚owo po sÅ‚owie</string>
+    <string name="quality_hourly">%1$s Â· %2$s</string>
+    <string name="quality_per_track">%1$s Â· %2$s na utwÃ³r</string>
     <string name="queued">W kolejce</string>
-    <string name="remove">Usuń</string>
-    <string name="remove_from_liked">Usuń z Polubionych Utworów</string>
-    <string name="remove_from_playlist">Usuń z tej playlisty</string>
-    <string name="move_up">Przenieś w górę</string>
-    <string name="move_down">Przenieś w dół</string>
-    <string name="remove_from_queue">Usuń z kolejki</string>
-    <string name="rename_playlist">Zmień nazwę playlisty</string>
-    <string name="reset_to_default">Przywróć domyślne</string>
-    <string name="rich_presence_footer">Pokaż w co grasz na swoim profilu na Discordzie.</string>
-    <string name="save_name">Zapisz nazwę</string>
+    <string name="remove">UsuÅ„</string>
+    <string name="remove_from_liked">UsuÅ„ z Polubionych UtworÃ³w</string>
+    <string name="remove_from_playlist">UsuÅ„ z tej playlisty</string>
+    <string name="move_up">PrzenieÅ› w gÃ³rÄ™</string>
+    <string name="move_down">PrzenieÅ› w dÃ³Å‚</string>
+    <string name="remove_from_queue">UsuÅ„ z kolejki</string>
+    <string name="rename_playlist">ZmieÅ„ nazwÄ™ playlisty</string>
+    <string name="reset_to_default">PrzywrÃ³Ä‡ domyÅ›lne</string>
+    <string name="rich_presence_footer">PokaÅ¼ w co grasz na swoim profilu na Discordzie.</string>
+    <string name="save_name">Zapisz nazwÄ™</string>
     <string name="saved_to_downloads">Zapisano w Pobranych</string>
     <string name="saved_to_youtube_music_account">Zapisano na twoim koncie YouTube Music</string>
-    <string name="scrobble_delay">Opóźnienie scrobblingu</string>
-    <string name="scrobble_delay_subtitle">Jak daleko w piosence, aby to scrobblować</string>
+    <string name="scrobble_delay">OpÃ³Åºnienie scrobblingu</string>
+    <string name="scrobble_delay_subtitle">Jak daleko w piosence, aby to scrobblowaÄ‡</string>
     <string name="scrobble_timing">Czasowanie scrobblingu</string>
     <string name="scrobble_tracks">Scrobbluj utwory</string>
     <string name="scrobble_tracks_subtitle">Zapisuj odtworzenia na swojej osi czasu Last.fm</string>
-    <string name="scrobbling_footer">Scrobbluj to, czego słuchasz, do Last.fm i ListenBrainz.</string>
-    <string name="scrobbling_paused_footer">Last.fm i ListenBrainz są wstrzymane w tej wersji i powrócą później. Istniejące połączenia pozostają zapisane.</string>
+    <string name="scrobbling_footer">Scrobbluj to, czego sÅ‚uchasz, do Last.fm i ListenBrainz.</string>
+    <string name="scrobbling_paused_footer">Last.fm i ListenBrainz sÄ… wstrzymane w tej wersji i powrÃ³cÄ… pÃ³Åºniej. IstniejÄ…ce poÅ‚Ä…czenia pozostajÄ… zapisane.</string>
     <string name="search_this_folder">Przeszukaj ten folder</string>
-    <string name="search_this_list">Przeszukaj tę listę</string>
+    <string name="search_this_list">Przeszukaj tÄ™ listÄ™</string>
     <string name="second_button">Drugi przycisk</string>
-    <string name="share">Udostępnij</string>
-    <string name="sharing_as">Udostępnianie jako @%1$s</string>
-    <string name="sharing_listens">Udostępnianie tego, co słuchasz</string>
-    <string name="show_what_playing">Pokaż co odtwarzam</string>
+    <string name="share">UdostÄ™pnij</string>
+    <string name="sharing_as">UdostÄ™pnianie jako @%1$s</string>
+    <string name="sharing_listens">UdostÄ™pnianie tego, co sÅ‚uchasz</string>
+    <string name="show_what_playing">PokaÅ¼ co odtwarzam</string>
     <string name="signed_in_as">Zalogowano jako %1$s</string>
-    <string name="signing_in">Logowanie…</string>
-    <string name="sleep_timer">Wyłącznik czasowy</string>
-    <string name="sources_no_lossless">Żadne włączone źródło nie może dostarczyć bezstratnego dźwięku. Dodaj moduł niestandardowy, aby odtwarzać dostępne pliki bezstratne bez transkodowania.</string>
-    <string name="sources_order_footer">Jeśli źródło nie ma utworu lub jest niedostępne, Free Music próbuje następne. Źródła przed YouTube mogą je zastąpić, gdy znajdą lepszą wersję.</string>
-    <string name="sources_order_header">Źródła, sprawdzane w tej kolejności</string>
-    <string name="sources_quality_capped">To połączenie jest ustawione poniżej Wysokiej jakości, więc strumienie są transkodowane. Pobierania pozostają nienaruszone.</string>
-    <string name="jiosaavn_mismatch_warning">Może dopasować złą wersję utworu. Włączasz na własne ryzyko.</string>
-    <string name="enable_jiosaavn">Włączyć JioSaavn?</string>
-    <string name="enable_anyway">Włącz mimo to</string>
-    <string name="sources_subtitle">Skąd pochodzi dźwięk i używana kolejność</string>
-    <string name="source_matching">Dopasowanie źródeł</string>
-    <string name="upgrade_length_slack">Tolerancja długości utworu</string>
-    <string name="upgrade_length_slack_subtitle">Maksymalna dozwolona różnica długości dla strumienia zastępczego</string>
-    <string name="upgrade_length_slack_footer">Większa tolerancja akceptuje więcej dopasowań ze źródeł; mniejsza jest bardziej rygorystyczna. Domyślnie 3 sekundy.</string>
+    <string name="signing_in">Logowanieâ€¦</string>
+    <string name="sleep_timer">WyÅ‚Ä…cznik czasowy</string>
+    <string name="sources_no_lossless">Å»adne wÅ‚Ä…czone ÅºrÃ³dÅ‚o nie moÅ¼e dostarczyÄ‡ bezstratnego dÅºwiÄ™ku. Dodaj moduÅ‚ niestandardowy, aby odtwarzaÄ‡ dostÄ™pne pliki bezstratne bez transkodowania.</string>
+    <string name="sources_order_footer">JeÅ›li ÅºrÃ³dÅ‚o nie ma utworu lub jest niedostÄ™pne, Free Music prÃ³buje nastÄ™pne. Å¹rÃ³dÅ‚a przed YouTube mogÄ… je zastÄ…piÄ‡, gdy znajdÄ… lepszÄ… wersjÄ™.</string>
+    <string name="sources_order_header">Å¹rÃ³dÅ‚a, sprawdzane w tej kolejnoÅ›ci</string>
+    <string name="sources_quality_capped">To poÅ‚Ä…czenie jest ustawione poniÅ¼ej Wysokiej jakoÅ›ci, wiÄ™c strumienie sÄ… transkodowane. Pobierania pozostajÄ… nienaruszone.</string>
+    <string name="jiosaavn_mismatch_warning">MoÅ¼e dopasowaÄ‡ zÅ‚Ä… wersjÄ™ utworu. WÅ‚Ä…czasz na wÅ‚asne ryzyko.</string>
+    <string name="enable_jiosaavn">WÅ‚Ä…czyÄ‡ JioSaavn?</string>
+    <string name="enable_anyway">WÅ‚Ä…cz mimo to</string>
+    <string name="sources_subtitle">SkÄ…d pochodzi dÅºwiÄ™k i uÅ¼ywana kolejnoÅ›Ä‡</string>
+    <string name="source_matching">Dopasowanie ÅºrÃ³deÅ‚</string>
+    <string name="upgrade_length_slack">Tolerancja dÅ‚ugoÅ›ci utworu</string>
+    <string name="upgrade_length_slack_subtitle">Maksymalna dozwolona rÃ³Å¼nica dÅ‚ugoÅ›ci dla strumienia zastÄ™pczego</string>
+    <string name="upgrade_length_slack_footer">WiÄ™ksza tolerancja akceptuje wiÄ™cej dopasowaÅ„ ze ÅºrÃ³deÅ‚; mniejsza jest bardziej rygorystyczna. DomyÅ›lnie 3 sekundy.</string>
     <string name="seconds_short">%1$d s</string>
     <string name="spdc_token">Token sp_dc</string>
     <string name="spotify_canvas_setup">Konfiguracja Spotify Canvas</string>
-    <string name="spotify_canvas_setup_description">Aby korzystać ze Spotify Canvas, podaj plik cookie sp_dc ze Spotify.</string>
-    <string name="spotify_canvas_setup_steps">1. Zaloguj się na open.spotify.com w przeglądarce.
-2. Otwórz Narzędzia deweloperskie &gt; Application &gt; Cookies.
-3. Skopiuj wartość ciasteczka sp_dc.
-4. Wklej ją poniżej.</string>
+    <string name="spotify_canvas_setup_description">Aby korzystaÄ‡ ze Spotify Canvas, podaj plik cookie sp_dc ze Spotify.</string>
+    <string name="spotify_canvas_setup_steps">1. Zaloguj siÄ™ na open.spotify.com w przeglÄ…darce.
+2. OtwÃ³rz NarzÄ™dzia deweloperskie &gt; Application &gt; Cookies.
+3. Skopiuj wartoÅ›Ä‡ ciasteczka sp_dc.
+4. Wklej jÄ… poniÅ¼ej.</string>
     <string name="spotify_canvas_auto_hide">Automatycznie ukrywaj sterowanie</string>
-    <string name="spotify_canvas_auto_hide_subtitle">Zwija połowę odtwarzacza po 5 sekundach, gdy odtwarzany jest Spotify Canvas</string>
+    <string name="spotify_canvas_auto_hide_subtitle">Zwija poÅ‚owÄ™ odtwarzacza po 5 sekundach, gdy odtwarzany jest Spotify Canvas</string>
     <string name="prioritize_spotify_canvas">Preferuj Spotify Canvas</string>
-    <string name="prioritize_spotify_canvas_subtitle">Próbuj Spotify przed Apple Music i innymi dostawcami animowanych okładek</string>
+    <string name="prioritize_spotify_canvas_subtitle">PrÃ³buj Spotify przed Apple Music i innymi dostawcami animowanych okÅ‚adek</string>
     <string name="status">Status</string>
-    <string name="status_dialog_message">Co pokazuje twoje konto podczas aktywności.</string>
-    <string name="status_dnd">Nie przeszkadzać</string>
-    <string name="status_dnd_detail">Czerwona kreska. Ukrywa również powiadomienia.</string>
+    <string name="status_dialog_message">Co pokazuje twoje konto podczas aktywnoÅ›ci.</string>
+    <string name="status_dnd">Nie przeszkadzaÄ‡</string>
+    <string name="status_dnd_detail">Czerwona kreska. Ukrywa rÃ³wnieÅ¼ powiadomienia.</string>
     <string name="status_idle">Zaraz wracam</string>
-    <string name="status_idle_detail">Bursztynowy półksiężyc, pokazywany jako oddalony</string>
-    <string name="status_online">Dostępny</string>
+    <string name="status_idle_detail">Bursztynowy pÃ³Å‚ksiÄ™Å¼yc, pokazywany jako oddalony</string>
+    <string name="status_online">DostÄ™pny</string>
     <string name="status_online_detail">Zielona kropka</string>
-    <string name="subscribers">%1$s subskrybentów</string>
-    <string name="tap_to_connect">Stuknij, by połączyć</string>
-    <string name="tap_to_sign_in">Stuknij, by zalogować</string>
-    <string name="tap_to_sign_in_discord">Stuknij, aby zalogować się przez Discord</string>
+    <string name="subscribers">%1$s subskrybentÃ³w</string>
+    <string name="tap_to_connect">Stuknij, by poÅ‚Ä…czyÄ‡</string>
+    <string name="tap_to_sign_in">Stuknij, by zalogowaÄ‡</string>
+    <string name="tap_to_sign_in_discord">Stuknij, aby zalogowaÄ‡ siÄ™ przez Discord</string>
     <string name="token">Token</string>
-    <string name="turn_off_timer">Wyłącz minutnik</string>
-    <string name="undo_dislike">Cofnij Nie lubię</string>
-    <string name="up_next">Następne</string>
+    <string name="turn_off_timer">WyÅ‚Ä…cz minutnik</string>
+    <string name="undo_dislike">Cofnij Nie lubiÄ™</string>
+    <string name="up_next">NastÄ™pne</string>
     <string name="verb_competing">Rywalizuje w</string>
-    <string name="verb_listening">Słucha</string>
+    <string name="verb_listening">SÅ‚ucha</string>
     <string name="verb_playing">Gra w</string>
-    <string name="verb_watching">Ogląda</string>
-    <string name="biggest_day_note">Twój najlepszy dzień to %1$s z %2$s muzyki.</string>
+    <string name="verb_watching">OglÄ…da</string>
+    <string name="biggest_day_note">TwÃ³j najlepszy dzieÅ„ to %1$s z %2$s muzyki.</string>
     <string name="close_replay">Zamknij Replay</string>
-    <string name="couldnt_draw_picture">Nie można utworzyć obrazka</string>
-    <string name="default_replay_holder">Słuchacz Free Music</string>
-    <string name="different_albums">Różne albumy</string>
-    <string name="genres_pending">Gatunki pojawią się w miarę wzrostu historii słuchania</string>
+    <string name="couldnt_draw_picture">Nie moÅ¼na utworzyÄ‡ obrazka</string>
+    <string name="default_replay_holder">SÅ‚uchacz Free Music</string>
+    <string name="different_albums">RÃ³Å¼ne albumy</string>
+    <string name="genres_pending">Gatunki pojawiÄ… siÄ™ w miarÄ™ wzrostu historii sÅ‚uchania</string>
     <string name="hour_am">%1$d AM</string>
     <string name="hour_pm">%1$d PM</string>
     <string name="hours_minutes_short">%1$dh %2$dm</string>
-    <string name="listen_most_around">Słuchasz muzyki głównie około %1$s.</string>
-    <string name="listening_shape">Twój wzorzec słuchania</string>
-    <string name="member_since">Członek od</string>
-    <string name="member_since_value">Członek od %1$s</string>
-    <string name="midday">południe</string>
-    <string name="midnight">północ</string>
+    <string name="listen_most_around">SÅ‚uchasz muzyki gÅ‚Ã³wnie okoÅ‚o %1$s.</string>
+    <string name="listening_shape">TwÃ³j wzorzec sÅ‚uchania</string>
+    <string name="member_since">CzÅ‚onek od</string>
+    <string name="member_since_value">CzÅ‚onek od %1$s</string>
+    <string name="midday">poÅ‚udnie</string>
+    <string name="midnight">pÃ³Å‚noc</string>
     <string name="minutes">Minuty</string>
     <string name="minutes_grouped_short">%1$s min</string>
-    <string name="minutes_listened">Przesłuchane minuty</string>
+    <string name="minutes_listened">PrzesÅ‚uchane minuty</string>
     <string name="minutes_short">%1$d min</string>
-    <string name="not_enough_listening">Brak wystarczającej historii</string>
-    <string name="not_enough_this_month">Zagraj jeszcze kilka piosenek w tym miesiącu, aby odblokować swój Replay.</string>
-    <string name="pinned">Przypięte</string>
+    <string name="not_enough_listening">Brak wystarczajÄ…cej historii</string>
+    <string name="not_enough_this_month">Zagraj jeszcze kilka piosenek w tym miesiÄ…cu, aby odblokowaÄ‡ swÃ³j Replay.</string>
+    <string name="pinned">PrzypiÄ™te</string>
     <string name="replay_across"> w </string>
-    <string name="replay_album_end"> przykuł twoją uwagę.</string>
+    <string name="replay_album_end"> przykuÅ‚ twojÄ… uwagÄ™.</string>
     <string name="replay_album_focus">Jeden album</string>
     <string name="replay_album_start">Tym razem, </string>
-    <string name="replay_artist_end"> ciągle powracał.</string>
+    <string name="replay_artist_end"> ciÄ…gle powracaÅ‚.</string>
     <string name="replay_artist_focus">Jeden artysta</string>
-    <string name="replay_artist_start">Przez cały miesiąc, </string>
-    <string name="replay_empty_description">Posłuchaj trochę więcej, a Free Music przekształci twoją historię w Replay.</string>
-    <string name="replay_genre_end"> ukształtowały twoje brzmienie.</string>
+    <string name="replay_artist_start">Przez caÅ‚y miesiÄ…c, </string>
+    <string name="replay_empty_description">PosÅ‚uchaj trochÄ™ wiÄ™cej, a Free Music przeksztaÅ‚ci twojÄ… historiÄ™ w Replay.</string>
+    <string name="replay_genre_end"> uksztaÅ‚towaÅ‚y twoje brzmienie.</string>
     <string name="replay_genre_focus">Twoje gatunki</string>
     <string name="replay_genre_start">Razem, </string>
     <string name="replay_habits_middle"> od </string>
-    <string name="replay_habits_start">Odkrywałeś </string>
+    <string name="replay_habits_start">OdkrywaÅ‚eÅ› </string>
     <string name="replay_hours_across">%1$s godzin</string>
     <string name="replay_intro_end"> jest gotowy.</string>
-    <string name="replay_intro_start">Twój </string>
+    <string name="replay_intro_start">TwÃ³j </string>
     <string name="replay_minutes_end"> przy muzyce.</string>
-    <string name="replay_minutes_start">Spędziłeś </string>
+    <string name="replay_minutes_start">SpÄ™dziÅ‚eÅ› </string>
     <string name="replay_minutes_value">%1$s</string>
-    <string name="replay_mostly_around">, w większości wokół %1$s.</string>
+    <string name="replay_mostly_around">, w wiÄ™kszoÅ›ci wokÃ³Å‚ %1$s.</string>
     <string name="replay_private_counting">Zbudowane prywatnie na podstawie historii lokalnej</string>
-    <string name="replay_share_card_description">Dopracowana karta z głównymi wydarzeniami muzycznymi.</string>
-    <string name="replay_share_summary_description">Pełny obraz piosenek, artystów i więcej.</string>
-    <string name="replay_songs_end"> wypełniły twój miesiąc.</string>
+    <string name="replay_share_card_description">Dopracowana karta z gÅ‚Ã³wnymi wydarzeniami muzycznymi.</string>
+    <string name="replay_share_summary_description">PeÅ‚ny obraz piosenek, artystÃ³w i wiÄ™cej.</string>
+    <string name="replay_songs_end"> wypeÅ‚niÅ‚y twÃ³j miesiÄ…c.</string>
     <string name="replay_songs_start">W sumie, </string>
-    <string name="replay_summary_start">Twój styl słuchania miał </string>
+    <string name="replay_summary_start">TwÃ³j styl sÅ‚uchania miaÅ‚ </string>
     <string name="saved">Zapisano</string>
-    <string name="share_my_replay">Udostępnij mój Replay</string>
-    <string name="share_your_replay">Udostępnij swój Replay</string>
-    <string name="tap_share_for_picture">Stuknij Udostępnij, aby utworzyć obrazek</string>
+    <string name="share_my_replay">UdostÄ™pnij mÃ³j Replay</string>
+    <string name="share_your_replay">UdostÄ™pnij swÃ³j Replay</string>
+    <string name="tap_share_for_picture">Stuknij UdostÄ™pnij, aby utworzyÄ‡ obrazek</string>
     <string name="top_album">Najlepszy album</string>
     <string name="top_artist">Najlepszy artysta</string>
     <string name="top_genre">Najlepszy gatunek</string>
     <string name="top_song">Najlepsza piosenka</string>
-    <string name="when_you_listen_most">Kiedy słuchasz najwięcej</string>
-    <string name="your_biggest_day">Twój najlepszy dzień: %1$s</string>
-    <string name="your_listening_experience">Twoje doświadczenie ze słuchaniem</string>
-    <string name="your_replay">Twój Replay</string>
-    <string name="all_audio_folders">Wszystkie foldery z dźwiękami</string>
-    <string name="local_music_folder">Folder z lokalną muzyką</string>
-    <string name="sort_music">Sortuj muzykę</string>
+    <string name="when_you_listen_most">Kiedy sÅ‚uchasz najwiÄ™cej</string>
+    <string name="your_biggest_day">TwÃ³j najlepszy dzieÅ„: %1$s</string>
+    <string name="your_listening_experience">Twoje doÅ›wiadczenie ze sÅ‚uchaniem</string>
+    <string name="your_replay">TwÃ³j Replay</string>
+    <string name="all_audio_folders">Wszystkie foldery z dÅºwiÄ™kami</string>
+    <string name="local_music_folder">Folder z lokalnÄ… muzykÄ…</string>
+    <string name="sort_music">Sortuj muzykÄ™</string>
     <string name="sort_title_ascending">Alfabetycznie (A-Z)</string>
     <string name="sort_title_descending">Alfabetycznie (Z-A)</string>
-    <string name="sort_date_added">Data dodania (najnowsze na początku)</string>
-    <string name="sort_date_modified">Data modyfikacji (najnowsze na początku)</string>
-    <string name="use_all_audio_folders">Użyj wszystkich folderów audio</string>
-    <string name="use_all_audio_folders_subtitle">Usunięcie limitu folderów i skanowanie muzyki na całym urządzeniu</string>
+    <string name="sort_date_added">Data dodania (najnowsze na poczÄ…tku)</string>
+    <string name="sort_date_modified">Data modyfikacji (najnowsze na poczÄ…tku)</string>
+    <string name="use_all_audio_folders">UÅ¼yj wszystkich folderÃ³w audio</string>
+    <string name="use_all_audio_folders_subtitle">UsuniÄ™cie limitu folderÃ³w i skanowanie muzyki na caÅ‚ym urzÄ…dzeniu</string>
     <string name="album">album</string>
     <string name="artist">artysta</string>
     <string name="webdav">WebDAV</string>
     <string name="webdav_subtitle">Muzyka na twoim serwerze</string>
-    <string name="webdav_not_configured">Połącz serwer w Źródłach</string>
-    <string name="webdav_empty">Nie znaleziono plików audio na serwerze WebDAV. Sprawdź adres URL w Ustawieniach.</string>
-    <string name="webdav_description">Wskaż Free Music folder z muzyką WebDAV – katalog Muzyka w Nextcloud lub dowolny serwer obsługujący WebDAV.</string>
+    <string name="webdav_not_configured">PoÅ‚Ä…cz serwer w Å¹rÃ³dÅ‚ach</string>
+    <string name="webdav_empty">Nie znaleziono plikÃ³w audio na serwerze WebDAV. SprawdÅº adres URL w Ustawieniach.</string>
+    <string name="webdav_description">WskaÅ¼ Free Music folder z muzykÄ… WebDAV â€“ katalog Muzyka w Nextcloud lub dowolny serwer obsÅ‚ugujÄ…cy WebDAV.</string>
     <string name="webdav_server_url">Adres URL serwera</string>
     <string name="webdav_server_url_hint">https://cloud.example.com/remote.php/dav/files/user/Music</string>
-    <string name="webdav_disconnect">Rozłącz</string>
-    <string name="webdav_test_failed">Nie udało się połączyć: %1$s</string>
-    <string name="upload_to_webdav">Prześlij do WebDAV</string>
-    <string name="webdav_conflict_title">„%1$s” już jest na serwerze</string>
-    <string name="webdav_conflict_message">Nadpisać czy zachować obie kopie?</string>
+    <string name="webdav_disconnect">RozÅ‚Ä…cz</string>
+    <string name="webdav_test_failed">Nie udaÅ‚o siÄ™ poÅ‚Ä…czyÄ‡: %1$s</string>
+    <string name="upload_to_webdav">PrzeÅ›lij do WebDAV</string>
+    <string name="webdav_conflict_title">â€ž%1$sâ€ juÅ¼ jest na serwerze</string>
+    <string name="webdav_conflict_message">NadpisaÄ‡ czy zachowaÄ‡ obie kopie?</string>
     <string name="webdav_overwrite">Nadpisz</string>
     <string name="webdav_keep_both">Zachowaj obie</string>
-    <string name="webdav_skip">Pomiń</string>
+    <string name="webdav_skip">PomiÅ„</string>
     <string name="webdav_apply_to_all">Zastosuj do wszystkich</string>
-    <string name="webdav_upload_summary">Przesłano: %1$d · pominięto: %2$d · błędy: %3$d</string>
+    <string name="webdav_upload_summary">PrzesÅ‚ano: %1$d Â· pominiÄ™to: %2$d Â· bÅ‚Ä™dy: %3$d</string>
     <string name="smb">SMB</string>
     <string name="smb_subtitle">Muzyka w udziale sieciowym</string>
-    <string name="smb_not_configured">Połącz udział w Źródłach</string>
-    <string name="smb_empty">Nie znaleziono plików audio w udziale SMB. Sprawdź serwer w Źródłach.</string>
-    <string name="smb_description">Wskaż Free Music udostępniony folder z muzyką – NAS lub udział Windows przez SMB.</string>
+    <string name="smb_not_configured">PoÅ‚Ä…cz udziaÅ‚ w Å¹rÃ³dÅ‚ach</string>
+    <string name="smb_empty">Nie znaleziono plikÃ³w audio w udziale SMB. SprawdÅº serwer w Å¹rÃ³dÅ‚ach.</string>
+    <string name="smb_description">WskaÅ¼ Free Music udostÄ™pniony folder z muzykÄ… â€“ NAS lub udziaÅ‚ Windows przez SMB.</string>
     <string name="smb_server_hint">nas.local or 192.168.1.10:4445</string>
-    <string name="smb_share_hint">Nazwa udziału, np. Music</string>
+    <string name="smb_share_hint">Nazwa udziaÅ‚u, np. Music</string>
     <string name="smb_folder_hint">Folder (opcjonalnie)</string>
-    <string name="smb_disconnect">Rozłącz</string>
-    <string name="smb_test_failed">Nie udało się połączyć: %1$s</string>
+    <string name="smb_disconnect">RozÅ‚Ä…cz</string>
+    <string name="smb_test_failed">Nie udaÅ‚o siÄ™ poÅ‚Ä…czyÄ‡: %1$s</string>
     <string name="playlist">playlista</string>
-    <string name="open">Otwórz</string>
-    <string name="open_playlist">Otwórz playlistę</string>
+    <string name="open">OtwÃ³rz</string>
+    <string name="open_playlist">OtwÃ³rz playlistÄ™</string>
     <string name="pin">Przypnij</string>
     <string name="unpin">Odepnij</string>
-    <string name="rename">Zmień nazwę</string>
+    <string name="rename">ZmieÅ„ nazwÄ™</string>
     <string name="downloading">Pobieranie</string>
-    <string name="delete_playlist">Usuń playlistę</string>
-    <string name="delete_download">Usuń pobrane pliki</string>
-    <string name="delete_playlist_confirmation">Usunąć „%1$s”? Stuknij ponownie, by potwierdzić.</string>
-    <string name="delete_download_confirmation">Usunąć „%1$s” z urządzenia? Stuknij ponownie, by potwierdzić.</string>
+    <string name="delete_playlist">UsuÅ„ playlistÄ™</string>
+    <string name="delete_download">UsuÅ„ pobrane pliki</string>
+    <string name="delete_playlist_confirmation">UsunÄ…Ä‡ â€ž%1$sâ€? Stuknij ponownie, by potwierdziÄ‡.</string>
+    <string name="delete_download_confirmation">UsunÄ…Ä‡ â€ž%1$sâ€ z urzÄ…dzenia? Stuknij ponownie, by potwierdziÄ‡.</string>
     <string name="running">Uruchomiono</string>
-    <string name="automix_analysis_status">Automix · ten utwór: %1$s · następny: %2$s</string>
+    <string name="automix_analysis_status">Automix Â· ten utwÃ³r: %1$s Â· nastÄ™pny: %2$s</string>
     <string name="analysis_complete">przeanalizowano</string>
-    <string name="analysis_refining">przeanalizowano, ulepszanie…</string>
-    <string name="analysis_in_progress">analizowanie…</string>
+    <string name="analysis_refining">przeanalizowano, ulepszanieâ€¦</string>
+    <string name="analysis_in_progress">analizowanieâ€¦</string>
     <string name="waiting">oczekiwanie</string>
-    <string name="version_alignment_status">%1$s · %2$s</string>
+    <string name="version_alignment_status">%1$s Â· %2$s</string>
     <string name="version_cut_not_fetched">nie pobrano</string>
     <string name="version_cut_fetching">pobieranie</string>
     <string name="version_cut_measuring">analiza</string>
-    <string name="version_cut_aligned">wyrównano</string>
-    <string name="automix_enabled_subtitle">Dostosowuje czas i miesza przejścia każdego z utworów. Wyłącz, jeżeli urządzenie się grzeje lub muzyka przycina.</string>
-    <string name="automix_disabled_subtitle">Dostosowuje czas i miesza przejścia automatycznie, bez suwaka. Wydajność może różnić się na wolniejszych urządzeniach.</string>
-    <string name="no_lyrics_sources_enabled">Brak. Teksty nie zostaną pobrane.</string>
-    <string name="song_cache_large_subtitle">Zachowuje maksymalnie %1$s pobranego dźwięku na dysku. To może zająć znaczną część wolnego miejsca.</string>
-    <string name="song_cache_limit_subtitle">Trzyma pobrany dźwięk na dysku do natychmiastowego przeglądania i odtwarzania</string>
-    <string name="replay_genres_enabled_subtitle">Pobiera z Last.fm gatunki artysty. Wysłane zostaje tylko imię/nazwa artysty.</string>
-    <string name="replay_genres_disabled_subtitle">Wykres gatunków Replay pozostaje ukryty z powodu wyłączonej funkcji</string>
-    <string name="swipe_plays_next">Przeciągnięcie utworu doda do odtworzenia na następnym miejscu</string>
-    <string name="swipe_adds_to_queue">Jeżeli jest wyłączone, przeciągnięcie powoduje dodanie go na sam koniec kolejki</string>
-    <string name="import_backup_warning">To zamieni te dane z danymi na tym urządzeniu. Wyeksportuj istniejące, jeżeli nie chcesz ich stracić.</string>
+    <string name="version_cut_aligned">wyrÃ³wnano</string>
+    <string name="automix_enabled_subtitle">Dostosowuje czas i miesza przejÅ›cia kaÅ¼dego z utworÃ³w. WyÅ‚Ä…cz, jeÅ¼eli urzÄ…dzenie siÄ™ grzeje lub muzyka przycina.</string>
+    <string name="automix_disabled_subtitle">Dostosowuje czas i miesza przejÅ›cia automatycznie, bez suwaka. WydajnoÅ›Ä‡ moÅ¼e rÃ³Å¼niÄ‡ siÄ™ na wolniejszych urzÄ…dzeniach.</string>
+    <string name="no_lyrics_sources_enabled">Brak. Teksty nie zostanÄ… pobrane.</string>
+    <string name="song_cache_large_subtitle">Zachowuje maksymalnie %1$s pobranego dÅºwiÄ™ku na dysku. To moÅ¼e zajÄ…Ä‡ znacznÄ… czÄ™Å›Ä‡ wolnego miejsca.</string>
+    <string name="song_cache_limit_subtitle">Trzyma pobrany dÅºwiÄ™k na dysku do natychmiastowego przeglÄ…dania i odtwarzania</string>
+    <string name="replay_genres_enabled_subtitle">Pobiera z Last.fm gatunki artysty. WysÅ‚ane zostaje tylko imiÄ™/nazwa artysty.</string>
+    <string name="replay_genres_disabled_subtitle">Wykres gatunkÃ³w Replay pozostaje ukryty z powodu wyÅ‚Ä…czonej funkcji</string>
+    <string name="swipe_plays_next">PrzeciÄ…gniÄ™cie utworu doda do odtworzenia na nastÄ™pnym miejscu</string>
+    <string name="swipe_adds_to_queue">JeÅ¼eli jest wyÅ‚Ä…czone, przeciÄ…gniÄ™cie powoduje dodanie go na sam koniec kolejki</string>
+    <string name="import_backup_warning">To zamieni te dane z danymi na tym urzÄ…dzeniu. Wyeksportuj istniejÄ…ce, jeÅ¼eli nie chcesz ich straciÄ‡.</string>
     <string name="youtube_music_account">Konto YouTube Music</string>
-    <string name="tap_to_sign_in_google">Stuknij, aby zalogować się z kontem Google</string>
+    <string name="tap_to_sign_in_google">Stuknij, aby zalogowaÄ‡ siÄ™ z kontem Google</string>
     <string name="export_succeeded">Ustawienia eksportu i %1$s</string>
-    <string name="export_failed">Eksport nie powiódł się: %1$s</string>
+    <string name="export_failed">Eksport nie powiÃ³dÅ‚ siÄ™: %1$s</string>
     <string name="import_succeeded">Zaimportowano %1$s z wersji v%2$s</string>
     <string name="import_succeeded_with_playlists">Zaimportowano %1$s z wersji v%2$s oraz %3$d playlist</string>
-    <string name="import_failed">Import nie powiódł się: %1$s</string>
-    <string name="unknown_error">nieznany błąd</string>
+    <string name="import_failed">Import nie powiÃ³dÅ‚ siÄ™: %1$s</string>
+    <string name="unknown_error">nieznany bÅ‚Ä…d</string>
     <string name="no_listening_history">brak historii odtwarzania</string>
-    <string name="no_local_albums">Nic stąd jeszcze nie należy do albumu ani playlisty. Pobierz cały album lub playlistę, a pojawi się tutaj.</string>
-    <string name="play_your_replay">Odtwórz swój Replay</string>
-    <string name="counted_on_device_with_freemusic">Obliczono na tym urządzeniu z Free Music</string>
-    <string name="this_month">Ten miesiąc</string>
+    <string name="no_local_albums">Nic stÄ…d jeszcze nie naleÅ¼y do albumu ani playlisty. Pobierz caÅ‚y album lub playlistÄ™, a pojawi siÄ™ tutaj.</string>
+    <string name="play_your_replay">OdtwÃ³rz swÃ³j Replay</string>
+    <string name="counted_on_device_with_freemusic">Obliczono na tym urzÄ…dzeniu z Free Music</string>
+    <string name="this_month">Ten miesiÄ…c</string>
     <string name="this_year">Ten rok</string>
-    <string name="all_time">Cały czas</string>
+    <string name="all_time">CaÅ‚y czas</string>
     <plurals name="downloads_failed_count">
-        <item quantity="one">Pobrania · %1$d zakończone niepowodzeniem</item>
-        <item quantity="few">Pobrania · %1$d zakończone niepowodzeniem</item>
-        <item quantity="many">Pobrania · %1$d zakończonych niepowodzeniem</item>
-        <item quantity="other">Pobrania · %1$d zakończonych niepowodzeniem</item>
+        <item quantity="one">Pobrania Â· %1$d zakoÅ„czone niepowodzeniem</item>
+        <item quantity="few">Pobrania Â· %1$d zakoÅ„czone niepowodzeniem</item>
+        <item quantity="many">Pobrania Â· %1$d zakoÅ„czonych niepowodzeniem</item>
+        <item quantity="other">Pobrania Â· %1$d zakoÅ„czonych niepowodzeniem</item>
     </plurals>
     <plurals name="download_waiting_count">
         <item quantity="one">%1$d oczekuje</item>
-        <item quantity="few">%1$d oczekują</item>
+        <item quantity="few">%1$d oczekujÄ…</item>
         <item quantity="many">%1$d oczekuje</item>
         <item quantity="other">%1$d oczekuje</item>
     </plurals>
@@ -716,13 +741,13 @@
         <item quantity="other">%1$d gotowych</item>
     </plurals>
     <plurals name="download_failed_count">
-        <item quantity="one">%1$d zawiodło</item>
-        <item quantity="few">%1$d zawiodły</item>
-        <item quantity="many">%1$d zawiodło</item>
-        <item quantity="other">%1$d zawiodło</item>
+        <item quantity="one">%1$d zawiodÅ‚o</item>
+        <item quantity="few">%1$d zawiodÅ‚y</item>
+        <item quantity="many">%1$d zawiodÅ‚o</item>
+        <item quantity="other">%1$d zawiodÅ‚o</item>
     </plurals>
     <plurals name="all_songs_downloaded">
-        <item quantity="one">Cała %1$d piosenka pobrana</item>
+        <item quantity="one">CaÅ‚a %1$d piosenka pobrana</item>
         <item quantity="few">Wszystkie %1$d piosenki pobrane</item>
         <item quantity="many">Wszystkich %1$d piosenek pobrano</item>
         <item quantity="other">Wszystkich %1$d piosenek pobrano</item>
@@ -734,22 +759,22 @@
         <item quantity="other">%1$d godzin</item>
     </plurals>
     <plurals name="songs_will_play_next">
-        <item quantity="one">%1$d piosenka zagra następna</item>
-        <item quantity="few">%1$d piosenki zagrają następne</item>
-        <item quantity="many">%1$d piosenek zagra jako następne</item>
-        <item quantity="other">%1$d piosenek zagra jako następne</item>
+        <item quantity="one">%1$d piosenka zagra nastÄ™pna</item>
+        <item quantity="few">%1$d piosenki zagrajÄ… nastÄ™pne</item>
+        <item quantity="many">%1$d piosenek zagra jako nastÄ™pne</item>
+        <item quantity="other">%1$d piosenek zagra jako nastÄ™pne</item>
     </plurals>
     <plurals name="songs_added_to_queue">
-        <item quantity="one">Dodano %1$d piosenkę do kolejki</item>
+        <item quantity="one">Dodano %1$d piosenkÄ™ do kolejki</item>
         <item quantity="few">Dodano %1$d piosenki do kolejki</item>
         <item quantity="many">Dodano %1$d piosenek do kolejki</item>
         <item quantity="other">Dodano %1$d piosenek do kolejki</item>
     </plurals>
     <plurals name="log_copied_line_count">
-        <item quantity="one">Log skopiowany · %1$d linia</item>
-        <item quantity="few">Log skopiowany · %1$d linie</item>
-        <item quantity="many">Log skopiowany · %1$d linii</item>
-        <item quantity="other">Log skopiowany · %1$d linii</item>
+        <item quantity="one">Log skopiowany Â· %1$d linia</item>
+        <item quantity="few">Log skopiowany Â· %1$d linie</item>
+        <item quantity="many">Log skopiowany Â· %1$d linii</item>
+        <item quantity="other">Log skopiowany Â· %1$d linii</item>
     </plurals>
     <plurals name="minute_count">
         <item quantity="one">%1$d minuta</item>
@@ -759,15 +784,15 @@
     </plurals>
     <plurals name="replay_artist_count">
         <item quantity="one">%1$s artysta</item>
-        <item quantity="few">%1$s artystów</item>
-        <item quantity="many">%1$s artystów</item>
-        <item quantity="other">%1$s artystów</item>
+        <item quantity="few">%1$s artystÃ³w</item>
+        <item quantity="many">%1$s artystÃ³w</item>
+        <item quantity="other">%1$s artystÃ³w</item>
     </plurals>
     <plurals name="replay_play_count">
         <item quantity="one">%1$s odtworzenie</item>
         <item quantity="few">%1$s odtworzenia</item>
-        <item quantity="many">%1$s odtworzeń</item>
-        <item quantity="other">%1$s odtworzeń</item>
+        <item quantity="many">%1$s odtworzeÅ„</item>
+        <item quantity="other">%1$s odtworzeÅ„</item>
     </plurals>
     <plurals name="replay_song_count">
         <item quantity="one">%1$s piosenka</item>
@@ -776,257 +801,257 @@
         <item quantity="other">%1$s piosenek</item>
     </plurals>
     <plurals name="listening_month_count">
-        <item quantity="one">%1$d miesiąc słuchania</item>
-        <item quantity="few">%1$d miesiące słuchania</item>
-        <item quantity="many">%1$d miesięcy słuchania</item>
-        <item quantity="other">%1$d miesięcy słuchania</item>
+        <item quantity="one">%1$d miesiÄ…c sÅ‚uchania</item>
+        <item quantity="few">%1$d miesiÄ…ce sÅ‚uchania</item>
+        <item quantity="many">%1$d miesiÄ™cy sÅ‚uchania</item>
+        <item quantity="other">%1$d miesiÄ™cy sÅ‚uchania</item>
     </plurals>
     <string-array name="lyrics_intro_lines">
         <item>Nadchodzi beat</item>
-        <item>Piosenka się zaczyna</item>
+        <item>Piosenka siÄ™ zaczyna</item>
         <item>Rozgrzewka</item>
         <item>Tworzenie nastroju</item>
-        <item>Najpierw bas, potem słowa</item>
+        <item>Najpierw bas, potem sÅ‚owa</item>
         <item>Poczekaj na to</item>
         <item>Poczuj to narastanie</item>
         <item>Tylko groove na razie</item>
         <item>Refren jest w drodze</item>
-        <item>Daj mu oddychać</item>
+        <item>Daj mu oddychaÄ‡</item>
         <item>Przygotuj wokale</item>
         <item>Pierwsze nuty</item>
     </string-array>
     <string-array name="lyrics_loading_lines">
-        <item>Pobieranie tekstów</item>
-        <item>Szukanie słów</item>
+        <item>Pobieranie tekstÃ³w</item>
+        <item>Szukanie sÅ‚Ã³w</item>
         <item>Pobieranie zwrotek</item>
-        <item>Ładowanie tekstów</item>
+        <item>Åadowanie tekstÃ³w</item>
         <item>Sprawdzanie kartki z tekstami</item>
-        <item>Przeszukiwanie śpiewnika</item>
-        <item>Układanie tekstów</item>
-        <item>Słowa są w drodze</item>
-        <item>Sprawdzanie archiwów</item>
-        <item>Szukanie odpowiednich słów</item>
-        <item>Teksty się łączą</item>
-        <item>Prawie znaleziono słowa</item>
+        <item>Przeszukiwanie Å›piewnika</item>
+        <item>UkÅ‚adanie tekstÃ³w</item>
+        <item>SÅ‚owa sÄ… w drodze</item>
+        <item>Sprawdzanie archiwÃ³w</item>
+        <item>Szukanie odpowiednich sÅ‚Ã³w</item>
+        <item>Teksty siÄ™ Å‚Ä…czÄ…</item>
+        <item>Prawie znaleziono sÅ‚owa</item>
     </string-array>
     <string name="hebrew">Hebrajski</string>
-    <string name="switch_to_grid_view">Przełącz na widok siatki</string>
+    <string name="switch_to_grid_view">PrzeÅ‚Ä…cz na widok siatki</string>
     <string name="grid_view">Siatka</string>
     <string name="list_view">Lista</string>
-    <string name="switch_to_list_view">Przełącz na widok listy</string>
+    <string name="switch_to_list_view">PrzeÅ‚Ä…cz na widok listy</string>
 
     <!-- Listen together -->
-    <string name="listen_together">Słuchajcie razem</string>
-    <string name="listen_together_subtitle">Podziel się kodem i słuchajcie tej samej muzyki, równocześnie</string>
-    <string name="listen_together_in_party">W imprezie · %1$s</string>
-    <string name="listen_together_sign_in_footer">Wspólne słuchanie wymaga konta, żeby każdy w imprezie widział, kto jeszcze słucha.</string>
+    <string name="listen_together">SÅ‚uchajcie razem</string>
+    <string name="listen_together_subtitle">Podziel siÄ™ kodem i sÅ‚uchajcie tej samej muzyki, rÃ³wnoczeÅ›nie</string>
+    <string name="listen_together_in_party">W imprezie Â· %1$s</string>
+    <string name="listen_together_sign_in_footer">WspÃ³lne sÅ‚uchanie wymaga konta, Å¼eby kaÅ¼dy w imprezie widziaÅ‚, kto jeszcze sÅ‚ucha.</string>
     <string name="listen_together_server">Serwer imprezy</string>
-    <string name="listen_together_server_online">Online · %1$d ms</string>
-    <string name="listen_together_server_online_fallback">Online (domyślny zapasowy) · %1$d ms</string>
-    <string name="listen_together_server_offline">Teraz nieosiągalny</string>
-    <string name="listen_together_server_checking">Sprawdzanie…</string>
-    <string name="listen_together_server_unknown">Dotknij, aby sprawdzić</string>
-    <string name="listen_together_custom_server">Użyj własnego serwera</string>
-    <string name="listen_together_custom_server_footer">Zostaw puste, aby użyć wbudowanego serwera. Jeśli prowadzisz własną kopię, wszyscy w imprezie muszą wskazywać ten sam adres.</string>
-    <string name="listen_together_using_default">Używany jest wbudowany serwer</string>
-    <string name="listen_together_remove_server">Usuń serwer</string>
-    <string name="listen_together_switched_to_default">Przełączono na serwer domyślny</string>
-    <string name="listen_together_custom_server_saved">Zapisano własny serwer</string>
-    <string name="listen_together_create">Utwórz imprezę</string>
-    <string name="listen_together_create_subtitle">Odbierz kod do udostępnienia znajomym</string>
-    <string name="listen_together_create_footer">Otrzymasz sześcioznakowy kod. Każdy, kto go ma, może się dołączyć — do %1$d urządzeń, licząc twoje.</string>
-    <string name="listen_together_profile">Twój profil na imprezie</string>
-    <string name="listen_together_nickname_hint">Pseudonim na tę imprezę</string>
+    <string name="listen_together_server_online">Online Â· %1$d ms</string>
+    <string name="listen_together_server_online_fallback">Online (domyÅ›lny zapasowy) Â· %1$d ms</string>
+    <string name="listen_together_server_offline">Teraz nieosiÄ…galny</string>
+    <string name="listen_together_server_checking">Sprawdzanieâ€¦</string>
+    <string name="listen_together_server_unknown">Dotknij, aby sprawdziÄ‡</string>
+    <string name="listen_together_custom_server">UÅ¼yj wÅ‚asnego serwera</string>
+    <string name="listen_together_custom_server_footer">Zostaw puste, aby uÅ¼yÄ‡ wbudowanego serwera. JeÅ›li prowadzisz wÅ‚asnÄ… kopiÄ™, wszyscy w imprezie muszÄ… wskazywaÄ‡ ten sam adres.</string>
+    <string name="listen_together_using_default">UÅ¼ywany jest wbudowany serwer</string>
+    <string name="listen_together_remove_server">UsuÅ„ serwer</string>
+    <string name="listen_together_switched_to_default">PrzeÅ‚Ä…czono na serwer domyÅ›lny</string>
+    <string name="listen_together_custom_server_saved">Zapisano wÅ‚asny serwer</string>
+    <string name="listen_together_create">UtwÃ³rz imprezÄ™</string>
+    <string name="listen_together_create_subtitle">Odbierz kod do udostÄ™pnienia znajomym</string>
+    <string name="listen_together_create_footer">Otrzymasz szeÅ›cioznakowy kod. KaÅ¼dy, kto go ma, moÅ¼e siÄ™ doÅ‚Ä…czyÄ‡ â€” do %1$d urzÄ…dzeÅ„, liczÄ…c twoje.</string>
+    <string name="listen_together_profile">TwÃ³j profil na imprezie</string>
+    <string name="listen_together_nickname_hint">Pseudonim na tÄ™ imprezÄ™</string>
     <string name="listen_together_party_size">Rozmiar imprezy</string>
-    <string name="listen_together_party_size_subtitle">Wybierz od 2 do 10 słuchaczy</string>
-    <string name="listen_together_host_controls">Tylko ty możesz zmienić limit lub usunąć słuchaczy</string>
-    <string name="listen_together_remove">Usuń</string>
-    <string name="listen_together_activity">Ostatnia aktywność</string>
-    <string name="listen_together_activity_footer">Tylko ta sesja · najnowsze na górze · do 100 działań</string>
-    <string name="listen_together_activity_played">Rozpoczęto odtwarzanie</string>
+    <string name="listen_together_party_size_subtitle">Wybierz od 2 do 10 sÅ‚uchaczy</string>
+    <string name="listen_together_host_controls">Tylko ty moÅ¼esz zmieniÄ‡ limit lub usunÄ…Ä‡ sÅ‚uchaczy</string>
+    <string name="listen_together_remove">UsuÅ„</string>
+    <string name="listen_together_activity">Ostatnia aktywnoÅ›Ä‡</string>
+    <string name="listen_together_activity_footer">Tylko ta sesja Â· najnowsze na gÃ³rze Â· do 100 dziaÅ‚aÅ„</string>
+    <string name="listen_together_activity_played">RozpoczÄ™to odtwarzanie</string>
     <string name="listen_together_activity_paused">Wstrzymano odtwarzanie</string>
-    <string name="listen_together_activity_seeked">Przewinięto utwór</string>
+    <string name="listen_together_activity_seeked">PrzewiniÄ™to utwÃ³r</string>
     <string name="listen_together_activity_skipped">Przeskoczono dalej</string>
-    <string name="listen_together_activity_went_back">Cofnięto</string>
+    <string name="listen_together_activity_went_back">CofniÄ™to</string>
     <string name="listen_together_activity_added">Dodano do kolejki</string>
-    <string name="listen_together_activity_removed_track">Usunięto utwór z kolejki</string>
-    <string name="listen_together_activity_cleared">Wyczyszczono nadchodzące utwory</string>
-    <string name="listen_together_activity_reordered">Zmieniono kolejność kolejki</string>
-    <string name="listen_together_activity_removed_member">Usunięto słuchacza</string>
+    <string name="listen_together_activity_removed_track">UsuniÄ™to utwÃ³r z kolejki</string>
+    <string name="listen_together_activity_cleared">Wyczyszczono nadchodzÄ…ce utwory</string>
+    <string name="listen_together_activity_reordered">Zmieniono kolejnoÅ›Ä‡ kolejki</string>
+    <string name="listen_together_activity_removed_member">UsuniÄ™to sÅ‚uchacza</string>
     <string name="listen_together_activity_changed_size">Zmieniono rozmiar imprezy</string>
-    <string name="listen_together_activity_updated">Zaktualizowano imprezę</string>
-    <string name="listen_together_join">Dołącz do imprezy</string>
-    <string name="listen_together_join_action">Dołącz</string>
-    <string name="listen_together_code_hint">Sześć liter lub cyfr</string>
+    <string name="listen_together_activity_updated">Zaktualizowano imprezÄ™</string>
+    <string name="listen_together_join">DoÅ‚Ä…cz do imprezy</string>
+    <string name="listen_together_join_action">DoÅ‚Ä…cz</string>
+    <string name="listen_together_code_hint">SzeÅ›Ä‡ liter lub cyfr</string>
     <string name="listen_together_code">Kod imprezy</string>
-    <string name="listen_together_code_footer">Przeczytaj go na głos albo wyślij. Liter O i I nie używamy, więc „o” to zawsze zero.</string>
+    <string name="listen_together_code_footer">Przeczytaj go na gÅ‚os albo wyÅ›lij. Liter O i I nie uÅ¼ywamy, wiÄ™c â€žoâ€ to zawsze zero.</string>
     <string name="copy_code">Kopiuj kod</string>
-    <string name="listen_together_share_text">Posłuchaj ze mną w Free Music — kod imprezy %1$s</string>
+    <string name="listen_together_share_text">PosÅ‚uchaj ze mnÄ… w Free Music â€” kod imprezy %1$s</string>
     <string name="listen_together_now_playing">Teraz odtwarzane</string>
     <string name="listen_together_nothing_playing">Jeszcze nic nie gra</string>
-    <string name="listen_together_listening">Słucha · %1$d z %2$d</string>
-    <string name="listen_together_members_footer">Impreza pomieści %1$d urządzeń. Każdy w niej może sterować muzyką.</string>
+    <string name="listen_together_listening">SÅ‚ucha Â· %1$d z %2$d</string>
+    <string name="listen_together_members_footer">Impreza pomieÅ›ci %1$d urzÄ…dzeÅ„. KaÅ¼dy w niej moÅ¼e sterowaÄ‡ muzykÄ….</string>
     <string name="listen_together_you">Ty</string>
     <string name="listen_together_host">Gospodarz</string>
-    <string name="listen_together_away">Poza zasięgiem — miejsce jest trzymane</string>
-    <string name="listen_together_manage">Zarządzaj</string>
-    <string name="listen_together_landing_title">Rozpocznij imprezę</string>
-    <string name="listen_together_landing_subtitle">Bo muzyka razem brzmi lepiej. Zaproś znajomych, by słuchali i dodawali utwory na żywo, gdziekolwiek są.</string>
-    <string name="listen_together_create_action">Utwórz imprezę</string>
-    <string name="listen_together_join_existing">Dołącz do istniejącej</string>
-    <string name="listen_together_create_sheet_subtitle">Wybierz, jak się pokażesz i ile osób może dołączyć.</string>
-    <string name="listen_together_creating">Tworzenie…</string>
-    <string name="listen_together_joining">Dołączanie…</string>
-    <string name="listen_together_full">Ta impreza jest pełna</string>
-    <string name="listen_together_join_question">Dołączyć do imprezy %1$s?</string>
-    <string name="listen_together_join_question_unnamed">Dołączyć do tej imprezy?</string>
+    <string name="listen_together_away">Poza zasiÄ™giem â€” miejsce jest trzymane</string>
+    <string name="listen_together_manage">ZarzÄ…dzaj</string>
+    <string name="listen_together_landing_title">Rozpocznij imprezÄ™</string>
+    <string name="listen_together_landing_subtitle">Bo muzyka razem brzmi lepiej. ZaproÅ› znajomych, by sÅ‚uchali i dodawali utwory na Å¼ywo, gdziekolwiek sÄ….</string>
+    <string name="listen_together_create_action">UtwÃ³rz imprezÄ™</string>
+    <string name="listen_together_join_existing">DoÅ‚Ä…cz do istniejÄ…cej</string>
+    <string name="listen_together_create_sheet_subtitle">Wybierz, jak siÄ™ pokaÅ¼esz i ile osÃ³b moÅ¼e doÅ‚Ä…czyÄ‡.</string>
+    <string name="listen_together_creating">Tworzenieâ€¦</string>
+    <string name="listen_together_joining">DoÅ‚Ä…czanieâ€¦</string>
+    <string name="listen_together_full">Ta impreza jest peÅ‚na</string>
+    <string name="listen_together_join_question">DoÅ‚Ä…czyÄ‡ do imprezy %1$s?</string>
+    <string name="listen_together_join_question_unnamed">DoÅ‚Ä…czyÄ‡ do tej imprezy?</string>
     <string name="listen_together_not_now">Nie teraz</string>
-    <string name="listen_together_preview_footer">Uczestnicy imprezy zobaczą twoje imię i zdjęcie profilowe.</string>
-    <string name="listen_together_invite_title">Zaproś znajomych na imprezę</string>
-    <string name="listen_together_share_link">Udostępnij link</string>
+    <string name="listen_together_preview_footer">Uczestnicy imprezy zobaczÄ… twoje imiÄ™ i zdjÄ™cie profilowe.</string>
+    <string name="listen_together_invite_title">ZaproÅ› znajomych na imprezÄ™</string>
+    <string name="listen_together_share_link">UdostÄ™pnij link</string>
     <string name="listen_together_scan_qr">Zeskanuj kod QR</string>
-    <string name="listen_together_scan_qr_subtitle">Znajomi mogą go zeskanować, by dołączyć.</string>
-    <string name="listen_together_invite">Zaproś</string>
-    <string name="listen_together_host_only">Tylko ja steruję muzyką</string>
-    <string name="listen_together_host_only_subtitle">Pozostali słuchają razem i mogą wstrzymać na własnym urządzeniu</string>
-    <string name="listen_together_host_only_notice">Tylko gospodarz może sterować muzyką</string>
-    <string name="listen_together_leave">Opuść imprezę</string>
-    <string name="listen_together_leave_subtitle">Pozostali słuchają dalej</string>
-    <string name="listen_together_reconnecting">Ponowne łączenie…</string>
-    <string name="listen_together_syncing_clock">Mierzenie zegara…</string>
-    <string name="listen_together_in_sync">Zsynchronizowano · %1$d ms w obie strony</string>
-    <string name="listen_together_jam">Jam użytkownika %1$s</string>
-    <string name="listen_together_jam_unnamed">Wspólne słuchanie</string>
-    <string name="listen_together_open">Słuchajcie razem</string>
-    <string name="listen_together_open_count">Wspólne słuchanie · %1$d</string>
-    <string name="listen_together_custom_server_dialog_title">Dołączyć do imprezy na własnym serwerze?</string>
-    <string name="listen_together_custom_server_dialog_message">Ta impreza działa na zewnętrznym serwerze:\n\n%1$s\n\nCzy chcesz zmienić serwer imprez i dołączyć do imprezy %2$s?</string>
-    <string name="listen_together_custom_server_switch_and_join">Zmień i dołącz</string>
-    <string name="listen_together_official_server_dialog_title">Przełączyć na oficjalny serwer?</string>
-    <string name="listen_together_official_server_dialog_message">Ta impreza działa na oficjalnym serwerze Free Music.\n\nCzy chcesz wrócić na oficjalny serwer i dołączyć do imprezy %1$s?</string>
-    <string name="listen_together_switch_failed_stayed_in_party">Nie udało się dołączyć do imprezy: %1$s. Pozostajesz na imprezie %2$s.</string>
-    <string name="listen_together_switch_failed">Nie udało się dołączyć do imprezy: %1$s.</string>
+    <string name="listen_together_scan_qr_subtitle">Znajomi mogÄ… go zeskanowaÄ‡, by doÅ‚Ä…czyÄ‡.</string>
+    <string name="listen_together_invite">ZaproÅ›</string>
+    <string name="listen_together_host_only">Tylko ja sterujÄ™ muzykÄ…</string>
+    <string name="listen_together_host_only_subtitle">Pozostali sÅ‚uchajÄ… razem i mogÄ… wstrzymaÄ‡ na wÅ‚asnym urzÄ…dzeniu</string>
+    <string name="listen_together_host_only_notice">Tylko gospodarz moÅ¼e sterowaÄ‡ muzykÄ…</string>
+    <string name="listen_together_leave">OpuÅ›Ä‡ imprezÄ™</string>
+    <string name="listen_together_leave_subtitle">Pozostali sÅ‚uchajÄ… dalej</string>
+    <string name="listen_together_reconnecting">Ponowne Å‚Ä…czenieâ€¦</string>
+    <string name="listen_together_syncing_clock">Mierzenie zegaraâ€¦</string>
+    <string name="listen_together_in_sync">Zsynchronizowano Â· %1$d ms w obie strony</string>
+    <string name="listen_together_jam">Jam uÅ¼ytkownika %1$s</string>
+    <string name="listen_together_jam_unnamed">WspÃ³lne sÅ‚uchanie</string>
+    <string name="listen_together_open">SÅ‚uchajcie razem</string>
+    <string name="listen_together_open_count">WspÃ³lne sÅ‚uchanie Â· %1$d</string>
+    <string name="listen_together_custom_server_dialog_title">DoÅ‚Ä…czyÄ‡ do imprezy na wÅ‚asnym serwerze?</string>
+    <string name="listen_together_custom_server_dialog_message">Ta impreza dziaÅ‚a na zewnÄ™trznym serwerze:\n\n%1$s\n\nCzy chcesz zmieniÄ‡ serwer imprez i doÅ‚Ä…czyÄ‡ do imprezy %2$s?</string>
+    <string name="listen_together_custom_server_switch_and_join">ZmieÅ„ i doÅ‚Ä…cz</string>
+    <string name="listen_together_official_server_dialog_title">PrzeÅ‚Ä…czyÄ‡ na oficjalny serwer?</string>
+    <string name="listen_together_official_server_dialog_message">Ta impreza dziaÅ‚a na oficjalnym serwerze Free Music.\n\nCzy chcesz wrÃ³ciÄ‡ na oficjalny serwer i doÅ‚Ä…czyÄ‡ do imprezy %1$s?</string>
+    <string name="listen_together_switch_failed_stayed_in_party">Nie udaÅ‚o siÄ™ doÅ‚Ä…czyÄ‡ do imprezy: %1$s. Pozostajesz na imprezie %2$s.</string>
+    <string name="listen_together_switch_failed">Nie udaÅ‚o siÄ™ doÅ‚Ä…czyÄ‡ do imprezy: %1$s.</string>
     <string name="listen_together_ping">%1$d ms</string>
-    <string name="listen_together_server_offline_dash">—</string>
-    <string name="listen_together_invalid_server_url">Nieprawidłowy adres serwera. Wpisz poprawny adres (np. https://your-server.com)</string>
-    <string name="listen_together_err_whitespace">Adres serwera nie może zawierać spacji</string>
-    <string name="listen_together_err_invalid_path">Adres serwera zawiera nieprawidłową ścieżkę</string>
-    <string name="listen_together_err_no_path">Adres serwera nie może zawierać ścieżki</string>
-    <string name="listen_together_err_no_query">Adres serwera nie może zawierać parametrów zapytania</string>
-    <string name="listen_together_err_no_fragment">Adres serwera nie może zawierać fragmentów</string>
-    <string name="listen_together_err_invalid_port">Port serwera musi mieścić się w zakresie od 1 do 65535</string>
-    <string name="listen_together_custom_server_connected">Połączono z własnym serwerem</string>
-    <string name="listen_together_custom_server_unreachable_fallback">Własny serwer jest niedostępny. Używany jest serwer domyślny.</string>
-    <string name="listen_together_status_custom_online">Połączono z własnym serwerem · %1$d ms</string>
-    <string name="listen_together_status_custom_fallback">Własny serwer niedostępny · Używany domyślny zapasowy (%1$d ms)</string>
-    <string name="listen_together_status_all_offline">Zarówno własny, jak i domyślny serwer są offline</string>
-    <string name="listen_together_top_bar_fallback">Zapasowy · %1$s</string>
+    <string name="listen_together_server_offline_dash">â€”</string>
+    <string name="listen_together_invalid_server_url">NieprawidÅ‚owy adres serwera. Wpisz poprawny adres (np. https://your-server.com)</string>
+    <string name="listen_together_err_whitespace">Adres serwera nie moÅ¼e zawieraÄ‡ spacji</string>
+    <string name="listen_together_err_invalid_path">Adres serwera zawiera nieprawidÅ‚owÄ… Å›cieÅ¼kÄ™</string>
+    <string name="listen_together_err_no_path">Adres serwera nie moÅ¼e zawieraÄ‡ Å›cieÅ¼ki</string>
+    <string name="listen_together_err_no_query">Adres serwera nie moÅ¼e zawieraÄ‡ parametrÃ³w zapytania</string>
+    <string name="listen_together_err_no_fragment">Adres serwera nie moÅ¼e zawieraÄ‡ fragmentÃ³w</string>
+    <string name="listen_together_err_invalid_port">Port serwera musi mieÅ›ciÄ‡ siÄ™ w zakresie od 1 do 65535</string>
+    <string name="listen_together_custom_server_connected">PoÅ‚Ä…czono z wÅ‚asnym serwerem</string>
+    <string name="listen_together_custom_server_unreachable_fallback">WÅ‚asny serwer jest niedostÄ™pny. UÅ¼ywany jest serwer domyÅ›lny.</string>
+    <string name="listen_together_status_custom_online">PoÅ‚Ä…czono z wÅ‚asnym serwerem Â· %1$d ms</string>
+    <string name="listen_together_status_custom_fallback">WÅ‚asny serwer niedostÄ™pny Â· UÅ¼ywany domyÅ›lny zapasowy (%1$d ms)</string>
+    <string name="listen_together_status_all_offline">ZarÃ³wno wÅ‚asny, jak i domyÅ›lny serwer sÄ… offline</string>
+    <string name="listen_together_top_bar_fallback">Zapasowy Â· %1$s</string>
 
     <string name="vietnamese">Wietnamski</string>
 
-    <string name="miscellaneous_footer">Po włączeniu, zamknięcie aplikacji z listy ostatnio używanych aplikacji zatrzyma odtwarzanie muzyki.</string>
+    <string name="miscellaneous_footer">Po wÅ‚Ä…czeniu, zamkniÄ™cie aplikacji z listy ostatnio uÅ¼ywanych aplikacji zatrzyma odtwarzanie muzyki.</string>
 
 
     <plurals name="track_count_plural">
-        <item quantity="one">%1$d utwór</item>
+        <item quantity="one">%1$d utwÃ³r</item>
         <item quantity="few">%1$d utwory</item>
-        <item quantity="many">%1$d utworów</item>
-        <item quantity="other">%1$d utworów</item>
+        <item quantity="many">%1$d utworÃ³w</item>
+        <item quantity="other">%1$d utworÃ³w</item>
     </plurals>
 
-    <string name="account_profiles_help">Konto Google może mieć profile osobiste i marki, każdy z własną biblioteką i historią.</string>
+    <string name="account_profiles_help">Konto Google moÅ¼e mieÄ‡ profile osobiste i marki, kaÅ¼dy z wÅ‚asnÄ… bibliotekÄ… i historiÄ….</string>
 
     <string name="accounts">Konta</string>
 
     <string name="add_account">Dodaj konto</string>
 
-    <string name="add_addon">Dodaj wtyczkę</string>
+    <string name="add_addon">Dodaj wtyczkÄ™</string>
 
-    <string name="add_addon_detail">Wskaż serwer wtyczki, który hostujesz lub do którego masz link</string>
+    <string name="add_addon_detail">WskaÅ¼ serwer wtyczki, ktÃ³ry hostujesz lub do ktÃ³rego masz link</string>
 
-    <string name="addon_url_description">Wklej adres URL wtyczki — katalog główny lub manifest.json.</string>
+    <string name="addon_url_description">Wklej adres URL wtyczki â€” katalog gÅ‚Ã³wny lub manifest.json.</string>
 
     <string name="advanced_options">Opcje zaawansowane i eksperymentalne</string>
 
-    <string name="automix_mode_balanced">Zrównoważony</string>
+    <string name="automix_mode_balanced">ZrÃ³wnowaÅ¼ony</string>
 
-    <string name="automix_mode_balanced_subtitle">2 wątki · zalecana równowaga szybkości i baterii</string>
+    <string name="automix_mode_balanced_subtitle">2 wÄ…tki Â· zalecana rÃ³wnowaga szybkoÅ›ci i baterii</string>
 
-    <string name="automix_mode_efficient">Oszczędny</string>
+    <string name="automix_mode_efficient">OszczÄ™dny</string>
 
-    <string name="automix_mode_efficient_subtitle">1 wątek · najmniejsze zużycie baterii · dłuższa analiza</string>
+    <string name="automix_mode_efficient_subtitle">1 wÄ…tek Â· najmniejsze zuÅ¼ycie baterii Â· dÅ‚uÅ¼sza analiza</string>
 
-    <string name="automix_mode_performance">Wydajność</string>
+    <string name="automix_mode_performance">WydajnoÅ›Ä‡</string>
 
-    <string name="automix_mode_performance_subtitle">4 wątki · najszybsza analiza · większe zużycie baterii</string>
+    <string name="automix_mode_performance_subtitle">4 wÄ…tki Â· najszybsza analiza Â· wiÄ™ksze zuÅ¼ycie baterii</string>
 
-    <string name="automix_not_supported_video">Automix nie jest obsługiwany dla utworów wideo</string>
-    <string name="automix_stopped_in_party">Automix: zatrzymany podczas wspólnego słuchania</string>
+    <string name="automix_not_supported_video">Automix nie jest obsÅ‚ugiwany dla utworÃ³w wideo</string>
+    <string name="automix_stopped_in_party">Automix: zatrzymany podczas wspÃ³lnego sÅ‚uchania</string>
 
-    <string name="automix_performance">Wydajność Automix</string>
+    <string name="automix_performance">WydajnoÅ›Ä‡ Automix</string>
 
-    <string name="automix_performance_subtitle">Określa, ile procesora może używać analiza w tle</string>
+    <string name="automix_performance_subtitle">OkreÅ›la, ile procesora moÅ¼e uÅ¼ywaÄ‡ analiza w tle</string>
 
-    <string name="automix_performance_warning">Wyższa wydajność szybciej analizuje utwory, ale zużywa więcej baterii.</string>
+    <string name="automix_performance_warning">WyÅ¼sza wydajnoÅ›Ä‡ szybciej analizuje utwory, ale zuÅ¼ywa wiÄ™cej baterii.</string>
 
     <string name="blur_unfocused_lyrics">Rozmywaj nieaktywne wersy</string>
 
-    <string name="blur_unfocused_lyrics_subtitle">Utrzymuje skupienie na bieżącej linii</string>
+    <string name="blur_unfocused_lyrics_subtitle">Utrzymuje skupienie na bieÅ¼Ä…cej linii</string>
 
     <string name="brand_account">Konto marki</string>
 
-    <string name="card_plays_format">%1$s odtworzeń</string>
+    <string name="card_plays_format">%1$s odtworzeÅ„</string>
 
-    <string name="card_songs_format">%1$s utworów</string>
+    <string name="card_songs_format">%1$s utworÃ³w</string>
 
-    <string name="card_views_format">%1$s wyświetleń</string>
+    <string name="card_views_format">%1$s wyÅ›wietleÅ„</string>
 
-    <string name="channel_session_unavailable">Brak sesji — najpierw otwórz YouTube Music</string>
+    <string name="channel_session_unavailable">Brak sesji â€” najpierw otwÃ³rz YouTube Music</string>
 
-    <string name="channel_switch_instructions">Zmień za pomocą awatara, a następnie naciśnij Użyj tego kanału</string>
+    <string name="channel_switch_instructions">ZmieÅ„ za pomocÄ… awatara, a nastÄ™pnie naciÅ›nij UÅ¼yj tego kanaÅ‚u</string>
 
-    <string name="choose_a_channel">Wybierz kanał</string>
+    <string name="choose_a_channel">Wybierz kanaÅ‚</string>
 
     <string name="choose_profile">Wybierz profil</string>
 
-    <string name="convert_to_audio">Konwertuj na dźwięk</string>
+    <string name="convert_to_audio">Konwertuj na dÅºwiÄ™k</string>
     <string name="convert_to_video">Konwertuj na wideo</string>
 
-    <string name="converting_to_audio">Konwertowanie na dźwięk…</string>
+    <string name="converting_to_audio">Konwertowanie na dÅºwiÄ™kâ€¦</string>
 
-    <string name="current_account">Bieżące konto</string>
+    <string name="current_account">BieÅ¼Ä…ce konto</string>
 
-    <string name="current_profile">Bieżący profil</string>
+    <string name="current_profile">BieÅ¼Ä…cy profil</string>
 
-    <string name="default_youtube_profile">Domyślny profil YouTube Music</string>
+    <string name="default_youtube_profile">DomyÅ›lny profil YouTube Music</string>
 
     <string name="dolby_atmos">Dolby Atmos</string>
 
-    <string name="dolby_atmos_subtitle">Odtwarza bardziej wciągający dźwięk przestrzenny, jeśli jest dostępny.</string>
+    <string name="dolby_atmos_subtitle">Odtwarza bardziej wciÄ…gajÄ…cy dÅºwiÄ™k przestrzenny, jeÅ›li jest dostÄ™pny.</string>
 
-    <string name="dolby_atmos_unavailable">To urządzenie nie obsługuje Atmos, utwory będą odtwarzane w wersji standardowej</string>
+    <string name="dolby_atmos_unavailable">To urzÄ…dzenie nie obsÅ‚uguje Atmos, utwory bÄ™dÄ… odtwarzane w wersji standardowej</string>
 
     <string name="export_compatible_downloads">Eksportuj zgodne pobrane pliki</string>
 
     <string name="legacy_mesh_gradient">Klasyczny gradient siatkowy</string>
 
-    <string name="legacy_mesh_gradient_subtitle">Przywraca płynne plamy kolorów z wersji v1.5</string>
+    <string name="legacy_mesh_gradient_subtitle">Przywraca pÅ‚ynne plamy kolorÃ³w z wersji v1.5</string>
 
-    <string name="liquid_glass">Płynne szkło</string>
+    <string name="liquid_glass">PÅ‚ynne szkÅ‚o</string>
 
-    <string name="liquid_glass_subtitle">Efekt szkła na pasku nawigacyjnym. Tylko Android 12+.</string>
+    <string name="liquid_glass_subtitle">Efekt szkÅ‚a na pasku nawigacyjnym. Tylko Android 12+.</string>
 
     <string name="liquid_glass_unavailable">Wymaga systemu Android 12 lub nowszego</string>
 
-    <string name="listen_as">Słuchaj jako</string>
+    <string name="listen_as">SÅ‚uchaj jako</string>
 
     <string name="lyrics_debug_logs">Dzienniki debugowania tekstu</string>
 
-    <string name="lyrics_debug_logs_subtitle">Pokaż zapytania API na żywo w panelu tekstów</string>
+    <string name="lyrics_debug_logs_subtitle">PokaÅ¼ zapytania API na Å¼ywo w panelu tekstÃ³w</string>
 
-    <string name="manage_accounts">Zarządzaj kontami</string>
+    <string name="manage_accounts">ZarzÄ…dzaj kontami</string>
 
-    <string name="output_precision">Precyzja wyjścia</string>
+    <string name="output_precision">Precyzja wyjÅ›cia</string>
 
     <string name="personal">Osobisty</string>
 
@@ -1035,16 +1060,16 @@
     <string name="playlist_action">Playlista</string>
 
     <string name="prefer_usb_dac">Preferuj USB DAC</string>
-    <string name="loudness_normalization">Normalizacja głośności</string>
-    <string name="loudness_normalization_subtitle">Wyrównuje głośność wszystkich utworów</string>
-    <string name="loudness_target">Docelowa głośność</string>
-    <string name="loudness_target_subtitle">Ciszej pasuje do słuchawek; głośniej do samochodu lub głośnika telefonu</string>
+    <string name="loudness_normalization">Normalizacja gÅ‚oÅ›noÅ›ci</string>
+    <string name="loudness_normalization_subtitle">WyrÃ³wnuje gÅ‚oÅ›noÅ›Ä‡ wszystkich utworÃ³w</string>
+    <string name="loudness_target">Docelowa gÅ‚oÅ›noÅ›Ä‡</string>
+    <string name="loudness_target_subtitle">Ciszej pasuje do sÅ‚uchawek; gÅ‚oÅ›niej do samochodu lub gÅ‚oÅ›nika telefonu</string>
     <string name="loudness_target_value">%1$s LUFS</string>
-    <string name="pipeline_loudness">Głośność</string>
+    <string name="pipeline_loudness">GÅ‚oÅ›noÅ›Ä‡</string>
     <string name="pipeline_loudness_gain">Wzmocnienie</string>
     <string name="pipeline_loudness_measured">Zmierzona</string>
     <string name="pipeline_bit_exact">Bit-perfect</string>
-    <string name="loudness_measuring">Mierzenie…</string>
+    <string name="loudness_measuring">Mierzenieâ€¦</string>
     <string name="loudness_gain_db">%1$s dB</string>
     <string name="loudness_lufs">%1$s LUFS</string>
 
@@ -1054,23 +1079,23 @@
 
     <string name="radio_started">Uruchomiono radio %1$s</string>
 
-    <string name="revert_to_original">Przywróć oryginał</string>
+    <string name="revert_to_original">PrzywrÃ³Ä‡ oryginaÅ‚</string>
 
-    <string name="scrobble_primary_artist_only">Scrobbluj tylko głównego wykonawcę</string>
+    <string name="scrobble_primary_artist_only">Scrobbluj tylko gÅ‚Ã³wnego wykonawcÄ™</string>
 
-    <string name="scrobble_primary_artist_only_subtitle">Użyj pierwszego wykonawcy, gdy wymieniono kilku</string>
+    <string name="scrobble_primary_artist_only_subtitle">UÅ¼yj pierwszego wykonawcy, gdy wymieniono kilku</string>
 
     <string name="select_all">Zaznacz wszystko</string>
 
     <string name="selected_account">Wybrane konto</string>
 
-    <string name="shelf_100_on_repeat">Ciągłe powtarzanie</string>
+    <string name="shelf_100_on_repeat">CiÄ…gÅ‚e powtarzanie</string>
 
-    <string name="shelf_artists_on_the_rise">Wschodzący artyści</string>
+    <string name="shelf_artists_on_the_rise">WschodzÄ…cy artyÅ›ci</string>
 
-    <string name="shelf_chart">Listy przebojów</string>
+    <string name="shelf_chart">Listy przebojÃ³w</string>
 
-    <string name="shelf_charts">Listy przebojów</string>
+    <string name="shelf_charts">Listy przebojÃ³w</string>
 
     <string name="shelf_commute">W drodze</string>
 
@@ -1088,23 +1113,23 @@
 
     <string name="shelf_forgotten_favorites">Zapomniane ulubione</string>
 
-    <string name="shelf_from_the_community">Od społeczności</string>
+    <string name="shelf_from_the_community">Od spoÅ‚ecznoÅ›ci</string>
 
     <string name="shelf_from_your_library">Z Twojej biblioteki</string>
 
     <string name="shelf_hits_today">Dzisiejsze hity</string>
 
-    <string name="shelf_listen_again">Posłuchaj ponownie</string>
+    <string name="shelf_listen_again">PosÅ‚uchaj ponownie</string>
 
     <string name="shelf_mixed_for_you">Mixy dla Ciebie</string>
 
     <string name="shelf_new_albums_singles">Nowe albumy i single</string>
 
-    <string name="shelf_new_releases">Nowości</string>
+    <string name="shelf_new_releases">NowoÅ›ci</string>
 
     <string name="shelf_party">Impreza</string>
 
-    <string name="shelf_quick_picks">Szybki wybór</string>
+    <string name="shelf_quick_picks">Szybki wybÃ³r</string>
 
     <string name="shelf_recents">Ostatnie</string>
 
@@ -1124,7 +1149,7 @@
 
     <string name="shelf_sleep">Sen</string>
 
-    <string name="shelf_song_item">Utwór</string>
+    <string name="shelf_song_item">UtwÃ³r</string>
 
     <string name="shelf_top_music_videos">Najlepsze teledyski</string>
 
@@ -1132,27 +1157,27 @@
 
     <string name="shelf_trending">Trendy</string>
 
-    <string name="shelf_trending_community_playlists">Popularne playlisty społeczności</string>
+    <string name="shelf_trending_community_playlists">Popularne playlisty spoÅ‚ecznoÅ›ci</string>
 
     <string name="shelf_workout">Trening</string>
 
-    <string name="shelf_youtube_charts">Listy przebojów YouTube</string>
+    <string name="shelf_youtube_charts">Listy przebojÃ³w YouTube</string>
 
     <string name="sort_date_added_oldest">Data dodania (najpierw najstarsze)</string>
 
     <string name="sort_date_added_toggle">Data dodania</string>
 
-    <string name="sort_default">Kolejność domyślna</string>
+    <string name="sort_default">KolejnoÅ›Ä‡ domyÅ›lna</string>
 
     <string name="sort_library">Sortuj</string>
 
     <string name="sort_songs">Sortuj utwory</string>
 
-    <string name="source_already_added">Już dodano jako %1$s</string>
+    <string name="source_already_added">JuÅ¼ dodano jako %1$s</string>
 
-    <string name="source_skipped_by_quality">Nie używane na %1$s · jakość ustawiona na %2$s</string>
+    <string name="source_skipped_by_quality">Nie uÅ¼ywane na %1$s Â· jakoÅ›Ä‡ ustawiona na %2$s</string>
 
-    <string name="source_unrecognised">Free Music nie rozpoznał tego linku</string>
+    <string name="source_unrecognised">Free Music nie rozpoznaÅ‚ tego linku</string>
 
     <string name="start_radio">Uruchom radio</string>
 
@@ -1160,17 +1185,17 @@
 
     <string name="subscriptions">Subskrypcje</string>
 
-    <string name="switch_account">Zmień konto</string>
+    <string name="switch_account">ZmieÅ„ konto</string>
 
-    <string name="switch_profile_hint">Zmień za pomocą awatara, a następnie użyj tego profilu.</string>
+    <string name="switch_profile_hint">ZmieÅ„ za pomocÄ… awatara, a nastÄ™pnie uÅ¼yj tego profilu.</string>
 
-    <string name="unsubscribe">Anuluj subskrypcję</string>
+    <string name="unsubscribe">Anuluj subskrypcjÄ™</string>
 
-    <string name="upgrade_quality">Ulepsz jakość</string>
+    <string name="upgrade_quality">Ulepsz jakoÅ›Ä‡</string>
 
-    <string name="use_this_channel">Użyj tego kanału</string>
+    <string name="use_this_channel">UÅ¼yj tego kanaÅ‚u</string>
 
-    <string name="use_this_profile">Użyj tego profilu</string>
+    <string name="use_this_profile">UÅ¼yj tego profilu</string>
 
 
     <string name="lyrics_offset">Lyrics offset</string>
@@ -1219,15 +1244,15 @@
 
     <string name="settings_search_hint">Search settings</string>
 
-    <string name="settings_search_empty">No settings match “%1$s”</string>
+    <string name="settings_search_empty">No settings match â€œ%1$sâ€</string>
 
-    <string name="prefer_music_only">Preferuj wersję muzyczną</string>
+    <string name="prefer_music_only">Preferuj wersjÄ™ muzycznÄ…</string>
 
-    <string name="prefer_music_only_subtitle">Dla teledysków pokazuje szczegóły wideo podczas wyszukiwania i ładowania wersji audio z katalogu</string>
+    <string name="prefer_music_only_subtitle">Dla teledyskÃ³w pokazuje szczegÃ³Å‚y wideo podczas wyszukiwania i Å‚adowania wersji audio z katalogu</string>
 
-    <string name="smart_version_alignment">Inteligentne dopasowanie dźwięku</string>
+    <string name="smart_version_alignment">Inteligentne dopasowanie dÅºwiÄ™ku</string>
 
-    <string name="smart_version_alignment_subtitle">Analizuje ścieżkę dźwiękową, by idealnie zgrać moment utworu (np. omijając intro w wideo)</string>
+    <string name="smart_version_alignment_subtitle">Analizuje Å›cieÅ¼kÄ™ dÅºwiÄ™kowÄ…, by idealnie zgraÄ‡ moment utworu (np. omijajÄ…c intro w wideo)</string>
 
     <string name="equalizer_footer">Shapes the sound inside Free Music, before it reaches the system.</string>
 
@@ -1265,8 +1290,8 @@
 
     <string name="equalizer_balance_footer">Shifts the sound towards one ear by quietening the other.</string>
     <string name="equalizer_bitstream_title">Teraz nieaktywny</string>
-    <string name="equalizer_bitstream_subtitle">Ten utwór trafia na wyjście bez dekodowania</string>
-    <string name="equalizer_bitstream_footer">Korektor działa na zdekodowanym dźwięku. Ten utwór jest przekazywany jako bitstream do zdekodowania przez twoje urządzenie, więc nie ma tu próbek do filtrowania.</string>
+    <string name="equalizer_bitstream_subtitle">Ten utwÃ³r trafia na wyjÅ›cie bez dekodowania</string>
+    <string name="equalizer_bitstream_footer">Korektor dziaÅ‚a na zdekodowanym dÅºwiÄ™ku. Ten utwÃ³r jest przekazywany jako bitstream do zdekodowania przez twoje urzÄ…dzenie, wiÄ™c nie ma tu prÃ³bek do filtrowania.</string>
 
     <string name="system_equalizer">System equalizer</string>
 
@@ -1325,7 +1350,7 @@
     <string name="medium_quality">Medium Quality</string>
 
     <string name="audio_pipeline">Audio Pipeline</string>
-    <string name="audio_pipeline_subtitle">Ścieżka sygnału na żywo, od dekodera do wyjścia</string>
+    <string name="audio_pipeline_subtitle">ÅšcieÅ¼ka sygnaÅ‚u na Å¼ywo, od dekodera do wyjÅ›cia</string>
 
     <string name="pipeline_track_info">Track Info</string>
 
@@ -1381,14 +1406,14 @@
 
     <string name="song_added_to_queue">Song added to queue</string>
     <string name="song_added_to_playlist">Dodano do playlisty</string>
-    <string name="song_already_in_playlist">Już jest na playliście</string>
-    <string name="party_queue_full">Kolejka jest pełna (maksymalnie %d utworów na imprezie)</string>
+    <string name="song_already_in_playlist">JuÅ¼ jest na playliÅ›cie</string>
+    <string name="party_queue_full">Kolejka jest peÅ‚na (maksymalnie %d utworÃ³w na imprezie)</string>
 
     <string name="paxsenix_api_key">PaxSenix API key</string>
 
-    <string name="paxsenix_api_key_configured">PaxSenix API key — configured</string>
+    <string name="paxsenix_api_key_configured">PaxSenix API key â€” configured</string>
 
-    <string name="paxsenix_api_key_missing">PaxSenix API key — optional, not configured</string>
+    <string name="paxsenix_api_key_missing">PaxSenix API key â€” optional, not configured</string>
 
     <string name="open_lyrics">Lyrics</string>
 
@@ -1402,7 +1427,7 @@
 
     <string name="hdmi_output">HDMI</string>
 
-    <string name="personal_phone">%1$s’s Phone</string>
+    <string name="personal_phone">%1$sâ€™s Phone</string>
 
     <string name="this_phone">This phone</string>
 
@@ -1414,16 +1439,16 @@
 
     <string name="notifications_empty">Na razie nic nowego</string>
 
-    <string name="notifications_unread">%1$d nieprzeczytanych powiadomień</string>
+    <string name="notifications_unread">%1$d nieprzeczytanych powiadomieÅ„</string>
 
-    <string name="notifications_update_available">Free Music %1$s jest dostępna</string>
+    <string name="notifications_update_available">Free Music %1$s jest dostÄ™pna</string>
 
-    <string name="notifications_saving">Zapisywanie · %1$d%%</string>
+    <string name="notifications_saving">Zapisywanie Â· %1$d%%</string>
 
     <string name="notifications_queued">W kolejce</string>
 
-    <string name="notifications_uploading">Wysyłanie · %1$d%%</string>
+    <string name="notifications_uploading">WysyÅ‚anie Â· %1$d%%</string>
 
-    <string name="notifications_queued_upload">W kolejce do wysłania</string>
+    <string name="notifications_queued_upload">W kolejce do wysÅ‚ania</string>
 
 </resources>

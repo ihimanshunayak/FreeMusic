@@ -144,7 +144,9 @@ import com.ihimanshunayak.freemusic.data.scrobbling.LastFM
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
 import com.ihimanshunayak.freemusic.data.settings.ThemeMode
+import com.ihimanshunayak.freemusic.data.profile.rememberProfileStats
 import com.ihimanshunayak.freemusic.ui.components.AccountProfileSelector
+import com.ihimanshunayak.freemusic.ui.components.EditProfileDialog
 import com.ihimanshunayak.freemusic.ui.screens.AccountAndScrobblingScreen
 import com.ihimanshunayak.freemusic.ui.screens.DiscordDialog
 import com.ihimanshunayak.freemusic.ui.screens.DiscordDialogHost
@@ -502,6 +504,8 @@ private fun FreeMusicApp(
     var showAccountSelector by remember { mutableStateOf(false) }
     var showListenBrainzLogin by remember { mutableStateOf(false) }
     var showLastfmLogin by remember { mutableStateOf(false) }
+    /** Whether the "Edit profile" sheet over the profile hero is open. */
+    var showEditProfile by remember { mutableStateOf(false) }
     var showWebDavEditor by remember { mutableStateOf(false) }
     var showSmbEditor by remember { mutableStateOf(false) }
     /**
@@ -2651,6 +2655,8 @@ private fun FreeMusicApp(
                             onOpenListenBrainzLogin = { showListenBrainzLogin = true },
                             onOpenLastfmLogin = { showLastfmLogin = true },
                             onOpenDiscord = { showDiscord = true },
+                            stats = rememberProfileStats(signedIn = signedIn),
+                            onEditProfile = { showEditProfile = true },
                             contentPadding = listPadding,
                         )
                     } else if (key == "sources") {
@@ -4699,6 +4705,15 @@ private fun FreeMusicApp(
                     showSettings = true
                 },
                 onDismiss = { showAccountSelector = false },
+            )
+        }
+
+        if (showEditProfile) {
+            BackHandler { showEditProfile = false }
+            EditProfileDialog(
+                account = account,
+                hazeState = hazeState,
+                onDismiss = { showEditProfile = false },
             )
         }
 

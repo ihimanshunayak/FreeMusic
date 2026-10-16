@@ -190,6 +190,31 @@
     <string name="connected">Connected</string>
     <string name="account_integrations">Account &amp; integrations</string>
     <string name="account_scrobbling">Account &amp; scrobbling</string>
+
+    <!-- Profile hero + edit profile dialog -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_signed_in_as">Signed in as %1$s</string>
+    <string name="profile_status_default">What\'s playing lately</string>
+    <string name="profile_bio_default">No bio yet</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_cancel">Cancel</string>
+    <string name="edit_profile_field_display_name">Display name</string>
+    <string name="edit_profile_field_status">Status</string>
+    <string name="edit_profile_field_bio">Bio</string>
+    <string name="edit_profile_avatar_alt">Profile picture</string>
+    <string name="edit_profile_change_avatar">Change picture</string>
+    <string name="edit_profile_remove_avatar">Remove</string>
+    <string name="edit_profile_display_name_hint">Visible to your connections</string>
+    <string name="edit_profile_status_hint">A short line about your listening mood</string>
+    <string name="edit_profile_bio_hint">A few lines about your music taste</string>
+    <string name="edit_profile_display_name_required">Display name cannot be empty</string>
+    <string name="edit_profile_status_too_long">Status is too long</string>
+    <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="stat_hours_listened">Hours listened</string>
+    <string name="stat_tracks_played">Tracks played</string>
+    <string name="stat_playlists">Playlists</string>
+    <string name="stat_sources">Sources</string>
     <string name="rich_presence">Rich presence</string>
     <string name="scrobbling">Scrobbling</string>
     <string name="now_playing">Now playing</string>

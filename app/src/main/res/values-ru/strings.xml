@@ -1,1166 +1,1191 @@
 <resources>
     <string name="app_name">Free Music</string>
-    <string name="playback_channel_name">Сейчас играет</string>
-    <string name="download_channel_name">Загрузки</string>
-    <string name="download_channel_description">Песни сохраняются в папку «Музыка»</string>
-    <string name="download_notification_title">Загрузка</string>
-    <string name="download_notification_starting">Начало</string>
-    <string name="download_notification_queued">%1$s · ещё %2$d в очереди</string>
-    <string name="upload_channel_name">Загрузки на сервер</string>
-    <string name="upload_channel_description">Песни, отправляемые на ваш сервер WebDAV</string>
-    <string name="upload_notification_title">Отправка</string>
-    <string name="upload_notification_queued">%1$s · ещё %2$d в очереди</string>
+    <string name="playback_channel_name">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="download_channel_name">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸</string>
+    <string name="download_channel_description">ÐŸÐµÑÐ½Ð¸ ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÑŽÑ‚ÑÑ Ð² Ð¿Ð°Ð¿ÐºÑƒ Â«ÐœÑƒÐ·Ñ‹ÐºÐ°Â»</string>
+    <string name="download_notification_title">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°</string>
+    <string name="download_notification_starting">ÐÐ°Ñ‡Ð°Ð»Ð¾</string>
+    <string name="download_notification_queued">%1$s Â· ÐµÑ‰Ñ‘ %2$d Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="upload_channel_name">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€</string>
+    <string name="upload_channel_description">ÐŸÐµÑÐ½Ð¸, Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼Ñ‹Ðµ Ð½Ð° Ð²Ð°Ñˆ ÑÐµÑ€Ð²ÐµÑ€ WebDAV</string>
+    <string name="upload_notification_title">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ°</string>
+    <string name="upload_notification_queued">%1$s Â· ÐµÑ‰Ñ‘ %2$d Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
     <plurals name="uploading_song_count">
-        <item quantity="one">Отправка %1$d песни</item>
-        <item quantity="few">Отправка %1$d песен</item>
-        <item quantity="many">Отправка %1$d песен</item>
-        <item quantity="other">Отправка %1$d песни</item>
+        <item quantity="one">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° %1$d Ð¿ÐµÑÐ½Ð¸</item>
+        <item quantity="few">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° %1$d Ð¿ÐµÑÐµÐ½</item>
+        <item quantity="many">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° %1$d Ð¿ÐµÑÐµÐ½</item>
+        <item quantity="other">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° %1$d Ð¿ÐµÑÐ½Ð¸</item>
     </plurals>
-    <string name="cancel">Отмена</string>
-    <string name="save">Сохранить</string>
-    <string name="close">Закрыть</string>
-    <string name="back">Назад</string>
-    <string name="settings">Настройки</string>
-    <string name="search">Поиск</string>
-    <string name="clear_search">Очистить поиск</string>
-    <string name="library">Библиотека</string>
-    <string name="home">Главная</string>
-    <string name="play">Играть</string>
-    <string name="explore">Обзор</string>
-    <string name="listen_now">Слушать сейчас</string>
-    <string name="downloads">Загрузки</string>
-    <string name="downloaded_songs">Загруженные песни</string>
-    <string name="local_music">Локальная музыка</string>
-    <string name="audio_files_on_device">Аудиофайлы на устройстве</string>
-    <string name="on_device">На устройстве</string>
-    <string name="playlists">Плейлисты</string>
-    <string name="new_playlist">Новый плейлист</string>
-    <string name="saved_to_youtube_music">Сохранено в YouTube Music</string>
-    <string name="my_playlists">Мои плейлисты</string>
-    <string name="playlist_empty">Этот плейлист пока пуст. Удерживайте трек в любом месте приложения и выберите этот плейлист, чтобы добавить его.</string>
-    <string name="playlist_limit_reached">Достигнут предел плейлистов</string>
-    <string name="device_playlists_unwritable">Это устройство сейчас не разрешает Free Music сохранять плейлисты, поэтому изменения исчезнут при закрытии приложения.</string>
-    <!-- Общие плейлисты и Blend. -->
-    <string name="shared_playlists">Общие плейлисты</string>
-    <string name="shared_playlist_new">Новый общий плейлист</string>
-    <string name="shared_playlist_name_hint">Название плейлиста</string>
-    <string name="shared_playlist_create">Создать</string>
-    <string name="shared_playlist_empty">Общих плейлистов пока нет. Создайте один и отправьте ссылку-приглашение тем, с кем хотите его собирать.</string>
-    <string name="shared_playlist_members">%1$d участников</string>
-    <string name="shared_playlist_songs">%1$d треков</string>
-    <string name="shared_playlist_invite">Пригласить людей</string>
-    <string name="shared_playlist_invite_title">Ссылка-приглашение</string>
-    <string name="shared_playlist_invite_body">Любой, у кого есть эта ссылка, может присоединиться и редактировать плейлист. Она действует семь дней.</string>
-    <string name="shared_playlist_invite_copy">Скопировать ссылку</string>
-    <string name="shared_playlist_invite_share">Поделиться</string>
-    <string name="shared_playlist_invite_copied">Ссылка скопирована</string>
-    <string name="shared_playlist_leave">Покинуть плейлист</string>
-    <string name="shared_playlist_leave_confirmation">Покинуть «%1$s»? Вернуться можно по новой ссылке-приглашению.</string>
-    <string name="shared_playlist_members_title">Участники</string>
-    <string name="shared_playlist_remove_member">Удалить</string>
-    <string name="shared_playlist_remove_member_confirmation">Удалить %1$s из «%2$s»? Добавленные треки останутся, но добавлять новые этот участник больше не сможет.</string>
-    <string name="shared_playlist_offline">Вы не в сети. Общие плейлисты загрузятся, когда связь вернётся.</string>
-    <string name="shared_playlist_not_durable">Сервер плейлистов сейчас не сохраняет на диск, поэтому общие плейлисты могут пропасть при его перезапуске.</string>
-    <string name="shared_playlist_added_by">Добавил(а) %1$s</string>
-    <string name="shared_playlist_owner">Владелец</string>
-    <string name="shared_playlist_owned_by_you">Этот плейлист ваш</string>
-    <string name="shared_playlist_sign_in_required">Войдите, чтобы создать общий плейлист.</string>
-    <string name="shared_playlist_add_to">Добавить в общий плейлист</string>
-    <string name="shared_playlist_added">Добавлено в «%1$s»</string>
-    <string name="shared_playlist_add_failed">Не удалось добавить в «%1$s»</string>
-    <string name="shared_playlist_created">«%1$s» создан</string>
+    <string name="cancel">ÐžÑ‚Ð¼ÐµÐ½Ð°</string>
+    <string name="save">Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ</string>
+    <string name="close">Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ</string>
+    <string name="back">ÐÐ°Ð·Ð°Ð´</string>
+    <string name="settings">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸</string>
+    <string name="search">ÐŸÐ¾Ð¸ÑÐº</string>
+    <string name="clear_search">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð¸ÑÐº</string>
+    <string name="library">Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ°</string>
+    <string name="home">Ð“Ð»Ð°Ð²Ð½Ð°Ñ</string>
+    <string name="play">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ</string>
+    <string name="explore">ÐžÐ±Ð·Ð¾Ñ€</string>
+    <string name="listen_now">Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
+    <string name="downloads">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸</string>
+    <string name="downloaded_songs">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ðµ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="local_music">Ð›Ð¾ÐºÐ°Ð»ÑŒÐ½Ð°Ñ Ð¼ÑƒÐ·Ñ‹ÐºÐ°</string>
+    <string name="audio_files_on_device">ÐÑƒÐ´Ð¸Ð¾Ñ„Ð°Ð¹Ð»Ñ‹ Ð½Ð° ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ</string>
+    <string name="on_device">ÐÐ° ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ</string>
+    <string name="playlists">ÐŸÐ»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
+    <string name="new_playlist">ÐÐ¾Ð²Ñ‹Ð¹ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="saved_to_youtube_music">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾ Ð² YouTube Music</string>
+    <string name="my_playlists">ÐœÐ¾Ð¸ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
+    <string name="playlist_empty">Ð­Ñ‚Ð¾Ñ‚ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚ Ð¿Ð¾ÐºÐ° Ð¿ÑƒÑÑ‚. Ð£Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°Ð¹Ñ‚Ðµ Ñ‚Ñ€ÐµÐº Ð² Ð»ÑŽÐ±Ð¾Ð¼ Ð¼ÐµÑÑ‚Ðµ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¸ Ð²Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÑ‚Ð¾Ñ‚ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐµÐ³Ð¾.</string>
+    <string name="playlist_limit_reached">Ð”Ð¾ÑÑ‚Ð¸Ð³Ð½ÑƒÑ‚ Ð¿Ñ€ÐµÐ´ÐµÐ» Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð²</string>
+    <string name="device_playlists_unwritable">Ð­Ñ‚Ð¾ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ ÑÐµÐ¹Ñ‡Ð°Ñ Ð½Ðµ Ñ€Ð°Ð·Ñ€ÐµÑˆÐ°ÐµÑ‚ Free Music ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÑ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ð¸ÑÑ‡ÐµÐ·Ð½ÑƒÑ‚ Ð¿Ñ€Ð¸ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ð¸ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ.</string>
+    <!-- ÐžÐ±Ñ‰Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ Ð¸ Blend. -->
+    <string name="shared_playlists">ÐžÐ±Ñ‰Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
+    <string name="shared_playlist_new">ÐÐ¾Ð²Ñ‹Ð¹ Ð¾Ð±Ñ‰Ð¸Ð¹ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="shared_playlist_name_hint">ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°</string>
+    <string name="shared_playlist_create">Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ</string>
+    <string name="shared_playlist_empty">ÐžÐ±Ñ‰Ð¸Ñ… Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ‚. Ð¡Ð¾Ð·Ð´Ð°Ð¹Ñ‚Ðµ Ð¾Ð´Ð¸Ð½ Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ ÑÑÑ‹Ð»ÐºÑƒ-Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ Ñ‚ÐµÐ¼, Ñ ÐºÐµÐ¼ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÐµÐ³Ð¾ ÑÐ¾Ð±Ð¸Ñ€Ð°Ñ‚ÑŒ.</string>
+    <string name="shared_playlist_members">%1$d ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ¾Ð²</string>
+    <string name="shared_playlist_songs">%1$d Ñ‚Ñ€ÐµÐºÐ¾Ð²</string>
+    <string name="shared_playlist_invite">ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ Ð»ÑŽÐ´ÐµÐ¹</string>
+    <string name="shared_playlist_invite_title">Ð¡ÑÑ‹Ð»ÐºÐ°-Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ</string>
+    <string name="shared_playlist_invite_body">Ð›ÑŽÐ±Ð¾Ð¹, Ñƒ ÐºÐ¾Ð³Ð¾ ÐµÑÑ‚ÑŒ ÑÑ‚Ð° ÑÑÑ‹Ð»ÐºÐ°, Ð¼Ð¾Ð¶ÐµÑ‚ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ð¸ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚. ÐžÐ½Ð° Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÑ‚ ÑÐµÐ¼ÑŒ Ð´Ð½ÐµÐ¹.</string>
+    <string name="shared_playlist_invite_copy">Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ</string>
+    <string name="shared_playlist_invite_share">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="shared_playlist_invite_copied">Ð¡ÑÑ‹Ð»ÐºÐ° ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°</string>
+    <string name="shared_playlist_leave">ÐŸÐ¾ÐºÐ¸Ð½ÑƒÑ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="shared_playlist_leave_confirmation">ÐŸÐ¾ÐºÐ¸Ð½ÑƒÑ‚ÑŒ Â«%1$sÂ»? Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ð¾ Ð½Ð¾Ð²Ð¾Ð¹ ÑÑÑ‹Ð»ÐºÐµ-Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸ÑŽ.</string>
+    <string name="shared_playlist_members_title">Ð£Ñ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ¸</string>
+    <string name="shared_playlist_remove_member">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ</string>
+    <string name="shared_playlist_remove_member_confirmation">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ %1$s Ð¸Ð· Â«%2$sÂ»? Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ Ñ‚Ñ€ÐµÐºÐ¸ Ð¾ÑÑ‚Ð°Ð½ÑƒÑ‚ÑÑ, Ð½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÑ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ðµ ÑÑ‚Ð¾Ñ‚ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸Ðº Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½Ðµ ÑÐ¼Ð¾Ð¶ÐµÑ‚.</string>
+    <string name="shared_playlist_offline">Ð’Ñ‹ Ð½Ðµ Ð² ÑÐµÑ‚Ð¸. ÐžÐ±Ñ‰Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ Ð·Ð°Ð³Ñ€ÑƒÐ·ÑÑ‚ÑÑ, ÐºÐ¾Ð³Ð´Ð° ÑÐ²ÑÐ·ÑŒ Ð²ÐµÑ€Ð½Ñ‘Ñ‚ÑÑ.</string>
+    <string name="shared_playlist_not_durable">Ð¡ÐµÑ€Ð²ÐµÑ€ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð² ÑÐµÐ¹Ñ‡Ð°Ñ Ð½Ðµ ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÐµÑ‚ Ð½Ð° Ð´Ð¸ÑÐº, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¾Ð±Ñ‰Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ Ð¼Ð¾Ð³ÑƒÑ‚ Ð¿Ñ€Ð¾Ð¿Ð°ÑÑ‚ÑŒ Ð¿Ñ€Ð¸ ÐµÐ³Ð¾ Ð¿ÐµÑ€ÐµÐ·Ð°Ð¿ÑƒÑÐºÐµ.</string>
+    <string name="shared_playlist_added_by">Ð”Ð¾Ð±Ð°Ð²Ð¸Ð»(Ð°) %1$s</string>
+    <string name="shared_playlist_owner">Ð’Ð»Ð°Ð´ÐµÐ»ÐµÑ†</string>
+    <string name="shared_playlist_owned_by_you">Ð­Ñ‚Ð¾Ñ‚ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚ Ð²Ð°Ñˆ</string>
+    <string name="shared_playlist_sign_in_required">Ð’Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¾Ð±Ñ‰Ð¸Ð¹ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚.</string>
+    <string name="shared_playlist_add_to">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Ð¾Ð±Ñ‰Ð¸Ð¹ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="shared_playlist_added">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ Ð² Â«%1$sÂ»</string>
+    <string name="shared_playlist_add_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Â«%1$sÂ»</string>
+    <string name="shared_playlist_created">Â«%1$sÂ» ÑÐ¾Ð·Ð´Ð°Ð½</string>
     <string name="shared_playlist_blend">Blend</string>
-    <string name="shared_playlist_blend_empty">Blend собирается сам из того, что слушают все. Он обновляется ежедневно, и вручную его не изменить.</string>
-    <string name="shared_playlist_compatibility">Музыкальная совместимость</string>
-    <string name="shared_playlist_compatibility_value">%1$d%% совпадения</string>
-    <string name="shared_playlist_code_join">Присоединиться по ссылке или коду</string>
-    <string name="shared_playlist_code_hint">Вставьте ссылку-приглашение</string>
-    <string name="shared_playlist_join">Присоединиться</string>
-    <string name="shared_playlist_invite_invalid">Это приглашение больше не действует.</string>
-    <string name="shared_playlist_invite_expired">Это приглашение истекло. Попросите новое.</string>
-    <string name="shared_playlist_invite_used">Это приглашение уже использовано.</string>
-    <string name="shared_playlist_invite_full">Этот плейлист заполнен.</string>
-    <string name="shared_playlist_join_title">Присоединиться к плейлисту</string>
-    <string name="shared_playlist_join_body">%1$s приглашает вас в «%2$s».</string>
-    <string name="shared_playlist_join_confirm">Присоединиться</string>
-    <string name="shared_playlist_joined">Вы присоединились к «%1$s»</string>
-    <string name="shared_playlist_loading">Загрузка плейлиста…</string>
-    <string name="loading">Загрузка…</string>
-    <string name="sign_in">Войти</string>
-    <string name="sign_out">Выйти</string>
-    <string name="signed_in">Вход выполнен</string>
-    <string name="not_signed_in">Вход не выполнен</string>
-    <string name="retry">Повторить</string>
-    <string name="shuffle">Перемешать</string>
-    <string name="more">Ещё</string>
-    <string name="add_to_playlist">Добавить в плейлист</string>
-    <string name="add_to_library">Добавить в библиотеку</string>
-    <string name="remove_from_library">Убрать из библиотеки</string>
-    <string name="download_all">Загрузить всё</string>
-    <string name="top_songs">Топ песен</string>
-    <string name="suggested">Рекомендации</string>
-    <string name="song_count">%1$d песня</string>
+    <string name="shared_playlist_blend_empty">Blend ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÑ‚ÑÑ ÑÐ°Ð¼ Ð¸Ð· Ñ‚Ð¾Ð³Ð¾, Ñ‡Ñ‚Ð¾ ÑÐ»ÑƒÑˆÐ°ÑŽÑ‚ Ð²ÑÐµ. ÐžÐ½ Ð¾Ð±Ð½Ð¾Ð²Ð»ÑÐµÑ‚ÑÑ ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½Ð¾, Ð¸ Ð²Ñ€ÑƒÑ‡Ð½ÑƒÑŽ ÐµÐ³Ð¾ Ð½Ðµ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ.</string>
+    <string name="shared_playlist_compatibility">ÐœÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½Ð°Ñ ÑÐ¾Ð²Ð¼ÐµÑÑ‚Ð¸Ð¼Ð¾ÑÑ‚ÑŒ</string>
+    <string name="shared_playlist_compatibility_value">%1$d%% ÑÐ¾Ð²Ð¿Ð°Ð´ÐµÐ½Ð¸Ñ</string>
+    <string name="shared_playlist_code_join">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ð¿Ð¾ ÑÑÑ‹Ð»ÐºÐµ Ð¸Ð»Ð¸ ÐºÐ¾Ð´Ñƒ</string>
+    <string name="shared_playlist_code_hint">Ð’ÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ ÑÑÑ‹Ð»ÐºÑƒ-Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ</string>
+    <string name="shared_playlist_join">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="shared_playlist_invite_invalid">Ð­Ñ‚Ð¾ Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð½Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÑ‚.</string>
+    <string name="shared_playlist_invite_expired">Ð­Ñ‚Ð¾ Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ Ð¸ÑÑ‚ÐµÐºÐ»Ð¾. ÐŸÐ¾Ð¿Ñ€Ð¾ÑÐ¸Ñ‚Ðµ Ð½Ð¾Ð²Ð¾Ðµ.</string>
+    <string name="shared_playlist_invite_used">Ð­Ñ‚Ð¾ Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ ÑƒÐ¶Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¾.</string>
+    <string name="shared_playlist_invite_full">Ð­Ñ‚Ð¾Ñ‚ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½.</string>
+    <string name="shared_playlist_join_title">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñƒ</string>
+    <string name="shared_playlist_join_body">%1$s Ð¿Ñ€Ð¸Ð³Ð»Ð°ÑˆÐ°ÐµÑ‚ Ð²Ð°Ñ Ð² Â«%2$sÂ».</string>
+    <string name="shared_playlist_join_confirm">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="shared_playlist_joined">Ð’Ñ‹ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ð»Ð¸ÑÑŒ Ðº Â«%1$sÂ»</string>
+    <string name="shared_playlist_loading">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°â€¦</string>
+    <string name="loading">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°â€¦</string>
+    <string name="sign_in">Ð’Ð¾Ð¹Ñ‚Ð¸</string>
+    <string name="sign_out">Ð’Ñ‹Ð¹Ñ‚Ð¸</string>
+    <string name="signed_in">Ð’Ñ…Ð¾Ð´ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½</string>
+    <string name="not_signed_in">Ð’Ñ…Ð¾Ð´ Ð½Ðµ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½</string>
+    <string name="retry">ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚ÑŒ</string>
+    <string name="shuffle">ÐŸÐµÑ€ÐµÐ¼ÐµÑˆÐ°Ñ‚ÑŒ</string>
+    <string name="more">Ð•Ñ‰Ñ‘</string>
+    <string name="add_to_playlist">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="add_to_library">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÑƒ</string>
+    <string name="remove_from_library">Ð£Ð±Ñ€Ð°Ñ‚ÑŒ Ð¸Ð· Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸</string>
+    <string name="download_all">Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Ð²ÑÑ‘</string>
+    <string name="top_songs">Ð¢Ð¾Ð¿ Ð¿ÐµÑÐµÐ½</string>
+    <string name="suggested">Ð ÐµÐºÐ¾Ð¼ÐµÐ½Ð´Ð°Ñ†Ð¸Ð¸</string>
+    <string name="song_count">%1$d Ð¿ÐµÑÐ½Ñ</string>
     <plurals name="song_count_plural">
-        <item quantity="one">%1$d песня</item>
-        <item quantity="few">%1$d песни</item>
-        <item quantity="many">%1$d песен</item>
-        <item quantity="other">%1$d песни</item>
+        <item quantity="one">%1$d Ð¿ÐµÑÐ½Ñ</item>
+        <item quantity="few">%1$d Ð¿ÐµÑÐ½Ð¸</item>
+        <item quantity="many">%1$d Ð¿ÐµÑÐµÐ½</item>
+        <item quantity="other">%1$d Ð¿ÐµÑÐ½Ð¸</item>
     </plurals>
     <plurals name="artist_count">
-        <item quantity="one">%1$d исполнитель</item>
-        <item quantity="few">%1$d исполнителя</item>
-        <item quantity="many">%1$d исполнителей</item>
-        <item quantity="other">%1$d исполнителя</item>
+        <item quantity="one">%1$d Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</item>
+        <item quantity="few">%1$d Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</item>
+        <item quantity="many">%1$d Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÐµÐ¹</item>
+        <item quantity="other">%1$d Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</item>
     </plurals>
     <plurals name="album_count">
-        <item quantity="one">%1$d альбом</item>
-        <item quantity="few">%1$d альбома</item>
-        <item quantity="many">%1$d альбомов</item>
-        <item quantity="other">%1$d альбома</item>
+        <item quantity="one">%1$d Ð°Ð»ÑŒÐ±Ð¾Ð¼</item>
+        <item quantity="few">%1$d Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°</item>
+        <item quantity="many">%1$d Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð²</item>
+        <item quantity="other">%1$d Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°</item>
     </plurals>
-    <string name="songs">Песни</string>
-    <string name="artists">Исполнители</string>
-    <string name="albums">Альбомы</string>
-    <string name="no_album_metadata">Ни один из этих треков не указывает свой альбом.</string>
-    <string name="search_empty">Ищите миллионы песен на YouTube Music.</string>
-    <string name="recent_searches">Недавние запросы</string>
-    <string name="clear">Очистить</string>
-    <string name="search_hint">Исполнители, песни, тексты и многое другое</string>
-    <string name="recent_search_edit">Изменить «%1$s»</string>
-    <string name="recent_search_remove">Удалить «%1$s» из недавних запросов</string>
-    <string name="storage_required_save">Для сохранения песен нужен доступ к хранилищу</string>
-    <string name="storage_required_read">Для чтения локальных аудиофайлов нужно разрешение на доступ к хранилищу</string>
-    <string name="sharing_coming_soon">Функция «Поделиться» скоро появится</string>
-    <string name="already_downloaded">Уже загружено</string>
+    <string name="songs">ÐŸÐµÑÐ½Ð¸</string>
+    <string name="artists">Ð˜ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ð¸</string>
+    <string name="albums">ÐÐ»ÑŒÐ±Ð¾Ð¼Ñ‹</string>
+    <string name="no_album_metadata">ÐÐ¸ Ð¾Ð´Ð¸Ð½ Ð¸Ð· ÑÑ‚Ð¸Ñ… Ñ‚Ñ€ÐµÐºÐ¾Ð² Ð½Ðµ ÑƒÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ ÑÐ²Ð¾Ð¹ Ð°Ð»ÑŒÐ±Ð¾Ð¼.</string>
+    <string name="search_empty">Ð˜Ñ‰Ð¸Ñ‚Ðµ Ð¼Ð¸Ð»Ð»Ð¸Ð¾Ð½Ñ‹ Ð¿ÐµÑÐµÐ½ Ð½Ð° YouTube Music.</string>
+    <string name="recent_searches">ÐÐµÐ´Ð°Ð²Ð½Ð¸Ðµ Ð·Ð°Ð¿Ñ€Ð¾ÑÑ‹</string>
+    <string name="clear">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ</string>
+    <string name="search_hint">Ð˜ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ð¸, Ð¿ÐµÑÐ½Ð¸, Ñ‚ÐµÐºÑÑ‚Ñ‹ Ð¸ Ð¼Ð½Ð¾Ð³Ð¾Ðµ Ð´Ñ€ÑƒÐ³Ð¾Ðµ</string>
+    <string name="recent_search_edit">Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Â«%1$sÂ»</string>
+    <string name="recent_search_remove">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Â«%1$sÂ» Ð¸Ð· Ð½ÐµÐ´Ð°Ð²Ð½Ð¸Ñ… Ð·Ð°Ð¿Ñ€Ð¾ÑÐ¾Ð²</string>
+    <string name="storage_required_save">Ð”Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð¿ÐµÑÐµÐ½ Ð½ÑƒÐ¶ÐµÐ½ Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ñ…Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ñƒ</string>
+    <string name="storage_required_read">Ð”Ð»Ñ Ñ‡Ñ‚ÐµÐ½Ð¸Ñ Ð»Ð¾ÐºÐ°Ð»ÑŒÐ½Ñ‹Ñ… Ð°ÑƒÐ´Ð¸Ð¾Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð½ÑƒÐ¶Ð½Ð¾ Ñ€Ð°Ð·Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ñ…Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ñƒ</string>
+    <string name="sharing_coming_soon">Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Â«ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑÂ» ÑÐºÐ¾Ñ€Ð¾ Ð¿Ð¾ÑÐ²Ð¸Ñ‚ÑÑ</string>
+    <string name="already_downloaded">Ð£Ð¶Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾</string>
     <plurals name="downloading_song_count">
-        <item quantity="one">Загрузка %1$d песни</item>
-        <item quantity="few">Загрузка %1$d песен</item>
-        <item quantity="many">Загрузка %1$d песен</item>
-        <item quantity="other">Загрузка %1$d песни</item>
+        <item quantity="one">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° %1$d Ð¿ÐµÑÐ½Ð¸</item>
+        <item quantity="few">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° %1$d Ð¿ÐµÑÐµÐ½</item>
+        <item quantity="many">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° %1$d Ð¿ÐµÑÐµÐ½</item>
+        <item quantity="other">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° %1$d Ð¿ÐµÑÐ½Ð¸</item>
     </plurals>
-    <string name="source">Источники</string>
-    <string name="lossless_audio">Аудио без потерь</string>
-    <string name="prefer_lossless">Предпочитать без потерь</string>
-    <string name="lossless_source_subtitle">FLAC и ALAC прямо из источника</string>
-    <string name="overridden">Переопределено</string>
-    <string name="add_module_source">Добавить источник-модуль</string>
-    <string name="remove_source">Удалить этот источник</string>
-    <string name="test">Проверить</string>
-    <string name="testing">Проверка…</string>
-    <string name="connected">Подключено</string>
-    <string name="account_integrations">Аккаунт и интеграции</string>
-    <string name="account_scrobbling">Аккаунт и скробблинг</string>
+    <string name="source">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸</string>
+    <string name="lossless_audio">ÐÑƒÐ´Ð¸Ð¾ Ð±ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ</string>
+    <string name="prefer_lossless">ÐŸÑ€ÐµÐ´Ð¿Ð¾Ñ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð±ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ</string>
+    <string name="lossless_source_subtitle">FLAC Ð¸ ALAC Ð¿Ñ€ÑÐ¼Ð¾ Ð¸Ð· Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ°</string>
+    <string name="overridden">ÐŸÐµÑ€ÐµÐ¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¾</string>
+    <string name="add_module_source">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº-Ð¼Ð¾Ð´ÑƒÐ»ÑŒ</string>
+    <string name="remove_source">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾Ñ‚ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº</string>
+    <string name="test">ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ</string>
+    <string name="testing">ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°â€¦</string>
+    <string name="connected">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="account_integrations">ÐÐºÐºÐ°ÑƒÐ½Ñ‚ Ð¸ Ð¸Ð½Ñ‚ÐµÐ³Ñ€Ð°Ñ†Ð¸Ð¸</string>
+    <string name="account_scrobbling">ÐÐºÐºÐ°ÑƒÐ½Ñ‚ Ð¸ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³</string>
+
+    <!-- Profile hero + edit profile dialog -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_signed_in_as">Signed in as %1$s</string>
+    <string name="profile_status_default">What\'s playing lately</string>
+    <string name="profile_bio_default">No bio yet</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_cancel">Cancel</string>
+    <string name="edit_profile_field_display_name">Display name</string>
+    <string name="edit_profile_field_status">Status</string>
+    <string name="edit_profile_field_bio">Bio</string>
+    <string name="edit_profile_avatar_alt">Profile picture</string>
+    <string name="edit_profile_change_avatar">Change picture</string>
+    <string name="edit_profile_remove_avatar">Remove</string>
+    <string name="edit_profile_display_name_hint">Visible to your connections</string>
+    <string name="edit_profile_status_hint">A short line about your listening mood</string>
+    <string name="edit_profile_bio_hint">A few lines about your music taste</string>
+    <string name="edit_profile_display_name_required">Display name cannot be empty</string>
+    <string name="edit_profile_status_too_long">Status is too long</string>
+    <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="stat_hours_listened">Hours listened</string>
+    <string name="stat_tracks_played">Tracks played</string>
+    <string name="stat_playlists">Playlists</string>
+    <string name="stat_sources">Sources</string>
     <string name="rich_presence">Rich Presence</string>
-    <string name="scrobbling">Скробблинг</string>
-    <string name="now_playing">Сейчас играет</string>
-    <string name="next_in_queue">Следующая в очереди</string>
-    <string name="next_from">Далее из: %1$s</string>
-    <string name="selected">Выбрано</string>
-    <string name="password">Пароль</string>
-    <string name="username">Имя пользователя</string>
-    <string name="login_failed">Не удалось войти</string>
-    <string name="song_cache_cleared">Кэш песен очищен</string>
-    <string name="image_cache_cleared">Кэш изображений очищен</string>
-    <string name="no_equalizer">На этом устройстве нет системного эквалайзера</string>
-    <string name="no_dolby_atmos">На этом устройстве нет панели Dolby Atmos</string>
-    <string name="dolby_atmos_open_failed">Не удалось открыть настройки Dolby Atmos</string>
-    <string name="update_available">Доступно обновление: v%1$s</string>
-    <string name="software_update">Обновление ПО</string>
-    <string name="update_available_body">Free Music %1$s доступен для загрузки.</string>
-    <string name="update_downloading_body">Загрузка Free Music %1$s…</string>
-    <string name="update_ready_body">Free Music %1$s готов к установке.</string>
-    <string name="update_failed_body">Не удалось загрузить Free Music %1$s.</string>
-    <string name="download_now">Загрузить сейчас</string>
-    <string name="install_now">Установить сейчас</string>
-    <string name="later">Позже</string>
-    <string name="remind_me_later">Напомнить позже</string>
-    <string name="try_again">Повторить попытку</string>
-    <string name="open_releases_page">Открыть страницу релизов</string>
-    <string name="whats_new">Что нового</string>
-    <string name="log_copied">Журнал скопирован · %1$d строк</string>
-    <string name="sign_in_youtube_music">Войти в YouTube Music</string>
-    <string name="sign_in_discord">Войти в Discord</string>
-    <string name="personalized_recommendations">Получайте персональные рекомендации</string>
-    <string name="play_next">Следующим</string>
-    <string name="queue">Очередь</string>
-    <string name="source_setup_required">Нажмите, чтобы завершить настройку</string>
-    <string name="source_unreachable">Сейчас недоступно · %1$s</string>
-    <string name="checking">Проверка…</string>
-    <string name="failed">Ошибка</string>
-    <string name="widget_square_label">Сейчас играет 2×2</string>
-    <string name="widget_wide_label">Сейчас играет 4×2</string>
-    <string name="widget_square_description">Обложка альбома с элементами управления воспроизведением, квадратная.</string>
-    <string name="widget_wide_description">Обложка альбома с названием трека и элементами управления, во всю ширину.</string>
-    <string name="widget_play">Играть</string>
-    <string name="widget_pause">Пауза</string>
-    <string name="widget_next">Далее</string>
-    <string name="widget_previous">Назад</string>
-    <string name="widget_artwork">Обложка альбома</string>
-    <string name="widget_nothing_played">Пока ничего не воспроизводилось</string>
-    <string name="widget_open_freemusic">Открыть Free Music</string>
-    <string name="widget_preview_title">Название песни</string>
-    <string name="widget_preview_artist">Исполнитель</string>
-    <string name="widget_pill_label">Сейчас играет 4×1</string>
-    <string name="widget_pill_description">Трек с лайком, перемешиванием и управлением воспроизведением в одну строку.</string>
-    <string name="widget_preview_pill">Название песни - Исполнитель</string>
-    <string name="download_quality">Качество загрузки</string>
-    <string name="download_wifi_only">Загружать только по Wi-Fi</string>
-    <string name="spatial_audio">Пространственный звук</string>
-    <string name="spatial_audio_subtitle">Расширяет стереодорожки для более глубокого погружения</string>
-    <string name="spatial_audio_atmos_subtitle">Приостановлено для этого трека — Dolby Atmos уже пространственный</string>
-    <string name="animated_cover_cellular">Воспроизводить анимированную обложку через мобильные данные</string>
+    <string name="scrobbling">Ð¡ÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³</string>
+    <string name="now_playing">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="next_in_queue">Ð¡Ð»ÐµÐ´ÑƒÑŽÑ‰Ð°Ñ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="next_from">Ð”Ð°Ð»ÐµÐµ Ð¸Ð·: %1$s</string>
+    <string name="selected">Ð’Ñ‹Ð±Ñ€Ð°Ð½Ð¾</string>
+    <string name="password">ÐŸÐ°Ñ€Ð¾Ð»ÑŒ</string>
+    <string name="username">Ð˜Ð¼Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ</string>
+    <string name="login_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð²Ð¾Ð¹Ñ‚Ð¸</string>
+    <string name="song_cache_cleared">ÐšÑÑˆ Ð¿ÐµÑÐµÐ½ Ð¾Ñ‡Ð¸Ñ‰ÐµÐ½</string>
+    <string name="image_cache_cleared">ÐšÑÑˆ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ð¹ Ð¾Ñ‡Ð¸Ñ‰ÐµÐ½</string>
+    <string name="no_equalizer">ÐÐ° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð½ÐµÑ‚ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ð¾Ð³Ð¾ ÑÐºÐ²Ð°Ð»Ð°Ð¹Ð·ÐµÑ€Ð°</string>
+    <string name="no_dolby_atmos">ÐÐ° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð½ÐµÑ‚ Ð¿Ð°Ð½ÐµÐ»Ð¸ Dolby Atmos</string>
+    <string name="dolby_atmos_open_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Dolby Atmos</string>
+    <string name="update_available">Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ: v%1$s</string>
+    <string name="software_update">ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÐž</string>
+    <string name="update_available_body">Free Music %1$s Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Ð´Ð»Ñ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸.</string>
+    <string name="update_downloading_body">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Free Music %1$sâ€¦</string>
+    <string name="update_ready_body">Free Music %1$s Ð³Ð¾Ñ‚Ð¾Ð² Ðº ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐµ.</string>
+    <string name="update_failed_body">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ Free Music %1$s.</string>
+    <string name="download_now">Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
+    <string name="install_now">Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
+    <string name="later">ÐŸÐ¾Ð·Ð¶Ðµ</string>
+    <string name="remind_me_later">ÐÐ°Ð¿Ð¾Ð¼Ð½Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð·Ð¶Ðµ</string>
+    <string name="try_again">ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð¿Ñ‹Ñ‚ÐºÑƒ</string>
+    <string name="open_releases_page">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñƒ Ñ€ÐµÐ»Ð¸Ð·Ð¾Ð²</string>
+    <string name="whats_new">Ð§Ñ‚Ð¾ Ð½Ð¾Ð²Ð¾Ð³Ð¾</string>
+    <string name="log_copied">Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½ Â· %1$d ÑÑ‚Ñ€Ð¾Ðº</string>
+    <string name="sign_in_youtube_music">Ð’Ð¾Ð¹Ñ‚Ð¸ Ð² YouTube Music</string>
+    <string name="sign_in_discord">Ð’Ð¾Ð¹Ñ‚Ð¸ Ð² Discord</string>
+    <string name="personalized_recommendations">ÐŸÐ¾Ð»ÑƒÑ‡Ð°Ð¹Ñ‚Ðµ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ñ€ÐµÐºÐ¾Ð¼ÐµÐ½Ð´Ð°Ñ†Ð¸Ð¸</string>
+    <string name="play_next">Ð¡Ð»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼</string>
+    <string name="queue">ÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ</string>
+    <string name="source_setup_required">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÑƒ</string>
+    <string name="source_unreachable">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ Â· %1$s</string>
+    <string name="checking">ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°â€¦</string>
+    <string name="failed">ÐžÑˆÐ¸Ð±ÐºÐ°</string>
+    <string name="widget_square_label">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚ 2Ã—2</string>
+    <string name="widget_wide_label">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚ 4Ã—2</string>
+    <string name="widget_square_description">ÐžÐ±Ð»Ð¾Ð¶ÐºÐ° Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð° Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸ÐµÐ¼, ÐºÐ²Ð°Ð´Ñ€Ð°Ñ‚Ð½Ð°Ñ.</string>
+    <string name="widget_wide_description">ÐžÐ±Ð»Ð¾Ð¶ÐºÐ° Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð° Ñ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÐµÐ¼ Ñ‚Ñ€ÐµÐºÐ° Ð¸ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ, Ð²Ð¾ Ð²ÑÑŽ ÑˆÐ¸Ñ€Ð¸Ð½Ñƒ.</string>
+    <string name="widget_play">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ</string>
+    <string name="widget_pause">ÐŸÐ°ÑƒÐ·Ð°</string>
+    <string name="widget_next">Ð”Ð°Ð»ÐµÐµ</string>
+    <string name="widget_previous">ÐÐ°Ð·Ð°Ð´</string>
+    <string name="widget_artwork">ÐžÐ±Ð»Ð¾Ð¶ÐºÐ° Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°</string>
+    <string name="widget_nothing_played">ÐŸÐ¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ð»Ð¾ÑÑŒ</string>
+    <string name="widget_open_freemusic">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Free Music</string>
+    <string name="widget_preview_title">ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="widget_preview_artist">Ð˜ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
+    <string name="widget_pill_label">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚ 4Ã—1</string>
+    <string name="widget_pill_description">Ð¢Ñ€ÐµÐº Ñ Ð»Ð°Ð¹ÐºÐ¾Ð¼, Ð¿ÐµÑ€ÐµÐ¼ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸ÐµÐ¼ Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸ÐµÐ¼ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸ÐµÐ¼ Ð² Ð¾Ð´Ð½Ñƒ ÑÑ‚Ñ€Ð¾ÐºÑƒ.</string>
+    <string name="widget_preview_pill">ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿ÐµÑÐ½Ð¸ - Ð˜ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
+    <string name="download_quality">ÐšÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸</string>
+    <string name="download_wifi_only">Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ð¾ Wi-Fi</string>
+    <string name="spatial_audio">ÐŸÑ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹ Ð·Ð²ÑƒÐº</string>
+    <string name="spatial_audio_subtitle">Ð Ð°ÑÑˆÐ¸Ñ€ÑÐµÑ‚ ÑÑ‚ÐµÑ€ÐµÐ¾Ð´Ð¾Ñ€Ð¾Ð¶ÐºÐ¸ Ð´Ð»Ñ Ð±Ð¾Ð»ÐµÐµ Ð³Ð»ÑƒÐ±Ð¾ÐºÐ¾Ð³Ð¾ Ð¿Ð¾Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¸Ñ</string>
+    <string name="spatial_audio_atmos_subtitle">ÐŸÑ€Ð¸Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð´Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ Ñ‚Ñ€ÐµÐºÐ° â€” Dolby Atmos ÑƒÐ¶Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹</string>
+    <string name="animated_cover_cellular">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð°Ð½Ð¸Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½ÑƒÑŽ Ð¾Ð±Ð»Ð¾Ð¶ÐºÑƒ Ñ‡ÐµÑ€ÐµÐ· Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ</string>
     <string name="replay">Replay</string>
-    <string name="replay_subtitle">Ваши любимые песни, исполнители, альбомы и жанры</string>
-    <string name="work_out_genres">Определять жанры</string>
-    <string name="export_data">Экспорт данных</string>
-    <string name="export_data_subtitle">Настройки, история прослушивания и плейлисты в одном файле JSON</string>
-    <string name="import_data">Импорт данных</string>
-    <string name="import_data_subtitle">Заменяет настройки и историю на этом устройстве и объединяет его плейлисты</string>
-    <string name="import_backup_title">Импортировать резервную копию?</string>
-    <string name="choose_file">Выбрать файл</string>
-    <string name="top_artists">Топ исполнителей</string>
-    <string name="top_albums">Топ альбомов</string>
-    <string name="top_genres">Топ жанров</string>
-    <string name="cancel_all">Отменить всё</string>
-    <string name="language">Язык</string>
-    <string name="app_language">Язык приложения</string>
-    <string name="app_language_description">Выберите язык, используемый в Free Music.</string>
-    <string name="english">Английский</string>
-    <string name="spanish">Испанский</string>
-    <string name="french">Французский</string>
-    <string name="german">Немецкий</string>
-    <string name="polish">Польский</string>
-    <string name="portuguese">Португальский</string>
-    <string name="indonesian">Индонезийский</string>
-    <string name="hindi">Хинди</string>
-    <string name="japanese">Японский</string>
-    <string name="russian">Русский</string>
-    <string name="chinese">Китайский (упрощённый)</string>
-    <string name="hebrew">Иврит</string>
-    <string name="italian">Итальянский</string>
-    <string name="turkish">Турецкий</string>
-    <string name="thai">Тайский</string>
-    <string name="show_all">Показать все</string>
-    <string name="grid_view">Сетка</string>
-    <string name="list_view">Список</string>
-    <string name="switch_to_grid_view">Переключить на сетку</string>
-    <string name="switch_to_list_view">Переключить на список</string>
-    <string name="audio_quality">Качество звука</string>
-    <string name="playback">Воспроизведение</string>
-    <string name="appearance">Внешний вид</string>
-    <string name="storage">Хранилище</string>
-    <string name="your_data">Ваши данные</string>
-    <string name="miscellaneous">Разное</string>
-    <string name="lossless_hq_audio">Без потерь / HQ-аудио</string>
-    <string name="on_wifi">По Wi-Fi</string>
-    <string name="on_mobile_data">По мобильным данным</string>
-    <string name="in_use">Используется</string>
-    <string name="blocking">Блокирует</string>
-    <string name="crossfade">Кроссфейд</string>
-    <string name="crossfade_subtitle">Плавно переходит от одного трека к другому</string>
-    <string name="automix">Автомикс [БЕТА]</string>
-    <string name="skip_silence">Пропускать тишину</string>
-    <string name="skip_silence_subtitle">Обрезает паузы длиннее секунды</string>
-    <string name="skip_silence_float_subtitle">Недоступно при 32-битном выводе с плавающей точкой</string>
-    <string name="music_haptics">Музыкальная тактильность</string>
-    <string name="music_haptics_subtitle">Чувствуйте ритм вместе с музыкой</string>
-    <string name="music_haptics_warning">Вибрационный мотор работает всю песню, поэтому батарея расходуется заметно быстрее.</string>
-    <string name="music_haptics_low_subtitle">Самое лёгкое ощущение</string>
-    <string name="music_haptics_medium_subtitle">Сбалансированно</string>
-    <string name="music_haptics_high_subtitle">Самое сильное — лучше всего в кармане</string>
-    <string name="equalizer">Эквалайзер</string>
-    <string name="equalizer_subtitle">Системная панель вашего устройства</string>
-    <string name="show_nerd_stats">Показывать техническую статистику</string>
-    <string name="show_nerd_stats_subtitle">Кодек, битрейт и частота дискретизации в плеере</string>
-    <string name="theme">Тема</string>
-    <string name="reduce_animation">Уменьшить анимацию</string>
-    <string name="reduce_animation_subtitle">Останавливает градиент главного плеера вместо плавного движения</string>
-    <string name="reduce_dynamic_blur">Уменьшить динамическое размытие</string>
-    <string name="reduce_dynamic_blur_subtitle">Заменяет матовое стекло сплошной заливкой во всём приложении</string>
-    <string name="full_screen_cover_art">Обложка на весь экран</string>
-    <string name="player_carousel">Смахивание обложки</string>
-    <string name="player_carousel_subtitle">Проведите по обложке в сторону, чтобы показать следующий и предыдущий трек, как колоду пластинок. Выключено — обложка остаётся как сейчас.</string>
-    <string name="animated_cover_art">Анимированная обложка</string>
-    <string name="synced_lyrics">Синхронизированный текст</string>
-    <string name="synced_lyrics_subtitle">Подсвечивает слова в плеере по мере исполнения</string>
-    <string name="lyrics_sources">Источники текстов</string>
-    <string name="song_cache_limit">Лимит кэша песен</string>
-    <string name="clear_song_cache">Очистить кэш песен</string>
-    <string name="clear_song_cache_subtitle">Освобождает место, занятое загруженным аудио</string>
-    <string name="clear_image_cache">Очистить кэш изображений</string>
-    <string name="clear_image_cache_subtitle">Освобождает место, занятое обложками альбомов</string>
-    <string name="play_next_on_swipe">Играть следующим при свайпе</string>
-    <string name="dont_repeat_songs">Не повторять песни в текущей сессии</string>
-    <string name="stop_music_on_close">Останавливать музыку при закрытии из недавних</string>
-    <string name="stop_music_on_close_subtitle">Останавливает воспроизведение при удалении приложения из недавних</string>
-    <string name="hide_volume_bar">Скрыть полосу громкости</string>
-    <string name="hide_volume_bar_subtitle">Убирает ползунок громкости с главного плеера</string>
-    <string name="hide_song_status">Скрыть статус песни</string>
-    <string name="hide_song_status_subtitle">Скрывает текст «Играет из» или «Воспроизводит» в основном плеере</string>
-    <string name="off">Выкл</string>
-    <string name="low">Низкое</string>
-    <string name="medium">Среднее</string>
-    <string name="high">Высокое</string>
-    <string name="standard">Стандартное</string>
-    <string name="lossless">Без потерь</string>
-    <string name="system">Системная</string>
-    <string name="light">Светлая</string>
-    <string name="dark">Тёмная</string>
-    <string name="full_screen_cover_art_subtitle">Растягивает обложку до краёв плеера вместо квадратного варианта</string>
-    <string name="animated_cover_art_subtitle">Воспроизводит зацикленное видео, которое есть у некоторых релизов вместо неподвижной обложки</string>
-    <string name="dont_repeat_songs_subtitle">Автовоспроизведение не будет предлагать уже сыгранную или предложенную в этой сессии песню</string>
-    <string name="download_quality_subtitle">%1$s за трек, независимо от соединения</string>
-    <string name="filter_non_music_audio">Фильтровать немузыкальное аудио</string>
-    <string name="filter_non_music_audio_subtitle">Скрывает клипы короче 30 секунд, файлы WAV, голосовые заметки, записи и системные звуки</string>
-    <string name="performance">Производительность</string>
-    <string name="high_performance_mode">Режим высокой производительности</string>
-    <string name="high_performance_subtitle">Использует полную анимацию и размытие, а также запрашивает более высокую частоту обновления экрана</string>
-    <string name="high_performance_active">Запрошена частота %1$d Гц. Android может снизить её при необходимости.</string>
-    <string name="beta">Бета</string>
-    <string name="refresh_rate">Частота обновления</string>
-    <string name="high_performance_before_enabling">Перед включением</string>
-    <string name="high_performance_battery_warning">Сначала установите для использования батареи Free Music значение «Без ограничений». Более высокая частота обновления расходует больше заряда батареи, ресурсов процессора и графического процессора и может нагревать устройство.</string>
-    <string name="open_battery_settings">Открыть настройки батареи</string>
-    <string name="enable_high_performance_title">Включить режим высокой производительности?</string>
-    <string name="enable_high_performance_confirmation">Включайте только если для использования батареи Free Music установлено значение «Без ограничений». Android всё равно может ограничивать частоту обновления, если устройство нагревается или заряд низкий.</string>
-    <string name="enable">Включить</string>
-    <string name="not_yet">Не сейчас</string>
-    <string name="activity">Активность</string>
-    <string name="activity_competing">Соревнуется</string>
-    <string name="activity_dialog_message">Глагол, отображаемый над карточкой.</string>
-    <string name="activity_listening">Слушает</string>
-    <string name="activity_name_message">То, что стоит после глагола в профиле. Оставьте пустым, чтобы использовать %1$s.</string>
-    <string name="activity_playing">Играет</string>
-    <string name="activity_watching">Смотрит</string>
-    <string name="add_to_queue">Добавить в очередь</string>
-    <string name="after_this_song">После этой песни</string>
-    <string name="always_on">Всегда включено</string>
-    <string name="api_token">API-токен</string>
-    <string name="audio_quality_connection">Через %1$s</string>
-    <string name="autoplay">Автовоспроизведение</string>
-    <string name="back_in_future_version">Вернётся в будущей версии</string>
-    <string name="buttons">Кнопки</string>
-    <string name="clear_name">Очистить имя</string>
-    <string name="close_lyrics">Закрыть текст песни</string>
-    <string name="translate_lyrics">Перевести текст</string>
-    <string name="romanize_lyrics">Транслитерировать текст</string>
-    <string name="show_original_lyrics">Показать оригинал</string>
-    <string name="translating_lyrics_to">Перевод на %1$s…</string>
-    <string name="lyrics_translated_to">Переведено на %1$s</string>
-    <string name="romanizing_lyrics">Транслитерация текста…</string>
-    <string name="lyrics_romanized">Произношение латиницей</string>
-    <string name="lyrics_already_romanized">Этот текст уже написан латиницей</string>
-    <string name="lyrics_romanization_unavailable">Транслитерация недоступна для этого текста</string>
-    <string name="lyrics_already_in_language">Текст уже на языке %1$s</string>
-    <string name="lyrics_translation_unavailable">Перевод сейчас недоступен</string>
-    <string name="connect_account_first">Сначала подключите аккаунт</string>
-    <string name="connected_presence_off">Подключено, Presence отключён</string>
-    <string name="copy_log">Скопировать журнал</string>
-    <string name="couldnt_find">Не удалось найти %1$s</string>
-    <string name="couldnt_open_link">Не удалось открыть эту ссылку</string>
-    <string name="create_playlist">Создать плейлист</string>
-    <string name="customize_card">Настроить карточку</string>
-    <string name="customize_card_subtitle">Статус, текст и обе кнопки</string>
-    <string name="delete">Удалить</string>
-    <string name="disconnect">Отключить</string>
+    <string name="replay_subtitle">Ð’Ð°ÑˆÐ¸ Ð»ÑŽÐ±Ð¸Ð¼Ñ‹Ðµ Ð¿ÐµÑÐ½Ð¸, Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ð¸, Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñ‹ Ð¸ Ð¶Ð°Ð½Ñ€Ñ‹</string>
+    <string name="work_out_genres">ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÑ‚ÑŒ Ð¶Ð°Ð½Ñ€Ñ‹</string>
+    <string name="export_data">Ð­ÐºÑÐ¿Ð¾Ñ€Ñ‚ Ð´Ð°Ð½Ð½Ñ‹Ñ…</string>
+    <string name="export_data_subtitle">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸, Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ Ð² Ð¾Ð´Ð½Ð¾Ð¼ Ñ„Ð°Ð¹Ð»Ðµ JSON</string>
+    <string name="import_data">Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚ Ð´Ð°Ð½Ð½Ñ‹Ñ…</string>
+    <string name="import_data_subtitle">Ð—Ð°Ð¼ÐµÐ½ÑÐµÑ‚ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð¸ Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½ÑÐµÑ‚ ÐµÐ³Ð¾ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
+    <string name="import_backup_title">Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÐµÑ€Ð²Ð½ÑƒÑŽ ÐºÐ¾Ð¿Ð¸ÑŽ?</string>
+    <string name="choose_file">Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»</string>
+    <string name="top_artists">Ð¢Ð¾Ð¿ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÐµÐ¹</string>
+    <string name="top_albums">Ð¢Ð¾Ð¿ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð²</string>
+    <string name="top_genres">Ð¢Ð¾Ð¿ Ð¶Ð°Ð½Ñ€Ð¾Ð²</string>
+    <string name="cancel_all">ÐžÑ‚Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð²ÑÑ‘</string>
+    <string name="language">Ð¯Ð·Ñ‹Ðº</string>
+    <string name="app_language">Ð¯Ð·Ñ‹Ðº Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ</string>
+    <string name="app_language_description">Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ·Ñ‹Ðº, Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ð¹ Ð² Free Music.</string>
+    <string name="english">ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸Ð¹</string>
+    <string name="spanish">Ð˜ÑÐ¿Ð°Ð½ÑÐºÐ¸Ð¹</string>
+    <string name="french">Ð¤Ñ€Ð°Ð½Ñ†ÑƒÐ·ÑÐºÐ¸Ð¹</string>
+    <string name="german">ÐÐµÐ¼ÐµÑ†ÐºÐ¸Ð¹</string>
+    <string name="polish">ÐŸÐ¾Ð»ÑŒÑÐºÐ¸Ð¹</string>
+    <string name="portuguese">ÐŸÐ¾Ñ€Ñ‚ÑƒÐ³Ð°Ð»ÑŒÑÐºÐ¸Ð¹</string>
+    <string name="indonesian">Ð˜Ð½Ð´Ð¾Ð½ÐµÐ·Ð¸Ð¹ÑÐºÐ¸Ð¹</string>
+    <string name="hindi">Ð¥Ð¸Ð½Ð´Ð¸</string>
+    <string name="japanese">Ð¯Ð¿Ð¾Ð½ÑÐºÐ¸Ð¹</string>
+    <string name="russian">Ð ÑƒÑÑÐºÐ¸Ð¹</string>
+    <string name="chinese">ÐšÐ¸Ñ‚Ð°Ð¹ÑÐºÐ¸Ð¹ (ÑƒÐ¿Ñ€Ð¾Ñ‰Ñ‘Ð½Ð½Ñ‹Ð¹)</string>
+    <string name="hebrew">Ð˜Ð²Ñ€Ð¸Ñ‚</string>
+    <string name="italian">Ð˜Ñ‚Ð°Ð»ÑŒÑÐ½ÑÐºÐ¸Ð¹</string>
+    <string name="turkish">Ð¢ÑƒÑ€ÐµÑ†ÐºÐ¸Ð¹</string>
+    <string name="thai">Ð¢Ð°Ð¹ÑÐºÐ¸Ð¹</string>
+    <string name="show_all">ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð²ÑÐµ</string>
+    <string name="grid_view">Ð¡ÐµÑ‚ÐºÐ°</string>
+    <string name="list_view">Ð¡Ð¿Ð¸ÑÐ¾Ðº</string>
+    <string name="switch_to_grid_view">ÐŸÐµÑ€ÐµÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ð½Ð° ÑÐµÑ‚ÐºÑƒ</string>
+    <string name="switch_to_list_view">ÐŸÐµÑ€ÐµÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ð½Ð° ÑÐ¿Ð¸ÑÐ¾Ðº</string>
+    <string name="audio_quality">ÐšÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð·Ð²ÑƒÐºÐ°</string>
+    <string name="playback">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ</string>
+    <string name="appearance">Ð’Ð½ÐµÑˆÐ½Ð¸Ð¹ Ð²Ð¸Ð´</string>
+    <string name="storage">Ð¥Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ðµ</string>
+    <string name="your_data">Ð’Ð°ÑˆÐ¸ Ð´Ð°Ð½Ð½Ñ‹Ðµ</string>
+    <string name="miscellaneous">Ð Ð°Ð·Ð½Ð¾Ðµ</string>
+    <string name="lossless_hq_audio">Ð‘ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ / HQ-Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="on_wifi">ÐŸÐ¾ Wi-Fi</string>
+    <string name="on_mobile_data">ÐŸÐ¾ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ð¼ Ð´Ð°Ð½Ð½Ñ‹Ð¼</string>
+    <string name="in_use">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ</string>
+    <string name="blocking">Ð‘Ð»Ð¾ÐºÐ¸Ñ€ÑƒÐµÑ‚</string>
+    <string name="crossfade">ÐšÑ€Ð¾ÑÑÑ„ÐµÐ¹Ð´</string>
+    <string name="crossfade_subtitle">ÐŸÐ»Ð°Ð²Ð½Ð¾ Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ð¸Ñ‚ Ð¾Ñ‚ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ñ‚Ñ€ÐµÐºÐ° Ðº Ð´Ñ€ÑƒÐ³Ð¾Ð¼Ñƒ</string>
+    <string name="automix">ÐÐ²Ñ‚Ð¾Ð¼Ð¸ÐºÑ [Ð‘Ð•Ð¢Ð]</string>
+    <string name="skip_silence">ÐŸÑ€Ð¾Ð¿ÑƒÑÐºÐ°Ñ‚ÑŒ Ñ‚Ð¸ÑˆÐ¸Ð½Ñƒ</string>
+    <string name="skip_silence_subtitle">ÐžÐ±Ñ€ÐµÐ·Ð°ÐµÑ‚ Ð¿Ð°ÑƒÐ·Ñ‹ Ð´Ð»Ð¸Ð½Ð½ÐµÐµ ÑÐµÐºÑƒÐ½Ð´Ñ‹</string>
+    <string name="skip_silence_float_subtitle">ÐÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ Ð¿Ñ€Ð¸ 32-Ð±Ð¸Ñ‚Ð½Ð¾Ð¼ Ð²Ñ‹Ð²Ð¾Ð´Ðµ Ñ Ð¿Ð»Ð°Ð²Ð°ÑŽÑ‰ÐµÐ¹ Ñ‚Ð¾Ñ‡ÐºÐ¾Ð¹</string>
+    <string name="music_haptics">ÐœÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½Ð°Ñ Ñ‚Ð°ÐºÑ‚Ð¸Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ</string>
+    <string name="music_haptics_subtitle">Ð§ÑƒÐ²ÑÑ‚Ð²ÑƒÐ¹Ñ‚Ðµ Ñ€Ð¸Ñ‚Ð¼ Ð²Ð¼ÐµÑÑ‚Ðµ Ñ Ð¼ÑƒÐ·Ñ‹ÐºÐ¾Ð¹</string>
+    <string name="music_haptics_warning">Ð’Ð¸Ð±Ñ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð¼Ð¾Ñ‚Ð¾Ñ€ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð²ÑÑŽ Ð¿ÐµÑÐ½ÑŽ, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð±Ð°Ñ‚Ð°Ñ€ÐµÑ Ñ€Ð°ÑÑ…Ð¾Ð´ÑƒÐµÑ‚ÑÑ Ð·Ð°Ð¼ÐµÑ‚Ð½Ð¾ Ð±Ñ‹ÑÑ‚Ñ€ÐµÐµ.</string>
+    <string name="music_haptics_low_subtitle">Ð¡Ð°Ð¼Ð¾Ðµ Ð»Ñ‘Ð³ÐºÐ¾Ðµ Ð¾Ñ‰ÑƒÑ‰ÐµÐ½Ð¸Ðµ</string>
+    <string name="music_haptics_medium_subtitle">Ð¡Ð±Ð°Ð»Ð°Ð½ÑÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾</string>
+    <string name="music_haptics_high_subtitle">Ð¡Ð°Ð¼Ð¾Ðµ ÑÐ¸Ð»ÑŒÐ½Ð¾Ðµ â€” Ð»ÑƒÑ‡ÑˆÐµ Ð²ÑÐµÐ³Ð¾ Ð² ÐºÐ°Ñ€Ð¼Ð°Ð½Ðµ</string>
+    <string name="equalizer">Ð­ÐºÐ²Ð°Ð»Ð°Ð¹Ð·ÐµÑ€</string>
+    <string name="equalizer_subtitle">Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð½Ð°Ñ Ð¿Ð°Ð½ÐµÐ»ÑŒ Ð²Ð°ÑˆÐµÐ³Ð¾ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°</string>
+    <string name="show_nerd_stats">ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ Ñ‚ÐµÑ…Ð½Ð¸Ñ‡ÐµÑÐºÑƒÑŽ ÑÑ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÑƒ</string>
+    <string name="show_nerd_stats_subtitle">ÐšÐ¾Ð´ÐµÐº, Ð±Ð¸Ñ‚Ñ€ÐµÐ¹Ñ‚ Ð¸ Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ð° Ð´Ð¸ÑÐºÑ€ÐµÑ‚Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð² Ð¿Ð»ÐµÐµÑ€Ðµ</string>
+    <string name="theme">Ð¢ÐµÐ¼Ð°</string>
+    <string name="reduce_animation">Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ Ð°Ð½Ð¸Ð¼Ð°Ñ†Ð¸ÑŽ</string>
+    <string name="reduce_animation_subtitle">ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ Ð³Ñ€Ð°Ð´Ð¸ÐµÐ½Ñ‚ Ð³Ð»Ð°Ð²Ð½Ð¾Ð³Ð¾ Ð¿Ð»ÐµÐµÑ€Ð° Ð²Ð¼ÐµÑÑ‚Ð¾ Ð¿Ð»Ð°Ð²Ð½Ð¾Ð³Ð¾ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ</string>
+    <string name="reduce_dynamic_blur">Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ñ€Ð°Ð·Ð¼Ñ‹Ñ‚Ð¸Ðµ</string>
+    <string name="reduce_dynamic_blur_subtitle">Ð—Ð°Ð¼ÐµÐ½ÑÐµÑ‚ Ð¼Ð°Ñ‚Ð¾Ð²Ð¾Ðµ ÑÑ‚ÐµÐºÐ»Ð¾ ÑÐ¿Ð»Ð¾ÑˆÐ½Ð¾Ð¹ Ð·Ð°Ð»Ð¸Ð²ÐºÐ¾Ð¹ Ð²Ð¾ Ð²ÑÑ‘Ð¼ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸</string>
+    <string name="full_screen_cover_art">ÐžÐ±Ð»Ð¾Ð¶ÐºÐ° Ð½Ð° Ð²ÐµÑÑŒ ÑÐºÑ€Ð°Ð½</string>
+    <string name="player_carousel">Ð¡Ð¼Ð°Ñ…Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ¸</string>
+    <string name="player_carousel_subtitle">ÐŸÑ€Ð¾Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð¾ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐµ Ð² ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ð¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ Ð¸ Ð¿Ñ€ÐµÐ´Ñ‹Ð´ÑƒÑ‰Ð¸Ð¹ Ñ‚Ñ€ÐµÐº, ÐºÐ°Ðº ÐºÐ¾Ð»Ð¾Ð´Ñƒ Ð¿Ð»Ð°ÑÑ‚Ð¸Ð½Ð¾Ðº. Ð’Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾ â€” Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ° Ð¾ÑÑ‚Ð°Ñ‘Ñ‚ÑÑ ÐºÐ°Ðº ÑÐµÐ¹Ñ‡Ð°Ñ.</string>
+    <string name="animated_cover_art">ÐÐ½Ð¸Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð°Ñ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ°</string>
+    <string name="synced_lyrics">Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚</string>
+    <string name="synced_lyrics_subtitle">ÐŸÐ¾Ð´ÑÐ²ÐµÑ‡Ð¸Ð²Ð°ÐµÑ‚ ÑÐ»Ð¾Ð²Ð° Ð² Ð¿Ð»ÐµÐµÑ€Ðµ Ð¿Ð¾ Ð¼ÐµÑ€Ðµ Ð¸ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ</string>
+    <string name="lyrics_sources">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸ Ñ‚ÐµÐºÑÑ‚Ð¾Ð²</string>
+    <string name="song_cache_limit">Ð›Ð¸Ð¼Ð¸Ñ‚ ÐºÑÑˆÐ° Ð¿ÐµÑÐµÐ½</string>
+    <string name="clear_song_cache">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ ÐºÑÑˆ Ð¿ÐµÑÐµÐ½</string>
+    <string name="clear_song_cache_subtitle">ÐžÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°ÐµÑ‚ Ð¼ÐµÑÑ‚Ð¾, Ð·Ð°Ð½ÑÑ‚Ð¾Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ð¼ Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="clear_image_cache">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ ÐºÑÑˆ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ð¹</string>
+    <string name="clear_image_cache_subtitle">ÐžÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°ÐµÑ‚ Ð¼ÐµÑÑ‚Ð¾, Ð·Ð°Ð½ÑÑ‚Ð¾Ðµ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ°Ð¼Ð¸ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð²</string>
+    <string name="play_next_on_swipe">Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼ Ð¿Ñ€Ð¸ ÑÐ²Ð°Ð¹Ð¿Ðµ</string>
+    <string name="dont_repeat_songs">ÐÐµ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑ‚ÑŒ Ð¿ÐµÑÐ½Ð¸ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ ÑÐµÑÑÐ¸Ð¸</string>
+    <string name="stop_music_on_close">ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°Ñ‚ÑŒ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ Ð¿Ñ€Ð¸ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ð¸ Ð¸Ð· Ð½ÐµÐ´Ð°Ð²Ð½Ð¸Ñ…</string>
+    <string name="stop_music_on_close_subtitle">ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¸ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¸Ð· Ð½ÐµÐ´Ð°Ð²Ð½Ð¸Ñ…</string>
+    <string name="hide_volume_bar">Ð¡ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð»Ð¾ÑÑƒ Ð³Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚Ð¸</string>
+    <string name="hide_volume_bar_subtitle">Ð£Ð±Ð¸Ñ€Ð°ÐµÑ‚ Ð¿Ð¾Ð»Ð·ÑƒÐ½Ð¾Ðº Ð³Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚Ð¸ Ñ Ð³Ð»Ð°Ð²Ð½Ð¾Ð³Ð¾ Ð¿Ð»ÐµÐµÑ€Ð°</string>
+    <string name="hide_song_status">Ð¡ÐºÑ€Ñ‹Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑƒÑ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="hide_song_status_subtitle">Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚ Â«Ð˜Ð³Ñ€Ð°ÐµÑ‚ Ð¸Ð·Â» Ð¸Ð»Ð¸ Â«Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚Â» Ð² Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð¼ Ð¿Ð»ÐµÐµÑ€Ðµ</string>
+    <string name="off">Ð’Ñ‹ÐºÐ»</string>
+    <string name="low">ÐÐ¸Ð·ÐºÐ¾Ðµ</string>
+    <string name="medium">Ð¡Ñ€ÐµÐ´Ð½ÐµÐµ</string>
+    <string name="high">Ð’Ñ‹ÑÐ¾ÐºÐ¾Ðµ</string>
+    <string name="standard">Ð¡Ñ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ð¾Ðµ</string>
+    <string name="lossless">Ð‘ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ</string>
+    <string name="system">Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð½Ð°Ñ</string>
+    <string name="light">Ð¡Ð²ÐµÑ‚Ð»Ð°Ñ</string>
+    <string name="dark">Ð¢Ñ‘Ð¼Ð½Ð°Ñ</string>
+    <string name="full_screen_cover_art_subtitle">Ð Ð°ÑÑ‚ÑÐ³Ð¸Ð²Ð°ÐµÑ‚ Ð¾Ð±Ð»Ð¾Ð¶ÐºÑƒ Ð´Ð¾ ÐºÑ€Ð°Ñ‘Ð² Ð¿Ð»ÐµÐµÑ€Ð° Ð²Ð¼ÐµÑÑ‚Ð¾ ÐºÐ²Ð°Ð´Ñ€Ð°Ñ‚Ð½Ð¾Ð³Ð¾ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ð°</string>
+    <string name="animated_cover_art_subtitle">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ Ð·Ð°Ñ†Ð¸ÐºÐ»ÐµÐ½Ð½Ð¾Ðµ Ð²Ð¸Ð´ÐµÐ¾, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ ÐµÑÑ‚ÑŒ Ñƒ Ð½ÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ñ€ÐµÐ»Ð¸Ð·Ð¾Ð² Ð²Ð¼ÐµÑÑ‚Ð¾ Ð½ÐµÐ¿Ð¾Ð´Ð²Ð¸Ð¶Ð½Ð¾Ð¹ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ¸</string>
+    <string name="dont_repeat_songs_subtitle">ÐÐ²Ñ‚Ð¾Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð½Ðµ Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ñ€ÐµÐ´Ð»Ð°Ð³Ð°Ñ‚ÑŒ ÑƒÐ¶Ðµ ÑÑ‹Ð³Ñ€Ð°Ð½Ð½ÑƒÑŽ Ð¸Ð»Ð¸ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð½ÑƒÑŽ Ð² ÑÑ‚Ð¾Ð¹ ÑÐµÑÑÐ¸Ð¸ Ð¿ÐµÑÐ½ÑŽ</string>
+    <string name="download_quality_subtitle">%1$s Ð·Ð° Ñ‚Ñ€ÐµÐº, Ð½ÐµÐ·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ Ð¾Ñ‚ ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ</string>
+    <string name="filter_non_music_audio">Ð¤Ð¸Ð»ÑŒÑ‚Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð½ÐµÐ¼ÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="filter_non_music_audio_subtitle">Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ ÐºÐ»Ð¸Ð¿Ñ‹ ÐºÐ¾Ñ€Ð¾Ñ‡Ðµ 30 ÑÐµÐºÑƒÐ½Ð´, Ñ„Ð°Ð¹Ð»Ñ‹ WAV, Ð³Ð¾Ð»Ð¾ÑÐ¾Ð²Ñ‹Ðµ Ð·Ð°Ð¼ÐµÑ‚ÐºÐ¸, Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ðµ Ð·Ð²ÑƒÐºÐ¸</string>
+    <string name="performance">ÐŸÑ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ</string>
+    <string name="high_performance_mode">Ð ÐµÐ¶Ð¸Ð¼ Ð²Ñ‹ÑÐ¾ÐºÐ¾Ð¹ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸</string>
+    <string name="high_performance_subtitle">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ Ð¿Ð¾Ð»Ð½ÑƒÑŽ Ð°Ð½Ð¸Ð¼Ð°Ñ†Ð¸ÑŽ Ð¸ Ñ€Ð°Ð·Ð¼Ñ‹Ñ‚Ð¸Ðµ, Ð° Ñ‚Ð°ÐºÐ¶Ðµ Ð·Ð°Ð¿Ñ€Ð°ÑˆÐ¸Ð²Ð°ÐµÑ‚ Ð±Ð¾Ð»ÐµÐµ Ð²Ñ‹ÑÐ¾ÐºÑƒÑŽ Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ñƒ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ ÑÐºÑ€Ð°Ð½Ð°</string>
+    <string name="high_performance_active">Ð—Ð°Ð¿Ñ€Ð¾ÑˆÐµÐ½Ð° Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ð° %1$d Ð“Ñ†. Android Ð¼Ð¾Ð¶ÐµÑ‚ ÑÐ½Ð¸Ð·Ð¸Ñ‚ÑŒ ÐµÑ‘ Ð¿Ñ€Ð¸ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ÑÑ‚Ð¸.</string>
+    <string name="beta">Ð‘ÐµÑ‚Ð°</string>
+    <string name="refresh_rate">Ð§Ð°ÑÑ‚Ð¾Ñ‚Ð° Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ</string>
+    <string name="high_performance_before_enabling">ÐŸÐµÑ€ÐµÐ´ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸ÐµÐ¼</string>
+    <string name="high_performance_battery_warning">Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ðµ Ð´Ð»Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸ Free Music Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Â«Ð‘ÐµÐ· Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ð¹Â». Ð‘Ð¾Ð»ÐµÐµ Ð²Ñ‹ÑÐ¾ÐºÐ°Ñ Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ð° Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ñ€Ð°ÑÑ…Ð¾Ð´ÑƒÐµÑ‚ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð·Ð°Ñ€ÑÐ´Ð° Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸, Ñ€ÐµÑÑƒÑ€ÑÐ¾Ð² Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð° Ð¸ Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð° Ð¸ Ð¼Ð¾Ð¶ÐµÑ‚ Ð½Ð°Ð³Ñ€ÐµÐ²Ð°Ñ‚ÑŒ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾.</string>
+    <string name="open_battery_settings">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸</string>
+    <string name="enable_high_performance_title">Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ñ€ÐµÐ¶Ð¸Ð¼ Ð²Ñ‹ÑÐ¾ÐºÐ¾Ð¹ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸?</string>
+    <string name="enable_high_performance_confirmation">Ð’ÐºÐ»ÑŽÑ‡Ð°Ð¹Ñ‚Ðµ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÐµÑÐ»Ð¸ Ð´Ð»Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸ Free Music ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Â«Ð‘ÐµÐ· Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ð¹Â». Android Ð²ÑÑ‘ Ñ€Ð°Ð²Ð½Ð¾ Ð¼Ð¾Ð¶ÐµÑ‚ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡Ð¸Ð²Ð°Ñ‚ÑŒ Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ñƒ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ, ÐµÑÐ»Ð¸ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Ð½Ð°Ð³Ñ€ÐµÐ²Ð°ÐµÑ‚ÑÑ Ð¸Ð»Ð¸ Ð·Ð°Ñ€ÑÐ´ Ð½Ð¸Ð·ÐºÐ¸Ð¹.</string>
+    <string name="enable">Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="not_yet">ÐÐµ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
+    <string name="activity">ÐÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ</string>
+    <string name="activity_competing">Ð¡Ð¾Ñ€ÐµÐ²Ð½ÑƒÐµÑ‚ÑÑ</string>
+    <string name="activity_dialog_message">Ð“Ð»Ð°Ð³Ð¾Ð», Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÐµÐ¼Ñ‹Ð¹ Ð½Ð°Ð´ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐ¾Ð¹.</string>
+    <string name="activity_listening">Ð¡Ð»ÑƒÑˆÐ°ÐµÑ‚</string>
+    <string name="activity_name_message">Ð¢Ð¾, Ñ‡Ñ‚Ð¾ ÑÑ‚Ð¾Ð¸Ñ‚ Ð¿Ð¾ÑÐ»Ðµ Ð³Ð»Ð°Ð³Ð¾Ð»Ð° Ð² Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ðµ. ÐžÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ Ð¿ÑƒÑÑ‚Ñ‹Ð¼, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ %1$s.</string>
+    <string name="activity_playing">Ð˜Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="activity_watching">Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ñ‚</string>
+    <string name="add_to_queue">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ</string>
+    <string name="after_this_song">ÐŸÐ¾ÑÐ»Ðµ ÑÑ‚Ð¾Ð¹ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="always_on">Ð’ÑÐµÐ³Ð´Ð° Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="api_token">API-Ñ‚Ð¾ÐºÐµÐ½</string>
+    <string name="audio_quality_connection">Ð§ÐµÑ€ÐµÐ· %1$s</string>
+    <string name="autoplay">ÐÐ²Ñ‚Ð¾Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ</string>
+    <string name="back_in_future_version">Ð’ÐµÑ€Ð½Ñ‘Ñ‚ÑÑ Ð² Ð±ÑƒÐ´ÑƒÑ‰ÐµÐ¹ Ð²ÐµÑ€ÑÐ¸Ð¸</string>
+    <string name="buttons">ÐšÐ½Ð¾Ð¿ÐºÐ¸</string>
+    <string name="clear_name">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ Ð¸Ð¼Ñ</string>
+    <string name="close_lyrics">Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="translate_lyrics">ÐŸÐµÑ€ÐµÐ²ÐµÑÑ‚Ð¸ Ñ‚ÐµÐºÑÑ‚</string>
+    <string name="romanize_lyrics">Ð¢Ñ€Ð°Ð½ÑÐ»Ð¸Ñ‚ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ‚ÐµÐºÑÑ‚</string>
+    <string name="show_original_lyrics">ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð»</string>
+    <string name="translating_lyrics_to">ÐŸÐµÑ€ÐµÐ²Ð¾Ð´ Ð½Ð° %1$sâ€¦</string>
+    <string name="lyrics_translated_to">ÐŸÐµÑ€ÐµÐ²ÐµÐ´ÐµÐ½Ð¾ Ð½Ð° %1$s</string>
+    <string name="romanizing_lyrics">Ð¢Ñ€Ð°Ð½ÑÐ»Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ñ Ñ‚ÐµÐºÑÑ‚Ð°â€¦</string>
+    <string name="lyrics_romanized">ÐŸÑ€Ð¾Ð¸Ð·Ð½Ð¾ÑˆÐµÐ½Ð¸Ðµ Ð»Ð°Ñ‚Ð¸Ð½Ð¸Ñ†ÐµÐ¹</string>
+    <string name="lyrics_already_romanized">Ð­Ñ‚Ð¾Ñ‚ Ñ‚ÐµÐºÑÑ‚ ÑƒÐ¶Ðµ Ð½Ð°Ð¿Ð¸ÑÐ°Ð½ Ð»Ð°Ñ‚Ð¸Ð½Ð¸Ñ†ÐµÐ¹</string>
+    <string name="lyrics_romanization_unavailable">Ð¢Ñ€Ð°Ð½ÑÐ»Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð° Ð´Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ Ñ‚ÐµÐºÑÑ‚Ð°</string>
+    <string name="lyrics_already_in_language">Ð¢ÐµÐºÑÑ‚ ÑƒÐ¶Ðµ Ð½Ð° ÑÐ·Ñ‹ÐºÐµ %1$s</string>
+    <string name="lyrics_translation_unavailable">ÐŸÐµÑ€ÐµÐ²Ð¾Ð´ ÑÐµÐ¹Ñ‡Ð°Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½</string>
+    <string name="connect_account_first">Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
+    <string name="connected_presence_off">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾, Presence Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ñ‘Ð½</string>
+    <string name="copy_log">Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¶ÑƒÑ€Ð½Ð°Ð»</string>
+    <string name="couldnt_find">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð½Ð°Ð¹Ñ‚Ð¸ %1$s</string>
+    <string name="couldnt_open_link">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ ÑÑ‚Ñƒ ÑÑÑ‹Ð»ÐºÑƒ</string>
+    <string name="create_playlist">Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="customize_card">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÑƒ</string>
+    <string name="customize_card_subtitle">Ð¡Ñ‚Ð°Ñ‚ÑƒÑ, Ñ‚ÐµÐºÑÑ‚ Ð¸ Ð¾Ð±Ðµ ÐºÐ½Ð¾Ð¿ÐºÐ¸</string>
+    <string name="delete">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ</string>
+    <string name="disconnect">ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
     <string name="discord">Discord</string>
-    <string name="discord_account">Аккаунт Discord</string>
-    <string name="discord_button_variables">{song_name}, {artist_name} и {album_name} заменяются данными текущего трека.</string>
-    <string name="discord_buttons_footer">{song_name}, {artist_name} и {album_name} заменяются данными трека. Первая кнопка открывает песню в YouTube Music, а вторая — этот проект.</string>
-    <string name="discord_presence_footer">Карточка обновляется при изменении трека, позиции воспроизведения или его состояния. Она исчезает, когда воспроизведение останавливается.</string>
-    <string name="discord_show_audio_quality">Показывать качество звука</string>
-    <string name="discord_show_audio_quality_subtitle">Характеристики Hi-Res, lossless и Dolby в карточке статуса</string>
-    <string name="discord_sign_in_footer">Вход открывает страницу входа Discord. В Free Music ничего не вводится.</string>
-    <string name="discord_token">Токен Discord</string>
-    <string name="discord_token_description">Вставьте токен своего аккаунта Discord. Он хранится в зашифрованном виде на этом устройстве и отправляется только в Discord.</string>
-    <string name="discord_token_rejected">Discord отклонил этот токен.</string>
-    <string name="discord_token_warning">Discord не предоставляет API, позволяющий приложениям задавать ваш статус, поэтому эта функция выполняет вход в ваш аккаунт и использует протокол Discord. Ваш токен хранится в зашифрованном виде на этом устройстве и отправляется только в Discord. Он даёт доступ ко всему вашему аккаунту, а автоматизация аккаунта нарушает условия использования Discord. Используйте эту функцию, только если принимаете этот риск.</string>
-    <string name="dislike">Не нравится</string>
-    <string name="done">Готово</string>
-    <string name="download">Загрузить</string>
-    <string name="download_quality_dialog_subtitle">Для файлов, хранящихся на этом устройстве</string>
-    <string name="downloaded">Загружено</string>
-    <string name="drag_to_reorder">Перетащите, чтобы изменить порядок</string>
-    <string name="enabled">Включено</string>
-    <string name="enter_token_instead">Ввести токен вручную</string>
-    <string name="enter_token_instead_subtitle">Используйте это, если страница входа не загружается</string>
-    <string name="enter_token_to_enable">Введите токен, чтобы включить</string>
-    <string name="first_button">Первая кнопка</string>
-    <string name="got_it">Понятно</string>
-    <string name="high_quality">Высокое качество</string>
-    <string name="instrumental">Инструментал</string>
-    <string name="pause">Пауза</string>
-    <string name="lyrics_by">Текст песни: %1$s</string>
-    <string name="change_lyrics_provider">Изменить</string>
-    <string name="choose_lyrics_provider">Выбрать источник текстов</string>
-    <string name="lyrics_provider_current">Текущий источник</string>
-    <string name="lyrics_provider_found">Текст найден · Нажмите, чтобы использовать</string>
-    <string name="lyrics_provider_not_found">Текст не найден</string>
-    <string name="lyrics_provider_fetching">Загрузка текста…</string>
-    <string name="lyrics_provider_not_fetched">Нажмите, чтобы загрузить</string>
-    <string name="no_lyrics_found">Текст не найден</string>
-    <string name="lyrics_saved_with_download">Текст сохранён вместе с этой загрузкой</string>
-    <string name="shuffle_on">Перемешивание включено</string>
-    <string name="shuffle_off">Перемешивание выключено</string>
-    <string name="repeat_one">Повтор одной песни</string>
-    <string name="repeat_all">Повтор всех</string>
-    <string name="repeat_off">Повтор выключен</string>
-    <string name="autoplay_on">Автовоспроизведение включено</string>
-    <string name="autoplay_off">Автовоспроизведение выключено</string>
-    <string name="autoplay_queue_description">Похожая музыка, выбранная для воспроизведения следующей</string>
-    <string name="autoplay_empty_description">Похожая музыка будет продолжать играть</string>
-    <string name="high_quality_upgrading">Высокое качество, улучшение</string>
-    <string name="upgrading_quality">Улучшение качества</string>
+    <string name="discord_account">ÐÐºÐºÐ°ÑƒÐ½Ñ‚ Discord</string>
+    <string name="discord_button_variables">{song_name}, {artist_name} Ð¸ {album_name} Ð·Ð°Ð¼ÐµÐ½ÑÑŽÑ‚ÑÑ Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ Ñ‚Ñ€ÐµÐºÐ°.</string>
+    <string name="discord_buttons_footer">{song_name}, {artist_name} Ð¸ {album_name} Ð·Ð°Ð¼ÐµÐ½ÑÑŽÑ‚ÑÑ Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ñ‚Ñ€ÐµÐºÐ°. ÐŸÐµÑ€Ð²Ð°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ Ð¿ÐµÑÐ½ÑŽ Ð² YouTube Music, Ð° Ð²Ñ‚Ð¾Ñ€Ð°Ñ â€” ÑÑ‚Ð¾Ñ‚ Ð¿Ñ€Ð¾ÐµÐºÑ‚.</string>
+    <string name="discord_presence_footer">ÐšÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐ° Ð¾Ð±Ð½Ð¾Ð²Ð»ÑÐµÑ‚ÑÑ Ð¿Ñ€Ð¸ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ñ‚Ñ€ÐµÐºÐ°, Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¸Ð»Ð¸ ÐµÐ³Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ñ. ÐžÐ½Ð° Ð¸ÑÑ‡ÐµÐ·Ð°ÐµÑ‚, ÐºÐ¾Ð³Ð´Ð° Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¾ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ÑÑ.</string>
+    <string name="discord_show_audio_quality">ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð·Ð²ÑƒÐºÐ°</string>
+    <string name="discord_show_audio_quality_subtitle">Ð¥Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸ÐºÐ¸ Hi-Res, lossless Ð¸ Dolby Ð² ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐµ ÑÑ‚Ð°Ñ‚ÑƒÑÐ°</string>
+    <string name="discord_sign_in_footer">Ð’Ñ…Ð¾Ð´ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñƒ Ð²Ñ…Ð¾Ð´Ð° Discord. Ð’ Free Music Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ.</string>
+    <string name="discord_token">Ð¢Ð¾ÐºÐµÐ½ Discord</string>
+    <string name="discord_token_description">Ð’ÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ Ñ‚Ð¾ÐºÐµÐ½ ÑÐ²Ð¾ÐµÐ³Ð¾ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð° Discord. ÐžÐ½ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑÑ Ð² Ð·Ð°ÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¼ Ð²Ð¸Ð´Ðµ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð² Discord.</string>
+    <string name="discord_token_rejected">Discord Ð¾Ñ‚ÐºÐ»Ð¾Ð½Ð¸Ð» ÑÑ‚Ð¾Ñ‚ Ñ‚Ð¾ÐºÐµÐ½.</string>
+    <string name="discord_token_warning">Discord Ð½Ðµ Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ API, Ð¿Ð¾Ð·Ð²Ð¾Ð»ÑÑŽÑ‰Ð¸Ð¹ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸ÑÐ¼ Ð·Ð°Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð²Ð°Ñˆ ÑÑ‚Ð°Ñ‚ÑƒÑ, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ ÑÑ‚Ð° Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ Ð²Ñ…Ð¾Ð´ Ð² Ð²Ð°Ñˆ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚ Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð» Discord. Ð’Ð°Ñˆ Ñ‚Ð¾ÐºÐµÐ½ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑÑ Ð² Ð·Ð°ÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¼ Ð²Ð¸Ð´Ðµ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð² Discord. ÐžÐ½ Ð´Ð°Ñ‘Ñ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿ ÐºÐ¾ Ð²ÑÐµÐ¼Ñƒ Ð²Ð°ÑˆÐµÐ¼Ñƒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ñƒ, Ð° Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð° Ð½Ð°Ñ€ÑƒÑˆÐ°ÐµÑ‚ ÑƒÑÐ»Ð¾Ð²Ð¸Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Discord. Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ ÑÑ‚Ñƒ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ, Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÐµÑÐ»Ð¸ Ð¿Ñ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÑ‚Ðµ ÑÑ‚Ð¾Ñ‚ Ñ€Ð¸ÑÐº.</string>
+    <string name="dislike">ÐÐµ Ð½Ñ€Ð°Ð²Ð¸Ñ‚ÑÑ</string>
+    <string name="done">Ð“Ð¾Ñ‚Ð¾Ð²Ð¾</string>
+    <string name="download">Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ</string>
+    <string name="download_quality_dialog_subtitle">Ð”Ð»Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð², Ñ…Ñ€Ð°Ð½ÑÑ‰Ð¸Ñ…ÑÑ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ</string>
+    <string name="downloaded">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾</string>
+    <string name="drag_to_reorder">ÐŸÐµÑ€ÐµÑ‚Ð°Ñ‰Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð¾Ñ€ÑÐ´Ð¾Ðº</string>
+    <string name="enabled">Ð’ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="enter_token_instead">Ð’Ð²ÐµÑÑ‚Ð¸ Ñ‚Ð¾ÐºÐµÐ½ Ð²Ñ€ÑƒÑ‡Ð½ÑƒÑŽ</string>
+    <string name="enter_token_instead_subtitle">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ ÑÑ‚Ð¾, ÐµÑÐ»Ð¸ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð° Ð²Ñ…Ð¾Ð´Ð° Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÑ‚ÑÑ</string>
+    <string name="enter_token_to_enable">Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚Ð¾ÐºÐµÐ½, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="first_button">ÐŸÐµÑ€Ð²Ð°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°</string>
+    <string name="got_it">ÐŸÐ¾Ð½ÑÑ‚Ð½Ð¾</string>
+    <string name="high_quality">Ð’Ñ‹ÑÐ¾ÐºÐ¾Ðµ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾</string>
+    <string name="instrumental">Ð˜Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð°Ð»</string>
+    <string name="pause">ÐŸÐ°ÑƒÐ·Ð°</string>
+    <string name="lyrics_by">Ð¢ÐµÐºÑÑ‚ Ð¿ÐµÑÐ½Ð¸: %1$s</string>
+    <string name="change_lyrics_provider">Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ</string>
+    <string name="choose_lyrics_provider">Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº Ñ‚ÐµÐºÑÑ‚Ð¾Ð²</string>
+    <string name="lyrics_provider_current">Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº</string>
+    <string name="lyrics_provider_found">Ð¢ÐµÐºÑÑ‚ Ð½Ð°Ð¹Ð´ÐµÐ½ Â· ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ</string>
+    <string name="lyrics_provider_not_found">Ð¢ÐµÐºÑÑ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½</string>
+    <string name="lyrics_provider_fetching">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Ñ‚ÐµÐºÑÑ‚Ð°â€¦</string>
+    <string name="lyrics_provider_not_fetched">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ</string>
+    <string name="no_lyrics_found">Ð¢ÐµÐºÑÑ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½</string>
+    <string name="lyrics_saved_with_download">Ð¢ÐµÐºÑÑ‚ ÑÐ¾Ñ…Ñ€Ð°Ð½Ñ‘Ð½ Ð²Ð¼ÐµÑÑ‚Ðµ Ñ ÑÑ‚Ð¾Ð¹ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¾Ð¹</string>
+    <string name="shuffle_on">ÐŸÐµÑ€ÐµÐ¼ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸Ðµ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="shuffle_off">ÐŸÐµÑ€ÐµÐ¼ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸Ðµ Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="repeat_one">ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ Ð¾Ð´Ð½Ð¾Ð¹ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="repeat_all">ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ Ð²ÑÐµÑ…</string>
+    <string name="repeat_off">ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½</string>
+    <string name="autoplay_on">ÐÐ²Ñ‚Ð¾Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="autoplay_off">ÐÐ²Ñ‚Ð¾Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="autoplay_queue_description">ÐŸÐ¾Ñ…Ð¾Ð¶Ð°Ñ Ð¼ÑƒÐ·Ñ‹ÐºÐ°, Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð°Ñ Ð´Ð»Ñ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ñ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÐµÐ¹</string>
+    <string name="autoplay_empty_description">ÐŸÐ¾Ñ…Ð¾Ð¶Ð°Ñ Ð¼ÑƒÐ·Ñ‹ÐºÐ° Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð°Ñ‚ÑŒ Ð¸Ð³Ñ€Ð°Ñ‚ÑŒ</string>
+    <string name="high_quality_upgrading">Ð’Ñ‹ÑÐ¾ÐºÐ¾Ðµ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾, ÑƒÐ»ÑƒÑ‡ÑˆÐµÐ½Ð¸Ðµ</string>
+    <string name="upgrading_quality">Ð£Ð»ÑƒÑ‡ÑˆÐµÐ½Ð¸Ðµ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð°</string>
     <string name="hi_res_lossless">Hi-Res Lossless</string>
-    <string name="bit_depth">%1$d-бит</string>
-    <string name="mono">Моно</string>
-    <string name="stereo">Стерео</string>
-    <string name="channel_count">%1$d кан.</string>
-    <string name="downgraded_from">↓ с %1$s</string>
-    <string name="history">История</string>
-    <string name="sources">Источники</string>
+    <string name="bit_depth">%1$d-Ð±Ð¸Ñ‚</string>
+    <string name="mono">ÐœÐ¾Ð½Ð¾</string>
+    <string name="stereo">Ð¡Ñ‚ÐµÑ€ÐµÐ¾</string>
+    <string name="channel_count">%1$d ÐºÐ°Ð½.</string>
+    <string name="downgraded_from">â†“ Ñ %1$s</string>
+    <string name="history">Ð˜ÑÑ‚Ð¾Ñ€Ð¸Ñ</string>
+    <string name="sources">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="mobile_data">Мобильные данные</string>
-    <string name="couldnt_load_tracks">Не удалось загрузить эти треки</string>
-    <string name="wifi_only_download_refusal">Загрузки ограничены сетью Wi-Fi. Отключите это в настройках, чтобы использовать мобильные данные.</string>
-    <string name="pinned_playlist_limit">Можно закрепить не более %1$d плейлистов</string>
-    <string name="downloaded_playlist">Загруженный плейлист</string>
-    <string name="library_sign_in_description">Войдите в свой аккаунт Google, чтобы видеть понравившиеся песни, плейлисты и историю YouTube Music.</string>
-    <string name="downloads_progress">Загрузки · %1$d%%</string>
-    <string name="downloads_finished">Загрузки · завершено</string>
-    <string name="downloading_progress">Загрузка · %1$d%%</string>
-    <string name="starting">Начало</string>
-    <string name="saved_to_freemusic_folder">Сохранено в Музыка/Free Music</string>
-    <string name="nothing_downloading">Ничего не загружается</string>
-    <string name="nothing_to_explore">Сейчас нечего смотреть в обзоре</string>
-    <string name="no_youtube_music_results">Нет результатов из YouTube Music</string>
-    <string name="library_empty">В библиотеке пока ничего нет</string>
-    <string name="history_sign_in_required">Войдите, чтобы увидеть, что вы слушали</string>
-    <string name="history_empty">Пока ничего не воспроизводилось</string>
-    <string name="no_results">Нет результатов</string>
-    <string name="downloaded_playlist_empty">На этом устройстве не осталось ничего из этого плейлиста</string>
-    <string name="no_local_audio_found">На этом устройстве не найдено аудиофайлов</string>
-    <string name="no_internet_connection">Нет подключения к интернету</string>
-    <string name="youtube_request_rejected">YouTube Music отклонил запрос. Попробуйте войти снова.</string>
-    <string name="something_went_wrong">Что-то пошло не так</string>
-    <string name="unknown_artist">Неизвестный исполнитель</string>
+    <string name="mobile_data">ÐœÐ¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ</string>
+    <string name="couldnt_load_tracks">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÑÑ‚Ð¸ Ñ‚Ñ€ÐµÐºÐ¸</string>
+    <string name="wifi_only_download_refusal">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ñ‹ ÑÐµÑ‚ÑŒÑŽ Wi-Fi. ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ ÑÑ‚Ð¾ Ð² Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°Ñ…, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ.</string>
+    <string name="pinned_playlist_limit">ÐœÐ¾Ð¶Ð½Ð¾ Ð·Ð°ÐºÑ€ÐµÐ¿Ð¸Ñ‚ÑŒ Ð½Ðµ Ð±Ð¾Ð»ÐµÐµ %1$d Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð²</string>
+    <string name="downloaded_playlist">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ð¹ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="library_sign_in_description">Ð’Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ Ð² ÑÐ²Ð¾Ð¹ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚ Google, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ð¸Ð´ÐµÑ‚ÑŒ Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð²ÑˆÐ¸ÐµÑÑ Ð¿ÐµÑÐ½Ð¸, Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ Ð¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ YouTube Music.</string>
+    <string name="downloads_progress">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Â· %1$d%%</string>
+    <string name="downloads_finished">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Â· Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¾</string>
+    <string name="downloading_progress">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ° Â· %1$d%%</string>
+    <string name="starting">ÐÐ°Ñ‡Ð°Ð»Ð¾</string>
+    <string name="saved_to_freemusic_folder">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾ Ð² ÐœÑƒÐ·Ñ‹ÐºÐ°/Free Music</string>
+    <string name="nothing_downloading">ÐÐ¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÑ‚ÑÑ</string>
+    <string name="nothing_to_explore">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð½ÐµÑ‡ÐµÐ³Ð¾ ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð² Ð¾Ð±Ð·Ð¾Ñ€Ðµ</string>
+    <string name="no_youtube_music_results">ÐÐµÑ‚ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð² Ð¸Ð· YouTube Music</string>
+    <string name="library_empty">Ð’ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐµ Ð¿Ð¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½ÐµÑ‚</string>
+    <string name="history_sign_in_required">Ð’Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑƒÐ²Ð¸Ð´ÐµÑ‚ÑŒ, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ ÑÐ»ÑƒÑˆÐ°Ð»Ð¸</string>
+    <string name="history_empty">ÐŸÐ¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ð»Ð¾ÑÑŒ</string>
+    <string name="no_results">ÐÐµÑ‚ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð²</string>
+    <string name="downloaded_playlist_empty">ÐÐ° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð½Ðµ Ð¾ÑÑ‚Ð°Ð»Ð¾ÑÑŒ Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð¸Ð· ÑÑ‚Ð¾Ð³Ð¾ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°</string>
+    <string name="no_local_audio_found">ÐÐ° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ Ð°ÑƒÐ´Ð¸Ð¾Ñ„Ð°Ð¹Ð»Ð¾Ð²</string>
+    <string name="no_internet_connection">ÐÐµÑ‚ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ðº Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚Ñƒ</string>
+    <string name="youtube_request_rejected">YouTube Music Ð¾Ñ‚ÐºÐ»Ð¾Ð½Ð¸Ð» Ð·Ð°Ð¿Ñ€Ð¾Ñ. ÐŸÐ¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ Ð²Ð¾Ð¹Ñ‚Ð¸ ÑÐ½Ð¾Ð²Ð°.</string>
+    <string name="something_went_wrong">Ð§Ñ‚Ð¾-Ñ‚Ð¾ Ð¿Ð¾ÑˆÐ»Ð¾ Ð½Ðµ Ñ‚Ð°Ðº</string>
+    <string name="unknown_artist">ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ñ‹Ð¹ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
     <plurals name="downloads_failed_count">
-        <item quantity="one">Загрузки · %1$d файл не загружен</item>
-        <item quantity="few">Загрузки · %1$d файла не загружены</item>
-        <item quantity="many">Загрузки · %1$d файлов не загружено</item>
+        <item quantity="one">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Â· %1$d Ñ„Ð°Ð¹Ð» Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½</item>
+        <item quantity="few">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Â· %1$d Ñ„Ð°Ð¹Ð»Ð° Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹</item>
+        <item quantity="many">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Â· %1$d Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾</item>
     </plurals>
     <plurals name="download_waiting_count">
-        <item quantity="one">%1$d файл ожидает</item>
-        <item quantity="few">%1$d файла ожидают</item>
-        <item quantity="many">%1$d файлов ожидает</item>
+        <item quantity="one">%1$d Ñ„Ð°Ð¹Ð» Ð¾Ð¶Ð¸Ð´Ð°ÐµÑ‚</item>
+        <item quantity="few">%1$d Ñ„Ð°Ð¹Ð»Ð° Ð¾Ð¶Ð¸Ð´Ð°ÑŽÑ‚</item>
+        <item quantity="many">%1$d Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð¾Ð¶Ð¸Ð´Ð°ÐµÑ‚</item>
     </plurals>
     <plurals name="download_done_count">
-        <item quantity="one">%1$d файл готов</item>
-        <item quantity="few">%1$d файла готовы</item>
-        <item quantity="many">%1$d файлов готово</item>
+        <item quantity="one">%1$d Ñ„Ð°Ð¹Ð» Ð³Ð¾Ñ‚Ð¾Ð²</item>
+        <item quantity="few">%1$d Ñ„Ð°Ð¹Ð»Ð° Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹</item>
+        <item quantity="many">%1$d Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð³Ð¾Ñ‚Ð¾Ð²Ð¾</item>
     </plurals>
     <plurals name="download_failed_count">
-        <item quantity="one">%1$d файл не загружен</item>
-        <item quantity="few">%1$d файла не загружены</item>
-        <item quantity="many">%1$d файлов не загружено</item>
+        <item quantity="one">%1$d Ñ„Ð°Ð¹Ð» Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½</item>
+        <item quantity="few">%1$d Ñ„Ð°Ð¹Ð»Ð° Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹</item>
+        <item quantity="many">%1$d Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾</item>
     </plurals>
     <plurals name="all_songs_downloaded">
-        <item quantity="one">Загружена %1$d песня</item>
-        <item quantity="few">Загружены все %1$d песни</item>
-        <item quantity="many">Загружены все %1$d песен</item>
+        <item quantity="one">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð° %1$d Ð¿ÐµÑÐ½Ñ</item>
+        <item quantity="few">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ Ð²ÑÐµ %1$d Ð¿ÐµÑÐ½Ð¸</item>
+        <item quantity="many">Ð—Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ Ð²ÑÐµ %1$d Ð¿ÐµÑÐµÐ½</item>
     </plurals>
-    <string name="your_playlists">Ваши плейлисты</string>
-    <string name="who_can_see_it">Кто может это видеть</string>
-    <string name="about_artist">Об исполнителе</string>
-    <string name="about_album">Об альбоме</string>
-    <string name="nothing_matches">Здесь ничего не соответствует запросу «%1$s»</string>
-    <string name="close_search">Закрыть поиск</string>
-    <string name="less">Меньше</string>
-    <string name="song_count_with_minutes">%1$s, %2$d мин</string>
+    <string name="your_playlists">Ð’Ð°ÑˆÐ¸ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
+    <string name="who_can_see_it">ÐšÑ‚Ð¾ Ð¼Ð¾Ð¶ÐµÑ‚ ÑÑ‚Ð¾ Ð²Ð¸Ð´ÐµÑ‚ÑŒ</string>
+    <string name="about_artist">ÐžÐ± Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ðµ</string>
+    <string name="about_album">ÐžÐ± Ð°Ð»ÑŒÐ±Ð¾Ð¼Ðµ</string>
+    <string name="nothing_matches">Ð—Ð´ÐµÑÑŒ Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð·Ð°Ð¿Ñ€Ð¾ÑÑƒ Â«%1$sÂ»</string>
+    <string name="close_search">Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð¸ÑÐº</string>
+    <string name="less">ÐœÐµÐ½ÑŒÑˆÐµ</string>
+    <string name="song_count_with_minutes">%1$s, %2$d Ð¼Ð¸Ð½</string>
     <string name="song_count_with_duration">%1$s, %2$s</string>
-    <string name="song_count_with_hours_minutes">%1$s, %2$s %3$d мин</string>
+    <string name="song_count_with_hours_minutes">%1$s, %2$s %3$d Ð¼Ð¸Ð½</string>
     <plurals name="hour_count">
-        <item quantity="one">%1$d час</item>
-        <item quantity="few">%1$d часа</item>
-        <item quantity="many">%1$d часов</item>
+        <item quantity="one">%1$d Ñ‡Ð°Ñ</item>
+        <item quantity="few">%1$d Ñ‡Ð°ÑÐ°</item>
+        <item quantity="many">%1$d Ñ‡Ð°ÑÐ¾Ð²</item>
     </plurals>
     <plurals name="songs_will_play_next">
-        <item quantity="one">%1$d песня будет сыграна следующей</item>
-        <item quantity="few">%1$d песни будут сыграны следующими</item>
-        <item quantity="many">%1$d песен будут сыграны следующими</item>
+        <item quantity="one">%1$d Ð¿ÐµÑÐ½Ñ Ð±ÑƒÐ´ÐµÑ‚ ÑÑ‹Ð³Ñ€Ð°Ð½Ð° ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÐµÐ¹</item>
+        <item quantity="few">%1$d Ð¿ÐµÑÐ½Ð¸ Ð±ÑƒÐ´ÑƒÑ‚ ÑÑ‹Ð³Ñ€Ð°Ð½Ñ‹ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼Ð¸</item>
+        <item quantity="many">%1$d Ð¿ÐµÑÐµÐ½ Ð±ÑƒÐ´ÑƒÑ‚ ÑÑ‹Ð³Ñ€Ð°Ð½Ñ‹ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼Ð¸</item>
     </plurals>
     <plurals name="songs_added_to_queue">
-        <item quantity="one">Добавлена %1$d песня в очередь</item>
-        <item quantity="few">Добавлено %1$d песни в очередь</item>
-        <item quantity="many">Добавлено %1$d песен в очередь</item>
+        <item quantity="one">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð° %1$d Ð¿ÐµÑÐ½Ñ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ</item>
+        <item quantity="few">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ %1$d Ð¿ÐµÑÐ½Ð¸ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ</item>
+        <item quantity="many">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ %1$d Ð¿ÐµÑÐµÐ½ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ</item>
     </plurals>
     <plurals name="log_copied_line_count">
-        <item quantity="one">Журнал скопирован · %1$d строка</item>
-        <item quantity="few">Журнал скопирован · %1$d строки</item>
-        <item quantity="many">Журнал скопирован · %1$d строк</item>
+        <item quantity="one">Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½ Â· %1$d ÑÑ‚Ñ€Ð¾ÐºÐ°</item>
+        <item quantity="few">Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½ Â· %1$d ÑÑ‚Ñ€Ð¾ÐºÐ¸</item>
+        <item quantity="many">Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½ Â· %1$d ÑÑ‚Ñ€Ð¾Ðº</item>
     </plurals>
-    <string name="integrate_spotify_canvas">Настроить Spotify Canvas</string>
-    <string name="lastfm_login">Вход в Last.fm</string>
-    <string name="lastfm_login_description">Войдите в свой аккаунт Last.fm, чтобы включить скробблинг.</string>
-    <string name="lastfm_now_playing_subtitle">Обновляет Last.fm информацией о том, что вы сейчас слушаете</string>
-    <string name="lead_with_song">Сначала песня</string>
-    <string name="lead_with_song_subtitle">Помещает название на жирную строку вместо исполнителя</string>
-    <string name="like">Нравится</string>
-    <string name="listenbrainz_token">Токен ListenBrainz</string>
-    <string name="listenbrainz_token_description">Вставьте токен пользователя ListenBrainz, чтобы включить скробблинг.</string>
-    <string name="listening_history">История прослушивания</string>
-    <string name="lyrics_not_available">Текст недоступен</string>
-    <string name="lyrics_sources_order">Источники пробуются в этом порядке. Перетащите, чтобы изменить порядок. Побеждает первый источник с текстом, если только не приоритизирован текст по слогам.</string>
-    <string name="max_delay">Максимальная задержка</string>
-    <string name="max_delay_subtitle">Максимальная задержка скробблинга в секундах</string>
-    <string name="min_song_duration">Минимальная длительность песни</string>
-    <string name="min_song_duration_subtitle">Более короткие песни не будут скробблиться</string>
-    <string name="monthly_listeners">%1$s слушателей в месяц</string>
-    <string name="name">Название</string>
-    <string name="no_lyrics_for_track">Для этого трека нет текста</string>
-    <string name="no_playlists_yet">Пока нет плейлистов. Используйте строку выше, чтобы создать новый.</string>
-    <string name="no_tracks_here">Здесь нет треков</string>
-    <string name="not_connected">Не подключено</string>
-    <string name="one_hour">1 час</string>
-    <string name="open_album">Открыть альбом</string>
-    <string name="open_artist">Открыть исполнителя</string>
-    <string name="pause_after_a_while">Приостановить воспроизведение через некоторое время</string>
-    <string name="pause_after_song">Пауза после окончания этой песни</string>
-    <string name="pause_countdown">%1$s до паузы</string>
-    <string name="play_to_preview">Воспроизведите что-нибудь, чтобы заполнить предпросмотр.</string>
-    <string name="playlist_name">Название плейлиста</string>
+    <string name="integrate_spotify_canvas">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÑŒ Spotify Canvas</string>
+    <string name="lastfm_login">Ð’Ñ…Ð¾Ð´ Ð² Last.fm</string>
+    <string name="lastfm_login_description">Ð’Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ Ð² ÑÐ²Ð¾Ð¹ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚ Last.fm, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³.</string>
+    <string name="lastfm_now_playing_subtitle">ÐžÐ±Ð½Ð¾Ð²Ð»ÑÐµÑ‚ Last.fm Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÐµÐ¹ Ð¾ Ñ‚Ð¾Ð¼, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ ÑÐµÐ¹Ñ‡Ð°Ñ ÑÐ»ÑƒÑˆÐ°ÐµÑ‚Ðµ</string>
+    <string name="lead_with_song">Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¿ÐµÑÐ½Ñ</string>
+    <string name="lead_with_song_subtitle">ÐŸÐ¾Ð¼ÐµÑ‰Ð°ÐµÑ‚ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð½Ð° Ð¶Ð¸Ñ€Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð²Ð¼ÐµÑÑ‚Ð¾ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</string>
+    <string name="like">ÐÑ€Ð°Ð²Ð¸Ñ‚ÑÑ</string>
+    <string name="listenbrainz_token">Ð¢Ð¾ÐºÐµÐ½ ListenBrainz</string>
+    <string name="listenbrainz_token_description">Ð’ÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ Ñ‚Ð¾ÐºÐµÐ½ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ ListenBrainz, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³.</string>
+    <string name="listening_history">Ð˜ÑÑ‚Ð¾Ñ€Ð¸Ñ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="lyrics_not_available">Ð¢ÐµÐºÑÑ‚ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½</string>
+    <string name="lyrics_sources_order">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸ Ð¿Ñ€Ð¾Ð±ÑƒÑŽÑ‚ÑÑ Ð² ÑÑ‚Ð¾Ð¼ Ð¿Ð¾Ñ€ÑÐ´ÐºÐµ. ÐŸÐµÑ€ÐµÑ‚Ð°Ñ‰Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð¾Ñ€ÑÐ´Ð¾Ðº. ÐŸÐ¾Ð±ÐµÐ¶Ð´Ð°ÐµÑ‚ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº Ñ Ñ‚ÐµÐºÑÑ‚Ð¾Ð¼, ÐµÑÐ»Ð¸ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ðµ Ð¿Ñ€Ð¸Ð¾Ñ€Ð¸Ñ‚Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ ÑÐ»Ð¾Ð³Ð°Ð¼.</string>
+    <string name="max_delay">ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ Ð·Ð°Ð´ÐµÑ€Ð¶ÐºÐ°</string>
+    <string name="max_delay_subtitle">ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ Ð·Ð°Ð´ÐµÑ€Ð¶ÐºÐ° ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³Ð° Ð² ÑÐµÐºÑƒÐ½Ð´Ð°Ñ…</string>
+    <string name="min_song_duration">ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ Ð´Ð»Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="min_song_duration_subtitle">Ð‘Ð¾Ð»ÐµÐµ ÐºÐ¾Ñ€Ð¾Ñ‚ÐºÐ¸Ðµ Ð¿ÐµÑÐ½Ð¸ Ð½Ðµ Ð±ÑƒÐ´ÑƒÑ‚ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="monthly_listeners">%1$s ÑÐ»ÑƒÑˆÐ°Ñ‚ÐµÐ»ÐµÐ¹ Ð² Ð¼ÐµÑÑÑ†</string>
+    <string name="name">ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ</string>
+    <string name="no_lyrics_for_track">Ð”Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ Ñ‚Ñ€ÐµÐºÐ° Ð½ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð°</string>
+    <string name="no_playlists_yet">ÐŸÐ¾ÐºÐ° Ð½ÐµÑ‚ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð². Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð²Ñ‹ÑˆÐµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ð¹.</string>
+    <string name="no_tracks_here">Ð—Ð´ÐµÑÑŒ Ð½ÐµÑ‚ Ñ‚Ñ€ÐµÐºÐ¾Ð²</string>
+    <string name="not_connected">ÐÐµ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾</string>
+    <string name="one_hour">1 Ñ‡Ð°Ñ</string>
+    <string name="open_album">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð°Ð»ÑŒÐ±Ð¾Ð¼</string>
+    <string name="open_artist">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</string>
+    <string name="pause_after_a_while">ÐŸÑ€Ð¸Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ñ‡ÐµÑ€ÐµÐ· Ð½ÐµÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð²Ñ€ÐµÐ¼Ñ</string>
+    <string name="pause_after_song">ÐŸÐ°ÑƒÐ·Ð° Ð¿Ð¾ÑÐ»Ðµ Ð¾ÐºÐ¾Ð½Ñ‡Ð°Ð½Ð¸Ñ ÑÑ‚Ð¾Ð¹ Ð¿ÐµÑÐ½Ð¸</string>
+    <string name="pause_countdown">%1$s Ð´Ð¾ Ð¿Ð°ÑƒÐ·Ñ‹</string>
+    <string name="play_to_preview">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ñ‚Ð¾-Ð½Ð¸Ð±ÑƒÐ´ÑŒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð¿Ñ€ÐµÐ´Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€.</string>
+    <string name="playlist_name">ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°</string>
     <string name="presence">Presence</string>
-    <string name="preview">Предпросмотр</string>
-    <string name="prioritize_syllable_lyrics">Приоритизировать текст по слогам</string>
-    <string name="prioritize_syllable_lyrics_subtitle">Продолжать поиск после нахождения совпадения по строкам, чтобы найти текст по словам</string>
-    <string name="quality_hourly">%1$s · %2$s</string>
-    <string name="quality_per_track">%1$s · %2$s за трек</string>
-    <string name="queued">В очереди</string>
-    <string name="remove">Удалить</string>
-    <string name="remove_from_liked">Удалить из понравившейся музыки</string>
-    <string name="remove_from_playlist">Удалить из этого плейлиста</string>
-    <string name="move_up">Переместить вверх</string>
-    <string name="move_down">Переместить вниз</string>
-    <string name="remove_from_queue">Удалить из очереди</string>
-    <string name="rename_playlist">Переименовать плейлист</string>
-    <string name="reset_to_default">Сбросить по умолчанию</string>
-    <string name="rich_presence_footer">Показывать, что вы слушаете, в вашем профиле Discord.</string>
-    <string name="save_name">Сохранить название</string>
-    <string name="saved_to_downloads">Сохранено в Загрузки</string>
-    <string name="saved_to_youtube_music_account">Сохранено в вашем аккаунте YouTube Music</string>
-    <string name="scrobble_delay">Задержка скробблинга</string>
-    <string name="scrobble_delay_subtitle">Насколько далеко в песню скробблить</string>
-    <string name="scrobble_timing">Время скробблинга</string>
-    <string name="scrobble_tracks">Скробблить треки</string>
-    <string name="scrobble_tracks_subtitle">Записывать прослушивания в вашу ленту Last.fm</string>
-    <string name="scrobbling_footer">Отправляйте свои прослушивания в Last.fm и ListenBrainz.</string>
-    <string name="scrobbling_paused_footer">Last.fm и ListenBrainz приостановлены для этого релиза и вернутся позже. Существующие подключения остаются сохранёнными.</string>
-    <string name="search_this_folder">Искать в этой папке</string>
-    <string name="search_this_list">Искать в этом списке</string>
-    <string name="second_button">Вторая кнопка</string>
-    <string name="share">Поделиться</string>
-    <string name="sharing_as">Публикация от имени @%1$s</string>
-    <string name="sharing_listens">Публикация ваших прослушиваний</string>
-    <string name="show_what_playing">Показывать, что я сейчас слушаю</string>
-    <string name="signed_in_as">Вход выполнен как %1$s</string>
-    <string name="signing_in">Выполняется вход…</string>
-    <string name="sleep_timer">Таймер сна</string>
-    <string name="sources_no_lossless">Ни один включённый источник не может предоставить аудио без потерь. Добавьте пользовательский модуль, чтобы воспроизводить доступные файлы без потерь без перекодирования.</string>
-    <string name="sources_order_footer">Если у источника нет трека или он недоступен, Free Music пробует следующий. Источники выше YouTube могут заменить его запись, если предоставляют более качественную версию.</string>
-    <string name="sources_order_header">Источники, пробуются в этом порядке</string>
-    <string name="sources_quality_capped">Это соединение установлено ниже высокого качества, поэтому потоки перекодируются под это ограничение. На загрузки это не влияет.</string>
-    <string name="jiosaavn_mismatch_warning">Может подобрать не ту версию песни. Включайте на свой страх и риск.</string>
-    <string name="enable_jiosaavn">Включить JioSaavn?</string>
-    <string name="enable_anyway">Всё равно включить</string>
-    <string name="sources_subtitle">Откуда поступает аудио и в каком порядке</string>
-    <string name="source_matching">Сопоставление источников</string>
-    <string name="upgrade_length_slack">Допуск по длительности</string>
-    <string name="upgrade_length_slack_subtitle">Максимальная разница в длительности для замещающего потока</string>
-    <string name="upgrade_length_slack_footer">Больший допуск принимает больше совпадений из источников; меньший — строже. По умолчанию 3 секунды.</string>
-    <string name="seconds_short">%1$d с</string>
-    <string name="spdc_token">Токен sp_dc</string>
-    <string name="spotify_canvas_setup">Настройка Spotify Canvas</string>
-    <string name="spotify_canvas_setup_description">Чтобы использовать Spotify Canvas, укажите свой cookie sp_dc от Spotify.</string>
-    <string name="spotify_canvas_setup_steps">1. Войдите на open.spotify.com в браузере.\n2. Откройте инструменты разработчика, затем Application и Cookies.\n3. Скопируйте значение cookie sp_dc.\n4. Вставьте его ниже.</string>
-    <string name="spotify_canvas_auto_hide">Автоскрытие элементов управления</string>
-    <string name="spotify_canvas_auto_hide_subtitle">Сворачивает половину плеера через 5 секунд, пока играет Spotify Canvas</string>
-    <string name="prioritize_spotify_canvas">Приоритет Spotify Canvas</string>
-    <string name="prioritize_spotify_canvas_subtitle">Пробовать Spotify раньше Apple Music и других источников анимированных обложек</string>
-    <string name="status">Статус</string>
-    <string name="status_dialog_message">Что показывает ваш аккаунт, пока Presence активен.</string>
-    <string name="status_dnd">Не беспокоить</string>
-    <string name="status_dnd_detail">Красный значок. Также отключает уведомления.</string>
-    <string name="status_idle">Нет на месте</string>
-    <string name="status_idle_detail">Янтарный полумесяц, отображается как «отошёл»</string>
-    <string name="status_online">В сети</string>
-    <string name="status_online_detail">Зелёная точка</string>
-    <string name="subscribers">%1$s подписчиков</string>
-    <string name="tap_to_connect">Нажмите, чтобы подключить</string>
-    <string name="tap_to_sign_in">Нажмите, чтобы войти</string>
-    <string name="tap_to_sign_in_discord">Нажмите, чтобы войти через Discord</string>
-    <string name="token">Токен</string>
-    <string name="turn_off_timer">Выключить таймер</string>
-    <string name="undo_dislike">Отменить «не нравится»</string>
-    <string name="up_next">Далее</string>
-    <string name="verb_competing">Участвует в</string>
-    <string name="verb_listening">Слушает</string>
-    <string name="verb_playing">Играет</string>
-    <string name="verb_watching">Смотрит</string>
+    <string name="preview">ÐŸÑ€ÐµÐ´Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€</string>
+    <string name="prioritize_syllable_lyrics">ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ ÑÐ»Ð¾Ð³Ð°Ð¼</string>
+    <string name="prioritize_syllable_lyrics_subtitle">ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð°Ñ‚ÑŒ Ð¿Ð¾Ð¸ÑÐº Ð¿Ð¾ÑÐ»Ðµ Ð½Ð°Ñ…Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ ÑÐ¾Ð²Ð¿Ð°Ð´ÐµÐ½Ð¸Ñ Ð¿Ð¾ ÑÑ‚Ñ€Ð¾ÐºÐ°Ð¼, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð½Ð°Ð¹Ñ‚Ð¸ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ ÑÐ»Ð¾Ð²Ð°Ð¼</string>
+    <string name="quality_hourly">%1$s Â· %2$s</string>
+    <string name="quality_per_track">%1$s Â· %2$s Ð·Ð° Ñ‚Ñ€ÐµÐº</string>
+    <string name="queued">Ð’ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="remove">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ</string>
+    <string name="remove_from_liked">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð· Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð²ÑˆÐµÐ¹ÑÑ Ð¼ÑƒÐ·Ñ‹ÐºÐ¸</string>
+    <string name="remove_from_playlist">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð· ÑÑ‚Ð¾Ð³Ð¾ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°</string>
+    <string name="move_up">ÐŸÐµÑ€ÐµÐ¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ Ð²Ð²ÐµÑ€Ñ…</string>
+    <string name="move_down">ÐŸÐµÑ€ÐµÐ¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ Ð²Ð½Ð¸Ð·</string>
+    <string name="remove_from_queue">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð· Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="rename_playlist">ÐŸÐµÑ€ÐµÐ¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="reset_to_default">Ð¡Ð±Ñ€Ð¾ÑÐ¸Ñ‚ÑŒ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ</string>
+    <string name="rich_presence_footer">ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ ÑÐ»ÑƒÑˆÐ°ÐµÑ‚Ðµ, Ð² Ð²Ð°ÑˆÐµÐ¼ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ðµ Discord.</string>
+    <string name="save_name">Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ</string>
+    <string name="saved_to_downloads">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾ Ð² Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸</string>
+    <string name="saved_to_youtube_music_account">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾ Ð² Ð²Ð°ÑˆÐµÐ¼ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ðµ YouTube Music</string>
+    <string name="scrobble_delay">Ð—Ð°Ð´ÐµÑ€Ð¶ÐºÐ° ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³Ð°</string>
+    <string name="scrobble_delay_subtitle">ÐÐ°ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð´Ð°Ð»ÐµÐºÐ¾ Ð² Ð¿ÐµÑÐ½ÑŽ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ñ‚ÑŒ</string>
+    <string name="scrobble_timing">Ð’Ñ€ÐµÐ¼Ñ ÑÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ð½Ð³Ð°</string>
+    <string name="scrobble_tracks">Ð¡ÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÐµÐºÐ¸</string>
+    <string name="scrobble_tracks_subtitle">Ð—Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð² Ð²Ð°ÑˆÑƒ Ð»ÐµÐ½Ñ‚Ñƒ Last.fm</string>
+    <string name="scrobbling_footer">ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐ¹Ñ‚Ðµ ÑÐ²Ð¾Ð¸ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð² Last.fm Ð¸ ListenBrainz.</string>
+    <string name="scrobbling_paused_footer">Last.fm Ð¸ ListenBrainz Ð¿Ñ€Ð¸Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ñ‹ Ð´Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ Ñ€ÐµÐ»Ð¸Ð·Ð° Ð¸ Ð²ÐµÑ€Ð½ÑƒÑ‚ÑÑ Ð¿Ð¾Ð·Ð¶Ðµ. Ð¡ÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ðµ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ð¾ÑÑ‚Ð°ÑŽÑ‚ÑÑ ÑÐ¾Ñ…Ñ€Ð°Ð½Ñ‘Ð½Ð½Ñ‹Ð¼Ð¸.</string>
+    <string name="search_this_folder">Ð˜ÑÐºÐ°Ñ‚ÑŒ Ð² ÑÑ‚Ð¾Ð¹ Ð¿Ð°Ð¿ÐºÐµ</string>
+    <string name="search_this_list">Ð˜ÑÐºÐ°Ñ‚ÑŒ Ð² ÑÑ‚Ð¾Ð¼ ÑÐ¿Ð¸ÑÐºÐµ</string>
+    <string name="second_button">Ð’Ñ‚Ð¾Ñ€Ð°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°</string>
+    <string name="share">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="sharing_as">ÐŸÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ñ Ð¾Ñ‚ Ð¸Ð¼ÐµÐ½Ð¸ @%1$s</string>
+    <string name="sharing_listens">ÐŸÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ñ Ð²Ð°ÑˆÐ¸Ñ… Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ð¹</string>
+    <string name="show_what_playing">ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ, Ñ‡Ñ‚Ð¾ Ñ ÑÐµÐ¹Ñ‡Ð°Ñ ÑÐ»ÑƒÑˆÐ°ÑŽ</string>
+    <string name="signed_in_as">Ð’Ñ…Ð¾Ð´ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½ ÐºÐ°Ðº %1$s</string>
+    <string name="signing_in">Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ Ð²Ñ…Ð¾Ð´â€¦</string>
+    <string name="sleep_timer">Ð¢Ð°Ð¹Ð¼ÐµÑ€ ÑÐ½Ð°</string>
+    <string name="sources_no_lossless">ÐÐ¸ Ð¾Ð´Ð¸Ð½ Ð²ÐºÐ»ÑŽÑ‡Ñ‘Ð½Ð½Ñ‹Ð¹ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð°ÑƒÐ´Ð¸Ð¾ Ð±ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ. Ð”Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÐ¸Ð¹ Ð¼Ð¾Ð´ÑƒÐ»ÑŒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ñ„Ð°Ð¹Ð»Ñ‹ Ð±ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ Ð±ÐµÐ· Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ.</string>
+    <string name="sources_order_footer">Ð•ÑÐ»Ð¸ Ñƒ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ° Ð½ÐµÑ‚ Ñ‚Ñ€ÐµÐºÐ° Ð¸Ð»Ð¸ Ð¾Ð½ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½, Free Music Ð¿Ñ€Ð¾Ð±ÑƒÐµÑ‚ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹. Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸ Ð²Ñ‹ÑˆÐµ YouTube Ð¼Ð¾Ð³ÑƒÑ‚ Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐµÐ³Ð¾ Ð·Ð°Ð¿Ð¸ÑÑŒ, ÐµÑÐ»Ð¸ Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÑŽÑ‚ Ð±Ð¾Ð»ÐµÐµ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²ÐµÐ½Ð½ÑƒÑŽ Ð²ÐµÑ€ÑÐ¸ÑŽ.</string>
+    <string name="sources_order_header">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸, Ð¿Ñ€Ð¾Ð±ÑƒÑŽÑ‚ÑÑ Ð² ÑÑ‚Ð¾Ð¼ Ð¿Ð¾Ñ€ÑÐ´ÐºÐµ</string>
+    <string name="sources_quality_capped">Ð­Ñ‚Ð¾ ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð½Ð¸Ð¶Ðµ Ð²Ñ‹ÑÐ¾ÐºÐ¾Ð³Ð¾ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð°, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¿Ð¾Ñ‚Ð¾ÐºÐ¸ Ð¿ÐµÑ€ÐµÐºÐ¾Ð´Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ Ð¿Ð¾Ð´ ÑÑ‚Ð¾ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ðµ. ÐÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ ÑÑ‚Ð¾ Ð½Ðµ Ð²Ð»Ð¸ÑÐµÑ‚.</string>
+    <string name="jiosaavn_mismatch_warning">ÐœÐ¾Ð¶ÐµÑ‚ Ð¿Ð¾Ð´Ð¾Ð±Ñ€Ð°Ñ‚ÑŒ Ð½Ðµ Ñ‚Ñƒ Ð²ÐµÑ€ÑÐ¸ÑŽ Ð¿ÐµÑÐ½Ð¸. Ð’ÐºÐ»ÑŽÑ‡Ð°Ð¹Ñ‚Ðµ Ð½Ð° ÑÐ²Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ñ… Ð¸ Ñ€Ð¸ÑÐº.</string>
+    <string name="enable_jiosaavn">Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ JioSaavn?</string>
+    <string name="enable_anyway">Ð’ÑÑ‘ Ñ€Ð°Ð²Ð½Ð¾ Ð²ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="sources_subtitle">ÐžÑ‚ÐºÑƒÐ´Ð° Ð¿Ð¾ÑÑ‚ÑƒÐ¿Ð°ÐµÑ‚ Ð°ÑƒÐ´Ð¸Ð¾ Ð¸ Ð² ÐºÐ°ÐºÐ¾Ð¼ Ð¿Ð¾Ñ€ÑÐ´ÐºÐµ</string>
+    <string name="source_matching">Ð¡Ð¾Ð¿Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¾Ð²</string>
+    <string name="upgrade_length_slack">Ð”Ð¾Ð¿ÑƒÑÐº Ð¿Ð¾ Ð´Ð»Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸</string>
+    <string name="upgrade_length_slack_subtitle">ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ Ñ€Ð°Ð·Ð½Ð¸Ñ†Ð° Ð² Ð´Ð»Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸ Ð´Ð»Ñ Ð·Ð°Ð¼ÐµÑ‰Ð°ÑŽÑ‰ÐµÐ³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°</string>
+    <string name="upgrade_length_slack_footer">Ð‘Ð¾Ð»ÑŒÑˆÐ¸Ð¹ Ð´Ð¾Ð¿ÑƒÑÐº Ð¿Ñ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÑ‚ Ð±Ð¾Ð»ÑŒÑˆÐµ ÑÐ¾Ð²Ð¿Ð°Ð´ÐµÐ½Ð¸Ð¹ Ð¸Ð· Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¾Ð²; Ð¼ÐµÐ½ÑŒÑˆÐ¸Ð¹ â€” ÑÑ‚Ñ€Ð¾Ð¶Ðµ. ÐŸÐ¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ 3 ÑÐµÐºÑƒÐ½Ð´Ñ‹.</string>
+    <string name="seconds_short">%1$d Ñ</string>
+    <string name="spdc_token">Ð¢Ð¾ÐºÐµÐ½ sp_dc</string>
+    <string name="spotify_canvas_setup">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Spotify Canvas</string>
+    <string name="spotify_canvas_setup_description">Ð§Ñ‚Ð¾Ð±Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Spotify Canvas, ÑƒÐºÐ°Ð¶Ð¸Ñ‚Ðµ ÑÐ²Ð¾Ð¹ cookie sp_dc Ð¾Ñ‚ Spotify.</string>
+    <string name="spotify_canvas_setup_steps">1. Ð’Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ Ð½Ð° open.spotify.com Ð² Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€Ðµ.\n2. ÐžÑ‚ÐºÑ€Ð¾Ð¹Ñ‚Ðµ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ°, Ð·Ð°Ñ‚ÐµÐ¼ Application Ð¸ Cookies.\n3. Ð¡ÐºÐ¾Ð¿Ð¸Ñ€ÑƒÐ¹Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ cookie sp_dc.\n4. Ð’ÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ ÐµÐ³Ð¾ Ð½Ð¸Ð¶Ðµ.</string>
+    <string name="spotify_canvas_auto_hide">ÐÐ²Ñ‚Ð¾ÑÐºÑ€Ñ‹Ñ‚Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ</string>
+    <string name="spotify_canvas_auto_hide_subtitle">Ð¡Ð²Ð¾Ñ€Ð°Ñ‡Ð¸Ð²Ð°ÐµÑ‚ Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½Ñƒ Ð¿Ð»ÐµÐµÑ€Ð° Ñ‡ÐµÑ€ÐµÐ· 5 ÑÐµÐºÑƒÐ½Ð´, Ð¿Ð¾ÐºÐ° Ð¸Ð³Ñ€Ð°ÐµÑ‚ Spotify Canvas</string>
+    <string name="prioritize_spotify_canvas">ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Spotify Canvas</string>
+    <string name="prioritize_spotify_canvas_subtitle">ÐŸÑ€Ð¾Ð±Ð¾Ð²Ð°Ñ‚ÑŒ Spotify Ñ€Ð°Ð½ÑŒÑˆÐµ Apple Music Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ñ… Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¾Ð² Ð°Ð½Ð¸Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð¾Ð±Ð»Ð¾Ð¶ÐµÐº</string>
+    <string name="status">Ð¡Ñ‚Ð°Ñ‚ÑƒÑ</string>
+    <string name="status_dialog_message">Ð§Ñ‚Ð¾ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ð²Ð°Ñˆ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚, Ð¿Ð¾ÐºÐ° Presence Ð°ÐºÑ‚Ð¸Ð²ÐµÐ½.</string>
+    <string name="status_dnd">ÐÐµ Ð±ÐµÑÐ¿Ð¾ÐºÐ¾Ð¸Ñ‚ÑŒ</string>
+    <string name="status_dnd_detail">ÐšÑ€Ð°ÑÐ½Ñ‹Ð¹ Ð·Ð½Ð°Ñ‡Ð¾Ðº. Ð¢Ð°ÐºÐ¶Ðµ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ ÑƒÐ²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ.</string>
+    <string name="status_idle">ÐÐµÑ‚ Ð½Ð° Ð¼ÐµÑÑ‚Ðµ</string>
+    <string name="status_idle_detail">Ð¯Ð½Ñ‚Ð°Ñ€Ð½Ñ‹Ð¹ Ð¿Ð¾Ð»ÑƒÐ¼ÐµÑÑÑ†, Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÐµÑ‚ÑÑ ÐºÐ°Ðº Â«Ð¾Ñ‚Ð¾ÑˆÑ‘Ð»Â»</string>
+    <string name="status_online">Ð’ ÑÐµÑ‚Ð¸</string>
+    <string name="status_online_detail">Ð—ÐµÐ»Ñ‘Ð½Ð°Ñ Ñ‚Ð¾Ñ‡ÐºÐ°</string>
+    <string name="subscribers">%1$s Ð¿Ð¾Ð´Ð¿Ð¸ÑÑ‡Ð¸ÐºÐ¾Ð²</string>
+    <string name="tap_to_connect">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="tap_to_sign_in">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ð¾Ð¹Ñ‚Ð¸</string>
+    <string name="tap_to_sign_in_discord">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ð¾Ð¹Ñ‚Ð¸ Ñ‡ÐµÑ€ÐµÐ· Discord</string>
+    <string name="token">Ð¢Ð¾ÐºÐµÐ½</string>
+    <string name="turn_off_timer">Ð’Ñ‹ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ñ‚Ð°Ð¹Ð¼ÐµÑ€</string>
+    <string name="undo_dislike">ÐžÑ‚Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Â«Ð½Ðµ Ð½Ñ€Ð°Ð²Ð¸Ñ‚ÑÑÂ»</string>
+    <string name="up_next">Ð”Ð°Ð»ÐµÐµ</string>
+    <string name="verb_competing">Ð£Ñ‡Ð°ÑÑ‚Ð²ÑƒÐµÑ‚ Ð²</string>
+    <string name="verb_listening">Ð¡Ð»ÑƒÑˆÐ°ÐµÑ‚</string>
+    <string name="verb_playing">Ð˜Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="verb_watching">Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ñ‚</string>
     <plurals name="minute_count">
-        <item quantity="one">%1$d минута</item>
-        <item quantity="few">%1$d минуты</item>
-        <item quantity="many">%1$d минут</item>
+        <item quantity="one">%1$d Ð¼Ð¸Ð½ÑƒÑ‚Ð°</item>
+        <item quantity="few">%1$d Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹</item>
+        <item quantity="many">%1$d Ð¼Ð¸Ð½ÑƒÑ‚</item>
     </plurals>
-    <string name="biggest_day_note">Ваш самый насыщенный день был %1$s — %2$s прослушивания.</string>
-    <string name="close_replay">Закрыть Replay</string>
-    <string name="couldnt_draw_picture">Не удалось создать изображение</string>
-    <string name="default_replay_holder">Слушатель Free Music</string>
-    <string name="different_albums">Разные альбомы</string>
-    <string name="genres_pending">Жанры появятся по мере роста вашей истории прослушивания</string>
-    <string name="hour_am">%1$d утра</string>
-    <string name="hour_pm">%1$d вечера</string>
-    <string name="hours_minutes_short">%1$dч %2$dм</string>
-    <string name="listen_most_around">Чаще всего вы слушаете музыку около %1$s.</string>
-    <string name="listening_shape">Ваша модель прослушивания</string>
-    <string name="member_since">Участник с</string>
-    <string name="member_since_value">Участник с %1$s</string>
-    <string name="midday">полдень</string>
-    <string name="midnight">полночь</string>
-    <string name="minutes">Минуты</string>
-    <string name="minutes_grouped_short">%1$s мин</string>
-    <string name="minutes_listened">Минут прослушано</string>
-    <string name="minutes_short">%1$d мин</string>
-    <string name="not_enough_listening">Пока недостаточно данных о прослушивании</string>
-    <string name="not_enough_this_month">Прослушайте ещё немного песен в этом месяце, чтобы открыть свой Replay.</string>
-    <string name="pinned">Закреплено</string>
-    <string name="replay_across"> в </string>
-    <string name="replay_album_end"> приковал ваше внимание.</string>
-    <string name="replay_album_focus">Один альбом</string>
-    <string name="replay_album_start">На этот раз </string>
-    <string name="replay_artist_end"> не отпускал вас.</string>
-    <string name="replay_artist_focus">Один исполнитель</string>
-    <string name="replay_artist_start">Весь месяц </string>
-    <string name="replay_empty_description">Слушайте немного больше, и Free Music превратит вашу историю в Replay.</string>
-    <string name="replay_genre_end"> определили ваше звучание.</string>
-    <string name="replay_genre_focus">Ваши жанры</string>
-    <string name="replay_genre_start">Вместе </string>
-    <string name="replay_habits_middle"> из </string>
-    <string name="replay_habits_start">Вы исследовали </string>
-    <string name="replay_hours_across">%1$s часов</string>
-    <string name="replay_intro_end"> готов.</string>
-    <string name="replay_intro_start">Ваш </string>
-    <string name="replay_minutes_end"> с музыкой.</string>
-    <string name="replay_minutes_start">Вы провели </string>
+    <string name="biggest_day_note">Ð’Ð°Ñˆ ÑÐ°Ð¼Ñ‹Ð¹ Ð½Ð°ÑÑ‹Ñ‰ÐµÐ½Ð½Ñ‹Ð¹ Ð´ÐµÐ½ÑŒ Ð±Ñ‹Ð» %1$s â€” %2$s Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ.</string>
+    <string name="close_replay">Ð—Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ Replay</string>
+    <string name="couldnt_draw_picture">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ</string>
+    <string name="default_replay_holder">Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÐµÐ»ÑŒ Free Music</string>
+    <string name="different_albums">Ð Ð°Ð·Ð½Ñ‹Ðµ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñ‹</string>
+    <string name="genres_pending">Ð–Ð°Ð½Ñ€Ñ‹ Ð¿Ð¾ÑÐ²ÑÑ‚ÑÑ Ð¿Ð¾ Ð¼ÐµÑ€Ðµ Ñ€Ð¾ÑÑ‚Ð° Ð²Ð°ÑˆÐµÐ¹ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ð¸ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="hour_am">%1$d ÑƒÑ‚Ñ€Ð°</string>
+    <string name="hour_pm">%1$d Ð²ÐµÑ‡ÐµÑ€Ð°</string>
+    <string name="hours_minutes_short">%1$dÑ‡ %2$dÐ¼</string>
+    <string name="listen_most_around">Ð§Ð°Ñ‰Ðµ Ð²ÑÐµÐ³Ð¾ Ð²Ñ‹ ÑÐ»ÑƒÑˆÐ°ÐµÑ‚Ðµ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ Ð¾ÐºÐ¾Ð»Ð¾ %1$s.</string>
+    <string name="listening_shape">Ð’Ð°ÑˆÐ° Ð¼Ð¾Ð´ÐµÐ»ÑŒ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="member_since">Ð£Ñ‡Ð°ÑÑ‚Ð½Ð¸Ðº Ñ</string>
+    <string name="member_since_value">Ð£Ñ‡Ð°ÑÑ‚Ð½Ð¸Ðº Ñ %1$s</string>
+    <string name="midday">Ð¿Ð¾Ð»Ð´ÐµÐ½ÑŒ</string>
+    <string name="midnight">Ð¿Ð¾Ð»Ð½Ð¾Ñ‡ÑŒ</string>
+    <string name="minutes">ÐœÐ¸Ð½ÑƒÑ‚Ñ‹</string>
+    <string name="minutes_grouped_short">%1$s Ð¼Ð¸Ð½</string>
+    <string name="minutes_listened">ÐœÐ¸Ð½ÑƒÑ‚ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ°Ð½Ð¾</string>
+    <string name="minutes_short">%1$d Ð¼Ð¸Ð½</string>
+    <string name="not_enough_listening">ÐŸÐ¾ÐºÐ° Ð½ÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¾ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ð¸</string>
+    <string name="not_enough_this_month">ÐŸÑ€Ð¾ÑÐ»ÑƒÑˆÐ°Ð¹Ñ‚Ðµ ÐµÑ‰Ñ‘ Ð½ÐµÐ¼Ð½Ð¾Ð³Ð¾ Ð¿ÐµÑÐµÐ½ Ð² ÑÑ‚Ð¾Ð¼ Ð¼ÐµÑÑÑ†Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ ÑÐ²Ð¾Ð¹ Replay.</string>
+    <string name="pinned">Ð—Ð°ÐºÑ€ÐµÐ¿Ð»ÐµÐ½Ð¾</string>
+    <string name="replay_across"> Ð² </string>
+    <string name="replay_album_end"> Ð¿Ñ€Ð¸ÐºÐ¾Ð²Ð°Ð» Ð²Ð°ÑˆÐµ Ð²Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ.</string>
+    <string name="replay_album_focus">ÐžÐ´Ð¸Ð½ Ð°Ð»ÑŒÐ±Ð¾Ð¼</string>
+    <string name="replay_album_start">ÐÐ° ÑÑ‚Ð¾Ñ‚ Ñ€Ð°Ð· </string>
+    <string name="replay_artist_end"> Ð½Ðµ Ð¾Ñ‚Ð¿ÑƒÑÐºÐ°Ð» Ð²Ð°Ñ.</string>
+    <string name="replay_artist_focus">ÐžÐ´Ð¸Ð½ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
+    <string name="replay_artist_start">Ð’ÐµÑÑŒ Ð¼ÐµÑÑÑ† </string>
+    <string name="replay_empty_description">Ð¡Ð»ÑƒÑˆÐ°Ð¹Ñ‚Ðµ Ð½ÐµÐ¼Ð½Ð¾Ð³Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐµ, Ð¸ Free Music Ð¿Ñ€ÐµÐ²Ñ€Ð°Ñ‚Ð¸Ñ‚ Ð²Ð°ÑˆÑƒ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð² Replay.</string>
+    <string name="replay_genre_end"> Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ð»Ð¸ Ð²Ð°ÑˆÐµ Ð·Ð²ÑƒÑ‡Ð°Ð½Ð¸Ðµ.</string>
+    <string name="replay_genre_focus">Ð’Ð°ÑˆÐ¸ Ð¶Ð°Ð½Ñ€Ñ‹</string>
+    <string name="replay_genre_start">Ð’Ð¼ÐµÑÑ‚Ðµ </string>
+    <string name="replay_habits_middle"> Ð¸Ð· </string>
+    <string name="replay_habits_start">Ð’Ñ‹ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð»Ð¸ </string>
+    <string name="replay_hours_across">%1$s Ñ‡Ð°ÑÐ¾Ð²</string>
+    <string name="replay_intro_end"> Ð³Ð¾Ñ‚Ð¾Ð².</string>
+    <string name="replay_intro_start">Ð’Ð°Ñˆ </string>
+    <string name="replay_minutes_end"> Ñ Ð¼ÑƒÐ·Ñ‹ÐºÐ¾Ð¹.</string>
+    <string name="replay_minutes_start">Ð’Ñ‹ Ð¿Ñ€Ð¾Ð²ÐµÐ»Ð¸ </string>
     <string name="replay_minutes_value">%1$s</string>
-    <string name="replay_mostly_around">, в основном около %1$s.</string>
-    <string name="replay_private_counting">Формируется приватно на основе истории прослушивания на этом устройстве</string>
-    <string name="replay_share_card_description">Аккуратная карточка с главными моментами вашего прослушивания.</string>
-    <string name="replay_share_summary_description">Полная картина: песни, исполнители, альбомы, жанры и привычки.</string>
-    <string name="replay_songs_end"> заполнили ваш месяц.</string>
-    <string name="replay_songs_start">Всего </string>
-    <string name="replay_summary_start">В центре вашего прослушивания был </string>
-    <string name="saved">Сохранено</string>
-    <string name="share_my_replay">Поделиться моим Replay</string>
-    <string name="share_your_replay">Поделиться своим Replay</string>
-    <string name="tap_share_for_picture">Нажмите «Поделиться», чтобы создать изображение</string>
-    <string name="top_album">Топ-альбом</string>
-    <string name="top_artist">Топ-исполнитель</string>
-    <string name="top_genre">Топ-жанр</string>
-    <string name="top_song">Топ-песня</string>
-    <string name="when_you_listen_most">Когда вы слушаете больше всего</string>
-    <string name="your_biggest_day">Ваш самый насыщенный день: %1$s</string>
-    <string name="your_listening_experience">Ваш опыт прослушивания</string>
-    <string name="your_replay">Ваш Replay</string>
+    <string name="replay_mostly_around">, Ð² Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð¼ Ð¾ÐºÐ¾Ð»Ð¾ %1$s.</string>
+    <string name="replay_private_counting">Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÐµÑ‚ÑÑ Ð¿Ñ€Ð¸Ð²Ð°Ñ‚Ð½Ð¾ Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ð¸ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ</string>
+    <string name="replay_share_card_description">ÐÐºÐºÑƒÑ€Ð°Ñ‚Ð½Ð°Ñ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐ° Ñ Ð³Ð»Ð°Ð²Ð½Ñ‹Ð¼Ð¸ Ð¼Ð¾Ð¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ.</string>
+    <string name="replay_share_summary_description">ÐŸÐ¾Ð»Ð½Ð°Ñ ÐºÐ°Ñ€Ñ‚Ð¸Ð½Ð°: Ð¿ÐµÑÐ½Ð¸, Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ð¸, Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñ‹, Ð¶Ð°Ð½Ñ€Ñ‹ Ð¸ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸.</string>
+    <string name="replay_songs_end"> Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ð»Ð¸ Ð²Ð°Ñˆ Ð¼ÐµÑÑÑ†.</string>
+    <string name="replay_songs_start">Ð’ÑÐµÐ³Ð¾ </string>
+    <string name="replay_summary_start">Ð’ Ñ†ÐµÐ½Ñ‚Ñ€Ðµ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð±Ñ‹Ð» </string>
+    <string name="saved">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾</string>
+    <string name="share_my_replay">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ Ð¼Ð¾Ð¸Ð¼ Replay</string>
+    <string name="share_your_replay">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ ÑÐ²Ð¾Ð¸Ð¼ Replay</string>
+    <string name="tap_share_for_picture">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Â«ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑÂ», Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ</string>
+    <string name="top_album">Ð¢Ð¾Ð¿-Ð°Ð»ÑŒÐ±Ð¾Ð¼</string>
+    <string name="top_artist">Ð¢Ð¾Ð¿-Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
+    <string name="top_genre">Ð¢Ð¾Ð¿-Ð¶Ð°Ð½Ñ€</string>
+    <string name="top_song">Ð¢Ð¾Ð¿-Ð¿ÐµÑÐ½Ñ</string>
+    <string name="when_you_listen_most">ÐšÐ¾Ð³Ð´Ð° Ð²Ñ‹ ÑÐ»ÑƒÑˆÐ°ÐµÑ‚Ðµ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð²ÑÐµÐ³Ð¾</string>
+    <string name="your_biggest_day">Ð’Ð°Ñˆ ÑÐ°Ð¼Ñ‹Ð¹ Ð½Ð°ÑÑ‹Ñ‰ÐµÐ½Ð½Ñ‹Ð¹ Ð´ÐµÐ½ÑŒ: %1$s</string>
+    <string name="your_listening_experience">Ð’Ð°Ñˆ Ð¾Ð¿Ñ‹Ñ‚ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="your_replay">Ð’Ð°Ñˆ Replay</string>
     <plurals name="replay_artist_count">
-        <item quantity="one">%1$s исполнитель</item>
-        <item quantity="few">%1$s исполнителя</item>
-        <item quantity="many">%1$s исполнителей</item>
+        <item quantity="one">%1$s Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</item>
+        <item quantity="few">%1$s Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</item>
+        <item quantity="many">%1$s Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÐµÐ¹</item>
     </plurals>
     <plurals name="replay_play_count">
-        <item quantity="one">%1$s прослушивание</item>
-        <item quantity="few">%1$s прослушивания</item>
-        <item quantity="many">%1$s прослушиваний</item>
+        <item quantity="one">%1$s Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ðµ</item>
+        <item quantity="few">%1$s Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</item>
+        <item quantity="many">%1$s Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ð¹</item>
     </plurals>
     <plurals name="replay_song_count">
-        <item quantity="one">%1$s песня</item>
-        <item quantity="few">%1$s песни</item>
-        <item quantity="many">%1$s песен</item>
+        <item quantity="one">%1$s Ð¿ÐµÑÐ½Ñ</item>
+        <item quantity="few">%1$s Ð¿ÐµÑÐ½Ð¸</item>
+        <item quantity="many">%1$s Ð¿ÐµÑÐµÐ½</item>
     </plurals>
-    <string name="all_audio_folders">Все папки с аудио</string>
-    <string name="local_music_folder">Папка локальной музыки</string>
-    <string name="sort_music">Сортировка музыки</string>
-    <string name="sort_title_ascending">По алфавиту (А — Я)</string>
-    <string name="sort_title_descending">По алфавиту (Я — А)</string>
-    <string name="sort_date_added">По дате добавления (сначала новые)</string>
-    <string name="sort_date_modified">По дате изменения (сначала новые)</string>
-    <string name="use_all_audio_folders">Использовать все папки с аудио</string>
-    <string name="use_all_audio_folders_subtitle">Снять ограничение по папкам и сканировать музыку по всему устройству</string>
-    <string name="album">альбом</string>
-    <string name="artist">исполнитель</string>
+    <string name="all_audio_folders">Ð’ÑÐµ Ð¿Ð°Ð¿ÐºÐ¸ Ñ Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="local_music_folder">ÐŸÐ°Ð¿ÐºÐ° Ð»Ð¾ÐºÐ°Ð»ÑŒÐ½Ð¾Ð¹ Ð¼ÑƒÐ·Ñ‹ÐºÐ¸</string>
+    <string name="sort_music">Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð¼ÑƒÐ·Ñ‹ÐºÐ¸</string>
+    <string name="sort_title_ascending">ÐŸÐ¾ Ð°Ð»Ñ„Ð°Ð²Ð¸Ñ‚Ñƒ (Ð â€” Ð¯)</string>
+    <string name="sort_title_descending">ÐŸÐ¾ Ð°Ð»Ñ„Ð°Ð²Ð¸Ñ‚Ñƒ (Ð¯ â€” Ð)</string>
+    <string name="sort_date_added">ÐŸÐ¾ Ð´Ð°Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ (ÑÐ½Ð°Ñ‡Ð°Ð»Ð° Ð½Ð¾Ð²Ñ‹Ðµ)</string>
+    <string name="sort_date_modified">ÐŸÐ¾ Ð´Ð°Ñ‚Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ (ÑÐ½Ð°Ñ‡Ð°Ð»Ð° Ð½Ð¾Ð²Ñ‹Ðµ)</string>
+    <string name="use_all_audio_folders">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²ÑÐµ Ð¿Ð°Ð¿ÐºÐ¸ Ñ Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="use_all_audio_folders_subtitle">Ð¡Ð½ÑÑ‚ÑŒ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ Ð¿Ð°Ð¿ÐºÐ°Ð¼ Ð¸ ÑÐºÐ°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ Ð¿Ð¾ Ð²ÑÐµÐ¼Ñƒ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ñƒ</string>
+    <string name="album">Ð°Ð»ÑŒÐ±Ð¾Ð¼</string>
+    <string name="artist">Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒ</string>
     <string name="webdav">WebDAV</string>
-    <string name="webdav_subtitle">Музыка на вашем сервере</string>
-    <string name="webdav_not_configured">Подключите сервер в разделе «Источники»</string>
-    <string name="webdav_empty">На сервере WebDAV не найдено аудиофайлов. Проверьте URL в настройках.</string>
-    <string name="webdav_description">Укажите Free Music музыкальную папку WebDAV — каталог «Музыка» в Nextcloud или любой сервер с поддержкой WebDAV.</string>
-    <string name="webdav_server_url">URL сервера</string>
+    <string name="webdav_subtitle">ÐœÑƒÐ·Ñ‹ÐºÐ° Ð½Ð° Ð²Ð°ÑˆÐµÐ¼ ÑÐµÑ€Ð²ÐµÑ€Ðµ</string>
+    <string name="webdav_not_configured">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ ÑÐµÑ€Ð²ÐµÑ€ Ð² Ñ€Ð°Ð·Ð´ÐµÐ»Ðµ Â«Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸Â»</string>
+    <string name="webdav_empty">ÐÐ° ÑÐµÑ€Ð²ÐµÑ€Ðµ WebDAV Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ Ð°ÑƒÐ´Ð¸Ð¾Ñ„Ð°Ð¹Ð»Ð¾Ð². ÐŸÑ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ URL Ð² Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°Ñ….</string>
+    <string name="webdav_description">Ð£ÐºÐ°Ð¶Ð¸Ñ‚Ðµ Free Music Ð¼ÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½ÑƒÑŽ Ð¿Ð°Ð¿ÐºÑƒ WebDAV â€” ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³ Â«ÐœÑƒÐ·Ñ‹ÐºÐ°Â» Ð² Nextcloud Ð¸Ð»Ð¸ Ð»ÑŽÐ±Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€ Ñ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ¾Ð¹ WebDAV.</string>
+    <string name="webdav_server_url">URL ÑÐµÑ€Ð²ÐµÑ€Ð°</string>
     <string name="webdav_server_url_hint">https://cloud.example.com/remote.php/dav/files/user/Music</string>
-    <string name="webdav_disconnect">Отключить</string>
-    <string name="webdav_test_failed">Не удалось подключиться: %1$s</string>
-    <string name="upload_to_webdav">Отправить в WebDAV</string>
-    <string name="webdav_conflict_title">«%1$s» уже есть на сервере</string>
-    <string name="webdav_conflict_message">Перезаписать или сохранить обе копии?</string>
-    <string name="webdav_overwrite">Перезаписать</string>
-    <string name="webdav_keep_both">Сохранить обе</string>
-    <string name="webdav_skip">Пропустить</string>
-    <string name="webdav_apply_to_all">Применить ко всем</string>
-    <string name="webdav_upload_summary">Отправлено: %1$d · пропущено: %2$d · ошибок: %3$d</string>
+    <string name="webdav_disconnect">ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="webdav_test_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒÑÑ: %1$s</string>
+    <string name="upload_to_webdav">ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ Ð² WebDAV</string>
+    <string name="webdav_conflict_title">Â«%1$sÂ» ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ</string>
+    <string name="webdav_conflict_message">ÐŸÐµÑ€ÐµÐ·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð¸Ð»Ð¸ ÑÐ¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð¾Ð±Ðµ ÐºÐ¾Ð¿Ð¸Ð¸?</string>
+    <string name="webdav_overwrite">ÐŸÐµÑ€ÐµÐ·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ</string>
+    <string name="webdav_keep_both">Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð¾Ð±Ðµ</string>
+    <string name="webdav_skip">ÐŸÑ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ</string>
+    <string name="webdav_apply_to_all">ÐŸÑ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐºÐ¾ Ð²ÑÐµÐ¼</string>
+    <string name="webdav_upload_summary">ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾: %1$d Â· Ð¿Ñ€Ð¾Ð¿ÑƒÑ‰ÐµÐ½Ð¾: %2$d Â· Ð¾ÑˆÐ¸Ð±Ð¾Ðº: %3$d</string>
     <string name="smb">SMB</string>
-    <string name="smb_subtitle">Музыка в общей папке</string>
-    <string name="smb_not_configured">Подключите общую папку в разделе «Источники»</string>
-    <string name="smb_empty">В общей папке SMB не найдено аудиофайлов. Проверьте сервер в разделе «Источники».</string>
-    <string name="smb_description">Укажите Free Music общую музыкальную папку — NAS или общую папку Windows по SMB.</string>
+    <string name="smb_subtitle">ÐœÑƒÐ·Ñ‹ÐºÐ° Ð² Ð¾Ð±Ñ‰ÐµÐ¹ Ð¿Ð°Ð¿ÐºÐµ</string>
+    <string name="smb_not_configured">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ Ð¾Ð±Ñ‰ÑƒÑŽ Ð¿Ð°Ð¿ÐºÑƒ Ð² Ñ€Ð°Ð·Ð´ÐµÐ»Ðµ Â«Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸Â»</string>
+    <string name="smb_empty">Ð’ Ð¾Ð±Ñ‰ÐµÐ¹ Ð¿Ð°Ð¿ÐºÐµ SMB Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾ Ð°ÑƒÐ´Ð¸Ð¾Ñ„Ð°Ð¹Ð»Ð¾Ð². ÐŸÑ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ ÑÐµÑ€Ð²ÐµÑ€ Ð² Ñ€Ð°Ð·Ð´ÐµÐ»Ðµ Â«Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¸Â».</string>
+    <string name="smb_description">Ð£ÐºÐ°Ð¶Ð¸Ñ‚Ðµ Free Music Ð¾Ð±Ñ‰ÑƒÑŽ Ð¼ÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½ÑƒÑŽ Ð¿Ð°Ð¿ÐºÑƒ â€” NAS Ð¸Ð»Ð¸ Ð¾Ð±Ñ‰ÑƒÑŽ Ð¿Ð°Ð¿ÐºÑƒ Windows Ð¿Ð¾ SMB.</string>
     <string name="smb_server_hint">nas.local or 192.168.1.10:4445</string>
-    <string name="smb_share_hint">Имя ресурса, например Music</string>
-    <string name="smb_folder_hint">Папка (необязательно)</string>
-    <string name="smb_disconnect">Отключить</string>
-    <string name="smb_test_failed">Не удалось подключиться: %1$s</string>
-    <string name="playlist">плейлист</string>
-    <string name="open">Открыть</string>
-    <string name="open_playlist">Открыть плейлист</string>
-    <string name="pin">Закрепить</string>
-    <string name="unpin">Открепить</string>
-    <string name="rename">Переименовать</string>
-    <string name="downloading">Загрузка</string>
-    <string name="delete_playlist">Удалить плейлист</string>
-    <string name="delete_download">Удалить загрузку</string>
-    <string name="delete_playlist_confirmation">Удалить «%1$s»? Нажмите ещё раз для подтверждения.</string>
-    <string name="delete_download_confirmation">Удалить «%1$s» с этого устройства? Нажмите ещё раз для подтверждения.</string>
-    <string name="running">Выполняется</string>
-    <string name="automix_analysis_status">Автомикс · эта песня: %1$s · следующая: %2$s</string>
-    <string name="analysis_complete">анализ завершён</string>
-    <string name="analysis_refining">анализ завершён, уточняется…</string>
-    <string name="analysis_in_progress">анализируется…</string>
-    <string name="waiting">ожидание</string>
-    <string name="version_alignment_status">%1$s · %2$s</string>
-    <string name="version_cut_not_fetched">не загружено</string>
-    <string name="version_cut_fetching">загрузка</string>
-    <string name="version_cut_measuring">анализ</string>
-    <string name="version_cut_aligned">выровнено</string>
-    <string name="automix_enabled_subtitle">Рассчитывает время и смешивает каждый переход на основе самих треков. Отключите, если телефон нагревается или воспроизведение прерывается.</string>
-    <string name="automix_disabled_subtitle">Автоматически рассчитывает время и смешивает переходы без ползунка. Производительность может отличаться на медленных устройствах.</string>
-    <string name="no_lyrics_sources_enabled">Ничего. Текст песен не будет загружаться.</string>
-    <string name="song_cache_large_subtitle">Хранит на диске до %1$s загруженного аудио. Это может занять заметную часть свободного места.</string>
-    <string name="song_cache_limit_subtitle">Хранит загруженное аудио на диске для мгновенной перемотки и повторного прослушивания</string>
-    <string name="replay_genres_enabled_subtitle">Запрашивает у Last.fm жанры исполнителя. Отправляется только имя исполнителя.</string>
-    <string name="replay_genres_disabled_subtitle">Пока это отключено, график жанров в Replay остаётся скрытым</string>
-    <string name="swipe_plays_next">Свайп песни ставит её следующей</string>
-    <string name="swipe_adds_to_queue">Если отключено, свайп добавляет песню в конец очереди</string>
-    <string name="import_backup_warning">Это заменит настройки и историю прослушивания на этом устройстве содержимым файла. Сначала экспортируйте текущие данные, если хотите их сохранить.</string>
-    <string name="youtube_music_account">Аккаунт YouTube Music</string>
-    <string name="tap_to_sign_in_google">Нажмите, чтобы войти через Google</string>
-    <string name="export_succeeded">Экспортированы настройки и %1$s</string>
-    <string name="export_failed">Ошибка экспорта: %1$s</string>
-    <string name="import_succeeded">Импортировано %1$s из v%2$s</string>
-    <string name="import_succeeded_with_playlists">Импортировано %1$s из v%2$s и %3$d плейлистов</string>
-    <string name="import_failed">Ошибка импорта: %1$s</string>
-    <string name="unknown_error">неизвестная ошибка</string>
-    <string name="no_listening_history">нет истории прослушивания</string>
+    <string name="smb_share_hint">Ð˜Ð¼Ñ Ñ€ÐµÑÑƒÑ€ÑÐ°, Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Music</string>
+    <string name="smb_folder_hint">ÐŸÐ°Ð¿ÐºÐ° (Ð½ÐµÐ¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾)</string>
+    <string name="smb_disconnect">ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ</string>
+    <string name="smb_test_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒÑÑ: %1$s</string>
+    <string name="playlist">Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="open">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ</string>
+    <string name="open_playlist">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="pin">Ð—Ð°ÐºÑ€ÐµÐ¿Ð¸Ñ‚ÑŒ</string>
+    <string name="unpin">ÐžÑ‚ÐºÑ€ÐµÐ¿Ð¸Ñ‚ÑŒ</string>
+    <string name="rename">ÐŸÐµÑ€ÐµÐ¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ñ‚ÑŒ</string>
+    <string name="downloading">Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°</string>
+    <string name="delete_playlist">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="delete_download">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÑƒ</string>
+    <string name="delete_playlist_confirmation">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Â«%1$sÂ»? ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ ÐµÑ‰Ñ‘ Ñ€Ð°Ð· Ð´Ð»Ñ Ð¿Ð¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð¸Ñ.</string>
+    <string name="delete_download_confirmation">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Â«%1$sÂ» Ñ ÑÑ‚Ð¾Ð³Ð¾ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°? ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ ÐµÑ‰Ñ‘ Ñ€Ð°Ð· Ð´Ð»Ñ Ð¿Ð¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð¸Ñ.</string>
+    <string name="running">Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ</string>
+    <string name="automix_analysis_status">ÐÐ²Ñ‚Ð¾Ð¼Ð¸ÐºÑ Â· ÑÑ‚Ð° Ð¿ÐµÑÐ½Ñ: %1$s Â· ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð°Ñ: %2$s</string>
+    <string name="analysis_complete">Ð°Ð½Ð°Ð»Ð¸Ð· Ð·Ð°Ð²ÐµÑ€ÑˆÑ‘Ð½</string>
+    <string name="analysis_refining">Ð°Ð½Ð°Ð»Ð¸Ð· Ð·Ð°Ð²ÐµÑ€ÑˆÑ‘Ð½, ÑƒÑ‚Ð¾Ñ‡Ð½ÑÐµÑ‚ÑÑâ€¦</string>
+    <string name="analysis_in_progress">Ð°Ð½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ÑÑâ€¦</string>
+    <string name="waiting">Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ðµ</string>
+    <string name="version_alignment_status">%1$s Â· %2$s</string>
+    <string name="version_cut_not_fetched">Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð¾</string>
+    <string name="version_cut_fetching">Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°</string>
+    <string name="version_cut_measuring">Ð°Ð½Ð°Ð»Ð¸Ð·</string>
+    <string name="version_cut_aligned">Ð²Ñ‹Ñ€Ð¾Ð²Ð½ÐµÐ½Ð¾</string>
+    <string name="automix_enabled_subtitle">Ð Ð°ÑÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ Ð²Ñ€ÐµÐ¼Ñ Ð¸ ÑÐ¼ÐµÑˆÐ¸Ð²Ð°ÐµÑ‚ ÐºÐ°Ð¶Ð´Ñ‹Ð¹ Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´ Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ ÑÐ°Ð¼Ð¸Ñ… Ñ‚Ñ€ÐµÐºÐ¾Ð². ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ, ÐµÑÐ»Ð¸ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½ Ð½Ð°Ð³Ñ€ÐµÐ²Ð°ÐµÑ‚ÑÑ Ð¸Ð»Ð¸ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¿Ñ€ÐµÑ€Ñ‹Ð²Ð°ÐµÑ‚ÑÑ.</string>
+    <string name="automix_disabled_subtitle">ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸ Ñ€Ð°ÑÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ Ð²Ñ€ÐµÐ¼Ñ Ð¸ ÑÐ¼ÐµÑˆÐ¸Ð²Ð°ÐµÑ‚ Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ñ‹ Ð±ÐµÐ· Ð¿Ð¾Ð»Ð·ÑƒÐ½ÐºÐ°. ÐŸÑ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð¼Ð¾Ð¶ÐµÑ‚ Ð¾Ñ‚Ð»Ð¸Ñ‡Ð°Ñ‚ÑŒÑÑ Ð½Ð° Ð¼ÐµÐ´Ð»ÐµÐ½Ð½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°Ñ….</string>
+    <string name="no_lyrics_sources_enabled">ÐÐ¸Ñ‡ÐµÐ³Ð¾. Ð¢ÐµÐºÑÑ‚ Ð¿ÐµÑÐµÐ½ Ð½Ðµ Ð±ÑƒÐ´ÐµÑ‚ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°Ñ‚ÑŒÑÑ.</string>
+    <string name="song_cache_large_subtitle">Ð¥Ñ€Ð°Ð½Ð¸Ñ‚ Ð½Ð° Ð´Ð¸ÑÐºÐµ Ð´Ð¾ %1$s Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð°ÑƒÐ´Ð¸Ð¾. Ð­Ñ‚Ð¾ Ð¼Ð¾Ð¶ÐµÑ‚ Ð·Ð°Ð½ÑÑ‚ÑŒ Ð·Ð°Ð¼ÐµÑ‚Ð½ÑƒÑŽ Ñ‡Ð°ÑÑ‚ÑŒ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð¼ÐµÑÑ‚Ð°.</string>
+    <string name="song_cache_limit_subtitle">Ð¥Ñ€Ð°Ð½Ð¸Ñ‚ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ð¾Ðµ Ð°ÑƒÐ´Ð¸Ð¾ Ð½Ð° Ð´Ð¸ÑÐºÐµ Ð´Ð»Ñ Ð¼Ð³Ð½Ð¾Ð²ÐµÐ½Ð½Ð¾Ð¹ Ð¿ÐµÑ€ÐµÐ¼Ð¾Ñ‚ÐºÐ¸ Ð¸ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð½Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="replay_genres_enabled_subtitle">Ð—Ð°Ð¿Ñ€Ð°ÑˆÐ¸Ð²Ð°ÐµÑ‚ Ñƒ Last.fm Ð¶Ð°Ð½Ñ€Ñ‹ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ. ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¸Ð¼Ñ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ.</string>
+    <string name="replay_genres_disabled_subtitle">ÐŸÐ¾ÐºÐ° ÑÑ‚Ð¾ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾, Ð³Ñ€Ð°Ñ„Ð¸Ðº Ð¶Ð°Ð½Ñ€Ð¾Ð² Ð² Replay Ð¾ÑÑ‚Ð°Ñ‘Ñ‚ÑÑ ÑÐºÑ€Ñ‹Ñ‚Ñ‹Ð¼</string>
+    <string name="swipe_plays_next">Ð¡Ð²Ð°Ð¹Ð¿ Ð¿ÐµÑÐ½Ð¸ ÑÑ‚Ð°Ð²Ð¸Ñ‚ ÐµÑ‘ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÐµÐ¹</string>
+    <string name="swipe_adds_to_queue">Ð•ÑÐ»Ð¸ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾, ÑÐ²Ð°Ð¹Ð¿ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÑ‚ Ð¿ÐµÑÐ½ÑŽ Ð² ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="import_backup_warning">Ð­Ñ‚Ð¾ Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸ÑŽ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ñ‹Ð¼ Ñ„Ð°Ð¹Ð»Ð°. Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐ¹Ñ‚Ðµ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ, ÐµÑÐ»Ð¸ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð¸Ñ… ÑÐ¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ.</string>
+    <string name="youtube_music_account">ÐÐºÐºÐ°ÑƒÐ½Ñ‚ YouTube Music</string>
+    <string name="tap_to_sign_in_google">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ð¾Ð¹Ñ‚Ð¸ Ñ‡ÐµÑ€ÐµÐ· Google</string>
+    <string name="export_succeeded">Ð­ÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸ %1$s</string>
+    <string name="export_failed">ÐžÑˆÐ¸Ð±ÐºÐ° ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð°: %1$s</string>
+    <string name="import_succeeded">Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾ %1$s Ð¸Ð· v%2$s</string>
+    <string name="import_succeeded_with_playlists">Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾ %1$s Ð¸Ð· v%2$s Ð¸ %3$d Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð¾Ð²</string>
+    <string name="import_failed">ÐžÑˆÐ¸Ð±ÐºÐ° Ð¸Ð¼Ð¿Ð¾Ñ€Ñ‚Ð°: %1$s</string>
+    <string name="unknown_error">Ð½ÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°</string>
+    <string name="no_listening_history">Ð½ÐµÑ‚ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ð¸ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</string>
     <plurals name="listening_month_count">
-        <item quantity="one">%1$d месяц прослушивания</item>
-        <item quantity="few">%1$d месяца прослушивания</item>
-        <item quantity="many">%1$d месяцев прослушивания</item>
+        <item quantity="one">%1$d Ð¼ÐµÑÑÑ† Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</item>
+        <item quantity="few">%1$d Ð¼ÐµÑÑÑ†Ð° Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</item>
+        <item quantity="many">%1$d Ð¼ÐµÑÑÑ†ÐµÐ² Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ</item>
     </plurals>
-    <string name="no_local_albums">Здесь пока ничего нет из альбома или плейлиста. Загрузите полный альбом или плейлист, и он появится здесь.</string>
-    <string name="play_your_replay">Воспроизвести ваш Replay</string>
-    <string name="counted_on_device_with_freemusic">Подсчитано на этом устройстве с помощью Free Music</string>
-    <string name="this_month">Этот месяц</string>
-    <string name="this_year">Этот год</string>
-    <string name="all_time">За всё время</string>
+    <string name="no_local_albums">Ð—Ð´ÐµÑÑŒ Ð¿Ð¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½ÐµÑ‚ Ð¸Ð· Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð° Ð¸Ð»Ð¸ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ð°. Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ð½Ñ‹Ð¹ Ð°Ð»ÑŒÐ±Ð¾Ð¼ Ð¸Ð»Ð¸ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚, Ð¸ Ð¾Ð½ Ð¿Ð¾ÑÐ²Ð¸Ñ‚ÑÑ Ð·Ð´ÐµÑÑŒ.</string>
+    <string name="play_your_replay">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÑÑ‚Ð¸ Ð²Ð°Ñˆ Replay</string>
+    <string name="counted_on_device_with_freemusic">ÐŸÐ¾Ð´ÑÑ‡Ð¸Ñ‚Ð°Ð½Ð¾ Ð½Ð° ÑÑ‚Ð¾Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Free Music</string>
+    <string name="this_month">Ð­Ñ‚Ð¾Ñ‚ Ð¼ÐµÑÑÑ†</string>
+    <string name="this_year">Ð­Ñ‚Ð¾Ñ‚ Ð³Ð¾Ð´</string>
+    <string name="all_time">Ð—Ð° Ð²ÑÑ‘ Ð²Ñ€ÐµÐ¼Ñ</string>
     <string-array name="lyrics_intro_lines">
-        <item>Бит набирает обороты</item>
-        <item>Песня начинается</item>
-        <item>Разогрев</item>
-        <item>Создаём настроение</item>
-        <item>Сначала бас, слова потом</item>
-        <item>Ещё чуть-чуть</item>
-        <item>Чувствуете нарастание?</item>
-        <item>Пока только грув</item>
-        <item>Припев уже близко</item>
-        <item>Дайте треку задышать</item>
-        <item>Включаем вокал</item>
-        <item>Первые ноты уже звучат</item>
+        <item>Ð‘Ð¸Ñ‚ Ð½Ð°Ð±Ð¸Ñ€Ð°ÐµÑ‚ Ð¾Ð±Ð¾Ñ€Ð¾Ñ‚Ñ‹</item>
+        <item>ÐŸÐµÑÐ½Ñ Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÑ‚ÑÑ</item>
+        <item>Ð Ð°Ð·Ð¾Ð³Ñ€ÐµÐ²</item>
+        <item>Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ð¼ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ</item>
+        <item>Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð±Ð°Ñ, ÑÐ»Ð¾Ð²Ð° Ð¿Ð¾Ñ‚Ð¾Ð¼</item>
+        <item>Ð•Ñ‰Ñ‘ Ñ‡ÑƒÑ‚ÑŒ-Ñ‡ÑƒÑ‚ÑŒ</item>
+        <item>Ð§ÑƒÐ²ÑÑ‚Ð²ÑƒÐµÑ‚Ðµ Ð½Ð°Ñ€Ð°ÑÑ‚Ð°Ð½Ð¸Ðµ?</item>
+        <item>ÐŸÐ¾ÐºÐ° Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð³Ñ€ÑƒÐ²</item>
+        <item>ÐŸÑ€Ð¸Ð¿ÐµÐ² ÑƒÐ¶Ðµ Ð±Ð»Ð¸Ð·ÐºÐ¾</item>
+        <item>Ð”Ð°Ð¹Ñ‚Ðµ Ñ‚Ñ€ÐµÐºÑƒ Ð·Ð°Ð´Ñ‹ÑˆÐ°Ñ‚ÑŒ</item>
+        <item>Ð’ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð²Ð¾ÐºÐ°Ð»</item>
+        <item>ÐŸÐµÑ€Ð²Ñ‹Ðµ Ð½Ð¾Ñ‚Ñ‹ ÑƒÐ¶Ðµ Ð·Ð²ÑƒÑ‡Ð°Ñ‚</item>
     </string-array>
     <string-array name="lyrics_loading_lines">
-        <item>Загружаем текст</item>
-        <item>Ищем слова</item>
-        <item>Достаём куплеты</item>
-        <item>Текст загружается</item>
-        <item>Сверяемся с текстовкой</item>
-        <item>Листаем песенник</item>
-        <item>Выстраиваем строки</item>
-        <item>Слова уже в пути</item>
-        <item>Заглядываем в архив</item>
-        <item>Подбираем нужные слова</item>
-        <item>Текст почти готов</item>
-        <item>Слова почти найдены</item>
+        <item>Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚</item>
+        <item>Ð˜Ñ‰ÐµÐ¼ ÑÐ»Ð¾Ð²Ð°</item>
+        <item>Ð”Ð¾ÑÑ‚Ð°Ñ‘Ð¼ ÐºÑƒÐ¿Ð»ÐµÑ‚Ñ‹</item>
+        <item>Ð¢ÐµÐºÑÑ‚ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÑ‚ÑÑ</item>
+        <item>Ð¡Ð²ÐµÑ€ÑÐµÐ¼ÑÑ Ñ Ñ‚ÐµÐºÑÑ‚Ð¾Ð²ÐºÐ¾Ð¹</item>
+        <item>Ð›Ð¸ÑÑ‚Ð°ÐµÐ¼ Ð¿ÐµÑÐµÐ½Ð½Ð¸Ðº</item>
+        <item>Ð’Ñ‹ÑÑ‚Ñ€Ð°Ð¸Ð²Ð°ÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÐ¸</item>
+        <item>Ð¡Ð»Ð¾Ð²Ð° ÑƒÐ¶Ðµ Ð² Ð¿ÑƒÑ‚Ð¸</item>
+        <item>Ð—Ð°Ð³Ð»ÑÐ´Ñ‹Ð²Ð°ÐµÐ¼ Ð² Ð°Ñ€Ñ…Ð¸Ð²</item>
+        <item>ÐŸÐ¾Ð´Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð½ÑƒÐ¶Ð½Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð°</item>
+        <item>Ð¢ÐµÐºÑÑ‚ Ð¿Ð¾Ñ‡Ñ‚Ð¸ Ð³Ð¾Ñ‚Ð¾Ð²</item>
+        <item>Ð¡Ð»Ð¾Ð²Ð° Ð¿Ð¾Ñ‡Ñ‚Ð¸ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹</item>
     </string-array>
 
     <!-- Listen together -->
-    <string name="listen_together">Слушать вместе</string>
-    <string name="listen_together_subtitle">Поделитесь кодом и слушайте одну музыку синхронно</string>
-    <string name="listen_together_in_party">В вечеринке · %1$s</string>
-    <string name="listen_together_sign_in_footer">Для совместного прослушивания нужен аккаунт, чтобы все участники видели, кто ещё слушает.</string>
-    <string name="listen_together_server">Сервер вечеринки</string>
-    <string name="listen_together_server_online">В сети · %1$d мс</string>
-    <string name="listen_together_server_online_fallback">В сети (резервный по умолчанию) · %1$d мс</string>
-    <string name="listen_together_server_offline">Сейчас недоступен</string>
-    <string name="listen_together_server_checking">Проверка…</string>
-    <string name="listen_together_server_unknown">Нажмите, чтобы проверить</string>
-    <string name="listen_together_custom_server">Использовать свой сервер</string>
-    <string name="listen_together_custom_server_footer">Оставьте пустым, чтобы использовать встроенный сервер. Если у вас своя копия, все участники должны указать один и тот же адрес.</string>
-    <string name="listen_together_using_default">Используется встроенный сервер</string>
-    <string name="listen_together_remove_server">Удалить сервер</string>
-    <string name="listen_together_switched_to_default">Переключено на сервер по умолчанию</string>
-    <string name="listen_together_custom_server_saved">Свой сервер сохранён</string>
-    <string name="listen_together_create">Создать вечеринку</string>
-    <string name="listen_together_create_subtitle">Получите код, чтобы поделиться с друзьями</string>
-    <string name="listen_together_create_footer">Вы получите код из шести символов. Присоединиться может любой, у кого он есть, — до %1$d устройств, включая ваше.</string>
-    <string name="listen_together_profile">Ваш профиль на вечеринке</string>
-    <string name="listen_together_nickname_hint">Никнейм для этой вечеринки</string>
-    <string name="listen_together_party_size">Размер вечеринки</string>
-    <string name="listen_together_party_size_subtitle">Выберите от 2 до 10 слушателей</string>
-    <string name="listen_together_host_controls">Только вы можете менять вместимость или удалять слушателей</string>
-    <string name="listen_together_remove">Удалить</string>
-    <string name="listen_together_activity">Недавние действия</string>
-    <string name="listen_together_activity_footer">Только этот сеанс · сначала новые · до 100 действий</string>
-    <string name="listen_together_activity_played">Запустил воспроизведение</string>
-    <string name="listen_together_activity_paused">Поставил на паузу</string>
-    <string name="listen_together_activity_seeked">Перемотал трек</string>
-    <string name="listen_together_activity_skipped">Переключил вперёд</string>
-    <string name="listen_together_activity_went_back">Вернулся назад</string>
-    <string name="listen_together_activity_added">Добавил в очередь</string>
-    <string name="listen_together_activity_removed_track">Удалил трек из очереди</string>
-    <string name="listen_together_activity_cleared">Очистил следующие треки</string>
-    <string name="listen_together_activity_reordered">Изменил порядок очереди</string>
-    <string name="listen_together_activity_removed_member">Удалил слушателя</string>
-    <string name="listen_together_activity_changed_size">Изменил размер вечеринки</string>
-    <string name="listen_together_activity_updated">Обновил вечеринку</string>
-    <string name="listen_together_join">Присоединиться к вечеринке</string>
-    <string name="listen_together_join_action">Присоединиться</string>
-    <string name="listen_together_code_hint">Шесть букв или цифр</string>
-    <string name="listen_together_code">Код вечеринки</string>
-    <string name="listen_together_code_footer">Продиктуйте или отправьте его. Буквы O и I не используются, поэтому «о» — это всегда ноль.</string>
-    <string name="copy_code">Копировать код</string>
-    <string name="listen_together_share_text">Слушай со мной в Free Music — код вечеринки %1$s</string>
-    <string name="listen_together_now_playing">Сейчас играет</string>
-    <string name="listen_together_nothing_playing">Пока ничего не играет</string>
-    <string name="listen_together_listening">Слушают · %1$d из %2$d</string>
-    <string name="listen_together_members_footer">В вечеринке до %1$d устройств. Управлять музыкой может любой участник.</string>
-    <string name="listen_together_you">Вы</string>
-    <string name="listen_together_host">Хост</string>
-    <string name="listen_together_away">Отошёл — место сохранено</string>
-    <string name="listen_together_manage">Управление</string>
-    <string name="listen_together_landing_title">Начать вечеринку</string>
-    <string name="listen_together_landing_subtitle">Потому что вместе музыка звучит лучше. Приглашайте друзей слушать и добавлять песни в реальном времени, где бы они ни были.</string>
-    <string name="listen_together_create_action">Создать вечеринку</string>
-    <string name="listen_together_join_existing">Присоединиться к существующей</string>
-    <string name="listen_together_create_sheet_subtitle">Выберите, как вы будете выглядеть и сколько людей смогут присоединиться.</string>
-    <string name="listen_together_creating">Создание…</string>
-    <string name="listen_together_joining">Подключение…</string>
-    <string name="listen_together_full">Эта вечеринка заполнена</string>
-    <string name="listen_together_join_question">Присоединиться к вечеринке %1$s?</string>
-    <string name="listen_together_join_question_unnamed">Присоединиться к этой вечеринке?</string>
-    <string name="listen_together_not_now">Не сейчас</string>
-    <string name="listen_together_preview_footer">Участники вечеринки увидят ваше имя и фото профиля.</string>
-    <string name="listen_together_invite_title">Пригласите друзей на вечеринку</string>
-    <string name="listen_together_share_link">Поделиться ссылкой</string>
-    <string name="listen_together_scan_qr">Сканировать QR-код</string>
-    <string name="listen_together_scan_qr_subtitle">Друзья могут отсканировать его, чтобы присоединиться.</string>
-    <string name="listen_together_invite">Пригласить</string>
-    <string name="listen_together_host_only">Только я управляю музыкой</string>
-    <string name="listen_together_host_only_subtitle">Остальные слушают вместе и могут ставить паузу на своём устройстве</string>
-    <string name="listen_together_host_only_notice">Только хозяин может управлять музыкой</string>
-    <string name="listen_together_leave">Покинуть вечеринку</string>
-    <string name="listen_together_leave_subtitle">Остальные продолжат слушать</string>
-    <string name="listen_together_reconnecting">Переподключение…</string>
-    <string name="listen_together_syncing_clock">Сверяем часы…</string>
-    <string name="listen_together_in_sync">Синхронно · %1$d мс на круг</string>
-    <string name="listen_together_jam">Джем %1$s</string>
-    <string name="listen_together_jam_unnamed">Слушаем вместе</string>
-    <string name="listen_together_open">Слушать вместе</string>
-    <string name="listen_together_open_count">Слушаем вместе · %1$d</string>
-    <string name="listen_together_custom_server_dialog_title">Присоединиться к вечеринке на своём сервере?</string>
-    <string name="listen_together_custom_server_dialog_message">Эта вечеринка размещена на внешнем сервере:\n\n%1$s\n\nСменить сервер вечеринок и присоединиться к вечеринке %2$s?</string>
-    <string name="listen_together_custom_server_switch_and_join">Сменить и войти</string>
-    <string name="listen_together_official_server_dialog_title">Перейти на официальный сервер?</string>
-    <string name="listen_together_official_server_dialog_message">Эта вечеринка размещена на официальном сервере Free Music.\n\nВернуться на официальный сервер и присоединиться к вечеринке %1$s?</string>
-    <string name="listen_together_switch_failed_stayed_in_party">Не удалось присоединиться: %1$s. Вы остаётесь на вечеринке %2$s.</string>
-    <string name="listen_together_switch_failed">Не удалось присоединиться: %1$s.</string>
+    <string name="listen_together">Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ Ð²Ð¼ÐµÑÑ‚Ðµ</string>
+    <string name="listen_together_subtitle">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÐµÑÑŒ ÐºÐ¾Ð´Ð¾Ð¼ Ð¸ ÑÐ»ÑƒÑˆÐ°Ð¹Ñ‚Ðµ Ð¾Ð´Ð½Ñƒ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð½Ð¾</string>
+    <string name="listen_together_in_party">Ð’ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ Â· %1$s</string>
+    <string name="listen_together_sign_in_footer">Ð”Ð»Ñ ÑÐ¾Ð²Ð¼ÐµÑÑ‚Ð½Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð½ÑƒÐ¶ÐµÐ½ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²ÑÐµ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ¸ Ð²Ð¸Ð´ÐµÐ»Ð¸, ÐºÑ‚Ð¾ ÐµÑ‰Ñ‘ ÑÐ»ÑƒÑˆÐ°ÐµÑ‚.</string>
+    <string name="listen_together_server">Ð¡ÐµÑ€Ð²ÐµÑ€ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸</string>
+    <string name="listen_together_server_online">Ð’ ÑÐµÑ‚Ð¸ Â· %1$d Ð¼Ñ</string>
+    <string name="listen_together_server_online_fallback">Ð’ ÑÐµÑ‚Ð¸ (Ñ€ÐµÐ·ÐµÑ€Ð²Ð½Ñ‹Ð¹ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ) Â· %1$d Ð¼Ñ</string>
+    <string name="listen_together_server_offline">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½</string>
+    <string name="listen_together_server_checking">ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°â€¦</string>
+    <string name="listen_together_server_unknown">ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ</string>
+    <string name="listen_together_custom_server">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ ÑÐ²Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€</string>
+    <string name="listen_together_custom_server_footer">ÐžÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ Ð¿ÑƒÑÑ‚Ñ‹Ð¼, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²ÑÑ‚Ñ€Ð¾ÐµÐ½Ð½Ñ‹Ð¹ ÑÐµÑ€Ð²ÐµÑ€. Ð•ÑÐ»Ð¸ Ñƒ Ð²Ð°Ñ ÑÐ²Ð¾Ñ ÐºÐ¾Ð¿Ð¸Ñ, Ð²ÑÐµ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ¸ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ ÑƒÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð¾Ð´Ð¸Ð½ Ð¸ Ñ‚Ð¾Ñ‚ Ð¶Ðµ Ð°Ð´Ñ€ÐµÑ.</string>
+    <string name="listen_together_using_default">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð²ÑÑ‚Ñ€Ð¾ÐµÐ½Ð½Ñ‹Ð¹ ÑÐµÑ€Ð²ÐµÑ€</string>
+    <string name="listen_together_remove_server">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐµÑ€Ð²ÐµÑ€</string>
+    <string name="listen_together_switched_to_default">ÐŸÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ</string>
+    <string name="listen_together_custom_server_saved">Ð¡Ð²Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€ ÑÐ¾Ñ…Ñ€Ð°Ð½Ñ‘Ð½</string>
+    <string name="listen_together_create">Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_create_subtitle">ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚Ðµ ÐºÐ¾Ð´, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ð¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ Ñ Ð´Ñ€ÑƒÐ·ÑŒÑÐ¼Ð¸</string>
+    <string name="listen_together_create_footer">Ð’Ñ‹ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð¸Ð· ÑˆÐµÑÑ‚Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð². ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ð¼Ð¾Ð¶ÐµÑ‚ Ð»ÑŽÐ±Ð¾Ð¹, Ñƒ ÐºÐ¾Ð³Ð¾ Ð¾Ð½ ÐµÑÑ‚ÑŒ, â€” Ð´Ð¾ %1$d ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð², Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ Ð²Ð°ÑˆÐµ.</string>
+    <string name="listen_together_profile">Ð’Ð°Ñˆ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ Ð½Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ</string>
+    <string name="listen_together_nickname_hint">ÐÐ¸ÐºÐ½ÐµÐ¹Ð¼ Ð´Ð»Ñ ÑÑ‚Ð¾Ð¹ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸</string>
+    <string name="listen_together_party_size">Ð Ð°Ð·Ð¼ÐµÑ€ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸</string>
+    <string name="listen_together_party_size_subtitle">Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¾Ñ‚ 2 Ð´Ð¾ 10 ÑÐ»ÑƒÑˆÐ°Ñ‚ÐµÐ»ÐµÐ¹</string>
+    <string name="listen_together_host_controls">Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ð²Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð¼ÐµÐ½ÑÑ‚ÑŒ Ð²Ð¼ÐµÑÑ‚Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¸Ð»Ð¸ ÑƒÐ´Ð°Ð»ÑÑ‚ÑŒ ÑÐ»ÑƒÑˆÐ°Ñ‚ÐµÐ»ÐµÐ¹</string>
+    <string name="listen_together_remove">Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ</string>
+    <string name="listen_together_activity">ÐÐµÐ´Ð°Ð²Ð½Ð¸Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ</string>
+    <string name="listen_together_activity_footer">Ð¢Ð¾Ð»ÑŒÐºÐ¾ ÑÑ‚Ð¾Ñ‚ ÑÐµÐ°Ð½Ñ Â· ÑÐ½Ð°Ñ‡Ð°Ð»Ð° Ð½Ð¾Ð²Ñ‹Ðµ Â· Ð´Ð¾ 100 Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹</string>
+    <string name="listen_together_activity_played">Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ð» Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ</string>
+    <string name="listen_together_activity_paused">ÐŸÐ¾ÑÑ‚Ð°Ð²Ð¸Ð» Ð½Ð° Ð¿Ð°ÑƒÐ·Ñƒ</string>
+    <string name="listen_together_activity_seeked">ÐŸÐµÑ€ÐµÐ¼Ð¾Ñ‚Ð°Ð» Ñ‚Ñ€ÐµÐº</string>
+    <string name="listen_together_activity_skipped">ÐŸÐµÑ€ÐµÐºÐ»ÑŽÑ‡Ð¸Ð» Ð²Ð¿ÐµÑ€Ñ‘Ð´</string>
+    <string name="listen_together_activity_went_back">Ð’ÐµÑ€Ð½ÑƒÐ»ÑÑ Ð½Ð°Ð·Ð°Ð´</string>
+    <string name="listen_together_activity_added">Ð”Ð¾Ð±Ð°Ð²Ð¸Ð» Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ</string>
+    <string name="listen_together_activity_removed_track">Ð£Ð´Ð°Ð»Ð¸Ð» Ñ‚Ñ€ÐµÐº Ð¸Ð· Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="listen_together_activity_cleared">ÐžÑ‡Ð¸ÑÑ‚Ð¸Ð» ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ðµ Ñ‚Ñ€ÐµÐºÐ¸</string>
+    <string name="listen_together_activity_reordered">Ð˜Ð·Ð¼ÐµÐ½Ð¸Ð» Ð¿Ð¾Ñ€ÑÐ´Ð¾Ðº Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
+    <string name="listen_together_activity_removed_member">Ð£Ð´Ð°Ð»Ð¸Ð» ÑÐ»ÑƒÑˆÐ°Ñ‚ÐµÐ»Ñ</string>
+    <string name="listen_together_activity_changed_size">Ð˜Ð·Ð¼ÐµÐ½Ð¸Ð» Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸</string>
+    <string name="listen_together_activity_updated">ÐžÐ±Ð½Ð¾Ð²Ð¸Ð» Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_join">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ</string>
+    <string name="listen_together_join_action">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ</string>
+    <string name="listen_together_code_hint">Ð¨ÐµÑÑ‚ÑŒ Ð±ÑƒÐºÐ² Ð¸Ð»Ð¸ Ñ†Ð¸Ñ„Ñ€</string>
+    <string name="listen_together_code">ÐšÐ¾Ð´ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸</string>
+    <string name="listen_together_code_footer">ÐŸÑ€Ð¾Ð´Ð¸ÐºÑ‚ÑƒÐ¹Ñ‚Ðµ Ð¸Ð»Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ ÐµÐ³Ð¾. Ð‘ÑƒÐºÐ²Ñ‹ O Ð¸ I Ð½Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑŽÑ‚ÑÑ, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Â«Ð¾Â» â€” ÑÑ‚Ð¾ Ð²ÑÐµÐ³Ð´Ð° Ð½Ð¾Ð»ÑŒ.</string>
+    <string name="copy_code">ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ¾Ð´</string>
+    <string name="listen_together_share_text">Ð¡Ð»ÑƒÑˆÐ°Ð¹ ÑÐ¾ Ð¼Ð½Ð¾Ð¹ Ð² Free Music â€” ÐºÐ¾Ð´ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸ %1$s</string>
+    <string name="listen_together_now_playing">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð¸Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="listen_together_nothing_playing">ÐŸÐ¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð¸Ð³Ñ€Ð°ÐµÑ‚</string>
+    <string name="listen_together_listening">Ð¡Ð»ÑƒÑˆÐ°ÑŽÑ‚ Â· %1$d Ð¸Ð· %2$d</string>
+    <string name="listen_together_members_footer">Ð’ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ Ð´Ð¾ %1$d ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð². Ð£Ð¿Ñ€Ð°Ð²Ð»ÑÑ‚ÑŒ Ð¼ÑƒÐ·Ñ‹ÐºÐ¾Ð¹ Ð¼Ð¾Ð¶ÐµÑ‚ Ð»ÑŽÐ±Ð¾Ð¹ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸Ðº.</string>
+    <string name="listen_together_you">Ð’Ñ‹</string>
+    <string name="listen_together_host">Ð¥Ð¾ÑÑ‚</string>
+    <string name="listen_together_away">ÐžÑ‚Ð¾ÑˆÑ‘Ð» â€” Ð¼ÐµÑÑ‚Ð¾ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾</string>
+    <string name="listen_together_manage">Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ</string>
+    <string name="listen_together_landing_title">ÐÐ°Ñ‡Ð°Ñ‚ÑŒ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_landing_subtitle">ÐŸÐ¾Ñ‚Ð¾Ð¼Ñƒ Ñ‡Ñ‚Ð¾ Ð²Ð¼ÐµÑÑ‚Ðµ Ð¼ÑƒÐ·Ñ‹ÐºÐ° Ð·Ð²ÑƒÑ‡Ð¸Ñ‚ Ð»ÑƒÑ‡ÑˆÐµ. ÐŸÑ€Ð¸Ð³Ð»Ð°ÑˆÐ°Ð¹Ñ‚Ðµ Ð´Ñ€ÑƒÐ·ÐµÐ¹ ÑÐ»ÑƒÑˆÐ°Ñ‚ÑŒ Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÑ‚ÑŒ Ð¿ÐµÑÐ½Ð¸ Ð² Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸, Ð³Ð´Ðµ Ð±Ñ‹ Ð¾Ð½Ð¸ Ð½Ð¸ Ð±Ñ‹Ð»Ð¸.</string>
+    <string name="listen_together_create_action">Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_join_existing">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰ÐµÐ¹</string>
+    <string name="listen_together_create_sheet_subtitle">Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ, ÐºÐ°Ðº Ð²Ñ‹ Ð±ÑƒÐ´ÐµÑ‚Ðµ Ð²Ñ‹Ð³Ð»ÑÐ´ÐµÑ‚ÑŒ Ð¸ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð»ÑŽÐ´ÐµÐ¹ ÑÐ¼Ð¾Ð³ÑƒÑ‚ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ.</string>
+    <string name="listen_together_creating">Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµâ€¦</string>
+    <string name="listen_together_joining">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµâ€¦</string>
+    <string name="listen_together_full">Ð­Ñ‚Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ° Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°</string>
+    <string name="listen_together_join_question">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ %1$s?</string>
+    <string name="listen_together_join_question_unnamed">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº ÑÑ‚Ð¾Ð¹ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ?</string>
+    <string name="listen_together_not_now">ÐÐµ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
+    <string name="listen_together_preview_footer">Ð£Ñ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ¸ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ¸ ÑƒÐ²Ð¸Ð´ÑÑ‚ Ð²Ð°ÑˆÐµ Ð¸Ð¼Ñ Ð¸ Ñ„Ð¾Ñ‚Ð¾ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ.</string>
+    <string name="listen_together_invite_title">ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚Ðµ Ð´Ñ€ÑƒÐ·ÐµÐ¹ Ð½Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_share_link">ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÑŒÑÑ ÑÑÑ‹Ð»ÐºÐ¾Ð¹</string>
+    <string name="listen_together_scan_qr">Ð¡ÐºÐ°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ QR-ÐºÐ¾Ð´</string>
+    <string name="listen_together_scan_qr_subtitle">Ð”Ñ€ÑƒÐ·ÑŒÑ Ð¼Ð¾Ð³ÑƒÑ‚ Ð¾Ñ‚ÑÐºÐ°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐµÐ³Ð¾, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ.</string>
+    <string name="listen_together_invite">ÐŸÑ€Ð¸Ð³Ð»Ð°ÑÐ¸Ñ‚ÑŒ</string>
+    <string name="listen_together_host_only">Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÑÑŽ Ð¼ÑƒÐ·Ñ‹ÐºÐ¾Ð¹</string>
+    <string name="listen_together_host_only_subtitle">ÐžÑÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ðµ ÑÐ»ÑƒÑˆÐ°ÑŽÑ‚ Ð²Ð¼ÐµÑÑ‚Ðµ Ð¸ Ð¼Ð¾Ð³ÑƒÑ‚ ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð¿Ð°ÑƒÐ·Ñƒ Ð½Ð° ÑÐ²Ð¾Ñ‘Ð¼ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ðµ</string>
+    <string name="listen_together_host_only_notice">Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ…Ð¾Ð·ÑÐ¸Ð½ Ð¼Ð¾Ð¶ÐµÑ‚ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÑÑ‚ÑŒ Ð¼ÑƒÐ·Ñ‹ÐºÐ¾Ð¹</string>
+    <string name="listen_together_leave">ÐŸÐ¾ÐºÐ¸Ð½ÑƒÑ‚ÑŒ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÑƒ</string>
+    <string name="listen_together_leave_subtitle">ÐžÑÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð°Ñ‚ ÑÐ»ÑƒÑˆÐ°Ñ‚ÑŒ</string>
+    <string name="listen_together_reconnecting">ÐŸÐµÑ€ÐµÐ¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµâ€¦</string>
+    <string name="listen_together_syncing_clock">Ð¡Ð²ÐµÑ€ÑÐµÐ¼ Ñ‡Ð°ÑÑ‹â€¦</string>
+    <string name="listen_together_in_sync">Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð½Ð¾ Â· %1$d Ð¼Ñ Ð½Ð° ÐºÑ€ÑƒÐ³</string>
+    <string name="listen_together_jam">Ð”Ð¶ÐµÐ¼ %1$s</string>
+    <string name="listen_together_jam_unnamed">Ð¡Ð»ÑƒÑˆÐ°ÐµÐ¼ Ð²Ð¼ÐµÑÑ‚Ðµ</string>
+    <string name="listen_together_open">Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ Ð²Ð¼ÐµÑÑ‚Ðµ</string>
+    <string name="listen_together_open_count">Ð¡Ð»ÑƒÑˆÐ°ÐµÐ¼ Ð²Ð¼ÐµÑÑ‚Ðµ Â· %1$d</string>
+    <string name="listen_together_custom_server_dialog_title">ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ Ð½Ð° ÑÐ²Ð¾Ñ‘Ð¼ ÑÐµÑ€Ð²ÐµÑ€Ðµ?</string>
+    <string name="listen_together_custom_server_dialog_message">Ð­Ñ‚Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ° Ñ€Ð°Ð·Ð¼ÐµÑ‰ÐµÐ½Ð° Ð½Ð° Ð²Ð½ÐµÑˆÐ½ÐµÐ¼ ÑÐµÑ€Ð²ÐµÑ€Ðµ:\n\n%1$s\n\nÐ¡Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÑÐµÑ€Ð²ÐµÑ€ Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½Ð¾Ðº Ð¸ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ %2$s?</string>
+    <string name="listen_together_custom_server_switch_and_join">Ð¡Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¸ Ð²Ð¾Ð¹Ñ‚Ð¸</string>
+    <string name="listen_together_official_server_dialog_title">ÐŸÐµÑ€ÐµÐ¹Ñ‚Ð¸ Ð½Ð° Ð¾Ñ„Ð¸Ñ†Ð¸Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÐµÑ€Ð²ÐµÑ€?</string>
+    <string name="listen_together_official_server_dialog_message">Ð­Ñ‚Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ° Ñ€Ð°Ð·Ð¼ÐµÑ‰ÐµÐ½Ð° Ð½Ð° Ð¾Ñ„Ð¸Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾Ð¼ ÑÐµÑ€Ð²ÐµÑ€Ðµ Free Music.\n\nÐ’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð½Ð° Ð¾Ñ„Ð¸Ñ†Ð¸Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÐµÑ€Ð²ÐµÑ€ Ð¸ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ Ðº Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ %1$s?</string>
+    <string name="listen_together_switch_failed_stayed_in_party">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ: %1$s. Ð’Ñ‹ Ð¾ÑÑ‚Ð°Ñ‘Ñ‚ÐµÑÑŒ Ð½Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ %2$s.</string>
+    <string name="listen_together_switch_failed">ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒÑÑ: %1$s.</string>
     <string name="listen_together_ping">%1$d ms</string>
-    <string name="listen_together_server_offline_dash">—</string>
-    <string name="listen_together_invalid_server_url">Неверный URL сервера. Введите правильный адрес (например, https://your-server.com)</string>
-    <string name="listen_together_err_whitespace">URL сервера не может содержать пробелы</string>
-    <string name="listen_together_err_invalid_path">URL сервера содержит недопустимый путь</string>
-    <string name="listen_together_err_no_path">URL сервера не должен содержать путь</string>
-    <string name="listen_together_err_no_query">URL сервера не должен содержать параметры запроса</string>
-    <string name="listen_together_err_no_fragment">URL сервера не должен содержать фрагменты</string>
-    <string name="listen_together_err_invalid_port">Порт сервера должен быть от 1 до 65535</string>
-    <string name="listen_together_custom_server_connected">Подключено к своему серверу</string>
-    <string name="listen_together_custom_server_unreachable_fallback">Свой сервер недоступен. Используется сервер по умолчанию.</string>
-    <string name="listen_together_status_custom_online">Подключено к своему серверу · %1$d мс</string>
-    <string name="listen_together_status_custom_fallback">Свой сервер недоступен · Используется резервный по умолчанию (%1$d мс)</string>
-    <string name="listen_together_status_all_offline">И свой сервер, и сервер по умолчанию недоступны</string>
-    <string name="listen_together_top_bar_fallback">Резерв · %1$s</string>
+    <string name="listen_together_server_offline_dash">â€”</string>
+    <string name="listen_together_invalid_server_url">ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ URL ÑÐµÑ€Ð²ÐµÑ€Ð°. Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ (Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, https://your-server.com)</string>
+    <string name="listen_together_err_whitespace">URL ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð±ÐµÐ»Ñ‹</string>
+    <string name="listen_together_err_invalid_path">URL ÑÐµÑ€Ð²ÐµÑ€Ð° ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð½ÐµÐ´Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ñ‹Ð¹ Ð¿ÑƒÑ‚ÑŒ</string>
+    <string name="listen_together_err_no_path">URL ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð¿ÑƒÑ‚ÑŒ</string>
+    <string name="listen_together_err_no_query">URL ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°</string>
+    <string name="listen_together_err_no_fragment">URL ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ñ„Ñ€Ð°Ð³Ð¼ÐµÐ½Ñ‚Ñ‹</string>
+    <string name="listen_together_err_invalid_port">ÐŸÐ¾Ñ€Ñ‚ ÑÐµÑ€Ð²ÐµÑ€Ð° Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ Ð¾Ñ‚ 1 Ð´Ð¾ 65535</string>
+    <string name="listen_together_custom_server_connected">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾ Ðº ÑÐ²Ð¾ÐµÐ¼Ñƒ ÑÐµÑ€Ð²ÐµÑ€Ñƒ</string>
+    <string name="listen_together_custom_server_unreachable_fallback">Ð¡Ð²Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½. Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ ÑÐµÑ€Ð²ÐµÑ€ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ.</string>
+    <string name="listen_together_status_custom_online">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¾ Ðº ÑÐ²Ð¾ÐµÐ¼Ñƒ ÑÐµÑ€Ð²ÐµÑ€Ñƒ Â· %1$d Ð¼Ñ</string>
+    <string name="listen_together_status_custom_fallback">Ð¡Ð²Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Â· Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ñ€ÐµÐ·ÐµÑ€Ð²Ð½Ñ‹Ð¹ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ (%1$d Ð¼Ñ)</string>
+    <string name="listen_together_status_all_offline">Ð˜ ÑÐ²Ð¾Ð¹ ÑÐµÑ€Ð²ÐµÑ€, Ð¸ ÑÐµÑ€Ð²ÐµÑ€ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹</string>
+    <string name="listen_together_top_bar_fallback">Ð ÐµÐ·ÐµÑ€Ð² Â· %1$s</string>
 
-    <string name="vietnamese">Вьетнамский</string>
+    <string name="vietnamese">Ð’ÑŒÐµÑ‚Ð½Ð°Ð¼ÑÐºÐ¸Ð¹</string>
 
-    <string name="miscellaneous_footer">При включении закрытие приложения из недавних также останавливает воспроизведение музыки.</string>
+    <string name="miscellaneous_footer">ÐŸÑ€Ð¸ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ð¸ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ðµ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¸Ð· Ð½ÐµÐ´Ð°Ð²Ð½Ð¸Ñ… Ñ‚Ð°ÐºÐ¶Ðµ Ð¾ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¼ÑƒÐ·Ñ‹ÐºÐ¸.</string>
 
 
     <plurals name="track_count_plural">
-        <item quantity="one">%1$d трек</item>
-        <item quantity="few">%1$d трека</item>
-        <item quantity="many">%1$d треков</item>
-        <item quantity="other">%1$d треков</item>
+        <item quantity="one">%1$d Ñ‚Ñ€ÐµÐº</item>
+        <item quantity="few">%1$d Ñ‚Ñ€ÐµÐºÐ°</item>
+        <item quantity="many">%1$d Ñ‚Ñ€ÐµÐºÐ¾Ð²</item>
+        <item quantity="other">%1$d Ñ‚Ñ€ÐµÐºÐ¾Ð²</item>
     </plurals>
 
-    <string name="account_profiles_help">У аккаунта Google могут быть личный и брендовый профили. У каждого своя медиатека и история.</string>
+    <string name="account_profiles_help">Ð£ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð° Google Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð»Ð¸Ñ‡Ð½Ñ‹Ð¹ Ð¸ Ð±Ñ€ÐµÐ½Ð´Ð¾Ð²Ñ‹Ð¹ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ð¸. Ð£ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ ÑÐ²Ð¾Ñ Ð¼ÐµÐ´Ð¸Ð°Ñ‚ÐµÐºÐ° Ð¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ.</string>
 
-    <string name="accounts">Аккаунты</string>
+    <string name="accounts">ÐÐºÐºÐ°ÑƒÐ½Ñ‚Ñ‹</string>
 
-    <string name="add_account">Добавить аккаунт</string>
+    <string name="add_account">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
 
-    <string name="add_addon">Добавить плагин</string>
+    <string name="add_addon">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¿Ð»Ð°Ð³Ð¸Ð½</string>
 
-    <string name="add_addon_detail">Подключите Free Music к серверу плагина</string>
+    <string name="add_addon_detail">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ Free Music Ðº ÑÐµÑ€Ð²ÐµÑ€Ñƒ Ð¿Ð»Ð°Ð³Ð¸Ð½Ð°</string>
 
-    <string name="addon_url_description">Вставьте URL плагина — корень или manifest.json. Free Music считает доступные треки.</string>
+    <string name="addon_url_description">Ð’ÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ URL Ð¿Ð»Ð°Ð³Ð¸Ð½Ð° â€” ÐºÐ¾Ñ€ÐµÐ½ÑŒ Ð¸Ð»Ð¸ manifest.json. Free Music ÑÑ‡Ð¸Ñ‚Ð°ÐµÑ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ñ‚Ñ€ÐµÐºÐ¸.</string>
 
-    <string name="advanced_options">Расширенные настройки</string>
+    <string name="advanced_options">Ð Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð½Ñ‹Ðµ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸</string>
 
-    <string name="automix_mode_balanced">Сбалансированный</string>
+    <string name="automix_mode_balanced">Ð¡Ð±Ð°Ð»Ð°Ð½ÑÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹</string>
 
-    <string name="automix_mode_balanced_subtitle">2 потока · рекомендуемый баланс скорости и батареи</string>
+    <string name="automix_mode_balanced_subtitle">2 Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Â· Ñ€ÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑƒÐµÐ¼Ñ‹Ð¹ Ð±Ð°Ð»Ð°Ð½Ñ ÑÐºÐ¾Ñ€Ð¾ÑÑ‚Ð¸ Ð¸ Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸</string>
 
-    <string name="automix_mode_efficient">Энергосберегающий</string>
+    <string name="automix_mode_efficient">Ð­Ð½ÐµÑ€Ð³Ð¾ÑÐ±ÐµÑ€ÐµÐ³Ð°ÑŽÑ‰Ð¸Ð¹</string>
 
-    <string name="automix_mode_efficient_subtitle">1 поток · минимальный нагрев и расход батареи</string>
+    <string name="automix_mode_efficient_subtitle">1 Ð¿Ð¾Ñ‚Ð¾Ðº Â· Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð½Ð°Ð³Ñ€ÐµÐ² Ð¸ Ñ€Ð°ÑÑ…Ð¾Ð´ Ð±Ð°Ñ‚Ð°Ñ€ÐµÐ¸</string>
 
-    <string name="automix_mode_performance">Производительный</string>
+    <string name="automix_mode_performance">ÐŸÑ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹</string>
 
-    <string name="automix_mode_performance_subtitle">4 потока · самый быстрый анализ · выше нагрев и расход</string>
+    <string name="automix_mode_performance_subtitle">4 Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Â· ÑÐ°Ð¼Ñ‹Ð¹ Ð±Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð°Ð½Ð°Ð»Ð¸Ð· Â· Ð²Ñ‹ÑˆÐµ Ð½Ð°Ð³Ñ€ÐµÐ² Ð¸ Ñ€Ð°ÑÑ…Ð¾Ð´</string>
 
-    <string name="automix_not_supported_video">Automix не поддерживается для видео-треков</string>
-    <string name="automix_stopped_in_party">Automix: остановлен в режиме «Слушать вместе»</string>
+    <string name="automix_not_supported_video">Automix Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ÑÑ Ð´Ð»Ñ Ð²Ð¸Ð´ÐµÐ¾-Ñ‚Ñ€ÐµÐºÐ¾Ð²</string>
+    <string name="automix_stopped_in_party">Automix: Ð¾ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ Ð² Ñ€ÐµÐ¶Ð¸Ð¼Ðµ Â«Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ Ð²Ð¼ÐµÑÑ‚ÐµÂ»</string>
 
-    <string name="automix_performance">Производительность Automix</string>
+    <string name="automix_performance">ÐŸÑ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Automix</string>
 
-    <string name="automix_performance_subtitle">Определяет нагрузку на процессор при фоновом анализе</string>
+    <string name="automix_performance_subtitle">ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚ Ð½Ð°Ð³Ñ€ÑƒÐ·ÐºÑƒ Ð½Ð° Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€ Ð¿Ñ€Ð¸ Ñ„Ð¾Ð½Ð¾Ð²Ð¾Ð¼ Ð°Ð½Ð°Ð»Ð¸Ð·Ðµ</string>
 
-    <string name="automix_performance_warning">Высокая производительность быстрее анализирует треки, но сильнее садит батарею.</string>
+    <string name="automix_performance_warning">Ð’Ñ‹ÑÐ¾ÐºÐ°Ñ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð±Ñ‹ÑÑ‚Ñ€ÐµÐµ Ð°Ð½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ Ñ‚Ñ€ÐµÐºÐ¸, Ð½Ð¾ ÑÐ¸Ð»ÑŒÐ½ÐµÐµ ÑÐ°Ð´Ð¸Ñ‚ Ð±Ð°Ñ‚Ð°Ñ€ÐµÑŽ.</string>
 
-    <string name="blur_unfocused_lyrics">Размывать неактивные строки</string>
+    <string name="blur_unfocused_lyrics">Ð Ð°Ð·Ð¼Ñ‹Ð²Ð°Ñ‚ÑŒ Ð½ÐµÐ°ÐºÑ‚Ð¸Ð²Ð½Ñ‹Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸</string>
 
-    <string name="blur_unfocused_lyrics_subtitle">Акцентирует внимание на текущей строке</string>
+    <string name="blur_unfocused_lyrics_subtitle">ÐÐºÑ†ÐµÐ½Ñ‚Ð¸Ñ€ÑƒÐµÑ‚ Ð²Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ Ð½Ð° Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ ÑÑ‚Ñ€Ð¾ÐºÐµ</string>
 
-    <string name="brand_account">Брендовый аккаунт</string>
+    <string name="brand_account">Ð‘Ñ€ÐµÐ½Ð´Ð¾Ð²Ñ‹Ð¹ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
 
-    <string name="card_plays_format">%1$s прослушиваний</string>
+    <string name="card_plays_format">%1$s Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐ¸Ð²Ð°Ð½Ð¸Ð¹</string>
 
-    <string name="card_songs_format">%1$s треков</string>
+    <string name="card_songs_format">%1$s Ñ‚Ñ€ÐµÐºÐ¾Ð²</string>
 
-    <string name="card_views_format">%1$s просмотров</string>
+    <string name="card_views_format">%1$s Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð¾Ð²</string>
 
-    <string name="channel_session_unavailable">Сессия еще не найдена — сначала откройте YouTube Music</string>
+    <string name="channel_session_unavailable">Ð¡ÐµÑÑÐ¸Ñ ÐµÑ‰Ðµ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð° â€” ÑÐ½Ð°Ñ‡Ð°Ð»Ð° Ð¾Ñ‚ÐºÑ€Ð¾Ð¹Ñ‚Ðµ YouTube Music</string>
 
-    <string name="channel_switch_instructions">Смените через аватар, затем нажмите \'Использовать этот канал\'</string>
+    <string name="channel_switch_instructions">Ð¡Ð¼ÐµÐ½Ð¸Ñ‚Ðµ Ñ‡ÐµÑ€ÐµÐ· Ð°Ð²Ð°Ñ‚Ð°Ñ€, Ð·Ð°Ñ‚ÐµÐ¼ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ \'Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑ‚Ð¾Ñ‚ ÐºÐ°Ð½Ð°Ð»\'</string>
 
-    <string name="choose_a_channel">Выберите канал</string>
+    <string name="choose_a_channel">Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÐºÐ°Ð½Ð°Ð»</string>
 
-    <string name="choose_profile">Выберите профиль</string>
+    <string name="choose_profile">Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ</string>
 
-    <string name="convert_to_audio">Конвертировать в аудио</string>
-    <string name="convert_to_video">Преобразовать в видео</string>
+    <string name="convert_to_audio">ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð² Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="convert_to_video">ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð² Ð²Ð¸Ð´ÐµÐ¾</string>
 
-    <string name="converting_to_audio">Конвертация в аудио…</string>
+    <string name="converting_to_audio">ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ñ Ð² Ð°ÑƒÐ´Ð¸Ð¾â€¦</string>
 
-    <string name="current_account">Текущий аккаунт</string>
+    <string name="current_account">Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
 
-    <string name="current_profile">Текущий профиль</string>
+    <string name="current_profile">Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ</string>
 
-    <string name="default_youtube_profile">Стандартный профиль YouTube Music</string>
+    <string name="default_youtube_profile">Ð¡Ñ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ð¹ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ YouTube Music</string>
 
     <string name="dolby_atmos">Dolby Atmos</string>
 
-    <string name="dolby_atmos_subtitle">Воспроизводит более объемный объемный звук, если доступно.</string>
+    <string name="dolby_atmos_subtitle">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ Ð±Ð¾Ð»ÐµÐµ Ð¾Ð±ÑŠÐµÐ¼Ð½Ñ‹Ð¹ Ð¾Ð±ÑŠÐµÐ¼Ð½Ñ‹Ð¹ Ð·Ð²ÑƒÐº, ÐµÑÐ»Ð¸ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾.</string>
 
-    <string name="dolby_atmos_unavailable">Это устройство не поддерживает Atmos, треки будут играть в обычном формате</string>
+    <string name="dolby_atmos_unavailable">Ð­Ñ‚Ð¾ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ Atmos, Ñ‚Ñ€ÐµÐºÐ¸ Ð±ÑƒÐ´ÑƒÑ‚ Ð¸Ð³Ñ€Ð°Ñ‚ÑŒ Ð² Ð¾Ð±Ñ‹Ñ‡Ð½Ð¾Ð¼ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ</string>
 
-    <string name="export_compatible_downloads">Экспорт совместимых загрузок</string>
+    <string name="export_compatible_downloads">Ð­ÐºÑÐ¿Ð¾Ñ€Ñ‚ ÑÐ¾Ð²Ð¼ÐµÑÑ‚Ð¸Ð¼Ñ‹Ñ… Ð·Ð°Ð³Ñ€ÑƒÐ·Ð¾Ðº</string>
 
-    <string name="legacy_mesh_gradient">Классический сетчатый градиент</string>
+    <string name="legacy_mesh_gradient">ÐšÐ»Ð°ÑÑÐ¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÑÐµÑ‚Ñ‡Ð°Ñ‚Ñ‹Ð¹ Ð³Ñ€Ð°Ð´Ð¸ÐµÐ½Ñ‚</string>
 
-    <string name="legacy_mesh_gradient_subtitle">Возвращает мягкие анимированные цветные пятна из v1.5</string>
+    <string name="legacy_mesh_gradient_subtitle">Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð¼ÑÐ³ÐºÐ¸Ðµ Ð°Ð½Ð¸Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ñ†Ð²ÐµÑ‚Ð½Ñ‹Ðµ Ð¿ÑÑ‚Ð½Ð° Ð¸Ð· v1.5</string>
 
-    <string name="liquid_glass">Жидкое стекло</string>
+    <string name="liquid_glass">Ð–Ð¸Ð´ÐºÐ¾Ðµ ÑÑ‚ÐµÐºÐ»Ð¾</string>
 
-    <string name="liquid_glass_subtitle">Эффект стекла на панели навигации. Только Android 12+.</string>
+    <string name="liquid_glass_subtitle">Ð­Ñ„Ñ„ÐµÐºÑ‚ ÑÑ‚ÐµÐºÐ»Ð° Ð½Ð° Ð¿Ð°Ð½ÐµÐ»Ð¸ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ð¸. Ð¢Ð¾Ð»ÑŒÐºÐ¾ Android 12+.</string>
 
-    <string name="liquid_glass_unavailable">Требуется Android 12 или новее</string>
+    <string name="liquid_glass_unavailable">Ð¢Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ Android 12 Ð¸Ð»Ð¸ Ð½Ð¾Ð²ÐµÐµ</string>
 
-    <string name="listen_as">Слушать как</string>
+    <string name="listen_as">Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ ÐºÐ°Ðº</string>
 
-    <string name="lyrics_debug_logs">Отладка текстов песен</string>
+    <string name="lyrics_debug_logs">ÐžÑ‚Ð»Ð°Ð´ÐºÐ° Ñ‚ÐµÐºÑÑ‚Ð¾Ð² Ð¿ÐµÑÐµÐ½</string>
 
-    <string name="lyrics_debug_logs_subtitle">Показывать запросы API в панели текстов песен</string>
+    <string name="lyrics_debug_logs_subtitle">ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ Ð·Ð°Ð¿Ñ€Ð¾ÑÑ‹ API Ð² Ð¿Ð°Ð½ÐµÐ»Ð¸ Ñ‚ÐµÐºÑÑ‚Ð¾Ð² Ð¿ÐµÑÐµÐ½</string>
 
-    <string name="manage_accounts">Управление аккаунтами</string>
+    <string name="manage_accounts">Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð°Ð¼Ð¸</string>
 
-    <string name="output_precision">Точность вывода</string>
+    <string name="output_precision">Ð¢Ð¾Ñ‡Ð½Ð¾ÑÑ‚ÑŒ Ð²Ñ‹Ð²Ð¾Ð´Ð°</string>
 
-    <string name="personal">Личный</string>
+    <string name="personal">Ð›Ð¸Ñ‡Ð½Ñ‹Ð¹</string>
 
-    <string name="playing_radio">Воспроизведение радио %1$s</string>
+    <string name="playing_radio">Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ñ€Ð°Ð´Ð¸Ð¾ %1$s</string>
 
-    <string name="playlist_action">Плейлист</string>
+    <string name="playlist_action">ÐŸÐ»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
 
-    <string name="prefer_usb_dac">Предпочитать USB ЦАП</string>
-    <string name="loudness_normalization">Нормализация громкости</string>
-    <string name="loudness_normalization_subtitle">Выравнивает громкость всех треков</string>
-    <string name="loudness_target">Целевая громкость</string>
-    <string name="loudness_target_subtitle">Тише — для наушников; громче — для машины или динамика телефона</string>
+    <string name="prefer_usb_dac">ÐŸÑ€ÐµÐ´Ð¿Ð¾Ñ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ USB Ð¦ÐÐŸ</string>
+    <string name="loudness_normalization">ÐÐ¾Ñ€Ð¼Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð³Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚Ð¸</string>
+    <string name="loudness_normalization_subtitle">Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°ÐµÑ‚ Ð³Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚ÑŒ Ð²ÑÐµÑ… Ñ‚Ñ€ÐµÐºÐ¾Ð²</string>
+    <string name="loudness_target">Ð¦ÐµÐ»ÐµÐ²Ð°Ñ Ð³Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚ÑŒ</string>
+    <string name="loudness_target_subtitle">Ð¢Ð¸ÑˆÐµ â€” Ð´Ð»Ñ Ð½Ð°ÑƒÑˆÐ½Ð¸ÐºÐ¾Ð²; Ð³Ñ€Ð¾Ð¼Ñ‡Ðµ â€” Ð´Ð»Ñ Ð¼Ð°ÑˆÐ¸Ð½Ñ‹ Ð¸Ð»Ð¸ Ð´Ð¸Ð½Ð°Ð¼Ð¸ÐºÐ° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð°</string>
     <string name="loudness_target_value">%1$s LUFS</string>
-    <string name="pipeline_loudness">Громкость</string>
-    <string name="pipeline_loudness_gain">Усиление</string>
-    <string name="pipeline_loudness_measured">Измерено</string>
-    <string name="pipeline_bit_exact">Бит в бит</string>
-    <string name="loudness_measuring">Измерение…</string>
+    <string name="pipeline_loudness">Ð“Ñ€Ð¾Ð¼ÐºÐ¾ÑÑ‚ÑŒ</string>
+    <string name="pipeline_loudness_gain">Ð£ÑÐ¸Ð»ÐµÐ½Ð¸Ðµ</string>
+    <string name="pipeline_loudness_measured">Ð˜Ð·Ð¼ÐµÑ€ÐµÐ½Ð¾</string>
+    <string name="pipeline_bit_exact">Ð‘Ð¸Ñ‚ Ð² Ð±Ð¸Ñ‚</string>
+    <string name="loudness_measuring">Ð˜Ð·Ð¼ÐµÑ€ÐµÐ½Ð¸Ðµâ€¦</string>
     <string name="loudness_gain_db">%1$s dB</string>
     <string name="loudness_lufs">%1$s LUFS</string>
 
-    <string name="profile_unavailable">На этой странице еще нет авторизованного профиля.</string>
+    <string name="profile_unavailable">ÐÐ° ÑÑ‚Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ðµ ÐµÑ‰Ðµ Ð½ÐµÑ‚ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ.</string>
 
-    <string name="profiles">Профили</string>
+    <string name="profiles">ÐŸÑ€Ð¾Ñ„Ð¸Ð»Ð¸</string>
 
-    <string name="radio_started">Радио %1$s запущено</string>
+    <string name="radio_started">Ð Ð°Ð´Ð¸Ð¾ %1$s Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½Ð¾</string>
 
-    <string name="revert_to_original">Вернуть оригинал</string>
+    <string name="revert_to_original">Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð¾Ñ€Ð¸Ð³Ð¸Ð½Ð°Ð»</string>
 
-    <string name="scrobble_primary_artist_only">Скробблить только основного исполнителя</string>
+    <string name="scrobble_primary_artist_only">Ð¡ÐºÑ€Ð¾Ð±Ð±Ð»Ð¸Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð³Ð¾ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ</string>
 
-    <string name="scrobble_primary_artist_only_subtitle">Использовать первого исполнителя при наличии нескольких</string>
+    <string name="scrobble_primary_artist_only_subtitle">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ Ð¿Ñ€Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¸Ñ…</string>
 
-    <string name="select_all">Выбрать все</string>
+    <string name="select_all">Ð’Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð²ÑÐµ</string>
 
-    <string name="selected_account">Выбранный аккаунт</string>
+    <string name="selected_account">Ð’Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ð¹ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
 
-    <string name="shelf_100_on_repeat">На повторе</string>
+    <string name="shelf_100_on_repeat">ÐÐ° Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ðµ</string>
 
-    <string name="shelf_artists_on_the_rise">Набирающие популярность</string>
+    <string name="shelf_artists_on_the_rise">ÐÐ°Ð±Ð¸Ñ€Ð°ÑŽÑ‰Ð¸Ðµ Ð¿Ð¾Ð¿ÑƒÐ»ÑÑ€Ð½Ð¾ÑÑ‚ÑŒ</string>
 
-    <string name="shelf_chart">Чарты</string>
+    <string name="shelf_chart">Ð§Ð°Ñ€Ñ‚Ñ‹</string>
 
-    <string name="shelf_charts">Чарты</string>
+    <string name="shelf_charts">Ð§Ð°Ñ€Ñ‚Ñ‹</string>
 
-    <string name="shelf_commute">В дороге</string>
+    <string name="shelf_commute">Ð’ Ð´Ð¾Ñ€Ð¾Ð³Ðµ</string>
 
-    <string name="shelf_concerts">Концерты</string>
+    <string name="shelf_concerts">ÐšÐ¾Ð½Ñ†ÐµÑ€Ñ‚Ñ‹</string>
 
-    <string name="shelf_energy_boosters">Заряд энергии</string>
+    <string name="shelf_energy_boosters">Ð—Ð°Ñ€ÑÐ´ ÑÐ½ÐµÑ€Ð³Ð¸Ð¸</string>
 
-    <string name="shelf_featured_playlists_for_you">Рекомендуемые плейлисты</string>
+    <string name="shelf_featured_playlists_for_you">Ð ÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑƒÐµÐ¼Ñ‹Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹</string>
 
-    <string name="shelf_feel_good">Хорошее настроение</string>
+    <string name="shelf_feel_good">Ð¥Ð¾Ñ€Ð¾ÑˆÐµÐµ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ</string>
 
-    <string name="shelf_focus">Концентрация</string>
+    <string name="shelf_focus">ÐšÐ¾Ð½Ñ†ÐµÐ½Ñ‚Ñ€Ð°Ñ†Ð¸Ñ</string>
 
-    <string name="shelf_for_you">Для вас</string>
+    <string name="shelf_for_you">Ð”Ð»Ñ Ð²Ð°Ñ</string>
 
-    <string name="shelf_forgotten_favorites">Забытые любимые треки</string>
+    <string name="shelf_forgotten_favorites">Ð—Ð°Ð±Ñ‹Ñ‚Ñ‹Ðµ Ð»ÑŽÐ±Ð¸Ð¼Ñ‹Ðµ Ñ‚Ñ€ÐµÐºÐ¸</string>
 
-    <string name="shelf_from_the_community">От сообщества</string>
+    <string name="shelf_from_the_community">ÐžÑ‚ ÑÐ¾Ð¾Ð±Ñ‰ÐµÑÑ‚Ð²Ð°</string>
 
-    <string name="shelf_from_your_library">Из вашей медиатеки</string>
+    <string name="shelf_from_your_library">Ð˜Ð· Ð²Ð°ÑˆÐµÐ¹ Ð¼ÐµÐ´Ð¸Ð°Ñ‚ÐµÐºÐ¸</string>
 
-    <string name="shelf_hits_today">Хиты сегодняшнего дня</string>
+    <string name="shelf_hits_today">Ð¥Ð¸Ñ‚Ñ‹ ÑÐµÐ³Ð¾Ð´Ð½ÑÑˆÐ½ÐµÐ³Ð¾ Ð´Ð½Ñ</string>
 
-    <string name="shelf_listen_again">Послушайте снова</string>
+    <string name="shelf_listen_again">ÐŸÐ¾ÑÐ»ÑƒÑˆÐ°Ð¹Ñ‚Ðµ ÑÐ½Ð¾Ð²Ð°</string>
 
-    <string name="shelf_mixed_for_you">Миксы для вас</string>
+    <string name="shelf_mixed_for_you">ÐœÐ¸ÐºÑÑ‹ Ð´Ð»Ñ Ð²Ð°Ñ</string>
 
-    <string name="shelf_new_albums_singles">Новые альбомы и синглы</string>
+    <string name="shelf_new_albums_singles">ÐÐ¾Ð²Ñ‹Ðµ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñ‹ Ð¸ ÑÐ¸Ð½Ð³Ð»Ñ‹</string>
 
-    <string name="shelf_new_releases">Новинки</string>
+    <string name="shelf_new_releases">ÐÐ¾Ð²Ð¸Ð½ÐºÐ¸</string>
 
-    <string name="shelf_party">Вечеринка</string>
+    <string name="shelf_party">Ð’ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐ°</string>
 
-    <string name="shelf_quick_picks">Быстрый выбор</string>
+    <string name="shelf_quick_picks">Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð²Ñ‹Ð±Ð¾Ñ€</string>
 
-    <string name="shelf_recents">Недавние</string>
+    <string name="shelf_recents">ÐÐµÐ´Ð°Ð²Ð½Ð¸Ðµ</string>
 
-    <string name="shelf_recommended_music_videos">Рекомендуемые клипы</string>
+    <string name="shelf_recommended_music_videos">Ð ÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑƒÐµÐ¼Ñ‹Ðµ ÐºÐ»Ð¸Ð¿Ñ‹</string>
 
-    <string name="shelf_relax">Релакс</string>
+    <string name="shelf_relax">Ð ÐµÐ»Ð°ÐºÑ</string>
 
-    <string name="shelf_romance">Романтика</string>
+    <string name="shelf_romance">Ð Ð¾Ð¼Ð°Ð½Ñ‚Ð¸ÐºÐ°</string>
 
-    <string name="shelf_sad">Грусть</string>
+    <string name="shelf_sad">Ð“Ñ€ÑƒÑÑ‚ÑŒ</string>
 
     <string name="shelf_shorts">Shorts</string>
 
-    <string name="shelf_similar_to">Похоже на %1$s</string>
+    <string name="shelf_similar_to">ÐŸÐ¾Ñ…Ð¾Ð¶Ðµ Ð½Ð° %1$s</string>
 
-    <string name="shelf_single">Сингл</string>
+    <string name="shelf_single">Ð¡Ð¸Ð½Ð³Ð»</string>
 
-    <string name="shelf_sleep">Сон</string>
+    <string name="shelf_sleep">Ð¡Ð¾Ð½</string>
 
-    <string name="shelf_song_item">Трек</string>
+    <string name="shelf_song_item">Ð¢Ñ€ÐµÐº</string>
 
-    <string name="shelf_top_music_videos">Лучшие клипы</string>
+    <string name="shelf_top_music_videos">Ð›ÑƒÑ‡ÑˆÐ¸Ðµ ÐºÐ»Ð¸Ð¿Ñ‹</string>
 
-    <string name="shelf_top_tunes_right_now">Главные треки прямо сейчас</string>
+    <string name="shelf_top_tunes_right_now">Ð“Ð»Ð°Ð²Ð½Ñ‹Ðµ Ñ‚Ñ€ÐµÐºÐ¸ Ð¿Ñ€ÑÐ¼Ð¾ ÑÐµÐ¹Ñ‡Ð°Ñ</string>
 
-    <string name="shelf_trending">В тренде</string>
+    <string name="shelf_trending">Ð’ Ñ‚Ñ€ÐµÐ½Ð´Ðµ</string>
 
-    <string name="shelf_trending_community_playlists">Популярные плейлисты сообщества</string>
+    <string name="shelf_trending_community_playlists">ÐŸÐ¾Ð¿ÑƒÐ»ÑÑ€Ð½Ñ‹Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ñ‹ ÑÐ¾Ð¾Ð±Ñ‰ÐµÑÑ‚Ð²Ð°</string>
 
-    <string name="shelf_workout">Тренировка</string>
+    <string name="shelf_workout">Ð¢Ñ€ÐµÐ½Ð¸Ñ€Ð¾Ð²ÐºÐ°</string>
 
-    <string name="shelf_youtube_charts">Чарты YouTube</string>
+    <string name="shelf_youtube_charts">Ð§Ð°Ñ€Ñ‚Ñ‹ YouTube</string>
 
-    <string name="sort_date_added_oldest">Дата добавления (сначала старые)</string>
+    <string name="sort_date_added_oldest">Ð”Ð°Ñ‚Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ (ÑÐ½Ð°Ñ‡Ð°Ð»Ð° ÑÑ‚Ð°Ñ€Ñ‹Ðµ)</string>
 
-    <string name="sort_date_added_toggle">Дата добавления</string>
+    <string name="sort_date_added_toggle">Ð”Ð°Ñ‚Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ</string>
 
-    <string name="sort_default">По умолчанию</string>
+    <string name="sort_default">ÐŸÐ¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ</string>
 
-    <string name="sort_library">Сортировка</string>
+    <string name="sort_library">Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ°</string>
 
-    <string name="sort_songs">Сортировать треки</string>
+    <string name="sort_songs">Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ‚Ñ€ÐµÐºÐ¸</string>
 
-    <string name="source_already_added">Уже добавлено как %1$s</string>
+    <string name="source_already_added">Ð£Ð¶Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ ÐºÐ°Ðº %1$s</string>
 
-    <string name="source_skipped_by_quality">Не используется на %1$s · качество установлено на %2$s</string>
+    <string name="source_skipped_by_quality">ÐÐµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð½Ð° %1$s Â· ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð½Ð° %2$s</string>
 
-    <string name="source_unrecognised">Free Music не удалось распознать ссылку</string>
+    <string name="source_unrecognised">Free Music Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ñ€Ð°ÑÐ¿Ð¾Ð·Ð½Ð°Ñ‚ÑŒ ÑÑÑ‹Ð»ÐºÑƒ</string>
 
-    <string name="start_radio">Запустить радио</string>
+    <string name="start_radio">Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ñ€Ð°Ð´Ð¸Ð¾</string>
 
-    <string name="subscribe">Подписаться</string>
+    <string name="subscribe">ÐŸÐ¾Ð´Ð¿Ð¸ÑÐ°Ñ‚ÑŒÑÑ</string>
 
-    <string name="subscriptions">Подписки</string>
+    <string name="subscriptions">ÐŸÐ¾Ð´Ð¿Ð¸ÑÐºÐ¸</string>
 
-    <string name="switch_account">Сменить аккаунт</string>
+    <string name="switch_account">Ð¡Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚</string>
 
-    <string name="switch_profile_hint">Смените через аватар и используйте этот профиль.</string>
+    <string name="switch_profile_hint">Ð¡Ð¼ÐµÐ½Ð¸Ñ‚Ðµ Ñ‡ÐµÑ€ÐµÐ· Ð°Ð²Ð°Ñ‚Ð°Ñ€ Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ ÑÑ‚Ð¾Ñ‚ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ.</string>
 
-    <string name="unsubscribe">Отписаться</string>
+    <string name="unsubscribe">ÐžÑ‚Ð¿Ð¸ÑÐ°Ñ‚ÑŒÑÑ</string>
 
-    <string name="upgrade_quality">Улучшить качество</string>
+    <string name="upgrade_quality">Ð£Ð»ÑƒÑ‡ÑˆÐ¸Ñ‚ÑŒ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾</string>
 
-    <string name="use_this_channel">Использовать этот канал</string>
+    <string name="use_this_channel">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑ‚Ð¾Ñ‚ ÐºÐ°Ð½Ð°Ð»</string>
 
-    <string name="use_this_profile">Использовать этот профиль</string>
+    <string name="use_this_profile">Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑ‚Ð¾Ñ‚ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ</string>
 
 
     <string name="lyrics_offset">Lyrics offset</string>
@@ -1209,13 +1234,13 @@
 
     <string name="settings_search_hint">Search settings</string>
 
-    <string name="settings_search_empty">No settings match “%1$s”</string>
+    <string name="settings_search_empty">No settings match â€œ%1$sâ€</string>
 
     <string name="prefer_music_only">Prefer music-only version</string>
 
     <string name="prefer_music_only_subtitle">For music videos, show the video details while finding and loading the catalogue audio version</string>
-    <string name="smart_version_alignment">Умное выравнивание аудио</string>
-    <string name="smart_version_alignment_subtitle">Анализирует звуковые волны, чтобы найти точно соответствующий момент воспроизведения</string>
+    <string name="smart_version_alignment">Ð£Ð¼Ð½Ð¾Ðµ Ð²Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð°ÑƒÐ´Ð¸Ð¾</string>
+    <string name="smart_version_alignment_subtitle">ÐÐ½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ Ð·Ð²ÑƒÐºÐ¾Ð²Ñ‹Ðµ Ð²Ð¾Ð»Ð½Ñ‹, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð½Ð°Ð¹Ñ‚Ð¸ Ñ‚Ð¾Ñ‡Ð½Ð¾ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ð¹ Ð¼Ð¾Ð¼ÐµÐ½Ñ‚ Ð²Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ñ</string>
 
     <string name="equalizer_footer">Shapes the sound inside Free Music, before it reaches the system.</string>
 
@@ -1252,9 +1277,9 @@
     <string name="equalizer_balance_right">R</string>
 
     <string name="equalizer_balance_footer">Shifts the sound towards one ear by quietening the other.</string>
-    <string name="equalizer_bitstream_title">Сейчас не работает</string>
-    <string name="equalizer_bitstream_subtitle">Этот трек передаётся на выход без декодирования</string>
-    <string name="equalizer_bitstream_footer">Эквалайзер работает с декодированным звуком. Этот трек передаётся битстримом, и декодирует его ваше устройство, поэтому здесь нет сэмплов для обработки.</string>
+    <string name="equalizer_bitstream_title">Ð¡ÐµÐ¹Ñ‡Ð°Ñ Ð½Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚</string>
+    <string name="equalizer_bitstream_subtitle">Ð­Ñ‚Ð¾Ñ‚ Ñ‚Ñ€ÐµÐº Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‘Ñ‚ÑÑ Ð½Ð° Ð²Ñ‹Ñ…Ð¾Ð´ Ð±ÐµÐ· Ð´ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ</string>
+    <string name="equalizer_bitstream_footer">Ð­ÐºÐ²Ð°Ð»Ð°Ð¹Ð·ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ Ð´ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¼ Ð·Ð²ÑƒÐºÐ¾Ð¼. Ð­Ñ‚Ð¾Ñ‚ Ñ‚Ñ€ÐµÐº Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‘Ñ‚ÑÑ Ð±Ð¸Ñ‚ÑÑ‚Ñ€Ð¸Ð¼Ð¾Ð¼, Ð¸ Ð´ÐµÐºÐ¾Ð´Ð¸Ñ€ÑƒÐµÑ‚ ÐµÐ³Ð¾ Ð²Ð°ÑˆÐµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð·Ð´ÐµÑÑŒ Ð½ÐµÑ‚ ÑÑÐ¼Ð¿Ð»Ð¾Ð² Ð´Ð»Ñ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸.</string>
 
     <string name="system_equalizer">System equalizer</string>
 
@@ -1313,7 +1338,7 @@
     <string name="medium_quality">Medium Quality</string>
 
     <string name="audio_pipeline">Audio Pipeline</string>
-    <string name="audio_pipeline_subtitle">Путь сигнала в реальном времени, от декодера до выхода</string>
+    <string name="audio_pipeline_subtitle">ÐŸÑƒÑ‚ÑŒ ÑÐ¸Ð³Ð½Ð°Ð»Ð° Ð² Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸, Ð¾Ñ‚ Ð´ÐµÐºÐ¾Ð´ÐµÑ€Ð° Ð´Ð¾ Ð²Ñ‹Ñ…Ð¾Ð´Ð°</string>
 
     <string name="pipeline_track_info">Track Info</string>
 
@@ -1368,15 +1393,15 @@
     <string name="song_will_play_next">Song will play next</string>
 
     <string name="song_added_to_queue">Song added to queue</string>
-    <string name="song_added_to_playlist">Добавлено в плейлист</string>
-    <string name="song_already_in_playlist">Уже в плейлисте</string>
-    <string name="party_queue_full">Очередь заполнена (максимум %d песен на вечеринке)</string>
+    <string name="song_added_to_playlist">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ Ð² Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚</string>
+    <string name="song_already_in_playlist">Ð£Ð¶Ðµ Ð² Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚Ðµ</string>
+    <string name="party_queue_full">ÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð° (Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼ %d Ð¿ÐµÑÐµÐ½ Ð½Ð° Ð²ÐµÑ‡ÐµÑ€Ð¸Ð½ÐºÐµ)</string>
 
     <string name="paxsenix_api_key">PaxSenix API key</string>
 
-    <string name="paxsenix_api_key_configured">PaxSenix API key — configured</string>
+    <string name="paxsenix_api_key_configured">PaxSenix API key â€” configured</string>
 
-    <string name="paxsenix_api_key_missing">PaxSenix API key — optional, not configured</string>
+    <string name="paxsenix_api_key_missing">PaxSenix API key â€” optional, not configured</string>
 
     <string name="open_lyrics">Lyrics</string>
 
@@ -1390,28 +1415,28 @@
 
     <string name="hdmi_output">HDMI</string>
 
-    <string name="personal_phone">%1$s’s Phone</string>
+    <string name="personal_phone">%1$sâ€™s Phone</string>
 
     <string name="this_phone">This phone</string>
 
 
 
-    <string name="speed_dial">Быстрый набор</string>
+    <string name="speed_dial">Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð½Ð°Ð±Ð¾Ñ€</string>
 
-    <string name="notifications">Уведомления</string>
+    <string name="notifications">Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ</string>
 
-    <string name="notifications_empty">Пока ничего нового</string>
+    <string name="notifications_empty">ÐŸÐ¾ÐºÐ° Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ð¾Ð²Ð¾Ð³Ð¾</string>
 
-    <string name="notifications_unread">Непрочитанных уведомлений: %1$d</string>
+    <string name="notifications_unread">ÐÐµÐ¿Ñ€Ð¾Ñ‡Ð¸Ñ‚Ð°Ð½Ð½Ñ‹Ñ… ÑƒÐ²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ð¹: %1$d</string>
 
-    <string name="notifications_update_available">Доступна Free Music %1$s</string>
+    <string name="notifications_update_available">Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð° Free Music %1$s</string>
 
-    <string name="notifications_saving">Сохранение · %1$d%%</string>
+    <string name="notifications_saving">Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ Â· %1$d%%</string>
 
-    <string name="notifications_queued">В очереди</string>
+    <string name="notifications_queued">Ð’ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸</string>
 
-    <string name="notifications_uploading">Отправка · %1$d%%</string>
+    <string name="notifications_uploading">ÐžÑ‚Ð¿Ñ€Ð°Ð²ÐºÐ° Â· %1$d%%</string>
 
-    <string name="notifications_queued_upload">В очереди на отправку</string>
+    <string name="notifications_queued_upload">Ð’ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸ Ð½Ð° Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÑƒ</string>
 
 </resources>

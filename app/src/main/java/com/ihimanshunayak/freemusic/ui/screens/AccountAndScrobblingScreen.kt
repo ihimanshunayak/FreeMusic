@@ -28,7 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ihimanshunayak.freemusic.R
 import com.ihimanshunayak.freemusic.data.model.Account
+import com.ihimanshunayak.freemusic.data.profile.ProfileStats
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
+import com.ihimanshunayak.freemusic.ui.components.ProfileHero
 import kotlin.math.roundToInt
 
 @Composable
@@ -36,9 +38,11 @@ fun AccountAndScrobblingScreen(
     signedIn: Boolean,
     account: Account?,
     channelName: String?,
+    stats: ProfileStats,
     onSignIn: () -> Unit,
     onSwitchChannel: () -> Unit,
     onSignOut: () -> Unit,
+    onEditProfile: () -> Unit,
     onOpenListenBrainzLogin: () -> Unit,
     onOpenLastfmLogin: () -> Unit,
     onOpenDiscord: () -> Unit,
@@ -68,13 +72,23 @@ fun AccountAndScrobblingScreen(
             .padding(contentPadding),
     ) {
         Text(
-            text = stringResource(R.string.account_integrations),
+            text = stringResource(R.string.profile_title),
             style = MaterialTheme.typography.displayLarge,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 14.dp),
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 6.dp),
         )
 
-        AccountCard(signedIn = signedIn, account = account, onSignIn = onSignIn, onClick = onSwitchChannel)
+        // Profile hero is the page's own identity — its own palette, its own
+        // glass stat tiles, and an Edit-profile affordance. The scrobbling
+        // groups below it pick up the regular settings surface treatment
+        // (a flat surfaceVariant card per group), which is the contrast the
+        // hero needs to read as the page rather than as one of the rows.
+        ProfileHero(
+            signedIn = signedIn,
+            account = account,
+            stats = stats,
+            onEditProfile = onEditProfile,
+        )
 
         if (signedIn) {
             SettingsGroup(

@@ -80,14 +80,13 @@ android {
         // Haze falls back to a translucent scrim below that.
         minSdk = 26
         targetSdk = 36
-        // 33, not 29: v1.18 reverts the v1.15 New Experience mode (and the
-        // earlier v1.17 already rolled back the v1.16 play counts). Android
-        // refuses to install a lower versionCode over a higher one, so a true
-        // rollback would be the one release nobody could put on a phone that
-        // already had 1.17 installed. The number tracks build order, not
-        // feature set, and this build comes after 1.17.
-        versionCode = 33
-        versionName = "1.18"
+        // 34: v1.19 lands the Account & Integrations profile hero redesign
+        // (avatar ring, status pill, 2x2 stat grid, liquid-glass treatment,
+        // edit-profile dialog with avatar picker) on top of the v1.18
+        // platform. This follows v1.18 (which itself rolled back the v1.15
+        // New Experience mode), so it is a strict forward step.
+        versionCode = 34
+        versionName = "1.19"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

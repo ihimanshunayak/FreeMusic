@@ -773,6 +773,26 @@ object AppSettings {
     /** The notice about what connecting an account actually does has been read. */
     val discordInfoDismissed = MutableStateFlow(false)
 
+    /**
+     * Local profile override fields, surfaced on the Account & Integrations
+     * page's profile hero and edited through [com.ihimanshunayak.freemusic.ui.components.EditProfileDialog].
+     *
+     * Each is a String — empty string means "fall back to the signed-in
+     * account's own value" rather than "blank". A blank display name is not a
+     * legal value to persist: the dialog refuses to save a blank one, and
+     * these flows are the source of truth *for the override* rather than for
+     * what the user is called.
+     *
+     * The avatar override is a `content://` or `file://` URI string the
+     * dialog copies into the app's files dir at pick time, so the URI itself
+     * is what persists — it is read with `ContentResolver.openInputStream`
+     * and decoded with `coil` exactly like any other remote image.
+     */
+    val displayNameOverride = MutableStateFlow("")
+    val statusLineOverride = MutableStateFlow("")
+    val bioOverride = MutableStateFlow("")
+    val avatarOverrideUri = MutableStateFlow("")
+
     /** Published by PlaybackService so the UI can open the system equalizer. */
     val audioSessionId = MutableStateFlow(0)
 
@@ -930,6 +950,10 @@ object AppSettings {
         smartVersionAlignment.value = prefs.getBoolean(KEY_SMART_VERSION_ALIGNMENT, true)
         reduceDynamicBlur.value = prefs.getBoolean(KEY_REDUCE_BLUR, false)
         liquidGlass.value = prefs.getBoolean(KEY_LIQUID_GLASS, false)
+        displayNameOverride.value = prefs.getString(KEY_DISPLAY_NAME_OVERRIDE, "").orEmpty()
+        statusLineOverride.value = prefs.getString(KEY_STATUS_LINE_OVERRIDE, "").orEmpty()
+        bioOverride.value = prefs.getString(KEY_BIO_OVERRIDE, "").orEmpty()
+        avatarOverrideUri.value = prefs.getString(KEY_AVATAR_OVERRIDE_URI, "").orEmpty()
         lyricsBlur.value = prefs.getBoolean(KEY_LYRICS_BLUR, true)
         lyricsOffsetMs.value = prefs.getInt(KEY_LYRICS_OFFSET_MS, 0)
             .coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
@@ -1334,6 +1358,51 @@ object AppSettings {
     fun setLiquidGlass(value: Boolean) {
         liquidGlass.value = value
         prefs.edit().putBoolean(KEY_LIQUID_GLASS, value).apply()
+    }
+
+    /**
+     * Persist a free-text display name override. The dialog is responsible for
+     * trimming and refusing blank values; this setter is the persistence
+     * half and trusts whatever it is handed.
+     */
+    fun setDisplayNameOverride(value: String) {
+        val normalized = value.trim()
+        if (displayNameOverride.value == normalized) return
+        displayNameOverride.value = normalized
+        prefs.edit().putString(KEY_DISPLAY_NAME_OVERRIDE, normalized).apply()
+    }
+
+    /**
+     * Persist a free-text status line override (one short sentence, the
+     * dialog enforces length). Empty clears the override.
+     */
+    fun setStatusLineOverride(value: String) {
+        val normalized = value.trim()
+        if (statusLineOverride.value == normalized) return
+        statusLineOverride.value = normalized
+        prefs.edit().putString(KEY_STATUS_LINE_OVERRIDE, normalized).apply()
+    }
+
+    /**
+     * Persist a free-text bio override. Longer than the status line, but
+     * still local-only and never sent anywhere.
+     */
+    fun setBioOverride(value: String) {
+        val normalized = value.trim()
+        if (bioOverride.value == normalized) return
+        bioOverride.value = normalized
+        prefs.edit().putString(KEY_BIO_OVERRIDE, normalized).apply()
+    }
+
+    /**
+     * Persist a local avatar override URI. Empty string clears the override
+     * and the hero falls back to the YouTube account's thumbnail.
+     */
+    fun setAvatarOverrideUri(value: String) {
+        val normalized = value.trim()
+        if (avatarOverrideUri.value == normalized) return
+        avatarOverrideUri.value = normalized
+        prefs.edit().putString(KEY_AVATAR_OVERRIDE_URI, normalized).apply()
     }
 
     fun setHighPerformanceMode(value: Boolean) {
@@ -2053,6 +2122,10 @@ object AppSettings {
     private const val KEY_SMART_VERSION_ALIGNMENT = "smart_version_alignment"
     private const val KEY_REDUCE_BLUR = "reduce_dynamic_blur"
     private const val KEY_LIQUID_GLASS = "liquid_glass"
+    private const val KEY_DISPLAY_NAME_OVERRIDE = "display_name_override"
+    private const val KEY_STATUS_LINE_OVERRIDE = "status_line_override"
+    private const val KEY_BIO_OVERRIDE = "bio_override"
+    private const val KEY_AVATAR_OVERRIDE_URI = "avatar_override_uri"
     private const val KEY_LYRICS_BLUR = "lyrics_blur"
     private const val KEY_LYRICS_OFFSET_MS = "lyrics_offset_ms"
     private const val KEY_TRANSLATION_LANGUAGE = "translation_language"
