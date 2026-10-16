@@ -669,10 +669,13 @@ private fun FreeMusicApp(
     // should surface above it rather than being hidden behind it.
     LaunchedEffect(detail) { if (detail != null) showSettings = false }
     LaunchedEffect(detail?.browseId) { detailActiveShelf = null }
+    // Account & Integrations is a child route opened from Settings.
+    // Do not couple its visibility to the Settings overlay: Settings may be
+    // dismissed while this route is opening, and clearing this flag here
+    // makes the destination disappear during AnimatedContent's transition.
+    // The page has explicit BackHandler and top-bar back actions below.
     LaunchedEffect(showSettings) {
-        if (!showSettings) {
-            showAccountScrobbling = false
-        }
+        // Intentionally no-op. Account & Integrations owns its own lifecycle.
     }
 
     // The Downloads page is a snapshot of the folder, taken when it was opened.
