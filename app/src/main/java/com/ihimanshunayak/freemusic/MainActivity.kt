@@ -792,11 +792,6 @@ private fun FreeMusicApp(
     // should surface above it rather than being hidden behind it.
     LaunchedEffect(detail) { if (detail != null) showSettings = false }
     LaunchedEffect(detail?.browseId) { detailActiveShelf = null }
-    LaunchedEffect(showSettings) {
-        if (!showSettings) {
-            showAccountScrobbling = false
-        }
-    }
 
     // The Downloads page is a snapshot of the folder, taken when it was opened.
     // Saving a track or deleting one while it is on screen changes what belongs
@@ -2696,7 +2691,17 @@ private fun FreeMusicApp(
                                 webSession = WebSessionMode.SIGN_IN
                             },
                             onSignOut = { viewModel.signOut() },
-                            onAccountScrobbling = { showAccountScrobbling = true },
+                            onAccountScrobbling = {
+                                // This route sits below Discord, History, Notifications
+                                // and the Library "show all" overlay in AnimatedContent's
+                                // priority order. Clear any stale overlay state first so
+                                // the account destination can become the visible target.
+                                showDiscord = false
+                                showHistory = false
+                                showNotifications = false
+                                libraryShowAll = null
+                                showAccountScrobbling = true
+                            },
                             onEqualizer = { showEqualizer = true },
                             onOpenReplay = {
                                 showSettings = false
