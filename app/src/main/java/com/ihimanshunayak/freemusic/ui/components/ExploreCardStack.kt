@@ -163,8 +163,25 @@ fun ExploreCardStack(
 ) {
     // Flatten the data once. Each card carries its section title so
     // the eyebrow can update as the user swipes past section
-    // boundaries.
-    val flat = remember(sections) { sections.flatMap { sec -> sec.items.map { it to sec.title } } }
+    // boundaries. Duplicates by browseId are de-duped (keeping the
+    // first occurrence) because the YouTube server commonly returns
+    // identical playlist IDs across related sections (e.g. shared
+    // "Workout" content in both "Workout" and "Energy Boost"), and
+    // duplicate rows in the carousel would mislead the user and
+    // break LazyRow's `key` contract.
+    val flat = remember(sections) {
+        val seen = HashSet<String>()
+        val out = ArrayList<Pair<MoodGenre, String>>()
+        for (sec in sections) {
+            for (item in sec.items) {
+                val key = item.browseId.ifEmpty { "${item.title}-${item.params.orEmpty()}" }
+                if (key.isNotEmpty() && seen.add(key)) {
+                    out += item to sec.title
+                }
+            }
+        }
+        out
+    }
     if (flat.isEmpty()) return
 
     val context = LocalContext.current
@@ -242,18 +259,25 @@ fun ExploreCardStack(
     // Snap to the nearest card on fling-end so the user doesn't end
     // up with the carousel half-way between two cards. The
     // `rememberSnapFlingBehavior` already does the snap on a fling,
-    // but a slow drag end still needs an explicit settle.
+    // but a slow drag end still needs an explicit settle. We only
+    // re-animate when the first visible item disagrees with the
+    // active target, otherwise we could enter an infinite
+    // re-animate loop (animateScrollToItem flips
+    // isScrollInProgress back to true).
     LaunchedEffect(listState) {
         snapshotFlow { listState.isScrollInProgress }
             .filter { !it }
             .distinctUntilChanged()
             .collect {
                 val target = activeIndex
-                scope.launch {
-                    listState.animateScrollToItem(
-                        index = target,
-                        scrollOffset = 0,
-                    )
+                val firstVisible = listState.firstVisibleItemIndex
+                if (firstVisible != target) {
+                    scope.launch {
+                        listState.animateScrollToItem(
+                            index = target,
+                            scrollOffset = 0,
+                        )
+                    }
                 }
             }
     }
@@ -290,7 +314,13 @@ fun ExploreCardStack(
                     ) {
                         items(
                             count = flat.size,
-                            key = { i -> flat[i].first.browseId },
+                            // Synthetic per-index key — the YouTube server can
+                            // legitimately return duplicate browseIds across
+                            // sections (e.g. shared "Workout" playlist), and
+                            // LazyRow's `items(count, key = ...)` throws
+                            // IllegalArgumentException on duplicates. Index
+                            // is the only universally unique value here.
+                            key = { i -> "explore-card-$i" },
                         ) { index ->
                             val (item, sectionTitle) = flat[index]
                             // Continuous offset of this card relative to
