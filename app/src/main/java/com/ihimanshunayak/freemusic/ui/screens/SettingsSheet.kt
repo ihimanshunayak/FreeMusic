@@ -88,6 +88,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -116,6 +117,7 @@ import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -151,6 +153,8 @@ import com.ihimanshunayak.freemusic.data.settings.ThemeMode
 import com.ihimanshunayak.freemusic.data.stats.Backup
 import com.ihimanshunayak.freemusic.playback.AudioCache
 import com.ihimanshunayak.freemusic.ui.player.fullBleedArtworkAvailable
+import com.ihimanshunayak.freemusic.ui.theme.BrandLime
+import com.ihimanshunayak.freemusic.ui.theme.BrandLimeOn
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import java.util.Locale
@@ -401,6 +405,19 @@ fun SettingsScreen(
             onSubmit = {},
             placeholder = stringResource(R.string.settings_search_hint),
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 4.dp),
+        )
+
+        // The "Quick Settings" hub — the iOS-style 8-row layout pinned at the
+        // top of the Settings screen, always visible regardless of the search
+        // query. Matches the reference image (Pasted Image 2.png) and uses
+        // BrandLime for the toggles/accents.
+        QuickSettingsHub(
+            signedIn = signedIn,
+            account = account,
+            onSignIn = onSignIn,
+            onSignOut = onSignOut,
+            onOpenAccountScrobbling = onAccountScrobbling,
+            onOpenGeneralSettings = { /* Phase 2: open advanced sub-page */ },
         )
 
         SearchableSettingsGroup(search) {
@@ -2258,6 +2275,309 @@ private class SettingsGroupScope(
     }
 }
 
+// -----------------------------------------------------------------------------
+// Section: Quick Settings hub (Phase 1B Settings redesign)
+// -----------------------------------------------------------------------------
+
+/**
+ * The 8-row iOS-style "Quick Settings" hub pinned at the top of the Settings
+ * screen, above the existing search-driven advanced groups. Always visible
+ * regardless of the search query — power users get the full list below, but
+ * the hub is the first thing every user sees.
+ *
+ * Layout (matches the reference image `Pasted Image 2.png`):
+ *   1. Account card: avatar + name + @username
+ *   2. Pause notifications toggle
+ *   3. Card: General settings · Dark mode (toggle) · Language · My Contact
+ *   4. Card: FAQ · Terms of service · User policy
+ *   5. Full-width Log Out button
+ *
+ * Brand: `BrandLime` for the active toggle thumb, `BrandLimeOn` for the
+ * label drawn on the lime thumb. No Material 3 role is touched.
+ */
+@Composable
+private fun QuickSettingsHub(
+    signedIn: Boolean,
+    account: Account?,
+    onSignIn: () -> Unit,
+    onSignOut: () -> Unit,
+    onOpenAccountScrobbling: () -> Unit,
+    onOpenGeneralSettings: () -> Unit,
+) {
+    val context = LocalContext.current
+    val username by AppSettings.usernameOverride.collectAsStateWithLifecycle()
+    val notificationsPaused by AppSettings.notificationsPaused.collectAsStateWithLifecycle()
+    val theme by AppSettings.themeMode.collectAsStateWithLifecycle()
+    val faqUrl by AppSettings.faqUrl.collectAsStateWithLifecycle()
+    val termsUrl by AppSettings.termsUrl.collectAsStateWithLifecycle()
+    val privacyUrl by AppSettings.privacyUrl.collectAsStateWithLifecycle()
+
+    Spacer(Modifier.height(8.dp))
+
+    // 1) Account card
+    Surface(
+        shape = RoundedCornerShape(20.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = GROUP_INSET),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onOpenAccountScrobbling)
+                .padding(horizontal = 14.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(CircleShape)
+                    .background(BrandLime),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = (account?.name?.firstOrNull() ?: 'A').uppercaseChar().toString(),
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = BrandLimeOn,
+                )
+            }
+            Spacer(Modifier.width(12.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = account?.name?.takeIf { it.isNotBlank() }
+                        ?: stringResource(R.string.signed_out_title),
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                    text = if (username.isNotBlank()) {
+                        stringResource(R.string.settings_account_subtitle, username)
+                    } else {
+                        stringResource(if (signedIn) R.string.signed_in else R.string.not_signed_in)
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                )
+            }
+            Chevron()
+        }
+    }
+
+    Spacer(Modifier.height(12.dp))
+
+    // 2) Pause notifications row
+    Surface(
+        shape = RoundedCornerShape(20.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = GROUP_INSET),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 14.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = stringResource(R.string.settings_pause_notifications),
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                    text = stringResource(R.string.settings_pause_notifications_subtitle),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                )
+            }
+            Spacer(Modifier.width(12.dp))
+            LimeSwitch(
+                checked = notificationsPaused,
+                onCheckedChange = AppSettings::setNotificationsPaused,
+            )
+        }
+    }
+
+    Spacer(Modifier.height(12.dp))
+
+    // 3) Card: General settings / Dark mode / Language / My Contact
+    Surface(
+        shape = RoundedCornerShape(20.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = GROUP_INSET),
+    ) {
+        Column {
+            HubRow(
+                title = stringResource(R.string.settings_general),
+                onClick = onOpenGeneralSettings,
+            )
+            HubDivider()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        val next = if (theme == ThemeMode.DARK) ThemeMode.LIGHT else ThemeMode.DARK
+                        AppSettings.setThemeMode(next)
+                    }
+                    .padding(horizontal = 14.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.settings_dark_mode),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                }
+                Spacer(Modifier.width(12.dp))
+                LimeSwitch(
+                    checked = theme == ThemeMode.DARK,
+                    onCheckedChange = { isDark ->
+                        AppSettings.setThemeMode(if (isDark) ThemeMode.DARK else ThemeMode.LIGHT)
+                    },
+                )
+            }
+            HubDivider()
+            HubRow(
+                title = stringResource(R.string.settings_language_english),
+                onClick = { /* Phase 2: language picker */ },
+            )
+            HubDivider()
+            HubRow(
+                title = stringResource(R.string.settings_my_contact),
+                onClick = { /* Phase 2: contact card */ },
+            )
+        }
+    }
+
+    Spacer(Modifier.height(12.dp))
+
+    // 4) Card: FAQ / Terms / User policy
+    Surface(
+        shape = RoundedCornerShape(20.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = GROUP_INSET),
+    ) {
+        Column {
+            HubRow(
+                title = stringResource(R.string.settings_faq),
+                onClick = { launchUrlOrToast(context, faqUrl, R.string.settings_faq) },
+            )
+            HubDivider()
+            HubRow(
+                title = stringResource(R.string.settings_terms_of_service),
+                onClick = { launchUrlOrToast(context, termsUrl, R.string.settings_terms_of_service) },
+            )
+            HubDivider()
+            HubRow(
+                title = stringResource(R.string.settings_user_policy),
+                onClick = { launchUrlOrToast(context, privacyUrl, R.string.settings_user_policy) },
+            )
+        }
+    }
+
+    Spacer(Modifier.height(16.dp))
+
+    // 5) Log Out button
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = GROUP_INSET)
+            .height(48.dp)
+            .clip(RoundedCornerShape(14.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .clickable {
+                if (signedIn) onSignOut() else onSignIn()
+            },
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = stringResource(R.string.settings_log_out),
+            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+            color = Color(0xFFFF453A),
+        )
+    }
+
+    Spacer(Modifier.height(20.dp))
+}
+
+@Composable
+private fun HubRow(
+    title: String,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 14.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.weight(1f),
+        )
+        Chevron()
+    }
+}
+
+@Composable
+private fun HubDivider() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(1.dp)
+            .background(MaterialTheme.colorScheme.outline.copy(alpha = 0.15f)),
+    )
+}
+
+@Composable
+private fun LimeSwitch(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        colors = SwitchDefaults.colors(
+            checkedTrackColor = BrandLime,
+            checkedThumbColor = BrandLimeOn,
+            checkedBorderColor = BrandLime,
+            uncheckedTrackColor = MaterialTheme.colorScheme.surface,
+            uncheckedThumbColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            uncheckedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+        ),
+    )
+}
+
+private fun launchUrlOrToast(context: Context, url: String, labelRes: Int) {
+    val opened = runCatching {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+        true
+    }.getOrDefault(false)
+    if (!opened) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.settings_open_failed, context.getString(labelRes)),
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
+}
+
 /**
  * A [SettingsGroup] whose rows are filtered by the search field, and which
  * takes itself off the screen when none of them are left. Dividers fall
@@ -2301,6 +2621,21 @@ internal fun SettingsGroup(
     topSpacing: Dp = 26.dp,
     content: @Composable () -> Unit,
 ) {
+    if (header != null) {
+        Text(
+            text = header.uppercase(Locale.ROOT),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(
+                start = GROUP_INSET + 4.dp,
+                end = GROUP_INSET,
+                top = 26.dp,
+                bottom = 8.dp,
+            ),
+        )
+    } else {
+        Spacer(Modifier.height(topSpacing))
+    }
     if (header != null) {
         Text(
             text = header.uppercase(Locale.ROOT),

@@ -28,6 +28,18 @@
     <string name="notifications_uploading">Uploading · %1$d%%</string>
     <string name="notifications_queued_upload">Queued for upload</string>
     <string name="settings">Settings</string>
+    <string name="settings_general">General settings</string>
+    <string name="settings_dark_mode">Dark mode</string>
+    <string name="settings_pause_notifications">Pause notifications</string>
+    <string name="settings_pause_notifications_subtitle">Stop the bell and the system notifications while you listen</string>
+    <string name="settings_my_contact">My Contact</string>
+    <string name="settings_faq">FAQ</string>
+    <string name="settings_terms_of_service">Terms of service</string>
+    <string name="settings_user_policy">User policy</string>
+    <string name="settings_log_out">Log Out</string>
+    <string name="settings_account_subtitle">@%1$s</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_open_failed">Couldn\'t open %1$s</string>
     <string name="search">Search</string>
     <string name="clear_search">Clear search</string>
     <string name="library">Library</string>
@@ -192,7 +204,7 @@
     <string name="account_scrobbling">Account &amp; scrobbling</string>
 
     <!-- Profile hero + edit profile dialog -->
-    <string name="profile_title">Profile</string>
+    <string name="profile_title">My profile</string>
     <string name="profile_signed_in_as">Signed in as %1$s</string>
     <string name="profile_status_default">What\'s playing lately</string>
     <string name="profile_bio_default">No bio yet</string>
@@ -211,6 +223,42 @@
     <string name="edit_profile_display_name_required">Display name cannot be empty</string>
     <string name="edit_profile_status_too_long">Status is too long</string>
     <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="edit_profile_field_full_name">Full name</string>
+    <string name="edit_profile_field_phone">Phone number</string>
+    <string name="edit_profile_field_email">Email</string>
+    <string name="edit_profile_field_username">Username</string>
+    <string name="edit_profile_save_changes">Save Changes</string>
+    <string name="edit_profile_delete_account">Delete Account</string>
+    <string name="edit_profile_phone_hint">0000-0000-0000</string>
+    <string name="edit_profile_email_hint">youremail@email.com</string>
+    <string name="edit_profile_username_hint">@yourname</string>
+    <string name="edit_profile_full_name_hint">Your Name</string>
+    <string name="edit_profile_change_avatar_cd">Change profile picture</string>
+    <string name="edit_profile_delete_coming_soon">Account deletion is not supported in this build.</string>
+
+    <!-- Profile page: tabs and post card -->
+    <string name="profile_tab_feed">Feed</string>
+    <string name="profile_tab_challenge">Challenge</string>
+    <string name="profile_tab_badge">Badge</string>
+    <string name="profile_verified_cd">Verified</string>
+    <string name="profile_notifications_cd">Notifications</string>
+    <string name="profile_settings_cd">Settings</string>
+    <string name="profile_post_comments_cd">Comments</string>
+    <string name="profile_post_likes_cd">Likes</string>
+    <string name="profile_post_menu_cd">Post options</string>
+    <string name="profile_post_sample_author">Your Name</string>
+    <string name="profile_post_sample_time">3h ago</string>
+    <string name="profile_post_sample_text">Beautiful landscape 🌄</string>
+    <string name="profile_followers">%1$s followers</string>
+    <string name="profile_following">%1$s following</string>
+    <string name="profile_challenge_empty">No challenges yet</string>
+    <string name="profile_challenge_empty_hint">Start a streak by listening to a full album today.</string>
+    <string name="profile_badge_empty">No badges yet</string>
+    <string name="profile_badge_empty_hint">Keep listening to unlock your first.</string>
+    <string name="profile_feed_empty">Nothing in your feed yet</string>
+    <string name="profile_feed_empty_hint">Posts from people you follow will show up here.</string>
+    <string name="profile_signed_out_title">Sign in to view your profile</string>
+    <string name="signed_out_title">Sign in</string>
     <string name="stat_hours_listened">Hours listened</string>
     <string name="stat_tracks_played">Tracks played</string>
     <string name="stat_playlists">Playlists</string>

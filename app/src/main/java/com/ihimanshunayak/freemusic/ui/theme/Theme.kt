@@ -22,6 +22,35 @@ import com.ihimanshunayak.freemusic.R
 // spots (Replay's rank badge) that want that specific red regardless of theme.
 val AccentRed = Color(0xFFFA2D48)
 
+/**
+ * The app's brand neon-lime. Used as the surface tint on the badge-pill,
+ * the Feed/Challenge/Badge active tab, the verification check on the
+ * profile avatar, and the "Save Changes" button on Edit Profile. Sits
+ * outside the Material 3 colour scheme on purpose: it is a brand mark,
+ * not a semantic role, so the colour scheme's `primary` stays neutral
+ * (white on dark, black on light) and only the spots that should shout
+ * "this is FreeMusic" reach for it.
+ *
+ * The hex is the same as the iOS reference: a true neon-lime that reads
+ * as a glowing yellow-green against the dark background and a saturated
+ * chartreuse against the light one. The 0xBF prefix (191/255) keeps it
+ * from being pure yellow at the top of the gradient and from being
+ * read as a security-green in the dimmer; 0xFF bottom is what gives the
+ * "almost radioactive" quality in the screenshot.
+ */
+val BrandLime = Color(0xFFBFFF00)
+
+/** Softer variant of [BrandLime] for backgrounds that need the colour but with
+ * a little less bite — the 3-dot menu pill and the disabled-state ghost of
+ * the Save Changes button. */
+val BrandLimeSoft = Color(0xFFC2F50C)
+
+/** On-colour for content drawn on top of [BrandLime]. Always near-black, even
+ * on the light theme: a white "Save Changes" label on a lime button would
+ * lose all contrast in bright sunlight, which is exactly when a brand mark
+ * has to read clearly. */
+val BrandLimeOn = Color(0xFF0A0A0A)
+
 private val DarkColors = darkColorScheme(
     primary = Color.White,
     onPrimary = Color.Black,

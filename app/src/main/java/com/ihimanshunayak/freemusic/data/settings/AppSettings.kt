@@ -793,6 +793,43 @@ object AppSettings {
     val bioOverride = MutableStateFlow("")
     val avatarOverrideUri = MutableStateFlow("")
 
+    /**
+     * Edit-Profile dialog fields (v1.21). The four follow the same
+     * "empty means fall back" contract as the existing overrides above,
+     * so a sign-in refresh does not blank a name the user has already
+     * typed: a blank override leaves the YouTube account's own value
+     * in place rather than overwriting it with an empty string.
+     *
+     * [emailOverride] sits between the two groups: it overrides the
+     * YouTube account's own email because the dialog no longer reads
+     * `account.email` directly — the user may have a different address
+     * they want shown on their public profile.
+     */
+    val fullNameOverride = MutableStateFlow("")
+    val phoneOverride = MutableStateFlow("")
+    val emailOverride = MutableStateFlow("")
+    val usernameOverride = MutableStateFlow("")
+
+    /**
+     * Whether the user has paused system-wide notifications from the
+     * Settings hub. Read by [NotificationFeed] / the playback service
+     * to suppress the bell badge, the post-play track-change toast, and
+     * the system notification when a new track starts. Default false:
+     * the first-run experience shows notifications on; this toggle is
+     * the way back to silent mode.
+     */
+    val notificationsPaused = MutableStateFlow(false)
+
+    /**
+     * Public links the Settings hub surfaces (FAQ, Terms, Privacy).
+     * Hard-coded defaults are placeholders; an explicit settings row
+     * to edit them lives in "General settings" → "About" so the values
+     * can be retargeted without shipping a new build.
+     */
+    val faqUrl = MutableStateFlow("https://example.com/faq")
+    val termsUrl = MutableStateFlow("https://example.com/terms")
+    val privacyUrl = MutableStateFlow("https://example.com/privacy")
+
     /** Published by PlaybackService so the UI can open the system equalizer. */
     val audioSessionId = MutableStateFlow(0)
 
@@ -954,6 +991,14 @@ object AppSettings {
         statusLineOverride.value = prefs.getString(KEY_STATUS_LINE_OVERRIDE, "").orEmpty()
         bioOverride.value = prefs.getString(KEY_BIO_OVERRIDE, "").orEmpty()
         avatarOverrideUri.value = prefs.getString(KEY_AVATAR_OVERRIDE_URI, "").orEmpty()
+        fullNameOverride.value = prefs.getString(KEY_FULL_NAME_OVERRIDE, "").orEmpty()
+        phoneOverride.value = prefs.getString(KEY_PHONE_OVERRIDE, "").orEmpty()
+        emailOverride.value = prefs.getString(KEY_EMAIL_OVERRIDE, "").orEmpty()
+        usernameOverride.value = prefs.getString(KEY_USERNAME_OVERRIDE, "").orEmpty()
+        notificationsPaused.value = prefs.getBoolean(KEY_NOTIFICATIONS_PAUSED, false)
+        faqUrl.value = prefs.getString(KEY_FAQ_URL, "").orEmpty().ifBlank { "https://example.com/faq" }
+        termsUrl.value = prefs.getString(KEY_TERMS_URL, "").orEmpty().ifBlank { "https://example.com/terms" }
+        privacyUrl.value = prefs.getString(KEY_PRIVACY_URL, "").orEmpty().ifBlank { "https://example.com/privacy" }
         lyricsBlur.value = prefs.getBoolean(KEY_LYRICS_BLUR, true)
         lyricsOffsetMs.value = prefs.getInt(KEY_LYRICS_OFFSET_MS, 0)
             .coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
@@ -1403,6 +1448,76 @@ object AppSettings {
         if (avatarOverrideUri.value == normalized) return
         avatarOverrideUri.value = normalized
         prefs.edit().putString(KEY_AVATAR_OVERRIDE_URI, normalized).apply()
+    }
+
+    /**
+     * Edit-Profile setters (v1.21). Same trim + "no-op if unchanged"
+     * contract as the existing four overrides above. The dialog hands
+     * us the user's text and we round-trip it to `prefs` synchronously;
+     * the hero / Settings row read the flows in composition and pick
+     * up the new value on the next recomposition.
+     */
+    fun setFullNameOverride(value: String) {
+        val normalized = value.trim()
+        if (fullNameOverride.value == normalized) return
+        fullNameOverride.value = normalized
+        prefs.edit().putString(KEY_FULL_NAME_OVERRIDE, normalized).apply()
+    }
+
+    fun setPhoneOverride(value: String) {
+        val normalized = value.trim()
+        if (phoneOverride.value == normalized) return
+        phoneOverride.value = normalized
+        prefs.edit().putString(KEY_PHONE_OVERRIDE, normalized).apply()
+    }
+
+    fun setEmailOverride(value: String) {
+        val normalized = value.trim()
+        if (emailOverride.value == normalized) return
+        emailOverride.value = normalized
+        prefs.edit().putString(KEY_EMAIL_OVERRIDE, normalized).apply()
+    }
+
+    fun setUsernameOverride(value: String) {
+        // Username is stored *with* the leading @ stripped — the dialog
+        // shows it in front, the canonical form does not, and the Settings
+        // row re-adds it on the way back out.
+        val withoutAt = value.trim().removePrefix("@")
+        if (usernameOverride.value == withoutAt) return
+        usernameOverride.value = withoutAt
+        prefs.edit().putString(KEY_USERNAME_OVERRIDE, withoutAt).apply()
+    }
+
+    /**
+     * Whether the user has paused system-wide notifications from the
+     * Settings hub. Drives the bell-badge visibility on the Profile
+     * page and the post-play notification suppression in PlaybackService.
+     */
+    fun setNotificationsPaused(value: Boolean) {
+        if (notificationsPaused.value == value) return
+        notificationsPaused.value = value
+        prefs.edit().putBoolean(KEY_NOTIFICATIONS_PAUSED, value).apply()
+    }
+
+    fun setFaqUrl(value: String) {
+        val normalized = value.trim()
+        if (faqUrl.value == normalized) return
+        faqUrl.value = normalized
+        prefs.edit().putString(KEY_FAQ_URL, normalized).apply()
+    }
+
+    fun setTermsUrl(value: String) {
+        val normalized = value.trim()
+        if (termsUrl.value == normalized) return
+        termsUrl.value = normalized
+        prefs.edit().putString(KEY_TERMS_URL, normalized).apply()
+    }
+
+    fun setPrivacyUrl(value: String) {
+        val normalized = value.trim()
+        if (privacyUrl.value == normalized) return
+        privacyUrl.value = normalized
+        prefs.edit().putString(KEY_PRIVACY_URL, normalized).apply()
     }
 
     fun setHighPerformanceMode(value: Boolean) {
@@ -2126,6 +2241,19 @@ object AppSettings {
     private const val KEY_STATUS_LINE_OVERRIDE = "status_line_override"
     private const val KEY_BIO_OVERRIDE = "bio_override"
     private const val KEY_AVATAR_OVERRIDE_URI = "avatar_override_uri"
+    // Edit-Profile v1.21 fields. The new dialog shows four fields (Full
+    // name, Phone, Email, Username) where the old one had three (Display
+    // name, Status, Bio); the new ones are stored separately so a
+    // downgrade to a v1.20 build does not lose the user's avatar / bio /
+    // status — only the new four would be missing.
+    private const val KEY_FULL_NAME_OVERRIDE = "full_name_override"
+    private const val KEY_PHONE_OVERRIDE = "phone_override"
+    private const val KEY_EMAIL_OVERRIDE = "email_override"
+    private const val KEY_USERNAME_OVERRIDE = "username_override"
+    private const val KEY_NOTIFICATIONS_PAUSED = "notifications_paused"
+    private const val KEY_FAQ_URL = "faq_url"
+    private const val KEY_TERMS_URL = "terms_url"
+    private const val KEY_PRIVACY_URL = "privacy_url"
     private const val KEY_LYRICS_BLUR = "lyrics_blur"
     private const val KEY_LYRICS_OFFSET_MS = "lyrics_offset_ms"
     private const val KEY_TRANSLATION_LANGUAGE = "translation_language"

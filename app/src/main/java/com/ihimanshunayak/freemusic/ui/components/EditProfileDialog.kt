@@ -95,6 +95,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -102,6 +103,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -114,6 +116,8 @@ import com.ihimanshunayak.freemusic.data.model.Account
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.ui.haptics.Haptic
 import com.ihimanshunayak.freemusic.ui.haptics.rememberHaptics
+import com.ihimanshunayak.freemusic.ui.theme.BrandLime
+import com.ihimanshunayak.freemusic.ui.theme.BrandLimeOn
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
@@ -166,37 +170,30 @@ fun EditProfileDialog(
     val context = LocalContext.current
     val haptics = rememberHaptics()
     val reduceDynamicBlur by AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
-    val shape = RoundedCornerShape(PROFILE_ALERT_CORNER)
 
     val displayNameOverride by AppSettings.displayNameOverride.collectAsStateWithLifecycle()
-    val statusOverride by AppSettings.statusLineOverride.collectAsStateWithLifecycle()
-    val bioOverride by AppSettings.bioOverride.collectAsStateWithLifecycle()
+    val fullNameOverride by AppSettings.fullNameOverride.collectAsStateWithLifecycle()
+    val phoneOverride by AppSettings.phoneOverride.collectAsStateWithLifecycle()
+    val emailOverride by AppSettings.emailOverride.collectAsStateWithLifecycle()
+    val usernameOverride by AppSettings.usernameOverride.collectAsStateWithLifecycle()
     val avatarOverride by AppSettings.avatarOverrideUri.collectAsStateWithLifecycle()
 
-    // Seed the form from the persisted overrides (or the YouTube account
-    // values when no override exists). Local state means cancel does not
-    // write anything, and a per-field validation message is computed
-    // without bouncing through AppSettings.
-    val initialName = displayNameOverride.takeIf { it.isNotBlank() } ?: account?.name.orEmpty()
-    val initialStatus = statusOverride.takeIf { it.isNotBlank() } ?: ""
-    val initialBio = bioOverride.takeIf { it.isNotBlank() } ?: ""
+    val initialFullName = fullNameOverride.takeIf { it.isNotBlank() }
+        ?: displayNameOverride.takeIf { it.isNotBlank() }
+        ?: account?.name.orEmpty()
+    val initialPhone = phoneOverride
+    val initialEmail = emailOverride.takeIf { it.isNotBlank() } ?: account?.email.orEmpty()
+    val initialUsername = usernameOverride
     val initialAvatar = avatarOverride.takeIf { it.isNotBlank() } ?: account?.thumbnailUrl
 
-    var name by remember { mutableStateOf(initialName) }
-    var status by remember { mutableStateOf(initialStatus) }
-    var bio by remember { mutableStateOf(initialBio) }
+    var fullName by remember { mutableStateOf(initialFullName) }
+    var phone by remember { mutableStateOf(initialPhone) }
+    var email by remember { mutableStateOf(initialEmail) }
+    var username by remember { mutableStateOf(initialUsername) }
     var avatar by remember { mutableStateOf(initialAvatar) }
-    // The pre-save state of the avatar — null while nothing has been
-    // picked this session. Lets us restore on cancel without comparing
-    // file paths.
-    val avatarOnOpen = remember { mutableStateOf(initialAvatar) }
     var busy by remember { mutableStateOf(false) }
+    var deleteToastShown by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-
-    val nameError = if (name.isBlank()) stringResource(R.string.edit_profile_display_name_required) else null
-    val statusError = if (status.length > MAX_STATUS) stringResource(R.string.edit_profile_status_too_long) else null
-    val bioError = if (bio.length > MAX_BIO) stringResource(R.string.edit_profile_bio_too_long) else null
-    val canSave = nameError == null && statusError == null && bioError == null && !busy
 
     val pickAvatar = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -225,7 +222,7 @@ fun EditProfileDialog(
         Column(
             modifier = Modifier
                 .width(PROFILE_ALERT_WIDTH)
-                .clip(shape)
+                .clip(RoundedCornerShape(PROFILE_ALERT_CORNER))
                 .then(
                     if (reduceDynamicBlur) {
                         Modifier.background(MaterialTheme.colorScheme.surface)
@@ -244,7 +241,7 @@ fun EditProfileDialog(
                 ),
         ) {
             Header(onClose = onDismiss)
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(8.dp))
             AvatarEditor(
                 avatarUri = avatar,
                 busy = busy,
@@ -257,56 +254,93 @@ fun EditProfileDialog(
                 },
                 onRemove = { avatar = null },
             )
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(20.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                    .padding(horizontal = 20.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 EditField(
-                    label = stringResource(R.string.edit_profile_field_display_name),
-                    value = name,
-                    onValueChange = { name = it.take(MAX_DISPLAY_NAME) },
-                    helper = stringResource(R.string.edit_profile_display_name_hint),
-                    error = nameError,
+                    label = stringResource(R.string.edit_profile_field_full_name),
+                    value = fullName,
+                    onValueChange = { fullName = it.take(MAX_DISPLAY_NAME) },
+                    hint = stringResource(R.string.edit_profile_full_name_hint),
                     singleLine = true,
                     capitalization = KeyboardCapitalization.Words,
                 )
                 EditField(
-                    label = stringResource(R.string.edit_profile_field_status),
-                    value = status,
-                    onValueChange = { status = it.take(MAX_STATUS) },
-                    helper = stringResource(R.string.edit_profile_status_hint),
-                    error = statusError,
+                    label = stringResource(R.string.edit_profile_field_phone),
+                    value = phone,
+                    onValueChange = { phone = it.take(MAX_PHONE) },
+                    hint = stringResource(R.string.edit_profile_phone_hint),
                     singleLine = true,
+                    keyboardType = KeyboardType.Phone,
                 )
                 EditField(
-                    label = stringResource(R.string.edit_profile_field_bio),
-                    value = bio,
-                    onValueChange = { bio = it.take(MAX_BIO) },
-                    helper = stringResource(R.string.edit_profile_bio_hint),
-                    error = bioError,
-                    singleLine = false,
+                    label = stringResource(R.string.edit_profile_field_email),
+                    value = email,
+                    onValueChange = { email = it.take(MAX_EMAIL) },
+                    hint = stringResource(R.string.edit_profile_email_hint),
+                    singleLine = true,
+                    keyboardType = KeyboardType.Email,
+                )
+                EditField(
+                    label = stringResource(R.string.edit_profile_field_username),
+                    value = if (username.isBlank()) "" else "@$username",
+                    onValueChange = { raw ->
+                        // Strip a leading "@" if the user typed it — we re-add
+                        // it on display, so storage stays canonical.
+                        username = raw.removePrefix("@").take(MAX_USERNAME)
+                    },
+                    hint = stringResource(R.string.edit_profile_username_hint),
+                    singleLine = true,
+                    capitalization = KeyboardCapitalization.None,
                 )
             }
-            Spacer(Modifier.height(8.dp))
-            Footer(
-                onCancel = onDismiss,
-                canSave = canSave,
-                onSave = {
-                    if (!canSave) return@Footer
-                    haptics.play(Haptic.Select)
-                    AppSettings.setDisplayNameOverride(name.trim())
-                    AppSettings.setStatusLineOverride(status.trim())
-                    AppSettings.setBioOverride(bio.trim())
-                    AppSettings.setAvatarOverrideUri(avatar?.toString().orEmpty())
-                    onDismiss()
-                },
-            )
+            Spacer(Modifier.height(20.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                PrimaryActionButton(
+                    label = stringResource(R.string.edit_profile_save_changes),
+                    onClick = {
+                        haptics.play(Haptic.Select)
+                        AppSettings.setFullNameOverride(fullName.trim())
+                        AppSettings.setPhoneOverride(phone.trim())
+                        AppSettings.setEmailOverride(email.trim())
+                        AppSettings.setUsernameOverride(username.trim())
+                        AppSettings.setAvatarOverrideUri(avatar?.toString().orEmpty())
+                        onDismiss()
+                    },
+                )
+                DestructiveActionButton(
+                    label = stringResource(R.string.edit_profile_delete_account),
+                    onClick = {
+                        if (!deleteToastShown) {
+                            deleteToastShown = true
+                            android.widget.Toast
+                                .makeText(
+                                    context,
+                                    context.getString(R.string.edit_profile_delete_coming_soon),
+                                    android.widget.Toast.LENGTH_SHORT,
+                                )
+                                .show()
+                        }
+                    },
+                )
+            }
+            Spacer(Modifier.height(16.dp))
         }
     }
 }
+
+private const val MAX_PHONE = 24
+private const val MAX_EMAIL = 80
+private const val MAX_USERNAME = 32
 
 @Composable
 private fun Header(onClose: () -> Unit) {
@@ -401,10 +435,12 @@ private fun EditField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
-    helper: String,
-    error: String?,
+    hint: String = "",
+    helper: String = hint,
+    error: String? = null,
     singleLine: Boolean,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
+    keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     val scheme = MaterialTheme.colorScheme
     val borderColor = if (error != null) {
@@ -442,7 +478,7 @@ private fun EditField(
                 decorationBox = { inner ->
                     if (value.isEmpty()) {
                         Text(
-                            text = helper,
+                            text = hint,
                             style = MaterialTheme.typography.bodyMedium,
                             color = scheme.onSurfaceVariant.copy(alpha = 0.7f),
                         )
@@ -564,6 +600,76 @@ private suspend fun copyToAppFiles(context: Context, source: Uri): Uri? =
             Uri.fromFile(out)
         }.getOrNull()
     }
+
+// -----------------------------------------------------------------------------
+// Section: action buttons
+// -----------------------------------------------------------------------------
+
+/**
+ * Lime-filled brand button that fills the row.
+ *
+ * Used for the primary affirmative action in the Edit Profile sheet
+ * ("Save Changes"). The fill is [BrandLime] and the label is drawn in
+ * [BrandLimeOn] so contrast is high even in direct sunlight.
+ */
+@Composable
+private fun PrimaryActionButton(
+    label: String,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clip(RoundedCornerShape(14.dp))
+            .background(BrandLime)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+            color = BrandLimeOn,
+        )
+    }
+}
+
+/**
+ * Outlined destructive button.
+ *
+ * Used for the secondary destructive action in the Edit Profile sheet
+ * ("Delete Account"). The background is a near-opaque dark surface so the
+ * button reads as a heavy warning without leaning on red — the design
+ * uses a dark/black fill rather than a red one.
+ */
+@Composable
+private fun DestructiveActionButton(
+    label: String,
+    onClick: () -> Unit,
+) {
+    val scheme = MaterialTheme.colorScheme
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clip(RoundedCornerShape(14.dp))
+            .background(
+                if (scheme.background.luminance() > 0.5f) {
+                    Color(0xFF111111)
+                } else {
+                    Color(0xFF1C1C1E)
+                },
+            )
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+            color = Color(0xFFFF453A),
+        )
+    }
+}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // CodeFooter

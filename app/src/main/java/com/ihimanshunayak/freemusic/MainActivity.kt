@@ -63,7 +63,9 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.CloudOff
 import androidx.compose.material.icons.rounded.History
+import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.Sort
 import androidx.compose.material.icons.rounded.Upgrade
 import com.ihimanshunayak.freemusic.data.listentogether.ServerConnectionState
@@ -263,6 +265,7 @@ import com.ihimanshunayak.freemusic.ui.replay.ReplayShareSheet
 import com.ihimanshunayak.freemusic.ui.replay.ReplayStories
 import com.ihimanshunayak.freemusic.ui.replay.ReplayStoryPage
 import com.ihimanshunayak.freemusic.ui.replay.rememberReplayState
+import com.ihimanshunayak.freemusic.ui.theme.BrandLime
 import com.ihimanshunayak.freemusic.ui.theme.FreeMusicTheme
 import com.ihimanshunayak.freemusic.ui.theme.rememberArtworkPalette
 import com.ihimanshunayak.freemusic.ui.theme.SystemBarIcons
@@ -2653,6 +2656,8 @@ private fun FreeMusicApp(
                             stats = rememberProfileStats(signedIn = signedIn),
                             onEditProfile = { showEditProfile = true },
                             contentPadding = listPadding,
+                            onOpenNotifications = { showNotifications = true },
+                            onOpenSettings = { showSettings = true },
                         )
                     } else if (key == "sources") {
                         SourcesScreen(
@@ -3307,7 +3312,7 @@ private fun FreeMusicApp(
                         showHistory -> stringResource(R.string.history)
                         showNotifications -> stringResource(R.string.notifications)
                         libraryShowAll != null && detail == null -> libraryShowAll?.title.orEmpty()
-                        showAccountScrobbling -> stringResource(R.string.account_scrobbling)
+                        showAccountScrobbling -> stringResource(R.string.profile_title)
                         showSources -> stringResource(R.string.sources)
                         showListenTogether -> stringResource(R.string.listen_together)
                         showEqualizer -> stringResource(R.string.equalizer)
@@ -3359,6 +3364,44 @@ private fun FreeMusicApp(
                     },
                     modifier = Modifier.align(Alignment.TopCenter),
                     actions = {
+                        // Profile page gets a bell-with-badge + gear icon row
+                        // on the right side of the top bar, matching the iOS
+                        // reference design. Both are passed as the same hooks
+                        // the Profile screen's own action buttons fire — so
+                        // tapping here is identical to tapping the icons
+                        // inside the page.
+                        if (showAccountScrobbling) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 8.dp),
+                            ) {
+                                Box {
+                                    IconButton(onClick = { showNotifications = true }) {
+                                        Icon(
+                                            imageVector = Icons.Rounded.NotificationsActive,
+                                            contentDescription = stringResource(R.string.profile_notifications_cd),
+                                            tint = MaterialTheme.colorScheme.onSurface,
+                                        )
+                                    }
+                                    // 5-dot badge — matches the reference design.
+                                    Box(
+                                        modifier = Modifier
+                                            .align(Alignment.TopEnd)
+                                            .padding(top = 6.dp, end = 6.dp)
+                                            .size(8.dp)
+                                            .clip(CircleShape)
+                                            .background(BrandLime),
+                                    )
+                                }
+                                IconButton(onClick = { showSettings = true }) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Settings,
+                                        contentDescription = stringResource(R.string.profile_settings_cd),
+                                        tint = MaterialTheme.colorScheme.onSurface,
+                                    )
+                                }
+                            }
+                        }
                         // This is intentionally scoped to Listen together: the
                         // round-trip time is meaningful while coordinating a
                         // party, but would be noise in the rest of the app.
