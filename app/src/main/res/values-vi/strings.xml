@@ -772,6 +772,9 @@
     <string name="song_cache_limit_subtitle">LÆ°u trá»¯ Ã¢m thanh Ä‘Ã£ táº£i trÃªn Ä‘Ä©a Ä‘á»ƒ tua nhanh vÃ  phÃ¡t láº¡i tá»©c thÃ¬</string>
     <string name="replay_genres_enabled_subtitle">Há»i Last.fm vá» thá»ƒ loáº¡i cá»§a nghá»‡ sÄ©. Chá»‰ tÃªn nghá»‡ sÄ© Ä‘Æ°á»£c gá»­i Ä‘i.</string>
     <string name="replay_genres_disabled_subtitle">Biá»ƒu Ä‘á»“ thá»ƒ loáº¡i Replay sáº½ áº©n khi táº¯t tÃ¹y chá»n nÃ y</string>
+    <string name="show_play_counts">Show play counts</string>
+    <string name="show_play_counts_enabled_subtitle">Each song row shows how many times you have played it on this device</string>
+    <string name="show_play_counts_disabled_subtitle">Play counts stay hidden — Replay totals are unaffected</string>
     <string name="swipe_plays_next">Vuá»‘t bÃ i hÃ¡t Ä‘á»ƒ phÃ¡t tiáº¿p theo</string>
     <string name="swipe_adds_to_queue">Khi táº¯t, vuá»‘t sáº½ thÃªm bÃ i hÃ¡t vÃ o cuá»‘i hÃ ng Ä‘á»£i</string>
     <string name="import_backup_warning">Thao tÃ¡c nÃ y sáº½ thay tháº¿ cÃ i Ä‘áº·t vÃ  lá»‹ch sá»­ nghe trÃªn thiáº¿t bá»‹ báº±ng ná»™i dung cá»§a tá»‡p sao lÆ°u. HÃ£y xuáº¥t dá»¯ liá»‡u hiá»‡n táº¡i trÆ°á»›c náº¿u báº¡n muá»‘n giá»¯ láº¡i.</string>

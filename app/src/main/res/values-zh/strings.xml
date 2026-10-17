@@ -737,6 +737,9 @@
     <string name="song_cache_limit_subtitle">å°†å·²ä¸‹è½½çš„éŸ³é¢‘ä¿ç•™åœ¨ç£ç›˜ä¸Šï¼Œä»¥ä¾¿å³æ—¶è·³è½¬å’Œé‡æ’­</string>
     <string name="replay_genres_enabled_subtitle">å‘ Last.fm è¯·æ±‚è‰ºäººçš„æµæ´¾ä¿¡æ¯ï¼Œä»…ä¼šå‘é€è‰ºäººåç§°ã€‚</string>
     <string name="replay_genres_disabled_subtitle">å…³é—­æ­¤é¡¹æ—¶ï¼ŒReplay çš„æµæ´¾å›¾è¡¨å°†ä¿æŒéšè—</string>
+    <string name="show_play_counts">Show play counts</string>
+    <string name="show_play_counts_enabled_subtitle">Each song row shows how many times you have played it on this device</string>
+    <string name="show_play_counts_disabled_subtitle">Play counts stay hidden — Replay totals are unaffected</string>
     <string name="swipe_plays_next">æ»‘åŠ¨æ­Œæ›²åŽå°†å…¶è®¾ä¸ºä¸‹ä¸€é¦–æ’­æ”¾</string>
     <string name="swipe_adds_to_queue">å…³é—­åŽï¼Œæ»‘åŠ¨ä¼šå°†æ­Œæ›²æ·»åŠ åˆ°æ’­æ”¾é˜Ÿåˆ—æœ«å°¾</string>
     <string name="import_backup_warning">è¿™å°†ç”¨æ–‡ä»¶ä¸­çš„å†…å®¹æ›¿æ¢æ­¤è®¾å¤‡ä¸Šçš„è®¾ç½®å’Œæ”¶å¬è®°å½•ã€‚å¦‚æžœæƒ³ä¿ç•™å½“å‰æ•°æ®ï¼Œè¯·å…ˆå°†å…¶å¯¼å‡ºã€‚</string>

@@ -623,6 +623,16 @@ object AppSettings {
      */
     val replayGenres = MutableStateFlow(true)
 
+    /**
+     * Whether a song row shows how many times it has been played on this device.
+     *
+     * The number is a counter that comes out of [ListeningStats] and only ever
+     * grows on this device — the same model as the Replay totals. A small badge
+     * sits to the right of the duration; off, the row is exactly the row it
+     * used to be, with no empty gap where the count would have gone.
+     */
+    val showPlayCounts = MutableStateFlow(true)
+
     // ── Library ─────────────────────────────────────────────────────────────
 
     /** Hides short clips, recorder output and non-music formats from Local Music. */
@@ -1044,6 +1054,7 @@ object AppSettings {
         listenBrainzPrimaryArtistOnly.value = prefs.getBoolean(KEY_LISTENBRAINZ_PRIMARY_ARTIST_ONLY, false)
         spotifySpdcToken.value = prefs.getString(KEY_SPOTIFY_SPDC_TOKEN, "").orEmpty()
         replayGenres.value = prefs.getBoolean(KEY_REPLAY_GENRES, true)
+        showPlayCounts.value = prefs.getBoolean(KEY_SHOW_PLAY_COUNTS, true)
         filterNonMusicAudio.value = prefs.getBoolean(KEY_FILTER_NON_MUSIC_AUDIO, true)
         localMusicSort.value = readLocalMusicSort(KEY_LOCAL_MUSIC_SORT)
         downloadedMusicSort.value = readLocalMusicSort(KEY_DOWNLOADED_MUSIC_SORT)
@@ -1895,6 +1906,11 @@ object AppSettings {
         prefs.edit().putBoolean(KEY_REPLAY_GENRES, value).apply()
     }
 
+    fun setShowPlayCounts(value: Boolean) {
+        showPlayCounts.value = value
+        prefs.edit().putBoolean(KEY_SHOW_PLAY_COUNTS, value).apply()
+    }
+
     fun setFilterNonMusicAudio(value: Boolean) {
         filterNonMusicAudio.value = value
         prefs.edit().putBoolean(KEY_FILTER_NON_MUSIC_AUDIO, value).apply()
@@ -2272,6 +2288,7 @@ object AppSettings {
     private const val KEY_PRIORITIZE_SYLLABLE_SYNC = "prioritize_syllable_sync"
     private const val KEY_PAXSENIX_API_KEY = "paxsenix_api_key"
     private const val KEY_REPLAY_GENRES = "replay_genres"
+    private const val KEY_SHOW_PLAY_COUNTS = "show_play_counts"
     private const val KEY_FILTER_NON_MUSIC_AUDIO = "filter_non_music_audio"
     private const val KEY_LOCAL_MUSIC_SORT = "local_music_sort"
     private const val KEY_DOWNLOADED_MUSIC_SORT = "downloaded_music_sort"

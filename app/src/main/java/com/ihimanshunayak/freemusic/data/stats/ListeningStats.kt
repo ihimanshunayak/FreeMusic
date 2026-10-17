@@ -6,6 +6,9 @@ import com.ihimanshunayak.freemusic.data.model.Song
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -106,6 +109,36 @@ object ListeningStats {
         val summary: ReplaySummary,
     )
 
+    /**
+     * Bumped by every *counted* play, separately from [version] (which moves on
+     * every flush). [publishPlays] only re-scans disk when this number changes,
+     * so a heartbeat tick that bumps [version] doesn't pay for a 36-month
+     * re-parse just to keep a row badge honest.
+     */
+    @Volatile
+    private var playsVersion = 0L
+
+    /** The last per-track play count map handed out, and what it was made from. */
+    private var cachedPlays: CachedPlays? = null
+
+    private class CachedPlays(
+        val version: Long,
+        val plays: Map<String, Int>,
+    )
+
+    /**
+     * Per-track play count, keyed by video id, for the badge a song row shows.
+     *
+     * Always empty until [publishPlays] has run, which it does as soon as there
+     * is anything to count — the row code reads this with `collectAsStateWithLifecycle`,
+     * so a missing value is indistinguishable from a row that has never been
+     * played, which is what it should be.
+     */
+    private val _plays = MutableStateFlow<Map<String, Int>>(emptyMap())
+
+    /** The shared read-only view: callers don't need to know it is a [MutableStateFlow]. */
+    val plays: StateFlow<Map<String, Int>> = _plays.asStateFlow()
+
     fun init(context: Context) {
         directory = File(context.filesDir, DIRECTORY)
         // Opening a month means reading and parsing it, and the first thing to
@@ -113,6 +146,10 @@ object ListeningStats {
         // seconds into the first track. Done here instead, it has happened long
         // before anything is playing.
         writer.launch { synchronized(lock) { bucketFor(YearMonth.now()) } }
+        // Same idea for the per-track badge: a cold start with a full history
+        // should be ready by the time the first row is on screen, not by the
+        // time the second play is counted.
+        writer.launch { publishPlays() }
     }
 
     private val ready: Boolean get() = this::directory.isInitialized
@@ -199,6 +236,14 @@ object ListeningStats {
             val day = at.dayOfMonth
             bucket.days[day] = (bucket.days[day] ?: 0L) + playedMs
             dirty = true
+        }
+        if (countsAsPlay) {
+            // Bumped outside the lock so the play-count cache knows to re-scan,
+            // and the re-scan itself happens in the flusher scope rather than
+            // inline — a counted play must not pay for a 36-month re-parse on
+            // the caller's thread.
+            playsVersion++
+            publishPlays()
         }
     }
 
@@ -304,6 +349,51 @@ object ListeningStats {
         }
     }
 
+    /**
+     * Walks every month on disk and adds up per-track plays.
+     *
+     * Cheap-ish: [KEEP_MONTHS] caps the number of files at 36, and each file
+     * is one [decodeFromString] pass. It is still a sweep that does not belong
+     * on the playback sampler's thread, so the caller is always [publishPlays]
+     * and that one launches onto [writer].
+     */
+    private suspend fun computePlays(): Map<String, Int> {
+        flushAndAwait()
+        val counts = HashMap<String, Int>()
+        for (month in months()) {
+            val bucket = read(month.toString()) ?: continue
+            for (track in bucket.tracks) {
+                if (track.plays <= 0) continue
+                counts[track.id] = (counts[track.id] ?: 0) + track.plays
+            }
+        }
+        return counts
+    }
+
+    /**
+     * Recomputes the per-track play map and publishes it to [_plays], but only
+     * if the cache is stale.
+     *
+     * Stale is "the [playsVersion] that came in has moved on since the last
+     * answer we handed out". A 30-second heartbeat ticks [version] without
+     * ticking [playsVersion], and that heartbeat must not pay for a re-scan.
+     * The actual disk work is off the caller's thread via [writer]; this
+     * function is safe to call from anywhere.
+     */
+    private fun publishPlays() {
+        if (!ready) return
+        val snapshot = playsVersion
+        cachedPlays?.takeIf { it.version == snapshot }?.let { return }
+        writer.launch {
+            val result = runCatching { computePlays() }.getOrElse {
+                Log.w(TAG, "Could not compute play counts", it)
+                return@launch
+            }
+            cachedPlays = CachedPlays(snapshot, result)
+            _plays.value = result
+        }
+    }
+
     /** Every month with a file, oldest first. */
     fun months(): List<YearMonth> {
         if (!ready) return emptyList()
@@ -403,6 +493,8 @@ object ListeningStats {
             directory.mkdirs()
             version++
             cached = null
+            cachedPlays = null
+            playsVersion++
             buckets.forEach { bucket ->
                 val key = runCatching { YearMonth.parse(bucket.month).toString() }.getOrNull()
                     ?: return@forEach
@@ -412,6 +504,9 @@ object ListeningStats {
                 }.onFailure { Log.w(TAG, "Could not import bucket $key", it) }
             }
         }
+        // The badge should reflect what the user just restored, not whatever
+        // the empty map said before the import replaced everything.
+        publishPlays()
     }
 
     // ── Shapes ──────────────────────────────────────────────────────────────

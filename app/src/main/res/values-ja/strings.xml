@@ -737,6 +737,9 @@
     <string name="song_cache_limit_subtitle">å³åº§ã«ã‚·ãƒ¼ã‚¯ã‚„å†ç”ŸãŒã§ãã‚‹ã‚ˆã†ã€ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸéŸ³å£°ã‚’ãƒ‡ã‚£ã‚¹ã‚¯ã«ä¿æŒã—ã¾ã™</string>
     <string name="replay_genres_enabled_subtitle">Last.fmã«ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆã®ã‚¸ãƒ£ãƒ³ãƒ«ã‚’å•ã„åˆã‚ã›ã¾ã™ã€‚é€ä¿¡ã•ã‚Œã‚‹ã®ã¯ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆåã®ã¿ã§ã™ã€‚</string>
     <string name="replay_genres_disabled_subtitle">ã‚ªãƒ•ã®é–“ã¯Replayã®ã‚¸ãƒ£ãƒ³ãƒ«ã‚°ãƒ©ãƒ•ãŒè¡¨ç¤ºã•ã‚Œã¾ã›ã‚“</string>
+    <string name="show_play_counts">Show play counts</string>
+    <string name="show_play_counts_enabled_subtitle">Each song row shows how many times you have played it on this device</string>
+    <string name="show_play_counts_disabled_subtitle">Play counts stay hidden — Replay totals are unaffected</string>
     <string name="swipe_plays_next">æ›²ã‚’ã‚¹ãƒ¯ã‚¤ãƒ—ã™ã‚‹ã¨æ¬¡ã«å†ç”Ÿã—ã¾ã™</string>
     <string name="swipe_adds_to_queue">ã‚ªãƒ•ã«ã™ã‚‹ã¨ã€ã‚¹ãƒ¯ã‚¤ãƒ—ã—ãŸæ›²ã¯å†ç”Ÿã‚­ãƒ¥ãƒ¼ã®æœ«å°¾ã«è¿½åŠ ã•ã‚Œã¾ã™</string>
     <string name="import_backup_warning">ã“ã‚Œã«ã‚ˆã‚Šã“ã®ãƒ‡ãƒã‚¤ã‚¹ã®è¨­å®šã¨å†ç”Ÿå±¥æ­´ãŒãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ã§ç½®ãæ›ãˆã‚‰ã‚Œã¾ã™ã€‚ä¿æŒã—ãŸã„å ´åˆã¯å…ˆã«ç¾åœ¨ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ã¦ãã ã•ã„ã€‚</string>

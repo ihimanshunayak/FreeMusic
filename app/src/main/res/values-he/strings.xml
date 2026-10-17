@@ -707,6 +707,9 @@
     <string name="song_cache_limit_subtitle">×©×•×ž×¨ ×©×ž×¢ ×©×”×•×¨×“ ×‘×›×•× ×Ÿ ×œ×—×™×¤×•×© ×ž×™×™×“×™ ×•×œ×”×©×ž×¢×•×ª ×—×•×–×¨×•×ª</string>
     <string name="replay_genres_enabled_subtitle">×ž×‘×§×© ×ž-Last.fm ××ª ×”×–\'×× ×¨×™× ×©×œ ×”××ž×Ÿ. ×¨×§ ×©× ×”××ž×Ÿ × ×©×œ×—.</string>
     <string name="replay_genres_disabled_subtitle">×ª×¨×©×™× ×”×–\'×× ×¨×™× ×©×œ Replay × ×©××¨ ×ž×•×¡×ª×¨ ×›×œ ×¢×•×“ ×–×” ×›×‘×•×™</string>
+    <string name="show_play_counts">Show play counts</string>
+    <string name="show_play_counts_enabled_subtitle">Each song row shows how many times you have played it on this device</string>
+    <string name="show_play_counts_disabled_subtitle">Play counts stay hidden — Replay totals are unaffected</string>
     <string name="swipe_plays_next">×”×—×œ×§×” ×©×œ ×©×™×¨ ×ž× ×’× ×ª ××•×ª×• ×‘×”×ž×©×š</string>
     <string name="swipe_adds_to_queue">×›××©×¨ ×ž×•×©×‘×ª, ×”×—×œ×§×” ×ž×•×¡×™×¤×” ××ª ×”×©×™×¨ ×œ×¡×•×£ ×”×ª×•×¨</string>
     <string name="import_backup_warning">×–×” ×ž×—×œ×™×£ ××ª ×”×”×’×“×¨×•×ª ×•×”×™×¡×˜×•×¨×™×™×ª ×”×”××–× ×” ×©×œ ×ž×›×©×™×¨ ×–×” ×‘×ª×•×›×Ÿ ×”×§×•×‘×¥. ×™×™×¦× ××ª ×”× ×ª×•× ×™× ×”× ×•×›×—×™×™× ×ª×—×™×œ×” ×× ×ª×¨×¦×” ×œ×©×ž×•×¨ ××•×ª×.</string>

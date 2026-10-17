@@ -30,6 +30,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
+import com.ihimanshunayak.freemusic.data.stats.ListeningStats
 import com.ihimanshunayak.freemusic.download.Downloads
 import com.ihimanshunayak.freemusic.ui.haptics.Haptic
 import com.ihimanshunayak.freemusic.ui.haptics.rememberHaptics
@@ -62,6 +63,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.text.style.TextAlign
@@ -575,6 +577,7 @@ private fun SongRowContent(
                 color = subtitleColor,
             )
         }
+        PlayCountBadge(song.videoId)
         // Same sheet the long-press opens, for anyone who doesn't think to hold.
         if (onMore != null) {
             Box(
@@ -618,6 +621,36 @@ fun DownloadedBadge(videoId: String, tint: Color, modifier: Modifier = Modifier)
         contentDescription = stringResource(R.string.downloaded),
         tint = tint,
         modifier = modifier.size(16.dp),
+    )
+}
+
+/**
+ * The "12 plays" mark on a row, sitting just to the right of the duration.
+ *
+ * The number is a counter on this device, not a chart of the song across the
+ * world: a track with zero local plays is no different from one nobody has
+ * heard of, and reads as nothing. The setting hides the whole thing rather
+ * than the digit, so an off switch isn't a "0 plays" badge pretending to be
+ * useful information.
+ *
+ * Reading [ListeningStats.plays] directly means a list is not the place to
+ * start a 36-month sweep — the publisher has already done it. The list
+ * re-renders only when that map changes, which is at most a few times a
+ * session.
+ */
+@Composable
+fun PlayCountBadge(videoId: String, modifier: Modifier = Modifier) {
+    val showCounts by AppSettings.showPlayCounts.collectAsStateWithLifecycle()
+    if (!showCounts) return
+    val plays by ListeningStats.plays.collectAsStateWithLifecycle()
+    val count = plays[videoId] ?: return
+    if (count <= 0) return
+    Spacer(Modifier.width(8.dp))
+    Text(
+        text = pluralStringResource(R.plurals.replay_play_count, count, count),
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = modifier,
     )
 }
 

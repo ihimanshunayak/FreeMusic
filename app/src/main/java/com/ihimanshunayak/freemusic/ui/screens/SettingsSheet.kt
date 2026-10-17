@@ -62,6 +62,7 @@ import androidx.compose.material.icons.rounded.MotionPhotosOff
 import androidx.compose.material.icons.rounded.Extension
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.PlaylistPlay
+import androidx.compose.material.icons.rounded.Repeat
 import androidx.compose.material.icons.rounded.SignalCellularAlt
 import androidx.compose.material.icons.rounded.SmartDisplay
 import androidx.compose.material.icons.rounded.Storage
@@ -267,6 +268,7 @@ fun SettingsScreen(
     val listenBrainzToken by AppSettings.listenBrainzToken.collectAsStateWithLifecycle()
 
     val replayGenres by AppSettings.replayGenres.collectAsStateWithLifecycle()
+    val showPlayCounts by AppSettings.showPlayCounts.collectAsStateWithLifecycle()
 
     // Read here so the row can say "In a party · ABC123" rather than making
     // somebody open the screen to find out whether they are still in one.
@@ -1230,6 +1232,29 @@ fun SettingsScreen(
                         )
                     },
                     onClick = { AppSettings.setReplayGenres(!replayGenres) },
+                )
+            }
+            val showPlayCountsTitle = stringResource(R.string.show_play_counts)
+            row(showPlayCountsTitle, "play count", "history", "count") {
+                SettingsRow(
+                    icon = Icons.Rounded.Repeat,
+                    title = showPlayCountsTitle,
+                    subtitle = if (showPlayCounts) {
+                        stringResource(R.string.show_play_counts_enabled_subtitle)
+                    } else {
+                        stringResource(R.string.show_play_counts_disabled_subtitle)
+                    },
+                    trailing = {
+                        Switch(
+                            checked = showPlayCounts,
+                            onCheckedChange = AppSettings::setShowPlayCounts,
+                            colors = SwitchDefaults.colors(
+                                checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                checkedBorderColor = MaterialTheme.colorScheme.primary,
+                            ),
+                        )
+                    },
+                    onClick = { AppSettings.setShowPlayCounts(!showPlayCounts) },
                 )
             }
             val exportDataTitle = stringResource(R.string.export_data)

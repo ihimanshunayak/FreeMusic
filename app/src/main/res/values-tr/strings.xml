@@ -788,6 +788,9 @@
     <string name="song_cache_limit_subtitle">AnÄ±nda atlama ve tekrar dinleme iÃ§in indirilen sesi diskte tutar</string>
     <string name="replay_genres_enabled_subtitle">Last.fm\'den bir sanatÃ§Ä±nÄ±n tÃ¼rlerini ister. YalnÄ±zca sanatÃ§Ä± adÄ± gÃ¶nderilir.</string>
     <string name="replay_genres_disabled_subtitle">Bu kapalÄ±yken Replay tÃ¼r grafiÄŸi gizli kalÄ±r</string>
+    <string name="show_play_counts">Show play counts</string>
+    <string name="show_play_counts_enabled_subtitle">Each song row shows how many times you have played it on this device</string>
+    <string name="show_play_counts_disabled_subtitle">Play counts stay hidden — Replay totals are unaffected</string>
     <string name="swipe_plays_next">Bir ÅŸarkÄ±yÄ± kaydÄ±rmak onu sonraki olarak Ã§alar</string>
     <string name="swipe_adds_to_queue">KapalÄ±yken kaydÄ±rmak ÅŸarkÄ±yÄ± sÄ±ranÄ±n sonuna ekler</string>
     <string name="import_backup_warning">Bu, dosyanÄ±n iÃ§eriÄŸiyle bu cihazÄ±n ayarlarÄ±nÄ± ve dinleme geÃ§miÅŸini deÄŸiÅŸtirir. Korumak istiyorsan Ã¶nce mevcut verileri dÄ±ÅŸa aktar.</string>
