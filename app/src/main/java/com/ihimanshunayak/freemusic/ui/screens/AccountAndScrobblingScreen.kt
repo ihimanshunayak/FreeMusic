@@ -1,5 +1,6 @@
 package com.ihimanshunayak.freemusic.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -49,6 +50,11 @@ fun AccountAndScrobblingScreen(
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
+    // Diagnostic marker — see "Troubleshooting" in the file footer. When the
+    // page crashes on open, this line is the first thing to appear in logcat
+    // for tag "Account". If the log line is missing, the crash happened in
+    // the AnimatedContent/Mount phase, before this composable ran at all.
+    Log.d("Account", "AccountAndScrobblingScreen compose: signedIn=$signedIn account=${account?.name}")
     val lastfmEnabled by AppSettings.lastfmEnabled.collectAsStateWithLifecycle()
     val lastfmUsername by AppSettings.lastfmUsername.collectAsStateWithLifecycle()
     val lastfmSessionKey by AppSettings.lastfmSessionKey.collectAsStateWithLifecycle()

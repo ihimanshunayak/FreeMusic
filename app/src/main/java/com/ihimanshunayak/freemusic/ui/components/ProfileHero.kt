@@ -155,6 +155,10 @@ private fun SignedInHero(
     onEditProfile: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Diagnostic marker — see the file footer. Tracks the path through the
+    // page so a crash on Account page open can be narrowed to either
+    // AccountAndScrobblingScreen itself or to ProfileHero composition.
+    android.util.Log.d("Account", "SignedInHero compose: avatarOverride present? name=${account?.name}")
     val haptics = rememberHaptics()
     val displayNameOverride by AppSettings.displayNameOverride.collectAsStateWithLifecycle()
     val statusOverride by AppSettings.statusLineOverride.collectAsStateWithLifecycle()
@@ -627,10 +631,17 @@ private fun formatCount(value: Long, suffix: String): String {
 //   - "Hours listened" is 0: stats come from `ListeningStats` which only
 //     starts writing once PlaybackService has had a turn. Open Replay or
 //     play a track and the number appears.
+//   - Page crashes on open with no logcat: the hero and the host page
+//     have `Log.d` markers on tag "Account" that fire before any other
+//     work. Filter logcat on that tag to see how far the page got
+//     before the crash.
 //
 // Versioning notes:
 //   1.0.0 — initial cut. Signed-in / signed-out branches, 2x2 stat grid,
 //   glass status pill, glass edit button.
+//   1.0.1 — logcat markers on tag "Account" at compose entry of
+//   `AccountAndScrobblingScreen`, `SignedInHero`, and `EditProfileDialog`
+//   for easier crash diagnosis.
 //
 // Extension hooks:
 //   - A "share my profile" tile goes beneath the edit button as another

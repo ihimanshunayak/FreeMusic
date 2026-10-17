@@ -160,6 +160,9 @@ fun EditProfileDialog(
     hazeState: HazeState,
     onDismiss: () -> Unit,
 ) {
+    // Diagnostic marker — tracks if the dialog composes without throwing,
+    // separate from the page that hosts it.
+    android.util.Log.d("Account", "EditProfileDialog compose")
     val context = LocalContext.current
     val haptics = rememberHaptics()
     val reduceDynamicBlur by AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
