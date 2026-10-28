@@ -42,6 +42,7 @@
 package com.ihimanshunayak.freemusic.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -76,6 +77,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.ihimanshunayak.freemusic.data.model.MoodGenre
 import com.ihimanshunayak.freemusic.ui.theme.rememberArtworkPalette
@@ -88,6 +90,23 @@ import com.ihimanshunayak.freemusic.ui.theme.rememberArtworkPalette
  * tablets (`width = 0.42 * pageWidth`, 600 dp+).
  */
 private val CardShape = RoundedCornerShape(28.dp)
+
+/**
+ * Which way the front card of the Explore deck is being swiped.
+ *
+ * The two directions mean different things, and the card says which one
+ * is about to happen while the finger is still down: right opens the
+ * mood, left skips it. Without the badge the two directions would be
+ * indistinguishable until the card had already gone.
+ */
+enum class SwipeAction {
+
+    /** Swiped right — the card will open. */
+    Open,
+
+    /** Swiped left — the card will be skipped. */
+    Skip,
+}
 
 /**
  * A rich-content card in the Explore carousel. Renders a full-bleed
@@ -103,10 +122,14 @@ private val CardShape = RoundedCornerShape(28.dp)
  * @param depthProgress   1 = active, 0 = about to leave. Drives the
  *                        alpha / scale of the corner Play button and
  *                        the tag-chip row.
- * @param peekProgress    0 = center, +1 = right neighbor, -1 = left
- *                        neighbor. Drives the rotationY.
  * @param isActive        true iff this card is the front-most. Gates
- *                        click handlers and the play-button visibility.
+ *                        click handlers, the play-button visibility, and
+ *                        whether the card draws a backdrop-sampled glass
+ *                        surface — only the card being looked at samples.
+ * @param swipeAction     which way the card is being swiped, if at all.
+ *                        Drives the Open / Skip badge on the card.
+ * @param swipeProgress   0 to 1, how far into the swipe the card is.
+ *                        Drives the badge's opacity and scale.
  * @param onClick         invoked when the user taps the card body.
  * @param onPlayClick     invoked when the user taps the corner Play
  *                        button.
@@ -116,8 +139,9 @@ fun ExploreCard(
     item: MoodGenre,
     sectionTitle: String?,
     depthProgress: Float,
-    peekProgress: Float,
     isActive: Boolean,
+    swipeAction: SwipeAction? = null,
+    swipeProgress: Float = 0f,
     onClick: () -> Unit,
     onPlayClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -147,7 +171,8 @@ fun ExploreCard(
             }
             // Dynamic-palette wash — paints *under* the glass surface,
             // so the wash is the fallback for devices where the glass
-            // effect isn't available (Android < 12).
+            // effect isn't available (Android < 12) and for the peek
+            // cards, which are flat by design.
             .background(
                 Brush.verticalGradient(
                     listOf(washDeep, wash, wash.copy(alpha = 0.65f)),
@@ -155,15 +180,30 @@ fun ExploreCard(
                     endY = Float.POSITIVE_INFINITY,
                 ),
             )
-            // Liquid-glass surface on top of the wash. On Android 12+
-            // this is a real backdrop with a tint + lens. On 11 and
-            // below the modifier returns `this` unchanged, so the wash
-            // shows through.
-            .liquidGlass(CardShape)
-            // 3D parallax: the card rotates around its Y axis by up to
-            // 8° when it's a side peek, so the carousel feels like a
-            // real "deck" of cards.
-            .graphicsLayer { rotationY = peekProgress.coerceIn(-1f, 1f) * 8f }
+            // The card's own rim. It is drawn rather than sampled.
+            //
+            // A backdrop-sampled surface is not an option here, and not
+            // because of cost: the app records the whole page into one
+            // layer for the glass bars to sample, and this card is *inside*
+            // that recorded page. A surface that reads the layer it is
+            // itself recorded into makes the render tree reference itself,
+            // and Android's render-node tree walks that cycle until the
+            // thread runs out of stack — the app dies with a SIGSEGV in
+            // the render thread the moment the Explore tab is opened.
+            //
+            // The card does not need a sampled backdrop in any case: the
+            // artwork is painted full-bleed over this surface, so a
+            // backdrop read would be hidden by the very next draw. The
+            // rim, the directional highlight and the translucent tint are
+            // the parts of the glass that read at this size, and
+            // [lightweightLiquidGlass] is exactly those three.
+            .lightweightLiquidGlass(
+                shape = CardShape,
+                fallbackColor = Color.Transparent,
+            )
+            // The card is tipped by the host's gesture layer, not here: the
+            // host owns the drag and the travel that comes with it, and a
+            // second rotation here would fight it.
             .clickable(
                 onClick = onClick,
                 onClickLabel = "Open ${item.title}",
@@ -266,6 +306,77 @@ fun ExploreCard(
                 modifier = Modifier.size(28.dp),
             )
         }
+
+        // The swipe badge: what is about to happen if the finger lets go
+        // now. It sits on the side the card is travelling towards and
+        // grows as the gesture approaches the point of no return.
+        if (isActive && swipeAction != null && swipeProgress > 0f) {
+            SwipeBadge(
+                action = swipeAction,
+                progress = swipeProgress,
+                modifier = Modifier
+                    .align(if (swipeAction == SwipeAction.Open) Alignment.TopStart else Alignment.TopEnd)
+                    .padding(
+                        start = if (swipeAction == SwipeAction.Open) 22.dp else 0.dp,
+                        end = if (swipeAction == SwipeAction.Skip) 22.dp else 0.dp,
+                        top = 26.dp,
+                    ),
+            )
+        }
+    }
+}
+
+/**
+ * The badge that says what a swipe will do, drawn on the card while the
+ * finger is down.
+ *
+ * Two things make it read: it is a glass surface rather than a flat fill,
+ * so it belongs to the same material as the rest of the app; and it is
+ * stamped at an angle, which is the convention every swipe deck already
+ * uses and which the eye reads before it reads the word.
+ */
+@Composable
+private fun SwipeBadge(
+    action: SwipeAction,
+    progress: Float,
+    modifier: Modifier = Modifier,
+) {
+    val label = when (action) {
+        SwipeAction.Open -> "OPEN"
+        SwipeAction.Skip -> "SKIP"
+    }
+    val tint = when (action) {
+        SwipeAction.Open -> Color(0xFF4ADE80)
+        SwipeAction.Skip -> Color(0xFFF87171)
+    }
+    val shape = RoundedCornerShape(12.dp)
+    Box(
+        modifier = modifier
+            .graphicsLayer {
+                // The badge grows into the gesture and turns with it, so
+                // it reads as stamped on the card rather than laid over it.
+                val eased = progress.coerceIn(0f, 1f)
+                scaleX = 0.70f + 0.30f * eased
+                scaleY = 0.70f + 0.30f * eased
+                rotationZ = if (action == SwipeAction.Open) -14f else 14f
+                this.alpha = eased.coerceIn(0f, 1f)
+            }
+            .lightweightLiquidGlass(
+                shape = shape,
+                fallbackColor = tint.copy(alpha = 0.22f),
+            )
+            .border(2.dp, tint.copy(alpha = 0.85f), shape)
+            .padding(horizontal = 14.dp, vertical = 7.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleMedium,
+            color = tint,
+            fontWeight = FontWeight.ExtraBold,
+            // Wide-tracked capitals, the way a stamp is set.
+            letterSpacing = 2.sp,
+        )
     }
 }
 

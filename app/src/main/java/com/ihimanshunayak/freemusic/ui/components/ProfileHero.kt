@@ -586,17 +586,9 @@ private fun SignedOutHero(modifier: Modifier = Modifier) {
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-/**
- * Whether the user has liquid glass turned on. Read once per recomposition;
- * the underlying [AppSettings.liquidGlass] is a `StateFlow` so a switch
- * somewhere in the app will trigger a recomposition of the hero.
- */
-@Composable
-private fun isLiquidGlassEnabled(): Boolean {
-    val useGlass = LocalLiquidGlassEnabled.current
-    val userOn by AppSettings.liquidGlass.collectAsStateWithLifecycle()
-    return useGlass && isGlassSupported() && userOn
-}
+// Whether a glass surface is drawn at all is answered by the shared
+// [isLiquidGlassEnabled]: the app-wide switch, the user's own setting and the
+// device's support all have to agree before a surface samples the backdrop.
 
 /**
  * Right-aligned counts — short numbers stay tight, long ones pick up the

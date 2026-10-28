@@ -47,6 +47,29 @@ val LocalAppBackdrop = staticCompositionLocalOf<Backdrop> { error("No AppBackdro
  */
 fun isGlassSupported(sdkInt: Int = Build.VERSION.SDK_INT): Boolean = sdkInt >= Build.VERSION_CODES.S
 
+/**
+ * Whether a real backdrop-sampled glass surface should be drawn at all.
+ *
+ * Three things have to agree before a surface samples the backdrop: the app
+ * has to be in liquid-glass mode ([LocalLiquidGlassEnabled]), the user has to
+ * have left the setting on ([AppSettings.liquidGlass]), and the device has to
+ * be able to run the effect ([isGlassSupported]).
+ *
+ * Every call site has to ask this question itself. [Modifier.liquidGlass]
+ * cannot answer it: it is a plain `Modifier` builder and so cannot read the
+ * user's setting without a composable call, and the setting it does read —
+ * "reduce dynamic blur" — is a different question. A surface that samples the
+ * backdrop costs an offscreen layer, a render-effect chain and a compiled
+ * shader; a surface that does not costs a fill. Drawing one when the user
+ * asked for no glass is both wrong and the most expensive mistake available.
+ */
+@Composable
+fun isLiquidGlassEnabled(): Boolean {
+    val appOn = LocalLiquidGlassEnabled.current
+    val userOn by AppSettings.liquidGlass.collectAsStateWithLifecycle()
+    return appOn && userOn && isGlassSupported()
+}
+
 /** Apple-matched defaults (Echo's GlassEffectConfig()), fixed rather than user sliders. */
 private const val VIBRANCY = 1f
 private const val BLUR_RADIUS_DP = 8f
@@ -153,6 +176,17 @@ fun Modifier.lightweightLiquidGlass(
  * recording the backdrop layer when it is on, and a surface that still tried to
  * sample would be sampling a layer nothing is drawing into.
  *
+ * The same applies to the user's own liquid-glass setting. A surface that
+ * samples the backdrop costs an offscreen layer, a render-effect chain and a
+ * compiled shader — real work on every frame the surface is on screen — and
+ * when the setting is off the user asked for no glass at all. So this returns
+ * the receiver unchanged in that case, and the caller's own fallback (a tint, a
+ * wash, a flat fill) shows through. The check lives here as well as at the
+ * call sites because a call site that forgot it was the Explore carousel
+ * sampling the backdrop five times over with the setting off, which is what
+ * held the main thread inside a draw long enough for the system to call the
+ * app unresponsive.
+ *
  * [shape] is restricted to [CornerBasedShape] because the backdrop's lens effect
  * throws for any other shape type.
  */
@@ -164,6 +198,7 @@ fun Modifier.liquidGlass(shape: CornerBasedShape): Modifier {
         return background(MaterialTheme.colorScheme.surface, shape)
             .border(GLASS_EDGE_WIDTH, GLASS_EDGE_COLOR, shape)
     }
+    if (!isLiquidGlassEnabled()) return this
     val backdrop = LocalAppBackdrop.current
     val density = LocalDensity.current
     val blurPx = with(density) { BLUR_RADIUS_DP.dp.toPx() } * GLASS_RESOLUTION_SCALE

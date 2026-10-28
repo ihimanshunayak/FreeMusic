@@ -316,7 +316,38 @@ private class DrawBackdropNode(
         }
     }
 
-    private val drawBackdropLayer: DrawScope.() -> Unit = {
+    private val drawBackdropLayer: DrawScope.() -> Unit = sample@{
+        // Vendored addition: never sample the backdrop from inside the layer
+        // that is being recorded.
+        //
+        // The app records the whole page into one layer so the glass bars can
+        // sample it, and a surface that samples that layer *from inside the
+        // layer it is being recorded into* makes the render tree reference
+        // itself. Android's render-node tree walks that cycle until the thread
+        // runs out of stack, and the process dies with a SIGSEGV in the render
+        // thread — no exception to catch, no log line naming the cause, and
+        // nothing in the tombstone but the recursion itself.
+        //
+        // It is a measured crash and not a theory: opening the Explore tab with
+        // liquid glass on produced a 2,868-frame tombstone that was nothing but
+        // `RenderNode::prepareTreeImpl` calling itself, with no app frames in
+        // it at all. The Account page did the same. Both had a glass surface
+        // inside the recorded page, and both stopped crashing the moment that
+        // surface was taken out.
+        //
+        // The check is here rather than at the call site because the flag is
+        // only true while the recording is in progress, and the recording
+        // happens in the draw phase — long after the modifier chain was
+        // composed. A call site cannot know at composition time whether it
+        // will end up inside the recorded layer, so the decision has to be
+        // made here, where the truth is available.
+        //
+        // Skipping the sample leaves the surface tint, the highlight and the
+        // shadow to be drawn as usual, so the surface still reads as glass —
+        // it just shows the flat tint instead of the blurred backdrop.
+        if (BackdropRecordingScope.isRecording) {
+            return@sample
+        }
         val layer = graphicsLayer
         if (layer != null) {
             val padding = padding

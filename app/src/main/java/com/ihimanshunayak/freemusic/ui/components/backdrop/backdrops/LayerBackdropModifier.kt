@@ -18,6 +18,7 @@ import androidx.compose.ui.node.GlobalPositionAwareModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.platform.InspectorInfo
+import com.ihimanshunayak.freemusic.ui.components.backdrop.BackdropRecordingScope
 import com.ihimanshunayak.freemusic.ui.components.backdrop.internal.recordLayer
 
 fun Modifier.layerBackdrop(backdrop: LayerBackdrop): Modifier =
@@ -83,7 +84,13 @@ private class LayerBackdropNode(
             drawContent()
             return
         }
-        recordLayer(this@LayerBackdropNode, backdrop.graphicsLayer) { backdrop.onDraw(this@draw) }
+        // The flag is set for exactly as long as the recording takes, so a
+        // glass surface drawn inside the page knows it must not sample the
+        // layer it is being recorded into. See [BackdropRecordingScope] for
+        // why that cycle crashes the render thread.
+        BackdropRecordingScope.recording {
+            recordLayer(this@LayerBackdropNode, backdrop.graphicsLayer) { backdrop.onDraw(this@draw) }
+        }
         drawLayer(backdrop.graphicsLayer)
     }
 

@@ -3273,6 +3273,22 @@ private fun FreeMusicApp(
                     !showDiscord && !showHistory && !showNotifications && !showSettings &&
                     !showAccountScrobbling && !showSources && !showListenTogether &&
                     !showEqualizer && !showReplay
+                // Explore wears a header picture of its own, the way Home does,
+                // and for the same reason it needs the same exception: the
+                // upside-down fade across the top of the screen is a solid band
+                // of the page's colour, and the Explore page's picture is at
+                // the very top of the page by design — so keeping it would paint
+                // the one thing the page just fetched straight back out.
+                //
+                // The picture only counts as "up" once the deck has told the
+                // page what it is showing, because until then the page has
+                // nothing to wear.
+                val isExploreArtworkPage = selectedTab == TAB_EXPLORE &&
+                    exploreState is UiState.Success &&
+                    detail == null && libraryShowAll == null && selectedMoodGenre == null &&
+                    !showDiscord && !showHistory && !showNotifications && !showSettings &&
+                    !showAccountScrobbling && !showSources && !showListenTogether &&
+                    !showEqualizer && !showReplay
                 val chromePageColor = when {
                     isDetailVisible -> detailPalette.background
                     else -> MaterialTheme.colorScheme.background
@@ -3282,13 +3298,13 @@ private fun FreeMusicApp(
                 // share the same curve, height and page-aware colour — including
                 // the white theme background in light mode.
                 //
-                // Left off while Home is artwork-led. Upside down it is a solid
-                // band across the top of the screen, and Home's picture is at the
-                // very top of the page by design — so keeping it would paint the
-                // one thing the page just fetched straight back out. The contrast
-                // it would have provided is provided instead by the scrim the
-                // header draws over its own top band.
-                if (!isHomeArtworkPage) {
+                // Left off while Home or Explore is artwork-led. Upside down it is a
+                // solid band across the top of the screen, and both of those
+                // pictures sit at the very top of the page by design — so keeping
+                // it would paint the one thing the page just fetched straight
+                // back out. The contrast it would have provided is provided
+                // instead by the scrim the header draws over its own top band.
+                if (!isHomeArtworkPage && !isExploreArtworkPage) {
                     BottomFadeScrim(
                         pageColor = chromePageColor,
                         modifier = Modifier
@@ -3299,7 +3315,9 @@ private fun FreeMusicApp(
 
                 // With Liquid Glass enabled, every page uses separated floating
                 // controls and therefore has no full-width pane underneath.
-                if (!glassActive && !isReplayVisible && !isDetailVisible && !isHomeArtworkPage) {
+                if (!glassActive && !isReplayVisible && !isDetailVisible &&
+                    !isHomeArtworkPage && !isExploreArtworkPage
+                ) {
                     TopBarBlur(
                         hazeState = hazeState,
                         modifier = Modifier.align(Alignment.TopCenter),
@@ -3325,7 +3343,8 @@ private fun FreeMusicApp(
                             if (it.label == "Play") stringResource(R.string.listen_now) else it.label
                         }
                     },
-                    transparentBackdrop = glassActive || isReplayVisible || isDetailVisible || isHomeArtworkPage,
+                    transparentBackdrop = glassActive || isReplayVisible || isDetailVisible ||
+                        isHomeArtworkPage || isExploreArtworkPage,
                     artworkPageChrome = isReplayVisible || isDetailVisible,
                     backButtonHazeState = hazeState,
                     trailingTitle = if (detail != null && detailActiveShelf != null) detail.title else null,
