@@ -286,10 +286,10 @@ private const val MESH_REFRESH_MS = 3_000L
 /** The player's side margin. Scrollable panels reach back across it. */
 internal val PLAYER_GUTTER = 30.dp
 /**
- * How wide the player's content is ever allowed to get. A sleeve and a volume
- * slider stretched right across a tablet aren't a bigger player, just a coarser
- * one; past this the column stops growing and centres itself instead. Phones
- * are narrower than this, so for them it does nothing.
+ * How wide the player's content is ever allowed to get. A sleeve stretched
+ * right across a tablet isn't a bigger player, just a coarser one; past this
+ * the column stops growing and centres itself instead. Phones are narrower than
+ * this, so for them it does nothing.
  */
 internal val PLAYER_MAX_WIDTH = 560.dp
 /**
@@ -504,8 +504,7 @@ private fun SlidingPlayerDeck(
 /**
  * Apple Music's Now Playing, closely: artwork that shrinks when paused, a
  * hairline scrubber with elapsed / remaining either side, oversized transport
- * glyphs, a volume capsule flanked by speaker icons, and lyrics / AirPlay /
- * queue along the bottom.
+ * glyphs, and lyrics / AirPlay / queue along the bottom.
  */
 @Composable
 @OptIn(ExperimentalHazeApi::class, ExperimentalHazeMaterialsApi::class)
@@ -654,7 +653,6 @@ fun NowPlayingScreen(
     val seekToLyric: (Long) -> Unit = { lineTimeMs ->
         onSeek(adjustedLyricsSeekTarget(lineTimeMs, lyricsOffsetMs))
     }
-    val hideVolumeBar by AppSettings.hideVolumeBar.collectAsStateWithLifecycle()
     val hideSongStatus by AppSettings.hideSongStatus.collectAsStateWithLifecycle()
 
     // Animated cover art: the looping video some labels publish alongside a
@@ -1012,7 +1010,6 @@ fun NowPlayingScreen(
         label = "artScale",
     )
 
-    val volume = rememberPlayerVolume()
     // Present when you arrive, out of the way once you are actually reading.
     //
     // The panel opens with the player under it so the scrubber and transport
@@ -1021,11 +1018,11 @@ fun NowPlayingScreen(
     // whole screen. Scrolling up brings it back and restarts the wait, since
     // that write to [lyricsControlsOpen] re-keys this effect.
     //
-    // Never while a finger is on the scrubber or the volume bar: those are the
-    // two controls that are *being used* while nothing else on screen moves,
-    // and timing out underneath them would take the thing away mid-gesture.
-    LaunchedEffect(lyricsOpen, lyricsControlsOpen, scrub.scrubbing, volume.dragging) {
-        if (lyricsOpen && lyricsControlsOpen && !scrub.scrubbing && !volume.dragging) {
+    // Never while a finger is on the scrubber: that is the one control that is
+    // *being used* while nothing else on screen moves, and timing out
+    // underneath it would take the thing away mid-gesture.
+    LaunchedEffect(lyricsOpen, lyricsControlsOpen, scrub.scrubbing) {
+        if (lyricsOpen && lyricsControlsOpen && !scrub.scrubbing) {
             delay(LYRICS_CONTROLS_IDLE_MS)
             lyricsControlsOpen = false
         }
@@ -1186,12 +1183,11 @@ fun NowPlayingScreen(
         spotifyCanvasAutoHide,
         isPlaying,
         scrub.scrubbing,
-        volume.dragging,
         lyricsOpen,
         queueOpen,
     ) {
         if (!spotifyCanvasPresentation || !spotifyCanvasControlsOpen ||
-            !spotifyCanvasAutoHide || !isPlaying || scrub.scrubbing || volume.dragging ||
+            !spotifyCanvasAutoHide || !isPlaying || scrub.scrubbing ||
             lyricsOpen || queueOpen
         ) return@LaunchedEffect
         delay(SPOTIFY_CANVAS_CONTROLS_IDLE_MS)
@@ -1413,8 +1409,6 @@ fun NowPlayingScreen(
         haptics.play(Haptic.Select)
         scrub.release(onSeekFraction)
     }
-    val onVolumeChange: (Float) -> Unit = volume::drag
-    val onVolumeChangeFinished: () -> Unit = volume::release
 
     // Lyrics, output and queue, with the output name under them — the row both
     // layouts end on, and the only thing in the landscape player's left column
@@ -1664,17 +1658,6 @@ fun NowPlayingScreen(
                                 onNext = onNext,
                                 compact = compact,
                             )
-                        },
-                        volume = if (hideVolumeBar) {
-                            null
-                        } else {
-                            {
-                                VolumeRow(
-                                    value = { volume.level.value },
-                                    onValueChange = onVolumeChange,
-                                    onValueChangeFinished = onVolumeChangeFinished,
-                                )
-                            }
                         },
                     )
                 },
@@ -2998,7 +2981,7 @@ fun NowPlayingScreen(
                 }
             }
 
-            // ---- Bottom: lyric strip, scrubber, transport, volume, toggles ----
+            // ---- Bottom: lyric strip, scrubber, transport, toggles ----
             // One block, measured at its natural height and pinned to the foot
             // of the player. Whatever is left over above it is the artwork's,
             // which is what keeps this row of controls in the same place on
@@ -3100,10 +3083,10 @@ fun NowPlayingScreen(
             }
 
             // The transport rides midway between the two blocks it separates:
-            // the scrubber above it, and the volume bar and toggle row below,
-            // which sit close enough together to read as one. Both of its own
-            // gaps take half the spread, so on a tall screen it holds the
-            // centre rather than drifting up under the seek bar.
+            // the scrubber above it, and the toggle row below, which sits close
+            // enough to read as one. Both of its own gaps take half the spread,
+            // so on a tall screen it holds the centre rather than drifting up
+            // under the seek bar.
             Spacer(Modifier.height(8.dp + controlSpread / 2))
 
             TransportRow(
@@ -3117,25 +3100,10 @@ fun NowPlayingScreen(
                 onNext = onNext,
             )
 
-            // Keep the volume slot's full footprint when its contents are
-            // hidden. Removing the slot itself shortened the controls by 50dp
-            // and moved every control below it. A display preference should not
-            // change the half-player's geometry.
+            // The gap the volume bar used to sit in, now the space between the
+            // transport and the action row. It keeps the two reading as one
+            // group while the artwork above takes the room that was freed.
             Spacer(Modifier.height(12.dp + controlSpread / 2))
-
-            if (!hideVolumeBar) {
-                VolumeRow(
-                    value = { volume.level.value },
-                    onValueChange = onVolumeChange,
-                    onValueChangeFinished = onVolumeChangeFinished,
-                )
-            } else {
-                Spacer(Modifier.height(VOLUME_ROW_HEIGHT))
-            }
-
-            // The volume slider already has 13dp below its drawn track.
-            // Balance that invisible inset with the caption gap below the icons.
-            Spacer(Modifier.height(6.dp))
 
             playerActions()
             Spacer(Modifier.height(18.dp))

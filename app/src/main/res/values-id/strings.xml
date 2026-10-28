@@ -303,8 +303,6 @@
     <string name="dont_repeat_songs">Jangan ulangi lagu dalam sesi ini</string>
     <string name="stop_music_on_close">Hentikan musik saat ditutup dari aplikasi terbaru</string>
     <string name="stop_music_on_close_subtitle">Menghentikan pemutaran saat aplikasi digeser keluar dari aplikasi terbaru</string>
-    <string name="hide_volume_bar">Sembunyikan bilah volume</string>
-    <string name="hide_volume_bar_subtitle">Menghapus penggeser volume dari pemutar utama</string>
     <string name="hide_song_status">Sembunyikan status lagu</string>
     <string name="hide_song_status_subtitle">Menyembunyikan teks â€œDiputar dariâ€ atau â€œDiputar olehâ€ di pemutar utama</string>
     <string name="off">Nonaktif</string>

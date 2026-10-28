@@ -306,8 +306,6 @@
     <string name="dont_repeat_songs">Nie powtarzaj utworÃ³w w bieÅ¼Ä…cej sesji</string>
     <string name="stop_music_on_close">Zatrzymaj muzykÄ™ po wyjÅ›ciu z ostatnich</string>
     <string name="stop_music_on_close_subtitle">Zatrzymuje odtwarzanie po usuniÄ™ciu z listy ostatnich aplikacji</string>
-    <string name="hide_volume_bar">Ukryj pasek gÅ‚oÅ›noÅ›ci</string>
-    <string name="hide_volume_bar_subtitle">Usuwa suwak gÅ‚oÅ›noÅ›ci z gÅ‚Ã³wnego odtwarzacza</string>
     <string name="hide_song_status">Ukryj status utworu</string>
     <string name="hide_song_status_subtitle">Ukrywa tekst â€žOdtwarzane zâ€ lub â€žOdtwarzane przezâ€ w gÅ‚Ã³wnym odtwarzaczu</string>
     <string name="off">WyÅ‚Ä…czone</string>

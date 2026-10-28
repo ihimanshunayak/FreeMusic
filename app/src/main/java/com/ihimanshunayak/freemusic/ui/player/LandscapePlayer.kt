@@ -78,8 +78,8 @@ private val LANDSCAPE_PLAYER_MAX_WIDTH = 1100.dp
 /**
  * Below this height the landscape player tightens its right column — smaller
  * transport, shorter gaps — so a phone on its side fits the credits, the
- * scrubber, the transport and the volume bar between its status and
- * navigation bars without any of them falling off the bottom.
+ * scrubber and the transport between its status and navigation bars without any
+ * of them falling off the bottom.
  */
 private val LANDSCAPE_COMPACT_HEIGHT = 440.dp
 
@@ -317,9 +317,8 @@ internal fun LandscapeArtwork(
 
 /**
  * The landscape player's right column in its main state: where the session
- * came from, the credits, the current line, the scrubber, the transport and
- * the volume bar — the portrait half-player, less the row the left column
- * already has.
+ * came from, the credits, the current line, the scrubber and the transport —
+ * the portrait half-player, less the row the left column already has.
  *
  * Centred in the column rather than pinned to its foot: there is no artwork
  * above it here to hand the spare height to.
@@ -335,8 +334,6 @@ internal fun LandscapeMainPane(
     lyricStrip: (@Composable () -> Unit)?,
     scrubber: @Composable () -> Unit,
     transport: @Composable () -> Unit,
-    /** Null where Settings hides the volume bar. */
-    volume: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -359,10 +356,6 @@ internal fun LandscapeMainPane(
         scrubber()
         Spacer(Modifier.height(if (compact) 0.dp else 8.dp))
         transport()
-        if (volume != null) {
-            Spacer(Modifier.height(if (compact) 0.dp else 12.dp))
-            volume()
-        }
     }
 }
 

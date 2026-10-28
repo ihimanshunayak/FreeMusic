@@ -308,8 +308,6 @@
     <string name="dont_repeat_songs">Songs in aktueller Sitzung nicht wiederholen</string>
     <string name="stop_music_on_close">Musik beim SchlieÃŸen aus den letzten Apps stoppen</string>
     <string name="stop_music_on_close_subtitle">Stoppt die Wiedergabe, wenn die App aus den letzten Apps entfernt wird</string>
-    <string name="hide_volume_bar">LautstÃ¤rkeleiste ausblenden</string>
-    <string name="hide_volume_bar_subtitle">Entfernt den LautstÃ¤rkeregler aus dem Hauptplayer</string>
     <string name="hide_song_status">Songstatus ausblenden</string>
     <string name="hide_song_status_subtitle">Blendet den Text â€žWiedergabe ausâ€œ bzw. â€žAbgespielt vonâ€œ im Player aus</string>
     <string name="off">Aus</string>

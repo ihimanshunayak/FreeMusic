@@ -351,8 +351,6 @@
     <string name="dont_repeat_songs">Non ripetere i brani nella sessione corrente</string>
     <string name="stop_music_on_close">Interrompi la musica chiudendo dai recenti</string>
     <string name="stop_music_on_close_subtitle">Interrompe la riproduzione quando l\'app viene rimossa dalle app recenti</string>
-    <string name="hide_volume_bar">Nascondi barra volume</string>
-    <string name="hide_volume_bar_subtitle">Rimuove il cursore del volume dal player principale</string>
     <string name="hide_song_status">Nascondi stato del brano</string>
     <string name="hide_song_status_subtitle">Nasconde il testo Â«In riproduzione daÂ» o Â«Riprodotto daÂ» nel player principale</string>
     <string name="off">Disattivato</string>

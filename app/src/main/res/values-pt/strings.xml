@@ -310,8 +310,6 @@
     <string name="dont_repeat_songs">NÃ£o repetir mÃºsicas na sessÃ£o atual</string>
     <string name="stop_music_on_close">Parar mÃºsica ao fechar pelos recentes</string>
     <string name="stop_music_on_close_subtitle">Interrompe a reproduÃ§Ã£o ao remover o app dos recentes</string>
-    <string name="hide_volume_bar">Ocultar barra de volume</string>
-    <string name="hide_volume_bar_subtitle">Remove o controle de volume do player principal</string>
     <string name="hide_song_status">Ocultar status da mÃºsica</string>
     <string name="hide_song_status_subtitle">Oculta o texto â€œTocando deâ€ ou â€œTocado porâ€ no player principal</string>
     <string name="off">Desativado</string>

@@ -303,8 +303,6 @@
     <string name="dont_repeat_songs">ä»Šå›žã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã§ã¯æ›²ã‚’ç¹°ã‚Šè¿”ã•ãªã„</string>
     <string name="stop_music_on_close">æœ€è¿‘ã®ã‚¢ãƒ—ãƒªã‹ã‚‰çµ‚äº†ã—ãŸã‚‰éŸ³æ¥½ã‚’åœæ­¢</string>
     <string name="stop_music_on_close_subtitle">ã‚¢ãƒ—ãƒªã‚’æœ€è¿‘ã®ã‚¢ãƒ—ãƒªã‹ã‚‰æ¶ˆã™ã¨å†ç”Ÿã‚’åœæ­¢ã—ã¾ã™</string>
-    <string name="hide_volume_bar">éŸ³é‡ãƒãƒ¼ã‚’éš ã™</string>
-    <string name="hide_volume_bar_subtitle">ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰éŸ³é‡ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’å‰Šé™¤ã—ã¾ã™</string>
     <string name="hide_song_status">æ›²ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’éš ã™</string>
     <string name="hide_song_status_subtitle">ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒ¤ãƒ¼ã®ã€Œå†ç”Ÿå…ƒã€ã‚„ã€Œå†ç”Ÿè€…ã€ã®è¡¨ç¤ºã‚’éš ã—ã¾ã™</string>
     <string name="off">ã‚ªãƒ•</string>

@@ -4,17 +4,8 @@ import kotlinx.coroutines.flow.first
 import androidx.compose.runtime.snapshotFlow
 import com.ihimanshunayak.freemusic.playback.PlaybackPosition
 import android.content.Context
-import android.database.ContentObserver
-import android.media.AudioManager
-import android.os.Handler
-import android.os.Looper
-import android.provider.Settings
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
@@ -24,7 +15,6 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,10 +26,7 @@ import com.ihimanshunayak.freemusic.data.model.Song
 import com.ihimanshunayak.freemusic.data.model.artworkAt
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import kotlin.math.abs
-import kotlin.math.roundToInt
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * The looping clip some releases publish alongside their cover, for [song], or
@@ -274,83 +261,6 @@ internal fun rememberPlayerScrub(trackId: String, position: PlaybackPosition, du
     LaunchedEffect(trackId) { pendingSeek = null }
 
     return scrub
-}
-
-/**
- * The volume bar's state: the music stream's level, tweened to whatever the
- * system reports, and followed exactly under a finger.
- */
-@Stable
-internal class PlayerVolume(
-    private val audioManager: AudioManager?,
-    private val maxVolume: Int,
-    private val scope: CoroutineScope,
-) {
-    /**
-     * Animatable rather than plain state: a hardware volume step is a jump of
-     * 1/15th of the bar, which reads as a stutter unless it's tweened.
-     */
-    val level = Animatable(
-        (audioManager?.getStreamVolume(AudioManager.STREAM_MUSIC) ?: 0).toFloat() / maxVolume,
-    )
-    var dragging by mutableStateOf(false)
-        private set
-
-    fun drag(to: Float) {
-        dragging = true
-        // Follow the finger exactly; only external changes tween.
-        scope.launch { level.snapTo(to) }
-        audioManager?.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            (to * maxVolume).roundToInt(),
-            0,
-        )
-    }
-
-    fun release() {
-        dragging = false
-    }
-}
-
-@Composable
-internal fun rememberPlayerVolume(): PlayerVolume {
-    val context = LocalContext.current
-    val audioManager = remember(context) {
-        context.getSystemService(AudioManager::class.java)
-    }
-    val maxVolume = remember(audioManager) {
-        audioManager?.getStreamMaxVolume(AudioManager.STREAM_MUSIC)?.coerceAtLeast(1) ?: 15
-    }
-    val scope = rememberCoroutineScope()
-    val volume = remember { PlayerVolume(audioManager, maxVolume, scope) }
-    var systemVolume by remember { mutableFloatStateOf(volume.level.value) }
-
-    // Glide to the level the system reports, but never fight the finger — a
-    // drag writes the stream, which calls straight back through here.
-    LaunchedEffect(systemVolume) {
-        if (!volume.dragging) {
-            volume.level.animateTo(systemVolume, tween(durationMillis = 220, easing = FastOutSlowInEasing))
-        }
-    }
-
-    // Hardware volume keys and the system panel change the stream behind our
-    // back — watch Settings for changes so the bar tracks them live.
-    DisposableEffect(audioManager) {
-        val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
-            override fun onChange(selfChange: Boolean) {
-                val current = audioManager?.getStreamVolume(AudioManager.STREAM_MUSIC) ?: return
-                systemVolume = current.toFloat() / maxVolume
-            }
-        }
-        context.contentResolver.registerContentObserver(
-            Settings.System.CONTENT_URI,
-            true,
-            observer,
-        )
-        onDispose { context.contentResolver.unregisterContentObserver(observer) }
-    }
-
-    return volume
 }
 
 /**

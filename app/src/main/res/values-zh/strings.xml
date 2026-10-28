@@ -303,8 +303,6 @@
     <string name="dont_repeat_songs">æœ¬æ¬¡ä¼šè¯ä¸­ä¸é‡å¤æ’­æ”¾æ­Œæ›²</string>
     <string name="stop_music_on_close">ä»Žæœ€è¿‘ä»»åŠ¡ä¸­å…³é—­æ—¶åœæ­¢éŸ³ä¹</string>
     <string name="stop_music_on_close_subtitle">ä»Žæœ€è¿‘ä»»åŠ¡ä¸­åˆ’èµ°åº”ç”¨æ—¶åœæ­¢æ’­æ”¾</string>
-    <string name="hide_volume_bar">éšè—éŸ³é‡æ¡</string>
-    <string name="hide_volume_bar_subtitle">ä»Žä¸»æ’­æ”¾å™¨ä¸­ç§»é™¤éŸ³é‡æ»‘å—</string>
     <string name="hide_song_status">éšè—æ­Œæ›²çŠ¶æ€</string>
     <string name="hide_song_status_subtitle">éšè—ä¸»æ’­æ”¾å™¨ä¸­çš„â€œæ’­æ”¾è‡ªâ€æˆ–â€œæ’­æ”¾è€…â€æ–‡å­—</string>
     <string name="off">å…³é—­</string>

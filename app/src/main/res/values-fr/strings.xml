@@ -309,8 +309,6 @@
     <string name="dont_repeat_songs">Ne pas rÃ©pÃ©ter les chansons dans la session actuelle</string>
     <string name="stop_music_on_close">ArrÃªter la musique en fermant depuis les rÃ©cents</string>
     <string name="stop_music_on_close_subtitle">ArrÃªte la lecture lorsque l\'application est retirÃ©e des rÃ©cents</string>
-    <string name="hide_volume_bar">Masquer la barre de volume</string>
-    <string name="hide_volume_bar_subtitle">Retire le curseur de volume du lecteur principal</string>
     <string name="hide_song_status">Masquer le statut du titre</string>
     <string name="hide_song_status_subtitle">Masque le texte Â« Lecture depuis Â» ou Â« Lu par Â» dans le lecteur principal</string>
     <string name="off">DÃ©sactivÃ©</string>

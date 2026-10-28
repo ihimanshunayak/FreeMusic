@@ -333,8 +333,6 @@
     <string name="dont_repeat_songs">Mevcut oturumda ÅŸarkÄ±larÄ± tekrar etme</string>
     <string name="stop_music_on_close">Son kullanÄ±lanlardan kapatÄ±nca mÃ¼ziÄŸi durdur</string>
     <string name="stop_music_on_close_subtitle">Uygulama son kullanÄ±lanlardan kaydÄ±rÄ±larak kapatÄ±ldÄ±ÄŸÄ±nda Ã§almayÄ± durdurur</string>
-    <string name="hide_volume_bar">Ses Ã§ubuÄŸunu gizle</string>
-    <string name="hide_volume_bar_subtitle">Ses kaydÄ±rÄ±cÄ±sÄ±nÄ± ana oynatÄ±cÄ±dan kaldÄ±rÄ±r</string>
     <string name="hide_song_status">ÅžarkÄ± durumunu gizle</string>
     <string name="hide_song_status_subtitle">Ana oynatÄ±cÄ±daki â€œÅžuradan Ã§alÄ±nÄ±yorâ€ veya â€œÃ‡alanâ€ yazÄ±sÄ±nÄ± gizler</string>
     <string name="off">KapalÄ±</string>

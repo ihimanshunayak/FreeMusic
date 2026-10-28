@@ -309,8 +309,6 @@
     <string name="dont_repeat_songs">×ž× ×™×¢×ª ×—×–×¨×” ×¢×œ ×©×™×¨×™× ×‘××•×ª×” ×”×¤×¢×œ×”</string>
     <string name="stop_music_on_close">×¢×¦×™×¨×ª ×ž×•×–×™×§×” ×‘×¡×’×™×¨×” ×ž×”××¤×œ×™×§×¦×™×•×ª ×”××—×¨×•× ×•×ª</string>
     <string name="stop_music_on_close_subtitle">×¢×•×¦×¨ ××ª ×”×”×©×ž×¢×” ×›×©×ž×—×œ×™×§×™× ××ª ×”××¤×œ×™×§×¦×™×” ×”×—×•×¦×” ×ž×ž×¡×š ×”××¤×œ×™×§×¦×™×•×ª ×”××—×¨×•× ×•×ª</string>
-    <string name="hide_volume_bar">×”×¡×ª×¨×ª ×¡×¨×’×œ ×¢×•×¦×ž×ª ×”×§×•×œ</string>
-    <string name="hide_volume_bar_subtitle">×ž×¡×™×¨ ××ª ×ž×—×•×•×Ÿ ×¢×•×¦×ž×ª ×”×§×•×œ ×ž×”× ×’×Ÿ ×”×¨××©×™</string>
     <string name="hide_song_status">×”×¡×ª×¨×ª ×¡×˜×˜×•×¡ ×”×©×™×¨</string>
     <string name="hide_song_status_subtitle">×ž×¡×ª×™×¨ ××ª ×”×˜×§×¡×˜ â€ž×ž×•×©×ž×¢ ×ž×ª×•×šâ€ ××• â€ž×”×•×©×ž×¢ ×¢×œ ×™×“×™â€ ×‘× ×’×Ÿ ×”×¨××©×™</string>
     <string name="off">×›×‘×•×™</string>
