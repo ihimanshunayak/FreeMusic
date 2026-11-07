@@ -94,6 +94,11 @@ class FreeMusicApplication : Application(), SingletonImageLoader.Factory {
         // by [Song.toMediaItem], so it has to be open before the restart
         // snapshot below is turned back into queue items.
         OriginalVersion.init(this)
+        // The public like / comment / view figures for a track, and the
+        // comments themselves. Kept on disk so a track opened yesterday still
+        // has its counts this morning — see EngagementRepository for why the
+        // response is large enough to be worth keeping.
+        com.ihimanshunayak.freemusic.data.engagement.EngagementRepository.init(this)
         // What's already saved to Downloads, so the song menu can say so
         // without a media-store query per row.
         Downloads.init(this)

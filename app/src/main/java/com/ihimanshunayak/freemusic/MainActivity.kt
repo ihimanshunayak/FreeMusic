@@ -250,6 +250,7 @@ import com.ihimanshunayak.freemusic.ui.icons.FreeMusicIcons
 import androidx.media3.common.Player
 import com.ihimanshunayak.freemusic.data.YtMusicRepository
 import com.ihimanshunayak.freemusic.ui.player.NowPlayingScreen
+import com.ihimanshunayak.freemusic.ui.player.rememberEngagement
 import com.ihimanshunayak.freemusic.ui.screens.DetailScreen
 import com.ihimanshunayak.freemusic.ui.screens.ExploreScreen
 import com.ihimanshunayak.freemusic.ui.screens.LocalMusicScreen
@@ -705,6 +706,11 @@ private fun FreeMusicApp(
         }
     }
     val account by viewModel.account.collectAsStateWithLifecycle()
+    // The avatar the profile wears. Read here rather than inside the page so
+    // the chrome can decide whether the profile is artwork-led before the
+    // page itself is composed.
+    val avatarOverrideUri by AppSettings.avatarOverrideUri.collectAsStateWithLifecycle()
+    val profileAvatarUrl = avatarOverrideUri.ifBlank { account?.thumbnailUrl.orEmpty() }
     val selectedChannelName by viewModel.selectedChannelName.collectAsStateWithLifecycle()
     val googleAccounts by viewModel.googleAccounts.collectAsStateWithLifecycle()
     val activeAccountId by viewModel.activeAccountId.collectAsStateWithLifecycle()
@@ -783,6 +789,10 @@ private fun FreeMusicApp(
     val songSort = detail?.browseId?.let { detailSongSorts[it] } ?: SongSort.DEFAULT
     var songSortMenuOpen by remember { mutableStateOf(false) }
     val likeStatuses by viewModel.likeStatuses.collectAsStateWithLifecycle()
+    // Which tracks the listener has saved to their library, for the player's
+    // Save chip. Held here rather than read from the library itself because
+    // the library is a slow page-load and the chip only needs one flag.
+    val savedTracks by viewModel.savedTracks.collectAsStateWithLifecycle()
     // Which tracks are being held on YouTube's own upload, so the player's menu
     // offers the way back out of a revert rather than the revert again.
     val pinnedToOriginal by OriginalVersion.pinned.collectAsStateWithLifecycle()
@@ -2079,6 +2089,12 @@ private fun FreeMusicApp(
     // to the theme's background anyway, which is exactly right there.
     val detailPalette = rememberArtworkPalette(detail?.thumbnailUrl)
 
+    // The profile page wears the avatar's own colours, washed across the top
+    // of the page. The same palette is read here so the chrome's fades match
+    // the wash the page paints — a fade in the theme's grey against a warm
+    // avatar wash reads as a seam across the top of the screen.
+    val profilePalette = rememberArtworkPalette(profileAvatarUrl.takeIf { it.isNotBlank() })
+
     // One set of numbers for the cards, the page, the stories and the shared
     // picture, so they cannot disagree. Read while any of them is on screen —
     // which includes the Library tab, since the cards live at the top of it.
@@ -2224,6 +2240,24 @@ private fun FreeMusicApp(
             signedIn = signedIn,
             likeStatus = likeStatuses[song.videoId] ?: LikeStatus.INDIFFERENT,
             onToggleLike = { viewModel.toggleLike(song.videoId) },
+            // The engagement row above the scrubber — YouTube Music's own
+            // rating, comment, save, share, download and mix controls.
+            engagement = rememberEngagement(displayedSong.videoId),
+            trackSaved = savedTracks[song.videoId] == true,
+            onToggleDislike = { viewModel.toggleDislike(song.videoId) },
+            onToggleSave = { viewModel.toggleSave(song.videoId) },
+            onShareTrack = {
+                val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "https://music.youtube.com/watch?v=${song.videoId}",
+                    )
+                }
+                context.startActivity(Intent.createChooser(sendIntent, song.title))
+            },
+            onDownloadTrack = { downloadSong(song) },
+            onStartMix = { startRadio(song) },
             // The service owns both the queue and the Shuffle state. Keeping
             // the toggle on that side prevents the UI from changing the icon
             // before its asynchronous reorder command has actually landed.
@@ -2657,7 +2691,34 @@ private fun FreeMusicApp(
                             onEditProfile = { showEditProfile = true },
                             contentPadding = listPadding,
                             onOpenNotifications = { showNotifications = true },
-                            onOpenSettings = { showSettings = true },
+                            onOpenSettings = {
+                                // Settings sits BELOW the account page in
+                                // AnimatedContent's priority order, so leaving
+                                // `showAccountScrobbling` set would keep the
+                                // profile as the visible target and the tap
+                                // would do nothing. The mirror of the
+                                // Settings -> Account route below, which
+                                // clears `showSettings` on its way out.
+                                showAccountScrobbling = false
+                                showSettings = true
+                            },
+                            // A track on the profile's own chart is one the
+                            // user already knows they like, so a tap starts a
+                            // station off it rather than queueing the chart —
+                            // the same reading [playRadio] makes of a search
+                            // hit and of a Replay chart row.
+                            onPlayTopSong = { top ->
+                                playRadio(
+                                    Song(
+                                        videoId = top.videoId,
+                                        title = top.title,
+                                        artist = top.artist,
+                                        thumbnailUrl = top.artworkUrl,
+                                    ),
+                                    QueueSource(replayLabel, PlaybackSourceType.REPLAY),
+                                )
+                            },
+                            onOpenReplay = { showReplay = true },
                         )
                     } else if (key == "sources") {
                         SourcesScreen(
@@ -3289,8 +3350,20 @@ private fun FreeMusicApp(
                     !showDiscord && !showHistory && !showNotifications && !showSettings &&
                     !showAccountScrobbling && !showSources && !showListenTogether &&
                     !showEqualizer && !showReplay
+                // The profile wears the avatar's own colours, washed across the
+                // top of the page, so it needs the same exception Home and
+                // Explore get: the upside-down top fade is a solid band of
+                // the page's colour and would paint the wash straight back
+                // out. It only counts as artwork-led once there is an avatar
+                // to wash with.
+                val isProfileArtworkPage = showAccountScrobbling &&
+                    profileAvatarUrl.isNotBlank() &&
+                    detail == null && libraryShowAll == null && selectedMoodGenre == null &&
+                    !showDiscord && !showHistory && !showNotifications && !showSettings &&
+                    !showSources && !showListenTogether && !showEqualizer && !showReplay
                 val chromePageColor = when {
                     isDetailVisible -> detailPalette.background
+                    isProfileArtworkPage -> profilePalette.background
                     else -> MaterialTheme.colorScheme.background
                 }
                 // This is the bottom floor itself turned upside down, not a
@@ -3304,7 +3377,7 @@ private fun FreeMusicApp(
                 // it would paint the one thing the page just fetched straight
                 // back out. The contrast it would have provided is provided
                 // instead by the scrim the header draws over its own top band.
-                if (!isHomeArtworkPage && !isExploreArtworkPage) {
+                if (!isHomeArtworkPage && !isExploreArtworkPage && !isProfileArtworkPage) {
                     BottomFadeScrim(
                         pageColor = chromePageColor,
                         modifier = Modifier
@@ -3316,7 +3389,7 @@ private fun FreeMusicApp(
                 // With Liquid Glass enabled, every page uses separated floating
                 // controls and therefore has no full-width pane underneath.
                 if (!glassActive && !isReplayVisible && !isDetailVisible &&
-                    !isHomeArtworkPage && !isExploreArtworkPage
+                    !isHomeArtworkPage && !isExploreArtworkPage && !isProfileArtworkPage
                 ) {
                     TopBarBlur(
                         hazeState = hazeState,
@@ -3344,7 +3417,7 @@ private fun FreeMusicApp(
                         }
                     },
                     transparentBackdrop = glassActive || isReplayVisible || isDetailVisible ||
-                        isHomeArtworkPage || isExploreArtworkPage,
+                        isHomeArtworkPage || isExploreArtworkPage || isProfileArtworkPage,
                     artworkPageChrome = isReplayVisible || isDetailVisible,
                     backButtonHazeState = hazeState,
                     trailingTitle = if (detail != null && detailActiveShelf != null) detail.title else null,
@@ -3395,24 +3468,45 @@ private fun FreeMusicApp(
                                 modifier = Modifier.padding(horizontal = 8.dp),
                             ) {
                                 Box {
-                                    IconButton(onClick = { showNotifications = true }) {
+                                    IconButton(onClick = {
+                                        showNotifications = true
+                                        // Opening the list is the acknowledgement:
+                                        // there is no separate mark-read gesture.
+                                        updateNotice?.let { AppSettings.markNotificationsSeen(it.version) }
+                                    }) {
                                         Icon(
                                             imageVector = Icons.Rounded.NotificationsActive,
-                                            contentDescription = stringResource(R.string.profile_notifications_cd),
+                                            contentDescription = if (notificationsUnread) {
+                                                stringResource(R.string.notifications_unread, notifications.size)
+                                            } else {
+                                                stringResource(R.string.profile_notifications_cd)
+                                            },
                                             tint = MaterialTheme.colorScheme.onSurface,
                                         )
                                     }
-                                    // 5-dot badge — matches the reference design.
-                                    Box(
-                                        modifier = Modifier
-                                            .align(Alignment.TopEnd)
-                                            .padding(top = 6.dp, end = 6.dp)
-                                            .size(8.dp)
-                                            .clip(CircleShape)
-                                            .background(BrandLime),
-                                    )
+                                    // The dot reflects the real list, not a
+                                    // fixed number: a badge that always says
+                                    // "5" is a decoration, and a decoration that
+                                    // lies about unread work is worse than none.
+                                    if (notificationsUnread) {
+                                        Box(
+                                            modifier = Modifier
+                                                .align(Alignment.TopEnd)
+                                                .padding(top = 6.dp, end = 6.dp)
+                                                .size(8.dp)
+                                                .clip(CircleShape)
+                                                .background(BrandLime),
+                                        )
+                                    }
                                 }
-                                IconButton(onClick = { showSettings = true }) {
+                                IconButton(onClick = {
+                                    // Same reason as the page's own Settings
+                                    // row: the account page outranks Settings
+                                    // in AnimatedContent's priority order, so
+                                    // the profile has to stand down first.
+                                    showAccountScrobbling = false
+                                    showSettings = true
+                                }) {
                                     Icon(
                                         imageVector = Icons.Rounded.Settings,
                                         contentDescription = stringResource(R.string.profile_settings_cd),

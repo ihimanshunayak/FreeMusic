@@ -58,12 +58,62 @@ import com.ihimanshunayak.freemusic.data.stats.ReplayPeriod
 import kotlinx.coroutines.launch
 
 /**
- * The four numbers a profile hero needs.
+ * One of the user's most-played tracks, as the profile page shows it.
  *
- * A `0` for [hoursListened] / [tracksPlayed] combined with [inFlight] being
- * true is the in-flight state before the first `ReplayPeriod.ALL_TIME`
- * summary has come back from disk. [playlists] and [sources] are always
- * populated synchronously and so are always meaningful.
+ * Kept as its own small record rather than handing the whole
+ * `ReplaySummary` to the UI: the profile wants a title, an artist, a cover
+ * and a play count, and nothing else. Carrying the summary would put the
+ * whole chart — every artist, every album, every genre — into a composition
+ * that only ever draws five rows.
+ */
+data class ProfileTopSong(
+    /** The video id, so a tap can start a station off the track itself. */
+    val videoId: String,
+    val title: String,
+    val artist: String,
+    val artworkUrl: String?,
+    /** How many times this track has been played. */
+    val plays: Int,
+)
+
+/**
+ * The numbers and facts the profile hero and the profile page show.
+ *
+ * The four headline numbers are:
+ *     - Hours listened (lifetime)     — Replay ALL_TIME totalMs
+ *     - Tracks played (lifetime)      — Replay ALL_TIME totalPlays
+ *     - Playlists                     — PlaylistStore.playlists.size
+ *     - Sources                       — SourceRegistry.configs.value.size
+ *
+ * And alongside them:
+ *     - [streak]  — consecutive days with listening
+ *     - [topSongs] — the most-played tracks, ranked
+ *
+ * Hours and tracks come from [ListeningStats.summary], which is a `suspend`
+ * function on Dispatchers.IO. The hero therefore drives it through a
+ * remembered coroutine and re-reads when the listening state changes, the
+ * user signs out, or the page is shown again — so the numbers are not
+ * "launch-time only".
+ *
+ * Playlists and sources are StateFlows; their latest value is good enough
+ * for a display number, and a subscription is not needed.
+ *
+ * Responsibilities:
+ *   - Expose the numbers and the top tracks in a single immutable record,
+ *     [ProfileStats].
+ *   - Keep the values consistent within a recomposition: one read of every
+ *     StateFlow, then the IO call, then the publish.
+ *
+ * Dependencies:
+ *   - ListeningStats (data/stats)
+ *   - PlaylistStore   (data/playlist)
+ *   - SourceRegistry  (data/sources)
+ *
+ * Integration Notes:
+ *   Call [rememberProfileStats] from the profile hero. The returned record
+ *   is null while the first IO call is in flight; the hero draws a skeleton
+ *   shape rather than zeros, so the page does not flash "0 h / 0 plays"
+ *   on every open.
  */
 data class ProfileStats(
     /** Total listening, in whole hours. Zero while [inFlight] is true. */
@@ -75,6 +125,31 @@ data class ProfileStats(
     /** Number of music sources the user has configured (built-in + addons). */
     val sources: Int,
     /**
+     * Consecutive days with listening, counting today. Zero when there is
+     * nothing on the calendar, and while [inFlight] is true.
+     */
+    val streak: Int = 0,
+    /**
+     * The most-played tracks, ranked. Empty while [inFlight] is true, and
+     * empty for good when the user has never played anything.
+     */
+    val topSongs: List<ProfileTopSong> = emptyList(),
+    /**
+     * The hour of the day with the most listening, 0..23, or null when
+     * nothing has been played.
+     */
+    val peakHour: Int? = null,
+    /**
+     * The day with the most listening, as `YYYY-MM-DD`, or null.
+     */
+    val busiestDay: String? = null,
+    /** How many distinct days carry some listening. */
+    val activeDays: Int = 0,
+    /** How many distinct songs have been played. */
+    val uniqueSongs: Int = 0,
+    /** How many distinct artists have been played. */
+    val uniqueArtists: Int = 0,
+    /**
      * True only on the first composition, before the listening summary has
      * come back. Used to draw a skeleton row in the hero rather than zeros.
      */
@@ -82,7 +157,8 @@ data class ProfileStats(
 )
 
 /**
- * Build the four numbers, refreshing the listening half whenever:
+ * Build the numbers and the top tracks, refreshing the listening half
+ * whenever:
  *   - the source counts change,
  *   - the listening-stats internal version changes (a play was recorded),
  *   - the user signs in or out (a recomposition in the parent will mount
@@ -103,6 +179,13 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
     // back to zero while the next read is in progress.
     var hours by remember { mutableStateOf(0L) }
     var plays by remember { mutableStateOf(0L) }
+    var streak by remember { mutableStateOf(0) }
+    var topSongs by remember { mutableStateOf(emptyList<ProfileTopSong>()) }
+    var peakHour by remember { mutableStateOf<Int?>(null) }
+    var busiestDay by remember { mutableStateOf<String?>(null) }
+    var activeDays by remember { mutableStateOf(0) }
+    var uniqueSongs by remember { mutableStateOf(0) }
+    var uniqueArtists by remember { mutableStateOf(0) }
     var inFlight by remember { mutableStateOf(true) }
 
     // Keying the effect on signedIn and the *count* of sources is enough:
@@ -113,6 +196,13 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
         if (!signedIn) {
             hours = 0L
             plays = 0L
+            streak = 0
+            topSongs = emptyList()
+            peakHour = null
+            busiestDay = null
+            activeDays = 0
+            uniqueSongs = 0
+            uniqueArtists = 0
             inFlight = false
             return@LaunchedEffect
         }
@@ -124,6 +214,21 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
             if (summary != null) {
                 hours = summary.totalMs / 3_600_000L
                 plays = summary.totalPlays.toLong()
+                streak = summary.streak
+                topSongs = summary.songs.take(TOP_SONGS_COUNT).map { entry ->
+                    ProfileTopSong(
+                        videoId = entry.song.videoId,
+                        title = entry.song.title,
+                        artist = entry.song.artist,
+                        artworkUrl = entry.song.thumbnailUrl,
+                        plays = entry.plays,
+                    )
+                }
+                peakHour = summary.peakHour
+                busiestDay = summary.busiestDay
+                activeDays = summary.activeDays.size
+                uniqueSongs = summary.distinctSongs
+                uniqueArtists = summary.distinctArtists
             }
             inFlight = false
         }
@@ -134,9 +239,19 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
         tracksPlayed = plays,
         playlists = playlists.size,
         sources = sources.size,
+        streak = streak,
+        topSongs = topSongs,
+        peakHour = peakHour,
+        busiestDay = busiestDay,
+        activeDays = activeDays,
+        uniqueSongs = uniqueSongs,
+        uniqueArtists = uniqueArtists,
         inFlight = inFlight,
     )
 }
+
+/** How many tracks the profile's "top songs" list carries. */
+private const val TOP_SONGS_COUNT = 5
 
 // ──────────────────────────────────────────────────────────────────────────────
 // CodeFooter
@@ -158,11 +273,18 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
 //
 // Versioning notes:
 //   1.0.0 — initial cut. Four numbers, one in-flight flag.
+//   1.1.0 — added [ProfileStats.streak] and [ProfileStats.topSongs], both
+//     derived from the same `ReplayPeriod.ALL_TIME` summary the four numbers
+//     already come from. No extra IO: one read still answers everything.
 //
 // Extension hooks:
-//   - For a "current streak" tile, add it as a fifth [ProfileStats] field
-//     derived from [ListeningStats] — the same call already returns the
-//     days listened; the streak is one more summary line on top of that.
+//   - For another lifetime tile (distinct songs, distinct artists), the same
+//     summary already carries `distinctSongs` / `distinctArtists` /
+//     `distinctAlbums` — add a field here and read it off the same call.
+//   - For a period-scoped tile (this month, this year), the summary's
+//     `period` is the only thing that has to change; the merge cost is one
+//     more `ListeningStats.summary` call, so it is worth a second read only
+//     if the tile really is period-scoped.
 //
 // Future compatibility notes:
 //   - [ListeningStats.summary] is `suspend` and lives on Dispatchers.IO;
@@ -172,3 +294,5 @@ fun rememberProfileStats(signedIn: Boolean): ProfileStats {
 //   - [SourceRegistry.configs] and [PlaylistStore.playlists] are
 //     `MutableStateFlow`s, so any new source-count tile just needs to read
 //     the same flow — there is no separate facade to maintain.
+//   - [ProfileStats] is a plain immutable record, so adding a field is
+//     backward compatible for every caller.

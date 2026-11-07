@@ -2640,21 +2640,6 @@ internal fun SettingsGroup(
     } else {
         Spacer(Modifier.height(topSpacing))
     }
-    if (header != null) {
-        Text(
-            text = header.uppercase(Locale.ROOT),
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(
-                start = GROUP_INSET + 4.dp,
-                end = GROUP_INSET,
-                top = 26.dp,
-                bottom = 8.dp,
-            ),
-        )
-    } else {
-        Spacer(Modifier.height(topSpacing))
-    }
     Column(
         modifier = Modifier
             .fillMaxWidth()

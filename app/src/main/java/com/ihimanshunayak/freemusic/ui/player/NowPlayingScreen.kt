@@ -153,6 +153,7 @@ import com.ihimanshunayak.freemusic.data.model.LikeStatus
 import com.ihimanshunayak.freemusic.data.model.PlaybackSourceType
 import com.ihimanshunayak.freemusic.data.model.PLAYER_ART_PX
 import com.ihimanshunayak.freemusic.data.model.Song
+import com.ihimanshunayak.freemusic.data.model.TrackEngagement
 import com.ihimanshunayak.freemusic.playback.BACK_RESTARTS_AFTER_MS
 import dev.chrisbanes.haze.HazeInputScale
 import dev.chrisbanes.haze.HazeState
@@ -538,6 +539,24 @@ fun NowPlayingScreen(
     accountName: String?,
     likeStatus: LikeStatus,
     onToggleLike: () -> Unit,
+    /**
+     * The engagement row under the title — thumbs up and down, comments, save,
+     * share, download and mix. See [EngagementChipRow].
+     */
+    engagement: TrackEngagement? = null,
+    /** Whether this track is in the library, for the Save chip. */
+    trackSaved: Boolean = false,
+    onToggleDislike: () -> Unit = {},
+    /**
+     * Opens the track's comments. The sheet is raised here rather than by the
+     * caller, because it is part of the player: it has to sit over the
+     * artwork the track is playing on, which only this screen owns.
+     */
+    onOpenComments: () -> Unit = {},
+    onToggleSave: () -> Unit = {},
+    onShareTrack: () -> Unit = {},
+    onDownloadTrack: () -> Unit = {},
+    onStartMix: () -> Unit = {},
     onPlayPause: () -> Unit,
     onNext: () -> Unit,
     onPrevious: () -> Unit,
@@ -633,6 +652,7 @@ fun NowPlayingScreen(
     var showAudioPipeline by remember { mutableStateOf(false) }
     var showAudioOutput by remember { mutableStateOf(false) }
     var showLyricsProviders by remember { mutableStateOf(false) }
+    var showComments by remember { mutableStateOf(false) }
     // Gated on the Bluetooth permission the first time — see [rememberOutputPicker].
     val openAudioOutput = rememberOutputPicker { showAudioOutput = true }
     // Listening in a party whose host has taken the controls: the transport
@@ -1487,6 +1507,13 @@ fun NowPlayingScreen(
                 onDismiss = onDismissLyricsOffset,
             )
         }
+        if (showComments) {
+            CommentsSheet(
+                hazeState = playerHaze,
+                videoId = song.videoId,
+                onDismiss = { showComments = false },
+            )
+        }
     }
 
     // A landscape window — a tablet, or a phone on its side — takes an entirely
@@ -1625,6 +1652,21 @@ fun NowPlayingScreen(
                             }
                         } else {
                             null
+                        },
+                        engagementRow = {
+                            EngagementChipRow(
+                                engagement = engagement,
+                                likeStatus = likeStatus,
+                                saved = trackSaved,
+                                signedIn = signedIn,
+                                onToggleLike = onToggleLike,
+                                onToggleDislike = onToggleDislike,
+                                onOpenComments = { showComments = true },
+                                onToggleSave = onToggleSave,
+                                onShare = onShareTrack,
+                                onDownload = onDownloadTrack,
+                                onStartMix = onStartMix,
+                            )
                         },
                         scrubber = {
                             PlayerScrubber(
@@ -3058,6 +3100,33 @@ fun NowPlayingScreen(
                         .padding(vertical = 4.dp),
                 )
             }
+
+            // The engagement row, above the scrubber — where YouTube Music
+            // puts it, and where the eye already is by the time the track is
+            // playing: the title, then the controls for this track, then the
+            // seek bar. Below the scrubber it would sit between the transport
+            // and the action row, which is a row about *how* the queue plays
+            // and would end up carrying a row about *this* track.
+            //
+            // It is drawn for a local file too — a downloaded track has no
+            // YouTube identity to rate, so the rating chips are the ones that
+            // go; the share and download ones stay, because a file on the
+            // device can still be shared.
+            EngagementChipRow(
+                engagement = engagement,
+                likeStatus = likeStatus,
+                saved = trackSaved,
+                signedIn = signedIn,
+                onToggleLike = onToggleLike,
+                onToggleDislike = onToggleDislike,
+                onOpenComments = { showComments = true },
+                onToggleSave = onToggleSave,
+                onShare = onShareTrack,
+                onDownload = onDownloadTrack,
+                onStartMix = onStartMix,
+            )
+            Spacer(Modifier.height(6.dp))
+
             val transitionWindow by AppSettings.smartTransitionWindow.collectAsStateWithLifecycle()
             PlayerScrubber(
                 shown = shown,

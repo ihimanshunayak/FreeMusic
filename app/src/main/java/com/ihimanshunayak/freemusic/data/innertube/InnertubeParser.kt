@@ -6,6 +6,7 @@ import com.ihimanshunayak.freemusic.data.model.AccountChannel
 import com.ihimanshunayak.freemusic.data.model.ArtistPage
 import com.ihimanshunayak.freemusic.data.model.BrowseItem
 import com.ihimanshunayak.freemusic.data.model.BrowseType
+import com.ihimanshunayak.freemusic.data.model.CommentPage
 import com.ihimanshunayak.freemusic.data.model.HomeChip
 import com.ihimanshunayak.freemusic.data.model.HomeShelf
 import com.ihimanshunayak.freemusic.data.model.LibraryState
@@ -17,6 +18,8 @@ import com.ihimanshunayak.freemusic.data.model.ShelfItem
 import com.ihimanshunayak.freemusic.data.model.Song
 import com.ihimanshunayak.freemusic.data.model.SongMenu
 import com.ihimanshunayak.freemusic.data.model.SubscriptionState
+import com.ihimanshunayak.freemusic.data.model.TrackComment
+import com.ihimanshunayak.freemusic.data.model.TrackEngagement
 import com.ihimanshunayak.freemusic.data.model.UserPlaylist
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -680,6 +683,23 @@ object InnertubeParser {
             !it.matches(DURATION) && it.lowercase(Locale.ROOT) !in TYPE_WORDS && !it.matches(TALLY)
         }
 
+        // The catalogue's play count, which rides along in one of the row's
+        // flex columns *or* inside the subtitle itself. It is not at a fixed
+        // index: a search row puts it third, an artist page's "Top songs"
+        // puts it third with the album name fourth, an album page puts it
+        // where the credit would be, and a home page's "Quick picks" states
+        // it in the second column *alongside* the artist — "Michael Jackson •
+        // 1.2B plays". So the columns are scanned, and the subtitle's own
+        // segments are scanned with them, rather than either being indexed.
+        // A row with no tally (a playlist's rows, whose third column is the
+        // album name) simply yields nothing.
+        val globalPlayCount = (columns
+            .map { column ->
+                column.o("musicResponsiveListItemFlexColumnRenderer").o("text").runs()
+            } + parts)
+            .firstOrNull { it.matches(TALLY) }
+            ?.let(::playCountLabel)
+
         // The artist/album names in the subtitle carry browse endpoints; pull
         // them out so the long-press menu can open those pages.
         val credits = creditsOf(
@@ -718,6 +738,7 @@ object InnertubeParser {
             // art where a catalogue track has square album cover art.
             isVideo = rowType == "video" || thumbnails.isNotSquare(),
             isExplicit = renderer.hasExplicitBadge(),
+            globalPlayCount = globalPlayCount,
         )
     }
 
@@ -1202,6 +1223,141 @@ object InnertubeParser {
     private fun JsonElement?.feedbackToken(endpoint: String): String? =
         this.o(endpoint).o("feedbackEndpoint").s("feedbackToken")
 
+    // ---- Engagement --------------------------------------------------------
+
+    /**
+     * The like, comment and view figures for one track, read off a watch-queue
+     * response.
+     *
+     * The response carries two like buttons and the wrong one is easy to
+     * pick: the queue's own panel button states the *account's* rating and
+     * no count at all, while the transport control — the one YouTube Music
+     * itself renders above the scrubber — carries the count. Reading the
+     * first one found is how a chip ends up permanently blank, so the
+     * transport control is addressed by name instead.
+     *
+     * The comment count is a *label* ("17K"), not a number: that is the only
+     * form YouTube publishes for it, and a chip that said "17,000" would be
+     * claiming a precision the wire does not carry.
+     */
+    fun parseEngagement(root: JsonElement): TrackEngagement {
+        // The transport control — the one YouTube Music itself renders above
+        // the scrubber. The queue's panel button is a different renderer with
+        // the same name and states the account's rating rather than a count,
+        // so it is skipped rather than taken.
+        val transport = collectRenderers(root, "transportControlsRenderer")
+            .firstOrNull()
+            // The buttons are an *array*, so the array accessor is the one
+            // that reads them. A JsonObject is a Map, and Map has a mapNotNull
+            // of its own — so reaching for the object accessor here would
+            // have compiled, matched nothing, and left the count blank.
+            ?.a("buttons")
+            ?.mapNotNull { it.o("button") }
+            ?.firstOrNull { it.o("likeButtonRenderer") != null }
+            ?.o("likeButtonRenderer")
+
+        val likeCount = transport?.s("likeCount")?.toLongOrNull()
+        // The label is YouTube's own rounding — "809K" — and is preferred
+        // over a count this app would have to round itself.
+        val likeLabel = transport?.o("likeCountText").s("simpleText")
+            ?: transport?.o("likeCountText").runs().takeIf { it.isNotBlank() }
+
+        // The comment count is a *label* ("17K"), not a number: that is the
+        // only form YouTube publishes for it, and a chip that said "17,000"
+        // would be claiming a precision the wire does not carry.
+        val commentCount = collectRenderers(root, "commentsEntryPointRenderer")
+            .firstOrNull()
+            ?.o("commentCount")
+            ?.s("simpleText")
+            ?: collectRenderers(root, "commentsEntryPointRenderer")
+                .firstOrNull()
+                ?.o("commentCount")
+                ?.runs()
+                ?.takeIf { it.isNotBlank() }
+
+        val viewCount = collectRenderers(root, "videoViewCountRenderer")
+            .firstOrNull()
+            ?.o("shortViewCount")
+            ?.s("simpleText")
+            ?: collectRenderers(root, "videoViewCountRenderer")
+                .firstOrNull()
+                ?.o("viewCount")
+                ?.s("simpleText")
+
+        // The comment section's own continuation — the one hanging off the
+        // item section named "comment-item-section". The response carries
+        // three other reload tokens (a radio shelf, and two sort-menu
+        // entries), and spending any of those returns no comments at all,
+        // so the section is addressed by the identifier it names.
+        val commentSection = collectRenderers(root, "itemSectionRenderer")
+            .firstOrNull { it.s("sectionIdentifier") == "comment-item-section" }
+        val commentToken = commentSection
+            ?.let { section ->
+                collectRenderers(section, "reloadContinuationData")
+                    .firstOrNull()
+                    ?.s("continuation")
+            }
+            ?: collectRenderers(root, "sectionIdentifier")
+                .firstOrNull { it.s("sectionIdentifier") == "comment-item-section" }
+                ?.let { section ->
+                    collectRenderers(section, "reloadContinuationData")
+                        .firstOrNull()
+                        ?.s("continuation")
+                }
+
+        return TrackEngagement(
+            likeCount = likeCount,
+            likeLabel = likeLabel,
+            commentCount = commentCount,
+            viewCount = viewCount,
+            commentToken = commentToken,
+        )
+    }
+
+    /**
+     * One page of a track's comments.
+     *
+     * The comment bodies arrive under `commentThreadRenderer`, each wrapping
+     * the comment itself in a `comment` node — so the renderer that carries
+     * the author and the text is one level in, not the thread.
+     */
+    fun parseComments(root: JsonElement): CommentPage {
+        val comments = collectRenderers(root, "commentThreadRenderer").mapNotNull { thread ->
+            // The thread holds the comment under `comment`, and *that* node
+            // holds it again under `commentRenderer` — two levels of wrapper,
+            // not one. Reading the first level alone finds a `comment` object
+            // whose author and body are nowhere in it, so every comment came
+            // back blank and the drawer said "no comments on this track yet"
+            // on a track with eighty-four thousand of them.
+            val comment = thread.o("comment").o("commentRenderer")
+                ?: thread.o("commentRenderer")
+                ?: thread.o("comment")
+                ?: return@mapNotNull null
+            val text = comment.o("contentText").runs().trim()
+            if (text.isBlank()) return@mapNotNull null
+            TrackComment(
+                author = comment.o("authorText").s("simpleText")
+                    ?: comment.o("authorText").runs().trim(),
+                text = text,
+                likeLabel = comment.o("voteCount").s("simpleText")
+                    ?: comment.o("voteCount").runs().takeIf { it.isNotBlank() },
+                replyCount = comment.s("replyCount")?.toIntOrNull()
+                    ?: comment.o("replyCount").s("replyCount")?.toIntOrNull()
+                    ?: 0,
+                published = comment.o("publishedTimeText").s("simpleText"),
+            )
+        }
+        val continuation = collectRenderers(root, "continuationItemRenderer")
+            .firstOrNull()
+            ?.o("continuationEndpoint")
+            ?.o("continuationCommand")
+            ?.s("token")
+            ?: collectRenderers(root, "nextContinuationData")
+                .firstOrNull()
+                ?.s("continuation")
+        return CommentPage(comments, continuation)
+    }
+
     /**
      * Whether a toggle menu item is the library one, told by its icons rather
      * than by its label — the label is localised, the icon type never is.
@@ -1372,6 +1528,14 @@ object InnertubeParser {
         val thumbnails = renderer.o("thumbnailRenderer").o("musicThumbnailRenderer")
             .o("thumbnail").a("thumbnails")
         val subtitle = renderer.o("subtitle").runs()
+        // A card's subtitle ends in its tally — "Siddh Shah • 4.7M views" —
+        // and it is the last segment, where a credit line's shape varies from
+        // page to page but the tally's does not.
+        val playCount = renderer.o("subtitle").a("runs").orEmpty()
+            .lastOrNull()
+            ?.s("text")
+            ?.takeIf { it.matches(TALLY) }
+            ?.let(::playCountLabel)
         // A card with no browse target is a playable track, not an album,
         // playlist or artist; widescreen art on one of those means it's a
         // music-video upload rather than the catalogue track — drop it, same
@@ -1397,6 +1561,7 @@ object InnertubeParser {
             thumbnailUrl = thumbnails.best(),
             videoId = videoId,
             browseId = resolvedBrowseId,
+            playCount = playCount,
         )
     }
 
@@ -1435,6 +1600,33 @@ object InnertubeParser {
         }
 
     private val DURATION = Regex("""\d+:\d{2}""")
+    /**
+     * A tally turned into the short form the row prints beside the artist:
+     * "197M plays" stays as it is, and "197 million plays" becomes "197M
+     * plays".
+     *
+     * The count itself is never rounded here — YouTube's own short form is
+     * taken as it stands, so the figure on the row is the figure YouTube
+     * publishes rather than one this app approximated.
+     */
+    private fun playCountLabel(tally: String): String? {
+        val trimmed = tally.trim()
+        if (trimmed.isBlank()) return null
+        // The figure and the unit's magnitude suffix travel together: "57M
+        // plays" is fifty-seven million, and cutting the suffix off leaves
+        // "57 plays" — a figure fifty-seven times too small, printed as
+        // though YouTube had said it.
+        val number = trimmed.takeWhile {
+            it.isDigit() || it == '.' || it == ',' || it == ' ' || it == 'K' || it == 'M' ||
+                it == 'B' || it == 'T'
+        }.trim()
+        if (number.isBlank()) return null
+        return when {
+            trimmed.contains("views", ignoreCase = true) -> "$number views"
+            else -> "$number plays"
+        }
+    }
+
     private val YEAR = Regex("""\d{4}""")
     /**
      * A counted quantity rather than a name — "12.4M plays", "13 songs",

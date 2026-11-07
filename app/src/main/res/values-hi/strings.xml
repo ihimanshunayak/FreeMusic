@@ -1414,4 +1414,85 @@
 
     <string name="notifications_queued_upload">à¤…à¤ªà¤²à¥‹à¤¡ à¤•à¥‡ à¤²à¤¿à¤ à¤•à¤¤à¤¾à¤° à¤®à¥‡à¤‚</string>
 
+    <string name="engagement_like">पसंद</string>
+    <string name="engagement_dislike">पसंद नहीं</string>
+    <string name="engagement_comments">टिप्पणियाँ</string>
+    <string name="engagement_save">सहेजें</string>
+    <string name="engagement_saved">सहेजा गया</string>
+    <string name="engagement_share">साझा करें</string>
+    <string name="engagement_download">डाउनलोड करें</string>
+    <string name="engagement_mix">मिक्स</string>
+    <string name="engagement_comments_unavailable">इस ट्रैक के लिए टिप्पणियाँ उपलब्ध नहीं हैं।</string>
+    <string name="engagement_no_comments">इस ट्रैक पर अभी तक कोई टिप्पणी नहीं है।</string>
+    <string name="engagement_load_more_comments">और टिप्पणियाँ लोड करें</string>
+    <string name="engagement_replies">%1$d जवाब</string>
+
+    <!-- Profile page: Phase 3 (top songs, insights, badges) -->
+    <string name="profile_streak_days">%1$d दिन की स्ट्रीक</string>
+    <string name="profile_top_songs_empty">अभी कोई टॉप गाना नहीं</string>
+    <string name="profile_top_songs_empty_hint">कुछ गाने चलाएँ और आपके सबसे ज़्यादा सुने गए गाने यहाँ दिखेंगे।</string>
+    <string name="profile_insights">सुनने की जानकारी</string>
+    <string name="profile_insight_streak">मौजूदा स्ट्रीक</string>
+    <string name="profile_insight_peak_hour">सबसे व्यस्त घंटा</string>
+    <string name="profile_insight_busiest_day">सबसे व्यस्त दिन</string>
+    <string name="profile_insight_unique">अलग-अलग गाने</string>
+    <string name="profile_insight_none">-</string>
+    <string name="profile_insight_unique_value">%1$s गाने - %2$s कलाकार</string>
+    <string name="profile_badges">बैज</string>
+    <string name="profile_badge_starter">पहला कदम</string>
+    <string name="profile_badge_starter_desc">100 गाने चलाएँ</string>
+    <string name="profile_badge_listener">गहरा श्रोता</string>
+    <string name="profile_badge_listener_desc">10 घंटे तक सुनें</string>
+    <string name="profile_badge_streak">लगातार</string>
+    <string name="profile_badge_streak_desc">7 दिन लगातार सुनें</string>
+    <string name="profile_badge_earned">हासिल</string>
+    <string name="profile_badge_locked">लॉक</string>
+
+    <!-- Locale parity: profile, edit-profile and settings rows -->
+    <string name="edit_profile_change_avatar_cd">प्रोफ़ाइल फ़ोटो बदलें</string>
+    <string name="edit_profile_delete_account">अकाउंट हटाएँ</string>
+    <string name="edit_profile_delete_coming_soon">इस बिल्ड में अकाउंट हटाना उपलब्ध नहीं है।</string>
+    <string name="edit_profile_email_hint">youremail@email.com</string>
+    <string name="edit_profile_field_email">ईमेल</string>
+    <string name="edit_profile_field_full_name">पूरा नाम</string>
+    <string name="edit_profile_field_phone">फ़ोन नंबर</string>
+    <string name="edit_profile_field_username">यूज़रनेम</string>
+    <string name="edit_profile_full_name_hint">आपका नाम</string>
+    <string name="edit_profile_phone_hint">0000-0000-0000</string>
+    <string name="edit_profile_save_changes">बदलाव सेव करें</string>
+    <string name="edit_profile_username_hint">@yourname</string>
+    <string name="profile_badge_empty">अभी कोई बैज नहीं</string>
+    <string name="profile_badge_empty_hint">पहला बैज पाने के लिए सुनते रहें।</string>
+    <string name="profile_challenge_empty">अभी कोई चुनौती नहीं</string>
+    <string name="profile_challenge_empty_hint">आज पूरा एल्बम सुनकर स्ट्रीक शुरू करें।</string>
+    <string name="profile_feed_empty">आपकी फ़ीड अभी खाली है</string>
+    <string name="profile_feed_empty_hint">जिन्हें आप फ़ॉलो करते हैं उकी पोस्ट यहाँ दिखेंगी।</string>
+    <string name="profile_followers">%1$s फ़ॉलोअर्स</string>
+    <string name="profile_following">%1$s फ़ॉलो कर रहे हैं</string>
+    <string name="profile_notifications_cd">नोटिफ़िकेशन</string>
+    <string name="profile_post_comments_cd">कमेंट</string>
+    <string name="profile_post_likes_cd">लाइक</string>
+    <string name="profile_post_menu_cd">पोस्ट विकल्प</string>
+    <string name="profile_post_sample_author">आपका नाम</string>
+    <string name="profile_post_sample_text">सुंदर नज़ारा 🌄</string>
+    <string name="profile_post_sample_time">3 घंटे पहले</string>
+    <string name="profile_settings_cd">सेटिंग्स</string>
+    <string name="profile_signed_out_title">प्रोफ़ाइल देखने के लिए साइन इन करें</string>
+    <string name="profile_tab_badge">बैज</string>
+    <string name="profile_tab_challenge">चुनौती</string>
+    <string name="profile_tab_feed">फ़ीड</string>
+    <string name="profile_verified_cd">वेरिफ़ाइड</string>
+    <string name="settings_account_subtitle">@%1$s</string>
+    <string name="settings_dark_mode">डार्क मोड</string>
+    <string name="settings_faq">सामान्य प्रश्न</string>
+    <string name="settings_general">सामान्य सेटिंग्स</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_log_out">लॉग आउट</string>
+    <string name="settings_my_contact">मेरा संपर्क</string>
+    <string name="settings_open_failed">%1$s खोला नहीं जा सका</string>
+    <string name="settings_pause_notifications">नोटिफ़िकेशन रोकें</string>
+    <string name="settings_pause_notifications_subtitle">सुनते समय घंटी और सिस्टम नोटिफ़िकेशन बंद करें</string>
+    <string name="settings_terms_of_service">सेवा की शर्तें</string>
+    <string name="settings_user_policy">यूज़र पॉलिसी</string>
+    <string name="signed_out_title">साइन इन</string>
 </resources>

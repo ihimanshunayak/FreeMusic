@@ -1299,4 +1299,37 @@
 
     <string name="card_songs_format">%1$s songs</string>
 
+    <string name="engagement_like">Like</string>
+    <string name="engagement_dislike">Dislike</string>
+    <string name="engagement_comments">Comments</string>
+    <string name="engagement_save">Save</string>
+    <string name="engagement_saved">Saved</string>
+    <string name="engagement_share">Share</string>
+    <string name="engagement_download">Download</string>
+    <string name="engagement_mix">Mix</string>
+    <string name="engagement_comments_unavailable">Comments aren’t available for this track.</string>
+    <string name="engagement_no_comments">No comments on this track yet.</string>
+    <string name="engagement_load_more_comments">Load more comments</string>
+    <string name="engagement_replies">%1$d replies</string>
+
+    <!-- Profile page: Phase 3 (top songs, insights, badges) -->
+    <string name="profile_streak_days">%1$d-day streak</string>
+    <string name="profile_top_songs_empty">No top songs yet</string>
+    <string name="profile_top_songs_empty_hint">Play a few tracks and your most-played songs will show up here.</string>
+    <string name="profile_insights">Listening insights</string>
+    <string name="profile_insight_streak">Current streak</string>
+    <string name="profile_insight_peak_hour">Peak hour</string>
+    <string name="profile_insight_busiest_day">Biggest day</string>
+    <string name="profile_insight_unique">Unique tracks</string>
+    <string name="profile_insight_none">-</string>
+    <string name="profile_insight_unique_value">%1$s songs - %2$s artists</string>
+    <string name="profile_badges">Badges</string>
+    <string name="profile_badge_starter">First steps</string>
+    <string name="profile_badge_starter_desc">Play 100 tracks</string>
+    <string name="profile_badge_listener">Deep listener</string>
+    <string name="profile_badge_listener_desc">Listen for 10 hours</string>
+    <string name="profile_badge_streak">On a roll</string>
+    <string name="profile_badge_streak_desc">Listen 7 days in a row</string>
+    <string name="profile_badge_earned">Earned</string>
+    <string name="profile_badge_locked">Locked</string>
 </resources>

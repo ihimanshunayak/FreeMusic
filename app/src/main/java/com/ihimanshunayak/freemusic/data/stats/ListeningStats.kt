@@ -673,6 +673,11 @@ object ListeningStats {
                 distinctArtists = artists.size,
                 distinctAlbums = albums.size,
                 since = earliest,
+                // Only the days that actually hold something count. A month
+                // bucket records a day the moment a sample lands on it, so a
+                // day with no milliseconds in it is a day that was never
+                // listened to and must not be able to fake a streak.
+                activeDays = days.keys.filter { (days[it] ?: 0L) > 0L }.toSet(),
             )
         }
     }
@@ -885,9 +890,49 @@ data class ReplaySummary(
     val distinctAlbums: Int,
     /** The earliest month with anything in it, `YYYY-MM`. */
     val since: String?,
+    /**
+     * The `YYYY-MM-DD` dates that carry some listening.
+     *
+     * A date is in here only if it holds at least one millisecond of
+     * listening. The month buckets record a day the moment a sample lands on
+     * it, so an empty day is not evidence of anything and must not be able to
+     * fake a streak.
+     */
+    val activeDays: Set<String> = emptySet(),
 ) {
     val minutes: Long get() = totalMs / 60_000
     val hours: Long get() = totalMs / 3_600_000
+
+    /**
+     * Consecutive days of listening, counting back from today.
+     *
+     * Today counts whether or not it holds anything: a streak that only
+     * exists once the day is over is a streak nobody can see they are on. So
+     * the walk starts at today and — if today is empty — at yesterday
+     * instead, which is the streak the day actually began with.
+     *
+     * Zero means there is nothing on the calendar to walk back through; the
+     * walk stops at the first gap.
+     */
+    val streak: Int
+        get() {
+            if (activeDays.isEmpty()) return 0
+            val days = activeDays
+                .mapNotNull { runCatching { LocalDate.parse(it) }.getOrNull() }
+                .toSet()
+            if (days.isEmpty()) return 0
+            val today = LocalDate.now()
+            // A streak that ended yesterday is still a streak — it is only
+            // broken by a whole day with nothing in it.
+            var cursor = if (days.contains(today)) today else today.minusDays(1)
+            if (!days.contains(cursor)) return 0
+            var count = 0
+            while (days.contains(cursor)) {
+                count++
+                cursor = cursor.minusDays(1)
+            }
+            return count
+        }
 
     /**
      * Whether there is anything at all to draw.

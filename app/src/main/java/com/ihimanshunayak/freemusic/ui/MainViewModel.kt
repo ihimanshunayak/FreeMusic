@@ -733,6 +733,62 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         return previous
     }
 
+    // ---- Saving a track to the library -------------------------------------
+
+    /**
+     * Which tracks are in the library, as this session has said.
+     *
+     * A track's membership is a property of the account, not of the player,
+     * but the player's Save chip is the one place it is toggled from without
+     * opening a menu — so the answer has to live where the chip can read it
+     * the moment the tap lands.
+     *
+     * The map is written optimistically and rolled back if YouTube refuses,
+     * for the same reason [setLike] is: it is a one-tap action on a screen
+     * that is playing something, and a chip that waits for a round trip
+     * before it changes reads as a tap that missed.
+     */
+    private val _savedTracks = MutableStateFlow<Map<String, Boolean>>(emptyMap())
+    val savedTracks: StateFlow<Map<String, Boolean>> = _savedTracks.asStateFlow()
+
+    /** Whether [videoId] is in the library, as far as this session knows. */
+    fun isSaved(videoId: String): Boolean = _savedTracks.value[videoId] == true
+
+    /**
+     * Saves a track to the library, or takes it out.
+     *
+     * The tokens that do it live on the track's own menu row, so they are
+     * fetched here rather than carried around: a token is per-row and
+     * per-account, and the one this chip needs is the one for *this* track.
+     *
+     * A track with no library toggle — one YouTube offers no way to save —
+     * is a no-op rather than a guess, and so is a track with no menu at all.
+     */
+    fun toggleSave(videoId: String) {
+        if (!requireSignIn()) return
+        val target = !isSaved(videoId)
+        _savedTracks.value = _savedTracks.value + (videoId to target)
+        viewModelScope.launch {
+            val menu = YtMusicRepository.songMenu(videoId).getOrNull()
+            val token = when {
+                menu == null -> null
+                target -> menu.addToLibraryToken
+                else -> menu.removeFromLibraryToken?.takeIf { menu.inLibrary }
+            }
+            if (token == null) {
+                // Nothing to act on: the track can't be saved, so the chip
+                // must not claim it did.
+                _savedTracks.value = _savedTracks.value - videoId
+                return@launch
+            }
+            if (YtMusicRepository.setLibraryStatus(token).isFailure) {
+                _savedTracks.value = _savedTracks.value + (videoId to !target)
+                return@launch
+            }
+            libraryStale = true
+        }
+    }
+
     /**
      * Saves the album or playlist [browseId] to the library, or takes it out.
      *

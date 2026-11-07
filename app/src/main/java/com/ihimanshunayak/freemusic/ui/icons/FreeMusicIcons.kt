@@ -716,4 +716,191 @@ object FreeMusicIcons {
             }
         }.build()
     }
+
+    // ---- Engagement chips --------------------------------------------------
+    //
+    // The player's chip row borrows YouTube Music's vocabulary, so these
+    // are drawn as the recognisable shapes rather than as variations of the
+    // heart the app already uses for "like" elsewhere: a thumb up and a
+    // thumb down are what a rating is called in this row, and the two have
+    // to read as opposites at 18 dp.
+
+    /**
+     * A thumb up, in two weights — the same filled/outline pairing
+     * [Heart] uses, and for the same reason: on album artwork a colour
+     * change alone is a signal the backdrop can swallow.
+     */
+    val ThumbsUp: ImageVector by lazy { thumb("bc_thumb_up", filled = false, up = true) }
+
+    val ThumbsUpFilled: ImageVector by lazy { thumb("bc_thumb_up_filled", filled = true, up = true) }
+
+    /** A thumb down — the mirror of [ThumbsUp]. */
+    val ThumbsDown: ImageVector by lazy { thumb("bc_thumb_down", filled = false, up = false) }
+
+    val ThumbsDownFilled: ImageVector by lazy { thumb("bc_thumb_down_filled", filled = true, up = false) }
+
+    /**
+     * A thumb, pointing up or down.
+     *
+     * The two are one drawing reflected about the viewport's horizontal
+     * centre line rather than two drawings that resemble each other. A
+     * hand-drawn "down" variant drifts — a cuff on the wrong side, a curve
+     * that bulges the other way — and at 18 dp beside its own twin the
+     * difference is exactly what tells the listener that the down chip is
+     * not the up chip.
+     *
+     * The reflection reverses the direction of every arc as well as the
+     * position of every point, which is why the arcs are drawn through a
+     * helper that flips both rather than being written out twice.
+     */
+    private fun thumb(name: String, filled: Boolean, up: Boolean): ImageVector =
+        ImageVector.Builder(
+            name = name,
+            defaultWidth = 24.dp, defaultHeight = 24.dp,
+            viewportWidth = 24f, viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = stroke,
+                strokeLineWidth = STROKE,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+                fill = if (filled) stroke else null,
+            ) {
+                // The reflection about the viewport's horizontal centre. A
+                // point moves; a relative arc also has to turn the other way,
+                // because a mirror reverses the direction a curve sweeps in.
+                fun ty(y: Float) = if (up) y else 24f - y
+                fun arc(
+                    rx: Float,
+                    ry: Float,
+                    dx: Float,
+                    dy: Float,
+                ) {
+                    // Every argument is positional on purpose: this Compose
+                    // version names the relative arc's own parameters a, b,
+                    // dx1 and dy1, and naming them after the absolute arc's
+                    // is a compile error rather than a wrong drawing. A
+                    // relative arc's offset is a delta from the point the pen
+                    // is already at, so the mirror only has to turn the
+                    // vertical one.
+                    arcToRelative(rx, ry, 0f, false, up, dx, if (up) dy else -dy)
+                }
+
+                // The wrist cuff, on the same side in both directions so the
+                // two read as one pair.
+                moveTo(3.5f, ty(10.5f)); lineTo(6.5f, ty(10.5f))
+                moveTo(3.5f, ty(10.5f)); lineTo(3.5f, ty(19f))
+                moveTo(3.5f, ty(19f)); lineTo(6.5f, ty(19f))
+                moveTo(6.5f, ty(19f)); lineTo(6.5f, ty(10.5f))
+                // The hand: a fist that opens into the thumb.
+                moveTo(6.5f, ty(10.5f))
+                lineTo(10.4f, ty(10.5f))
+                lineTo(12.4f, ty(4.6f))
+                arc(1.9f, 1.9f, 3.4f, 2.1f)
+                lineTo(16.4f, ty(15.4f))
+                arc(1.7f, 1.7f, 3.3f, 0.3f)
+                lineTo(19.7f, ty(15.7f))
+                arc(1.6f, 1.6f, 0.2f, 2.3f)
+                lineTo(19.9f, ty(18f))
+                arc(1.2f, 1.2f, -1.6f, 1f)
+                lineTo(6.5f, ty(19f))
+                close()
+            }
+        }.build()
+
+    /**
+     * A speech bubble — the comment chip.
+     *
+     * Drawn with a tail on the lower left, which is what tells it apart
+     * from a plain circle at this size.
+     */
+    val Comment: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "bc_comment",
+            defaultWidth = 24.dp, defaultHeight = 24.dp,
+            viewportWidth = 24f, viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = stroke,
+                strokeLineWidth = STROKE,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                moveTo(4.2f, 5.6f)
+                arcToRelative(7.8f, 7.8f, 0f, isMoreThanHalf = true, isPositiveArc = true, 15.6f, 0f)
+                arcToRelative(7.8f, 7.8f, 0f, isMoreThanHalf = true, isPositiveArc = true, -15.6f, 0f)
+                arcToRelative(7.8f, 7.8f, 0f, isMoreThanHalf = false, isPositiveArc = true, -5.2f, 5.9f)
+                lineTo(6.4f, 19.4f)
+                lineTo(9.2f, 15.5f)
+                arcToRelative(7.8f, 7.8f, 0f, isMoreThanHalf = false, isPositiveArc = true, 5.2f, -5.9f)
+                close()
+            }
+        }.build()
+    }
+
+    /**
+     * An arrow leaving a bracket — the share chip.
+     *
+     * The classic three-line "share" node, drawn as an arrow so it reads at
+     * 18 dp where a node-and-links drawing turns to mush.
+     */
+    val Share: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "bc_share",
+            defaultWidth = 24.dp, defaultHeight = 24.dp,
+            viewportWidth = 24f, viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = stroke,
+                strokeLineWidth = STROKE,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                // Stem rising out of the bracket.
+                moveTo(12f, 12f); lineTo(12f, 3.6f)
+                // Arrow head.
+                moveTo(8.2f, 7.4f); lineTo(12f, 3.6f); lineTo(15.8f, 7.4f)
+                // The bracket.
+                moveTo(7.2f, 10.4f)
+                lineTo(5.2f, 10.4f)
+                arcToRelative(1.6f, 1.6f, 0f, isMoreThanHalf = false, isPositiveArc = true, -1.6f, 1.6f)
+                lineTo(3.6f, 18.4f)
+                arcToRelative(1.6f, 1.6f, 0f, isMoreThanHalf = false, isPositiveArc = true, 1.6f, 1.6f)
+                lineTo(18.8f, 20f)
+                arcToRelative(1.6f, 1.6f, 0f, isMoreThanHalf = false, isPositiveArc = true, 1.6f, -1.6f)
+                lineTo(20.4f, 12f)
+                arcToRelative(1.6f, 1.6f, 0f, isMoreThanHalf = false, isPositiveArc = true, -1.6f, -1.6f)
+                lineTo(16.8f, 10.4f)
+            }
+        }.build()
+    }
+
+    /**
+     * Two crossing arrows — the "mix" chip.
+     *
+     * A radio is a mix of tracks, and the two arrows crossing is the shape
+     * that says so without a word. Drawn as strokes so it belongs with the
+     * rest of the family.
+     */
+    val Mix: ImageVector by lazy {
+        ImageVector.Builder(
+            name = "bc_mix",
+            defaultWidth = 24.dp, defaultHeight = 24.dp,
+            viewportWidth = 24f, viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = stroke,
+                strokeLineWidth = STROKE,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                // One arrow rising to the right.
+                moveTo(4.4f, 17.2f); lineTo(4.4f, 12.6f); lineTo(15.4f, 12.6f)
+                moveTo(12.6f, 9.8f); lineTo(15.4f, 12.6f); lineTo(12.6f, 15.4f)
+                // One falling to the right.
+                moveTo(19.6f, 6.8f); lineTo(19.6f, 11.4f); lineTo(8.6f, 11.4f)
+                moveTo(11.4f, 8.6f); lineTo(8.6f, 11.4f); lineTo(11.4f, 14.2f)
+            }
+        }.build()
+    }
 }

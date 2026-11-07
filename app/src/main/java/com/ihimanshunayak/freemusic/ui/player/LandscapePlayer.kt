@@ -332,6 +332,8 @@ internal fun LandscapeMainPane(
     credits: @Composable () -> Unit,
     /** The one-line lyric over the scrubber; null where synced lyrics are off. */
     lyricStrip: (@Composable () -> Unit)?,
+    /** The engagement row above the scrubber — see [EngagementChipRow]. */
+    engagementRow: (@Composable () -> Unit)? = null,
     scrubber: @Composable () -> Unit,
     transport: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -353,6 +355,13 @@ internal fun LandscapeMainPane(
         credits()
         Spacer(Modifier.height(if (compact) 2.dp else 10.dp))
         lyricStrip?.invoke()
+        // Above the scrubber, as in the portrait player — the two are the same
+        // player in two shapes, and a control that moved between them would
+        // be a control that moved.
+        engagementRow?.invoke()
+        if (engagementRow != null) {
+            Spacer(Modifier.height(6.dp))
+        }
         scrubber()
         Spacer(Modifier.height(if (compact) 0.dp else 8.dp))
         transport()

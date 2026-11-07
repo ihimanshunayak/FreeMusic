@@ -95,6 +95,22 @@ data class Song(
     val playbackSourceType: PlaybackSourceType? = null,
     /** Browse id for an album, playlist, or other source page. */
     val playbackSourceId: String? = null,
+    /**
+     * How many times the catalogue track has been played, as YouTube states
+     * it — "197M plays", "4.6M plays".
+     *
+     * This is the *catalogue* tally, not the playing video's figures: it
+     * counts every stream of this recording across every upload, so it is
+     * the number a song row shows and the one YouTube Music prints beside
+     * the artist. The like, comment and view counts on the player's chips
+     * belong to one particular upload and are a different family of numbers —
+     * they live on [TrackEngagement], and the two must not be conflated.
+     *
+     * Null wherever YouTube states no tally. A playlist's rows carry none —
+     * their third column is the album name — and neither does a row that
+     * came from a source with no catalogue to count against.
+     */
+    val globalPlayCount: String? = null,
 ) {
     /** Legacy derived property: true if and only if [queueTier] is [QueueTier.AUTOPLAY]. */
     val fromAutoplay: Boolean get() = queueTier == QueueTier.AUTOPLAY
@@ -124,6 +140,7 @@ data class Song(
         playbackSource: String? = null,
         playbackSourceType: PlaybackSourceType? = null,
         playbackSourceId: String? = null,
+        globalPlayCount: String? = null,
     ) : this(
         videoId = videoId,
         title = title,
@@ -149,6 +166,7 @@ data class Song(
         playbackSource = playbackSource,
         playbackSourceType = playbackSourceType,
         playbackSourceId = playbackSourceId,
+        globalPlayCount = globalPlayCount,
     )
 }
 
@@ -307,6 +325,15 @@ data class ShelfItem(
     val thumbnailUrl: String?,
     val videoId: String?,
     val browseId: String?,
+    /**
+     * The tally the card's own subtitle carried — "4.7M views" on a
+     * user-uploaded video, "862M plays" on a catalogue track.
+     *
+     * Kept apart from [subtitle] because the two are read differently: the
+     * subtitle is a credit line whose shape varies by page, while this is
+     * one figure that belongs beside the title wherever it is printed.
+     */
+    val playCount: String? = null,
 )
 
 /** The signed-in Google account, as YouTube Music reports it. */

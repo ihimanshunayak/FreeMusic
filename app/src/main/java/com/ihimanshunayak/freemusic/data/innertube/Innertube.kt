@@ -92,6 +92,15 @@ object Innertube {
     private const val WEB_REMIX_VERSION = "1.20250101.01.00"
     private const val WEB_REMIX_CLIENT_ID = "67"
 
+    /**
+     * The TV client's identity. Version [TV_CLIENT_VERSION] is the one that
+     * was measured against the live endpoint; a client version that no
+     * longer exists is answered with an error rather than with empty counts,
+     * so it is pinned rather than tracked.
+     */
+    private const val TV_CLIENT_VERSION = "7.20250101.18.00"
+    private const val TV_CLIENT_ID = "7"
+
     private const val TAG = "Free Music"
 
     /** Session cookie captured by the login WebView; null = browse as guest. */
@@ -598,6 +607,51 @@ object Innertube {
         put("videoId", videoId)
         put("playlistId", "RDAMVM$videoId")
         put("isAudioOnly", true)
+    }
+
+    /**
+     * The engagement figures for one track — likes, comment count and view
+     * count — read off a single watch-queue response.
+     *
+     * Asked as the TV client rather than the music one, and the reason is
+     * empirical rather than aesthetic. YouTube Music's own `next` response
+     * carries the like *state* (whether this account has rated the track)
+     * but none of the counts; the web client's response carries the counts
+     * but only when the request carries a session, and then only the ones
+     * that page happened to render. The TV client answers an unauthenticated
+     * request with all three, every time, and does so without the session
+     * cookie — so it works for a signed-out listener too, which is the point:
+     * a guest browsing a playlist still deserves to know how popular a track
+     * is.
+     *
+     * The response is large — a full watch queue with every recommendation in
+     * it — so it is asked for once per track and then cached, rather than on
+     * every row that scrolls past. See [com.ihimanshunayak.freemusic.data.engagement.TrackEngagement].
+     *
+     * The counts are the *video's*, not the catalogue track's: a song
+     * reachable through two different uploads reports two different figures,
+     * and this is the one YouTube itself puts on the button.
+     */
+    suspend fun engagement(videoId: String): JsonObject = postTv("next") {
+        put("videoId", videoId)
+        put("playlistId", "RDAMVM$videoId")
+        put("isAudioOnly", true)
+    }
+
+    /**
+     * One page of the comments on a track.
+     *
+     * The continuation token comes from the same watch-queue response as
+     * [engagement] — a `reloadContinuationData` on the item section named
+     * `comment-item-section` — and is spent against YouTube's own `next`
+     * endpoint. Both halves have to be the TV client's: the music client
+     * answers no comment section at all, and the web client's continuation
+     * belongs to a session this app may not have.
+     *
+     * @param token the continuation carried by the comment section.
+     */
+    suspend fun comments(token: String): JsonObject = postTv("next") {
+        put("continuation", token)
     }
 
     /** Timed caption transcript used as a last-resort lyrics source. */
@@ -1182,6 +1236,53 @@ object Innertube {
                 )
             }.body<JsonObject>()
         }
+    }
+
+    /**
+     * A request made as the TV client, which is the only client that answers
+     * an unauthenticated call with a track's like, comment and view counts.
+     *
+     * The music client answers the same question with the like *state* and
+     * nothing else; the web client answers it with the counts but only when
+     * it carries a session cookie, and then only for whichever figures the
+     * page happened to render. The TV client answers it with all three,
+     * every time, without a cookie — which matters because a signed-out
+     * listener is a first-class case here, not an edge case.
+     *
+     * Deliberately session-free: the counts are public figures, and sending
+     * the cookie would let YouTube log a watch-queue request against the
+     * listener's account every time a track is opened.
+     */
+    private suspend fun postTv(
+        endpoint: String,
+        bodyExtras: JsonObjectBuilder.() -> Unit,
+    ): JsonObject = withRetry {
+        client.post("$MUSIC_BASE/$endpoint") {
+            contentType(ContentType.Application.Json)
+            parameter("prettyPrint", "false")
+            parameter("hl", currentLanguage)
+            header("Accept-Language", acceptLanguageHeader)
+            header("X-Origin", MUSIC_ORIGIN)
+            header("Origin", MUSIC_ORIGIN)
+            header("Referer", "$MUSIC_ORIGIN/")
+            header("X-YouTube-Client-Name", TV_CLIENT_ID)
+            header("X-YouTube-Client-Version", TV_CLIENT_VERSION)
+            setBody(
+                buildJsonObject {
+                    putJsonObject("context") {
+                        putJsonObject("client") {
+                            put("clientName", "TVHTML5")
+                            put("clientVersion", TV_CLIENT_VERSION)
+                            put("hl", currentLanguage)
+                            put("gl", "US")
+                        }
+                        putJsonObject("user") { put("lockedSafetyMode", false) }
+                        putJsonObject("request") { put("useSsl", true) }
+                    }
+                    bodyExtras()
+                },
+            )
+        }.body<JsonObject>()
     }
 
     /** First string value under [key] anywhere in [element], depth-first. */

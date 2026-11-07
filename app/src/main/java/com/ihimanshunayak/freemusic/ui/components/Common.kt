@@ -540,6 +540,10 @@ private fun SongRowContent(
             Text(
                 text = listOfNotNull(
                     song.artist.takeIf { it.isNotBlank() },
+                    // The catalogue's play tally, in YouTube Music's own place:
+                    // the artist's name, then how many times the track has
+                    // been played — "Taylor Swift · 254M plays".
+                    song.globalPlayCount?.takeIf { it.isNotBlank() },
                     song.downloadFormat,
                 ).joinToString(" · "),
                 style = MaterialTheme.typography.bodyMedium,
