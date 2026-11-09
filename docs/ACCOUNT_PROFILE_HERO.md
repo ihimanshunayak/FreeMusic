@@ -128,3 +128,47 @@ So the work is composition, not invention.
   don't, and a fallback on pre-Android-12.
 - Scrobbling, rich presence, sign-out, and the rest of the page still work
   exactly as before.
+
+## Follow-up fixes (2026-11-09)
+
+A deep audit of the page after the redesign found seven defects, all of which
+made the page look broken to a user rather than merely rough. They are fixed
+in the same release as the redesign itself, so the two ship together.
+
+| # | Defect | Cause | Fix |
+|---|--------|-------|-----|
+| P1 | The stats never moved after a play | `rememberProfileStats` wrapped its IO read in a `scope.launch` *inside* a `LaunchedEffect`. `rememberCoroutineScope()` is bound to the composition, not to the effect, so the inner launch survived cancellation and published stale numbers over newer ones. The effect's keys also never changed when a play was recorded. | `ListeningStats` now exposes a `revision: StateFlow<Long>` that moves on a counted play, a completed write and a restore. `rememberProfileStats` reads it through `produceState`, whose body is cancelled when the keys change — so a stale read can no longer publish over a newer state. |
+| P2 | Every edit made in "Edit profile" was invisible | The dialog wrote `fullNameOverride` / `phoneOverride` / `emailOverride` / `usernameOverride`; the hero reads `displayNameOverride` / `usernameOverride` / `statusLineOverride` / `bioOverride` / `avatarOverrideUri`. The two sets did not overlap, so an edit saved to one place and was read from another. Status and bio had no field at all. | The dialog now edits display name, handle, status, bio and avatar — the exact five the hero reads. The old override keys are kept in `AppSettings` so already-persisted data is not lost, but nothing writes them any more. Real validation was added: a blank display name, an over-long handle, an over-long status and an over-long bio each raise an inline error and keep Save disabled. |
+| P3 | The profile was reachable only by digging through Settings | The top-bar account button opened Settings when signed out and the Google account picker when signed in — never the profile page. | The account photo now opens the profile page for a signed-out visitor and a signed-in one alike, clearing the overlays that outrank that route in `AnimatedContent`'s priority order. |
+| P4 | "Listen as" opened the wrong picker | It opened `AccountProfileSelector` (the Google accounts on the device), which cannot name a YouTube channel, so the row's subtitle could never be changed from there. `AccountChannelDialog` — the real channel picker — was dead code. | "Listen as" now opens `AccountChannelDialog`, fed by `viewModel.channels` / `channelsLoading` / `selectedChannelKey`, with `viewModel.selectChannel` on a choice and the in-app browser for "choose in YouTube". A separate "Switch account" row was added for the Google account picker, so neither route loses its entry point. |
+| P5 | A signed-out visitor saw an empty page | Every stat block sat inside `if (signedIn)`, even though the listening history is device-local (`ListeningStats` writes to `context.filesDir`) and belongs to whoever is listening. | Top songs, insights and badges are shown either way. Only the account group and the sign-out row remain behind the sign-in. |
+| P6 | The dialog's own footer contradicted its behaviour | The footer described a "Save button is greyed out" rule that no validation implemented. | Real validation, real disabled Save, real inline errors — and the footer now describes what the code does. |
+| P7 | `ProfileStats`' footer described a null record that did not exist | The record is non-null and carries an `inFlight` flag. | The footer and the CodeHeader now describe the flag, and the duplicated header block was removed. |
+
+### Contract summary
+
+The hero and the edit dialog now share one contract, and it is worth stating
+plainly because the old one was the bug:
+
+| Setting key | Read by the hero | Written by the dialog |
+|--------------|-------------------|------------------------|
+| `displayNameOverride` | yes | yes |
+| `usernameOverride` | yes (as the `@handle`) | yes |
+| `statusLineOverride` | yes | yes |
+| `bioOverride` | yes | yes |
+| `avatarOverrideUri` | yes | yes |
+| `fullNameOverride` | no | no — kept for already-persisted data |
+| `phoneOverride` | no | no — kept for already-persisted data |
+| `emailOverride` | no | no — kept for already-persisted data |
+
+The handle is stored **bare** (no leading `@`): `AppSettings.setUsernameOverride`
+trims and strips the `@`, and `ProfileHero` re-adds it when it draws the
+handle. Saving `@himanshu` in the dialog therefore renders as `@himanshu`,
+never `@@himanshu`.
+
+### Tests
+
+`app/src/test/java/com/ihimanshunayak/freemusic/ProfileStatsTest.kt` covers the
+pure reducer `ProfileStats.withSummary`: hour truncation, the play count, the
+five-row top-songs cap, the in-flight flag clearing, and the playlist and
+source counts surviving the fold. It needs no device and no Compose runtime.

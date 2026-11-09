@@ -223,6 +223,7 @@
     <string name="edit_profile_display_name_required">Display name cannot be empty</string>
     <string name="edit_profile_status_too_long">Status is too long</string>
     <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="edit_profile_username_too_long">Username is too long</string>
     <string name="edit_profile_field_full_name">Full name</string>
     <string name="edit_profile_field_phone">Phone number</string>
     <string name="edit_profile_field_email">Email</string>

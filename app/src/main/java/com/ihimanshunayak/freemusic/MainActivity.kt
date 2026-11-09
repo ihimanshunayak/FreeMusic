@@ -147,6 +147,7 @@ import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
 import com.ihimanshunayak.freemusic.data.settings.ThemeMode
 import com.ihimanshunayak.freemusic.data.profile.rememberProfileStats
+import com.ihimanshunayak.freemusic.ui.components.AccountChannelDialog
 import com.ihimanshunayak.freemusic.ui.components.AccountProfileSelector
 import com.ihimanshunayak.freemusic.ui.components.EditProfileDialog
 import com.ihimanshunayak.freemusic.ui.screens.AccountAndScrobblingScreen
@@ -506,6 +507,15 @@ private fun FreeMusicApp(
     var showAppLanguage by remember { mutableStateOf(false) }
     var showTranslationLanguage by remember { mutableStateOf(false) }
     var showAccountSelector by remember { mutableStateOf(false) }
+    /**
+     * The "Listen as" channel picker over the profile page.
+     *
+     * A separate flag from [showAccountSelector] because the two pick
+     * different things: the account selector switches between *Google
+     * accounts* on the device, while this one switches between the
+     * *YouTube channels* a single account acts as.
+     */
+    var showAccountChannels by remember { mutableStateOf(false) }
     var showListenBrainzLogin by remember { mutableStateOf(false) }
     var showLastfmLogin by remember { mutableStateOf(false) }
     /** Whether the "Edit profile" sheet over the profile hero is open. */
@@ -712,6 +722,12 @@ private fun FreeMusicApp(
     val avatarOverrideUri by AppSettings.avatarOverrideUri.collectAsStateWithLifecycle()
     val profileAvatarUrl = avatarOverrideUri.ifBlank { account?.thumbnailUrl.orEmpty() }
     val selectedChannelName by viewModel.selectedChannelName.collectAsStateWithLifecycle()
+    // The channel list behind "Listen as". Read here so the picker opens
+    // with whatever the view model already has and refills itself if the
+    // list was empty when the row was tapped.
+    val accountChannels by viewModel.channels.collectAsStateWithLifecycle()
+    val accountChannelsLoading by viewModel.channelsLoading.collectAsStateWithLifecycle()
+    val selectedChannelKey by viewModel.selectedChannelKey.collectAsStateWithLifecycle()
     val googleAccounts by viewModel.googleAccounts.collectAsStateWithLifecycle()
     val activeAccountId by viewModel.activeAccountId.collectAsStateWithLifecycle()
     val activeProfileId by viewModel.activeProfileId.collectAsStateWithLifecycle()
@@ -2680,7 +2696,23 @@ private fun FreeMusicApp(
                                 webSession = WebSessionMode.SIGN_IN
                             },
                             onSwitchChannel = {
+                                // "Listen as" is the YouTube channel
+                                // picker for the account that is signed
+                                // in — not the Google account picker.
+                                // It used to open the account selector,
+                                // which lists accounts on the device and
+                                // could not name a single channel, so the
+                                // row's subtitle ("the channel you listen
+                                // as") could never be changed from here.
                                 viewModel.loadChannels()
+                                showAccountChannels = true
+                            },
+                            onSwitchGoogleAccount = {
+                                // The other half of "Listen as": the Google
+                                // account on the device, which the channel
+                                // picker sits inside. It has its own row so
+                                // the two never get confused for one
+                                // another.
                                 showAccountSelector = true
                             },
                             onSignOut = { viewModel.signOut() },
@@ -3758,10 +3790,28 @@ private fun FreeMusicApp(
                             TopBarAccountButton(
                                 account = account,
                                 onClick = {
-                                    if (signedIn) {
-                                        viewModel.loadChannels()
-                                        showAccountSelector = true
-                                    } else showSettings = true
+                                    // The account photo is the way into the
+                                    // Profile page — "Account & integrations"
+                                    // — for a signed-out visitor and a
+                                    // signed-in one alike. It used to open
+                                    // Settings when signed out and the Google
+                                    // account picker when signed in, so the
+                                    // profile was reachable only by digging
+                                    // through Settings.
+                                    //
+                                    // The Profile route sits below Discord,
+                                    // History, Notifications and the Library
+                                    // "show all" overlay in AnimatedContent's
+                                    // priority order, so those are cleared
+                                    // first; Settings is cleared with them so
+                                    // only one screen competes for the frame
+                                    // during the crossfade.
+                                    showDiscord = false
+                                    showHistory = false
+                                    showNotifications = false
+                                    libraryShowAll = null
+                                    showSettings = false
+                                    showAccountScrobbling = true
                                 },
                                 onSwipeProfile = { forward -> viewModel.stepProfile(forward) },
                             )
@@ -4907,6 +4957,25 @@ private fun FreeMusicApp(
                     showSettings = true
                 },
                 onDismiss = { showAccountSelector = false },
+            )
+        }
+
+        if (showAccountChannels) {
+            BackHandler { showAccountChannels = false }
+            AccountChannelDialog(
+                channels = accountChannels,
+                loading = accountChannelsLoading,
+                selectedKey = selectedChannelKey,
+                hazeState = hazeState,
+                onSelect = { channel ->
+                    showAccountChannels = false
+                    viewModel.selectChannel(channel)
+                },
+                onChooseInYouTube = {
+                    showAccountChannels = false
+                    webSession = WebSessionMode.SWITCH_CHANNEL
+                },
+                onDismiss = { showAccountChannels = false },
             )
         }
 

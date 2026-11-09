@@ -162,6 +162,7 @@
     <string name="edit_profile_display_name_required">Display name cannot be empty</string>
     <string name="edit_profile_status_too_long">Status is too long</string>
     <string name="edit_profile_bio_too_long">Bio is too long</string>
+    <string name="edit_profile_username_too_long">Username is too long</string>
     <string name="stat_hours_listened">Hours listened</string>
     <string name="stat_tracks_played">Tracks played</string>
     <string name="stat_playlists">Playlists</string>

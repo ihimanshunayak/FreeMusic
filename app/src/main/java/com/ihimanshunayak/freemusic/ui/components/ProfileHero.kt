@@ -681,7 +681,7 @@ private fun formatCount(value: Long, suffix: String): String {
 // ──────────────────────────────────────────────────────────────────────────────
 //
 // Usage:
-//   val stats = rememberProfileStats(signedIn = true)
+//   val stats = rememberProfileStats(signedIn = signedIn)
 //   ProfileHero(
 //       signedIn = signedIn,
 //       account = account,
@@ -701,6 +701,11 @@ private fun formatCount(value: Long, suffix: String): String {
 //   - "Hours listened" is 0: stats come from `ListeningStats` which only
 //     starts writing once PlaybackService has had a turn. Open Replay or
 //     play a track and the number appears.
+//   - The numbers stay at 0 after playing: the stats are read from the
+//     device's own listening history and refresh when the
+//     `ListeningStats.revision` counter moves. If they do not move,
+//     check that playback is actually running — a paused player records
+//     nothing.
 //   - No streak chip: a streak of zero is not drawn at all. Play something
 //     today and the chip appears; it disappears after a day with nothing
 //     in it.

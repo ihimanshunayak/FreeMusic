@@ -16,6 +16,27 @@
  *   from the YouTube account; clearing the override is a single delete
  *   rather than a PATCH to a server record.
  *
+ *   ## The contract with the hero
+ *
+ *   [ProfileHero] reads exactly five overrides: [AppSettings.displayNameOverride],
+ *   [AppSettings.usernameOverride], [AppSettings.statusLineOverride],
+ *   [AppSettings.bioOverride] and [AppSettings.avatarOverrideUri]. This dialog
+ *   writes exactly those five and nothing else, so every field it offers is
+ *   visible on the hero the moment it is saved.
+ *
+ *   The handle is stored *without* the leading "@" — [AppSettings.setUsernameOverride]
+ *   strips it, and the hero re-adds it when it draws "@name". Saving "@name"
+ *   here therefore renders as "@name" and not "@@name".
+ *
+ *   The first cut wrote a *different* set — `fullNameOverride`,
+ *   `phoneOverride` and `emailOverride` — none of which the hero reads.
+ *   Editing the display name there therefore changed nothing on screen,
+ *   and the status pill and bio could not be edited at all. Those three
+ *   flows are kept in [AppSettings] (they are still persisted, and the
+ *   release notes reference them) but the dialog no longer writes them,
+ *   because a field that is stored and never read is a field that lies to
+ *   the user about having been saved.
+ *
  *   The avatar picker uses [ActivityResultContracts.PickVisualMedia], the
  *   system photo picker. The chosen image is then *copied* into the
  *   app's private files dir (so a deletion from the gallery does not
@@ -25,15 +46,16 @@
  *   even after a pick.
  *
  * Responsibilities:
- *   - Show the three text fields with sensible defaults and validation.
+ *   - Show the four text fields with sensible defaults and validation.
  *   - Show the avatar preview, with a "change" affordance and a
  *     "remove" affordance that returns the hero to the YouTube avatar.
- *   - On save, write all four overrides through [AppSettings] and
+ *   - On save, write all five overrides through [AppSettings] and
  *     close; on cancel, write nothing and close.
  *
  * Dependencies:
- *   - AppSettings.displayNameOverride / statusLineOverride /
- *     bioOverride / avatarOverrideUri + setters (data/settings/AppSettings)
+ *   - AppSettings.displayNameOverride / usernameOverride /
+ *     statusLineOverride / bioOverride / avatarOverrideUri + setters
+ *     (data/settings/AppSettings)
  *   - Account model (data/model/Models.kt)
  *   - HazeMaterials / HazeState (existing AccountChannelDialog pattern)
  *   - rememberLauncherForActivityResult + PickVisualMedia
@@ -73,6 +95,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AddPhotoAlternate
@@ -84,7 +107,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -103,10 +125,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -141,6 +160,7 @@ private val PROFILE_SCRIM_COLOR = Color(0x66000000)
 private const val MAX_STATUS = 80
 private const val MAX_BIO = 240
 private const val MAX_DISPLAY_NAME = 40
+private const val MAX_USERNAME = 32
 private const val AVATAR_FILE = "profile_avatar.jpg"
 
 /**
@@ -172,28 +192,58 @@ fun EditProfileDialog(
     val reduceDynamicBlur by AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
 
     val displayNameOverride by AppSettings.displayNameOverride.collectAsStateWithLifecycle()
-    val fullNameOverride by AppSettings.fullNameOverride.collectAsStateWithLifecycle()
-    val phoneOverride by AppSettings.phoneOverride.collectAsStateWithLifecycle()
-    val emailOverride by AppSettings.emailOverride.collectAsStateWithLifecycle()
     val usernameOverride by AppSettings.usernameOverride.collectAsStateWithLifecycle()
+    val statusLineOverride by AppSettings.statusLineOverride.collectAsStateWithLifecycle()
+    val bioOverride by AppSettings.bioOverride.collectAsStateWithLifecycle()
     val avatarOverride by AppSettings.avatarOverrideUri.collectAsStateWithLifecycle()
 
-    val initialFullName = fullNameOverride.takeIf { it.isNotBlank() }
-        ?: displayNameOverride.takeIf { it.isNotBlank() }
+    // The defaults the hero itself would fall back to, so opening the dialog
+    // shows what is on screen — not an empty form that silently discards the
+    // account's own name when the user saves without touching anything.
+    val initialDisplayName = displayNameOverride.takeIf { it.isNotBlank() }
         ?: account?.name.orEmpty()
-    val initialPhone = phoneOverride
-    val initialEmail = emailOverride.takeIf { it.isNotBlank() } ?: account?.email.orEmpty()
     val initialUsername = usernameOverride
+    val initialStatus = statusLineOverride
+    val initialBio = bioOverride
     val initialAvatar = avatarOverride.takeIf { it.isNotBlank() } ?: account?.thumbnailUrl
 
-    var fullName by remember { mutableStateOf(initialFullName) }
-    var phone by remember { mutableStateOf(initialPhone) }
-    var email by remember { mutableStateOf(initialEmail) }
+    var displayName by remember { mutableStateOf(initialDisplayName) }
     var username by remember { mutableStateOf(initialUsername) }
+    var status by remember { mutableStateOf(initialStatus) }
+    var bio by remember { mutableStateOf(initialBio) }
     var avatar by remember { mutableStateOf(initialAvatar) }
     var busy by remember { mutableStateOf(false) }
     var deleteToastShown by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+
+    // The validation the footer promises, done as real validation rather
+    // than as prose: a blank display name would leave the hero with
+    // nothing to show, and an over-long status or bio would be silently
+    // truncated on the way in.
+    val displayNameError = when {
+        displayName.isBlank() -> stringResource(R.string.edit_profile_display_name_required)
+        else -> null
+    }
+    val statusError = if (status.length > MAX_STATUS) {
+        stringResource(R.string.edit_profile_status_too_long)
+    } else {
+        null
+    }
+    // The handle is shown on the hero as "@name", so the leading "@" the
+    // hint shows is added by the hero, not stored here — a stored "@name"
+    // would print as "@@name".
+    val usernameError = if (username.length > MAX_USERNAME) {
+        stringResource(R.string.edit_profile_username_too_long)
+    } else {
+        null
+    }
+    val bioError = if (bio.length > MAX_BIO) {
+        stringResource(R.string.edit_profile_bio_too_long)
+    } else {
+        null
+    }
+    val canSave = displayNameError == null && statusError == null &&
+        bioError == null && usernameError == null
 
     val pickAvatar = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -262,40 +312,40 @@ fun EditProfileDialog(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 EditField(
-                    label = stringResource(R.string.edit_profile_field_full_name),
-                    value = fullName,
-                    onValueChange = { fullName = it.take(MAX_DISPLAY_NAME) },
-                    hint = stringResource(R.string.edit_profile_full_name_hint),
+                    label = stringResource(R.string.edit_profile_field_display_name),
+                    value = displayName,
+                    onValueChange = { displayName = it.take(MAX_DISPLAY_NAME) },
+                    hint = stringResource(R.string.edit_profile_display_name_hint),
+                    error = displayNameError,
                     singleLine = true,
                     capitalization = KeyboardCapitalization.Words,
                 )
                 EditField(
-                    label = stringResource(R.string.edit_profile_field_phone),
-                    value = phone,
-                    onValueChange = { phone = it.take(MAX_PHONE) },
-                    hint = stringResource(R.string.edit_profile_phone_hint),
-                    singleLine = true,
-                    keyboardType = KeyboardType.Phone,
-                )
-                EditField(
-                    label = stringResource(R.string.edit_profile_field_email),
-                    value = email,
-                    onValueChange = { email = it.take(MAX_EMAIL) },
-                    hint = stringResource(R.string.edit_profile_email_hint),
-                    singleLine = true,
-                    keyboardType = KeyboardType.Email,
-                )
-                EditField(
                     label = stringResource(R.string.edit_profile_field_username),
-                    value = if (username.isBlank()) "" else "@$username",
-                    onValueChange = { raw ->
-                        // Strip a leading "@" if the user typed it — we re-add
-                        // it on display, so storage stays canonical.
-                        username = raw.removePrefix("@").take(MAX_USERNAME)
-                    },
+                    value = username,
+                    onValueChange = { username = it.take(MAX_USERNAME + 1) },
                     hint = stringResource(R.string.edit_profile_username_hint),
+                    error = usernameError,
                     singleLine = true,
                     capitalization = KeyboardCapitalization.None,
+                )
+                EditField(
+                    label = stringResource(R.string.edit_profile_field_status),
+                    value = status,
+                    onValueChange = { status = it.take(MAX_STATUS + 1) },
+                    hint = stringResource(R.string.edit_profile_status_hint),
+                    error = statusError,
+                    singleLine = true,
+                    capitalization = KeyboardCapitalization.Sentences,
+                )
+                EditField(
+                    label = stringResource(R.string.edit_profile_field_bio),
+                    value = bio,
+                    onValueChange = { bio = it.take(MAX_BIO + 1) },
+                    hint = stringResource(R.string.edit_profile_bio_hint),
+                    error = bioError,
+                    singleLine = false,
+                    capitalization = KeyboardCapitalization.Sentences,
                 )
             }
             Spacer(Modifier.height(20.dp))
@@ -307,12 +357,20 @@ fun EditProfileDialog(
             ) {
                 PrimaryActionButton(
                     label = stringResource(R.string.edit_profile_save_changes),
+                    enabled = canSave,
                     onClick = {
+                        if (!canSave) return@PrimaryActionButton
                         haptics.play(Haptic.Select)
-                        AppSettings.setFullNameOverride(fullName.trim())
-                        AppSettings.setPhoneOverride(phone.trim())
-                        AppSettings.setEmailOverride(email.trim())
-                        AppSettings.setUsernameOverride(username.trim())
+                        // Exactly the five overrides the hero reads. Writing
+                        // anything else here would persist a value that no
+                        // screen shows, and the user would come back to a
+                        // profile that ignored what they just typed.
+                        // setUsernameOverride trims and strips the leading
+                        // "@" itself, so the handle is stored bare.
+                        AppSettings.setDisplayNameOverride(displayName.trim())
+                        AppSettings.setUsernameOverride(username)
+                        AppSettings.setStatusLineOverride(status.trim())
+                        AppSettings.setBioOverride(bio.trim())
                         AppSettings.setAvatarOverrideUri(avatar?.toString().orEmpty())
                         onDismiss()
                     },
@@ -337,10 +395,6 @@ fun EditProfileDialog(
         }
     }
 }
-
-private const val MAX_PHONE = 24
-private const val MAX_EMAIL = 80
-private const val MAX_USERNAME = 32
 
 @Composable
 private fun Header(onClose: () -> Unit) {
@@ -436,11 +490,9 @@ private fun EditField(
     value: String,
     onValueChange: (String) -> Unit,
     hint: String = "",
-    helper: String = hint,
     error: String? = null,
     singleLine: Boolean,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
-    keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     val scheme = MaterialTheme.colorScheme
     val borderColor = if (error != null) {
@@ -461,7 +513,17 @@ private fun EditField(
                 .clip(RoundedCornerShape(12.dp))
                 .border(1.dp, borderColor, RoundedCornerShape(12.dp))
                 .background(scheme.surface.copy(alpha = 0.5f))
-                .padding(horizontal = 12.dp, vertical = 10.dp),
+                .then(
+                    // A bio is prose, so it gets a box tall enough to read as
+                    // prose. A single-line field stays one line tall.
+                    if (singleLine) {
+                        Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+                    } else {
+                        Modifier
+                            .heightIn(min = 96.dp)
+                            .padding(horizontal = 12.dp, vertical = 10.dp)
+                    },
+                ),
         ) {
             BasicTextField(
                 value = value,
@@ -474,6 +536,10 @@ private fun EditField(
                 ),
                 cursorBrush = SolidColor(scheme.primary),
                 visualTransformation = VisualTransformation.None,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = capitalization,
+                    imeAction = if (singleLine) ImeAction.Next else ImeAction.Default,
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 decorationBox = { inner ->
                     if (value.isEmpty()) {
@@ -616,20 +682,21 @@ private suspend fun copyToAppFiles(context: Context, source: Uri): Uri? =
 private fun PrimaryActionButton(
     label: String,
     onClick: () -> Unit,
+    enabled: Boolean = true,
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
             .clip(RoundedCornerShape(14.dp))
-            .background(BrandLime)
-            .clickable(onClick = onClick),
+            .background(if (enabled) BrandLime else BrandLime.copy(alpha = 0.35f))
+            .clickable(enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = label,
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-            color = BrandLimeOn,
+            color = if (enabled) BrandLimeOn else BrandLimeOn.copy(alpha = 0.6f),
         )
     }
 }
@@ -700,6 +767,12 @@ private fun DestructiveActionButton(
 // Versioning notes:
 //   1.0.0 — initial cut. Three text fields, avatar picker, save/cancel,
 //   per-field validation, local-only persistence through AppSettings.
+//   2.0.0 — contract unified with [ProfileHero]: the dialog now edits
+//   display name / status / bio / avatar, which are the exact four
+//   overrides the hero reads. The former full-name / phone / email /
+//   username fields were written to settings the hero never read, so
+//   every one of those edits was invisible. Save is now disabled until
+//   the form is valid, and the affected field shows an inline error.
 //
 // Extension hooks:
 //   - A "Use YouTube avatar" button restores the YouTube-provided

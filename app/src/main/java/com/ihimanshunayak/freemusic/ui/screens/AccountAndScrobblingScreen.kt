@@ -49,6 +49,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Cloud
 import androidx.compose.material.icons.rounded.EmojiEvents
 import androidx.compose.material.icons.rounded.GraphicEq
@@ -126,6 +127,7 @@ fun AccountAndScrobblingScreen(
     stats: ProfileStats,
     onSignIn: () -> Unit,
     onSwitchChannel: () -> Unit,
+    onSwitchGoogleAccount: () -> Unit = {},
     onSignOut: () -> Unit,
     onEditProfile: () -> Unit,
     onOpenListenBrainzLogin: () -> Unit,
@@ -203,47 +205,53 @@ fun AccountAndScrobblingScreen(
                 )
             }
 
-            if (signedIn) {
-                item("top-songs-header") {
-                    SectionHeader(label = stringResource(R.string.top_songs))
-                }
-                if (stats.topSongs.isEmpty()) {
-                    item("top-songs-empty") {
-                        EmptyStateCard(
-                            title = stringResource(R.string.profile_top_songs_empty),
-                            body = stringResource(R.string.profile_top_songs_empty_hint),
-                        )
-                    }
-                } else {
-                    items(
-                        count = stats.topSongs.size,
-                        key = { index -> stats.topSongs[index].videoId },
-                    ) { index ->
-                        TopSongRow(
-                            song = stats.topSongs[index],
-                            rank = index + 1,
-                            onClick = { onPlayTopSong(stats.topSongs[index]) },
-                        )
-                    }
-                }
-
-                item("insights-header") {
-                    SectionHeader(label = stringResource(R.string.profile_insights))
-                }
-                item("insights") {
-                    InsightsCard(
-                        stats = stats,
-                        onClick = onOpenReplay,
+            // Listening stats are device-local — they come from
+            // ListeningStats on this handset, not from the Google account.
+            // Hiding them behind a sign-in therefore showed an empty page
+            // to a visitor who already has a listening history on the
+            // device. They are shown either way; only the account-bound
+            // rows below stay behind the sign-in.
+            item("top-songs-header") {
+                SectionHeader(label = stringResource(R.string.top_songs))
+            }
+            if (stats.topSongs.isEmpty()) {
+                item("top-songs-empty") {
+                    EmptyStateCard(
+                        title = stringResource(R.string.profile_top_songs_empty),
+                        body = stringResource(R.string.profile_top_songs_empty_hint),
                     )
                 }
-
-                item("badges-header") {
-                    SectionHeader(label = stringResource(R.string.profile_badges))
+            } else {
+                items(
+                    count = stats.topSongs.size,
+                    key = { index -> stats.topSongs[index].videoId },
+                ) { index ->
+                    TopSongRow(
+                        song = stats.topSongs[index],
+                        rank = index + 1,
+                        onClick = { onPlayTopSong(stats.topSongs[index]) },
+                    )
                 }
-                item("badges") {
-                    BadgesCard(stats = stats)
-                }
+            }
 
+            item("insights-header") {
+                SectionHeader(label = stringResource(R.string.profile_insights))
+            }
+            item("insights") {
+                InsightsCard(
+                    stats = stats,
+                    onClick = onOpenReplay,
+                )
+            }
+
+            item("badges-header") {
+                SectionHeader(label = stringResource(R.string.profile_badges))
+            }
+            item("badges") {
+                BadgesCard(stats = stats)
+            }
+
+            if (signedIn) {
                 item("account-group") {
                     SettingsGroup(
                         footer = stringResource(R.string.account_profiles_help),
@@ -253,6 +261,17 @@ fun AccountAndScrobblingScreen(
                             title = stringResource(R.string.listen_as),
                             subtitle = channelName ?: stringResource(R.string.default_youtube_profile),
                             onClick = onSwitchChannel,
+                        )
+                        RowDivider()
+                        // The Google account on the device is a different
+                        // thing from the YouTube channel inside it, and it
+                        // needs its own way in: without this row the account
+                        // selector had no route at all once the top-bar
+                        // button was repointed at the profile page.
+                        SettingsRow(
+                            icon = Icons.Rounded.AccountCircle,
+                            title = stringResource(R.string.switch_account),
+                            onClick = onSwitchGoogleAccount,
                         )
                         RowDivider()
                         SettingsRow(
@@ -910,7 +929,7 @@ private const val STREAK_DAYS = 7
 //       channelName = selectedChannelName,
 //       stats = rememberProfileStats(signedIn = signedIn),
 //       onSignIn = { webSession = WebSessionMode.SIGN_IN },
-//       onSwitchChannel = { viewModel.loadChannels(); showAccountSelector = true },
+//       onSwitchChannel = { viewModel.loadChannels(); showAccountChannels = true },
 //       onSignOut = { viewModel.signOut() },
 //       onEditProfile = { showEditProfile = true },
 //       onOpenListenBrainzLogin = { showListenBrainzLogin = true },
@@ -933,12 +952,20 @@ private const val STREAK_DAYS = 7
 //     is not drawn at all when the streak is zero.
 //   - The integrations are missing: the page shows them only while
 //     `AppSettings.scrobblingAvailable` is true. It is a build-time flag.
+//   - "Listen as" opens the wrong picker: it must open the YouTube
+//     channel picker (`AccountChannelDialog`) for the signed-in account,
+//     not the Google account selector (`AccountProfileSelector`) — the
+//     latter switches accounts on the device and cannot name a channel.
 //
 // Versioning notes:
 //   1.0.0 — Phase 1B: flat hero, sample post, inert tabs.
 //   2.0.0 — Phase 3: glass hero over an avatar wash, real top songs,
 //   insights and badges, the integrations restored, the fake badge and
 //   sample post gone.
+//   3.0.0 — the device-local listening stats (top songs, insights,
+//   badges) are shown to a signed-out visitor too; only the account
+//   group and the sign-out row remain behind the sign-in. "Listen as"
+//   now opens the YouTube channel picker.
 //
 // Extension hooks:
 //   - Another badge is one more entry in the [BadgesCard] list; each one

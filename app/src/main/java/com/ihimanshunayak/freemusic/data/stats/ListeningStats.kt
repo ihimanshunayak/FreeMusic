@@ -139,6 +139,22 @@ object ListeningStats {
     /** The shared read-only view: callers don't need to know it is a [MutableStateFlow]. */
     val plays: StateFlow<Map<String, Int>> = _plays.asStateFlow()
 
+    /**
+     * Bumped whenever the listening numbers change in a way a screen might be
+     * showing.
+     *
+     * The internal [version] and [playsVersion] counters are deliberately not
+     * exposed: they mean "the on-disk shape moved", and a UI that keyed on
+     * them would re-read the whole history on every thirty-second heartbeat.
+     * This one moves only when the *numbers a listener would see* move — a
+     * counted play, a completed write, or a restore — which is what lets the
+     * profile page refresh itself after a track finishes without polling.
+     */
+    private val _revision = MutableStateFlow(0L)
+
+    /** The shared read-only view of [revision]. */
+    val revision: StateFlow<Long> = _revision.asStateFlow()
+
     fun init(context: Context) {
         directory = File(context.filesDir, DIRECTORY)
         // Opening a month means reading and parsing it, and the first thing to
@@ -243,6 +259,11 @@ object ListeningStats {
             // inline — a counted play must not pay for a 36-month re-parse on
             // the caller's thread.
             playsVersion++
+            // A counted play moves the numbers the profile page shows, so the
+            // revision moves with it — that is what lets an open profile
+            // refresh itself after a track finishes rather than showing the
+            // count it had when the page was opened.
+            _revision.value++
             publishPlays()
         }
     }
@@ -298,6 +319,11 @@ object ListeningStats {
                 if (file.delete() && temporary.renameTo(file)) Unit else temporary.delete()
             }
             version++
+            // The minutes moved on disk, so the "hours listened" number moved
+            // with them. Bumped here rather than in `flush()` because this is
+            // the moment the numbers actually change — a flush that had
+            // nothing pending writes nothing and therefore changes nothing.
+            _revision.value++
         }.onFailure { Log.w(TAG, "Could not write listening bucket $key", it) }
     }
 
@@ -495,6 +521,9 @@ object ListeningStats {
             cached = null
             cachedPlays = null
             playsVersion++
+            // A restore replaces every number on the profile at once, so the
+            // revision moves with it.
+            _revision.value++
             buckets.forEach { bucket ->
                 val key = runCatching { YearMonth.parse(bucket.month).toString() }.getOrNull()
                     ?: return@forEach
