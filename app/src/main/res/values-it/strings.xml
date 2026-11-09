@@ -1434,4 +1434,11 @@
     <string name="settings_terms_of_service">Terms of service</string>
     <string name="settings_user_policy">User policy</string>
     <string name="signed_out_title">Sign in</string>
+
+    <!-- Updater: manual "Check for updates" row -->
+    <string name="update_check_title">Check for updates</string>
+    <string name="update_check_subtitle">Installed version %1$s</string>
+    <string name="update_check_checking">Checking for updates…</string>
+    <string name="update_check_up_to_date">You’re on the latest version.</string>
+    <string name="update_check_failed">Couldn’t check for updates. Try again later.</string>
 </resources>

@@ -284,6 +284,11 @@
     <string name="update_downloading_body">Downloading Free Music %1$s…</string>
     <string name="update_ready_body">Free Music %1$s is ready to install.</string>
     <string name="update_failed_body">Couldn’t download Free Music %1$s.</string>
+    <string name="update_check_title">Check for updates</string>
+    <string name="update_check_subtitle">Installed version %1$s</string>
+    <string name="update_check_checking">Checking for updates…</string>
+    <string name="update_check_up_to_date">You’re on the latest version.</string>
+    <string name="update_check_failed">Couldn’t check for updates. Try again later.</string>
     <string name="download_now">Download Now</string>
     <string name="install_now">Install Now</string>
     <string name="later">Later</string>

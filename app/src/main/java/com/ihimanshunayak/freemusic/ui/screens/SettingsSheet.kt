@@ -68,6 +68,7 @@ import androidx.compose.material.icons.rounded.SmartDisplay
 import androidx.compose.material.icons.rounded.Storage
 import androidx.compose.material.icons.rounded.SurroundSound
 import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.material.icons.rounded.Upgrade
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Waves
 import androidx.compose.material.icons.rounded.Vibration
@@ -140,6 +141,7 @@ import com.ihimanshunayak.freemusic.data.LocalMediaRepository
 import com.ihimanshunayak.freemusic.data.NerdStats
 import com.ihimanshunayak.freemusic.data.scrobbling.LastFM
 import com.ihimanshunayak.freemusic.data.listentogether.ListenTogether
+import com.ihimanshunayak.freemusic.data.AppUpdateChecker
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.OutputPcmMode
 import com.ihimanshunayak.freemusic.playback.AudioOutputStatus
@@ -184,6 +186,7 @@ fun SettingsScreen(
     onListenTogether: () -> Unit,
     onSpotifyCanvasAuth: () -> Unit,
     onAppLanguage: () -> Unit,
+    onCheckForUpdates: () -> Unit,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
@@ -366,6 +369,10 @@ fun SettingsScreen(
             context.packageManager.getPackageInfo(context.packageName, 0).versionName
         }.getOrNull() ?: "1.0"
     }
+
+    // True while an update check is in flight, so the row says so instead of
+    // looking like the tap did nothing.
+    val updateChecking by AppUpdateChecker.checking.collectAsStateWithLifecycle()
 
     // Made fresh on every pass rather than remembered: it tallies the rows
     // that answered to the query, and that tally has to start from zero each
@@ -1356,6 +1363,25 @@ fun SettingsScreen(
                         )
                     },
                     onClick = { AppSettings.setHideSongStatus(!hideSongStatus) },
+                )
+            }
+            // The launch-time update check is silent and runs once, so this row
+            // is the only way to ask again — and the only way to find out
+            // whether the check itself worked. The outcome is reported by the
+            // caller (a toast for "up to date" and "failed", the update dialog
+            // for an actual update), so the row only has to say what it is.
+            val checkForUpdatesTitle = stringResource(R.string.update_check_title)
+            row(checkForUpdatesTitle, "update", "upgrade", "version", "new release", "download") {
+                SettingsRow(
+                    icon = Icons.Rounded.Upgrade,
+                    title = checkForUpdatesTitle,
+                    subtitle = if (updateChecking) {
+                        stringResource(R.string.update_check_checking)
+                    } else {
+                        stringResource(R.string.update_check_subtitle, version)
+                    },
+                    enabled = !updateChecking,
+                    onClick = onCheckForUpdates,
                 )
             }
         }

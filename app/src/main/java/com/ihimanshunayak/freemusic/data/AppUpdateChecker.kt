@@ -7,9 +7,12 @@ import android.os.Build
 import android.provider.Settings
 import androidx.core.content.FileProvider
 import com.ihimanshunayak.freemusic.BuildConfig
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -65,21 +68,91 @@ object AppUpdateChecker {
     @Volatile
     private var downloadCancelled = false
 
-    suspend fun check() = withContext(Dispatchers.IO) {
-        runCatching {
-            val request = Request.Builder().url(LATEST_RELEASE_URL).build()
-            val body = Http.client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) null else response.body?.string()
-            } ?: return@runCatching
-            val release = json.parseToJsonElement(body) as? JsonObject ?: return@runCatching
-            val tag = release["tag_name"]?.jsonPrimitive?.contentOrNull ?: return@runCatching
-            val url = release["html_url"]?.jsonPrimitive?.contentOrNull ?: return@runCatching
-            val apkUrl = apkAssetUrl(release)
-            val notes = release["body"]?.jsonPrimitive?.contentOrNull
-            val latest = tag.removePrefix("v")
-            if (isNewer(latest, BuildConfig.VERSION_NAME)) {
-                _available.value = UpdateInfo(latest, url, apkUrl, notes)
+    /**
+     * Guards the one network read, so a manual check and the launch-time check
+     * cannot both be in flight — two concurrent reads of the same endpoint
+     * would race on [_available] and the slower one would win, potentially
+     * overwriting a newer answer with a staler one.
+     */
+    private val checkMutex = Mutex()
+
+    /** Outcome of the most recent check, so the UI can say what happened. */
+    enum class CheckOutcome {
+        /** A newer release exists; [available] holds it. */
+        UpdateAvailable,
+
+        /** The installed build is already the newest published release. */
+        UpToDate,
+
+        /** The check could not be completed (offline, API error, bad payload). */
+        Failed,
+    }
+
+    private val _lastCheck = MutableStateFlow<CheckOutcome?>(null)
+
+    /** What the most recent check concluded, or null if none has run yet. */
+    val lastCheck = _lastCheck.asStateFlow()
+
+    private val _checking = MutableStateFlow(false)
+
+    /** True while a check is in flight, so the UI can say so instead of going quiet. */
+    val checking = _checking.asStateFlow()
+
+    /**
+     * Polls GitHub for the newest release and compares it with this build.
+     *
+     * Returns what it concluded so a caller that asked for the check (the
+     * Settings row) can report it, while the launch-time caller ignores the
+     * return value and simply reads [available].
+     */
+    suspend fun check(): CheckOutcome = withContext(Dispatchers.IO) {
+        // Set before the lock, so a second caller that is waiting its turn
+        // still shows as "checking" rather than looking like it did nothing.
+        _checking.value = true
+        try {
+            checkMutex.withLock {
+                val result = try {
+                    val request = Request.Builder().url(LATEST_RELEASE_URL).build()
+                    val body = Http.client.newCall(request).execute().use { response ->
+                        if (!response.isSuccessful) null else response.body?.string()
+                    }
+                    val release = body
+                        ?.let { json.parseToJsonElement(it) as? JsonObject }
+                    val tag = release?.get("tag_name")?.jsonPrimitive?.contentOrNull
+                    val url = release?.get("html_url")?.jsonPrimitive?.contentOrNull
+                    if (release == null || tag == null || url == null) {
+                        CheckOutcome.Failed
+                    } else {
+                        val apkUrl = apkAssetUrl(release)
+                        val notes = release["body"]?.jsonPrimitive?.contentOrNull
+                        val latest = tag.removePrefix("v")
+                        if (isNewer(latest, BuildConfig.VERSION_NAME)) {
+                            _available.value = UpdateInfo(latest, url, apkUrl, notes)
+                            CheckOutcome.UpdateAvailable
+                        } else {
+                            // This build is the newest one published, so any update
+                            // carried over from an earlier check is stale — clearing
+                            // it takes the top bar's upgrade icon away with it.
+                            _available.value = null
+                            CheckOutcome.UpToDate
+                        }
+                    }
+                } catch (cancelled: CancellationException) {
+                    // A cancelled check is a cancelled check, not a failed one:
+                    // swallowing it here would report "couldn't reach GitHub" for
+                    // a request that was only abandoned.
+                    throw cancelled
+                } catch (_: Exception) {
+                    CheckOutcome.Failed
+                }
+                // A failed read is a failed check, not an "up to date" — silently
+                // claiming there is nothing new would hide the fact that the check
+                // never happened.
+                _lastCheck.value = result
+                result
             }
+        } finally {
+            _checking.value = false
         }
     }
 
@@ -235,25 +308,114 @@ object AppUpdateChecker {
     }
 
     /** A version split into its numeric dotted parts and whether it carries a "-suffix" (e.g. "-beta2"). */
-    private data class ParsedVersion(val parts: List<Int>, val isPreRelease: Boolean)
+    private data class ParsedVersion(
+        val parts: List<Int>,
+        val isPreRelease: Boolean,
+        /**
+         * The calendar date this version names, when it uses the date-based
+         * scheme (`DD.MM.YY[.N]`), or null when it doesn't.
+         */
+        val date: VersionDate?,
+    )
+
+    /**
+     * A calendar date as the date-based version scheme spells it.
+     *
+     * The scheme is `DD.MM.YY` with an optional same-day counter — see
+     * `scripts/compute-date-version.ps1` and `docs/VERSION_DATE_SYSTEM.md`.
+     */
+    private data class VersionDate(
+        val year: Int,
+        val month: Int,
+        val day: Int,
+        val counter: Int,
+    )
 
     private fun parseVersion(raw: String): ParsedVersion {
         val dash = raw.indexOf('-')
         val base = if (dash >= 0) raw.substring(0, dash) else raw
-        return ParsedVersion(base.split(".").map { it.toIntOrNull() ?: 0 }, dash >= 0)
+        val parts = base.split(".").map { it.toIntOrNull() ?: 0 }
+        return ParsedVersion(parts, dash >= 0, parseVersionDate(parts))
     }
 
     /**
-     * Numeric, dot-separated comparison — "1.10" outranks "1.9" — with one
-     * extra rule: a "-betaN" build (see the debug build type's
-     * `versionNameSuffix` in app/build.gradle.kts) is treated as older than a
-     * plain release of the same numbers, since the beta by definition predates
-     * the tag it was testing toward. Without this, a beta and the release it
-     * matches compare equal and testers never get nudged onto the real build.
+     * Recognises the date-based scheme and reads it as a calendar date.
+     *
+     * The scheme is `DD.MM.YY` optionally followed by a same-day counter
+     * (`.2`, `.3`, ...). Two digits of day, two of month and two of year is
+     * what makes it unambiguous against the legacy `1.20` scheme, which has
+     * one or two parts and never three — so anything with three parts is
+     * read as a date.
+     *
+     * Returns null for anything that isn't a plausible date, which is what
+     * keeps the legacy scheme on its own comparison path.
      */
-    private fun isNewer(latest: String, current: String): Boolean {
+    private fun parseVersionDate(parts: List<Int>): VersionDate? {
+        if (parts.size < 3) return null
+        val day = parts[0]
+        val month = parts[1]
+        val year = parts[2]
+        if (day !in 1..31 || month !in 1..12) return null
+        val counter = parts.getOrElse(3) { 1 }
+        return VersionDate(year, month, day, counter)
+    }
+
+    /**
+     * Whether [latest] is a newer release than the running [current] build.
+     *
+     * Two schemes have to be compared here, and they do not mean the same
+     * thing:
+     *
+     *  - The date-based scheme (`DD.MM.YY[.N]`) is a *calendar* date, so it
+     *    is compared year, then month, then day, then the same-day counter.
+     *    Comparing it as plain numbers — the obvious reading of a dotted
+     *    version — is wrong the moment the day rolls over: `08.11.26` (8
+     *    November) would look *older* than `28.10.26` (28 October) because 8
+     *    is less than 28, and a user on the October build would never be told
+     *    about the November release at all. That is the bug this ordering
+     *    exists to fix.
+     *
+     *  - The legacy scheme (`1.20`, `1.9`) is a plain number, and there
+     *    "1.10" really does outrank "1.9", so it keeps the numeric
+     *    comparison.
+     *
+     * A build on one scheme is always treated as older than a release on the
+     * other: the date scheme came later, so anything still reporting `1.N`
+     * predates every date-based build and must be offered the update.
+     *
+     * The "-betaN" suffix (see the debug build type's `versionNameSuffix` in
+     * app/build.gradle.kts) marks a pre-release, and a pre-release is treated
+     * as older than a plain release of the same numbers — the beta by
+     * definition predates the tag it was testing toward.
+     */
+    internal fun isNewer(latest: String, current: String): Boolean {
         val l = parseVersion(latest)
         val c = parseVersion(current)
+        return when {
+            l.date != null && c.date != null -> isNewerDate(l, c)
+            // A date-based release is newer than a legacy-numbered build, and
+            // a legacy-numbered release is never newer than a date-based build.
+            l.date != null -> true
+            c.date != null -> false
+            else -> isNewerNumeric(l, c)
+        }
+    }
+
+    /** Calendar comparison for two date-based versions. */
+    private fun isNewerDate(l: ParsedVersion, c: ParsedVersion): Boolean {
+        val ld = l.date!!
+        val cd = c.date!!
+        return when {
+            ld.year != cd.year -> ld.year > cd.year
+            ld.month != cd.month -> ld.month > cd.month
+            ld.day != cd.day -> ld.day > cd.day
+            ld.counter != cd.counter -> ld.counter > cd.counter
+            else -> c.isPreRelease && !l.isPreRelease
+        }
+    }
+
+    /** Numeric comparison for two legacy-numbered versions. */
+    private fun isNewerNumeric(l: ParsedVersion, c: ParsedVersion): Boolean {
         for (i in 0 until maxOf(l.parts.size, c.parts.size)) {
             val a = l.parts.getOrElse(i) { 0 }
             val b = c.parts.getOrElse(i) { 0 }

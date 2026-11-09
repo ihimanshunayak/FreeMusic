@@ -600,6 +600,24 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     /** Set once per launch if GitHub has a release newer than this build. */
     val updateAvailable: StateFlow<AppUpdateChecker.UpdateInfo?> = AppUpdateChecker.available
 
+    /**
+     * What the most recent update check concluded.
+     *
+     * Exposed so the Settings row can tell the user what happened when they
+     * ask for a check, instead of the row doing nothing visible when the
+     * answer is "there is nothing new".
+     */
+    val updateCheckOutcome: StateFlow<AppUpdateChecker.CheckOutcome?> = AppUpdateChecker.lastCheck
+
+    /**
+     * Runs an update check on demand and reports what it found.
+     *
+     * The launch-time check in [init] runs once and is silent, so a user who
+     * suspects a newer release exists has no way to ask again — and on a
+     * flaky connection that one silent attempt is the only attempt there is.
+     */
+    suspend fun checkForUpdates(): AppUpdateChecker.CheckOutcome = AppUpdateChecker.check()
+
     // ---- Ratings, library and playlists -------------------------------------
 
     /**

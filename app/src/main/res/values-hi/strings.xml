@@ -1495,4 +1495,11 @@
     <string name="settings_terms_of_service">सेवा की शर्तें</string>
     <string name="settings_user_policy">यूज़र पॉलिसी</string>
     <string name="signed_out_title">साइन इन</string>
+
+    <!-- Updater: manual "Check for updates" row -->
+    <string name="update_check_title">अपडेट देखें</string>
+    <string name="update_check_subtitle">इंस्टॉल किया गया वर्ज़न %1$s</string>
+    <string name="update_check_checking">अपडेट देख रहे हैं…</string>
+    <string name="update_check_up_to_date">आप नवीनतम वर्ज़न पर हैं।</string>
+    <string name="update_check_failed">अपडेट नहीं देख सके। बाद में कोशिश करें।</string>
 </resources>

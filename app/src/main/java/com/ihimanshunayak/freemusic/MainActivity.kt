@@ -2791,6 +2791,36 @@ private fun FreeMusicApp(
                             onListenTogether = { showListenTogether = true },
                             onSpotifyCanvasAuth = { showSpotifyCanvasAuth = true },
                             onAppLanguage = { showAppLanguage = true },
+                            onCheckForUpdates = {
+                                // The launch-time check is silent and runs once,
+                                // so this is the only way a user can ask again —
+                                // and the only way they learn whether the check
+                                // itself worked. The dialog opens on the update
+                                // when there is one; the toast covers the
+                                // other two answers, since "nothing new" and
+                                // "couldn't reach GitHub" have no dialog.
+                                scope.launch {
+                                    when (viewModel.checkForUpdates()) {
+                                        AppUpdateChecker.CheckOutcome.UpdateAvailable -> {
+                                            showUpdateDialog = true
+                                        }
+                                        AppUpdateChecker.CheckOutcome.UpToDate -> {
+                                            Toast.makeText(
+                                                context,
+                                                context.getString(R.string.update_check_up_to_date),
+                                                Toast.LENGTH_SHORT,
+                                            ).show()
+                                        }
+                                        AppUpdateChecker.CheckOutcome.Failed -> {
+                                            Toast.makeText(
+                                                context,
+                                                context.getString(R.string.update_check_failed),
+                                                Toast.LENGTH_SHORT,
+                                            ).show()
+                                        }
+                                    }
+                                }
+                            },
                             contentPadding = listPadding,
                         )
                     } else if (page != null && page.browseId.isDeviceFolder()) {
