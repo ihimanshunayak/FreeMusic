@@ -161,7 +161,7 @@ Commits `fa2b790`, `77c0b35`.
 ## 3. Release history
 
 | Version | Date | Commit | APK status |
-|---------|------|--------|-----------|
+| **12.11.26** (`2026111211`) | 2026-11-12 | `8b4cb91` | **built, publishing** |
 | **10.11.26** (`2026111001`) | 2026-11-12 | *uncommitted* | **built locally, not published** |
 | 09.11.26.3 (`2026110903`) | 2026-11-09 | `05812ba` | published on GitHub |
 | 08.11.26 | 2026-11-08 | `ca566ee` | published |
@@ -202,10 +202,10 @@ New play-count tests:
 
 | # | Item | State |
 |---|------|-------|
-| 1 | Commit + push the play-count work (6 modified files + 2 new test files) | **Pending** |
+| 2 | Publish release `12.11.26` — release notes, annotated tag, push, upload 3 per-arch APKs | **In progress** |
 | 2 | Publish release `10.11.26` — release notes, annotated tag, push, upload 3 per-arch APKs | **Pending** |
 | 3 | On-device confirmation that the Quick picks card shows the tally | **In progress** |
-| 4 | Delete the 10 stray `.ui-*.xml` UI-dump artifacts from the repo root | **Pending** |
+| 5 | Verify the in-app update path end-to-end (old APK -> prompt names `12.11.26` -> new APK -> no prompt) | **Pending** |
 | 5 | Verify the in-app update path end-to-end (old APK → prompt names `10.11.26` → new APK → no prompt) | **Pending** |
 
 ---
