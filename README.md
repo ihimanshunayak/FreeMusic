@@ -65,6 +65,8 @@ WinUI 3's design system) and libVLC on Windows.
 
 Grab the latest signed APK from the [Releases](https://github.com/ihimanshunayak/FreeMusic/releases) page. Sideloading requires enabling "Install unknown apps" for whichever app you download it with.
 
+Looking for what has already been built and shipped? See the [Project Status & Work Summary](docs/PROJECT_STATUS.md) — every delivered feature, the release history, the test coverage and the build runbook.
+
 ---
 
 ## Contributing

@@ -161,7 +161,7 @@ Commits `fa2b790`, `77c0b35`.
 ## 3. Release history
 
 | Version | Date | Commit | APK status |
-| **12.11.26** (`2026111211`) | 2026-11-12 | `8b4cb91` | **published on GitHub** — 3 per-arch APKs |
+| **12.11.26** (`2026111211`) | 2026-11-12 | `8b4cb91` | **published on GitHub** — 3 per-arch APKs, also in `releases/v12.11.26/` |
 | 09.11.26.3 (`2026110903`) | 2026-11-09 | `05812ba` | published on GitHub |
 | 08.11.26 | 2026-11-08 | `ca566ee` | published |
 | 17.10.26.26 | 2026-10-17 | `1fe5a4f` | published, per-arch APKs |
@@ -241,10 +241,10 @@ adb install -r .\app\build\outputs\apk\prod\release\app-prod-arm64-v8a-release.a
 **Version bump:** the release build auto-bumps the date version. To keep the
 current version, run with `DATE_VERSION_SKIP=1`.
 
-**APK outputs:** `app-prod-arm64-v8a-release.apk` (56.3 MB),
-`app-prod-armeabi-v7a-release.apk` (47.6 MB), `app-prod-x86_64-release.apk`
-(62.4 MB). The **universal APK (149.2 MB) exceeds GitHub's 100 MB asset
-limit** and must not be uploaded.
+**APK outputs:** `app-prod-arm64-v8a-release.apk` (53.71 MB),
+`app-prod-armeabi-v7a-release.apk` (45.41 MB), `app-prod-x86_64-release.apk`
+(59.47 MB). The **universal APK (142.30 MB) exceeds GitHub's 100 MB asset
+limit** and must not be uploaded — every device is covered by one of the three above.
 
 **Signing note:** the release APK and the debug APK have different signatures.
 Installing one over the other fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE` —
