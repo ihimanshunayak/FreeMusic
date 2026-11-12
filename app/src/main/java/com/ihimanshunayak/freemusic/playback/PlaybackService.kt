@@ -7460,6 +7460,9 @@ class PlaybackService : MediaLibraryService() {
                 title = title,
                 artist = InnertubeParser.artistFromSubtitle(subtitle),
                 thumbnailUrl = thumbnailUrl,
+                // The card's own tally, so the row it becomes keeps the
+                // figure the card was showing.
+                globalPlayCount = playCount,
             )
             songCache[vid] = song
             return song.toMediaItem()
@@ -7490,6 +7493,9 @@ class PlaybackService : MediaLibraryService() {
             title = title,
             artist = InnertubeParser.artistFromSubtitle(subtitle),
             thumbnailUrl = thumbnailUrl,
+            // The card's own tally, so the row it becomes keeps the
+            // figure the card was showing.
+            globalPlayCount = playCount,
         )
     }
 

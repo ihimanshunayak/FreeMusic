@@ -1812,6 +1812,9 @@ private fun FreeMusicApp(
                 title = item.title,
                 artist = InnertubeParser.artistFromSubtitle(item.subtitle),
                 thumbnailUrl = item.thumbnailUrl,
+                // The catalogue tally the card carried, so the track opened
+                // from a card keeps the figure the card showed.
+                globalPlayCount = item.playCount,
             )
         }
     }
@@ -3182,6 +3185,7 @@ private fun FreeMusicApp(
                                                 title = item.title,
                                                 artist = InnertubeParser.artistFromSubtitle(item.subtitle),
                                                 thumbnailUrl = item.thumbnailUrl,
+                                                globalPlayCount = item.playCount,
                                             ),
                                             QueueSource(
                                                 category.title,

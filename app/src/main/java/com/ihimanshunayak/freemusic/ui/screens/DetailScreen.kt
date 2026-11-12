@@ -1457,7 +1457,15 @@ private fun CompactSongRow(
                 color = palette.onBackground,
             )
             Text(
-                text = song.artist,
+                text = listOfNotNull(
+                    song.artist.takeIf { it.isNotBlank() },
+                    // The catalogue tally, in YouTube Music's own place: the
+                    // artist, then how many times the track has been played.
+                    // An artist's "Top songs" states it as its own column —
+                    // "104M plays" — so the row shows it the way a search row
+                    // does rather than leaving the number on the page.
+                    song.globalPlayCount?.takeIf { it.isNotBlank() },
+                ).joinToString(" · "),
                 style = MaterialTheme.typography.bodyMedium,
                 color = palette.onBackgroundVariant,
                 maxLines = 1,
@@ -1525,7 +1533,12 @@ private fun SuggestedSongRow(
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text = song.artist,
+                text = listOfNotNull(
+                    song.artist.takeIf { it.isNotBlank() },
+                    // Same place the count takes on a search row, so the
+                    // figure reads the same wherever the track is listed.
+                    song.globalPlayCount?.takeIf { it.isNotBlank() },
+                ).joinToString(" · "),
                 style = MaterialTheme.typography.bodyMedium,
                 color = palette.onBackgroundVariant,
                 maxLines = 1,

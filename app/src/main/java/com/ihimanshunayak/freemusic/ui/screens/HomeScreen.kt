@@ -1172,10 +1172,17 @@ private fun HeroCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            if (item.subtitle.isNotBlank()) {
-                val displaySubtitle = localizeCardSubtitle(item.subtitle)
+            val tally = item.playCount?.takeIf { it.isNotBlank() }
+            val credit = localizeCardSubtitle(item.subtitle)
+            val caption = when {
+                tally == null -> credit
+                credit.isBlank() -> tally
+                credit.contains(tally, ignoreCase = true) -> credit
+                else -> "$credit • $tally"
+            }
+            if (caption.isNotBlank()) {
                 Text(
-                    text = displaySubtitle,
+                    text = caption,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.72f),
                     maxLines = 2,
@@ -1419,9 +1426,23 @@ internal fun ShelfCard(
                 modifier = Modifier.weight(1f, fill = false),
             )
         }
-        val displaySubtitle = localizeCardSubtitle(item.subtitle)
+        // The tally is shown beside the credit line rather than under it, the
+        // way YouTube Music prints it on a card: the credit says who, the
+        // tally says how often, and putting them in one line keeps the card's
+        // caption two lines tall whether the tally is there or not.
+        val tally = item.playCount?.takeIf { it.isNotBlank() }
+        val credit = localizeCardSubtitle(item.subtitle)
+        val caption = when {
+            tally == null -> credit
+            credit.isBlank() -> tally
+            // The credit line often already ends with the tally — YouTube
+            // puts it in the subtitle itself on some shelves — so printing it
+            // again would read "Siddh Shah • 4.9M views • 4.9M views".
+            credit.contains(tally, ignoreCase = true) -> credit
+            else -> "$credit • $tally"
+        }
         Text(
-            text = displaySubtitle,
+            text = caption,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = 1,

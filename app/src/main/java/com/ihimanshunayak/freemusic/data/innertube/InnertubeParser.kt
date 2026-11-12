@@ -325,7 +325,17 @@ object InnertubeParser {
                 ?: parseResponsiveListItem(item.o("musicResponsiveListItemRenderer"))
                     ?.takeUnless { it.isVideo }
                     ?.let { song ->
-                        ShelfItem(song.title, song.artist, song.thumbnailUrl, song.videoId, null)
+                        // The catalogue tally rides along, so the card can
+                        // print it — a card that knows how often the track
+                        // has been played should say so.
+                        ShelfItem(
+                            title = song.title,
+                            subtitle = song.artist,
+                            thumbnailUrl = song.thumbnailUrl,
+                            videoId = song.videoId,
+                            browseId = null,
+                            playCount = song.globalPlayCount,
+                        )
                     }
                 // A chart row with nothing to play — "Top artists" lists the
                 // artist alone, no track — falls through parseResponsiveListItem
@@ -341,7 +351,16 @@ object InnertubeParser {
         val items = shelf.a("contents").orEmpty().mapNotNull {
             parseResponsiveListItem(it.o("musicResponsiveListItemRenderer"))
         }.filterNot { it.isVideo }
-            .map { ShelfItem(it.title, it.artist, it.thumbnailUrl, it.videoId, null) }
+            .map {
+                ShelfItem(
+                    title = it.title,
+                    subtitle = it.artist,
+                    thumbnailUrl = it.thumbnailUrl,
+                    videoId = it.videoId,
+                    browseId = null,
+                    playCount = it.globalPlayCount,
+                )
+            }
         return if (items.isEmpty()) null else HomeShelf(title.ifBlank { "For you" }, items)
     }
 
@@ -1530,12 +1549,20 @@ object InnertubeParser {
         val subtitle = renderer.o("subtitle").runs()
         // A card's subtitle ends in its tally — "Siddh Shah • 4.7M views" —
         // and it is the last segment, where a credit line's shape varies from
-        // page to page but the tally's does not.
+        // page to page but the tally's does not. The last run is checked
+        // first, and the rest of the runs are scanned after it, because the
+        // tally is not always last: a card billed as "Song • Chelsea Wolfe"
+        // puts the credit second and states the count in the title row
+        // instead, so scanning only the tail would silently drop it.
         val playCount = renderer.o("subtitle").a("runs").orEmpty()
             .lastOrNull()
             ?.s("text")
             ?.takeIf { it.matches(TALLY) }
             ?.let(::playCountLabel)
+            ?: renderer.o("subtitle").a("runs").orEmpty()
+                .map { it.s("text").orEmpty() }
+                .firstOrNull { it.matches(TALLY) }
+                ?.let(::playCountLabel)
         // A card with no browse target is a playable track, not an album,
         // playlist or artist; widescreen art on one of those means it's a
         // music-video upload rather than the catalogue track — drop it, same

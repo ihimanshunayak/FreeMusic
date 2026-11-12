@@ -215,6 +215,7 @@ object YtMusicRepository {
                     videoId = vid,
                     title = item.title,
                     artist = InnertubeParser.artistFromSubtitle(item.subtitle),
+                     globalPlayCount = item.playCount,
                     thumbnailUrl = item.thumbnailUrl,
                 )
             }
@@ -237,6 +238,7 @@ object YtMusicRepository {
                         videoId = vid,
                         title = item.title,
                         artist = InnertubeParser.artistFromSubtitle(item.subtitle),
+                         globalPlayCount = item.playCount,
                         thumbnailUrl = item.thumbnailUrl,
                     )
                 }
@@ -253,6 +255,7 @@ object YtMusicRepository {
                         videoId = vid,
                         title = item.title,
                         artist = InnertubeParser.artistFromSubtitle(item.subtitle),
+                         globalPlayCount = item.playCount,
                         thumbnailUrl = item.thumbnailUrl,
                     )
                 }
@@ -271,6 +274,7 @@ object YtMusicRepository {
                         videoId = vid,
                         title = item.title,
                         artist = InnertubeParser.artistFromSubtitle(item.subtitle),
+                         globalPlayCount = item.playCount,
                         thumbnailUrl = item.thumbnailUrl,
                     )
                 }
