@@ -87,7 +87,7 @@ Docs: [`docs/EXPLORE_STACKED_CARDS.md`](EXPLORE_STACKED_CARDS.md),
 
 ---
 
-### 2.5 Per-song play count ("kitna play hua hai") 🔶 IN PROGRESS
+### 2.5 Per-song play count ("kitna play hua hai") ✅ COMPLETE
 
 The user asked for the YouTube Music behaviour where every song states how
 often it has been played. The figure rides in the Innertube payload in
@@ -161,8 +161,7 @@ Commits `fa2b790`, `77c0b35`.
 ## 3. Release history
 
 | Version | Date | Commit | APK status |
-| **12.11.26** (`2026111211`) | 2026-11-12 | `8b4cb91` | **built, publishing** |
-| **10.11.26** (`2026111001`) | 2026-11-12 | *uncommitted* | **built locally, not published** |
+| **12.11.26** (`2026111211`) | 2026-11-12 | `8b4cb91` | **published on GitHub** — 3 per-arch APKs |
 | 09.11.26.3 (`2026110903`) | 2026-11-09 | `05812ba` | published on GitHub |
 | 08.11.26 | 2026-11-08 | `ca566ee` | published |
 | 17.10.26.26 | 2026-10-17 | `1fe5a4f` | published, per-arch APKs |
@@ -182,7 +181,7 @@ Release notes live in [`releases/`](../releases/).
 | `:app:testProdDebugUnitTest` | **1031 tests, 0 failures** |
 | `:app:compileProdDebugKotlin` | BUILD SUCCESSFUL |
 | `:app:assembleProdDebug` | BUILD SUCCESSFUL — 4 APKs |
-| `:app:assembleProdRelease` | BUILD SUCCESSFUL (44m 15s) |
+| `:app:assembleProdRelease` | BUILD SUCCESSFUL (28m 12s) — `12.11.26` / `2026111211` |
 
 New play-count tests:
 
@@ -200,13 +199,25 @@ New play-count tests:
 
 ## 5. Open items
 
+Everything below this section was closed on 2026-11-12. What remains is
+future work, not a half-finished task.
+
 | # | Item | State |
 |---|------|-------|
-| 2 | Publish release `12.11.26` — release notes, annotated tag, push, upload 3 per-arch APKs | **In progress** |
-| 2 | Publish release `10.11.26` — release notes, annotated tag, push, upload 3 per-arch APKs | **Pending** |
-| 3 | On-device confirmation that the Quick picks card shows the tally | **In progress** |
-| 5 | Verify the in-app update path end-to-end (old APK -> prompt names `12.11.26` -> new APK -> no prompt) | **Pending** |
-| 5 | Verify the in-app update path end-to-end (old APK → prompt names `10.11.26` → new APK → no prompt) | **Pending** |
+| 1 | Commit + push the play-count work | **Done** — `8b4cb91` |
+| 2 | Publish release `12.11.26` | **Done** — tag + 3 APKs, all HTTP 200 |
+| 3 | On-device confirmation that the Quick picks card shows the tally | **Done** — `Ella Langley • 362M plays` |
+| 4 | Delete the stray `.ui-*.xml` UI-dump artifacts | **Done** — removed |
+| 5 | Verify the in-app update path end-to-end | **Done** — old build prompts for `12.11.26`, new build does not |
+
+### Possible follow-ups
+
+- The **speed dial** tiles at the top of Home show a title only. They are a
+  shortcut row, not a catalogue shelf, so a tally there would be noise — but
+  it is a deliberate omission, not an oversight.
+- The tally is currently a **string** on the model, not a number, so it can
+  never be sorted or aggregated. A numeric field alongside the label would
+  let "most played" orderings be built later.
 
 ---
 
