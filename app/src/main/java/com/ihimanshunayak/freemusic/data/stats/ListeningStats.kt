@@ -658,7 +658,11 @@ object ListeningStats {
             val genrePlays = LinkedHashMap<String, Int>()
             val genreArt = LinkedHashMap<String, String?>()
             rankedArtists.forEach { artist ->
-                ArtistFacts.genresFor(artist.title).forEach { genre ->
+                // Last.fm returns a ranked folksonomy, often with overlapping
+                // tags. Use the first recognised tag as this artist's primary
+                // genre so the distribution assigns each artist's listening
+                // time exactly once instead of inflating totals across tags.
+                ArtistFacts.genresFor(artist.title).firstOrNull()?.let { genre ->
                     genreMs[genre] = (genreMs[genre] ?: 0L) + artist.ms
                     genrePlays[genre] = (genrePlays[genre] ?: 0) + artist.plays
                     if (genreArt[genre] == null) genreArt[genre] = artist.artworkUrl
@@ -669,7 +673,10 @@ object ListeningStats {
             // playing the music, which is no help to someone who has just
             // installed a build that started collecting them.
             rankedArtists.take(ARTISTS_TO_RESOLVE)
-                .filter { it.artworkUrl == null || it.browseId == null }
+                .filter {
+                    it.artworkUrl == null || it.browseId == null ||
+                        (ArtistFacts.genresAvailable && ArtistFacts.genresFor(it.title).isEmpty())
+                }
                 .forEach { ArtistFacts.noticed(it.title) }
 
             val rankedGenres = genreMs.entries

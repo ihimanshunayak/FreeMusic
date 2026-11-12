@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -32,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.draw.clip
@@ -51,6 +53,8 @@ import com.ihimanshunayak.freemusic.data.collab.CollabSummary
 import com.ihimanshunayak.freemusic.data.playlist.PlaylistStore
 import com.ihimanshunayak.freemusic.data.settings.AppSettings
 import com.ihimanshunayak.freemusic.data.settings.LibrarySort
+import com.ihimanshunayak.freemusic.data.stats.ArtistFacts
+import com.ihimanshunayak.freemusic.data.stats.ReplaySummary
 import com.ihimanshunayak.freemusic.download.Downloads
 import com.ihimanshunayak.freemusic.download.SavedCollection
 import com.ihimanshunayak.freemusic.ui.icons.FreeMusicIcons
@@ -66,7 +70,11 @@ import com.ihimanshunayak.freemusic.ui.player.rememberArtworkColors
 import com.ihimanshunayak.freemusic.ui.replay.ReplayCardRow
 import com.ihimanshunayak.freemusic.ui.replay.ReplayHeroCard
 import com.ihimanshunayak.freemusic.ui.replay.ReplayStoryPage
+import com.ihimanshunayak.freemusic.ui.replay.formatHour
+import com.ihimanshunayak.freemusic.ui.replay.formatListening
+import com.ihimanshunayak.freemusic.ui.replay.replayCount
 import java.util.Locale
+import kotlin.math.roundToInt
 
 /**
  * The signed-in library: the saved collections, as shelves of cards.
@@ -100,6 +108,7 @@ fun LibraryScreen(
     onShowAll: (HomeShelf) -> Unit,
     /** Replay's headline cards. Each opens the detailed page at its own chart. */
     replayCards: List<ReplayHeroCard>,
+    replaySummary: ReplaySummary?,
     replayHolder: String,
     replayMemberSince: String?,
     onOpenReplay: (ReplayStoryPage) -> Unit,
@@ -191,6 +200,13 @@ fun LibraryScreen(
                     style = MaterialTheme.typography.displayLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.padding(horizontal = PAGE_GUTTER, vertical = 8.dp),
+                )
+            }
+            item(key = "sound-intelligence") {
+                LibrarySoundIntelligence(
+                    summary = replaySummary,
+                    onOpenListening = { onOpenReplay(ReplayStoryPage.MINUTES) },
+                    onOpenGenres = { onOpenReplay(ReplayStoryPage.GENRES) },
                 )
             }
             // Drawn whether or not anything has been played: with nothing behind
@@ -454,29 +470,182 @@ fun LibraryScreen(
     }
 }
 
-/**
- * The way in to Replay, at the top of the page.
- *
- * On the Library tab rather than a tab of its own because that is what Replay
- * is — a view of what is already yours, alongside the playlists and the
- * downloads. A fifth tab would give a page most people open a handful of times
- * a year the same standing as Search.
- *
- * ## Why it is painted the way the cards are
- *
- * The mesh is the same one the Replay cards and the player's backdrop run —
- * sampled from the artwork of the record the period was mostly spent on, and
- * drifting rather than settling (see [MeshGradientBackground]'s `continuous`).
- * A fixed brand gradient here looked like a promo banner, which is the one thing
- * this must not be: it advertises the user's own listening, so it should be lit
- * by the user's own listening, and it should not look like anything else on the
- * page. With nothing played yet the mesh falls back to its stock colours, which
- * is a perfectly good button and still not a red rectangle.
- *
- * A single wide strip rather than a shelf of cards: there is exactly one of it,
- * and a carousel with one item in it always reads as a carousel that failed to
- * load the rest.
- */
+/** Personal listening totals and the genre split, drawn above the Library shelves. */
+@Composable
+private fun LibrarySoundIntelligence(
+    summary: ReplaySummary?,
+    onOpenListening: () -> Unit,
+    onOpenGenres: () -> Unit,
+) {
+    val context = LocalContext.current
+    val genresEnabled by AppSettings.replayGenres.collectAsStateWithLifecycle()
+    val canLoadGenres = genresEnabled && ArtistFacts.genresAvailable
+    val colors = MaterialTheme.colorScheme
+    val insightColors = listOf(
+        colors.primary,
+        colors.tertiary,
+        Color(0xFFD7A85A),
+        Color(0xFF8C9EFF),
+        Color(0xFF72C8AE),
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = PAGE_GUTTER, vertical = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.library_sound_intelligence),
+            style = MaterialTheme.typography.titleLarge,
+            color = colors.onBackground,
+        )
+
+        val listeningShape = RoundedCornerShape(28.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(listeningShape)
+                .background(
+                    Brush.linearGradient(
+                        listOf(colors.surfaceContainerHigh, colors.surfaceVariant.copy(alpha = 0.88f)),
+                    ),
+                )
+                .clickable(onClick = onOpenListening)
+                .padding(horizontal = 20.dp, vertical = 18.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = stringResource(R.string.library_listening_time),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = colors.onSurface,
+                    modifier = Modifier.weight(1f),
+                )
+                summary?.let {
+                    Text(
+                        text = it.label,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colors.onSurfaceVariant,
+                    )
+                }
+                Icon(
+                    imageVector = FreeMusicIcons.ChevronRight,
+                    contentDescription = null,
+                    tint = colors.onSurfaceVariant,
+                    modifier = Modifier.padding(start = 6.dp).size(18.dp),
+                )
+            }
+            Spacer(Modifier.height(12.dp))
+            val hasListening = summary != null && !summary.isEmpty
+            Text(
+                text = if (hasListening) formatListening(context, summary!!.totalMs) else "—",
+                style = MaterialTheme.typography.displayMedium,
+                color = colors.onSurface,
+            )
+            Spacer(Modifier.height(14.dp))
+            if (hasListening) {
+                Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                    Text(
+                        text = context.replayCount(summary!!.totalPlays, R.plurals.replay_play_count),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = colors.onSurfaceVariant,
+                    )
+                    summary!!.peakHour?.let { hour ->
+                        Text(
+                            text = stringResource(R.string.library_peak_time, formatHour(context, hour)),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = colors.onSurfaceVariant,
+                        )
+                    }
+                }
+            } else {
+                Text(
+                    text = stringResource(R.string.replay_empty_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = colors.onSurfaceVariant,
+                )
+            }
+        }
+
+        val genreShape = RoundedCornerShape(28.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(genreShape)
+                .background(colors.surfaceContainerHigh)
+                .clickable(onClick = onOpenGenres)
+                .padding(horizontal = 20.dp, vertical = 18.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = stringResource(R.string.library_genre_distribution),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = colors.onSurface,
+                    modifier = Modifier.weight(1f),
+                )
+                Icon(
+                    imageVector = FreeMusicIcons.ChevronRight,
+                    contentDescription = null,
+                    tint = colors.onSurfaceVariant,
+                    modifier = Modifier.size(18.dp),
+                )
+            }
+            val genres = summary?.genres.orEmpty().take(5)
+            val genreTotal = summary?.genres.orEmpty().sumOf { it.ms }
+            if (genres.isNotEmpty() && genreTotal > 0L) {
+                Spacer(Modifier.height(18.dp))
+                genres.forEachIndexed { index, genre ->
+                    val tint = insightColors[index % insightColors.size]
+                    val share = (genre.ms.toDouble() / genreTotal).toFloat().coerceIn(0f, 1f)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = genre.title,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = colors.onSurface,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Text(
+                            text = "${(share * 100).roundToInt()}%",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = colors.onSurfaceVariant,
+                        )
+                    }
+                    Spacer(Modifier.height(6.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(tint.copy(alpha = 0.18f)),
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(share)
+                                .height(8.dp)
+                                .background(tint, RoundedCornerShape(50)),
+                        )
+                    }
+                    if (index != genres.lastIndex) Spacer(Modifier.height(12.dp))
+                }
+            } else {
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = when {
+                        summary == null -> stringResource(R.string.library_insights_loading)
+                        !genresEnabled -> stringResource(R.string.replay_genres_disabled_subtitle)
+                        !canLoadGenres -> stringResource(R.string.library_genres_need_key)
+                        else -> stringResource(R.string.genres_pending)
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = colors.onSurfaceVariant,
+                )
+            }
+        }
+    }
+}
+
 @Composable
 private fun ReplayBanner(card: ReplayHeroCard?, onClick: () -> Unit) {
     val palette = rememberArtworkColors(card?.artworkUrl)

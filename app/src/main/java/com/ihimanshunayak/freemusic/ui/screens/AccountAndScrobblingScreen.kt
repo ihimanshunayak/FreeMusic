@@ -124,6 +124,7 @@ fun AccountAndScrobblingScreen(
     signedIn: Boolean,
     account: Account?,
     channelName: String?,
+    currentTrackTitle: String? = null,
     stats: ProfileStats,
     onSignIn: () -> Unit,
     onSwitchChannel: () -> Unit,
@@ -198,6 +199,7 @@ fun AccountAndScrobblingScreen(
                 ProfileHero(
                     signedIn = signedIn,
                     account = account,
+                    currentTrackTitle = currentTrackTitle,
                     stats = stats,
                     onEditProfile = onEditProfile,
                     onSignIn = onSignIn,

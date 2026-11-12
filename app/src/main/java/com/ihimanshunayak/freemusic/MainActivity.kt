@@ -2122,7 +2122,9 @@ private fun FreeMusicApp(
         (selectedTab == TAB_LIBRARY && detail == null && !showSettings)
     val (replay, setReplayPeriod) = rememberReplayState(replayOpen)
     val replayCards = remember(replay.summary) {
-        replay.summary?.takeUnless { it.isEmpty }?.cards(context).orEmpty()
+        replay.summary?.takeUnless { it.isEmpty }?.cards(context)
+            ?.filterNot { it.page == ReplayStoryPage.MINUTES }
+            .orEmpty()
     }
 
     // ---- The track in the player ----
@@ -2693,6 +2695,7 @@ private fun FreeMusicApp(
                             signedIn = signedIn,
                             account = account,
                             channelName = selectedChannelName,
+                            currentTrackTitle = player.song?.title,
                             onSignIn = {
                                 showAccountScrobbling = false
                                 showSettings = false
@@ -3350,6 +3353,7 @@ private fun FreeMusicApp(
                             onNewPlaylist = { creatingPlaylist = true },
                             onShowAll = { shelf -> libraryShowAll = shelf },
                             replayCards = replayCards,
+                            replaySummary = replay.summary,
                             replayHolder = account?.name.orEmpty(),
                             replayMemberSince = replay.memberSince,
                             onOpenReplay = { page ->
@@ -3814,7 +3818,12 @@ private fun FreeMusicApp(
                                     showHistory = false
                                     showNotifications = false
                                     libraryShowAll = null
+                                    showSources = false
+                                    showListenTogether = false
+                                    showEqualizer = false
                                     showSettings = false
+                                    showReplay = false
+                                    viewModel.clearDetail()
                                     showAccountScrobbling = true
                                 },
                                 onSwipeProfile = { forward -> viewModel.stepProfile(forward) },

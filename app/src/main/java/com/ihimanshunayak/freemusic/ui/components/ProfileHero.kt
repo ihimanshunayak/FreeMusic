@@ -138,6 +138,7 @@ import java.util.Locale
 fun ProfileHero(
     signedIn: Boolean,
     account: Account?,
+    currentTrackTitle: String? = null,
     stats: ProfileStats,
     onEditProfile: () -> Unit,
     onSignIn: () -> Unit = {},
@@ -149,6 +150,7 @@ fun ProfileHero(
     }
     SignedInHero(
         account = account,
+        currentTrackTitle = currentTrackTitle,
         stats = stats,
         onEditProfile = onEditProfile,
         modifier = modifier,
@@ -160,6 +162,7 @@ fun ProfileHero(
 @Composable
 private fun SignedInHero(
     account: Account?,
+    currentTrackTitle: String?,
     stats: ProfileStats,
     onEditProfile: () -> Unit,
     modifier: Modifier = Modifier,
@@ -180,6 +183,9 @@ private fun SignedInHero(
         ?: stringResource(R.string.signed_in)
     val effectiveHandle = usernameOverride.takeIf { it.isNotBlank() }?.let { "@$it" }
     val effectiveStatus = statusOverride.takeIf { it.isNotBlank() }
+        ?: currentTrackTitle?.takeIf { it.isNotBlank() }?.let {
+            stringResource(R.string.profile_status_listening_to, it)
+        }
         ?: stringResource(R.string.profile_status_default)
     val effectiveBio = bioOverride.takeIf { it.isNotBlank() }
         ?: stringResource(R.string.profile_bio_default)

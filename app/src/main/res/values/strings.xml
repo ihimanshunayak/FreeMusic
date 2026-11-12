@@ -207,6 +207,7 @@
     <string name="profile_title">My profile</string>
     <string name="profile_signed_in_as">Signed in as %1$s</string>
     <string name="profile_status_default">What\'s playing lately</string>
+    <string name="profile_status_listening_to">Listening to %1$s</string>
     <string name="profile_bio_default">No bio yet</string>
     <string name="edit_profile">Edit profile</string>
     <string name="edit_profile_save">Save</string>
@@ -862,6 +863,12 @@
     <string name="minutes">Minutes</string>
     <string name="minutes_grouped_short">%1$s min</string>
     <string name="minutes_listened">Minutes listened</string>
+    <string name="library_sound_intelligence">Sound intelligence</string>
+    <string name="library_listening_time">Listening time</string>
+    <string name="library_peak_time">Peak time %1$s</string>
+    <string name="library_genre_distribution">Genre distribution</string>
+    <string name="library_genres_need_key">Add a Last.fm API key to show genre insights.</string>
+    <string name="library_insights_loading">Loading your listening insights…</string>
     <string name="minutes_short">%1$d min</string>
     <string name="not_enough_listening">Not enough listening yet</string>
     <string name="not_enough_this_month">Play a few more songs this month to unlock your Replay.</string>
